@@ -1,0 +1,55 @@
+angular			si
+angular-animate		lo usa PACE
+angular-base64-upload	si
+angular-bootstrap	lo usa PACE
+angular-cookies
+angular-datatables
+angular-datepicker
+angular-dropdowns	(en otro proyecto, es para combobox)
+angular-flot		si (graficos)
+angular-i18n		si
+angular-jqfile-upload
+angular-local-storage	si
+angular-mocks
+angular-notify		si
+angular-pouchdb
+angular-resource	si checar que es (es para llamadas ajax)
+angular-route
+angular-sanitize
+angular-sweetalert	si
+angular-ui-bootstrap
+angular-ui-bootstrap-bower	si
+angular-ui-date		si (calendario)
+angular-ui-map		si (mapas)
+angular-ui-router	si
+angular-ui-utils
+animate.css		si
+blueimp-canvas-to-blob
+blueimp-gallery
+blueimp-load-image
+blueimp-tmpl
+bootstrap		si
+datatables
+fastclick
+flot			si (graficos)
+flot-axislabels		si (graficos)
+flot.tooltip		si (graficos)
+fontawesome		si
+iCheck			(en otro proyecto, es para estilos del checkbox)
+jasny-bootstrap		si
+jquery			si
+jquery-file-upload
+jquery-ui		si
+metisMenu		si (es para el menu laterial)
+ng-grid
+ng-idle			si (es para detectar la interaccion del usuario y sino hay durante x tiempo lo saque del sistema)
+ng-switchery		si
+oclazyload		si
+PACE			si checar
+pouchdb
+slimScroll		si checar configuracion
+sweetalert
+sweetalert2		si
+switchery		si
+transitionize
+uievents		si (mapas)

@@ -1,0 +1,21 @@
+{
+  "name": "select2-bootstrap3",
+  "version": "0.0.1",
+  "homepage": "https://github.com/fourteenmeister/select2-bootstrap",
+  "description": "A Select2 v4 Theme for Bootstrap 3",
+  "main": [
+    "dist/select2-bootstrap.css",
+    "dist/select2-bootstrap.min.css"
+  ],
+  "keywords": [
+    "select2", "bootstrap"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "composer.json"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

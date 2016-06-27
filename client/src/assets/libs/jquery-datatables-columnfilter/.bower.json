@@ -1,0 +1,37 @@
+{
+  "name": "jquery-datatables-columnfilter",
+  "version": "0.0.7",
+  "homepage": "https://code.google.com/p/jquery-datatables-column-filter/",
+  "authors": [
+    "Jovan Popovic"
+  ],
+  "description": "Original code by - Jovan Popovic. https://code.google.com/p/jquery-datatables-column-filter/",
+  "main": "jquery.dataTables.columnFilter.js",
+  "keywords": [
+    "Datatables",
+    "column",
+    "filter"
+  ],
+  "license": "BSD",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "datatables": "1.10.7",
+    "select2": "4.0.0"
+  },
+  "_release": "0.0.7",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.7",
+    "commit": "0b231425edf44d2b8616cd3f7f9260a8e4086eb1"
+  },
+  "_source": "git://github.com/renattomachado/jquery-datatables-column-filter.git",
+  "_target": "^0.0.7",
+  "_originalSource": "jquery-datatables-columnfilter",
+  "_direct": true
+}

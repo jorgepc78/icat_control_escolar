@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ng-app="icat_control_escolar">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Page title set in pageTitle directive -->
+    <title page-title></title>
+
+    <!-- build:css css/style.min.css -->
+            <!-- Font awesome -->
+            <link href="assets/libs/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+
+            <!-- Bootstrap and Fonts -->
+            <link href="assets/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+            <!-- Main Inspinia CSS files -->
+            <link href="assets/libs/animate.css/animate.min.css" rel="stylesheet">
+
+            <!-- jasny-bootstrap -->
+            <link href="assets/libs/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
+
+            <!-- sweet alert 2 -->
+            <link href="assets/libs/sweetalert2/dist/sweetalert2.css" rel="stylesheet">
+
+            <!-- Switchery -->
+            <link href="assets/libs/switchery/dist/switchery.min.css" rel="stylesheet">
+
+            <!-- jquery-ui -->
+            <link href="assets/libs/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet">
+
+            <link id="loadBefore" href="assets/css/google_fonts.css" rel="stylesheet">
+            <link id="loadBefore" href="assets/css/style-red.css" rel="stylesheet">
+            <link id="loadBefore" href="assets/css/mis_estilos.css" rel="stylesheet">
+    <!-- endbuild -->
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body class="fixed-nav md-skin">
+
+    <!-- Main view  -->
+    <div ui-view></div>
+
+            <script>
+                window.paceOptions = {
+                    document: true,
+                    eventLag: true,
+                    restartOnPushState: true,
+                    restartOnRequestAfter: true,
+                    ajax: {
+                        trackMethods: [ 'POST','GET','PUT','DELETE']
+                    }
+                };
+            </script>
+            <!-- jQuery and Bootstrap -->
+            <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+            <script src="assets/libs/jquery-ui/jquery-ui.min.js"></script>
+            <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+            <!-- MetsiMenu -->
+            <script src="assets/libs/metisMenu/dist/metisMenu.min.js"></script>
+
+            <!-- SlimScroll -->
+            <script src="assets/libs/slimScroll/jquery.slimscroll.min.js"></script>
+
+            <!-- jasny-bootstrap -->
+            <script src="assets/libs/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+
+            <!-- Peace JS -->
+            <script src="assets/libs/PACE/pace.min.js"></script>
+            
+            <!-- Sweet alert 2 -->
+            <script src="assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+
+            <!--Switchery -->
+            <script src="assets/libs/switchery/dist/switchery.min.js"></script>
+
+            <!-- Jquery datepicker -->
+            <script src="assets/libs/jquery-ui/ui/minified/i18n/datepicker-es.min.js"></script>
+
+            <!-- Custom and plugin javascript -->
+            <script src="assets/js/inspinia.js"></script>
+
+            <!-- Main Angular scripts-->
+            <script src="assets/libs/angular/angular.min.js"></script>
+            <script src="assets/libs/angular-i18n/angular-locale_es-mx.js"></script>
+            <script src="assets/libs/angular-resource/angular-resource.min.js"></script>
+            <script src="assets/libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
+            <script src="assets/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+            <script src="assets/libs/oclazyload/dist/ocLazyLoad.min.js"></script>
+            <script src="assets/libs/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
+
+            <script src="assets/libs/uievents/event.js"></script>
+            <script src="assets/libs/angular-sweetalert/SweetAlert.min.js"></script>
+            <script src="assets/libs/angular-ui-date/dist/date.js"></script>
+            <script src="assets/libs/ng-switchery/src/ng-switchery.js"></script>
+
+    <!-- build:js js/app.min.js -->
+
+            <!-- Anglar App Script -->
+            <script src="app/app.module.js"></script>
+            <script src="app/app.route.js"></script>
+            <script src="app/app.run.js"></script>
+
+            <!-- Directivas -->
+            <script src="app/shared/layout/minimaliza-sidebar.directive.js"></script>
+            <script src="app/shared/layout/pagetitle.directive.js"></script>
+            <script src="app/shared/layout/sidenavigation.directive.js"></script>
+            <script src="app/shared/layout/fullscroll.directive.js"></script>
+            <script src="app/shared/custom-directives/tecla-enter.directive.js"></script>
+            <script src="app/shared/custom-directives/tabla-paginacion.directive.js"></script>
+            <script src="app/shared/custom-directives/icheck.directive.js"></script>
+
+            <!-- Servicios -->
+            <script src="app/shared/strongloop-sdk/lb-services.js"></script>
+            <script src="app/shared/services/tabla-datos.service.js"></script>
+            
+            <!-- Factorias -->
+            <!-- <script src="app/shared/factories/lista-municipios.factory.js"></script> -->
+            <!-- <script src="app/shared/factories/lista-localidades.factory.js"></script> -->
+
+            <!-- Modulos -->            
+            <script src="app/components/autorizacion/login.controller.js"></script>
+            <script src="app/components/autorizacion/logout.controller.js"></script>
+            
+            <script src="app/components/inicio/inicio.controller.js"></script>
+            
+            <script src="app/components/admin-sistema/usuarios/admin-usuarios-principal.controller.js"></script>
+            <script src="app/components/admin-sistema/usuarios/modal-nuevo-usuario.controller.js"></script>
+            <script src="app/components/admin-sistema/usuarios/modal-edita-usuario.controller.js"></script>
+            
+            <script src="app/components/catalogos/catalogo-especialidades/principal-catalogo-especialidades.controller.js"></script>
+            <script src="app/components/catalogos/catalogo-especialidades/modal-edita-especialidad.controller.js"></script>
+            <script src="app/components/catalogos/catalogo-especialidades/modal-nueva-especialidad.controller.js"></script>
+            
+            <script src="app/components/catalogos/catalogo-cursos/principal-catalogo-cursos.controller.js"></script>
+            <script src="app/components/catalogos/catalogo-cursos/modal-edita-cat-curso.controller.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

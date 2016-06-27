@@ -1,0 +1,12 @@
+{
+  "icat_control_escolar_ds": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "icat_control_escolar",
+    "username": "postgres",
+    "password": "post",
+    "name": "icat_control_escolar_ds",
+    "connector": "postgresql",
+    "debug": false
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "google-maps-infoboxjs",
+  "homepage": "https://github.com/oytunyuksel/Google-Maps-Infobox.js",
+  "authors": [
+    "Oytun Yuksel <oytun.yuksel@yellow.com.tr>"
+  ],
+  "description": "Custom infobox for Google Maps API v3.",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "google",
+    "maps",
+    "infobox",
+    "custom",
+    "javascript",
+    "js",
+    "api",
+    "v3"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "4e6e4516fe",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4e6e4516fe9343a941462c536c6a940776b06e4b"
+  },
+  "_source": "https://github.com/oytunyuksel/Google-Maps-Infobox.js.git",
+  "_target": "*",
+  "_originalSource": "google-maps-infoboxjs",
+  "_direct": true
+}

@@ -1,0 +1,64 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "Role": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "Usuario": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "CatalogoUnidadesAdmtvas": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "CatalogoTemas": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "CatalogoTemarioCursos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "CatalogoEspecialidades": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "CatalogoLocalidades": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "CatalogoCursos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  }
+}

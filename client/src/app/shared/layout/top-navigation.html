@@ -1,0 +1,82 @@
+<div class="row border-bottom">
+    <nav class="navbar navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <i class="fa fa-reorder"></i>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-top-links">
+
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'vinculacion'">
+                    <a class="dropdown-toggle" href dropdown-toggle> Cat&aacute;logos <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'vinculacion'">
+                            <a ui-sref="index.categoria_especialidades"><i class="fa fa-book"></i> <span class="nav-label" style="display:inline-block;width:80%;vertical-align:middle;">Categor&iacute;a de especialidades</span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'coordinador_gral'">
+                            <a ui-sref="index.catalogo_especialidades"><i class="fa fa-book"></i> <span class="nav-label" style="display:inline-block;width:80%;vertical-align:middle;">Cat&aacute;logo de especialidades</span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'coordinador_gral'">
+                            <a ui-sref="index.catalogo_cursos"><i class="fa fa-book"></i> <span class="nav-label">Cat&aacute;logo de cursos</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
+                    <a class="dropdown-toggle" href dropdown-toggle> Cursos <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
+                            <a ui-sref="index.lista_cursos_activos({ tipo: 'activos' })"><i class="fa fa-users"></i> <span class="nav-label">Cursos vigentes </span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
+                            <a ui-sref="index.lista_cursos_activos({ tipo: 'historicos' })"><i class="fa fa-users"></i> <span class="nav-label">Hist&oacute;rico de cursos </span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
+                    <a class="dropdown-toggle" href dropdown-toggle> Alumnos <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
+                            <a ui-sref="index.lista_alumnos"><i class="fa fa-user"></i> <span class="nav-label" style="display:inline-block;width:80%;vertical-align:middle;">Lista de alumnos inscritos</span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
+                            <a ui-sref="index.inscripcion"><i class="fa fa-sign-in"></i> <span class="nav-label">Inscripci&oacute;n de alumnos</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
+                    <a class="dropdown-toggle" href dropdown-toggle> Pago de cursos <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
+                            <a ui-sref="index.registra_pago"><i class="fa fa-money"></i> <span class="nav-label" style="display:inline-block;width:80%;vertical-align:middle;">Registro de pago de los alumnos</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li ui-sref-active="active" ng-if="currentUser.perfil == 'admin_sistema'">
+                    <a ui-sref="admin.usuarios"><i class="fa fa-book"></i> <span class="nav-label">Usuarios del sistema</span></a>
+                </li>
+
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
+                    <a class="dropdown-toggle" href dropdown-toggle><i class="fa fa-bars"></i>Cat&aacute;logos <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active">
+                            <a ui-sref="index.catalogo_especialidades"><i class="fa fa-table"></i> <span class="nav-label"> Cat&aacute;logo de especialidades</span></a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="index.catalogo_cursos"><i class="fa fa-table"></i> <span class="nav-label"> Cat&aacute;logo general de cursos</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a ui-sref="logout"><i class="fa fa-sign-out"></i> Cerrar sesi&oacute;n</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

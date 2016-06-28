@@ -5,17 +5,12 @@
         .module('icat_control_escolar')
         .config(config);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider'];
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 
-    function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+    function config($stateProvider, $urlRouterProvider) {
         
         $urlRouterProvider.otherwise('login');
-
-        $ocLazyLoadProvider.config({
-            // Set to true if you want to see what and when is dynamically loaded
-            debug: false
-        });
 
         $stateProvider
 

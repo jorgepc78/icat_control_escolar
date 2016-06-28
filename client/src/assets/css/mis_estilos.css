@@ -34,7 +34,7 @@ body.fixed-nav #wrapper #page-wrapper {
   height: 100vh;
 }
 .pace .pace-progress {
-  background: red;
+  background: #EF9A9A;
   position: fixed;
   z-index: 2040;
   top: 0;
@@ -181,4 +181,8 @@ body.fixed-nav #wrapper #page-wrapper {
     color: #fff;
     background-color: #ed5565;
     border-color: #ed5565;
+}
+
+.app-modal-window .modal-dialog {
+  width: 1124px;
 }

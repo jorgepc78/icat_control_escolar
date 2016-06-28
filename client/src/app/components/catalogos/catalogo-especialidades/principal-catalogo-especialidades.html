@@ -33,9 +33,11 @@
                                     <td> {{registro.nombre}}</td>
                                     <td> {{registro.clave}}</td>
                                     <td> {{registro.tema_pertenece.nombre}}</td>
-                                    <td style="width:170px">
-                                            <button type="button" ng-click="vm.edita_registro(registro)" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Editar</button> 
-                                            <button type="button" ng-click="vm.elimina_registro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Eliminar</button>
+                                    <td style="width:220px">
+                                            <!-- <button type="button" ng-click="vm.edita_registro(registro)" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Editar</button> -->
+                                            <button type="button" class="btn btn-primary btn-sm btn-labeled" ng-click="vm.edita_registro(registro)"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar</button>
+                                            <button type="button" class="btn btn-danger btn-sm btn-labeled" ng-click="vm.elimina_registro(registro)"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar</button>
+                                            <!-- <button type="button" ng-click="vm.elimina_registro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Eliminar</button> -->
                                     </td>
                                 </tr>
                               </tbody>

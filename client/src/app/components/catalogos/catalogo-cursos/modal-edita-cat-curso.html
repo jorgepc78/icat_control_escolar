@@ -1,88 +1,109 @@
 <div class="inmodal">
       <div class="modal-header">
-          <h4 class="modal-title"> Datos del usuario</h4>
+          <h4 class="modal-title"> Edici&oacute;n del curso</h4>
       </div>
       <div class="modal-body" style="background: #fff;">
-            <form name="form_datos" class="form-horizontal">
 
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Perfil</label>
-                      <div class="col-sm-7">
-                          <select class="form-control m-b" 
-                              ng-model="vm.perfilSeleccionado"
-                              ng-options="rol as rol.description for rol in vm.listaRoles" required>
-                          </select>
-                      </div>
-                  </div>
+        <div class="row">
+                <div class="col-lg-6">
 
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Unidad</label>
-                      <div class="col-sm-7">
-                          <select class="form-control m-b" 
-                              ng-model="vm.unidadSelecccionada"
-                              ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades" required>
-                          </select>
-                      </div>
-                  </div>
-
-                  <div class="hr-line-dashed"></div>
-
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Nombre</label>
-                      <div class="col-sm-7">
-                          <input type="text" class="form-control" ng-model="vm.usuarioEditar.nombre" required>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Puesto</label>
-                      <div class="col-sm-7">
-                          <input type="text" class="form-control" ng-model="vm.usuarioEditar.puesto" required>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Email</label>
-                      <div class="col-sm-7">
-                          <input type="email" class="form-control" ng-model="vm.usuarioEditar.email" required>
-                      </div>
-                  </div>
-
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Nombre de usuario</label>
-                      <div class="col-sm-9">
-                          <div class="row">
-                              <div class="col-md-4">
-                                  <input type="text" class="form-control" ng-model="vm.usuarioEditar.username" required>
-                              </div>
-                              <div class="col-md-1" style="width: 85px;">
-                                  <label class="control-label">Password</label>
-                              </div>
-                              <div class="col-md-5">
-                                  <input type="text" class="form-control" ng-model="vm.usuarioEditar.password">
+                    <form name="form_datos" class="form-horizontal">
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Especialidad</label>
+                              <div class="col-sm-9">
+                                  <select class="form-control m-b" 
+                                      ng-model="vm.especialidadSeleccionada"
+                                      ng-options="especialidad as especialidad.nombre for especialidad in vm.listaEspecialidades" required>
+                                  </select>
                               </div>
                           </div>
-                      <span class="help-block m-b-none">(Si no desea cambiar el password, dejar la casilla correspondiente en blanco)</span>
-                      </div>
-                  </div>
 
-                  <div class="hr-line-dashed"></div>
+                          <div class="hr-line-dashed"></div>
 
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Aviso apertura cursos</label>
-                      <div class="col-sm-3">
-                          <input ng-if="vm.usuarioEditar.avisoCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoCurso"/>
-                      </div>
-                      <label class="col-sm-3 control-label">Usuario activo</label>
-                      <div class="col-sm-3">
-                          <input ng-if="vm.usuarioEditar.activo!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.activo"/>
-                      </div>
-                  </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Nombre curso</label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCurso" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Clave</label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.claveCurso" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Descripci&oacute;n</label>
+                              <div class="col-sm-9">
+                                  <textarea class="form-control" ng-model="vm.registroEdicion.descripcion" rows="6" cols="90" required></textarea>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">N&uacute;mero de horas</label>
+                              <div class="col-sm-9">
+                                  <input type="number" class="form-control" ng-model="vm.registroEdicion.numeroHoras" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Modalidad</label>
+                              <div class="col-sm-9">
+                                  <select class="form-control m-b"
+                                      ng-model="vm.registroEdicion.modalidad" required>
+                                      <option value="CAE">CAE</option>
+                                      <option value="Regular">Regular</option>
+                                      <option value="Extension">Extensi&oacute;n</option>
+                                  </select>
+                              </div>
+                          </div>
+                    </form>
 
-            </form>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="tablaDatos table table-condensed no-footer">
+                              <thead>
+                                <col width="10%">
+                                <col width="70%">
+                                <col width="20%">
+                                <tr>
+                                    <th>N&uacute;m.</th>
+                                    <th>Tema</th>
+                                    <th><button type="button" ng-click="vm.agregaTema()" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar tema</button></th>
+                                </tr>
+                              </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="height: 400px;">
+                            <div class="full-height-scroll" full-scroll>
+                                  <table class="tablaDatos table table-condensed no-footer">
+                                    <thead>
+                                      <col width="10%">
+                                      <col width="90%">
+                                      <col width="10%">
+                                    </thead>
+                                   <tbody>
+                                      <tr ng-repeat="registro in vm.registroEdicion.temario" class="pointer">
+                                          <td>{{$index + 1}}</td>
+                                          <td><input type="text" class="form-control" ng-model="registro.tema"></td>
+                                          <td style="width:170px">
+                                                  <button type="button" ng-click="vm.eliminaRegistro($index)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                          </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
 
       </div>
       <div class="modal-footer">
-          <span class="text-danger" ng-show="vm.msg_password">{{vm.txt_msg_password}}</span>
-          <button type="button" class="btn btn-white" ng-click="$dismiss()">Cancelar</button>
-          <button type="button" class="btn btn-primary" ng-disabled="form_datos.$invalid" ng-click="vm.guardar()">Guardar</button>
+          <button type="button" ng-click="$dismiss()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+          <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
       </div>
 </div>

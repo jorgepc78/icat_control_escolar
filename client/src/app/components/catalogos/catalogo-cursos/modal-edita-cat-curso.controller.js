@@ -11,20 +11,30 @@
 
             var vm = this;
 
-            vm.especialidadSeleccionado = 0;
-            
-            vm.registroEditar = {
+            vm.especialidadSeleccionada = 0;
+            vm.listaEspecialidades = {};
+           
+            vm.registroEdicion = {
                     idCatalogoCurso : registroEditar.idCatalogoCurso,
                     claveCurso      : registroEditar.claveCurso,
+                    descripcion     : registroEditar.descripcion,
                     idEspecialidad  : registroEditar.idEspecialidad,
                     especialidad    : '',
                     modalidad       : registroEditar.modalidad,
                     nombreCurso     : registroEditar.nombreCurso,
-                    numeroHoras     : registroEditar.numeroHoras
+                    numeroHoras     : registroEditar.numeroHoras,
+                    temario         : []
             };
 
+            angular.forEach(registroEditar.temario, function(record) {
+                  vm.registroEdicion.temario.push({
+                      tema: record.tema
+                  });
+            });
 
             vm.guardar = guardar;
+            vm.agregaTema = agregaTema;
+            vm.eliminaRegistro = eliminaRegistro;
 
             inicia();
 
@@ -38,110 +48,86 @@
                 })
                 .$promise
                 .then(function(resp) {
-                    vm.listaRoles = resp;
+                    vm.listaEspecialidades = resp;
 
-                    var perfilSeleccionadoIndex = vm.listaRoles.map(function(rol) {
-                                                        return rol.id;
-                                                      }).indexOf(vm.registroEditar.idPerfil);
+                    var index = vm.listaEspecialidades.map(function(especialidad) {
+                                                        return especialidad.idEspecialidad;
+                                                      }).indexOf(vm.registroEdicion.idEspecialidad);
 
-                    vm.perfilSeleccionado = vm.listaRoles[perfilSeleccionadoIndex];
-                });
-    
-                CatalogoUnidadesAdmtvas.find({
-                    filter: {
-                        order: 'nombre ASC'
-                    }
-                })
-                .$promise
-                .then(function(resp) {
-                    vm.listaUnidades = resp;
-
-                    var unidadSelecccionadaIndex = vm.listaUnidades.map(function(unidad) {
-                                                        return unidad.idUnidadAdmtva;
-                                                      }).indexOf(vm.registroEditar.idUnidadAdmtva);
-
-                    vm.unidadSelecccionada = vm.listaUnidades[unidadSelecccionadaIndex];
+                    vm.especialidadSeleccionada = vm.listaEspecialidades[index];
                 });
     
             };
 
+            function agregaTema() {
+                vm.registroEdicion.temario.push({
+                    tema: ''
+                });
+            };
+
+            function eliminaRegistro(indice) {
+                vm.registroEdicion.temario.splice(indice, 1);
+            };
+
+
             function guardar() {
 
-                if(vm.registroEditar.password == '' || vm.registroEditar.password === undefined)
-                {
-                    var datos = {
+                var datos = {
+                        claveCurso     : vm.registroEdicion.claveCurso,
+                        descripcion    : vm.registroEdicion.descripcion,
+                        idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
+                        modalidad      : vm.registroEdicion.modalidad,
+                        nombreCurso    : vm.registroEdicion.nombreCurso,
+                        numeroHoras    : vm.registroEdicion.numeroHoras
+                };
 
-                            nombre         : vm.registroEditar.nombre,
-                            puesto         : vm.registroEditar.puesto,
-                            email          : vm.registroEditar.email,
-                            username       : vm.registroEditar.username,
-                            idUnidadAdmtva : vm.unidadSelecccionada.idUnidadAdmtva,
-                            avisoCurso     : vm.registroEditar.avisoCurso,
-                            activo         : vm.registroEditar.activo
-                    };
-                }
-                else
-                {
-                    var datos = {
-                            nombre         : vm.registroEditar.nombre,
-                            puesto         : vm.registroEditar.puesto,
-                            email          : vm.registroEditar.email,
-                            username       : vm.registroEditar.username,
-                            password       : vm.registroEditar.password,
-                            idUnidadAdmtva : vm.unidadSelecccionada.idUnidadAdmtva,
-                            avisoCurso     : vm.registroEditar.avisoCurso,
-                            activo         : vm.registroEditar.activo
-                    };
-                }
+                vm.registroEdicion.idEspecialidad = vm.especialidadSeleccionada.idEspecialidad;
+                vm.registroEdicion.especialidad = vm.especialidadSeleccionada.nombre;
 
-                vm.registroEditar.perfil = vm.perfilSeleccionado;
-                vm.registroEditar.idUnidadAdmtva = vm.unidadSelecccionada.idUnidadAdmtva;
-                vm.registroEditar.UnidadAdmtva = vm.unidadSelecccionada.nombre;
-
-                Usuario.prototype$updateAttributes(
+                CatalogoCursos.prototype$updateAttributes(
                 {
-                    id: vm.registroEditar.idUsuario
+                    id: vm.registroEdicion.idCatalogoCurso
                 },
                     datos
                 )
                 .$promise
                 .then(function(respuesta) {
 
-                    if(vm.registroEditar.idPerfil != vm.perfilSeleccionado.id)
-                    {
-                            Usuario.perfil.destroyAll({ id: vm.registroEditar.idUsuario })
-                              .$promise
-                              .then(function() { 
+                    CatalogoCursos.temario.destroyAll({ id: vm.registroEdicion.idCatalogoCurso })
+                      .$promise
+                      .then(function() { 
 
-                                    Role.principals.create({
-                                        id: vm.perfilSeleccionado.id
-                                    },{
-                                        principalType: 'USER',
-                                        principalId: vm.registroEditar.idUsuario,
-                                        roleId: vm.perfilSeleccionado.id
-                                    }) 
-                                    .$promise
-                                    .then(function() {                
-                                        $modalInstance.close(vm.registroEditar);
+                            if(vm.registroEdicion.temario.length > 0)
+                            {
+                                    var array_temario_enviar = [];
+                                    angular.forEach(vm.registroEdicion.temario, function(record) {
+                                          array_temario_enviar.push({
+                                              idCatalogoCurso : vm.registroEdicion.idCatalogoCurso,
+                                              tema            : record.tema
+                                          });
                                     });
-                            });
 
-                    }
-                    else
-                    {
-                      $modalInstance.close(vm.registroEditar);
+                                    CatalogoCursos.temario.createMany(
+                                      {id: vm.registroEdicion.idCatalogoCurso},
+                                      array_temario_enviar
+                                    )
+                                    .$promise
+                                    .then(function(lista_temas) {
+    
+                                        vm.registroEdicion.temario = lista_temas;
 
-                    }
+                                        $modalInstance.close(vm.registroEdicion);
+                                    });
+                            }
+                            else
+                            {
+                                    $modalInstance.close(vm.registroEdicion);
+                            }
+
+                    });
+
                 })
                 .catch(function(error) {
-                    if(error.status == 422) {
-                            vm.txt_msg_password = 'El email ya existe';
-                            vm.msg_password = true;
-                            $timeout(function(){
-                                 vm.msg_password = false;
-                                 vm.txt_msg_password = '';
-                            }, 3000);
-                      }
                 });
             };
     };

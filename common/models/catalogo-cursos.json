@@ -13,7 +13,7 @@
     "idCatalogoCurso": {
       "type": "Number",
       "id": true,
-      "required": true,
+      "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
@@ -71,22 +71,6 @@
         "dataLength": null,
         "dataPrecision": 32,
         "dataScale": 0,
-        "nullable": "YES"
-      },
-      "_selectable": true
-    },
-    "especialidadid": {
-      "type": "String",
-      "required": false,
-      "length": 32,
-      "precision": null,
-      "scale": null,
-      "postgresql": {
-        "columnName": "especialidadid",
-        "dataType": "character varying",
-        "dataLength": 32,
-        "dataPrecision": null,
-        "dataScale": null,
         "nullable": "YES"
       },
       "_selectable": true

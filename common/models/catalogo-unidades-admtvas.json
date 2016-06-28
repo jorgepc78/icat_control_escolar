@@ -13,7 +13,7 @@
     "idUnidadAdmtva": {
       "type": "Number",
       "id": true,
-      "required": true,
+      "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,

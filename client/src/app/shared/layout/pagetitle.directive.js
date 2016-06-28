@@ -12,7 +12,7 @@
                     // Default title - load on Dashboard 1
                     var title = 'ICAT Control Escolar';
                     // Create your own title pattern
-                    if (toState.data && toState.data.pageTitle) title = 'SEDUVI | ' + toState.data.pageTitle;
+                    if (toState.data && toState.data.pageTitle) title = 'ICATQR | ' + toState.data.pageTitle;
                     $timeout(function() {
                         element.text(title);
                     });

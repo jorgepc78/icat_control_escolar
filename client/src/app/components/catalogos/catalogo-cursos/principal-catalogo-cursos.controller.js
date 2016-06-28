@@ -21,7 +21,7 @@
             vm.tablaListaRegistros = {
               totalElementos     : 0,
               paginaActual       : 1,
-              registrosPorPagina : 5,
+              registrosPorPagina : 10,
               inicio             : 0,
               fin                : 1,
               condicion          : {},
@@ -45,7 +45,7 @@
                                 {
                                     relation: 'especialidad',
                                     scope: {
-                                        fields:['idEspecialidad','idTema','nombre']
+                                        fields:['idEspecialidad','nombre']
                                     }
                                 }
                               ]
@@ -183,6 +183,7 @@
                         windowClass: "animated fadeIn",
                         controller: 'ModalEditaCatCursoController as vm',
                         //size: 'lg',
+                        windowClass: 'app-modal-window',
                         resolve: {
                           registroEditar: function () { return seleccion }
                         }
@@ -190,28 +191,28 @@
                     });
 
                     modalInstance.result.then(function (respuesta) {
-                        vm.RegistroSeleccionado.nombre                          = respuesta.nombre;
-                        vm.RegistroSeleccionado.puesto                          = respuesta.puesto;
-                        vm.RegistroSeleccionado.email                           = respuesta.email;
-                        vm.RegistroSeleccionado.username                        = respuesta.username;
-                        vm.RegistroSeleccionado.unidad_pertenece.idUnidadAdmtva = respuesta.idUnidadAdmtva;
-                        vm.RegistroSeleccionado.unidad_pertenece.nombre         = respuesta.UnidadAdmtva;
-                        vm.RegistroSeleccionado.avisoCurso                      = respuesta.avisoCurso;
-                        vm.RegistroSeleccionado.activo                          = respuesta.activo;
-                        if(vm.RegistroSeleccionado.perfil.length > 0)
+                        vm.RegistroSeleccionado.claveCurso                  = respuesta.claveCurso;
+                        vm.RegistroSeleccionado.descripcion                 = respuesta.descripcion;
+                        vm.RegistroSeleccionado.idEspecialidad              = respuesta.idEspecialidad;
+                        vm.RegistroSeleccionado.modalidad                   = respuesta.modalidad;
+                        vm.RegistroSeleccionado.nombreCurso                 = respuesta.nombreCurso;
+                        vm.RegistroSeleccionado.numeroHoras                 = respuesta.numeroHoras;
+
+                        vm.RegistroSeleccionado.especialidad.idEspecialidad = respuesta.idEspecialidad;
+                        vm.RegistroSeleccionado.especialidad.nombre         = respuesta.especialidad;
+
+                        if(respuesta.temario.length > 0)
                         {
-                            vm.RegistroSeleccionado.perfil[0].id                    = respuesta.perfil.id;
-                            vm.RegistroSeleccionado.perfil[0].description           = respuesta.perfil.description;
-                            vm.RegistroSeleccionado.perfil[0].name                  = respuesta.perfil.name;                          
+                              vm.RegistroSeleccionado.temario = [];
+                              angular.forEach(respuesta.temario, function(record) {
+                                    vm.RegistroSeleccionado.temario.push({
+                                        idTemario       : record.idTemario,
+                                        idCatalogoCurso : record.idCatalogoCurso,
+                                        tema            : record.tema
+                                    });
+                              });
                         }
-                        else
-                        {
-                            vm.RegistroSeleccionado.perfil.push({
-                                id          : respuesta.perfil.id,
-                                description : respuesta.perfil.description,
-                                name        : respuesta.perfil.name
-                            });
-                        }
+
                     }, function () {
                     });
             };
@@ -220,10 +221,10 @@
             function nuevo_registro() {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/admin-sistema/usuarios/modal-edita-usuario.html',
+                        templateUrl: 'app/components/catalogos/catalogo-cursos/modal-edita-cat-curso.html',
                         windowClass: "animated fadeIn",
-                        controller: 'ModalNuevoUsuarioController as vm',
-                        size: 'lg'
+                        controller: 'ModalnuevoCatCursoController as vm',
+                        windowClass: 'app-modal-window'
                     });
 
                     modalInstance.result.then(function () {
@@ -237,7 +238,7 @@
 
                   swal({
                     title: "Confirmar",
-                    html: 'Se eliminar&aacute; el usuario <strong>'+ RegistroSeleccionado.nombre +'</strong>, ¿Continuar?',
+                    html: 'Se eliminar&aacute; el curso <strong>'+ RegistroSeleccionado.nombreCurso +'</strong>, ¿Continuar?',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -248,16 +249,15 @@
                   }, function(){
                           swal.disableButtons();
 
-
-                            CatalogoCursos.perfil.destroyAll({ id: RegistroSeleccionado.idUsuario })
+                            CatalogoCursos.temario.destroyAll({ id: RegistroSeleccionado.idCatalogoCurso })
                               .$promise
                               .then(function() { 
 
-                                    CatalogoCursos.deleteById({ id: RegistroSeleccionado.idUsuario })
+                                    CatalogoCursos.deleteById({ id: RegistroSeleccionado.idCatalogoCurso })
                                     .$promise
                                     .then(function() { 
                                           vm.limpiaBusqueda();
-                                          swal('CatalogoCursos eliminado', '', 'success');
+                                          swal('Curso eliminado', '', 'success');
                                     });
 
                             });

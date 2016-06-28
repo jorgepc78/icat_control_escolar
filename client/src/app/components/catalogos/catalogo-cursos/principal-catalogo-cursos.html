@@ -1,135 +1,182 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-md-8">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <div class="row">
-                            <div class="col-md-4">
-                                    <h2>Cat&aacute;logo oficial de cursos</h2>
+                <div class="col-md-8">
+    
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <div class="row">
+                                        <div class="col-md-4">
+                                                <h2>Cat&aacute;logo oficial de cursos</h2>
+                                        </div>
+                                        <div class="col-md-8 text-right">
+                                                <div class="mail-tools">
+                                                        <button class="btn btn-primary btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
+                                                </div>
+                                        </div>
+                                </div>
                             </div>
-                            <div class="col-md-8 text-right">
-                                    <div class="mail-tools">
-                                            <button class="btn btn-primary btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
+                            <div class="ibox-content">
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group" style="margin-top:16px;">
+                                            <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Texto a buscar" class="input form-control" ng-model="vm.cadena_buscar">
+                                                    <span class="input-group-btn">
+                                                            <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
+                                                            <button class="btn btn-primary btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
+                                                    </span>
+                                        </div>
                                     </div>
+                                </div>
+                              
+                                <br>
+                                        <table class="tablaDatos table table-condensed table-hover no-footer">
+                                          <thead>
+                                            <tr>
+                                                <th>Nombre curso</th>
+                                                <th>Especialidad</th>
+                                                <th>Clave</th>
+                                                <th>Modalidad</th>
+                                                <th>N&uacute;m. horas</th>
+                                            </tr>
+                                          </thead>
+                                         <tbody>
+                                            <tr ng-repeat="registro in vm.registros" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaRegistros.fila_seleccionada}" class="pointer">
+                                                <td> {{registro.nombreCurso}}</td>
+                                                <td> {{registro.especialidad.nombre}}</td>
+                                                <td> {{registro.claveCurso}}</td>
+                                                <td> {{registro.modalidad}}</td>
+                                                <td> {{registro.numeroHoras}}</td>
+                                                <!-- <td class="client-status"><span class="label label-{{registro.activo === true ? 'primary' : 'warning'}}">{{registro.activo === true ? 'S&iacute;' : 'No'}}</span></td> -->
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+                                        <tabla-paginacion config="vm.tablaListaRegistros" paginar="vm.cambiarPagina()"></tabla-paginacion>
+
                             </div>
-                    </div>
-                </div>
-                <div class="ibox-content">
+                        </div>
+                
+                </div> <!-- column1 -->
+                <div class="col-md-4">
                     
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="input-group" style="margin-top:16px;">
-                                <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Texto a buscar" class="input form-control" ng-model="vm.cadena_buscar" required>
-                                        <span class="input-group-btn">
-                                                <button class="btn btn-success" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><i class="fa fa-trash-o"></i> Limpiar</button>
-                                                <button class="btn btn-primary" ng-click="vm.muestraResultadosBusqueda()"><i class="fa fa-search"></i> Buscar</button>
-                                        </span>
-                            </div>
-                        </div>
-                    </div>
-                  
-                    <br>
-                            <table class="tablaDatos table table-condensed table-hover no-footer">
-                              <thead>
-                                <tr>
-                                    <th>Especialidad</th>
-                                    <th>Nombre curso</th>
-                                    <th>Clave</th>
-                                    <th>Modalidad</th>
-                                    <th>N&uacute;m. horas</th>
-                                </tr>
-                              </thead>
-                             <tbody>
-                                <tr ng-repeat="registro in vm.registros" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaRegistros.fila_seleccionada}" class="pointer">
-                                    <td> {{registro.especialidad.nombre}}</td>
-                                    <td> {{registro.nombreCurso}}</td>
-                                    <td> {{registro.claveCurso}}</td>
-                                    <td> {{registro.modalidad}}</td>
-                                    <td> {{registro.numeroHoras}}</td>
-                                    <!-- <td class="client-status"><span class="label label-{{registro.activo === true ? 'primary' : 'warning'}}">{{registro.activo === true ? 'S&iacute;' : 'No'}}</span></td> -->
-                                </tr>
-                              </tbody>
-                            </table>
 
-                            <tabla-paginacion config="vm.tablaListaRegistros" paginar="vm.cambiarPagina()"></tabla-paginacion>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="ibox ">
-        
-                <div class="ibox-content" style="height:400px;">
-                    <div class="tab-content">
-        
-                        <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
-
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
-                                            <p>
-                                                <h2>Seleccione un registro para ver los detalles</h2>
-                                            </p>
+                                <div class="ibox">
+                                    <div class="ibox-content" style="height:435px;">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 text-center">
+                                                                <p>
+                                                                    <h2>Seleccione un registro para ver los detalles</h2>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane active" ng-show="vm.client == 2">
+                                                        <div class="panel blank-panel">
+                                                                            <ul class="list-group clear-list">
+                                                                                <li style="height: 60px" class="list-group-item fist-item">
+                                                                                    <span style="width: 440px;text-align: right;" class="pull-right"> {{vm.RegistroSeleccionado.nombreCurso}} </span>
+                                                                                    Nombre curso
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.especialidad.nombre}} </span>
+                                                                                    Especialidad
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.claveCurso}} </span>
+                                                                                    Clave
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.modalidad}} </span>
+                                                                                    Modalidad
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.numeroHoras}} </span>
+                                                                                    N&uacute;m. horas
+                                                                                </li>
+                                                                                <li style="height: 130px" class="list-group-item">
+                                                                                    <span class="pull-right" style="width: 440px;text-align: justify;"> {{vm.RegistroSeleccionado.descripcion}} </span>
+                                                                                    Descripci&oacute;n
+                                                                                </li>
+                                                                                <!-- <li class="list-group-item">
+                                                                                    <span class="pull-right label label-{{vm.RegistroSeleccionado.activo === true ? 'primary' : 'warning'}}">{{vm.RegistroSeleccionado.activo === true ? 'S&iacute;' : 'No'}}</span>
+                                                                                    Usuario activo
+                                                                                </li> -->
+                                                                            </ul>
+                                                                    <br>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 text-center">
+                                                                                    <div class="col-md-6">
+                                                                                        <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar registro</button>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <button type="button" ng-click="vm.elimina_registro(vm.RegistroSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar registro</button>
+                                                                                    </div>
+                                                                        </div>
+                                                                    </div>
+                                                        </div> <!--panel blank-panel-->
+                          
+                                            </div> <!-- client == 2 -->
                                         </div>
                                     </div>
-                        </div>
-        
-                        <div class="tab-pane active" ng-show="vm.client == 2">
+                                </div> <!-- class ibox -->
+                                <div class="ibox">
+                                    <div class="ibox-title">
+                                        <h2>Temario</h2>
+                                    </div>
+                                    <div class="ibox-content" style="height:230px;">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" ng-show="vm.RegistroSeleccionado.temario.length == 0">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 text-center">
+                                                                <p>
+                                                                    <h2>Sin temas</h2>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane active" ng-show="vm.RegistroSeleccionado.temario.length > 0">
+                    
+                                                <table class="tablaDatos table table-condensed no-footer">
+                                                  <thead>
+                                                    <col width="10%">
+                                                    <col width="90%">
+                                                    <tr>
+                                                        <th>N&uacute;m.</th>
+                                                        <th>Tema</th>
+                                                    </tr>
+                                                  </thead>
+                                                </table>
 
-                                    <div class="panel blank-panel">
-
-                                                        <ul class="list-group clear-list">
-                                                            <li class="list-group-item fist-item">
-                                                                <span class="pull-right"> {{vm.RegistroSeleccionado.especialidad.nombre}} </span>
-                                                                Especialidad
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                                <span class="pull-right"> {{vm.RegistroSeleccionado.nombreCurso}} </span>
-                                                                Nombre curso
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                                <span class="pull-right"> {{vm.RegistroSeleccionado.claveCurso}} </span>
-                                                                Clave
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                                <span class="pull-right"> {{vm.RegistroSeleccionado.modalidad}} </span>
-                                                                Modalidad
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                                <span class="pull-right"> {{vm.RegistroSeleccionado.numeroHoras}} </span>
-                                                                N&uacute;m. horas
-                                                            </li>
-                                                            <li style="height: 120px" class="list-group-item">
-                                                                <span class="pull-right" style="width: 440px;text-align: right;"> {{vm.RegistroSeleccionado.descripcion}} </span>
-                                                                Descripci&oacute;n
-                                                            </li>
-                                                            <!-- <li class="list-group-item">
-                                                                <span class="pull-right label label-{{vm.RegistroSeleccionado.activo === true ? 'primary' : 'warning'}}">{{vm.RegistroSeleccionado.activo === true ? 'S&iacute;' : 'No'}}</span>
-                                                                Usuario activo
-                                                            </li> -->
-                                                        </ul>
-        
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-12 text-center">
-                                                                <div class="col-md-6">
-                                                                    <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar registro</button>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <button type="button" ng-click="vm.elimina_registro(vm.RegistroSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar registro</button>
-                                                                </div>
+                                                <div style="width:100%;height:140px">
+                                                    <div class="full-height-scroll" full-scroll>
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                              <col width="10%">
+                                                              <col width="90%">
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr ng-repeat="temario in vm.RegistroSeleccionado.temario | orderBy:'idTemario'">
+                                                                <td> {{$index + 1}}</td>
+                                                                <td> {{temario.tema}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
-
+                                            </div> <!-- client == 2 -->
+                                        </div>
                                     </div>
+                                </div> <!-- class ibox -->
 
-                                </div>
-      
-                        </div> <!-- client == 2 -->
-                    </div>
-                </div>
-            </div>
-        </div>
+                        </div>
+                    </div> <!-- row -->
 
-    </div>
+                </div> <!-- column2 -->
+
+    </div><!-- row principal -->
 </div>

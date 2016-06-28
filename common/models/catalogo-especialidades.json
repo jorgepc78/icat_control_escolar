@@ -90,8 +90,5 @@
     }
   },
   "acls": [],
-  "scope": {
-    "limit":10
-  },
   "methods": {}
 }

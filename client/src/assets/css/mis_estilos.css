@@ -26,8 +26,9 @@ body.fixed-nav #wrapper #page-wrapper {
     font-size: 95%;
 }
 .page-heading {
-  border-top: 0;
-  padding: 0 10px 10px 10px;
+  border-top: 0 !important;
+  padding: 0 10px 0 10px !important;
+  height: 50px;
 }
 .login-container {
   background-color: #f3f3f4;
@@ -46,7 +47,7 @@ body.fixed-nav #wrapper #page-wrapper {
 
 /*ESTILOS PERSONALIZADOS DE LOS COMPONENTES*/
 .seleccion{
-    background:rgb(225, 225, 225);
+    background: #f7b8b8;
 }
 .ListaTagClass .tags {
   background-color: #fff;
@@ -107,6 +108,7 @@ body.fixed-nav #wrapper #page-wrapper {
 
 .tablaDatos.no-footer {
     border-bottom: 1px solid #111;
+    margin-bottom: 1px;
 }
 
 .anchoListaEdades {
@@ -185,4 +187,7 @@ body.fixed-nav #wrapper #page-wrapper {
 
 .app-modal-window .modal-dialog {
   width: 1124px;
+}
+.texto-estatus-ptc {
+  font-size: 12px;
 }

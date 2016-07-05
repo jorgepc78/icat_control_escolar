@@ -39,6 +39,13 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+            .state('index.catalogo_temas', {
+                url: '/catalogo_temas',
+                templateUrl: 'app/components/catalogos/catalogo-temas/principal-catalogo-temas.html',
+                controller: 'PrincipalCatalogoTemasController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
             .state('index.catalogo_especialidades', {
                 url: '/catalogo_especialidades',
                 templateUrl: 'app/components/catalogos/catalogo-especialidades/principal-catalogo-especialidades.html',
@@ -68,6 +75,21 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+            
+            /*** seccion del PTC ***/
+            .state('ptc', {
+                abstract: true,
+                url: '/ptc',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('ptc.lista_ptcs', {
+                url: '/lista_ptcs',
+                templateUrl: 'app/components/ptc/principal-ptc.html',
+                controller: 'PrincipalPTCController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+
 
     }
 

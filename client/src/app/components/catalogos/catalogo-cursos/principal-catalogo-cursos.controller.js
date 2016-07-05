@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('PrincipalCatalogoCursosController', PrincipalCatalogoCursosController);
 
-    PrincipalCatalogoCursosController.$inject = ['$timeout', '$modal', 'tablaDatosService', 'CatalogoCursos'];
+    PrincipalCatalogoCursosController.$inject = ['$modal', 'tablaDatosService', 'CatalogoCursos'];
 
-    function PrincipalCatalogoCursosController($timeout, $modal, tablaDatosService, CatalogoCursos ) {
+    function PrincipalCatalogoCursosController($modal, tablaDatosService, CatalogoCursos ) {
 
             var vm = this;
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
@@ -87,9 +87,7 @@
                   vm.tablaListaRegistros.inicio = 0;
                   vm.tablaListaRegistros.fin = 1;
                   vm.tablaListaRegistros.condicion = {
-                                    nombreCurso: {
-                                      like: '%' + vm.cadena_buscar + '%',
-                                    }
+                                    nombreCurso: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}
                                 };
 
                   tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)

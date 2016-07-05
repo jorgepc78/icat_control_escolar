@@ -1,4 +1,2 @@
-'use strict';
-
-require('./dist/angular-base64-upload');
+require('./src/angular-base64-upload.js');
 module.exports = 'naif.base64';

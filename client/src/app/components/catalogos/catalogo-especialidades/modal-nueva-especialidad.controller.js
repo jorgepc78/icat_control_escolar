@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalNuevaEspecialidadController', ModalNuevaEspecialidadController);
 
-        ModalNuevaEspecialidadController.$inject = ['$modalInstance', 'registroEditar', 'CatalogoEspecialidades', 'CatalogoTemas'];
+        ModalNuevaEspecialidadController.$inject = ['$modalInstance', 'CatalogoEspecialidades', 'CatalogoTemas'];
 
-    function ModalNuevaEspecialidadController($modalInstance, registroEditar, CatalogoEspecialidades, CatalogoTemas) {
+    function ModalNuevaEspecialidadController($modalInstance, CatalogoEspecialidades, CatalogoTemas) {
 
             var vm = this;
 

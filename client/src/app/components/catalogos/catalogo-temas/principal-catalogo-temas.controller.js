@@ -3,14 +3,13 @@
 
     angular
         .module('icat_control_escolar')
-        .controller('PrincipalCatalogoEspecialidadesController', PrincipalCatalogoEspecialidadesController);
+        .controller('PrincipalCatalogoTemasController', PrincipalCatalogoTemasController);
 
-    PrincipalCatalogoEspecialidadesController.$inject = ['$stateParams', '$modal', 'tablaDatosService', 'CatalogoEspecialidades'];
+    PrincipalCatalogoTemasController.$inject = ['$stateParams', '$modal', 'tablaDatosService', 'CatalogoTemas'];
 
-    function PrincipalCatalogoEspecialidadesController($stateParams, $modal, tablaDatosService, CatalogoEspecialidades) {
+    function PrincipalCatalogoTemasController($stateParams, $modal, tablaDatosService, CatalogoTemas) {
 
             var vm = this;
-            vm.descripcion_catalogo      = '';
             vm.listaRegistros            = [];
             vm.muestraResultadosBusqueda = muestraResultadosBusqueda;
             vm.limpiaBusqueda            = limpiaBusqueda;
@@ -38,22 +37,13 @@
                           filter: {
                               where: vm.tablaCatalogo.condicion,
                               order: ['nombre ASC'],
-                              fields:['idEspecialidad','idTema','clave','nombre'],
+                              fields:['idTema','nombre'],
                               limit: vm.tablaCatalogo.registrosPorPagina,
-                              skip: vm.tablaCatalogo.paginaActual - 1,
-                              include: [
-                                {
-                                    relation: 'tema_pertenece',
-                                    scope: {
-                                        fields:['idTema','nombre']
-                                    }
-                                }
-                              ]
+                              skip: vm.tablaCatalogo.paginaActual - 1
                           }
                   };
 
-                  vm.descripcion_catalogo = 'Catálogo de especialidades';
-                  vm.CatalogoMostrar = CatalogoEspecialidades;
+                  vm.CatalogoMostrar = CatalogoTemas;
                   vm.listaRegistros = {};
 
                   tablaDatosService.obtiene_datos_tabla(vm.CatalogoMostrar, vm.tablaCatalogo)
@@ -147,16 +137,14 @@
                     vm.RegistroSeleccionado = registroSeleccionado;
 
                     vm.registroEditar = {
-                        idEspecialidad : registroSeleccionado.idEspecialidad,
-                        idTema         : registroSeleccionado.idTema,
-                        clave          : registroSeleccionado.clave,
-                        nombre         : registroSeleccionado.nombre
+                        idTema : registroSeleccionado.idTema
                     };
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/catalogos/catalogo-especialidades/modal-edita-especialidad.html',
+                        templateUrl: 'app/components/catalogos/catalogo-temas/modal-edita-tema.html',
                         windowClass: "animated fadeIn",
-                        controller: 'ModalEditaEspecialidadController as vm',
+                        controller: 'ModalEditaTemaController as vm',
+                        size: 'lg',
                         resolve: {
                           registroEditar: function () { return vm.registroEditar }
                         }
@@ -164,11 +152,7 @@
                     });
 
                     modalInstance.result.then(function (respuesta) {
-                        vm.RegistroSeleccionado.idTema = respuesta.idTema;
-                        vm.RegistroSeleccionado.clave = respuesta.clave;
                         vm.RegistroSeleccionado.nombre = respuesta.nombre;
-                        vm.RegistroSeleccionado.tema_pertenece.idTema = respuesta.idTema;
-                        vm.RegistroSeleccionado.tema_pertenece.nombre = respuesta.tema;
                     }, function () {
                     });
             };
@@ -177,9 +161,10 @@
             function nuevo_registro() {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/catalogos/catalogo-especialidades/modal-edita-especialidad.html',
+                        templateUrl: 'app/components/catalogos/catalogo-temas/modal-edita-tema.html',
                         windowClass: "animated fadeIn",
-                        controller: 'ModalNuevaEspecialidadController as vm'
+                        controller: 'ModalNuevoTemaController as vm',
+                        size: 'lg'
                     });
 
                     modalInstance.result.then(function () {
@@ -191,18 +176,18 @@
 
             function elimina_registro(registroSeleccionado) {
 
-                    CatalogoEspecialidades.RegistroCursos.count({ id:registroSeleccionado.idEspecialidad })
+                    CatalogoTemas.especialidades.count({ id:registroSeleccionado.idTema })
                     .$promise
                     .then(function(resultado) {
                         if(resultado.count > 0)
                         {
-                            swal('No se puede eliminar el registro seleccionado porque tiene cursos asignados', '', 'error');
+                            swal('No se puede eliminar el registro seleccionado porque tiene especialidades asignadas', '', 'error');
                         }
                         else
                         {
                             swal({
                               title: "Confirmar",
-                              html: 'Se eliminar&aacute; la especialidad <strong>'+ registroSeleccionado.nombre +'</strong>, ¿Continuar?',
+                              html: 'Se eliminar&aacute; el tema <strong>'+ registroSeleccionado.nombre +'</strong>, ¿Continuar?',
                               type: "warning",
                               showCancelButton: true,
                               confirmButtonColor: "#3085d6",
@@ -213,7 +198,7 @@
                             }, function(){
                                     swal.disableButtons();
 
-                                    vm.CatalogoMostrar.deleteById({ id: registroSeleccionado.idEspecialidad })
+                                    vm.CatalogoMostrar.deleteById({ id: registroSeleccionado.idTema })
                                     .$promise
                                     .then(function() { 
                                           vm.limpiaBusqueda();
@@ -223,7 +208,6 @@
                         }
                     });
             };
-
     };
 
 })();

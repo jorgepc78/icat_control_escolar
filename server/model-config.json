@@ -60,5 +60,27 @@
   "CatalogoCursos": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
+  },
+  "ProgTrimCursos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "CursosPtc": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Instructor": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "RelInstrucPtc": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
   }
 }

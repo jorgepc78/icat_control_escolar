@@ -1,16 +1,16 @@
 {
-  "name": "CatalogoTemas",
+  "name": "RelInstrucPtc",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "public",
-    "table": "catalogo_temas"
+    "schema": "ptc",
+    "table": "rel_instruc_ptc"
   },
   "properties": {
-    "idTema": {
+    "id": {
       "type": "Number",
       "id": true,
       "required": false,
@@ -18,7 +18,7 @@
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "id_tema",
+        "columnName": "id",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -27,34 +27,34 @@
       },
       "_selectable": false
     },
-    "fotoInicio": {
-      "type": "String",
+    "idCurso": {
+      "type": "Number",
       "required": false,
       "length": null,
-      "precision": null,
-      "scale": null,
+      "precision": 32,
+      "scale": 0,
       "postgresql": {
-        "columnName": "foto_inicio",
-        "dataType": "text",
+        "columnName": "id_curso",
+        "dataType": "integer",
         "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
         "nullable": "YES"
       },
       "_selectable": true
     },
-    "nombre": {
-      "type": "String",
+    "idInstructor": {
+      "type": "Number",
       "required": false,
-      "length": 45,
-      "precision": null,
-      "scale": null,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
       "postgresql": {
-        "columnName": "nombre",
-        "dataType": "character varying",
-        "dataLength": 45,
-        "dataPrecision": null,
-        "dataScale": null,
+        "columnName": "id_instructor",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
         "nullable": "YES"
       },
       "_selectable": true
@@ -62,10 +62,15 @@
   },
   "validations": [],
   "relations": {
-    "especialidades": {
-      "type": "hasMany",
-      "model": "CatalogoEspecialidades",
-      "foreignKey": "idTema"
+    "curso": {
+      "type": "belongsTo",
+      "model": "CursosPtc",
+      "foreignKey": "idCurso"
+    },
+    "instructor": {
+      "type": "belongsTo",
+      "model": "Instructor",
+      "foreignKey": "idInstructor"
     }
   },
   "acls": [],

@@ -9,7 +9,8 @@
     	'ui.event',
     	'oitozero.ngSweetAlert',
         'ui.date',
-        'NgSwitchery'
+        'NgSwitchery',
+        'naif.base64'
     	/*'templates'*/
     ]);
 })();

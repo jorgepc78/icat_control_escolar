@@ -77,7 +77,7 @@
                                         nombre              : usuario.nombre,
                                         puesto              : usuario.puesto,
                                         perfil              : usuario.perfil[0].name,
-                                        descripcin_perfil   : usuario.perfil[0].description,
+                                        descripcion_perfil   : usuario.perfil[0].description,
                                         unidad_pertenece_id : usuario.idUnidadAdmtva,
                                         nombre_unidad       : usuario.unidad_pertenece.nombre,
                                         estatus             : 200

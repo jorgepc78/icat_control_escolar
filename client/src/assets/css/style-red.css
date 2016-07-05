@@ -597,7 +597,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   min-width: 120px;
 }
 .btn-primary.btn-outline {
-  color: #9a0000;
+  color: #1ab394;
 }
 .btn-success.btn-outline {
   color: #1c84c6;
@@ -619,8 +619,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   color: #fff;
 }
 .btn-primary {
-  background-color: #9a0000;
-  border-color: #9a0000;
+  background-color: #1ab394;
+  border-color: #1ab394;
   color: #FFFFFF;
 }
 .btn-primary:hover,
@@ -632,8 +632,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .btn-primary:active:hover,
 .btn-primary.active:hover,
 .btn-primary.active:focus {
-  background-color: #670001;
-  border-color: #670001;
+  background-color: #18a689;
+  border-color: #18a689;
   color: #FFFFFF;
 }
 .btn-primary:active,
@@ -742,9 +742,9 @@ fieldset[disabled] .btn-info.active {
   border-color: #26d7d9;
 }
 .btn-default {
-  color: inherit;
-  background: white;
-  border: 1px solid #e7eaec;
+  color: #fff;
+  background-color: #9a0000;
+  border: 1px solid #670001;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -755,8 +755,9 @@ fieldset[disabled] .btn-info.active {
 .btn-default:active:hover,
 .btn-default.active:hover,
 .btn-default.active:focus {
-  color: inherit;
-  border: 1px solid #d2d2d2;
+  background-color: #670001;
+  border-color: #670001;
+  color: #FFFFFF;
 }
 .btn-default:active,
 .btn-default.active,
@@ -3482,8 +3483,8 @@ ol.unstyled {
 }
 /* FOOTER */
 .footer {
-  background: none repeat scroll 0 0 #9a0000;
-  border-top: 1px solid #9a0000;
+  background: none repeat scroll 0 0 #1ab394;
+  border-top: 1px solid #1ab394;
   bottom: 0;
   left: 0;
   padding: 10px 20px;
@@ -3498,8 +3499,8 @@ ol.unstyled {
   right: 0;
   z-index: 1000;
   padding: 10px 20px;
-  background: none repeat scroll 0 0 #9a0000;
-  border-top: 1px solid #9a0000;
+  background: none repeat scroll 0 0 #1ab394;
+  border-top: 1px solid #1ab394;
 }
 .footer.fixed {
   position: fixed;
@@ -3508,8 +3509,8 @@ ol.unstyled {
   right: 0;
   z-index: 1000;
   padding: 10px 20px;
-  background: none repeat scroll 0 0 #9a0000;
-  border-top: 1px solid #9a0000;
+  background: none repeat scroll 0 0 #1ab394;
+  border-top: 1px solid #1ab394;
   margin-left: 220px;
 }
 body.mini-navbar .footer.fixed,
@@ -6610,8 +6611,8 @@ body.landing-page {
   padding-left: 15px;
 }
 .landing-page .navbar-default.navbar-scroll {
-  background-color: #9a0000;
-  border-color: #9a0000;
+  background-color: #1ab394;
+  border-color: #1ab394;
   padding: 15px 0;
 }
 .landing-page .navbar-default {
@@ -6664,7 +6665,7 @@ body.landing-page {
   height: auto;
   display: block;
   font-size: 14px;
-  background: #9a0000;
+  background: #1ab394;
   padding: 15px 20px 15px 20px;
   border-radius: 0 0 5px 5px;
   font-weight: 700;
@@ -6983,8 +6984,8 @@ body.landing-page {
   color: #fff;
 }
 .landing-page .btn-primary {
-  background-color: #9a0000;
-  border-color: #9a0000;
+  background-color: #1ab394;
+  border-color: #1ab394;
   color: #FFFFFF;
   font-size: 14px;
   padding: 10px 20px;

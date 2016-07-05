@@ -91,7 +91,7 @@
                                       {username: {neq: 'adminsystem'}},
                                       {
                                         nombre: {
-                                          like: '%' + vm.nombre_buscar + '%',
+                                          regexp: '/.*'+ vm.nombre_buscar +'.*/i'
                                         }
                                       }
                                     ]

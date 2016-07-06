@@ -18,13 +18,14 @@
             password: 'jorgepc'
         };
 
-        vm.msg_error_login = false;
-        vm.msg_error_txt = '';
+        vm.mostrar_msg_login = false;
+        vm.msg_login_txt = '';
+        vm.msg_color = 'danger';
 
 
         function login() {
 
-            vm.msg_error_login = false;
+            vm.mostrar_msg_login = false;
 
             Usuario
             .login({
@@ -56,18 +57,20 @@
 
                         if(resp.length == 0)
                         {
-                            vm.msg_error_txt = 'Usuario desactivado';
+                            vm.msg_login_txt = 'Usuario desactivado';
+                            vm.msg_color = 'warning';
 
-                            vm.msg_error_login = true;
+                            vm.mostrar_msg_login = true;
                             $timeout(function(){
-                                 vm.msg_error_login = false;
-                                 vm.msg_error_txt = '';
+                                 vm.mostrar_msg_login = false;
+                                 vm.msg_login_txt = '';
                             }, 3000);
                         }
                         else
                         {
-                            vm.msg_error_txt = 'Entrando al sistema...';
-                            vm.msg_error_login = true;
+                            vm.msg_login_txt = 'Entrando al sistema...';
+                            vm.msg_color = 'success';
+                            vm.mostrar_msg_login = true;
                             $timeout(function() {
 
                                     var usuario = resp[0];
@@ -96,15 +99,19 @@
                         estatus: error.status
                     };
 
-                    if(error.data.error.message == 'login failed as the email has not been verified')
-                        vm.msg_error_txt = 'El email no ha sido verificado';
-                    else
-                        vm.msg_error_txt = 'El nombre de usuario no existe o contraseña incorrecta';
+                    if(error.data.error.message == 'login failed as the email has not been verified') {
+                        vm.msg_login_txt = 'El email no ha sido verificado';
+                        vm.msg_color = 'warning';
+                    }
+                    else {
+                        vm.msg_login_txt = 'El nombre de usuario no existe o contraseña incorrecta';
+                        vm.msg_color = 'danger';
+                    }
 
-                    vm.msg_error_login = true;
+                    vm.mostrar_msg_login = true;
                     $timeout(function(){
-                         vm.msg_error_login = false;
-                         vm.msg_error_txt = '';
+                         vm.mostrar_msg_login = false;
+                         vm.msg_login_txt = '';
                     }, 3000);
 
                   }

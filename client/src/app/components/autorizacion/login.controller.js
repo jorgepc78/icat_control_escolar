@@ -76,11 +76,11 @@
                                     var usuario = resp[0];
 
                                     $rootScope.currentUser = {
-                                        id_usuario          : usuario.id,
+                                        id_usuario          : usuario.idUsuario,
                                         nombre              : usuario.nombre,
                                         puesto              : usuario.puesto,
                                         perfil              : usuario.perfil[0].name,
-                                        descripcion_perfil   : usuario.perfil[0].description,
+                                        descripcion_perfil  : usuario.perfil[0].description,
                                         unidad_pertenece_id : usuario.idUnidadAdmtva,
                                         nombre_unidad       : usuario.unidad_pertenece.nombre,
                                         estatus             : 200

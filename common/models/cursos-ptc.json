@@ -214,7 +214,7 @@
     },
     "instructores_propuestos": {
       "type": "hasMany",
-      "model": "Instructor",
+      "model": "CatalogoInstructores",
       "foreignKey": "idCurso",
       "through": "RelInstrucPtc",
       "keyThrough": "idInstructor"

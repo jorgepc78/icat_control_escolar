@@ -5,11 +5,13 @@
         .module('icat_control_escolar')
         .controller('ModalEditaCursoPTCController', ModalEditaCursoPTCController);
 
-        ModalEditaCursoPTCController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'ProgTrimCursos', 'CursosPtc', 'CatalogoCursos', 'Instructor'];
+        ModalEditaCursoPTCController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'ProgTrimCursos', 'CursosPtc', 'CatalogoCursos', 'CatalogoInstructores'];
 
-    function ModalEditaCursoPTCController($scope, $modalInstance, registroEditar, ProgTrimCursos, CursosPtc, CatalogoCursos, Instructor) {
+    function ModalEditaCursoPTCController($scope, $modalInstance, registroEditar, ProgTrimCursos, CursosPtc, CatalogoCursos, CatalogoInstructores) {
 
             var vm = this;
+
+            vm.mostrarSpiner = false;
 
             vm.cursoSeleccionado = 0;
             vm.listaCursos = {};
@@ -77,7 +79,7 @@
                 });
     
 
-                Instructor.find({
+                CatalogoInstructores.find({
                     filter: {
                         where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                         fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre'],
@@ -155,6 +157,8 @@
 
             function guardar() {
 
+                vm.mostrarSpiner = true;
+                
                 var datos = {
                         idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
                         horario         : vm.registroEdicion.horario,

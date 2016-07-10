@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "public",
+    "schema": "catalogos",
     "table": "catalogo_localidades"
   },
   "properties": {

@@ -5,11 +5,15 @@
         .module('icat_control_escolar')
         .controller('ModalNuevoCursoPTCController', ModalNuevoCursoPTCController);
 
-        ModalNuevoCursoPTCController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'ProgTrimCursos', 'CursosPtc', 'CatalogoCursos', 'Instructor'];
+        ModalNuevoCursoPTCController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'ProgTrimCursos', 'CursosPtc', 'CatalogoCursos', 'CatalogoInstructores'];
 
-    function ModalNuevoCursoPTCController($scope, $modalInstance, registroEditar, ProgTrimCursos, CursosPtc, CatalogoCursos, Instructor) {
+    function ModalNuevoCursoPTCController($scope, $modalInstance, registroEditar, ProgTrimCursos, CursosPtc, CatalogoCursos, CatalogoInstructores) {
 
             var vm = this;
+            vm.opened1 = false;
+            vm.opened2 = false;
+
+            vm.mostrarSpiner = false;
 
             vm.cursoSeleccionado = 0;
             vm.listaCursos = {};
@@ -61,7 +65,7 @@
                 });
     
 
-                Instructor.find({
+                CatalogoInstructores.find({
                     filter: {
                         where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                         fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre'],
@@ -127,6 +131,8 @@
 
             function guardar() {
 
+                vm.mostrarSpiner = true;
+                
                 CursosPtc
                 .create({
                     idPtc           : vm.registroEdicion.idPtc,

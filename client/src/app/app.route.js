@@ -82,14 +82,34 @@
                 url: '/ptc',
                 templateUrl: 'app/shared/layout/content-top-navigation.html',
             })
-            .state('ptc.lista_ptcs', {
-                url: '/lista_ptcs',
+            .state('ptc.planeacion_ptc', {
+                url: '/planeacion_ptc',
+                templateUrl: 'app/components/ptc/principal-ptc.html',
+                controller: 'PrincipalPTCController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+            .state('ptc.ptc_historico', {
+                url: '/ptc_historico',
                 templateUrl: 'app/components/ptc/principal-ptc.html',
                 controller: 'PrincipalPTCController',
                 controllerAs: 'vm',
                 authenticate: true
             })
 
+            /*** seccion de instructores ***/
+            .state('instructores', {
+                abstract: true,
+                url: '/instructores',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('ptc.cat_instructores', {
+                url: '/cat_instructores',
+                templateUrl: 'app/components/instructores/admin-instructores.html',
+                controller: 'AdminInstructoresController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
 
     }
 

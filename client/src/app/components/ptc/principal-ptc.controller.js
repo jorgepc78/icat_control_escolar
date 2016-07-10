@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('PrincipalPTCController', PrincipalPTCController);
 
-    PrincipalPTCController.$inject = ['$scope','$modal', 'tablaDatosService', 'ProgTrimCursos', 'CursosPtc', 'CatalogoUnidadesAdmtvas'];
+    PrincipalPTCController.$inject = ['$scope', '$modal', '$q', 'tablaDatosService', 'ProgTrimCursos', 'CursosPtc', 'CatalogoUnidadesAdmtvas', 'ControlProcesos'];
 
-    function PrincipalPTCController($scope, $modal, tablaDatosService, ProgTrimCursos, CursosPtc, CatalogoUnidadesAdmtvas ) {
+    function PrincipalPTCController($scope, $modal, $q, tablaDatosService, ProgTrimCursos, CursosPtc, CatalogoUnidadesAdmtvas, ControlProcesos) {
 
             var vm = this;
 
@@ -491,31 +491,47 @@
                   }, function(){
                           swal.disableButtons();
 
-                            //Agregarle promises para disparar secuencialmente los eventos
-                            angular.forEach(vm.registrosCursosPTCs, function(curso) {
+                            function borra_instructores_cursos(registrosCursosPTCs) {
 
-                                CursosPtc.instructores_propuestos.destroyAll({ id: curso.idCurso })
-                                .$promise
-                                .then(function() { 
-                                });
+                                var deferred = $q.defer();
+                                var total_cursos = registrosCursosPTCs.length;
+                                var indice = 0;
 
-                            });
+                                angular.forEach(registrosCursosPTCs, function(curso) {
 
-                            ProgTrimCursos.cursos_programados.destroyAll({ id: RegistroSeleccionado.idPtc })
-                              .$promise
-                              .then(function() { 
-
-                                    ProgTrimCursos.deleteById({ id: RegistroSeleccionado.idPtc })
+                                    CursosPtc.instructores_propuestos.destroyAll({ id: curso.idCurso })
                                     .$promise
-                                    .then(function() { 
-                                          vm.tablaListaPTCs.paginaActual = 1;
-                                          vm.tablaListaPTCs.inicio = 0;
-                                          vm.tablaListaPTCs.fin = 1;
-                                          vm.tablaListaPTCs.fila_seleccionada = 0;
-
-                                          inicia();
-                                          swal('PTC eliminado', '', 'success');
+                                    .then(function() {
+                                        indice++;
+                                        if(indice == total_cursos)
+                                          deferred.resolve();
                                     });
+
+                                });
+                                return deferred.promise;
+                            }
+
+                            var promise = borra_instructores_cursos(vm.registrosCursosPTCs);
+                            
+                            promise.then(function() {
+    
+                                ProgTrimCursos.cursos_programados.destroyAll({ id: RegistroSeleccionado.idPtc })
+                                  .$promise
+                                  .then(function() { 
+
+                                        ProgTrimCursos.deleteById({ id: RegistroSeleccionado.idPtc })
+                                        .$promise
+                                        .then(function() { 
+                                              vm.tablaListaPTCs.paginaActual = 1;
+                                              vm.tablaListaPTCs.inicio = 0;
+                                              vm.tablaListaPTCs.fin = 1;
+                                              vm.tablaListaPTCs.fila_seleccionada = 0;
+
+                                              inicia();
+                                              swal('PTC eliminado', '', 'success');
+                                        });
+
+                                });
 
                             });
 
@@ -549,9 +565,42 @@
                             })
                             .$promise
                             .then(function(respuesta) {
+
                                   vm.RegistroPTCSeleccionado.estatus            = respuesta.estatus;
                                   vm.RegistroPTCSeleccionado.fechaEnvioRevision = respuesta.fechaEnvioRevision;
-                                  swal('PTC enviado a revisión', '', 'success');
+
+                                  ControlProcesos
+                                  .create({
+                                      proceso         : 'PTC',
+                                      accion          : 'ENVIO REVISION',
+                                      idDocumento     : RegistroSeleccionado.idPtc,
+                                      idUsuario       : $scope.currentUser.id_usuario,
+                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+
+                                        ControlProcesos.findById({ 
+                                            id: resp.id,
+                                            filter: {
+                                              fields : ['identificador']
+                                            }
+                                        })
+                                        .$promise
+                                        .then(function(resp_control) {
+
+                                              swal({
+                                                title: 'PTC enviado',
+                                                html: 'se env&iacute;o el PTC a revisi&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                type: 'success',
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#9a0000",
+                                                confirmButtonText: "Aceptar"
+                                              });
+
+                                        });
+                                  });
+
                             });
 
                   });
@@ -586,7 +635,39 @@
                             .then(function(respuesta) {
                                   vm.RegistroPTCSeleccionado.estatus         = respuesta.estatus;
                                   vm.RegistroPTCSeleccionado.fechaAceptacion = respuesta.fechaAceptacion;
-                                  swal('PTC marcado como aceptado', '', 'success');
+
+                                  ControlProcesos
+                                  .create({
+                                      proceso         : 'PTC',
+                                      accion          : 'PTC ACEPTADO',
+                                      idDocumento     : RegistroSeleccionado.idPtc,
+                                      idUsuario       : $scope.currentUser.id_usuario,
+                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+
+                                        ControlProcesos.findById({ 
+                                            id: resp.id,
+                                            filter: {
+                                              fields : ['identificador']
+                                            }
+                                        })
+                                        .$promise
+                                        .then(function(resp_control) {
+
+                                              swal({
+                                                title: 'PTC enviado',
+                                                html: 'se marc&oacute; el PTC como aceptado y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                type: 'success',
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#9a0000",
+                                                confirmButtonText: "Aceptar"
+                                              });
+
+                                        });
+                                  });
+
                             });
 
                   });
@@ -621,7 +702,38 @@
                             .then(function(respuesta) {
                                   vm.RegistroPTCSeleccionado.estatus      = respuesta.estatus;
                                   vm.RegistroPTCSeleccionado.fechaRechazo = respuesta.fechaRechazo;
-                                  swal('PTC marcado como rechazado', '', 'success');
+
+                                  ControlProcesos
+                                  .create({
+                                      proceso         : 'PTC',
+                                      accion          : 'PTC RECHAZADO',
+                                      idDocumento     : RegistroSeleccionado.idPtc,
+                                      idUsuario       : $scope.currentUser.id_usuario,
+                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+
+                                        ControlProcesos.findById({ 
+                                            id: resp.id,
+                                            filter: {
+                                              fields : ['identificador']
+                                            }
+                                        })
+                                        .$promise
+                                        .then(function(resp_control) {
+
+                                              swal({
+                                                title: 'PTC enviado',
+                                                html: 'se marc&oacute; el PTC como rechazado y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                type: 'success',
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#9a0000",
+                                                confirmButtonText: "Aceptar"
+                                              });
+
+                                        });
+                                  });
                             });
 
                   });

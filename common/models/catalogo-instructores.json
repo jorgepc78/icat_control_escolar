@@ -1,0 +1,253 @@
+{
+  "name": "CatalogoInstructores",
+  "plural": "CatalogoInstructores",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "instructores",
+    "table": "catalogo_instructores"
+  },
+  "properties": {
+    "idInstructor": {
+      "type": "Number",
+      "id": true,
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_instructor",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "NO"
+      },
+      "_selectable": false
+    },
+    "idUnidadAdmtva": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_unidad_admtva",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "curp": {
+      "type": "String",
+      "required": false,
+      "length": 20,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "curp",
+        "dataType": "character varying",
+        "dataLength": 20,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "apellidoPaterno": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "apellido_paterno",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "apellidoMaterno": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "apellido_materno",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "nombre": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "nombre",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "rfc": {
+      "type": "String",
+      "required": false,
+      "length": 14,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "rfc",
+        "dataType": "character varying",
+        "dataLength": 14,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "gradoAcademico": {
+      "type": "String",
+      "required": false,
+      "length": 95,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "grado_academico",
+        "dataType": "character varying",
+        "dataLength": 95,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "telefono": {
+      "type": "String",
+      "required": false,
+      "length": 10,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "telefono",
+        "dataType": "character varying",
+        "dataLength": 10,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "email": {
+      "type": "String",
+      "required": false,
+      "length": 85,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "email",
+        "dataType": "character varying",
+        "dataLength": 85,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "escolaridad": {
+      "type": "String",
+      "required": false,
+      "length": 65,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "escolaridad",
+        "dataType": "character varying",
+        "dataLength": 65,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "idLocalidad": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_localidad",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "activo": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "activo",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cursos_propuestos": {
+      "type": "hasMany",
+      "model": "CursosPtc",
+      "foreignKey": "idInstructor",
+      "through": "RelInstrucPtc",
+      "keyThrough": "idCurso"
+    },
+    "cursos_habilitados": {
+      "type": "hasMany",
+      "model": "CatalogoCursos",
+      "foreignKey": "idInstructor",
+      "through": "RelInstrucCatCurso",
+      "keyThrough": "idCatalogoCurso"
+    },
+    "unidad_pertenece": {
+      "type": "belongsTo",
+      "model": "CatalogoUnidadesAdmtvas",
+      "foreignKey": "idUnidadAdmtva"
+    },
+    "localidad_pertenece": {
+      "type": "belongsTo",
+      "model": "CatalogoLocalidades",
+      "foreignKey": "idLocalidad"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

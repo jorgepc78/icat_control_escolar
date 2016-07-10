@@ -3,11 +3,11 @@
 
     angular
         .module('icat_control_escolar')
-        .controller('PrincipalCatalogoCursosController', PrincipalCatalogoCursosController);
+        .controller('AdminInstructoresController', AdminInstructoresController);
 
-    PrincipalCatalogoCursosController.$inject = ['$modal', 'tablaDatosService', 'CatalogoCursos'];
+    AdminInstructoresController.$inject = ['$modal', 'tablaDatosService', 'CatalogoInstructores'];
 
-    function PrincipalCatalogoCursosController($modal, tablaDatosService, CatalogoCursos ) {
+    function AdminInstructoresController($modal, tablaDatosService, CatalogoInstructores ) {
 
             var vm = this;
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
@@ -36,16 +36,17 @@
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
                               where: vm.tablaListaRegistros.condicion,
-                              fields: ['idCatalogoCurso','claveCurso','descripcion','idEspecialidad','modalidad','nombreCurso','numeroHoras'],
-                              order: ['nombreCurso ASC'],
+                              //fields: ['idCatalogoCurso','claveCurso','descripcion','idEspecialidad','modalidad','nombreCurso','numeroHoras'],
+                              order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC'],
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
                               include: [
-                                'temario',
+                                'unidad_pertenece',
+                                'localidad_pertenece',
                                 {
-                                    relation: 'especialidad',
+                                    relation: 'cursos_habilitados',
                                     scope: {
-                                        fields:['idEspecialidad','nombre']
+                                        fields:['idCatalogoCurso','nombreCurso','modalidad']
                                     }
                                 }
                               ]
@@ -57,7 +58,7 @@
                   vm.tablaListaRegistros.fila_seleccionada = undefined;
                   vm.client = 1;
 
-                  tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)
+                  tablaDatosService.obtiene_datos_tabla(CatalogoInstructores, vm.tablaListaRegistros)
                   .then(function(respuesta) {
 
                         vm.tablaListaRegistros.totalElementos = respuesta.total_registros;
@@ -87,10 +88,14 @@
                   vm.tablaListaRegistros.inicio = 0;
                   vm.tablaListaRegistros.fin = 1;
                   vm.tablaListaRegistros.condicion = {
-                                    nombreCurso: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}
+                                    or: [
+                                      {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
+                                      {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
+                                      {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
+                                    ]
                                 };
 
-                  tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)
+                  tablaDatosService.obtiene_datos_tabla(CatalogoInstructores, vm.tablaListaRegistros)
                   .then(function(respuesta) {
 
                         vm.tablaListaRegistros.totalElementos = respuesta.total_registros;
@@ -122,7 +127,7 @@
                   vm.tablaListaRegistros.fin = 1;
                   vm.tablaListaRegistros.condicion = {};
 
-                  tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)
+                  tablaDatosService.obtiene_datos_tabla(CatalogoInstructores, vm.tablaListaRegistros)
                   .then(function(respuesta) {
 
                         vm.tablaListaRegistros.totalElementos = respuesta.total_registros;
@@ -149,7 +154,7 @@
 
                   if(vm.tablaListaRegistros.totalElementos > 0)
                   {
-                        tablaDatosService.cambia_pagina(CatalogoCursos, vm.tablaListaRegistros)
+                        tablaDatosService.cambia_pagina(CatalogoInstructores, vm.tablaListaRegistros)
                         .then(function(respuesta) {
 
                             vm.tablaListaRegistros.inicio = respuesta.inicio;
@@ -177,9 +182,9 @@
             function edita_datos_registro(seleccion) {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/catalogos/catalogo-cursos/modal-edita-cat-curso.html',
+                        templateUrl: 'app/components/instructores/modal-edita-instructor.html',
                         windowClass: "animated fadeIn",
-                        controller: 'ModalEditaCatCursoController as vm',
+                        controller: 'ModalEditaInstructorController as vm',
                         //size: 'lg',
                         windowClass: 'app-modal-window',
                         resolve: {
@@ -188,25 +193,44 @@
 
                     });
 
+           /* vm.registroEdicion = {
+                    cursos_habilitados : []
+            };*/
+
+
                     modalInstance.result.then(function (respuesta) {
-                        vm.RegistroSeleccionado.claveCurso                  = respuesta.claveCurso;
-                        vm.RegistroSeleccionado.descripcion                 = respuesta.descripcion;
-                        vm.RegistroSeleccionado.idEspecialidad              = respuesta.idEspecialidad;
-                        vm.RegistroSeleccionado.modalidad                   = respuesta.modalidad;
-                        vm.RegistroSeleccionado.nombreCurso                 = respuesta.nombreCurso;
-                        vm.RegistroSeleccionado.numeroHoras                 = respuesta.numeroHoras;
 
-                        vm.RegistroSeleccionado.especialidad.idEspecialidad = respuesta.idEspecialidad;
-                        vm.RegistroSeleccionado.especialidad.nombre         = respuesta.especialidad;
+                        vm.RegistroSeleccionado.idUnidadAdmtva     = respuesta.idUnidadAdmtva;
+                        vm.RegistroSeleccionado.curp               = respuesta.curp;
+                        vm.RegistroSeleccionado.apellidoPaterno    = respuesta.apellidoPaterno;
+                        vm.RegistroSeleccionado.apellidoMaterno    = respuesta.apellidoMaterno;
+                        vm.RegistroSeleccionado.nombre             = respuesta.nombre;
+                        vm.RegistroSeleccionado.rfc                = respuesta.rfc;
+                        vm.RegistroSeleccionado.gradoAcademico     = respuesta.gradoAcademico;
+                        vm.RegistroSeleccionado.telefono           = respuesta.telefono;
+                        vm.RegistroSeleccionado.email              = respuesta.email;
+                        vm.RegistroSeleccionado.escolaridad        = respuesta.escolaridad;
+                        vm.RegistroSeleccionado.idLocalidad        = respuesta.idLocalidad;
+                        vm.RegistroSeleccionado.activo             = respuesta.activo;
 
-                        if(respuesta.temario.length > 0)
+                        vm.RegistroSeleccionado.UnidadAdmtva       = respuesta.UnidadAdmtva;
+                        vm.RegistroSeleccionado.localidad          = respuesta.localidad;
+
+                        vm.RegistroSeleccionado.unidad_pertenece.UnidadAdmtva   = respuesta.idUnidadAdmtva;
+                        vm.RegistroSeleccionado.unidad_pertenece.nombre         = respuesta.UnidadAdmtva;
+
+                        vm.RegistroSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;
+                        vm.RegistroSeleccionado.localidad_pertenece.nombre      = respuesta.localidad;
+
+                        if(respuesta.cursos_habilitados.length > 0)
                         {
-                              vm.RegistroSeleccionado.temario = [];
-                              angular.forEach(respuesta.temario, function(record) {
-                                    vm.RegistroSeleccionado.temario.push({
-                                        idTemario       : record.idTemario,
+                              vm.RegistroSeleccionado.cursos_habilitados = [];
+                              angular.forEach(respuesta.cursos_habilitados, function(record) {
+                                    vm.RegistroSeleccionado.cursos_habilitados.push({
+
                                         idCatalogoCurso : record.idCatalogoCurso,
-                                        tema            : record.tema
+                                        nombreCurso     : record.nombreCurso,
+                                        modalidad       : record.modalidad
                                     });
                               });
                         }
@@ -219,7 +243,7 @@
             function nuevo_registro() {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/catalogos/catalogo-cursos/modal-edita-cat-curso.html',
+                        templateUrl: 'app/components/instructores/modal-edita-instructor.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalnuevoCatCursoController as vm',
                         windowClass: 'app-modal-window'
@@ -247,11 +271,11 @@
                   }, function(){
                           swal.disableButtons();
 
-                            CatalogoCursos.temario.destroyAll({ id: RegistroSeleccionado.idCatalogoCurso })
+                            CatalogoInstructores.temario.destroyAll({ id: RegistroSeleccionado.idCatalogoCurso })
                               .$promise
                               .then(function() { 
 
-                                    CatalogoCursos.deleteById({ id: RegistroSeleccionado.idCatalogoCurso })
+                                    CatalogoInstructores.deleteById({ id: RegistroSeleccionado.idCatalogoCurso })
                                     .$promise
                                     .then(function() { 
                                           vm.limpiaBusqueda();

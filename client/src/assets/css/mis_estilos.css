@@ -136,10 +136,12 @@ body.fixed-nav #wrapper #page-wrapper {
   border-top: 1px solid #9a0000;
   margin-left: 220px;
 }
+
 .md-skin .nav > li > a {
-  color: #fff;
+  /* color: #fff; */
   padding: 14px 20px 14px 25px;
 }
+
 .top-navigation .nav > li a:hover,
 .top-navigation .nav > li a:focus {
   background: #fff;

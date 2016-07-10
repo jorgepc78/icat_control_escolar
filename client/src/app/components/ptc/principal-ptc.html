@@ -13,7 +13,7 @@
                             <div class="ibox-title">
                                 <div class="row">
                                         <div class="col-md-4">
-                                                <h2 style="font-size:2em;">Programa Trimestral de Cursos</h2>
+                                                <h2 style="font-size:1.8em;">Programa Trimestral de Cursos</h2>
                                         </div>
                                         <div class="col-md-3">
                                                         <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:17px;width: 300px;">
@@ -82,7 +82,7 @@
                                                     <button type="button" ng-show="( (currentUser.unidad_pertenece_id == 1) && (registro.estatus == 1) )" ng-click="vm.rechazaPTC(registro)" class="btn btn-danger btn-sm" tooltip-placement="top" tooltip="Rechazar este PTC"><i class="fa fa-times"></i></button>
 
                                                     <button type="button" ng-show="( (currentUser.unidad_pertenece_id > 1) && ((registro.estatus == 0)||(registro.estatus == 3)) )" ng-click="vm.editaPTC(registro)" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Edita este PTC"><i class="fa fa-pencil"></i></button>
-                                                    <button type="button" ng-show="( (currentUser.unidad_pertenece_id > 1) && ((registro.estatus == 0)||(registro.estatus == 3)) )" ng-click="vm.eliminaPTC(registro)" class="btn btn-danger btn-sm" tooltip-placement="top" tooltip="Elimnar este PTC"><i class="fa fa-trash-o"></i></button>
+                                                    <button type="button" ng-show="( (currentUser.unidad_pertenece_id > 1) && ((registro.estatus == 0)||(registro.estatus == 3)) )" ng-click="vm.eliminaPTC(registro)" class="btn btn-danger btn-sm" tooltip-placement="top" tooltip="Eliminar este PTC"><i class="fa fa-trash-o"></i></button>
                                                     
                                                     <button type="button" ng-show="( (registro.estatus == 0) && (currentUser.unidad_pertenece_id > 1) && (registro.cursos_programados.length > 0) )" ng-click="vm.enviaRevisionPTC(registro)" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Env&iacute;a este PTC a revisi&oacute;n"><i class="fa fa-upload"></i></button>                                                    
                                                 </td>
@@ -112,10 +112,10 @@
                                 <div class="ibox">
                                     <div class="ibox-title">
                                         <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-5">
                                                         <h2>Cursos programados</h2>
                                                 </div>
-                                                <div class="col-md-8 text-right" ng-show="( (currentUser.unidad_pertenece_id > 1) && ((vm.RegistroPTCSeleccionado.estatus == 0)||(vm.RegistroPTCSeleccionado.estatus == 3)) )">
+                                                <div class="col-md-7 text-right" ng-show="( (currentUser.unidad_pertenece_id > 1) && ((vm.RegistroPTCSeleccionado.estatus == 0)||(vm.RegistroPTCSeleccionado.estatus == 3)) )">
                                                         <div class="mail-tools">
                                                                 <button class="btn btn-default btn-labeled" ng-click="vm.nuevoCursoPTC()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar curso</button>
                                                         </div>

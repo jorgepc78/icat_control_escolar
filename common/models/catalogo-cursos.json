@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "public",
+    "schema": "cursos",
     "table": "catalogo_cursos"
   },
   "properties": {
@@ -135,8 +135,15 @@
       "type": "hasMany",
       "model": "CatalogoTemarioCursos",
       "foreignKey": "idCatalogoCurso"
+    },
+    "instructores_habilitados": {
+      "type": "hasMany",
+      "model": "CatalogoInstructores",
+      "foreignKey": "idCatalogoCurso",
+      "through": "RelInstrucCatCurso",
+      "keyThrough": "idInstructor"
     }
-  },
+},
   "acls": [],
   "methods": {}
 }

@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "public",
+    "schema": "cursos",
     "table": "catalogo_temas"
   },
   "properties": {

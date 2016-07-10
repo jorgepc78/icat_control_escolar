@@ -1,13 +1,13 @@
 {
-  "name": "RelInstrucPtc",
+  "name": "RelInstrucCatCurso",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "ptc",
-    "table": "rel_instruc_ptc"
+    "schema": "instructores",
+    "table": "rel_instruc_cat_curso"
   },
   "properties": {
     "id": {
@@ -27,22 +27,6 @@
       },
       "_selectable": false
     },
-    "idCurso": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 32,
-      "scale": 0,
-      "postgresql": {
-        "columnName": "id_curso",
-        "dataType": "integer",
-        "dataLength": null,
-        "dataPrecision": 32,
-        "dataScale": 0,
-        "nullable": "YES"
-      },
-      "_selectable": true
-    },
     "idInstructor": {
       "type": "Number",
       "required": false,
@@ -58,19 +42,35 @@
         "nullable": "YES"
       },
       "_selectable": true
+    },
+    "idCatalogoCurso": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_catalogo_curso",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
     }
   },
   "validations": [],
   "relations": {
-    "curso": {
-      "type": "belongsTo",
-      "model": "CursosPtc",
-      "foreignKey": "idCurso"
-    },
     "instructor": {
       "type": "belongsTo",
       "model": "CatalogoInstructores",
       "foreignKey": "idInstructor"
+    },    
+    "cat_curso": {
+      "type": "belongsTo",
+      "model": "CatalogoCursos",
+      "foreignKey": "idCatalogoCurso"
     }
   },
   "acls": [],

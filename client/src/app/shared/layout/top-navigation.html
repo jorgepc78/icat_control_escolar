@@ -13,30 +13,42 @@
                 </li>
 
                 <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
-                    <a class="dropdown-toggle" href dropdown-toggle><i class="fa fa-bars"></i>Cat&aacute;logos <span class="caret"></span></a>
+                    <a class="dropdown-toggle" href dropdown-toggle  style="color: #fff;">Cat&aacute;logo gral. de cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active">
-                            <a ui-sref="index.catalogo_temas"><i class="fa fa-book"></i> <span class="nav-label"> Temas</span></a>
+                            <a ui-sref="index.catalogo_temas">          <span class="nav-label"> Temas</span></a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="index.catalogo_especialidades"><i class="fa fa-book"></i> <span class="nav-label"> Cat&aacute;logo de especialidades</span></a>
+                            <a ui-sref="index.catalogo_especialidades"> <span class="nav-label"> Cat&aacute;logo de especialidades</span></a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="index.catalogo_cursos"><i class="fa fa-book"></i> <span class="nav-label"> Cat&aacute;logo general de cursos</span></a>
+                            <a ui-sref="index.catalogo_cursos">         <span class="nav-label"> Cat&aacute;logo general de cursos</span></a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
-                    <a class="dropdown-toggle" href dropdown-toggle><i class="fa fa-bars"></i>Planeaci&oacute;n y prog. de Cursos <span class="caret"></span></a>
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Planeaci&oacute;n de Cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active">
-                            <a ui-sref="ptc.lista_ptcs"><i class="fa fa-lock-o"></i> <span class="nav-label"> Programa Trimestral de cursos</span></a>
+                            <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC</span></a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="ptc.ptc_historico">     <span class="nav-label"> Hist&oacute;rico PTC</span></a>
                         </li>
                     </ul>
                 </li>
 
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Instructores <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active">
+                            <a ui-sref="ptc.cat_instructores">  <span class="nav-label"> Cat&aacute;logo de instructores</span></a>
+                        </li>
+                    </ul>
+                </li>
 
+                <!-- 
                 <li class="dropdown" dropdown ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
                     <a class="dropdown-toggle" href dropdown-toggle> Cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
@@ -67,7 +79,7 @@
                         </li>
                     </ul>
                 </li>
-
+                 -->
 
             </ul>
             <ul class="nav navbar-top-links navbar-right">

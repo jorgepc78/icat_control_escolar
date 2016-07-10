@@ -73,13 +73,21 @@
     "$promise": {},
     "$resolved": true
   },
-  "Instructor": {
+  "CatalogoInstructores": {
     "dataSource": "icat_control_escolar_ds",
     "public": true,
     "$promise": {},
     "$resolved": true
   },
   "RelInstrucPtc": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "ControlProcesos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "RelInstrucCatCurso": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
   }

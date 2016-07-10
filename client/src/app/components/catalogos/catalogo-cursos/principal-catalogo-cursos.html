@@ -5,12 +5,12 @@
                         <div class="ibox">
                             <div class="ibox-title">
                                 <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                                 <h2>Cat&aacute;logo oficial de cursos</h2>
                                         </div>
-                                        <div class="col-md-8 text-right">
+                                        <div class="col-md-6 text-right">
                                                 <div class="mail-tools">
-                                                        <button class="btn btn-primary btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
+                                                        <button class="btn btn-default btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
                                                 </div>
                                         </div>
                                 </div>
@@ -23,7 +23,7 @@
                                             <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Texto a buscar" class="input form-control" ng-model="vm.cadena_buscar">
                                                     <span class="input-group-btn">
                                                             <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
-                                                            <button class="btn btn-primary btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
+                                                            <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
                                                     </span>
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12 text-center">
                                                                                     <div class="col-md-6">
-                                                                                        <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar registro</button>
+                                                                                        <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar registro</button>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <button type="button" ng-click="vm.elimina_registro(vm.RegistroSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar registro</button>

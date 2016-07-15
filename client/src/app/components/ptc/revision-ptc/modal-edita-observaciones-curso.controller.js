@@ -12,7 +12,7 @@
             var vm = this;
 
             vm.registroEdicion = {
-                    idCurso               : registroEditar.idCurso,
+                    idCursoPTC               : registroEditar.idCursoPTC,
                     observacionesRevision : registroEditar.observacionesRevision
             };
 
@@ -28,7 +28,7 @@
 
                 CursosPtc.prototype$updateAttributes(
                 {
-                    id: vm.registroEdicion.idCurso
+                    id: vm.registroEdicion.idCursoPTC
                 },{
                     observacionesRevision : vm.registroEdicion.observacionesRevision
                 })

@@ -28,22 +28,37 @@
                 </li>
 
                 <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
-                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Planeaci&oacute;n de Cursos <span class="caret"></span></a>
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Instructores <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active">
-                            <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC</span></a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="ptc.ptc_historico">     <span class="nav-label"> Hist&oacute;rico PTC</span></a>
+                            <a ui-sref="ptc.cat_instructores">  <span class="nav-label"> Cat&aacute;logo de instructores</span></a>
                         </li>
                     </ul>
                 </li>
 
                 <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
-                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Instructores <span class="caret"></span></a>
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Planeaci&oacute;n de Cursos <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
+                            <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC</span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id == 1">
+                            <a ui-sref="ptc.revision_ptc">      <span class="nav-label"> Revisi&oacute;n PTC unidades</span></a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="ptc.pct_autorizados">   <span class="nav-label"> PTC autorizados</span></a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Pre-apertura de cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active">
-                            <a ui-sref="ptc.cat_instructores">  <span class="nav-label"> Cat&aacute;logo de instructores</span></a>
+                            <a ui-sref="pre_apertura.cursos_ptc">    <span class="nav-label"> Cursos del PTC</span></a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="pre_apertura.cursos_ptc">   <span class="nav-label"> Cursos fuera del PTC</span></a>
                         </li>
                     </ul>
                 </li>

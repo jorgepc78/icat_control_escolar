@@ -60,57 +60,56 @@
 
             function guardar() {
 
-                var datos = {
+                    var datos = {
+                            claveCurso     : vm.registroEdicion.claveCurso,
+                            descripcion    : vm.registroEdicion.descripcion,
+                            idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
+                            modalidad      : vm.registroEdicion.modalidad,
+                            nombreCurso    : vm.registroEdicion.nombreCurso,
+                            numeroHoras    : vm.registroEdicion.numeroHoras
+                    };
+
+                    vm.registroEdicion.idEspecialidad = vm.especialidadSeleccionada.idEspecialidad;
+                    vm.registroEdicion.especialidad = vm.especialidadSeleccionada.nombre;
+
+                    CatalogoCursos
+                    .create({
                         claveCurso     : vm.registroEdicion.claveCurso,
                         descripcion    : vm.registroEdicion.descripcion,
                         idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
                         modalidad      : vm.registroEdicion.modalidad,
                         nombreCurso    : vm.registroEdicion.nombreCurso,
                         numeroHoras    : vm.registroEdicion.numeroHoras
-                };
+                    })
+                    .$promise
+                    .then(function(respuesta) {
 
-                vm.registroEdicion.idEspecialidad = vm.especialidadSeleccionada.idEspecialidad;
-                vm.registroEdicion.especialidad = vm.especialidadSeleccionada.nombre;
+                            if(vm.registroEdicion.temario.length > 0)
+                            {
+                                    var array_temario_enviar = [];
+                                    angular.forEach(vm.registroEdicion.temario, function(record) {
+                                          array_temario_enviar.push({
+                                              idCatalogoCurso : respuesta.idCatalogoCurso,
+                                              tema            : record.tema
+                                          });
+                                    });
 
-                CatalogoCursos
-                .create({
-                    claveCurso     : vm.registroEdicion.claveCurso,
-                    descripcion    : vm.registroEdicion.descripcion,
-                    idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
-                    modalidad      : vm.registroEdicion.modalidad,
-                    nombreCurso    : vm.registroEdicion.nombreCurso,
-                    numeroHoras    : vm.registroEdicion.numeroHoras
-                })
-                .$promise
-                .then(function(respuesta) {
-
-                        if(vm.registroEdicion.temario.length > 0)
-                        {
-                                var array_temario_enviar = [];
-                                angular.forEach(vm.registroEdicion.temario, function(record) {
-                                      array_temario_enviar.push({
-                                          idCatalogoCurso : respuesta.idCatalogoCurso,
-                                          tema            : record.tema
-                                      });
-                                });
-
-                                CatalogoCursos.temario.createMany(
-                                  {id: respuesta.idCatalogoCurso},
-                                  array_temario_enviar
-                                )
-                                .$promise
-                                .then(function(lista_temas) {
+                                    CatalogoCursos.temario.createMany(
+                                      {id: respuesta.idCatalogoCurso},
+                                      array_temario_enviar
+                                    )
+                                    .$promise
+                                    .then(function(lista_temas) {
+                                        $modalInstance.close();
+                                    });
+                            }
+                            else
+                            {
                                     $modalInstance.close();
-                                });
-                        }
-                        else
-                        {
-                                $modalInstance.close();
-                        }
-
-                })
-                .catch(function(error) {
-                });
+                            }
+                    })
+                    .catch(function(error) {
+                    });
 
 
             };

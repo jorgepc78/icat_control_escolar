@@ -90,5 +90,9 @@
   "RelInstrucCatCurso": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
+  },
+  "CursosOficiales": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
   }
 }

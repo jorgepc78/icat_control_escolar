@@ -27,14 +27,14 @@
       },
       "_selectable": false
     },
-    "idCurso": {
+    "idCursoPTC": {
       "type": "Number",
       "required": false,
       "length": null,
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "id_curso",
+        "columnName": "id_curso_ptc",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -62,12 +62,12 @@
   },
   "validations": [],
   "relations": {
-    "curso": {
+    "CursosPtc": {
       "type": "belongsTo",
       "model": "CursosPtc",
-      "foreignKey": "idCurso"
+      "foreignKey": "idCursoPTC"
     },
-    "instructor": {
+    "CatalogoInstructores": {
       "type": "belongsTo",
       "model": "CatalogoInstructores",
       "foreignKey": "idInstructor"

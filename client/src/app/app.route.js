@@ -84,15 +84,22 @@
             })
             .state('ptc.planeacion_ptc', {
                 url: '/planeacion_ptc',
-                templateUrl: 'app/components/ptc/principal-ptc.html',
-                controller: 'PrincipalPTCController',
+                templateUrl: 'app/components/ptc/ptc-unidad/principal-ptc-unidad.html',
+                controller: 'PrincipalPTCUnidadController',
                 controllerAs: 'vm',
                 authenticate: true
             })
-            .state('ptc.ptc_historico', {
-                url: '/ptc_historico',
-                templateUrl: 'app/components/ptc/principal-ptc.html',
-                controller: 'PrincipalPTCController',
+            .state('ptc.revision_ptc', {
+                url: '/revision_ptc',
+                templateUrl: 'app/components/ptc/revision-ptc/principal-revision-ptc.html',
+                controller: 'PrincipalRevisionPTCController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+            .state('ptc.pct_autorizados', {
+                url: '/pct_autorizados',
+                templateUrl: 'app/components/ptc/autorizados/ptc-autorizados.html',
+                controller: 'PTCAutorizadosController',
                 controllerAs: 'vm',
                 authenticate: true
             })
@@ -107,6 +114,20 @@
                 url: '/cat_instructores',
                 templateUrl: 'app/components/instructores/admin-instructores.html',
                 controller: 'AdminInstructoresController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+
+            /*** seccion de pre apertura de cursos ***/
+            .state('pre_apertura', {
+                abstract: true,
+                url: '/pre_apertura',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('pre_apertura.cursos_ptc', {
+                url: '/cursos_ptc',
+                templateUrl: 'app/components/preapertura-cursos/pre-apertura-curso.html',
+                controller: 'PreAperturaCursoPTCController',
                 controllerAs: 'vm',
                 authenticate: true
             })

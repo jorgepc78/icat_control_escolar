@@ -14,12 +14,13 @@
             vm.opened2 = false;
 
             vm.mostrarSpiner = false;
+            vm.EdicionCurso = false;
 
             vm.cursoSeleccionado = 0;
             vm.listaCursos = {};
            
-            vm.instructorSeleccionado = 0;
-            vm.listaInstructores = {};
+            vm.instructorSeleccionado = {};
+            vm.listaInstructores = [];
            
 
             vm.registroEdicion = {
@@ -42,9 +43,11 @@
                     instructores_propuestos: []
             };
 
+            vm.sort_by = sort_by;
             vm.openCalendar1 = openCalendar1;
             vm.openCalendar2 = openCalendar2;
 
+            vm.muestraInstructoresCurso = muestraInstructoresCurso;
             vm.guardar = guardar;
             vm.agregaInstructor = agregaInstructor;
             vm.eliminaInstructor = eliminaInstructor;
@@ -63,20 +66,7 @@
                 .then(function(resp) {
                     vm.listaCursos = resp;
                 });
-    
-
-                CatalogoInstructores.find({
-                    filter: {
-                        where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                        fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre'],
-                        order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
-                    }
-                })
-                .$promise
-                .then(function(resp) {
-                    vm.listaInstructores = resp;
-                });
-    
+        
             };
 
 
@@ -92,6 +82,51 @@
                 vm.opened2 = true;
             };
 
+
+
+            function muestraInstructoresCurso(){
+
+                vm.listaInstructores = [];
+                CatalogoCursos.instructores_habilitados({
+                        id: vm.cursoSeleccionado.idCatalogoCurso,
+                        filter: {
+                            where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre']
+                        }
+                })
+                .$promise
+                .then(function(resp) {
+
+                    angular.forEach(resp, function(record) {
+                            vm.listaInstructores.push({
+                                idInstructor    : record.idInstructor,
+                                apellidoPaterno : record.apellidoPaterno,
+                                apellidoMaterno : record.apellidoMaterno,
+                                nombre          : record.nombre,
+                                nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre
+                            });
+                    });
+
+                    vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
+
+                });
+
+            }
+
+
+            function sort_by(field, reverse, primer) {
+                var key = primer ? 
+                   function(x) {return primer(x[field])} : 
+                   function(x) {return x[field]};
+
+                reverse = !reverse ? 1 : -1;
+
+                return function (a, b) {
+                   return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+                }                 
+            }
+
+
             function agregaInstructor() {
 
                 if(vm.listaInstructores.length > 0)
@@ -100,7 +135,8 @@
                             idInstructor    : vm.instructorSeleccionado.idInstructor,
                             apellidoPaterno : vm.instructorSeleccionado.apellidoPaterno,
                             apellidoMaterno : vm.instructorSeleccionado.apellidoMaterno,
-                            nombre          : vm.instructorSeleccionado.nombre
+                            nombre          : vm.instructorSeleccionado.nombre,
+                            nombre_completo : vm.instructorSeleccionado.apellidoPaterno + ' ' + vm.instructorSeleccionado.apellidoMaterno + ' ' + vm.instructorSeleccionado.nombre
                         });
 
                         var index;
@@ -110,8 +146,10 @@
                                                                     return instructor.idInstructor;
                                                                   }).indexOf(record.idInstructor);
 
-                                vm.listaInstructores.splice(index, 1);
+                                if(index >= 0)
+                                    vm.listaInstructores.splice(index, 1);
                         });
+                        vm.instructorSeleccionado = {};
                 }
             };
 
@@ -122,10 +160,12 @@
                     idInstructor    : vm.registroEdicion.instructores_propuestos[indice].idInstructor,
                     apellidoPaterno : vm.registroEdicion.instructores_propuestos[indice].apellidoPaterno,
                     apellidoMaterno : vm.registroEdicion.instructores_propuestos[indice].apellidoMaterno,
-                    nombre          : vm.registroEdicion.instructores_propuestos[indice].nombre
+                    nombre          : vm.registroEdicion.instructores_propuestos[indice].nombre,
+                    nombre_completo : vm.registroEdicion.instructores_propuestos[indice].apellidoPaterno + ' ' + vm.registroEdicion.instructores_propuestos[indice].apellidoMaterno + ' ' + vm.registroEdicion.instructores_propuestos[indice].nombre
                 });
                 
                 vm.registroEdicion.instructores_propuestos.splice(indice, 1);
+                vm.instructorSeleccionado = {};
             };
 
 
@@ -153,7 +193,7 @@
                             angular.forEach(vm.registroEdicion.instructores_propuestos, function(record) {
 
                                     CursosPtc.instructores_propuestos.link({
-                                          id: respuesta.idCurso,
+                                          id: respuesta.idCursoPTC,
                                           fk: record.idInstructor
                                     },{
                                     }) 

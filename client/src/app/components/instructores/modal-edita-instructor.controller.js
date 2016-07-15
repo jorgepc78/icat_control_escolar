@@ -11,6 +11,8 @@
 
             var vm = this;
 
+            vm.mostrarSpiner = false;
+
             vm.listaUnidades = {};
             vm.unidadSeleccionada = {};
 
@@ -22,7 +24,7 @@
 
             vm.listaCursosInhabilit = true;
             vm.cursoSeleccionado = {};
-            vm.listaCursos = {};
+            vm.listaCursos = [];
 
             vm.registroEdicion = {
                     idInstructor       : registroEditar.idInstructor,
@@ -111,6 +113,7 @@
             function muestraCursosEspecialidad() {
 
                 vm.listaCursosInhabilit = true;
+                vm.cursoSeleccionado = {};
                 vm.listaCursos = [];
                 CatalogoCursos.find({
                     filter: {
@@ -146,6 +149,7 @@
                     modalidad       : vm.cursoSeleccionado.modalidad
                 });
 
+                vm.cursoSeleccionado = {};
                 angular.forEach(vm.registroEdicion.cursos_habilitados, function(record) {
                     
                     var index = vm.listaCursos.map(function(registro) {
@@ -166,6 +170,8 @@
 
             function guardar() {
 
+                vm.mostrarSpiner = true;
+                
                 var datos = {
                         idUnidadAdmtva     : vm.unidadSeleccionada.idUnidadAdmtva,
                         curp               : vm.registroEdicion.curp,
@@ -194,7 +200,7 @@
                 .$promise
                 .then(function(respuesta) {
 
-                    CatalogoInstructores.prototype$__destroyById__cursos_habilitados({ id: vm.registroEdicion.idInstructor })
+                    CatalogoInstructores.cursos_habilitados.destroyAll({ id: vm.registroEdicion.idInstructor })
                       .$promise
                       .then(function() { 
 
@@ -202,7 +208,7 @@
                             {
                                     angular.forEach(vm.registroEdicion.cursos_habilitados, function(record) {
 
-                                            CatalogoInstructores.prototype$__link__cursos_habilitados({
+                                            CatalogoInstructores.cursos_habilitados.link({
                                                   id: vm.registroEdicion.idInstructor,
                                                   fk: record.idCatalogoCurso
                                             },{

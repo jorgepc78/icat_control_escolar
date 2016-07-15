@@ -1,0 +1,170 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Edici&oacute;n del curso del PTC</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;">
+
+        <div class="row">
+                <div class="col-lg-6">
+
+                    <form name="form_datos" class="form-horizontal">
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Cursos</label>
+                              <div class="col-sm-9">
+                                  <select class="form-control m-b" 
+                                      ng-change="vm.muestraInstructoresCurso()"
+                                      ng-model="vm.cursoSeleccionado"
+                                      ng-disabled="vm.EdicionCurso"
+                                      ng-options="curso as (curso.nombreCurso + ' (' + curso.modalidad + ')' ) for curso in vm.listaCursos" required>
+                                  </select>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Clave curso</label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" ng-model="vm.cursoSeleccionado.claveCurso" readonly>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Tipo</label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" ng-model="vm.cursoSeleccionado.modalidad" readonly>
+                              </div>
+                          </div>
+
+                          <div class="hr-line-dashed"></div>
+
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Horario</label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.horario" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Aula asignada</label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.aulaAsignada" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Capacitandos</label>
+                              <div class="col-sm-9">
+                                  <input type="number" class="form-control" ng-model="vm.registroEdicion.capacitandos" required>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Horas semana</label>
+                              <div class="col-sm-9">
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                          <input type="number" class="form-control" ng-model="vm.registroEdicion.semanas" required>
+                                      </div>
+                                      <div class="col-md-4 text-right">
+                                          <label class="control-label">Horas total</label>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <input type="number" class="form-control" ng-model="vm.registroEdicion.total" required>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Fecha inicio</label>
+                              <div class="col-sm-9">
+                                  <div class="row">
+                                      <div class="col-md-5">
+                                          <div class="input-group date" style="width: 155px;">
+                                              <input type="text" readonly class="form-control" is-open="vm.opened1" datepicker-popup="d/M/yyyy" ui-date="dateOptions" ng-model="vm.registroEdicion.fechaInicio" required>
+                                              <span class="input-group-addon" ng-click="vm.openCalendar1($event)"><i class="fa fa-calendar"></i></span>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-2 text-right">
+                                          <label class="control-label">Fecha t&eacute;rmino</label>
+                                      </div>
+                                      <div class="col-md-5">
+                                          <div class="input-group date" style="width: 155px;">
+                                              <input type="text" readonly class="form-control" is-open="vm.opened2" datepicker-popup="d/M/yyyy" ui-date="dateOptions" ng-model="vm.registroEdicion.fechaFin" required>
+                                              <span class="input-group-addon" ng-click="vm.openCalendar2($event)"><i class="fa fa-calendar"></i></span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Observaciones</label>
+                              <div class="col-sm-9">
+                                  <textarea class="form-control" ng-model="vm.registroEdicion.observaciones" rows="4" cols="90" required></textarea>
+                              </div>
+                          </div>
+                    </form>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 style="margin-top:0;">Instructores propuestos</h2>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-8">
+                              <select class="form-control m-b" 
+                                  ng-model="vm.instructorSeleccionado"
+                                  ng-options="instructor as instructor.nombre_completo for instructor in vm.listaInstructores" required>
+                              </select>                        
+                        </div>
+                        <div class="col-md-4">
+                              <button type="button" ng-disabled="(vm.instructorSeleccionado.idInstructor === undefined)" ng-click="vm.agregaInstructor()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar instructor</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12" style="height: 400px;">
+                                  <table class="tablaDatos table table-condensed no-footer">
+                                    <thead>
+                                      <tr>
+                                          <th>N&uacute;m.</th>
+                                          <th>Instructor</th>
+                                          <th></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr ng-repeat="registro in vm.registroEdicion.instructores_propuestos" class="pointer">
+                                          <td style="width:30px">{{$index + 1}}</td>
+                                          <td>{{registro.nombre_completo}}</td>
+                                          <td style="width:40px">
+                                              <button type="button" ng-click="vm.eliminaInstructor($index)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                          </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-7">
+              </div>
+              <div class="col-md-2">
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

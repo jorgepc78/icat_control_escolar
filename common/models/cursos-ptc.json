@@ -11,7 +11,7 @@
     "table": "cursos_ptc"
   },
   "properties": {
-    "idCurso": {
+    "idCursoPTC": {
       "type": "Number",
       "id": true,
       "required": false,
@@ -19,7 +19,7 @@
       "precision": 32,
       "scale": 0,
       "postgresql": {
-        "columnName": "id_curso",
+        "columnName": "id_curso_ptc",
         "dataType": "integer",
         "dataLength": null,
         "dataPrecision": 32,
@@ -203,6 +203,22 @@
         "nullable": "YES"
       },
       "_selectable": true
+    },
+    "estatus": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 16,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "estatus",
+        "dataType": "smallint",
+        "dataLength": null,
+        "dataPrecision": 16,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
     }
   },
   "validations": [],
@@ -212,10 +228,15 @@
       "model": "CatalogoCursos",
       "foreignKey": "idCatalogoCurso"
     },
+    "curso_oficial_registrado": {
+      "type": "hasMany",
+      "model": "CursosOficiales",
+      "foreignKey": "idCursoPTC"
+    },
     "instructores_propuestos": {
       "type": "hasMany",
       "model": "CatalogoInstructores",
-      "foreignKey": "idCurso",
+      "foreignKey": "idCursoPTC",
       "through": "RelInstrucPtc",
       "keyThrough": "idInstructor"
     }

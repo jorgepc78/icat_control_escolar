@@ -1,0 +1,159 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-10">
+    
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <div class="row">
+                                        <div class="col-md-4">
+                                                <h2 style="font-size:1.8em;">Programa Trimestral de Cursos</h2>
+                                        </div>
+                                        <div class="col-md-4">
+                                                        <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:17px;width: 300px;">
+                                                                <label class="col-md-3 control-label" style="margin-top:7px;">Unidad:</label>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.muestra_ptc_unidad()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                                        <div class="input-group" style="margin-top:17px;width: 300px;">
+                                                                <label class="col-md-3 control-label" style="margin-top:7px;">Estatus:</label>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control m-b" ng-model="vm.estatusSeleccionado" ng-change="vm.muestra_ptc_estatus()" ng-options="estatus as estatus.texto for estatus in vm.listaEstatus"></select>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                                             
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                            <tr>
+                                                <th ng-show="(currentUser.unidad_pertenece_id == 1)">Unidad</th>
+                                                <th>Ciclo escolar</th>
+                                                <th>Trimestre</th>
+                                                <th>Fecha Aceptaci&oacute;n</th>
+                                                <th>N&uacute;m cursos</th>
+                                                <th>Estatus</th>
+                                                <th></th>
+                                            </tr>
+                                          </thead>
+                                         <tbody>
+                                            <tr ng-repeat="registro in vm.registrosPTCs" ng-click="vm.muestraCursosPTCActual(registro)" ng-class="{seleccion:$index==vm.tablaListaPTCs.fila_seleccionada}" class="pointer">
+                                                <td ng-show="(currentUser.unidad_pertenece_id == 1)"> {{registro.unidad_pertenece.nombre}}</td>
+                                                <td> {{registro.anio}}</td>
+                                                <td class="client-status" ng-switch on="registro.trimestre">
+                                                    <span ng-switch-when="1">PRIMERO</span>
+                                                    <span ng-switch-when="2">SEGUNDO</span>
+                                                    <span ng-switch-when="3">TERCERO</span>
+                                                    <span ng-switch-when="4">CUARTO</span>
+                                                </td>
+
+                                                <td> {{registro.fechaAceptacion | date:'d/MMMM/yyyy'}}</td>
+                                                <td> {{registro.cursos_programados.length}}</td>
+                                                <td class="client-status" ng-switch on="registro.estatus">
+                                                    <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
+                                                    <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
+                                                </td>
+                                                <td style="width:60px">
+                                                    <button type="button" class="btn btn-sm"><i class="fa fa-print" tooltip-placement="top" tooltip="Imprime el PTC completo"></i></button>
+                                                </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+                                        <tabla-paginacion config="vm.tablaListaPTCs" paginar="vm.cambiarPaginaPrincipal()"></tabla-paginacion>
+
+                            </div>
+                        </div>
+                
+                </div> <!-- column1 -->
+                <div class="col-md-1">
+                </div>
+
+    </div><!-- row principal -->
+
+
+    <div class="row">
+
+                <div class="col-md-12">
+                    
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                <div class="ibox">
+                                    <div class="ibox-title">
+                                        <div class="row">
+                                                <div class="col-md-5">
+                                                        <h2>Cursos programados</h2>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-content">
+
+                                        <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 text-center">
+                                                            <p>
+                                                                <h2>No se encontr&oacute; ning&uacute;n curso</h2>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                        <div class="tab-pane active" ng-show="vm.client == 2">
+                                        
+                                                <table class="tablaDatos table table-condensed no-footer">
+                                                  <thead>
+                                                    <tr>
+                                                        <th>Curso o m&oacute;dulo</th>
+                                                        <th>Tipo</th>
+                                                        <th>Horario</th>
+                                                        <th>Aula asignada</th>
+                                                        <th>Capacitandos</th>
+                                                        <th>Horas semana</th>
+                                                        <th>Horas total</th>
+                                                        <th>Fecha inicio</th>
+                                                        <th>Fecha t&eacute;rmino</th>
+                                                        <th>Instructores propuestos</th>
+                                                        <th>Observaciones</th>
+                                                    </tr>
+                                                  </thead>
+                                                 <tbody>
+                                                    <tr ng-repeat="registroDetalle in vm.registrosCursosPTCs" class="pointer">
+                                                        <td> {{registroDetalle.detalle_curso.nombreCurso}}</td>
+                                                        <td> {{registroDetalle.detalle_curso.modalidad}}</td>
+                                                        <td> {{registroDetalle.horario}}</td>
+                                                        <td> {{registroDetalle.aulaAsignada}}</td>
+                                                        <td> {{registroDetalle.capacitandos}}</td>
+                                                        <td> {{registroDetalle.semanas}}</td>
+                                                        <td> {{registroDetalle.total}}</td>
+                                                        <td> {{registroDetalle.fechaInicio | date:'d/MMMM/yyyy'}}</td>
+                                                        <td> {{registroDetalle.fechaFin | date:'d/MMMM/yyyy'}}</td>
+                                                        <td>
+                                                            <ul>
+                                                                <li ng-repeat="instructor in registroDetalle.instructores_propuestos">{{instructor.apellidoPaterno + ' ' + instructor.apellidoMaterno + ' ' + instructor.nombre}}</li>
+                                                            </ul>
+                                                        </td>
+                                                        <td> {{registroDetalle.observaciones}}</td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+
+                                                <tabla-paginacion config="vm.tablaListaCursos" paginar="vm.cambiarPaginaDetalle()"></tabla-paginacion>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div> <!-- row -->
+
+                </div> <!-- column2 -->
+
+    </div><!-- row principal -->
+</div>

@@ -62,12 +62,12 @@
   },
   "validations": [],
   "relations": {
-    "instructor": {
+    "CatalogoInstructores": {
       "type": "belongsTo",
       "model": "CatalogoInstructores",
       "foreignKey": "idInstructor"
-    },    
-    "cat_curso": {
+    },
+    "CatalogoCursos": {
       "type": "belongsTo",
       "model": "CatalogoCursos",
       "foreignKey": "idCatalogoCurso"

@@ -5,18 +5,14 @@
         .module('icat_control_escolar')
         .controller('AdminInstructoresController', AdminInstructoresController);
 
-    AdminInstructoresController.$inject = ['$modal', 'tablaDatosService', 'CatalogoInstructores'];
+    AdminInstructoresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas'];
 
-    function AdminInstructoresController($modal, tablaDatosService, CatalogoInstructores ) {
+    function AdminInstructoresController($scope, $modal, tablaDatosService, CatalogoInstructores, CatalogoUnidadesAdmtvas ) {
 
             var vm = this;
-            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
-            vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
-            vm.limpiaBusqueda             = limpiaBusqueda;
-            vm.cambiarPagina              = cambiarPagina;
-            vm.edita_datos_registro       = edita_datos_registro;
-            vm.nuevo_registro             = nuevo_registro;
-            vm.elimina_registro           = elimina_registro;
+
+            vm.listaUnidades = [];
+            vm.unidadSeleccionada = undefined;
 
             vm.tablaListaRegistros = {
               totalElementos     : 0,
@@ -29,9 +25,56 @@
               fila_seleccionada  : 0
             };
 
+            vm.muestra_ptc_unidad     = muestra_ptc_unidad;
+
+            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
+            vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
+            vm.limpiaBusqueda             = limpiaBusqueda;
+            vm.cambiarPagina              = cambiarPagina;
+            vm.edita_datos_registro       = edita_datos_registro;
+            vm.nuevo_registro             = nuevo_registro;
+            vm.elimina_registro           = elimina_registro;
+
+
             inicia();
 
             function inicia() {
+
+                  if($scope.currentUser.unidad_pertenece_id > 1)
+                  {
+                      vm.tablaListaRegistros.condicion = {
+                          idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id
+                      };
+                  }
+                  else
+                  {
+                      vm.tablaListaRegistros.condicion = {};
+                      CatalogoUnidadesAdmtvas.find({
+                          filter: {
+                              where: {idUnidadAdmtva: {gt: 1}},
+                              order: 'nombre ASC'
+                          }
+                      })
+                      .$promise
+                      .then(function(resp) {
+
+                          vm.listaUnidades.push({
+                              idUnidadAdmtva  : -1,
+                              nombre          : 'Todas'
+                          });
+
+                          angular.forEach(resp, function(unidad) {
+                                vm.listaUnidades.push({
+                                    idUnidadAdmtva  : unidad.idUnidadAdmtva,
+                                    nombre          : unidad.nombre
+                                });
+                          });
+
+                          vm.unidadSeleccionada = vm.listaUnidades[0];
+                      });
+
+                  }
+
 
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
@@ -78,6 +121,47 @@
             }
 
 
+            function muestra_ptc_unidad() {
+
+                  vm.registros = {};
+                  vm.RegistroSeleccionado = {};
+                  vm.tablaListaRegistros.fila_seleccionada = undefined;
+                  vm.tablaListaRegistros.paginaActual = 1;
+                  vm.tablaListaRegistros.inicio = 0;
+                  vm.tablaListaRegistros.fin = 1;
+                  vm.client = 1;
+                  vm.mostrarbtnLimpiar = false;
+                  vm.cadena_buscar = '';
+
+                  if(vm.unidadSeleccionada.idUnidadAdmtva == -1)
+                  {
+                        vm.tablaListaRegistros.condicion = {};
+                  }
+                  else
+                  {
+                        vm.tablaListaRegistros.condicion = {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva};
+                  }
+
+                  tablaDatosService.obtiene_datos_tabla(CatalogoInstructores, vm.tablaListaRegistros)
+                  .then(function(respuesta) {
+
+                        vm.tablaListaRegistros.totalElementos = respuesta.total_registros;
+                        vm.tablaListaRegistros.inicio = respuesta.inicio;
+                        vm.tablaListaRegistros.fin = respuesta.fin;
+
+                        if(vm.tablaListaRegistros.totalElementos > 0)
+                        {
+                            vm.registros = respuesta.datos;
+                            vm.RegistroSeleccionado = vm.registros[0];
+                            vm.client = 2;
+                            vm.tablaListaRegistros.fila_seleccionada = 0;
+                            muestraDatosRegistroActual(vm.RegistroSeleccionado);
+                        }
+
+                  });
+            };
+
+
             function muestraResultadosBusqueda() {
 
                   vm.registros = {};
@@ -87,13 +171,52 @@
                   vm.tablaListaRegistros.paginaActual = 1;
                   vm.tablaListaRegistros.inicio = 0;
                   vm.tablaListaRegistros.fin = 1;
-                  vm.tablaListaRegistros.condicion = {
-                                    or: [
-                                      {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                      {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                      {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
-                                    ]
-                                };
+
+                  if($scope.currentUser.unidad_pertenece_id > 1)
+                  {
+                        vm.tablaListaRegistros.condicion = {
+                            and: [
+                              {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                              {
+                                  or: [
+                                    {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
+                                    {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
+                                    {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
+                                  ]
+                              },
+                            ]
+                        };
+                  }
+                  else
+                  {
+                        if(vm.unidadSeleccionada.idUnidadAdmtva == -1)
+                        {
+                              vm.tablaListaRegistros.condicion = {
+                                  or: [
+                                    {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
+                                    {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
+                                    {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
+                                  ]
+                              };
+                        }
+                        else
+                        {
+                              vm.tablaListaRegistros.condicion = {
+                                  and: [
+                                    {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
+                                    {
+                                        or: [
+                                          {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
+                                          {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
+                                          {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
+                                        ]
+                                    },
+                                  ]
+                              };
+                        }
+                  }
+                  
+
 
                   tablaDatosService.obtiene_datos_tabla(CatalogoInstructores, vm.tablaListaRegistros)
                   .then(function(respuesta) {
@@ -125,7 +248,24 @@
                   vm.tablaListaRegistros.paginaActual = 1;
                   vm.tablaListaRegistros.inicio = 0;
                   vm.tablaListaRegistros.fin = 1;
-                  vm.tablaListaRegistros.condicion = {};
+
+                  if($scope.currentUser.unidad_pertenece_id > 1)
+                  {
+                        vm.tablaListaRegistros.condicion = {
+                            idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id
+                        };
+                  }
+                  else
+                  {
+                        if(vm.unidadSeleccionada.idUnidadAdmtva == -1)
+                        {
+                              vm.tablaListaRegistros.condicion = {};
+                        }
+                        else
+                        {
+                              vm.tablaListaRegistros.condicion = {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva};
+                        }
+                  }
 
                   tablaDatosService.obtiene_datos_tabla(CatalogoInstructores, vm.tablaListaRegistros)
                   .then(function(respuesta) {
@@ -185,18 +325,12 @@
                         templateUrl: 'app/components/instructores/modal-edita-instructor.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalEditaInstructorController as vm',
-                        //size: 'lg',
                         windowClass: 'app-modal-window',
                         resolve: {
                           registroEditar: function () { return seleccion }
                         }
 
                     });
-
-           /* vm.registroEdicion = {
-                    cursos_habilitados : []
-            };*/
-
 
                     modalInstance.result.then(function (respuesta) {
 
@@ -245,7 +379,7 @@
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/instructores/modal-edita-instructor.html',
                         windowClass: "animated fadeIn",
-                        controller: 'ModalnuevoCatCursoController as vm',
+                        controller: 'ModalNUevoInstructorController as vm',
                         windowClass: 'app-modal-window'
                     });
 
@@ -258,33 +392,53 @@
 
             function elimina_registro(RegistroSeleccionado) {
 
-                  swal({
-                    title: "Confirmar",
-                    html: 'Se eliminar&aacute; el curso <strong>'+ RegistroSeleccionado.nombreCurso +'</strong>, ¿Continuar?',
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "Aceptar",
-                    cancelButtonText: "Cancelar",
-                    closeOnConfirm: false,
-                    closeOnCancel: true
-                  }, function(){
-                          swal.disableButtons();
+                  CatalogoInstructores.cursos_propuestos.count({ id: RegistroSeleccionado.idInstructor })
+                  .$promise
+                  .then(function(resultado) {
+                      if(resultado.count > 0)
+                      {
+                            swal({
+                              title: 'Error',
+                              html: 'No se puede eliminar el instructor seleccionado porque tiene cursos asignados',
+                              type: 'error',
+                              showCancelButton: false,
+                              confirmButtonColor: "#9a0000",
+                              confirmButtonText: "Aceptar"
+                            });
+                      }
+                      else
+                      {
 
-                            CatalogoInstructores.temario.destroyAll({ id: RegistroSeleccionado.idCatalogoCurso })
-                              .$promise
-                              .then(function() { 
+                            swal({
+                              title: "Confirmar",
+                              html: 'Se eliminar&aacute; al instructor <strong>'+ RegistroSeleccionado.apellidoPaterno + ' ' + RegistroSeleccionado.apellidoMaterno + ' ' + RegistroSeleccionado.nombre  +'</strong>, ¿Continuar?',
+                              type: "warning",
+                              showCancelButton: true,
+                              confirmButtonColor: "#9a0000",
+                              confirmButtonText: "Aceptar",
+                              cancelButtonText: "Cancelar",
+                              closeOnConfirm: false,
+                              closeOnCancel: true
+                            }, function(){
+                                    swal.disableButtons();
 
-                                    CatalogoInstructores.deleteById({ id: RegistroSeleccionado.idCatalogoCurso })
-                                    .$promise
-                                    .then(function() { 
-                                          vm.limpiaBusqueda();
-                                          swal('Curso eliminado', '', 'success');
-                                    });
+                                      CatalogoInstructores.cursos_habilitados.destroyAll({ id: RegistroSeleccionado.idInstructor })
+                                        .$promise
+                                        .then(function() { 
+
+                                              CatalogoInstructores.deleteById({ id: RegistroSeleccionado.idInstructor })
+                                              .$promise
+                                              .then(function() { 
+                                                    vm.limpiaBusqueda();
+                                                    swal('Instructor eliminado', '', 'success');
+                                              });
+
+                                      });
 
                             });
-
+                      }
                   });
+
 
             };
 

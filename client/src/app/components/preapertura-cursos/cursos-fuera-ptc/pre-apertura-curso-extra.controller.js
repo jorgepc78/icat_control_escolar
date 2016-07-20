@@ -35,6 +35,7 @@
             vm.abreExtraCurso = abreExtraCurso;
             vm.editaCurso = editaCurso;
             vm.enviaCursoRevision = enviaCursoRevision;
+            vm.eliminaCurso = eliminaCurso;
 
             inicia();
 
@@ -186,9 +187,9 @@
             function editaCurso(seleccion) {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/preapertura-cursos/cursos-ptc/modal-apertura-curso.html',
+                        templateUrl: 'app/components/preapertura-cursos/cursos-fuera-ptc/modal-apertura-curso-extra.html',
                         windowClass: "animated fadeIn",
-                        controller: 'ModalEditaAperturaCursoController as vm',
+                        controller: 'ModalEditaaCursoExtraController as vm',
                         windowClass: 'app-modal-window',
                         resolve: {
                           registroEditar: function () { return seleccion }
@@ -198,35 +199,37 @@
 
                     modalInstance.result.then(function (respuesta) {
 
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].horario = respuesta.horario;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].aulaAsignada = respuesta.aulaAsignada;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].cupoMaximo = respuesta.capacitandos;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].minRequeridoInscritos = respuesta.min_requerido_inscritos;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].minRequeridoPago = respuesta.min_requerido_pago;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].fechaInicio = respuesta.fechaInicio;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].fechaFin = respuesta.fechaFin;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].idInstructor = respuesta.idInstructor;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].nombreInstructor = respuesta.nombreInstructor;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].observaciones = respuesta.observaciones;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].idLocalidad = respuesta.idLocalidad;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].horasSemana = respuesta.semanas;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].numeroHoras = respuesta.total;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].costo = respuesta.costo;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].publico = respuesta.publico;
+                        vm.CursoExtraSeleccionado.horario               = respuesta.horario;
+                        vm.CursoExtraSeleccionado.aulaAsignada          = respuesta.aulaAsignada;
+                        vm.CursoExtraSeleccionado.cupoMaximo            = respuesta.capacitandos;
+                        vm.CursoExtraSeleccionado.minRequeridoInscritos = respuesta.min_requerido_inscritos;
+                        vm.CursoExtraSeleccionado.minRequeridoPago      = respuesta.min_requerido_pago;
+                        vm.CursoExtraSeleccionado.fechaInicio           = respuesta.fechaInicio;
+                        vm.CursoExtraSeleccionado.fechaFin              = respuesta.fechaFin;
+                        vm.CursoExtraSeleccionado.idInstructor          = respuesta.idInstructor;
+                        vm.CursoExtraSeleccionado.nombreInstructor      = respuesta.nombreInstructor;
+                        vm.CursoExtraSeleccionado.observaciones         = respuesta.observaciones;
+                        
+                        vm.CursoExtraSeleccionado.idLocalidad           = respuesta.idLocalidad;
+                        vm.CursoExtraSeleccionado.horasSemana           = respuesta.semanas;
+                        vm.CursoExtraSeleccionado.numeroHoras           = respuesta.total;
+                        vm.CursoExtraSeleccionado.costo                 = respuesta.costo;
+                        vm.CursoExtraSeleccionado.publico               = respuesta.publico;
 
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].localidad_pertenece.idLocalidad = respuesta.idLocalidad;
-                        vm.CursoExtraSeleccionado.curso_oficial_registrado[0].localidad_pertenece.nombre = respuesta.nombreLocalidad;
+                        vm.CursoExtraSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;
+                        vm.CursoExtraSeleccionado.localidad_pertenece.nombre = respuesta.nombreLocalidad;
+
                     }, function () {
                     });
 
             }
 
 
-            function enviaCursoRevision(RegistroSeleccionado) {
+            function enviaCursoRevision(seleccion) {
 
                   swal({
                     title: "Confirmar",
-                    html: 'La propuesta del curso <strong>'+ RegistroSeleccionado.nombreCurso +'</strong> ser&aacute; enviada a validaci&oacute;n, ¿Continuar?',
+                    html: 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; enviada a validaci&oacute;n, ¿Continuar?',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -239,7 +242,7 @@
 
                             CursosOficiales.prototype$updateAttributes(
                             {
-                                id: RegistroSeleccionado.idCurso
+                                id: seleccion.idCurso
                             },{
                                 estatus: 1
                             })
@@ -252,7 +255,7 @@
                                   .create({
                                       proceso         : 'Pre-Apertura Curso Extra',
                                       accion          : 'ENVIO VALIDACION',
-                                      idDocumento     : RegistroSeleccionado.idCurso,
+                                      idDocumento     : seleccion.idCurso,
                                       idUsuario       : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
                                   })
@@ -281,6 +284,34 @@
                                   });
 
                             });
+
+                  });
+
+            }
+
+
+            function eliminaCurso(seleccion) {
+                  
+                  swal({
+                    title: "Confirmar",
+                    html: 'Se eliminar&aacute; el curso <strong>'+ seleccion.nombreCurso +'</strong>, ¿Continuar?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#9a0000",
+                    confirmButtonText: "Aceptar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                  }, function(){
+                          swal.disableButtons();
+
+                          CursosOficiales.deleteById({ id: seleccion.idCurso })
+                          .$promise
+                          .then(function() {
+                                vm.muestraCursosExtrasPTCseleccionado();
+                                swal('Curso eliminado', '', 'success');
+
+                          });
 
                   });
 

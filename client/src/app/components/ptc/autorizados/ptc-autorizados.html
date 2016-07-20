@@ -127,7 +127,7 @@
                                                  <tbody ng-repeat="registroDetalle in vm.registrosCursosPTCs">
                                                     <tr class="pointer">
                                                         <td style="width:60px">
-                                                            <div ng-show="(registroDetalle.curso_oficial_registrado.length > 0)"><button type="button" ng-click="vm.muestraCursoPreapertura(registroDetalle)" class="btn btn-default" tooltip-placement="right" tooltip="Clic para ver el detalle del curso aperturado"><i class="fa fa-eye{{vm.icono}}"></i></button></div>
+                                                            <div ng-show="(registroDetalle.curso_oficial_registrado.length > 0)"><button type="button" ng-click="vm.muestraCursoPreapertura(registroDetalle)" class="btn btn-default" tooltip-placement="right" tooltip="Clic para ver el detalle de la propuesta de apertura"><i class="fa fa-eye{{vm.icono}}"></i></button></div>
                                                         </td>
                                                         <td> {{registroDetalle.nombreCurso}}</td>
                                                         <td> {{registroDetalle.modalidad}}</td>
@@ -146,7 +146,7 @@
                                                         <td> {{registroDetalle.observaciones}}</td>
                                                     </tr>
                                                     <tr ng-show="registroDetalle.showChild" style="background: #CDCDCD;">
-                                                        <td colspan="2">&nbsp;</td>
+                                                        <td colspan="2"><h4>Propuesta para apertura</h4></td>
                                                         <td colspan="10">
                                                             <div class="pull-right">
                                                                 <table class="tablaDatos table table-condensed no-footer">

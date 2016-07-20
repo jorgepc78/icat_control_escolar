@@ -138,6 +138,13 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+            .state('pre_apertura.valida_apertura_cursos', {
+                url: '/valida_apertura_cursos',
+                templateUrl: 'app/components/preapertura-cursos/validacion/valida-apertura-cursos.html',
+                controller: 'ValidaAperturaCursosController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
 
     }
 

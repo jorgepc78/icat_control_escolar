@@ -37,6 +37,7 @@
             vm.editaCurso = editaCurso;
             vm.abreCurso = abreCurso;
             vm.enviaCursoRevision = enviaCursoRevision;
+            vm.eliminaCurso = eliminaCurso;
 
             inicia();
 
@@ -269,11 +270,11 @@
             }
 
 
-            function enviaCursoRevision(RegistroSeleccionado) {
+            function enviaCursoRevision(seleccion) {
 
                   swal({
                     title: "Confirmar",
-                    html: 'La propuesta del curso <strong>'+ RegistroSeleccionado.curso_oficial_registrado[0].nombreCurso +'</strong> ser&aacute; enviada a validaci&oacute;n, ¿Continuar?',
+                    html: 'La propuesta del curso <strong>'+ seleccion.curso_oficial_registrado[0].nombreCurso +'</strong> ser&aacute; enviada a validaci&oacute;n, ¿Continuar?',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -286,7 +287,7 @@
 
                             CursosPtc.prototype$updateAttributes(
                             {
-                                id: RegistroSeleccionado.idCursoPTC
+                                id: seleccion.idCursoPTC
                             },{
                                 estatus: 3
                             })
@@ -297,7 +298,7 @@
 
                                   CursosOficiales.prototype$updateAttributes(
                                   {
-                                      id: RegistroSeleccionado.curso_oficial_registrado[0].idCurso
+                                      id: seleccion.curso_oficial_registrado[0].idCurso
                                   },{
                                       estatus: 1
                                   })
@@ -308,7 +309,7 @@
                                         .create({
                                             proceso         : 'Pre-Apertura Curso',
                                             accion          : 'ENVIO VALIDACION',
-                                            idDocumento     : RegistroSeleccionado.curso_oficial_registrado[0].idCurso,
+                                            idDocumento     : seleccion.curso_oficial_registrado[0].idCurso,
                                             idUsuario       : $scope.currentUser.id_usuario,
                                             idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
                                         })
@@ -336,6 +337,47 @@
                                               });
                                         });
 
+
+                                  });
+
+                            });
+
+                  });
+
+            }
+
+
+            function eliminaCurso(seleccion) {
+                  
+                  swal({
+                    title: "Confirmar",
+                    html: 'Se eliminar&aacute; la propuesta de pre-apertura del curso <strong>'+ seleccion.curso_oficial_registrado[0].nombreCurso +'</strong>, ¿Continuar?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#9a0000",
+                    confirmButtonText: "Aceptar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                  }, function(){
+                          swal.disableButtons();
+
+                            CursosPtc.prototype$updateAttributes(
+                            {
+                                id: seleccion.idCursoPTC
+                            },{
+                                estatus: 0
+                            })
+                            .$promise
+                            .then(function(respuesta) {
+
+                                  vm.CursoPTCSeleccionado.estatus = respuesta.estatus;
+
+                                  CursosOficiales.deleteById({ id: seleccion.curso_oficial_registrado[0].idCurso })
+                                  .$promise
+                                  .then(function() {
+                                        vm.muestraCursosPTCseleccionado();
+                                        swal('Curso de pre-apertura eliminado', '', 'success');
 
                                   });
 

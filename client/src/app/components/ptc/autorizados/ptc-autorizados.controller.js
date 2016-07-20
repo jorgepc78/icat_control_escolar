@@ -38,7 +38,7 @@
             vm.tablaListaCursos = {
               totalElementos     : 0,
               paginaActual       : 1,
-              registrosPorPagina : 10,
+              registrosPorPagina : 5,
               inicio             : 0,
               fin                : 1,
               condicion          : {},
@@ -90,7 +90,7 @@
                         vm.listaEstatus = [
                             {valor: -1, texto: 'Todos'},
                             {valor: 2, texto: 'Aprobado'},
-                            {valor: 3, texto: 'Rechazado'}
+                            {valor: 4, texto: 'Cerrado'}
                         ];
 
                         vm.tablaListaPTCs.condicion = {
@@ -169,6 +169,7 @@
                                   {
                                       relation: 'curso_oficial_registrado',
                                       scope: {
+                                        where: {estatus: {gt:0}},
                                         fields: ['idCurso','idLocalidad','nombreCurso','claveCurso','modalidad','horario','aulaAsignada','numeroHoras','costo','cupoMaximo','minRequeridoInscritos','minRequeridoPago','fechaInicio','fechaFin','nombreInstructor','observaciones','estatus','publico']
                                       }
                                   }

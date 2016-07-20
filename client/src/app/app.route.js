@@ -126,8 +126,15 @@
             })
             .state('pre_apertura.cursos_ptc', {
                 url: '/cursos_ptc',
-                templateUrl: 'app/components/preapertura-cursos/pre-apertura-curso.html',
+                templateUrl: 'app/components/preapertura-cursos/cursos-ptc/pre-apertura-curso.html',
                 controller: 'PreAperturaCursoPTCController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+            .state('pre_apertura.cursos_ptc_extra', {
+                url: '/cursos_ptc_extra',
+                templateUrl: 'app/components/preapertura-cursos/cursos-fuera-ptc/pre-apertura-curso-extra.html',
+                controller: 'PreAperturaCursoExtraController',
                 controllerAs: 'vm',
                 authenticate: true
             })

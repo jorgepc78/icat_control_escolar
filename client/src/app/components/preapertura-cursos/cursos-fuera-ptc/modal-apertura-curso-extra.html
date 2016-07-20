@@ -5,30 +5,42 @@
       <div class="modal-body" style="background: #fff;">
 
         <div class="row">
-                <div class="col-lg-7">
+            <form name="form_datos" class="form-horizontal">
+            
+                <div class="col-lg-6">
 
-                    <form name="form_datos" class="form-horizontal">
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Cursos</label>
-                              <div class="col-sm-9">
+                              <label class="col-sm-2 control-label">Cursos</label>
+                              <div class="col-sm-10">
+                                  <select class="form-control m-b" 
+                                      ng-change="vm.muestraInstructoresCurso()"
+                                      ng-model="vm.cursoSeleccionado"
+                                      ng-disabled="vm.EdicionCurso"
+                                      ng-options="curso as (curso.nombreCurso + ' (' + curso.modalidad + ')' ) for curso in vm.listaCursos" required>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Nombre curso</label>
+                              <div class="col-sm-10">
                                   <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCurso" readonly>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Clave curso</label>
-                              <div class="col-sm-9">
+                              <label class="col-sm-2 control-label">Clave curso</label>
+                              <div class="col-sm-10">
                                   <input type="text" class="form-control" ng-model="vm.registroEdicion.claveCurso" readonly>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Tipo</label>
-                              <div class="col-sm-9">
+                              <label class="col-sm-2 control-label">Tipo</label>
+                              <div class="col-sm-10">
                                   <input type="text" class="form-control" ng-model="vm.registroEdicion.modalidad" readonly>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Localidad</label>
-                              <div class="col-sm-9">
+                              <label class="col-sm-2 control-label">Localidad</label>
+                              <div class="col-sm-10">
                                   <select class="form-control m-b" 
                                       ng-model="vm.localidadSeleccionada"
                                       ng-options="localidad as localidad.nombre for localidad in vm.listaLocalidades" required>
@@ -36,20 +48,33 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Horario</label>
-                              <div class="col-sm-9">
+                              <label class="col-sm-2 control-label">Instructor</label>
+                              <div class="col-sm-10">
+                                  <select class="form-control m-b" 
+                                      ng-model="vm.instructorSeleccionado"
+                                      ng-options="instructor as instructor.nombre_completo for instructor in vm.listaInstructores" required>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Horario</label>
+                              <div class="col-sm-10">
                                   <input type="text" class="form-control" ng-model="vm.registroEdicion.horario" required>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Aula asignada</label>
-                              <div class="col-sm-9">
+                              <label class="col-sm-2 control-label">Aula asignada</label>
+                              <div class="col-sm-10">
                                   <input type="text" class="form-control" ng-model="vm.registroEdicion.aulaAsignada" required>
                               </div>
                           </div>
+
+                </div>
+                <div class="col-lg-6">
+
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Horas semana</label>
-                              <div class="col-sm-9">
+                              <label class="col-sm-2 control-label">Horas semana</label>
+                              <div class="col-sm-10">
                                   <div class="row">
                                       <div class="col-md-4">
                                           <input type="number" class="form-control" ng-model="vm.registroEdicion.semanas" required>
@@ -64,9 +89,9 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Costo</label>
+                              <label class="col-sm-2 control-label">Costo</label>
 
-                              <div class="col-sm-9">
+                              <div class="col-sm-10">
                                   <div class="row">
 
                                       <div class="col-md-4">
@@ -85,9 +110,9 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Capacitandos</label>
+                              <label class="col-sm-2 control-label">Capacitandos</label>
 
-                              <div class="col-sm-9">
+                              <div class="col-sm-10">
                                   <div class="row">
 
                                       <div class="col-md-2">
@@ -114,8 +139,8 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Fecha inicio</label>
-                              <div class="col-sm-9">
+                              <label class="col-sm-2 control-label">Fecha inicio</label>
+                              <div class="col-sm-10">
                                   <div class="row">
                                       <div class="col-md-4">
                                           <div class="input-group date" style="width: 155px;">
@@ -136,47 +161,15 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-3 control-label">Observaciones</label>
-                              <div class="col-sm-9">
-                                  <textarea class="form-control" ng-model="vm.registroEdicion.observaciones" rows="4" cols="90" required></textarea>
+                              <label class="col-sm-2 control-label">Observaciones</label>
+                              <div class="col-sm-10">
+                                  <textarea class="form-control" ng-model="vm.registroEdicion.observaciones" rows="4" cols="90"></textarea>
                               </div>
                           </div>
-                    </form>
 
                 </div>
-                <div class="col-lg-5">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h3 style="margin-top:0;">Seleccione el instructor del curso</h3>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12" style="height: 380px;">
-                            <div ng-repeat="registro in vm.registroEdicion.instructores_propuestos">
-                                <div class="radio-inline" style="margin-bottom:10px;"><label> <input icheck type="radio" name="instructor" ng-model="vm.radioidInstructorSeleccionado" value="{{registro.idInstructor}}"> {{registro.nombre_completo}} </label></div>
-                            </div>
-                        </div>
 
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12 text-left">
-                            <h4 style="margin-top:0;">Otros instructores</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                              <select class="form-control m-b" 
-                                  ng-model="vm.instructorSeleccionado"
-                                  ng-options="instructor as instructor.nombre_completo for instructor in vm.listaInstructores" required>
-                              </select>                        
-                        </div>
-                        <div class="col-md-4">
-                              <button type="button" ng-disabled="(vm.instructorSeleccionado.idInstructor === undefined)" ng-click="vm.agregaInstructor()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar instructor</button>
-                        </div>
-                    </div>
-                </div>
+            </form>
         </div>
 
 

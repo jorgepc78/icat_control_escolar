@@ -187,6 +187,22 @@
       },
       "_selectable": true
     },
+    "horasSemana": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "horas_semana",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "numeroHoras": {
       "type": "Number",
       "required": false,
@@ -380,22 +396,38 @@
       "_selectable": true
     },
     "publico": {
-      "type": "Number",
+      "type": "boolean",
       "required": false,
       "length": null,
-      "precision": 16,
-      "scale": 0,
+      "precision": null,
+      "scale": null,
       "postgresql": {
         "columnName": "publico",
-        "dataType": "smallint",
+        "dataType": "boolean",
         "dataLength": null,
-        "dataPrecision": 16,
-        "dataScale": 0,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+      "programadoPTC": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "programado_ptc",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "YES"
       },
       "_selectable": true
     }
-  },
+},
   "validations": [],
   "relations": {
     "unidad_pertenece": {

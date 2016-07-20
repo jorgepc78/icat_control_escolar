@@ -11,7 +11,7 @@
                             </div>
                             <div class="col-md-5 text-right">
                                     <div class="mail-tools">
-                                            <button class="btn btn-primary btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
+                                            <button class="btn btn-default btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
                                     </div>
                             </div>
                     </div>
@@ -42,7 +42,7 @@
                                 <tr ng-repeat="registro in vm.listaRegistros" class="pointer">
                                     <td> {{registro.nombre}}</td>
                                     <td style="width:220px">
-                                            <button type="button" class="btn btn-primary btn-sm btn-labeled" ng-click="vm.edita_registro(registro)"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar</button>
+                                            <button type="button" class="btn btn-default btn-sm btn-labeled" ng-click="vm.edita_registro(registro)"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar</button>
                                             <button type="button" class="btn btn-danger btn-sm btn-labeled" ng-click="vm.elimina_registro(registro)"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar</button>
                                     </td>
                                 </tr>

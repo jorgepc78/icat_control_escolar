@@ -107,9 +107,10 @@
                                         </div>
                                         <div class="tab-pane active" ng-show="vm.client == 2">
                                         
-                                                <table class="tablaDatos table table-condensed no-footer">
+                                                  <table class="tablaDatos table table-condensed no-footer">
                                                   <thead>
                                                     <tr>
+                                                        <th></th>
                                                         <th>Curso o m&oacute;dulo</th>
                                                         <th>Tipo</th>
                                                         <th>Horario</th>
@@ -123,10 +124,13 @@
                                                         <th>Observaciones</th>
                                                     </tr>
                                                   </thead>
-                                                 <tbody>
-                                                    <tr ng-repeat="registroDetalle in vm.registrosCursosPTCs" class="pointer">
-                                                        <td> {{registroDetalle.detalle_curso.nombreCurso}}</td>
-                                                        <td> {{registroDetalle.detalle_curso.modalidad}}</td>
+                                                 <tbody ng-repeat="registroDetalle in vm.registrosCursosPTCs">
+                                                    <tr class="pointer">
+                                                        <td style="width:60px">
+                                                            <div ng-show="(registroDetalle.curso_oficial_registrado.length > 0)"><button type="button" ng-click="vm.muestraCursoPreapertura(registroDetalle)" class="btn btn-default" tooltip-placement="right" tooltip="Clic para ver el detalle del curso aperturado"><i class="fa fa-eye{{vm.icono}}"></i></button></div>
+                                                        </td>
+                                                        <td> {{registroDetalle.nombreCurso}}</td>
+                                                        <td> {{registroDetalle.modalidad}}</td>
                                                         <td> {{registroDetalle.horario}}</td>
                                                         <td> {{registroDetalle.aulaAsignada}}</td>
                                                         <td> {{registroDetalle.capacitandos}}</td>
@@ -141,10 +145,55 @@
                                                         </td>
                                                         <td> {{registroDetalle.observaciones}}</td>
                                                     </tr>
+                                                    <tr ng-show="registroDetalle.showChild" style="background: #CDCDCD;">
+                                                        <td colspan="2">&nbsp;</td>
+                                                        <td colspan="10">
+                                                            <div class="pull-right">
+                                                                <table class="tablaDatos table table-condensed no-footer">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Horario</th>
+                                                                        <th>Aula asignada</th>
+                                                                        <th>Cupo m&aacute;ximo</th>
+                                                                        <th>M&iacute;nimo inscritos</th>
+                                                                        <th>M&iacute;nimo inscritos pagados</th>
+                                                                        <th>Fecha inicio</th>
+                                                                        <th>Fecha t&eacute;rmino</th>
+                                                                        <th>Instructor</th>
+                                                                        <th>Estatus</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="record in registroDetalle.curso_oficial_registrado">
+                                                                            <td> {{record.horario}}</td>
+                                                                            <td> {{record.aulaAsignada}}</td>
+                                                                            <td> {{record.cupoMaximo}}</td>
+                                                                            <td> {{record.minRequeridoInscritos}}</td>
+                                                                            <td> {{record.minRequeridoPago}}</td>
+                                                                            <td> {{record.fechaInicio | date:'d/MMMM/yyyy'}}</td>
+                                                                            <td> {{record.fechaFin | date:'d/MMMM/yyyy'}}</td>
+                                                                            <td> {{record.nombreInstructor}}</td>
+                                                                            <td>
+                                                                                <div class="client-status" ng-switch on="record.estatus">
+                                                                                    <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
+                                                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
+                                                                                    <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
+                                                                                    <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
+                                                                                    <span ng-switch-when="4" class="label label-info texto-estatus-ptc">Activo</span>
+                                                                                    <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cerrado</span>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                   </tbody>
                                                 </table>
-
+                                                
                                                 <tabla-paginacion config="vm.tablaListaCursos" paginar="vm.cambiarPaginaDetalle()"></tabla-paginacion>
+
                                         </div>
 
                                     </div>

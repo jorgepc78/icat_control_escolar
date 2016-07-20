@@ -69,7 +69,7 @@
                         <div class="col-md-12">
 
                                 <div class="ibox">
-                                    <div class="ibox-content" style="height:660px;">
+                                    <div class="ibox-content" style="height:730px;">
                                         <div class="tab-content">
                                             <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                                         <div class="row">
@@ -96,12 +96,24 @@
                                                                                     Tipo
                                                                                 </li>
                                                                                 <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.nombre}} </span>
+                                                                                    Localidad
+                                                                                </li>
+                                                                                <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.CursoPTCSeleccionado.curso_oficial_registrado[0].horario}} </span>
                                                                                     Horario
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.CursoPTCSeleccionado.curso_oficial_registrado[0].aulaAsignada}} </span>
                                                                                     Aula asignada
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.CursoPTCSeleccionado.curso_oficial_registrado[0].costo}} </span>
+                                                                                    Costo
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right label label-{{vm.CursoPTCSeleccionado.curso_oficial_registrado[0].publico === true ? 'primary' : 'warning'}}">{{vm.CursoPTCSeleccionado.curso_oficial_registrado[0].publico === true ? 'S&iacute;' : 'No'}}</span>
+                                                                                    P&uacute;blico
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.CursoPTCSeleccionado.curso_oficial_registrado[0].cupoMaximo}} </span>
@@ -132,6 +144,14 @@
                                                                                     Observaciones
                                                                                 </li>
                                                                             </ul>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <button type="button" ng-show="( (vm.CursoPTCSeleccionado.estatus == 0 || vm.CursoPTCSeleccionado.estatus == 2) && vm.CursoPTCSeleccionado.curso_oficial_registrado.length > 0)" ng-click="vm.editaCurso(vm.CursoPTCSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span>Editar curso propuesto</button>
+                                                                                    <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 2)" ng-click="vm.enviaCursoRevision(vm.CursoPTCSeleccionado)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-upload"></i></span> Enviar a revisi&oacute;n</button>
+                                                                                    <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 3)" ng-click="vm.imprimeDocValidacion(vm.CursoPTCSeleccionado)" class="btn btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-print"></i></span> Imprimir Doc. validaci&oacute;n</button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br>
                                                                     </tab>
 
                                                                     <tab heading="Curso programado en el PTC" ng-init="true" active="vm.tabs[1].active">
@@ -186,16 +206,15 @@
                                                                                     Observaciones
                                                                                 </li>
                                                                             </ul>
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 text-center">
+                                                                                    <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 0)" ng-click="vm.abreCurso(vm.CursoPTCSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Pre aperturar este curso</button>
+                                                                                </div>
+                                                                            </div>
                                                                     </tab>
                                                                 </tabset>
 
-                                                                    <div class="row">
-                                                                        <div class="col-md-12 text-center">
-                                                                            <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 0)" ng-click="vm.abreCurso(vm.CursoPTCSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Pre aperturar este curso</button>
-                                                                            <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 2)" ng-click="vm.enviaCursoRevision(vm.CursoPTCSeleccionado)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-upload"></i></span> Enviar a revisi&oacute;n</button>
-                                                                            <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 3)" ng-click="vm.imprimeDocValidacion(vm.CursoPTCSeleccionado)" class="btn btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-print"></i></span> Imprimir Doc. validaci&oacute;n</button>
-                                                                        </div>
-                                                                    </div>
                                                         </div> <!--panel blank-panel-->
                           
                                             </div> <!-- client == 2 -->

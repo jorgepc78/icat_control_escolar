@@ -19,7 +19,7 @@
             vm.tablaListaCursos = {
               totalElementos     : 0,
               paginaActual       : 1,
-              registrosPorPagina : 2,
+              registrosPorPagina : 5,
               inicio             : 0,
               fin                : 1,
               condicion          : {},
@@ -34,6 +34,7 @@
             vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
             vm.cambiarPagina                = cambiarPagina;
 
+            vm.editaCurso = editaCurso;
             vm.abreCurso = abreCurso;
             vm.enviaCursoRevision = enviaCursoRevision;
 
@@ -57,7 +58,7 @@
                   .then(function(resp) {
                       angular.forEach(resp, function(registro) {
                             
-                            var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
+                            var trimestres = ['PRIMER TRIMESTRE','SEGUNDO TRIMESTRE','TERCER TRIMESTRE','CUARTO TRIMESTRE'];
                             vm.listaPTCautorizados.push({
                                 idPtc        : registro.idPtc,
                                 anio         : registro.anio,
@@ -91,7 +92,13 @@
                                   {
                                       relation: 'curso_oficial_registrado',
                                       scope: {
-                                        fields: ['idCurso','idLocalidad','nombreCurso','claveCurso','modalidad','horario','aulaAsignada','numeroHoras','costo','cupoMaximo','minRequeridoInscritos','minRequeridoPago','fechaInicio','fechaFin','nombreInstructor','observaciones','estatus','publico']
+                                        fields: ['idCurso','idLocalidad','nombreCurso','claveCurso','modalidad','horario','aulaAsignada','horasSemana','numeroHoras','costo','cupoMaximo','minRequeridoInscritos','minRequeridoPago','fechaInicio','fechaFin','idInstructor','nombreInstructor','observaciones','estatus','publico'],
+                                        include: {
+                                          relation: 'localidad_pertenece',
+                                          scope: {
+                                            fields: ['nombre']
+                                          }
+                                        }
                                       }
                                   }
                               ]
@@ -170,7 +177,7 @@
             function abreCurso(seleccion) {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/preapertura-cursos/modal-apertura-curso.html',
+                        templateUrl: 'app/components/preapertura-cursos/cursos-ptc/modal-apertura-curso.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalAperturaCursoController as vm',
                         windowClass: 'app-modal-window',
@@ -191,7 +198,71 @@
                           confirmButtonText: "Aceptar"
                         });
 
-                        vm.CursoPTCSeleccionado.estatus = respuesta.estatus;
+                        vm.CursoPTCSeleccionado.estatus = respuesta.estatusCursoPTC;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado = [{
+                            idCurso               : respuesta.idCurso,
+                            nombreCurso           : respuesta.nombreCurso,
+                            modalidad             : respuesta.modalidad,
+                            horario               : respuesta.horario,
+                            aulaAsignada          : respuesta.aulaAsignada,
+                            cupoMaximo            : respuesta.capacitandos,
+                            minRequeridoInscritos : respuesta.min_requerido_inscritos,
+                            minRequeridoPago      : respuesta.min_requerido_pago,
+                            fechaInicio           : respuesta.fechaInicio,
+                            fechaFin              : respuesta.fechaFin,
+                            idInstructor          : respuesta.idInstructor,
+                            nombreInstructor      : respuesta.nombreInstructor,
+                            observaciones         : respuesta.observaciones,
+                            idLocalidad           : respuesta.idLocalidad,
+                            horasSemana           : respuesta.semanas,
+                            numeroHoras           : respuesta.total,
+                            costo                 : respuesta.costo,
+                            publico               : respuesta.publico,
+                            localidad_pertenece   : {
+                                idLocalidad : respuesta.idLocalidad,
+                                nombre      : respuesta.nombreLocalidad
+                            }
+                        }];
+
+                    }, function () {
+                    });
+
+            }
+
+
+            function editaCurso(seleccion) {
+
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/components/preapertura-cursos/cursos-ptc/modal-apertura-curso.html',
+                        windowClass: "animated fadeIn",
+                        controller: 'ModalEditaAperturaCursoController as vm',
+                        windowClass: 'app-modal-window',
+                        resolve: {
+                          registroEditar: function () { return seleccion }
+                        }
+
+                    });
+
+                    modalInstance.result.then(function (respuesta) {
+
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].horario = respuesta.horario;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].aulaAsignada = respuesta.aulaAsignada;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].cupoMaximo = respuesta.capacitandos;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].minRequeridoInscritos = respuesta.min_requerido_inscritos;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].minRequeridoPago = respuesta.min_requerido_pago;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].fechaInicio = respuesta.fechaInicio;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].fechaFin = respuesta.fechaFin;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].idInstructor = respuesta.idInstructor;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].nombreInstructor = respuesta.nombreInstructor;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].observaciones = respuesta.observaciones;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].idLocalidad = respuesta.idLocalidad;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].horasSemana = respuesta.semanas;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].numeroHoras = respuesta.total;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].costo = respuesta.costo;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].publico = respuesta.publico;
+
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.idLocalidad = respuesta.idLocalidad;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.nombre = respuesta.nombreLocalidad;
                     }, function () {
                     });
 

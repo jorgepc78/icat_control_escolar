@@ -3,15 +3,16 @@
 
     angular
         .module('icat_control_escolar')
-        .controller('ModalAperturaCursoController', ModalAperturaCursoController);
+        .controller('ModalAperturaCursoExtraController', ModalAperturaCursoExtraController);
 
-        ModalAperturaCursoController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'CursosPtc', 'CatalogoCursos', 'CatalogoInstructores', 'CatalogoLocalidades', 'CursosOficiales'];
+        ModalAperturaCursoExtraController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'CursosPtc', 'CatalogoCursos', 'CatalogoInstructores', 'CatalogoLocalidades', 'CursosOficiales'];
 
-    function ModalAperturaCursoController($scope, $modalInstance, registroEditar, CursosPtc, CatalogoCursos, CatalogoInstructores, CatalogoLocalidades, CursosOficiales) {
+    function ModalAperturaCursoExtraController($scope, $timeout, $modalInstance, registroEditar, CursosPtc, CatalogoCursos, CatalogoInstructores, CatalogoLocalidades, CursosOficiales) {
 
             var vm = this;
 
             vm.mostrarSpiner = false;
+            vm.mostrar_msg_error = false;
 
             vm.listaLocalidades = {};
             vm.localidadSeleccionada = {};
@@ -20,9 +21,8 @@
             vm.radioidInstructorSeleccionado = 0;
             vm.listaInstructores = [];
            
-
             vm.registroEdicion = {
-                    idCursoPTC              : registroEditar.idCursoPTC,
+                    idCurso                 : 0,
                     idPtc                   : registroEditar.idPtc,
                     idCatalogoCurso         : registroEditar.idCatalogoCurso,
                     nombreCurso             : registroEditar.detalle_curso.nombreCurso,
@@ -39,8 +39,13 @@
                     min_requerido_pago      : 0,
                     fechaInicio             : registroEditar.fechaInicio,
                     fechaFin                : registroEditar.fechaFin,
-                    observaciones           : registroEditar.observaciones,
-                    estatus              : registroEditar.estatus,
+                    idLocalidad             : '',
+                    nombreLocalidad         : '',
+                    idInstructor            : '',
+                    nombreInstructor        : '',
+                    publico                 : '',
+                    observaciones           : '',
+                    estatusCursoPTC         : registroEditar.estatus,
                     instructores_propuestos : []
             };
 
@@ -188,6 +193,15 @@
 
             function guardar() {
 
+                if(vm.radioidInstructorSeleccionado == 0)
+                {
+                    vm.mostrar_msg_error = true;
+                    $timeout(function(){
+                         vm.mostrar_msg_error = false;
+                    }, 3000);
+                    return;
+                }
+
                 vm.mostrarSpiner = true;
 
                 CursosPtc.prototype$updateAttributes(
@@ -231,10 +245,21 @@
                             observaciones         : vm.registroEdicion.observaciones,
                             estatus               : 0,
                             publico               : vm.registroEdicion.publico,
+                            programadoPTC         : true
                         })
                         .$promise
                         .then(function(respuesta) {
-                                vm.registroEdicion.estatus = 2;
+                                vm.registroEdicion.idCurso  = respuesta.idCurso;
+                                vm.registroEdicion.estatusCursoPTC  = 2;
+                                vm.registroEdicion.idInstructor     = vm.registroEdicion.instructores_propuestos[index].idInstructor;
+                                vm.registroEdicion.nombreInstructor = vm.registroEdicion.instructores_propuestos[index].nombre_completo;
+                                vm.registroEdicion.observaciones    = vm.registroEdicion.observaciones;
+                                vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.idLocalidad;
+                                vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.nombre;
+                                
+                                vm.registroEdicion.nombreCurso  = vm.registroEdicion.nombreCurso;
+                                vm.registroEdicion.modalidad    = vm.registroEdicion.modalidad;
+
                               $modalInstance.close(vm.registroEdicion);
                         })
                         .catch(function(error) {

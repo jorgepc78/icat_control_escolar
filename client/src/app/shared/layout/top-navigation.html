@@ -9,20 +9,20 @@
             <ul class="nav navbar-nav navbar-top-links">
 
                 <li ui-sref-active="active" ng-if="currentUser.perfil == 'admin_sistema'">
-                    <a ui-sref="admin.usuarios"><i class="fa fa-user"></i> <span class="nav-label">Usuarios del sistema</span></a>
+                    <a ui-sref="admin.usuarios"><i class="fa fa-user"></i> <span class="nav-label">Usuarios del sistema </span></a>
                 </li>
 
                 <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
-                    <a class="dropdown-toggle" href dropdown-toggle  style="color: #fff;">Cat&aacute;logo gral. de cursos <span class="caret"></span></a>
+                    <a class="dropdown-toggle" href dropdown-toggle  style="color: #fff;">Cat&aacute;logos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active">
-                            <a ui-sref="index.catalogo_temas">          <span class="nav-label"> Temas</span></a>
+                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id == 1">
+                            <a ui-sref="index.catalogo_temas">          <span class="nav-label"> Temas </span></a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="index.catalogo_especialidades"> <span class="nav-label"> Cat&aacute;logo de especialidades</span></a>
+                            <a ui-sref="index.catalogo_especialidades"> <span class="nav-label"> Cat&aacute;logo de especialidades </span></a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="index.catalogo_cursos">         <span class="nav-label"> Cat&aacute;logo general de cursos</span></a>
+                            <a ui-sref="index.catalogo_cursos">         <span class="nav-label"> Cat&aacute;logo general de cursos </span></a>
                         </li>
                     </ul>
                 </li>
@@ -31,7 +31,7 @@
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Instructores <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active">
-                            <a ui-sref="ptc.cat_instructores">  <span class="nav-label"> Cat&aacute;logo de instructores</span></a>
+                            <a ui-sref="ptc.cat_instructores">  <span class="nav-label"> Cat&aacute;logo de instructores </span></a>
                         </li>
                     </ul>
                 </li>
@@ -40,13 +40,13 @@
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Planeaci&oacute;n de Cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
-                            <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC</span></a>
+                            <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC </span></a>
                         </li>
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id == 1">
-                            <a ui-sref="ptc.revision_ptc">      <span class="nav-label"> Revisi&oacute;n PTC unidades</span></a>
+                            <a ui-sref="ptc.revision_ptc">      <span class="nav-label"> Revisi&oacute;n PTC unidades </span></a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="ptc.pct_autorizados">   <span class="nav-label"> PTC autorizados</span></a>
+                            <a ui-sref="ptc.pct_autorizados">   <span class="nav-label"> PTC autorizados </span></a>
                         </li>
                     </ul>
                 </li>
@@ -54,47 +54,62 @@
                 <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Pre-apertura de cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active">
-                            <a ui-sref="pre_apertura.cursos_ptc">    <span class="nav-label"> Cursos del PTC</span></a>
+                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
+                            <a ui-sref="pre_apertura.cursos_ptc">    <span class="nav-label"> Cursos del PTC </span></a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="pre_apertura.cursos_ptc">   <span class="nav-label"> Cursos fuera del PTC</span></a>
+                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
+                            <a ui-sref="pre_apertura.cursos_ptc_extra">   <span class="nav-label"> Cursos fuera del PTC </span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id == 1">
+                            <a ui-sref="pre_apertura.cursos_ptc_extra">   <span class="nav-label"> Validaci&oacute;n de cursos para pre-apertura </span></a>
                         </li>
                     </ul>
                 </li>
 
-                <!-- 
-                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
-                    <a class="dropdown-toggle" href dropdown-toggle> Cursos <span class="caret"></span></a>
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Cursos autorizados <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
-                            <a ui-sref="index.lista_cursos_activos({ tipo: 'activos' })"><i class="fa fa-users"></i> <span class="nav-label">Cursos vigentes </span></a>
+                        <li ui-sref-active="active">
+                            <a ui-sref="cursos_autorizados.cursos_vigentes">    <span class="nav-label"> Cursos vigentes </span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
-                            <a ui-sref="index.lista_cursos_activos({ tipo: 'historicos' })"><i class="fa fa-users"></i> <span class="nav-label">Hist&oacute;rico de cursos </span></a>
+                        <li ui-sref-active="active">
+                            <a ui-sref="cursos_autorizados.cursos_historico">   <span class="nav-label">Hist&oacute;rico de cursos </span></a>
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
-                    <a class="dropdown-toggle" href dropdown-toggle> Alumnos <span class="caret"></span></a>
+
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil == 'academica' && currentUser.unidad_pertenece_id > 1)">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Alumnos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
-                            <a ui-sref="index.lista_alumnos"><i class="fa fa-user"></i> <span class="nav-label" style="display:inline-block;width:80%;vertical-align:middle;">Lista de alumnos inscritos</span></a>
-                        </li>
-                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
-                            <a ui-sref="index.inscripcion"><i class="fa fa-sign-in"></i> <span class="nav-label">Inscripci&oacute;n de alumnos</span></a>
+                        <li ui-sref-active="active">
+                            <a ui-sref="alumnos.registro_alumnos">    <span class="nav-label"> Registro de alumnos </span></a>
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
-                    <a class="dropdown-toggle" href dropdown-toggle> Pago de cursos <span class="caret"></span></a>
+
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil == 'academica' && currentUser.unidad_pertenece_id > 1)">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Inscripciones y pagos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="currentUser.perfil == 'capturista' || currentUser.perfil == 'coordinador_gral' || currentUser.perfil == 'coordinador'">
-                            <a ui-sref="index.registra_pago"><i class="fa fa-money"></i> <span class="nav-label" style="display:inline-block;width:80%;vertical-align:middle;">Registro de pago de los alumnos</span></a>
+                        <li ui-sref-active="active">
+                            <a ui-sref="cursos_autorizados.cursos_vigentes">    <span class="nav-label"> Inscripci&oacute;n a un curso </span></a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="cursos_autorizados.cursos_historico">   <span class="nav-label">Registro del pago a un curso </span></a>
                         </li>
                     </ul>
                 </li>
-                 -->
+                <li class="dropdown" dropdown>
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Reportes y bit&aacute;cora <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active">
+                            <a ui-sref="cursos_autorizados.cursos_vigentes">    <span class="nav-label"> Resumen de alumnos y cursos </span></a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="cursos_autorizados.cursos_historico">   <span class="nav-label">Bit&aacute;cora de eventos </span></a>
+                        </li>
+                    </ul>
+                </li>
+
 
             </ul>
             <ul class="nav navbar-top-links navbar-right">

@@ -10,9 +10,9 @@
                             <div class="col-md-7">
                                     <h2>{{vm.descripcion_catalogo}}</h2>
                             </div>
-                            <div class="col-md-5 text-right">
+                            <div class="col-md-5 text-right" ng-if="currentUser.unidad_pertenece_id == 1">
                                     <div class="mail-tools">
-                                            <button class="btn btn-primary btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
+                                            <button class="btn btn-default btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
                                     </div>
                             </div>
                     </div>
@@ -25,7 +25,7 @@
                                         <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Texto a buscar" class="input form-control" ng-model="vm.cadena_buscar">
                                                 <span class="input-group-btn">
                                                         <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
-                                                        <button class="btn btn-primary btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
+                                                        <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
                                                 </span>
                                     </div>
                                 </div>
@@ -47,10 +47,10 @@
                                     <td> {{registro.clave}}</td>
                                     <td> {{registro.tema_pertenece.nombre}}</td>
                                     <td style="width:220px">
-                                            <!-- <button type="button" ng-click="vm.edita_registro(registro)" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> Editar</button> -->
-                                            <button type="button" class="btn btn-primary btn-sm btn-labeled" ng-click="vm.edita_registro(registro)"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar</button>
+                                        <div  ng-if="currentUser.unidad_pertenece_id == 1">
+                                            <button type="button" class="btn btn-default btn-sm btn-labeled" ng-click="vm.edita_registro(registro)"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar</button>
                                             <button type="button" class="btn btn-danger btn-sm btn-labeled" ng-click="vm.elimina_registro(registro)"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar</button>
-                                            <!-- <button type="button" ng-click="vm.elimina_registro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Eliminar</button> -->
+                                        </div>
                                     </td>
                                 </tr>
                               </tbody>

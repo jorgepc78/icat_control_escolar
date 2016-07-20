@@ -5,32 +5,19 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
-    banner:
-      '/*! <%= pkg.title || pkg.name %> - <%= pkg.version %>\n' +
-      '* <%= pkg.homepage %>\n' +
-      '* Copyright (c) <%= pkg.author %> [<%= grunt.template.today("mmmm dd, yyyy") %>]\n' +
-      '* Licensed <%= pkg.license %> */\n',
+    banner: '/*! <%= pkg.title || pkg.name %> - <%= pkg.version %> - ' +
+      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+      '* Copyright (c) <%= pkg.author %> <%= grunt.template.today("yyyy") %>;' +
+      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     config: {
       dist:'./dist',
       src: './src',
-      demo: './demo',
       js: [
         '<%= config.src %>/**/*.js'
       ]
     },
-    copy: {
-      distToDemo: {
-        expand: true,
-        src: '**/angular-base64-upload.js*',
-        cwd: '<%= config.dist %>/',
-        dest: '<%= config.demo %>/'
-      }
-    },
-    clean: [
-      '<%= config.dist %>',
-      '<%= config.demo %>/<%= pkg.name %>.min.js',
-      '<%= config.demo %>/<%= pkg.name %>.min.js.map'
-    ],
+    clean: ['<%= config.dist %>'],
 
     // Task configuration.
     concat: {
@@ -45,8 +32,7 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '<%= banner %>',
-        sourceMap: true
+        banner: '<%= banner %>'
       },
       dist: {
         src: '<%= concat.dist.dest %>',
@@ -72,47 +58,29 @@ module.exports = function(grunt) {
         }
       },
       gruntfile: {
-        options: {
-          undef: false
-        },
         src: 'Gruntfile.js'
       },
       'angular-base64-upload': {
         src: 'src/angular-base64-upload.js'
-      },
-      tests: {
-        options: {
-          undef: false,
-          unused: false
-        },
-        src: ['test/**/*.js']
       }
     },
     karma: {
-      options: {
-        configFile: './test/config/karma.conf.js'
-      },
-      unit: {
-      }
-    },
-    watch: {
-      src: {
-        files: ['<%= config.src %>/<%= pkg.name %>.js'],
-        tasks: ['build']
-      }
+        unit: {
+            configFile: 'karma-unit.js',
+            background: false,
+            singleRun: true
+        }
     }
   });
 
-  // load plugins
-  require('load-grunt-tasks')(grunt);
+  // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-karma');
 
-  grunt.registerTask('default', ['build']);
-  grunt.registerTask('build', ['clean', 'jshint', 'concat', 'uglify', 'copy']);
-
-  grunt.registerTask('test', function () {
-    var TestRunner = require('./test/config/grunt_test_runner.js');
-    var runner = new TestRunner(grunt);
-    runner.run();
-  });
+  grunt.registerTask('build', ['clean', 'jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['karma:unit']);
 
 };

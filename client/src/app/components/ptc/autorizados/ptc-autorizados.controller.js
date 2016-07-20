@@ -47,6 +47,7 @@
             };
 
             vm.registrosCursosPTCs = {};
+            vm.icono = '';
 
 
             /****** DEFINICION DE FUNCIONES DE LA TABLA PRINCIPAL ******/
@@ -56,6 +57,8 @@
             vm.muestraCursosPTCActual = muestraCursosPTCActual;
             vm.cambiarPaginaPrincipal = cambiarPaginaPrincipal;
             vm.cambiarPaginaDetalle   = cambiarPaginaDetalle;
+            
+            vm.muestraCursoPreapertura = muestraCursoPreapertura;
 
             inicia();
             
@@ -162,6 +165,12 @@
                                         fields: ['apellidoPaterno','apellidoMaterno','nombre'],
                                         order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
                                       }
+                                  },
+                                  {
+                                      relation: 'curso_oficial_registrado',
+                                      scope: {
+                                        fields: ['idCurso','idLocalidad','nombreCurso','claveCurso','modalidad','horario','aulaAsignada','numeroHoras','costo','cupoMaximo','minRequeridoInscritos','minRequeridoPago','fechaInicio','fechaFin','nombreInstructor','observaciones','estatus','publico']
+                                      }
                                   }
                               ]
                           }
@@ -240,7 +249,7 @@
                   vm.tablaListaCursos.fin = 1;
                   vm.tablaListaCursos.condicion = {idPtc: seleccion.idPtc};
 
-                  vm.registrosCursosPTCs = {};
+                  vm.registrosCursosPTCs = [];
                   tablaDatosService.obtiene_datos_tabla(CursosPtc, vm.tablaListaCursos)
                   .then(function(respuesta) {
 
@@ -251,11 +260,40 @@
                         if(vm.tablaListaCursos.totalElementos > 0)
                         {
                             vm.client = 2;
-                            vm.registrosCursosPTCs = respuesta.datos;
+                            vm.icono = '';
+
+                            angular.forEach(respuesta.datos, function(registro) {
+                                  vm.registrosCursosPTCs.push({
+                                      idCursoPTC              : registro.idCursoPTC,
+                                      nombreCurso             : registro.detalle_curso.nombreCurso,
+                                      modalidad               : registro.detalle_curso.modalidad,
+                                      horario                 : registro.horario,
+                                      aulaAsignada            : registro.aulaAsignada,
+                                      capacitandos            : registro.capacitandos,
+                                      semanas                 : registro.semanas,
+                                      total                   : registro.total,
+                                      fechaInicio             : registro.fechaInicio,
+                                      fechaFin                :registro.fechaFin,
+                                      instructores_propuestos : registro.instructores_propuestos,
+                                      observaciones           : registro.observaciones,
+                                      showChild               : false,
+                                      curso_oficial_registrado: registro.curso_oficial_registrado
+                                  });
+                            });
+
                         }
                   });
 
             };
+
+
+            function muestraCursoPreapertura(registro) {
+                registro.showChild =! registro.showChild
+                if(registro.showChild == true)
+                  vm.icono = '-slash';
+                else
+                  vm.icono = '';
+            }
 
 
             function muestra_ptc_unidad() {

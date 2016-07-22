@@ -1,0 +1,225 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+                <div class="col-md-7">
+    
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <div class="row">
+                                        <div class="col-md-3">
+                                                <h2>{{vm.titulo_seccion}}</h2>
+                                        </div>
+                                        <div class="col-md-5">
+                                                        <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:3px;width: 320px;">
+                                                                <label class="col-md-3 control-label" style="margin-top:7px;">Unidad:</label>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.muestra_cursos_unidad()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                                        <div class="input-group" style="margin-top:3px;width: 230px;">
+                                                                <label class="col-md-3 control-label" style="margin-top:7px;">Estatus:</label>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control m-b" ng-model="vm.estatusSeleccionado" ng-change="vm.muestra_estatus_curso()" ng-options="estatus as estatus.texto for estatus in vm.listaEstatus"></select>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group" style="margin-top:16px;">
+                                            <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Curso a buscar" class="input form-control" ng-model="vm.cadena_buscar">
+                                                    <span class="input-group-btn">
+                                                            <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
+                                                            <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
+                                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="ibox-content">
+                                
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                            <tr>
+                                                <th>Unidad</th>
+                                                <th>Curso o m&oacute;dulo</th>
+                                                <th>Modalidad</th>
+                                                <th>Horario</th>
+                                                <th>Fecha inicio</th>
+                                                <th>Fecha fin</th>
+                                                <th>Estatus</th>
+                                            </tr>
+                                          </thead>
+                                         <tbody>
+                                            <tr ng-repeat="registro in vm.listaCursos" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaCursos.fila_seleccionada}" class="pointer">
+                                                <td> {{registro.unidad_pertenece.nombre}}</td>
+                                                <td> {{registro.nombreCurso}}</td>
+                                                <td> {{registro.modalidad}}</td>
+                                                <td> {{registro.horario}}</td>
+                                                <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
+                                                <td> {{registro.fechaFin | date:'d/MMMM/yyyy'}}</td>
+                                                <td class="client-status" ng-switch on="registro.estatus">
+                                                    <span ng-switch-when="2" class="label label-warning texto-estatus-ptc">En espera</span>
+                                                    <span ng-switch-when="4" class="label label-success texto-estatus-ptc">Activo</span>
+                                                    <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Concluido</span>
+                                                    <span ng-switch-when="6" class="label label-danger texto-estatus-ptc">Cancelado</span>
+                                                </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+                                        <tabla-paginacion config="vm.tablaListaCursos" paginar="vm.cambiarPagina()"></tabla-paginacion>
+
+                            </div>
+                        </div>
+                
+                </div> <!-- column1 -->
+                <div class="col-md-5">
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+
+                                <div class="ibox">
+                                    <div class="ibox-content" style="height:770px;">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 text-center">
+                                                                <p>
+                                                                    <h2>Seleccione un registro para ver los detalles</h2>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane active" ng-show="vm.client == 2">
+                                                        <div class="panel blank-panel">
+                                                                <tabset style="height: 700px;">
+                                                                    <tab heading="Detalle del curso" active="vm.tabs[0].active">
+
+                                                                            <ul class="list-group clear-list">
+                                                                                <li class="list-group-item fist-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.unidad_pertenece.nombre}} </span>
+                                                                                    Unidad
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.localidad_pertenece.nombre}} </span>
+                                                                                    Localidad
+                                                                                </li>
+                                                                                <li class="list-group-item" style="height: 60px">
+                                                                                    <span style="width: 300px;text-align: right;" class="pull-right"> {{vm.cursoSeleccionado.nombreCurso}} </span>
+                                                                                    Curso o m&oacute;dulo
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.modalidad}} </span>
+                                                                                    Modalidad
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.numeroHoras}} </span>
+                                                                                    N&uacute;mero de horas
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.nombreInstructor}} </span>
+                                                                                    Instructor
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> Fecha t&eacute;rmino: {{vm.cursoSeleccionado.fechaFin | date:'d/MMMM/yyyy'}} </span>
+                                                                                    Fecha inicio: {{vm.cursoSeleccionado.fechaInicio | date:'d/MMMM/yyyy'}}
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.aulaAsignada}} </span>
+                                                                                    Aula asignada
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.horario}} </span>
+                                                                                    Horario
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> $ {{vm.cursoSeleccionado.costo}} </span>
+                                                                                    Costo
+                                                                                </li>
+                                                                                <li style="height: 80px" class="list-group-item">
+                                                                                    <span class="pull-right" style="width: 300px;text-align: right;"> {{vm.cursoSeleccionado.observaciones}} </span>
+                                                                                    Observaciones
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right">P&uacute;blico: <span class="label label-{{vm.cursoSeleccionado.publico === true ? 'primary' : 'warning'}}">{{vm.cursoSeleccionado.publico === true ? 'S&iacute;' : 'No'}}</span></span>
+                                                                                    Estatus: 
+                                                                                    <span ng-switch on="vm.cursoSeleccionado.estatus">
+                                                                                        <span ng-switch-when="2" class="label label-warning">En espera</span>
+                                                                                        <span ng-switch-when="4" class="label label-primary">Activo</span>
+                                                                                        <span ng-switch-when="5" class="label label-default">Concluido</span>
+                                                                                        <span ng-switch-when="6" class="label label-danger">Cancelado</span>
+                                                                                    </span>
+                                                                                </li>
+                                                                            </ul>
+
+                                                                            <strong>Registro actual de inscripciones y pagos</strong>
+                                                                            <ul class="list-group clear-list">
+                                                                                <li class="list-group-item fist-item">
+                                                                                    
+                                                                                    Cupo m&aacute;ximo: {{vm.cursoSeleccionado.cupoMaximo}}
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> Inscritos actual: {{vm.cursoSeleccionado.inscripcionesCursos.length}}</span>
+                                                                                    N&uacute;m. m&iacute;nimo de inscritos: {{vm.cursoSeleccionado.minRequeridoInscritos}}
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> Pagaron: {{vm.total_pagados}} </span>
+                                                                                    N&uacute;m. m&iacute;nimo de inscritos pagados: {{vm.cursoSeleccionado.minRequeridoPago}}
+                                                                                </li>
+                                                                            </ul>
+                                                                    </tab>
+
+                                                                    <tab heading="Capacitandos inscritos" ng-init="true" active="vm.tabs[1].active">
+
+                                                                            <div  style="height: 680px;">
+                                                                                    <div class="full-height-scroll" full-scroll>
+                                                            
+                                                                                        <table class="table table-striped">
+                                                                                            <thead>
+                                                                                            <tr>
+                                                                                                <th></th>
+                                                                                                <th>Nombre</th>
+                                                                                                <th>Curp</th>
+                                                                                                <th>Pago</th>
+                                                                                            </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                            <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesCursos">
+                                                                                                <td> {{$index + 1}}</td>
+                                                                                                <td> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
+                                                                                                <td> {{inscripcion.Capacitandos.curp}}</td>
+                                                                                                <td class="client-status" ng-switch on="inscripcion.pagado">
+                                                                                                    <span ng-switch-when="0" class="label label-warning texto-estatus-ptc">Pendiente</span>
+                                                                                                    <span ng-switch-when="1" class="label label-success texto-estatus-ptc">Pagado</span>
+                                                                                                    <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Condonado</span>
+                                                                                                    <span ng-switch-when="3" class="label label-info texto-estatus-ptc">Becado</span>
+                                                                                                </td>
+                                                                                            </tr>
+
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        
+                                                                                    </div>
+                                                                            </div>
+
+                                                                    </tab>
+                                                                </tabset>
+
+                                                        </div> <!--panel blank-panel-->
+                          
+                                            </div> <!-- client == 2 -->
+                                        </div>
+                                    </div>
+                                </div> <!-- class ibox -->
+
+
+                        </div>
+                    </div> <!-- row -->
+
+                </div> <!-- column2 -->
+
+    </div><!-- row principal -->
+</div>

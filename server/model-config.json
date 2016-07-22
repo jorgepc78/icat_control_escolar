@@ -94,5 +94,13 @@
   "CursosOficiales": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
+  },
+  "Capacitandos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "InscripcionCurso": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
   }
 }

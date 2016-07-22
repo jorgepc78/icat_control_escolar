@@ -427,7 +427,7 @@
       },
       "_selectable": true
     },
-      "programadoPTC": {
+    "programadoPTC": {
       "type": "Boolean",
       "required": false,
       "length": null,
@@ -443,25 +443,42 @@
       },
       "_selectable": true
     }
-},
+  },
   "validations": [],
   "relations": {
     "unidad_pertenece": {
       "type": "belongsTo",
       "model": "CatalogoUnidadesAdmtvas",
       "foreignKey": "idUnidadAdmtva"
-    },    
+    },
     "curso_ptc_pertenece": {
       "type": "belongsTo",
       "model": "CursosPtc",
       "foreignKey": "idCursoPTC"
-    },    
+    },
+    "ptc_pertenece": {
+      "type": "belongsTo",
+      "model": "ProgTrimCursos",
+      "foreignKey": "idPtc"
+    },
     "localidad_pertenece": {
       "type": "belongsTo",
       "model": "CatalogoLocalidades",
       "foreignKey": "idLocalidad"
+    },
+    "alumnos_inscritos": {
+      "type": "hasMany",
+      "model": "Capacitandos",
+      "foreignKey": "idCurso",
+      "through": "InscripcionCurso",
+      "keyThrough": "idAlumno"
+    },
+      "inscripcionesCursos": {
+      "type": "hasMany",
+      "model": "InscripcionCurso",
+      "foreignKey": "idCurso"
     }
-  },
+},
   "acls": [],
   "methods": {}
 }

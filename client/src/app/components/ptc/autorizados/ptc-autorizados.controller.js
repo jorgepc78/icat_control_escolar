@@ -65,13 +65,13 @@
 
             function inicia() {
 
-                  if($scope.currentUser.unidad_pertenece_id > 1) {
+                  vm.listaEstatus = [
+                      {valor: -1, texto: 'Todos'},
+                      {valor: 2, texto: 'Aprobado'},
+                      {valor: 4, texto: 'Cerrado'}
+                  ];
 
-                        vm.listaEstatus = [
-                            {valor: -1, texto: 'Todos'},
-                            {valor: 2, texto: 'Aprobado'},
-                            {valor: 4, texto: 'Cerrado'}
-                        ];
+                  if($scope.currentUser.unidad_pertenece_id > 1) {
 
                         vm.unidadSeleccionada = {
                             idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id,
@@ -87,12 +87,6 @@
                   }
                   else
                   {
-                        vm.listaEstatus = [
-                            {valor: -1, texto: 'Todos'},
-                            {valor: 2, texto: 'Aprobado'},
-                            {valor: 4, texto: 'Cerrado'}
-                        ];
-
                         vm.tablaListaPTCs.condicion = {
                             or: [
                               {estatus: 2},

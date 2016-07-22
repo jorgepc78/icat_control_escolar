@@ -146,6 +146,19 @@
                 authenticate: true
             })
 
+            /*** seccion del manejo de los cursos (resumen, inscripcion y cierre) ***/
+            .state('cursos_autorizados', {
+                abstract: true,
+                url: '/cursos_autorizados',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('cursos_autorizados.resumen_cursos', {
+                url: '/resumen_cursos:tipo',
+                templateUrl: 'app/components/cursos_oficiales/resumen-cursos/principal-resumen-cursos.html',
+                controller: 'ResumenCursosController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
     }
 
 })();

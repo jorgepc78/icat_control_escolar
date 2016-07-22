@@ -5,8 +5,16 @@
                         <div class="ibox">
                             <div class="ibox-title">
                                 <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                                 <h2>Cursos pendientes de validar</h2>
+                                        </div>
+                                        <div class="col-md-6">
+                                                        <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top: 4px;width: 350px;">
+                                                                <label class="col-md-3 control-label" style="margin-top:7px;">Unidad:</label>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.muestra_cursos_unidad()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
+                                                            </div>
+                                                        </div>
                                         </div>
                                 </div>
                             </div>
@@ -15,10 +23,10 @@
                                         <table class="tablaDatos table table-condensed no-footer">
                                           <thead>
                                             <tr>
+                                                <th>Unidad</th>
                                                 <th>Curso o m&oacute;dulo</th>
                                                 <th>Tipo</th>
                                                 <th>Horario</th>
-                                                <th>Aula asignada</th>
                                                 <th>Fecha inicio</th>
                                                 <th>Fecha fin</th>
                                                 <th>Estatus</th>
@@ -26,10 +34,10 @@
                                           </thead>
                                          <tbody>
                                             <tr ng-repeat="registro in vm.listaCursosValidar" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaCursos.fila_seleccionada}" class="pointer">
+                                                <td> {{registro.unidad_pertenece.nombre}}</td>
                                                 <td> {{registro.nombreCurso}}</td>
                                                 <td> {{registro.modalidad}}</td>
                                                 <td> {{registro.horario}}</td>
-                                                <td> {{registro.aulaAsignada}}</td>
                                                 <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.fechaFin | date:'d/MMMM/yyyy'}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
@@ -56,7 +64,7 @@
                         <div class="col-md-12">
 
                                 <div class="ibox">
-                                    <div class="ibox-content" style="height:730px;">
+                                    <div class="ibox-content" style="height:770px;">
                                         <div class="tab-content">
                                             <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                                         <div class="row">
@@ -69,11 +77,23 @@
                                             </div>
                                             <div class="tab-pane active" ng-show="vm.client == 2">
                                                         <div class="panel blank-panel">
-                                                                <tabset style="height: 660px;">
+                                                                <tabset style="height: 700px;">
                                                                     <tab heading="Curso propuesto para ofertar" active="vm.tabs[0].active">
 
                                                                             <ul class="list-group clear-list">
-                                                                                <li style="height: 60px" class="list-group-item fist-item">
+                                                                                <li class="list-group-item fist-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.unidad_pertenece.nombre}} </span>
+                                                                                    Unidad
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.trimestres[vm.cursoSeleccionado.ptc_pertenece.trimestre - 1] + ' ' + vm.cursoSeleccionado.ptc_pertenece.anio }} </span>
+                                                                                    Trimestre
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right label label-{{vm.cursoSeleccionado.programadoPTC === true ? 'primary' : 'warning'}}">{{vm.cursoSeleccionado.programadoPTC === true ? 'S&iacute;' : 'No'}}</span>
+                                                                                    Programado en el PTC
+                                                                                </li>
+                                                                                <li class="list-group-item" style="height: 60px">
                                                                                     <span style="width: 300px;text-align: right;" class="pull-right"> {{vm.cursoSeleccionado.nombreCurso}} </span>
                                                                                     Curso o m&oacute;dulo
                                                                                 </li>
@@ -106,20 +126,12 @@
                                                                                     Cupo m&aacute;ximo
                                                                                 </li>
                                                                                 <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.minRequeridoInscritos}} </span>
-                                                                                    M&iacute;nimo inscritos
+                                                                                    <span class="pull-right"> M&iacute;nimo inscritos pagados: {{vm.cursoSeleccionado.minRequeridoPago}}</span>
+                                                                                    M&iacute;nimo inscritos: {{vm.cursoSeleccionado.minRequeridoInscritos}}
                                                                                 </li>
                                                                                 <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.minRequeridoPago}} </span>
-                                                                                    M&iacute;nimo inscritos pagados
-                                                                                </li>
-                                                                                <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.fechaInicio | date:'d/MMMM/yyyy'}} </span>
-                                                                                    Fecha inicio
-                                                                                </li>
-                                                                                <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.fechaFin | date:'d/MMMM/yyyy'}} </span>
-                                                                                    Fecha t&eacute;rmino
+                                                                                    <span class="pull-right"> Fecha t&eacute;rmino: {{vm.cursoSeleccionado.fechaFin | date:'d/MMMM/yyyy'}} </span>
+                                                                                    Fecha inicio: {{vm.cursoSeleccionado.fechaInicio | date:'d/MMMM/yyyy'}}
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.cursoSeleccionado.nombreInstructor}} </span>

@@ -5,13 +5,18 @@
         .module('icat_control_escolar')
         .controller('ValidaAperturaCursosController', ValidaAperturaCursosController);
 
-    ValidaAperturaCursosController.$inject = ['$scope', '$modal', 'tablaDatosService', 'CursosOficiales', 'ControlProcesos'];
+    ValidaAperturaCursosController.$inject = ['$scope', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'ControlProcesos'];
 
-    function ValidaAperturaCursosController($scope, $modal, tablaDatosService, CursosOficiales, ControlProcesos ) {
+    function ValidaAperturaCursosController($scope, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, CursosOficiales, ControlProcesos ) {
 
             var vm = this;
 
+            vm.trimestres = ['PRIMER TRIMESTRE','SEGUNDO TRIMESTRE','TERCER TRIMESTRE','CUARTO TRIMESTRE'];
+
             vm.tabs = [{active: true}, {active: false}];
+
+            vm.listaUnidades = [];
+            vm.unidadSeleccionada = undefined;
 
             vm.listaCursosValidar = [];
             vm.cursoSeleccionado = {};
@@ -27,6 +32,7 @@
               fila_seleccionada  : 0
             };
 
+            vm.muestra_cursos_unidad     = muestra_cursos_unidad;
             vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
             vm.cambiarPagina                = cambiarPagina;
 
@@ -36,6 +42,30 @@
             inicia();
 
             function inicia() {
+
+                  CatalogoUnidadesAdmtvas.find({
+                      filter: {
+                          where: {idUnidadAdmtva: {gt: 1}},
+                          order: 'nombre ASC'
+                      }
+                  })
+                  .$promise
+                  .then(function(resp) {
+
+                      vm.listaUnidades.push({
+                          idUnidadAdmtva  : -1,
+                          nombre          : 'Todas'
+                      });
+
+                      angular.forEach(resp, function(unidad) {
+                            vm.listaUnidades.push({
+                                idUnidadAdmtva  : unidad.idUnidadAdmtva,
+                                nombre          : unidad.nombre
+                            });
+                      });
+
+                      vm.unidadSeleccionada = vm.listaUnidades[0];
+                  });
 
                   vm.tablaListaCursos.condicion = {
                     or:[
@@ -61,6 +91,12 @@
                                       relation: 'unidad_pertenece',
                                       scope: {
                                         fields: ['nombre']
+                                      }
+                                  },
+                                  {
+                                      relation: 'ptc_pertenece',
+                                      scope: {
+                                        fields: ['anio','trimestre']
                                       }
                                   },
                                   {
@@ -112,6 +148,58 @@
 
             }
 
+
+            function muestra_cursos_unidad() {
+
+                  vm.client = 1;
+                  vm.listaCursosValidar = {};
+                  vm.cursoSeleccionado = {};
+                  vm.tablaListaCursos.fila_seleccionada = undefined;
+                  vm.tablaListaCursos.paginaActual = 1;
+                  vm.tablaListaCursos.inicio = 0;
+                  vm.tablaListaCursos.fin = 1;
+
+                  if(vm.unidadSeleccionada.idUnidadAdmtva == -1)
+                  {
+                        vm.tablaListaCursos.condicion = {
+                            or: [
+                              {estatus: 1},
+                              {estatus: 3}
+                            ]
+                        };
+                  }
+                  else
+                  {
+                        vm.tablaListaCursos.condicion = {
+                            and: [
+                              {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
+                              {
+                                  or: [
+                                    {estatus: 1},
+                                    {estatus: 3}
+                                  ]
+                              },
+                            ]
+                        };
+                  }
+
+                  tablaDatosService.obtiene_datos_tabla(CursosOficiales, vm.tablaListaCursos)
+                  .then(function(respuesta) {
+
+                        vm.tablaListaCursos.totalElementos = respuesta.total_registros;
+                        vm.tablaListaCursos.inicio = respuesta.inicio;
+                        vm.tablaListaCursos.fin = respuesta.fin;
+
+                        if(vm.tablaListaCursos.totalElementos > 0)
+                        {
+                            vm.listaCursosValidar = respuesta.datos;
+                            vm.cursoSeleccionado = vm.listaCursosValidar[0];
+                            vm.client = 2;
+                            vm.tablaListaCursos.fila_seleccionada = 0;
+                            muestraDatosRegistroActual(vm.cursoSeleccionado);
+                        }
+                  });
+            };
 
 
             function muestraDatosRegistroActual(seleccion) {

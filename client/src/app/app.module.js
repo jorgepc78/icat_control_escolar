@@ -10,7 +10,8 @@
     	'oitozero.ngSweetAlert',
         'ui.date',
         'NgSwitchery',
-        'naif.base64'
+        'naif.base64',
+        'ngDropdowns'
     	/*'templates'*/
     ]);
 })();

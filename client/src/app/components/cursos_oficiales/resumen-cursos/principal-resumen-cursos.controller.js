@@ -36,14 +36,19 @@
               fila_seleccionada  : 0
             };
 
-            vm.muestra_cursos_unidad        = muestra_cursos_unidad;
-            vm.muestra_estatus_curso          = muestra_estatus_curso;
+            vm.muestra_cursos_unidad      = muestra_cursos_unidad;
+            vm.muestra_estatus_curso      = muestra_estatus_curso;
 
             vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
             vm.limpiaBusqueda             = limpiaBusqueda;
 
-            vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
-            vm.cambiarPagina                = cambiarPagina;
+            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
+            vm.cambiarPagina              = cambiarPagina;
+
+            vm.reprogramaCurso            = reprogramaCurso;
+            vm.concluyeCurso              = concluyeCurso;
+            vm.cierraCurso                = cierraCurso;
+            vm.asientaCalificaciones      = asientaCalificaciones;
 
             inicia();
 
@@ -56,14 +61,14 @@
 
                       vm.listaEstatus = [
                           {valor: -1, texto: 'Todos'},
-                          {valor: 5, texto: 'Cerrado'},
-                          {valor: 6, texto: 'Cancelado'}
+                          {valor: 6, texto: 'Cerrado'},
+                          {valor: 7, texto: 'Cancelado'}
                       ];
 
                       vm.condicion_estatus = {
                               or: [
-                                {estatus: 5},
-                                {estatus: 6}
+                                {estatus: 6},
+                                {estatus: 7}
                               ]
                       };
                   }
@@ -73,13 +78,15 @@
                       vm.listaEstatus = [
                           {valor: -1, texto: 'Todos'},
                           {valor: 2, texto: 'En espera'},
-                          {valor: 4, texto: 'Activo'}
+                          {valor: 4, texto: 'Activo'},
+                          {valor: 5, texto: 'Concluido'}
                       ];
 
                       vm.condicion_estatus = {
                               or: [
                                 {estatus: 2},
-                                {estatus: 4}
+                                {estatus: 4},
+                                {estatus: 5}
                               ]
                       };
 
@@ -154,7 +161,7 @@
                                   {
                                       relation: 'inscripcionesCursos',
                                       scope: {
-                                          fields:['id','pagado','idAlumno'],
+                                          fields:['id','pagado','idAlumno','calificacion','numDocAcreditacion'],
                                           include:{
                                               relation: 'Capacitandos',
                                               scope: {
@@ -184,6 +191,7 @@
                         if(vm.tablaListaCursos.totalElementos > 0)
                         {
                             vm.listaCursos = respuesta.datos;
+                            formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
@@ -232,6 +240,7 @@
                         if(vm.tablaListaCursos.totalElementos > 0)
                         {
                             vm.listaCursos = respuesta.datos;
+                            formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
@@ -297,6 +306,7 @@
                         if(vm.tablaListaCursos.totalElementos > 0)
                         {
                             vm.listaCursos = respuesta.datos;
+                            formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
@@ -352,6 +362,7 @@
                         if(vm.tablaListaCursos.totalElementos > 0)
                         {
                             vm.listaCursos = respuesta.datos;
+                            formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
@@ -365,6 +376,7 @@
 
             function limpiaBusqueda() {
 
+                  vm.mostrarbtnLimpiar = false;
                   vm.cadena_buscar = '';
                   vm.client = 1;
                   vm.listaCursos = {};
@@ -400,12 +412,12 @@
                         if(vm.tablaListaCursos.totalElementos > 0)
                         {
                             vm.listaCursos = respuesta.datos;
+                            formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
                         }
-                        vm.mostrarbtnLimpiar = false;
                   });
 
             };
@@ -441,6 +453,7 @@
                             vm.tablaListaCursos.fin = respuesta.fin;
 
                             vm.listaCursos = respuesta.datos;
+                            formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
@@ -450,7 +463,217 @@
             }
 
 
+            function reprogramaCurso(seleccion) {
 
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/components/cursos_oficiales/resumen-cursos/modal-reprograma-curso.html',
+                        windowClass: "animated fadeIn",
+                        controller: 'ModalReprogramaCursoController as vm',
+                        resolve: {
+                          registroEditar: function () { return seleccion }
+                        }
+
+                    });
+
+                    modalInstance.result.then(function (respuesta) {
+
+                        vm.cursoSeleccionado.horario               = respuesta.horario;
+                        vm.cursoSeleccionado.aulaAsignada          = respuesta.aulaAsignada;
+                        vm.cursoSeleccionado.fechaInicio           = respuesta.fechaInicio;
+                        vm.cursoSeleccionado.fechaFin              = respuesta.fechaFin;
+                        vm.cursoSeleccionado.idInstructor          = respuesta.idInstructor;
+                        vm.cursoSeleccionado.nombreInstructor      = respuesta.nombreInstructor;
+                        vm.cursoSeleccionado.observaciones         = respuesta.observaciones;
+                        formateaListado();
+                    }, function () {
+                    });
+
+            }
+
+
+            function asientaCalificaciones(seleccion) {
+
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/components/cursos_oficiales/resumen-cursos/modal-asienta-calificaciones.html',
+                        windowClass: "animated fadeIn",
+                        controller: 'ModalAsientaCalificacionesController as vm',
+                        size: 'lg',
+                        resolve: {
+                          registroEditar: function () { return seleccion }
+                        }
+                    });
+
+                    modalInstance.result.then(function (respuesta) {
+
+                        angular.forEach(respuesta.inscripcionesCursos, function(registro) {
+
+                              var index = vm.cursoSeleccionado.inscripcionesCursos.map(function(record) {
+                                                                                    return record.id;
+                                                                                  }).indexOf(registro.id);
+                              vm.cursoSeleccionado.inscripcionesCursos[index].calificacion = registro.calificacion.value;
+                              vm.cursoSeleccionado.inscripcionesCursos[index].numDocAcreditacion = registro.numDocAcreditacion;
+                        });
+
+                    }, function () {
+                    });
+
+            }
+
+
+            function concluyeCurso(seleccion) {
+
+                  swal({
+                    title: "Confirmar",
+                    html: 'El curso <strong>'+ seleccion.nombreCurso +'</strong> cambiar&aacute; su estatus a concluido, una vez realizado esto se podr&aacute; realizar el registro de calificaciones, ¿Continuar?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#9a0000",
+                    confirmButtonText: "Aceptar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                  }, function(){
+                          swal.disableButtons();
+
+                            CursosOficiales.prototype$updateAttributes(
+                            {
+                                id: seleccion.idCurso
+                            },{
+                                estatus: 5
+                            })
+                            .$promise
+                            .then(function(respuesta) {
+
+                                  vm.cursoSeleccionado.estatus = respuesta.estatus;
+
+                                  ControlProcesos
+                                  .create({
+                                      proceso         : 'Cursos vigentes',
+                                      accion          : 'CONCLUSION DE CURSO',
+                                      idDocumento     : seleccion.idCurso,
+                                      idUsuario       : $scope.currentUser.id_usuario,
+                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+
+                                        ControlProcesos.findById({ 
+                                            id: resp.id,
+                                            filter: {
+                                              fields : ['identificador']
+                                            }
+                                        })
+                                        .$promise
+                                        .then(function(resp_control) {
+
+                                              swal({
+                                                title: 'Cambio de estatus registrado',
+                                                html: 'se realiz&oacute; el cambio de estatus del curso a concluido y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                type: 'success',
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#9a0000",
+                                                confirmButtonText: "Aceptar"
+                                              });
+
+                                        });
+                                  });
+
+                            });
+
+                  });
+
+            }
+
+
+            function cierraCurso(seleccion) {
+
+                  swal({
+                    title: "Confirmar",
+                    html: 'El curso <strong>'+ seleccion.nombreCurso +'</strong> cambiar&aacute; su estatus a cerrado, una vez realizado esto el curso pasar&aacute; a la secci&oacute;n de hist&oacute;ricos, ¿Continuar?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#9a0000",
+                    confirmButtonText: "Aceptar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                  }, function(){
+                          swal.disableButtons();
+
+                            CursosOficiales.prototype$updateAttributes(
+                            {
+                                id: seleccion.idCurso
+                            },{
+                                estatus: 6
+                            })
+                            .$promise
+                            .then(function(respuesta) {
+
+                                  vm.cursoSeleccionado.estatus = respuesta.estatus;
+
+                                  ControlProcesos
+                                  .create({
+                                      proceso         : 'Cursos vigentes',
+                                      accion          : 'CIERRE DE CURSO',
+                                      idDocumento     : seleccion.idCurso,
+                                      idUsuario       : $scope.currentUser.id_usuario,
+                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+
+                                        ControlProcesos.findById({ 
+                                            id: resp.id,
+                                            filter: {
+                                              fields : ['identificador']
+                                            }
+                                        })
+                                        .$promise
+                                        .then(function(resp_control) {
+
+                                              swal({
+                                                title: 'Cambio de estatus registrado',
+                                                html: 'se realiz&oacute; el cambio de estatus del curso a cerrado y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                type: 'success',
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#9a0000",
+                                                confirmButtonText: "Aceptar"
+                                              });
+
+                                              vm.limpiaBusqueda();
+                                        });
+                                  });
+
+                            });
+
+                  });
+
+            }
+
+
+            function formateaListado() {
+                  
+                  var hoy = new Date();
+                  hoy.setHours(0);
+                  hoy.setMinutes(0);
+                  hoy.setSeconds(0);
+                  hoy.setMilliseconds(0);
+
+                  for(var i=0; i < vm.listaCursos.length; i++)
+                  {
+                      var fecha_inicio = new Date(vm.listaCursos[i].fechaInicio);
+
+                      fecha_inicio.setHours(0);
+                      fecha_inicio.setMinutes(0);
+                      fecha_inicio.setSeconds(0);
+                      fecha_inicio.setMilliseconds(0);
+
+                      var dif = fecha_inicio - hoy;
+                      var num_dias_falta = Math.floor(dif / (1000 * 60 * 60 * 24)); 
+
+                      vm.listaCursos[i].diasDif = num_dias_falta;
+                  }
+            }
 
 
     };

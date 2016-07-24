@@ -6,10 +6,10 @@
                             <div class="ibox-title">
                                 <div class="row">
                                         <div class="col-md-3">
-                                                <h2>{{vm.titulo_seccion}}</h2>
+                                                <h2 style="width: 200px;">{{vm.titulo_seccion}}</h2>
                                         </div>
                                         <div class="col-md-5">
-                                                        <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:3px;width: 320px;">
+                                                        <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:7px;width: 320px;">
                                                                 <label class="col-md-3 control-label" style="margin-top:7px;">Unidad:</label>
                                                                 <div class="col-md-9">
                                                                     <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.muestra_cursos_unidad()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
@@ -17,7 +17,7 @@
                                                         </div>
                                         </div>
                                         <div class="col-md-4">
-                                                        <div class="input-group" style="margin-top:3px;width: 230px;">
+                                                        <div class="input-group" style="margin-top:7px;width: 230px;">
                                                                 <label class="col-md-3 control-label" style="margin-top:7px;">Estatus:</label>
                                                                 <div class="col-md-9">
                                                                     <select class="form-control m-b" ng-model="vm.estatusSeleccionado" ng-change="vm.muestra_estatus_curso()" ng-options="estatus as estatus.texto for estatus in vm.listaEstatus"></select>
@@ -43,18 +43,18 @@
                                         <table class="tablaDatos table table-condensed no-footer">
                                           <thead>
                                             <tr>
-                                                <th>Unidad</th>
+                                                <th ng-show="(currentUser.unidad_pertenece_id == 1)" >Unidad</th>
                                                 <th>Curso o m&oacute;dulo</th>
                                                 <th>Modalidad</th>
                                                 <th>Horario</th>
                                                 <th>Fecha inicio</th>
                                                 <th>Fecha fin</th>
-                                                <th>Estatus</th>
+                                                <th style="width: 130px;">Estatus</th>
                                             </tr>
                                           </thead>
                                          <tbody>
                                             <tr ng-repeat="registro in vm.listaCursos" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaCursos.fila_seleccionada}" class="pointer">
-                                                <td> {{registro.unidad_pertenece.nombre}}</td>
+                                                <td ng-show="(currentUser.unidad_pertenece_id == 1)" > {{registro.unidad_pertenece.nombre}}</td>
                                                 <td> {{registro.nombreCurso}}</td>
                                                 <td> {{registro.modalidad}}</td>
                                                 <td> {{registro.horario}}</td>
@@ -62,9 +62,12 @@
                                                 <td> {{registro.fechaFin | date:'d/MMMM/yyyy'}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="2" class="label label-warning texto-estatus-ptc">En espera</span>
-                                                    <span ng-switch-when="4" class="label label-success texto-estatus-ptc">Activo</span>
-                                                    <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Concluido</span>
-                                                    <span ng-switch-when="6" class="label label-danger texto-estatus-ptc">Cancelado</span>
+                                                    <span ng-switch-when="4" class="label label-primary texto-estatus-ptc">Activo</span>
+                                                    <span ng-switch-when="5" class="label label-success texto-estatus-ptc">Concluido</span>
+                                                    <span ng-switch-when="6" class="label label-default texto-estatus-ptc">Cerrado</span>
+                                                    <span ng-switch-when="7" class="label label-danger texto-estatus-ptc">Cancelado</span>
+                                                    <button type="button" ng-if="( (registro.diasDif <= 4)&&(registro.diasDif >= 1) )  && (registro.estatus == 2)" class="btn btn-white btn-sm" tooltip-placement="top" tooltip="Faltan {{registro.diasDif}} d&iacute;as para que este curso inicie y no ha sido activado"><i class="fa fa-asterisk"></i></button>
+                                                    <button type="button" ng-if="(registro.diasDif <= 0) && (registro.estatus == 2)" class="btn btn-white btn-sm" tooltip-placement="right" tooltip="Se ha vencido la fecha de inicio de este curso"><i class="fa fa-asterisk"></i></button>
                                                 </td>
                                             </tr>
                                           </tbody>
@@ -82,7 +85,7 @@
                         <div class="col-md-12">
 
                                 <div class="ibox">
-                                    <div class="ibox-content" style="height:770px;">
+                                    <div class="ibox-content" style="height:780px;">
                                         <div class="tab-content">
                                             <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                                         <div class="row">
@@ -95,25 +98,26 @@
                                             </div>
                                             <div class="tab-pane active" ng-show="vm.client == 2">
                                                         <div class="panel blank-panel">
-                                                                <tabset style="height: 700px;">
+                                                                <tabset style="height: 720px;">
                                                                     <tab heading="Detalle del curso" active="vm.tabs[0].active">
 
                                                                             <ul class="list-group clear-list">
-                                                                                <li class="list-group-item fist-item">
-                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.unidad_pertenece.nombre}} </span>
-                                                                                    Unidad
-                                                                                </li>
-                                                                                <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.localidad_pertenece.nombre}} </span>
-                                                                                    Localidad
-                                                                                </li>
-                                                                                <li class="list-group-item" style="height: 60px">
+
+                                                                                <li class="list-group-item fist-item" style="height: 60px">
                                                                                     <span style="width: 300px;text-align: right;" class="pull-right"> {{vm.cursoSeleccionado.nombreCurso}} </span>
                                                                                     Curso o m&oacute;dulo
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.cursoSeleccionado.modalidad}} </span>
                                                                                     Modalidad
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.localidad_pertenece.nombre}} </span>
+                                                                                    Localidad
+                                                                                </li>
+                                                                                <li class="list-group-item" ng-show="(currentUser.unidad_pertenece_id == 1)" >
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.unidad_pertenece.nombre}} </span>
+                                                                                    Unidad
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.cursoSeleccionado.numeroHoras}} </span>
@@ -149,8 +153,9 @@
                                                                                     <span ng-switch on="vm.cursoSeleccionado.estatus">
                                                                                         <span ng-switch-when="2" class="label label-warning">En espera</span>
                                                                                         <span ng-switch-when="4" class="label label-primary">Activo</span>
-                                                                                        <span ng-switch-when="5" class="label label-default">Concluido</span>
-                                                                                        <span ng-switch-when="6" class="label label-danger">Cancelado</span>
+                                                                                        <span ng-switch-when="5" class="label label-success">Concluido</span>
+                                                                                        <span ng-switch-when="6" class="label label-default">Cerrado</span>
+                                                                                        <span ng-switch-when="7" class="label label-danger">Cancelado</span>
                                                                                     </span>
                                                                                 </li>
                                                                             </ul>
@@ -181,22 +186,24 @@
                                                                                             <thead>
                                                                                             <tr>
                                                                                                 <th></th>
+                                                                                                <th>ID</th>
                                                                                                 <th>Nombre</th>
-                                                                                                <th>Curp</th>
-                                                                                                <th>Pago</th>
+                                                                                                <th ng-show="(vm.cursoSeleccionado.estatus < 5)">Pago</th>
+                                                                                                <th ng-show="(vm.cursoSeleccionado.estatus >= 5)">Calif.</th>
                                                                                             </tr>
                                                                                             </thead>
                                                                                             <tbody>
                                                                                             <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesCursos">
                                                                                                 <td> {{$index + 1}}</td>
+                                                                                                <td> {{inscripcion.Capacitandos.idAlumno}}</td>
                                                                                                 <td> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
-                                                                                                <td> {{inscripcion.Capacitandos.curp}}</td>
-                                                                                                <td class="client-status" ng-switch on="inscripcion.pagado">
+                                                                                                <td class="client-status" ng-switch on="inscripcion.pagado" ng-show="(vm.cursoSeleccionado.estatus < 5)">
                                                                                                     <span ng-switch-when="0" class="label label-warning texto-estatus-ptc">Pendiente</span>
                                                                                                     <span ng-switch-when="1" class="label label-success texto-estatus-ptc">Pagado</span>
                                                                                                     <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Condonado</span>
                                                                                                     <span ng-switch-when="3" class="label label-info texto-estatus-ptc">Becado</span>
                                                                                                 </td>
+                                                                                                <td ng-show="(vm.cursoSeleccionado.estatus >= 5)"> {{inscripcion.calificacion}}</td>
                                                                                             </tr>
 
                                                                                             </tbody>
@@ -207,6 +214,15 @@
 
                                                                     </tab>
                                                                 </tabset>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 2) && (currentUser.unidad_pertenece_id > 1)" ng-click="vm.reprogramaCurso(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-share"></i></span> Reprogramar curso</button>
+                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 4) && (currentUser.unidad_pertenece_id > 1)" ng-click="vm.concluyeCurso(vm.cursoSeleccionado)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Marcar como concluido</button>
+                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 5) && (currentUser.unidad_pertenece_id > 1)" ng-click="vm.cierraCurso(vm.cursoSeleccionado)" class="btn btn-warning btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-times"></i></span> Cerrar curso</button>
+                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.inscripcionesCursos.length > 0)" ng-click="vm.generaListados(vm.cursoSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-list"></i></span> Listado de inscritos</button>
+                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 5) && (currentUser.unidad_pertenece_id > 1)" ng-click="vm.asientaCalificaciones(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Asentar calificaciones</button>
+                                                                    </div>
+                                                                </div>
 
                                                         </div> <!--panel blank-panel-->
                           

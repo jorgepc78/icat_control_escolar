@@ -1,0 +1,90 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Reprogramaci&oacute;n de cursos</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;">
+
+        <div class="row">
+            <form name="form_datos" class="form-horizontal">
+            
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nombre curso</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCurso" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Instructor</label>
+                    <div class="col-sm-10">
+                        <select class="form-control m-b" 
+                            ng-model="vm.instructorSeleccionado"
+                            ng-options="instructor as instructor.nombre_completo for instructor in vm.listaInstructores" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Horario</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="vm.registroEdicion.horario" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Aula asignada</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="vm.registroEdicion.aulaAsignada" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Fecha inicio</label>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="input-group date" style="width: 155px;">
+                                    <input type="text" readonly class="form-control" is-open="vm.opened1" datepicker-popup="d/M/yyyy" ui-date="dateOptions" ng-model="vm.registroEdicion.fechaInicio" required>
+                                    <span class="input-group-addon" ng-click="vm.openCalendar1($event)"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-right">
+                                <label class="control-label">Fecha t&eacute;rmino</label>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group date" style="width: 155px;">
+                                    <input type="text" readonly class="form-control" is-open="vm.opened2" datepicker-popup="d/M/yyyy" ui-date="dateOptions" ng-model="vm.registroEdicion.fechaFin" required>
+                                    <span class="input-group-addon" ng-click="vm.openCalendar2($event)"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Observaciones</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" ng-model="vm.registroEdicion.observaciones" rows="4" cols="90"></textarea>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-5">
+              </div>
+              <div class="col-md-2">
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-5">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

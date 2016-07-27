@@ -1,0 +1,67 @@
+{
+  "name": "CatalogoActividades",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "catalogos",
+    "table": "catalogo_actividades"
+  },
+  "properties": {
+    "idActividad": {
+      "type": "Number",
+      "id": true,
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_actividad",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "NO"
+      },
+      "_selectable": false
+    },
+    "actividad": {
+      "type": "String",
+      "required": false,
+      "length": 52,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "actividad",
+        "dataType": "character varying",
+        "dataLength": 52,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "valor": {
+      "type": "String",
+      "required": false,
+      "length": 26,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "valor",
+        "dataType": "character varying",
+        "dataLength": 26,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

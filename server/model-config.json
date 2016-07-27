@@ -102,5 +102,35 @@
   "InscripcionCurso": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
+  },
+  "CatalogoActividades": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "CatalogoExperiencias": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "CatalogoMotivos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "CatalogoMedios": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "CatalogoNivelEstudios": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   }
 }

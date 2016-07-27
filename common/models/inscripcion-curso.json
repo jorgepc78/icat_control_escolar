@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "public",
+    "schema": "cursos_ofertados",
     "table": "inscripcion_curso"
   },
   "properties": {
@@ -167,7 +167,7 @@
       "type": "belongsTo",
       "model": "CursosOficiales",
       "foreignKey": "idCurso"
-    }    
+    }
   },
   "acls": [],
   "methods": {}

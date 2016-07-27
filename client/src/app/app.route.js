@@ -159,6 +159,20 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+
+            /*** seccion del manejo de los cursos (resumen, inscripcion y cierre) ***/
+            .state('capacitandos', {
+                abstract: true,
+                url: '/capacitandos',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('capacitandos.principal_capacitandos', {
+                url: '/principal_capacitandos',
+                templateUrl: 'app/components/capacitandos/principal-capacitandos.html',
+                controller: 'PrincipalCapacitandosController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
     }
 
 })();

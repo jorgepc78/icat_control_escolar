@@ -6,7 +6,7 @@
     "validateUpsert": true
   },
   "postgresql": {
-    "schema": "public",
+    "schema": "cursos_ofertados",
     "table": "capacitandos"
   },
   "properties": {
@@ -117,6 +117,54 @@
         "columnName": "email",
         "dataType": "character varying",
         "dataLength": 95,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "diaNacimiento": {
+      "type": "String",
+      "required": false,
+      "length": 2,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "dia_nacimiento",
+        "dataType": "char",
+        "dataLength": 2,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "mesNacimiento": {
+      "type": "String",
+      "required": false,
+      "length": 2,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "mes_nacimiento",
+        "dataType": "char",
+        "dataLength": 2,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "anioNacimiento": {
+      "type": "String",
+      "required": false,
+      "length": 4,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "anio_nacimiento",
+        "dataType": "char",
+        "dataLength": 4,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"
@@ -635,18 +683,18 @@
       },
       "_selectable": true
     },
-    "actividad": {
-      "type": "String",
+    "idActividad": {
+      "type": "Number",
       "required": false,
-      "length": 26,
-      "precision": null,
-      "scale": null,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
       "postgresql": {
-        "columnName": "actividad",
-        "dataType": "character varying",
-        "dataLength": 26,
-        "dataPrecision": null,
-        "dataScale": null,
+        "columnName": "id_actividad",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
         "nullable": "YES"
       },
       "_selectable": true
@@ -731,34 +779,50 @@
       },
       "_selectable": true
     },
-    "experiencia": {
-      "type": "String",
+    "idExperiencia": {
+      "type": "Number",
       "required": false,
-      "length": 24,
-      "precision": null,
-      "scale": null,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
       "postgresql": {
-        "columnName": "experiencia",
-        "dataType": "character varying",
-        "dataLength": 24,
-        "dataPrecision": null,
-        "dataScale": null,
+        "columnName": "id_experiencia",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
         "nullable": "YES"
       },
       "_selectable": true
     },
-    "motivos": {
-      "type": "String",
+    "idMedio": {
+      "type": "Number",
       "required": false,
-      "length": 95,
-      "precision": null,
-      "scale": null,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
       "postgresql": {
-        "columnName": "motivos",
-        "dataType": "character varying",
-        "dataLength": 95,
-        "dataPrecision": null,
-        "dataScale": null,
+        "columnName": "id_medio",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "idMotivo": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_motivo",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
         "nullable": "YES"
       },
       "_selectable": true
@@ -956,7 +1020,7 @@
       "_selectable": true
     },
     "fechaRegistro": {
-      "type": "String",
+      "type": "date",
       "required": false,
       "length": null,
       "precision": null,
@@ -972,7 +1036,7 @@
       "_selectable": true
     },
     "ultimaActualizacion": {
-      "type": "String",
+      "type": "date",
       "required": false,
       "length": null,
       "precision": null,
@@ -1011,6 +1075,31 @@
       "type": "belongsTo",
       "model": "CatalogoLocalidades",
       "foreignKey": "idLocalidad"
+    },
+    "nivel_estudios": {
+      "type": "belongsTo",
+      "model": "CatalogoNivelEstudios",
+      "foreignKey": "idNivelEstudios"
+    },
+    "actividades_desempena": {
+      "type": "belongsTo",
+      "model": "CatalogoActividades",
+      "foreignKey": "idActividad"
+    },
+    "experiencia_laboral": {
+      "type": "belongsTo",
+      "model": "CatalogoExperiencias",
+      "foreignKey": "idExperiencia"
+    },
+    "medio_comunicacion": {
+      "type": "belongsTo",
+      "model": "CatalogoMedios",
+      "foreignKey": "idMedio"
+    },
+    "motivos_capacitarse": {
+      "type": "belongsTo",
+      "model": "CatalogoMotivos",
+      "foreignKey": "idMotivo"
     }
   },
   "acls": [],

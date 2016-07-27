@@ -473,12 +473,12 @@
       "through": "InscripcionCurso",
       "keyThrough": "idAlumno"
     },
-      "inscripcionesCursos": {
+    "inscripcionesCursos": {
       "type": "hasMany",
       "model": "InscripcionCurso",
       "foreignKey": "idCurso"
     }
-},
+  },
   "acls": [],
   "methods": {}
 }

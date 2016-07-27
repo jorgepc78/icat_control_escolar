@@ -1,0 +1,480 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Datos del capacitando</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;">
+            <form name="form_datos" class="form-horizontal">
+
+                <tabset>
+                    <tab heading="Datos personales">
+                            <br>   
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Apellidos paterno</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.apellidoPaterno" required>
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            <label class="control-label">Apellido materno</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.apellidoMaterno" required>
+                                        </div>
+                                        <div class="col-md-1 text-right">
+                                            <label class="control-label">Nombre</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.nombre" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Sexo</label>
+                                <div class="col-sm-10">
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="sexo" ng-model="vm.registroEditar.sexo" value="H"> Hombre </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="sexo" ng-model="vm.registroEditar.sexo" value="M"> Mujer </label></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Correo electr&oacute;nico</label>
+                                <div class="col-sm-5"><input type="email" class="form-control" ng-model="vm.registroEditar.email" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Fecha nacimiento</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-1 text-right">
+                                            <label class="control-label">Dia</label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="form-control m-b"
+                                                ng-model="vm.registroEditar.diaNacimiento" required>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                    <option value="25">25</option>
+                                                    <option value="26">26</option>
+                                                    <option value="27">27</option>
+                                                    <option value="28">28</option>
+                                                    <option value="29">29</option>
+                                                    <option value="30">30</option>
+                                                    <option value="31">31</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1 text-right">
+                                            <label class="control-label">Mes</label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="form-control m-b"
+                                                ng-model="vm.registroEditar.mesNacimiento" required>
+                                                    <option value="01">Enero</option>
+                                                    <option value="02">Febrero</option>
+                                                    <option value="03">Marzo</option>
+                                                    <option value="04">Abril</option>
+                                                    <option value="05">Mayo</option>
+                                                    <option value="06">Junio</option>
+                                                    <option value="07">Julio</option>
+                                                    <option value="08">Agosto</option>
+                                                    <option value="09">Septiembre</option>
+                                                    <option value="10">Octubre</option>
+                                                    <option value="11">Noviembre</option>
+                                                    <option value="12">Diciembre</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1 text-right">
+                                            <label class="control-label">A&ntilde;o</label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select class="form-control m-b"
+                                                ng-model="vm.registroEditar.anioNacimiento" required>
+                                                    <option value="1960">1960</option>
+                                                    <option value="1961">1961</option>
+                                                    <option value="1962">1962</option>
+                                                    <option value="1963">1963</option>
+                                                    <option value="1964">1964</option>
+                                                    <option value="1965">1965</option>
+                                                    <option value="1966">1966</option>
+                                                    <option value="1967">1967</option>
+                                                    <option value="1968">1968</option>
+                                                    <option value="1969">1969</option>
+                                                    <option value="1970">1970</option>
+                                                    <option value="1971">1971</option>
+                                                    <option value="1972">1972</option>
+                                                    <option value="1973">1973</option>
+                                                    <option value="1974">1974</option>
+                                                    <option value="1975">1975</option>
+                                                    <option value="1976">1976</option>
+                                                    <option value="1977">1977</option>
+                                                    <option value="1978">1978</option>
+                                                    <option value="1979">1979</option>
+                                                    <option value="1980">1980</option>
+                                                    <option value="1981">1981</option>
+                                                    <option value="1982">1982</option>
+                                                    <option value="1983">1983</option>
+                                                    <option value="1984">1984</option>
+                                                    <option value="1985">1985</option>
+                                                    <option value="1986">1986</option>
+                                                    <option value="1987">1987</option>
+                                                    <option value="1988">1988</option>
+                                                    <option value="1989">1989</option>
+                                                    <option value="1990">1990</option>
+                                                    <option value="1991">1991</option>
+                                                    <option value="1992">1992</option>
+                                                    <option value="1993">1993</option>
+                                                    <option value="1994">1994</option>
+                                                    <option value="1995">1995</option>
+                                                    <option value="1996">1996</option>
+                                                    <option value="1997">1997</option>
+                                                    <option value="1998">1998</option>
+                                                    <option value="1999">1999</option>
+                                                    <option value="2000">2000</option>
+                                                    <option value="2001">2001</option>
+                                                    <option value="2002">2002</option>
+                                                    <option value="2003">2003</option>
+                                                    <option value="2004">2004</option>
+                                                    <option value="2005">2005</option>
+                                                    <option value="2006">2006</option>
+                                                    <option value="2007">2007</option>
+                                                    <option value="2008">2008</option>
+                                                    <option value="2009">2009</option>
+                                                    <option value="2010">2010</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-1 text-right">
+                                            <label class="control-label">Edad</label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="number" class="form-control" ng-model="vm.registroEditar.edad">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Tel&eacute;fono</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.telefono">
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            <label class="control-label">Celular</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.celular">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">CURP</label>
+                                <div class="col-sm-5"><input type="text" class="form-control" ng-model="vm.registroEditar.curp" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Domicilio</label>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.domicilio"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Colonia</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.colonia">
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            <label class="control-label">C&oacute;digo postal</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.codigoPostal">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Localidad</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select class="form-control m-b" 
+                                                ng-model="vm.registroEditar.idLocalidad"
+                                                ng-options="localidad.idLocalidad as localidad.nombre for localidad in vm.listaLocalidades" required>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 text-right">
+                                            <label class="control-label">Nivel de estudios</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <select class="form-control m-b" 
+                                                ng-model="vm.registroEditar.idNivelEstudios"
+                                                ng-options="nivel.idNivelEstudios as nivel.nivelEstudios for nivel in vm.listaNivelEstudios">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Estado civil</label>
+                                <div class="col-sm-10">
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="soltero"> Soltero </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="casado"> Casado </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="viudo"> Viudo </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="divorciado"> Divorciado </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="union_libre"> Uni&oacute;n libre </label></div>
+                                </div>
+                            </div>
+                    </tab>
+                    <tab heading="Datos personales (2)">
+                            <br> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Discapacidad que presenta</label>
+                                <div class="col-sm-5">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disVisual"  > Visual </label></div>
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disAuditiva"> Auditiva </label></div>
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disLenguaje"> Lenguaje </label></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disMotriz"  > Motr&iacute;z o m&uacute;sculo-esquel&eacute;tico </label></div>
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disMental"  > Mental </label></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Padece alguna enfermedad o alergia</label>
+                                <div class="col-sm-10">
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="enfermedad" ng-model="vm.registroEditar.enfermedadPadece" value="si"> SI </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="enfermedad" ng-model="vm.registroEditar.enfermedadPadece" value="no"> NO </label></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Cual</label>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.enfermedadCual"></div>
+                            </div>
+                            
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label"></label>
+                                <div class="col-lg-10"><p class="form-control-static">En caso de ser menor de edad, favor de llenar lo siguiente</p></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nombre del tutor</label>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorNombre"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">CURP</label>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorCurp"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Parentesco</label>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorParentesco"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Direcci&oacute;n</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.tutorDireccion">
+                                        </div>
+                                        <div class="col-md-1 text-right">
+                                            <label class="control-label">Tel&eacute;fono</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.tutorTelefono">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </tab>
+                    <tab heading="Documentos personales">
+                            <br> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Documentaci&oacute;n entregada</label>
+                                <div class="col-sm-10">
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docActaNacimiento"> Acta de nacimiento </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docCompEstudios"  > Comprobante de estudios </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docIdentOficial"  > Identificaci&oacute;n oficial </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docConstCurp"     > Constancia de la CURP</label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docFotografias"   > 3 fotograf&iacute;as </label></div>                                                                
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docCompMigratorio"> Comprobante de calidad migratoria con la que se encuentra en el territorio nacional </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docCompDomicilio" > Comprobante de domicilio </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docCurpTutor"     > CURP del tutor </label></div>
+                                </div>
+                            </div>
+                    </tab>
+                    <tab heading="Datos laborales">
+                            <br> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Trabaja actualmente</label>
+                                <div class="col-sm-10">
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="trabaja" ng-model="vm.registroEditar.trabajaActualmente" value="si"> SI </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="trabaja" ng-model="vm.registroEditar.trabajaActualmente" value="no"> NO </label></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Actividad espec&iacute;fica que desempe&ntilde;a</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" 
+                                        ng-model="vm.registroEditar.idActividad"
+                                        ng-options="actividad.idActividad as actividad.actividad for actividad in vm.listaActividades">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Empresa donde trabaja</label>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.empresaTrabaja"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Puesto</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaPuesto">
+                                        </div>
+                                        <div class="col-md-1 text-right">
+                                            <label class="control-label">Antig&uuml;edad</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaAntiguedad">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Direcci&oacute;n</label>
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaDireccion">
+                                        </div>
+                                        <div class="col-md-1 text-right">
+                                            <label class="control-label">Tel&eacute;fono</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaTelefono">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Experiencia laboral</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" 
+                                        ng-model="vm.registroEditar.idExperiencia"
+                                        ng-options="experiencia.idExperiencia as experiencia.experiencia for experiencia in vm.listaExperiencia">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Medio por el que se enter&oacute;</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" 
+                                        ng-model="vm.registroEditar.idMedio"
+                                        ng-options="motivos.idMedio as motivos.medio for motivos in vm.listaMedios">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Motivo para capacitarse</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" 
+                                        ng-model="vm.registroEditar.idMotivo"
+                                        ng-options="motivos.idMotivo as motivos.motivo for motivos in vm.listaMotivos">
+                                    </select>
+                                </div>
+                            </div>
+
+                    </tab>
+                    <tab heading="Grupos (Cuando aplica)">
+                            <br> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Grupos a los que pertenece (cuando aplica)</label>
+                                <div class="col-sm-10">
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoJefasFamilia" > Mujeres jefas de familia </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoSitViolencia" > Mujeres en situaci&oacute;n de violencia </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoAdolCalle"    > Adolescentes en condiciones de calle (15 a 29 a&ntilde;os) </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoIndigenas"    > Personas ind&iacute;genas</label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoAdultoMayor"  > Persona adulta mayor (60 a&ntilde;os o m&aacute;s) </label></div>                                                                
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoLgbttti"      > Comunidad LGBTTTI </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoDentroCereso" > Personas recluidas en centros de rehabilitaci&oacute;n social (CERESO) </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoCapDiferentes"> Personas con capacidades diferentes </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoMenorReadap"  > Menores recluidos en centros de readaptaci&oacute;n </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoFueraCereso"  > Personas liberadas del centro de rehabilitaci&oacute;n social (CERESO) </label></div>
+                                </div>
+                            </div>
+                    </tab>
+
+                    <!-- <tab heading="Foto">
+                            <br> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Foto</label>                                                            
+                                <input type='file' ng-model='vm.temp.foto_alumno' base-sixty-four-input accept="image/*">
+                                <img style="margin-top:10px" base-sixty-four-image="vm.temp.foto_alumno" alt="" ng-src="{{vm.registroEditar.foto}}">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <button type="button" class="btn btn-danger" ng-click="borraFoto()">Borrar foto</button>
+                                </div>
+                            </div>
+                    </tab> -->
+                </tabset>
+
+            </form>
+
+      </div>
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-5">
+              </div>
+              <div class="col-md-4">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje}}</div>
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

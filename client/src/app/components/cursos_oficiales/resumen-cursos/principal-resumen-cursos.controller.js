@@ -19,9 +19,6 @@
             vm.listaUnidades = [];
             vm.unidadSeleccionada = undefined;
 
-            vm.listaUnidades = [];
-            vm.unidadSeleccionada = undefined;
-
             vm.listaCursos = [];
             vm.cursoSeleccionado = {};
 

@@ -5,11 +5,26 @@
         .module('icat_control_escolar')
         .controller('ResumenCursosController', ResumenCursosController);
 
-    ResumenCursosController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'ControlProcesos'];
+    ResumenCursosController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'InscripcionCurso', 'ControlProcesos'];
 
-    function ResumenCursosController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, CursosOficiales, ControlProcesos ) {
+    function ResumenCursosController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, CursosOficiales, InscripcionCurso, ControlProcesos ) {
 
             var vm = this;
+
+            vm.muestra_cursos_unidad      = muestra_cursos_unidad;
+            vm.muestra_estatus_curso      = muestra_estatus_curso;
+
+            vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
+            vm.limpiaBusqueda             = limpiaBusqueda;
+
+            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
+            vm.cambiarPagina              = cambiarPagina;
+            vm.reprogramaCurso            = reprogramaCurso;
+            vm.concluyeCurso              = concluyeCurso;
+            vm.cierraCurso                = cierraCurso;
+            vm.asientaCalificaciones      = asientaCalificaciones;
+            vm.generaListados             = generaListados;
+
 
             vm.tabs = [{active: true}, {active: false}];
             vm.total_pagados = 0;
@@ -33,19 +48,6 @@
               fila_seleccionada  : 0
             };
 
-            vm.muestra_cursos_unidad      = muestra_cursos_unidad;
-            vm.muestra_estatus_curso      = muestra_estatus_curso;
-
-            vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
-            vm.limpiaBusqueda             = limpiaBusqueda;
-
-            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
-            vm.cambiarPagina              = cambiarPagina;
-
-            vm.reprogramaCurso            = reprogramaCurso;
-            vm.concluyeCurso              = concluyeCurso;
-            vm.cierraCurso                = cierraCurso;
-            vm.asientaCalificaciones      = asientaCalificaciones;
 
             inicia();
 
@@ -646,6 +648,284 @@
                   });
 
             }
+
+
+            function generaListados(seleccion) {
+
+                  InscripcionCurso.find({
+                        filter: {
+                            fields:['idAlumno','pagado','fechaInscripcion','fechaPago','numFactura','calificacion','numDocAcreditacion'],
+                            where: {
+                              idCurso: seleccion.idCurso
+                            },
+                            include: [
+                                  {
+                                      relation: 'Capacitandos',
+                                      scope: {
+                                          include: [
+                                                {
+                                                    relation: 'localidad_pertenece',
+                                                    scope: {
+                                                      fields: ['nombre']
+                                                    }
+                                                },
+                                                {
+                                                    relation: 'unidad_pertenece',
+                                                    scope: {
+                                                      fields: ['nombre']
+                                                    }
+                                                },
+                                                {
+                                                    relation: 'actividades_desempena',
+                                                    scope: {
+                                                      fields: ['actividad']
+                                                    }
+                                                },
+                                                {
+                                                    relation: 'experiencia_laboral',
+                                                    scope: {
+                                                      fields: ['experiencia']
+                                                    }
+                                                },
+                                                {
+                                                    relation: 'medio_comunicacion',
+                                                    scope: {
+                                                      fields: ['medio']
+                                                    }
+                                                },
+                                                {
+                                                    relation: 'motivos_capacitarse',
+                                                    scope: {
+                                                      fields: ['motivo']
+                                                    }
+                                                },
+                                                {
+                                                    relation: 'nivel_estudios',
+                                                    scope: {
+                                                      fields: ['nivelEstudios']
+                                                    }
+                                                }
+                                          ]
+                                      }
+                                  }
+                            ]
+                        }
+                  }) 
+                  .$promise
+                  .then(function(listaInscripcion) {
+
+
+                          var fecha_inicio_temp = new Date(seleccion.fechaInicio);
+                          var fecha_fin_temp = new Date(seleccion.fechaFin);
+
+                          var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+                          var contenido = '    <table width="100%">'+
+                                          '        <tbody>'+
+                                          '            <tr>'+
+                                          '                <td>Nombre del curso</td>'+
+                                          '                <td>'+codifica_caracteres_html(seleccion.nombreCurso)+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Clave del curso</td>'+
+                                          '                <td>'+seleccion.claveCurso+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Localidad impartici&oacute;n</td>'+
+                                          '                <td>'+codifica_caracteres_html(seleccion.localidad_pertenece.nombre)+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Unidad de capacitaci&oacute;n</td>'+
+                                          '                <td>'+codifica_caracteres_html(seleccion.unidad_pertenece.nombre)+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Fecha de inicio</td>'+
+                                          '                <td>'+( fecha_inicio_temp.getDate() +' de '+ meses[fecha_inicio_temp.getMonth()] +' de '+ fecha_inicio_temp.getFullYear() )+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Fecha fin</td>'+
+                                          '                <td>'+( fecha_fin_temp.getDate() +' de '+ meses[fecha_fin_temp.getMonth()] +' de '+ fecha_fin_temp.getFullYear() )+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Horario</td>'+
+                                          '                <td>'+seleccion.horario+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>N&uacute;mero de horas</td>'+
+                                          '                <td>'+seleccion.numeroHoras+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Instructor</td>'+
+                                          '                <td>'+codifica_caracteres_html(seleccion.nombreInstructor)+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Cupo m&aacute;ximo</td>'+
+                                          '                <td>'+seleccion.cupoMaximo+'</td>'+
+                                          '            </tr>'+
+                                          '            <tr>'+
+                                          '                <td>Inscritos</td>'+
+                                          '                <td>'+seleccion.inscripcionesCursos.length+'</td>'+
+                                          '            </tr>'+
+                                          '        </tbody>'+
+                                          '    </table><br>'+
+
+                                          '    <table width="100%">'+
+                                          '        <thead>'+
+                                          '            <tr>'+
+                                          '                <th>Fecha de inscripci&oacute;n</th>'+
+                                          '                <th>Curso pagado</th>'+
+                                          '                <th>Fecha de pago</th>'+
+                                          '                <th>N&uacute;m. recibo</th>'+
+                                          '                <th>Calificaci&oacute;n</th>'+
+                                          '                <th>N&uacute;m. documento acreditaci&oacute;n</th>'+
+                                          '                <th>Apellido Paterno</th>'+
+                                          '                <th>Apellido Materno</th>'+
+                                          '                <th>Nombre(s)</th>'+
+                                          '                <th>Sexo</th>'+
+                                          '                <th>Email</th>'+
+                                          '                <th>Edad</th>'+
+                                          '                <th>Tel&eacute;fono</th>'+
+                                          '                <th>Celular</th>'+
+                                          '                <th>CURP</th>'+
+                                          '                <th>Direcci&oacute;n</th>'+
+                                          '                <th>Colonia</th>'+
+                                          '                <th>C&oacute;digo postal</th>'+
+                                          '                <th>Localidad</th>'+
+                                          '                <th>Estudios</th>'+
+                                          '                <th>Estado civil</th>'+
+                                          '                <th>Discapacidad visual</th>'+
+                                          '                <th>Discapacidad auditiva</th>'+
+                                          '                <th>Discapacidad lenguaje</th>'+
+                                          '                <th>Discapacidad motriz</th>'+
+                                          '                <th>Discapacidad mental</th>'+
+                                          '                <th>&iquest;Padece alguna enfermedad o alergia?</th>'+
+                                          '                <th>&iquest;Cual?</th>'+
+                                          '                <th>Nombre tutor</th>'+
+                                          '                <th>CURP tutor</th>'+
+                                          '                <th>Parentesco tutor</th>'+
+                                          '                <th>Direcci&oacute;n tutor</th>'+
+                                          '                <th>Tel&eacute;fono tutor</th>'+
+                                          '                <th>Acta nacimiento</th>'+
+                                          '                <th>Comprobante de estudios</th>'+
+                                          '                <th>Identificaci&oacute;n oficial</th>'+
+                                          '                <th>Constancia CURP</th>'+
+                                          '                <th>Fotograf&iacute;as</th>'+
+                                          '                <th>Comprobante migratorio</th>'+
+                                          '                <th>Comprobante de domicilio</th>'+
+                                          '                <th>CURP del tutor</th>'+
+                                          '                <th>Actividad laboral</th>'+
+                                          '                <th>Experiencia</th>'+
+                                          '                <th>Empresa trabaja</th>'+
+                                          '                <th>Empresa puesto</th>'+
+                                          '                <th>Empresa antiguedad</th>'+
+                                          '                <th>Empresa direcci&oacute;n</th>'+
+                                          '                <th>Empresa tel&eacute;fono</th>'+
+                                          '                <th>Motivos para capacitarse</th>'+
+                                          '            </tr>'+
+                                          '        </thead>'+
+                                          '        <tbody>';
+
+                                          angular.forEach(listaInscripcion, function(registro) {
+
+                                                  var fechaInscripcion    = new Date(registro.fechaInscripcion);
+                                                  var fechaPago           = new Date(registro.fechaPago);
+
+                                                  var fechaInscripcionTXT = fechaInscripcion.getDate() +'/'+ meses[fechaInscripcion.getMonth()] +'-'+ fechaInscripcion.getFullYear();
+                                                  var fechaPagoTXT        = fechaPago.getDate() +'/'+ meses[fechaPago.getMonth()] +'-'+ fechaPago.getFullYear();
+
+                                                 contenido += '<tr>'+
+                                                              '    <td>'+fechaInscripcionTXT+'</td>'+
+                                                              '    <td>'+(registro.pagado                                                                == true ? 'S&iacute;' : 'No')+'</td>'+
+                                                              '    <td>'+fechaPagoTXT+'</td>'+
+                                                              '    <td>'+(registro.numFactura                                                            == undefined ? ''     : registro.numFactura) +'</td>'+
+                                                              '    <td>'+registro.numFactura+'</td>'+
+                                                              '    <td>'+registro.calificacion+'</td>'+
+                                                              '    <td>'+registro.numDocAcreditacion+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.apellidoPaterno                 == undefined ? ''     : registro.Capacitandos.apellidoPaterno)) +'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.apellidoMaterno                 == undefined ? ''     : registro.Capacitandos.apellidoMaterno)) +'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.nombre                          == undefined ? ''     : registro.Capacitandos.nombre)) +'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.sexo                                                     == undefined ? ''     : (registro.Capacitandos.sexo == 'H' ? 'Hombre' : 'Mujer' ) ) +'</td>'+
+                                                              '    <td>'+registro.Capacitandos.email+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.edad                                                     == undefined ? ''     : registro.Capacitandos.edad) +'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.telefono                                                 == undefined ? ''     : registro.Capacitandos.telefono) +'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.celular                                                  == undefined ? ''     : registro.Capacitandos.celular) +'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.curp                                                     == undefined ? ''     : registro.Capacitandos.curp) +'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.domicilio                       == undefined ? ''     : registro.Capacitandos.domicilio)) +'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.colonia                         == undefined ? ''     : registro.Capacitandos.colonia)) +'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.codigoPostal                                             == undefined ? ''     : registro.Capacitandos.codigoPostal) +'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.localidad_pertenece.nombre      == undefined ? ''     : registro.Capacitandos.localidad_pertenece.nombre)) +'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.nivel_estudios.nivelEstudios    == undefined ? ''     : registro.Capacitandos.nivel_estudios.nivelEstudios)) +'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.estadoCivil                                              == undefined ? ''     : registro.Capacitandos.estadoCivil) +'</td>'+
+
+                                                              '    <td>'+(registro.Capacitandos.disVisual                                                == undefined ? ''     : (registro.Capacitandos.disVisual == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.disAuditiva                                              == undefined ? ''     : (registro.Capacitandos.disAuditiva == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.disLenguaje                                              == undefined ? ''     : (registro.Capacitandos.disLenguaje == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.disMotriz                                                == undefined ? ''     : (registro.Capacitandos.disMotriz == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.disMental                                                == undefined ? ''     : (registro.Capacitandos.disMental == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+
+                                                              '    <td>'+(registro.Capacitandos.enfermedadPadece                                         == undefined ? ''     : (registro.Capacitandos.enfermedadPadece == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.enfermedadCual                  == undefined ? ''     : registro.Capacitandos.enfermedadCual))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.tutorNombre                     == undefined ? ''     : registro.Capacitandos.tutorNombre))+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.tutorCurp                                                == undefined ? ''     : registro.Capacitandos.tutorCurp)+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.tutorParentesco                 == undefined ? ''     : registro.Capacitandos.tutorParentesco))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.tutorDireccion                  == undefined ? ''     : registro.Capacitandos.tutorDireccion))+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.tutorTelefono                                            == undefined ? ''     : registro.Capacitandos.tutorTelefono)+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.docActaNacimiento                                        == undefined ? ''     : (registro.Capacitandos.docActaNacimiento == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.docCompEstudios                                          == undefined ? ''     : (registro.Capacitandos.docCompEstudios == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.docIdentOficial                                          == undefined ? ''     : (registro.Capacitandos.docIdentOficial == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.docConstCurp                                             == undefined ? ''     : (registro.Capacitandos.docConstCurp == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.docFotografias                                           == undefined ? ''     : (registro.Capacitandos.docFotografias == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.docCompMigratorio                                        == undefined ? ''     : (registro.Capacitandos.docCompMigratorio == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.docCompDomicilio                                         == undefined ? ''     : (registro.Capacitandos.docCompDomicilio == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.docCurpTutor                                             == undefined ? ''     : (registro.Capacitandos.docCurpTutor == true ? 'S&iacute;' : 'No' ) )+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.actividades_desempena.actividad == undefined ? ''     : registro.Capacitandos.actividades_desempena.actividad))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.experiencia_laboral.experiencia == undefined ? ''     : registro.Capacitandos.experiencia_laboral.experiencia))+'</td>'+
+                                                              
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.empresaTrabaja                  == undefined ? ''     : registro.Capacitandos.empresaTrabaja))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.empresaPuesto                   == undefined ? ''     : registro.Capacitandos.empresaPuesto))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.empresaAntiguedad               == undefined ? ''     : registro.Capacitandos.empresaAntiguedad))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.empresaDireccion                == undefined ? ''     : registro.Capacitandos.empresaDireccion))+'</td>'+
+                                                              '    <td>'+(registro.Capacitandos.empresaTelefono                                          == undefined ? ''     : registro.Capacitandos.empresaTelefono)+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.motivos_capacitarse.motivo      == undefined ? ''     : registro.Capacitandos.motivos_capacitarse.motivo))+'</td>'+
+                                                              ' </tr>';
+                                          });
+
+                              contenido +='        </tbody>'+
+                                          '    </table>';
+
+                              var blob = new Blob([contenido], {
+                                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=ISO-8859-1"
+                                });
+                                saveAs(blob, "lista_capacitandos_curso_exportado.xls");
+                  });
+            }
+
+
+
+            function codifica_caracteres_html(tx)
+            {
+                  var rp = String(tx);
+                  //
+                  rp = rp.replace(/á/g, '&aacute;');
+                  rp = rp.replace(/é/g, '&eacute;');
+                  rp = rp.replace(/í/g, '&iacute;');
+                  rp = rp.replace(/ó/g, '&oacute;');
+                  rp = rp.replace(/ú/g, '&uacute;');
+                  rp = rp.replace(/ñ/g, '&ntilde;');
+                  rp = rp.replace(/ü/g, '&uuml;');
+                  //
+                  rp = rp.replace(/Á/g, '&Aacute;');
+                  rp = rp.replace(/É/g, '&Eacute;');
+                  rp = rp.replace(/Í/g, '&Iacute;');
+                  rp = rp.replace(/Ó/g, '&Oacute;');
+                  rp = rp.replace(/Ú/g, '&Uacute;');
+                  rp = rp.replace(/Ñ/g, '&Ntilde;');
+                  rp = rp.replace(/Ü/g, '&Uuml;');
+                  //
+                  return rp;
+            }
+
 
 
             function formateaListado() {

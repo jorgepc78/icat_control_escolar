@@ -11,7 +11,8 @@
         'ui.date',
         'NgSwitchery',
         'naif.base64',
-        'ngDropdowns'
+        'ngDropdowns',
+        'ngFileSaver'
     	/*'templates'*/
     ]);
 })();

@@ -173,6 +173,20 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+
+            /*** seccion de la inscripcion a un curso y registro del pago ***/
+            .state('inscripcion', {
+                abstract: true,
+                url: '/inscripcion',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('inscripcion.registro_inscripcion_pagos', {
+                url: '/registro_inscripcion_pagos',
+                templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/registra-inscrip-pago-curso.html',
+                controller: 'RegistroInscripPagoCursoController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
     }
 
 })();

@@ -11,7 +11,8 @@
 
             var vm = this;
 
-            vm.guardar = guardar;
+            vm.calculaNacim = calculaNacim;
+            vm.guardar      = guardar;
 
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
@@ -140,9 +141,77 @@
         
             };
 
+
+            function calculaNacim() {
+
+                if(vm.registroEditar.curp.length >= 10)
+                {
+                        var error_fecha = false;
+
+                        if( isNaN(Number(vm.registroEditar.curp.substr(4,2))))
+                            error_fecha = true;
+                        else if( isNaN(Number(vm.registroEditar.curp.substr(6,2))) )
+                            error_fecha = true;
+                        else if(isNaN(Number(vm.registroEditar.curp.substr(8,2))) )
+                            error_fecha = true;
+
+                        if(error_fecha == true)
+                        {
+                            vm.mostrar_msg_error = true;
+                            vm.mensaje = 'La fecha de nacimiento dentro de la CURP es incorrecta';
+                            vm.registroEditar.edad = '';
+                            $timeout(function(){
+                                 vm.mostrar_msg_error = false;
+                                 vm.mensaje = '';
+                            }, 2000);
+                        }
+                        else
+                        {
+                            var fechaHoy = new Date();
+                            var anioHoy = fechaHoy.getFullYear();
+
+                            var anio = parseInt(vm.registroEditar.curp.substr(4,2)) + 2000;
+                            if( (anioHoy - anio) < 0)
+                                var anio = parseInt(vm.registroEditar.curp.substr(4,2)) + 1900;
+
+                            var mes = parseInt(vm.registroEditar.curp.substr(6,2));
+                            var dia = parseInt(vm.registroEditar.curp.substr(8,2));
+
+                            var fechaNacimiento = new Date(anio,(mes-1),dia);
+                            
+                            var edad = fechaHoy.getFullYear()- fechaNacimiento.getFullYear() - 1; 
+                            
+                            if(fechaHoy.getMonth() + 1 - mes > 0) 
+                                edad++;
+            
+                            if( (fechaHoy.getDate() - dia >= 0) && (fechaHoy.getMonth() + 1 - mes == 0) ) 
+                                edad++;
+
+                            vm.registroEditar.edad = edad;
+                            vm.registroEditar.anioNacimiento = anio.toString();
+                            vm.registroEditar.mesNacimiento  = vm.registroEditar.curp.substr(6,2);
+                            vm.registroEditar.diaNacimiento  = vm.registroEditar.curp.substr(8,2);
+
+                        }
+                }
+            }
+
+
             function guardar() {
 
                 vm.mostrarSpiner = true;
+
+                if( vm.registroEditar.edad == '' )
+                {
+                    vm.mostrarSpiner = false;
+                    vm.mostrar_msg_error = true;
+                    vm.mensaje = 'La fecha de nacimiento dentro de la CURP es incorrecta';
+                    $timeout(function(){
+                         vm.mostrar_msg_error = false;
+                         vm.mensaje = '';
+                    }, 3000);
+                    return;
+                }
 
                 Capacitandos.count({
                     where: {email: vm.registroEditar.email}

@@ -155,8 +155,12 @@
                                                                 </div>
                                                                 <ul class="list-group clear-list">
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right"> <button type="button" ng-click="vm.registraInscripcion(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Registrar inscripci&oacute;n</button> </span>
-                                                                        <h3>Lugares disponibles: <span class="label label-success">{{vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length}}</span></h3>
+                                                                        <span class="pull-right"> <button type="button" ng-disabled="((vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length) == 0)" ng-click="vm.registraInscripcion(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Registrar inscripci&oacute;n</button> </span>
+                                                                        <h3>Lugares disponibles:
+                                                                            <span class="label label-success" ng-show="((vm.cursoSeleccionado.inscripcionesCursos.length / vm.cursoSeleccionado.cupoMaximo) <= 0.25)">{{vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length}}</span>
+                                                                            <span class="label label-warning" ng-show="((vm.cursoSeleccionado.inscripcionesCursos.length / vm.cursoSeleccionado.cupoMaximo) > 0.25 && (vm.cursoSeleccionado.inscripcionesCursos.length / vm.cursoSeleccionado.cupoMaximo) <= 0.75)">{{vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length}}</span>
+                                                                            <span class="label label-danger"  ng-show="((vm.cursoSeleccionado.inscripcionesCursos.length / vm.cursoSeleccionado.cupoMaximo) > 0.75)">{{vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length}}</span>
+                                                                        </h3>
                                                                     </li>
                                                                 </ul>
                                                                 <br>
@@ -174,7 +178,7 @@
                                                                                 </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesCursos">
+                                                                                <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesCursos | orderObjectBy: 'Capacitandos.nombreCompleto' ">
                                                                                     <td> {{$index + 1}}</td>
                                                                                     <td> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
                                                                                     <td class="client-status" ng-switch on="inscripcion.pagado">
@@ -185,8 +189,9 @@
                                                                                     </td>
                                                                                     <td>{{inscripcion.numFactura}}</td>
                                                                                     <td>
-                                                                                        <button ng-show="(inscripcion.pagado == 0)" type="button" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Registrar pago"><i class="fa fa-usd"></i></button>
-                                                                                        <button type="button" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Eliminar capacitando"><i class="fa fa-trash-o"></i></button>
+                                                                                        <button ng-show="(inscripcion.pagado > 0)" type="button" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Editar n&uacute;m. factura" ng-click="vm.editaNumFactura(inscripcion)"><i class="fa fa-pencil"></i></button>
+                                                                                        <button ng-show="(inscripcion.pagado == 0)" type="button" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Registrar pago" ng-click="vm.registraPago(inscripcion)"><i class="fa fa-usd"></i></button>
+                                                                                        <button type="button" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Eliminar capacitando" ng-click="vm.eliminaInscrito(inscripcion)"><i class="fa fa-trash-o"></i></button>
                                                                                     </td>
                                                                                 </tr>
 

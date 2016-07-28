@@ -119,7 +119,7 @@
                   vm.mostrarbtnLimpiar = true;
 
 
-                  var condicion_busqueda = {
+                  vm.tablalListaCapacitados.condicion = {
                                     or: [
                                       {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
                                       {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},

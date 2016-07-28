@@ -144,6 +144,9 @@
 
             function calculaNacim() {
 
+                if(vm.registroEditar.curp == undefined)
+                    return;
+
                 if(vm.registroEditar.curp.length >= 10)
                 {
                         var error_fecha = false;
@@ -232,7 +235,12 @@
                         else
                         {
                                 Capacitandos.count({
-                                    where: {celular: vm.registroEditar.celular}
+                                    where: {
+                                        and: [
+                                            {celular: vm.registroEditar.celular},
+                                            {celular: {neq: ''}}
+                                        ]
+                                    }
                                 })
                                 .$promise
                                 .then(function(resp) {
@@ -271,10 +279,8 @@
                                             {
                                                 vm.registroEditar.ultimaActualizacion =  Date();
 
-                                                Capacitandos.prototype$updateAttributes(
+                                                Capacitandos.create(
                                                 {
-                                                    id: vm.registroEditar.idAlumno
-                                                },{
                                                     idUnidadAdmtva      : vm.registroEditar.idUnidadAdmtva,
                                                     apellidoPaterno     : vm.registroEditar.apellidoPaterno,
                                                     apellidoMaterno     : vm.registroEditar.apellidoMaterno,

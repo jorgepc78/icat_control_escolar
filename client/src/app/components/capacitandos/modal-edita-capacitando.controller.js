@@ -145,6 +145,9 @@
 
             function calculaNacim() {
 
+                if(vm.registroEditar.curp == undefined)
+                    return;
+
                 if(vm.registroEditar.curp.length >= 10)
                 {
                         var error_fecha = false;
@@ -242,6 +245,7 @@
                                     where: {
                                         and: [
                                             {celular: vm.registroEditar.celular},
+                                            {celular: {neq: ''}},
                                             {idAlumno : {neq: vm.registroEditar.idAlumno}}
                                         ]
                                     }

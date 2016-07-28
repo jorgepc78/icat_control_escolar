@@ -12,7 +12,8 @@
         'NgSwitchery',
         'naif.base64',
         'ngDropdowns',
-        'ngFileSaver'
+        'ngFileSaver',
+        'ngOrderObjectBy'
     	/*'templates'*/
     ]);
 })();

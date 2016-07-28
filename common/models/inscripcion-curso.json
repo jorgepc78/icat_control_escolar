@@ -60,7 +60,7 @@
       "_selectable": true
     },
     "fechaInscripcion": {
-      "type": "String",
+      "type": "date",
       "required": false,
       "length": null,
       "precision": null,
@@ -92,7 +92,7 @@
       "_selectable": true
     },
     "fechaPago": {
-      "type": "String",
+      "type": "date",
       "required": false,
       "length": null,
       "precision": null,

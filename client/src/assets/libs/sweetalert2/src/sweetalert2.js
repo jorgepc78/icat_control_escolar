@@ -208,7 +208,11 @@
   window.sweetAlert = window.swal = function() {
     // Copy arguments to the local args variable
     var args = arguments;
-    if (getModal() !== null) {
+    var modal = getModal();
+    if (modal !== null) {
+        if (hasClass(modal, 'visible')) {
+          resetPrevState();
+        }
         // If getModal returns values then continue
         modalDependant.apply(this, args);
     } else {
@@ -353,10 +357,7 @@
           } else if (params.callback && modalIsVisible) { // Clicked 'cancel'
 
             // Check if callback function expects a parameter (to track cancel actions)
-            var functionAsStr          = String(params.callback).replace(/\s/g, '');
-            var functionHandlesCancel  = functionAsStr.substring(0, 9) === 'function(' && functionAsStr.substring(9, 10) !== ')';
-
-            if (functionHandlesCancel) {
+            if (params.callback.length > 0) {
               params.callback(false);
             }
 
@@ -403,6 +404,7 @@
     function handleKeyDown(event) {
       var e = event || window.event;
       var keyCode = e.keyCode || e.which;
+      var modalIsVisible = hasClass(modal, 'visible');
 
       if ([9,13,32,27].indexOf(keyCode) === -1) {
         // Don't do work on keys we don't care about.
@@ -421,6 +423,12 @@
 
       if (keyCode === 9) {
         // TAB
+
+        // Should only happen if modal is visible
+        if (!modalIsVisible) {
+          return;
+        }
+
         if (btnIndex === -1) {
           // No button focused. Jump to the confirm button.
           $targetElement = $confirmButton;
@@ -496,8 +504,9 @@
    * Add modal + overlay to DOM
    */
   window.swal.init = function() {
-    var sweetHTML = '<div class="sweet-overlay" tabIndex="-1"></div><div class="sweet-alert" tabIndex="-1"><div class="icon error"><span class="x-mark"><span class="line left"></span><span class="line right"></span></span></div><div class="icon warning"> <span class="body"></span> <span class="dot"></span> </div> <div class="icon info"></div> <div class="icon success"> <span class="line tip"></span> <span class="line long"></span> <div class="placeholder"></div> <div class="fix"></div> </div> <div class="icon custom"></div> <h2>Title</h2><p>Text</p><hr><button class="confirm">OK</button><button class="cancel">Cancel</button></div>';
+    var sweetHTML = '<div class="sweet-overlay" tabIndex="-1"></div><div class="sweet-alert" style="display: none" tabIndex="-1"><div class="icon error"><span class="x-mark"><span class="line left"></span><span class="line right"></span></span></div><div class="icon warning"> <span class="body"></span> <span class="dot"></span> </div> <div class="icon info"></div> <div class="icon success"> <span class="line tip"></span> <span class="line long"></span> <div class="placeholder"></div> <div class="fix"></div> </div> <div class="icon custom"></div> <h2>Title</h2><p>Text</p><hr><button class="confirm">OK</button><button class="cancel">Cancel</button></div>';
     var sweetWrap = document.createElement('div');
+    sweetWrap.className = 'sweet-container';
 
     sweetWrap.innerHTML = sweetHTML;
 
@@ -556,9 +565,13 @@
     $title.innerHTML = escapeHtml(params.title).split('\n').join('<br>');
 
     // Text
-    $text.innerHTML = escapeHtml(params.text.split('\n').join('<br>')) || params.html;
-    if ($text.innerHTML) {
-      show($text);
+    if (window.jQuery) {
+      $text = $($text).html(escapeHtml(params.text.split('\n').join('<br>')) || params.html);
+    } else {
+      $text.innerHTML = escapeHtml(params.text.split('\n').join('<br>')) || params.html;
+      if ($text.innerHTML) {
+        show($text);
+      }
     }
 
     //Custom Class
@@ -640,6 +653,8 @@
     // Buttons spacer
     if (!params.showConfirmButton && !params.showCancelButton) {
       hide($btnSpacer);
+    } else {
+      show($btnSpacer);
     }
 
     // Edit text on cancel and confirm buttons
@@ -651,7 +666,9 @@
     $cancelBtn.style.backgroundColor = params.cancelButtonColor;
 
     // Add buttons custom classes
+    $confirmBtn.className = 'confirm';
     addClass($confirmBtn, params.confirmButtonClass);
+    $cancelBtn.className = 'cancel';
     addClass($cancelBtn, params.cancelButtonClass);
 
     // CSS animation
@@ -740,7 +757,19 @@
     removeClass($warningIcon.querySelector('.body'), 'pulse-warning-ins');
     removeClass($warningIcon.querySelector('.dot'), 'pulse-warning-ins');
 
-    // Reset the page to its previous state
+    resetPrevState();
+
+    // Remove dynamically created media query
+    var head = document.getElementsByTagName('head')[0];
+    var mediaquery = document.getElementById(mediaqueryId);
+    if (mediaquery) {
+      head.removeChild(mediaquery);
+    }
+  }
+
+  // Reset the page to its previous state
+  function resetPrevState() {
+    var modal = getModal();
     window.onkeydown = previousWindowKeyDown;
     document.onclick = previousDocumentClick;
     if (previousActiveElement) {
@@ -748,11 +777,6 @@
     }
     lastFocusedButton = undefined;
     clearTimeout(modal.timeout);
-
-    // Remove dynamically created media query
-    var head = document.getElementsByTagName('head')[0];
-    var mediaquery = document.getElementById(mediaqueryId);
-    head.removeChild(mediaquery);
   }
 
   /*

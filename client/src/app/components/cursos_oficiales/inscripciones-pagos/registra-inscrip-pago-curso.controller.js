@@ -16,10 +16,11 @@
 
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
             vm.cambiarPagina              = cambiarPagina;
-            vm.registraPago               = registraPago;
             vm.registraInscripcion        = registraInscripcion;
+            vm.registraPago               = registraPago;
+            vm.editaNumFactura            = editaNumFactura;
+            vm.eliminaInscrito            = eliminaInscrito;
 
-            vm.total_pagados = 0;
             vm.mostrarbtnLimpiar = false;
             vm.cadena_buscar = '';
 
@@ -95,6 +96,7 @@
                             vm.listaCursos = respuesta.datos;
                             formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
+                            agregaNombreCompleto();
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
@@ -140,6 +142,7 @@
                             vm.listaCursos = respuesta.datos;
                             formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
+                            agregaNombreCompleto();
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
@@ -181,6 +184,7 @@
                             vm.listaCursos = respuesta.datos;
                             formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
+                            agregaNombreCompleto();
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
@@ -197,12 +201,6 @@
                   vm.cursoSeleccionado = seleccion;
                   vm.client = 2;
                   vm.tablaListaCursos.fila_seleccionada = index;
-                  vm.total_pagados = 0;
-                  angular.forEach(vm.cursoSeleccionado.inscripcionesCursos, function(inscripcion) {
-                    if(inscripcion.pagado > 0)
-                    vm.total_pagados++;
-                  });
-
             };
 
 
@@ -220,6 +218,7 @@
                             vm.listaCursos = respuesta.datos;
                             formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
+                            agregaNombreCompleto();
                             vm.client = 2;
                             vm.tablaListaCursos.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
@@ -229,12 +228,93 @@
 
 
 
+            function registraInscripcion(seleccion) {
+
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/modal-agrega-persona.html',
+                        windowClass: "animated fadeIn",
+                        controller: 'ModalAgregaPersonaController as vm',
+                        size: 'lg',
+                        resolve: {
+                          registroEditar: function () { return seleccion }
+                        }
+
+                    });
+
+                    modalInstance.result.then(function (respuesta) {
+
+                        vm.cursoSeleccionado.inscripcionesCursos.push(
+                            respuesta
+                        );
+                        agregaNombreCompleto();
+
+                    }, function () {
+                    });
+
+            }
+
+
 
             function registraPago(seleccion) {
 
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/modal-captura-num-factura.html',
+                        windowClass: "animated fadeIn",
+                        controller: 'ModalCapturaNumFacturaController as vm',
+                        resolve: {
+                          registroEditar: function () { return {nombreCurso: vm.cursoSeleccionado.nombreCurso ,seleccion: seleccion} }
+                        }
+
+                    });
+
+                    modalInstance.result.then(function (respuesta) {
+                        
+                            var index = vm.cursoSeleccionado.inscripcionesCursos.map(function(instructor) {
+                                                                return instructor.id;
+                                                              }).indexOf(respuesta.id);
+
+                            vm.cursoSeleccionado.inscripcionesCursos[index].pagado = respuesta.pagado;
+                            vm.cursoSeleccionado.inscripcionesCursos[index].numFactura = respuesta.numFactura;
+
+                    }, function () {
+                    });
+
+            }
+
+
+            function editaNumFactura(seleccion) {
+
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/modal-captura-num-factura.html',
+                        windowClass: "animated fadeIn",
+                        controller: 'ModalCapturaNumFacturaController as vm',
+                        resolve: {
+                          registroEditar: function () { return {nombreCurso: vm.cursoSeleccionado.nombreCurso ,seleccion: seleccion} }
+                        }
+
+                    });
+
+                    modalInstance.result.then(function (respuesta) {
+                        
+                            var index = vm.cursoSeleccionado.inscripcionesCursos.map(function(instructor) {
+                                                                return instructor.id;
+                                                              }).indexOf(respuesta.id);
+
+                            vm.cursoSeleccionado.inscripcionesCursos[index].pagado = respuesta.pagado;
+                            vm.cursoSeleccionado.inscripcionesCursos[index].numFactura = respuesta.numFactura;
+
+                    }, function () {
+                    });
+
+            }
+
+
+
+            function eliminaInscrito(seleccion) {
+
                   swal({
                     title: "Confirmar",
-                    html: 'El curso <strong>'+ seleccion.nombreCurso +'</strong> cambiar&aacute; su estatus a concluido, una vez realizado esto se podr&aacute; realizar el registro de calificaciones, ¿Continuar?',
+                    html: 'La persona <strong>'+ seleccion.Capacitandos.apellidoPaterno + ' ' + seleccion.Capacitandos.apellidoMaterno + ' ' + seleccion.Capacitandos.nombre +'</strong> se eliminar&aacute; de la lista de inscripci&oacute;n, ¿Continuar?',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -243,125 +323,35 @@
                     closeOnConfirm: false,
                     closeOnCancel: true
                   }, function(){
-                          swal.disableButtons();
+                          
+                            swal.disableButtons();
 
-                            CursosOficiales.prototype$updateAttributes(
-                            {
-                                id: seleccion.idCurso
-                            },{
-                                estatus: 5
-                            })
-                            .$promise
-                            .then(function(respuesta) {
+                            InscripcionCurso
+                              .deleteById({ id: seleccion.id })
+                              .$promise
+                              .then(function() {
+                                var index = vm.cursoSeleccionado.inscripcionesCursos.indexOf(seleccion);
+                                /*index = vm.listaInstructores.map(function(instructor) {
+                                                                    return instructor.idInstructor;
+                                                                  }).indexOf(record.idInstructor);*/
 
-                                  vm.cursoSeleccionado.estatus = respuesta.estatus;
+                                if(index >= 0)
+                                    vm.cursoSeleccionado.inscripcionesCursos.splice(index, 1);
 
-                                  ControlProcesos
-                                  .create({
-                                      proceso         : 'Cursos vigentes',
-                                      accion          : 'CONCLUSION DE CURSO',
-                                      idDocumento     : seleccion.idCurso,
-                                      idUsuario       : $scope.currentUser.id_usuario,
-                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
-                                  })
-                                  .$promise
-                                  .then(function(resp) {
-
-                                        ControlProcesos.findById({ 
-                                            id: resp.id,
-                                            filter: {
-                                              fields : ['identificador']
-                                            }
-                                        })
-                                        .$promise
-                                        .then(function(resp_control) {
-
-                                              swal({
-                                                title: 'Cambio de estatus registrado',
-                                                html: 'se realiz&oacute; el cambio de estatus del curso a concluido y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
-                                                type: 'success',
-                                                showCancelButton: false,
-                                                confirmButtonColor: "#9a0000",
-                                                confirmButtonText: "Aceptar"
-                                              });
-
-                                        });
-                                  });
-
+                                swal('Capacitando eliminado', '', 'success');
                             });
-
                   });
 
             }
 
 
-            function registraInscripcion(seleccion) {
-
-                  swal({
-                    title: "Confirmar",
-                    html: 'El curso <strong>'+ seleccion.nombreCurso +'</strong> cambiar&aacute; su estatus a cerrado, una vez realizado esto el curso pasar&aacute; a la secci&oacute;n de hist&oacute;ricos, ¿Continuar?',
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#9a0000",
-                    confirmButtonText: "Aceptar",
-                    cancelButtonText: "Cancelar",
-                    closeOnConfirm: false,
-                    closeOnCancel: true
-                  }, function(){
-                          swal.disableButtons();
-
-                            CursosOficiales.prototype$updateAttributes(
-                            {
-                                id: seleccion.idCurso
-                            },{
-                                estatus: 6
-                            })
-                            .$promise
-                            .then(function(respuesta) {
-
-                                  vm.cursoSeleccionado.estatus = respuesta.estatus;
-
-                                  ControlProcesos
-                                  .create({
-                                      proceso         : 'Cursos vigentes',
-                                      accion          : 'CIERRE DE CURSO',
-                                      idDocumento     : seleccion.idCurso,
-                                      idUsuario       : $scope.currentUser.id_usuario,
-                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
-                                  })
-                                  .$promise
-                                  .then(function(resp) {
-
-                                        ControlProcesos.findById({ 
-                                            id: resp.id,
-                                            filter: {
-                                              fields : ['identificador']
-                                            }
-                                        })
-                                        .$promise
-                                        .then(function(resp_control) {
-
-                                              swal({
-                                                title: 'Cambio de estatus registrado',
-                                                html: 'se realiz&oacute; el cambio de estatus del curso a cerrado y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
-                                                type: 'success',
-                                                showCancelButton: false,
-                                                confirmButtonColor: "#9a0000",
-                                                confirmButtonText: "Aceptar"
-                                              });
-
-                                              vm.limpiaBusqueda();
-                                        });
-                                  });
-
-                            });
-
-                  });
-
+            function agregaNombreCompleto() {
+                  
+                  for(var i=0; i < vm.cursoSeleccionado.inscripcionesCursos.length; i++)
+                  {
+                      vm.cursoSeleccionado.inscripcionesCursos[i].Capacitandos.nombreCompleto = vm.cursoSeleccionado.inscripcionesCursos[i].Capacitandos.apellidoPaterno + ' ' + vm.cursoSeleccionado.inscripcionesCursos[i].Capacitandos.apellidoMaterno + ' ' + vm.cursoSeleccionado.inscripcionesCursos[i].Capacitandos.nombre;
+                  }
             }
-
-
-
 
 
             function formateaListado() {

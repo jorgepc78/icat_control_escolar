@@ -14,6 +14,18 @@
                                                 </div>
                                         </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group" style="margin-top:16px;">
+                                            <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Persona a buscar" class="input form-control" ng-model="vm.cadena_buscar">
+                                                    <span class="input-group-btn">
+                                                            <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
+                                                            <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
+                                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
                             </div>
                             <div class="ibox-content">
                                 
@@ -24,7 +36,7 @@
                                                 <th>Email</th>
                                                 <th>Tel&eacute;fono</th>
                                                 <th>Celular</th>
-                                                <th>Unidad registrado</th>
+                                                <th>Unidad registro</th>
                                             </tr>
                                           </thead>
                                          <tbody>
@@ -39,7 +51,6 @@
                                         </table>
 
                                         <tabla-paginacion config="vm.tablalListaCapacitados" paginar="vm.cambiarPagina()"></tabla-paginacion>
-
                             </div>
                         </div>
                 

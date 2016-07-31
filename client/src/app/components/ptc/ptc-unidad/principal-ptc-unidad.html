@@ -5,26 +5,61 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
-                <div class="col-md-1">
+                <div class="col-md-2">
+                    <div class="ibox">
+                        <div class="ibox-content" style="height:240px;">
+                            <div class="tab-content">
+                                <div class="tab-pane active" ng-show="(vm.anioSeleccionado.anio == undefined)" ng-init="(vm.anioSeleccionado.anio == undefined)">
+                                            <div class="row">
+                                                <div class="col-lg-12 text-center">
+                                                    <p>
+                                                        <h3>Seleccione un año para ver los detalles</h3>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                </div>
+                                <div class="tab-pane active" ng-show="(vm.anioSeleccionado.anio !== undefined)">
+                                            <div class="panel blank-panel text-center">
+
+                                                    <h2>A&ntilde;o</h2>
+                                                    <h4>{{vm.anioSeleccionado.anio}}</h4>
+                                                    <h3>Horas asignadas</h3>
+                                                    <span>{{vm.anioSeleccionado.horasAsignadas | number:0}}</span>
+                                                    <h3>Horas disponibles</h3>
+                                                    <span>{{vm.horas_disponibles | number:0}}</span>
+                                            </div> <!--panel blank-panel-->
+              
+                                </div> <!-- client == 2 -->
+                            </div>
+                        </div>
+                    </div> <!-- class ibox -->
                 </div>
                 <div class="col-md-10">
     
                         <div class="ibox">
                             <div class="ibox-title">
                                 <div class="row">
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
                                                 <h2 style="font-size:1.8em;">Programa Trimestral de Cursos</h2>
                                         </div>
+                                        <div class="col-md-2">
+                                                        <div class="input-group" style="margin-top:7px;">
+                                                                <label class="col-md-3 control-label" style="margin-top:7px;">A&ntilde;o:</label>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control m-b" ng-model="vm.anioSeleccionado" ng-change="vm.muestra_ptc_anio()" ng-options="registro as registro.anio for registro in vm.listaAniosDisp"></select>
+                                                            </div>
+                                                        </div>
+                                        </div>
                                         <div class="col-md-4">
-                                                        <div class="input-group" style="margin-top:17px;width: 380px;">
+                                                        <div class="input-group" style="margin-top:7px;width: 380px;">
                                                                 <label class="col-md-3 control-label" style="margin-top:7px;">Estatus:</label>
                                                                 <div class="col-md-9">
                                                                     <select class="form-control m-b" ng-model="vm.estatusSeleccionado" ng-change="vm.muestra_ptc_estatus()" ng-options="estatus as estatus.texto for estatus in vm.listaEstatus"></select>
                                                             </div>
                                                         </div>
                                         </div>
-                                        <div class="col-md-3 text-right">
-                                                <div class="mail-tools" style="margin-top:17px;">
+                                        <div class="col-md-2 text-right">
+                                                <div class="mail-tools" style="margin-top:7px;">
                                                         <button class="btn btn-default btn-labeled" ng-click="vm.nuevoPTC()"><span class="btn-label"><i class="fa fa-plus"></i></span> Nuevo PTC</button>
                                                 </div>
                                         </div>
@@ -41,6 +76,7 @@
                                                 <th>Fecha modificaci&oacute;n</th>
                                                 <th>Fecha env&iacute;o revisi&oacute;n</th>
                                                 <th>N&uacute;m cursos</th>
+                                                <th>Total horas</th>
                                                 <th>Estatus</th>
                                                 <th>Acciones</th>
                                             </tr>
@@ -59,6 +95,7 @@
                                                 <td> {{registro.fechaModificacion | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.fechaEnvioRevision | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.cursos_programados.length}}</td>
+                                                <td> {{registro.horasSeparadas}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="0" class="label label-info texto-estatus-ptc">Sin revisar</span>
                                                     <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
@@ -77,14 +114,12 @@
                                           </tbody>
                                         </table>
 
-                                        <tabla-paginacion config="vm.tablaListaPTCs" paginar="vm.cambiarPaginaPrincipal()"></tabla-paginacion>
+                                        <!-- <tabla-paginacion config="vm.tablaListaPTCs" paginar="vm.cambiarPaginaPrincipal()"></tabla-paginacion> -->
 
                             </div>
                         </div>
                 
                 </div> <!-- column1 -->
-                <div class="col-md-1">
-                </div>
 
     </div><!-- row principal -->
 

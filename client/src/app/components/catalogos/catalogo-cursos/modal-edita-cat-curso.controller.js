@@ -5,14 +5,21 @@
         .module('icat_control_escolar')
         .controller('ModalEditaCatCursoController', ModalEditaCatCursoController);
 
-        ModalEditaCatCursoController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'CatalogoCursos', 'CatalogoEspecialidades'];
+        ModalEditaCatCursoController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'CatalogoCursos', 'CatalogoEspecialidades'];
 
-    function ModalEditaCatCursoController($scope, $modalInstance, registroEditar, CatalogoCursos, CatalogoEspecialidades) {
+    function ModalEditaCatCursoController($scope,  $timeout, $modalInstance, registroEditar, CatalogoCursos, CatalogoEspecialidades) {
 
             var vm = this;
 
+            vm.agregaTema      = agregaTema;
+            vm.eliminaRegistro = eliminaRegistro;
+            vm.guardar         = guardar;
+
+            vm.mostrarSpiner            = false;
+            vm.mostrar_msg_error        = false;
+
             vm.especialidadSeleccionada = 0;
-            vm.listaEspecialidades = {};
+            vm.listaEspecialidades      = {};
            
             vm.registroEdicion = {
                     idCatalogoCurso : registroEditar.idCatalogoCurso,
@@ -31,10 +38,6 @@
                       tema: record.tema
                   });
             });
-
-            vm.guardar = guardar;
-            vm.agregaTema = agregaTema;
-            vm.eliminaRegistro = eliminaRegistro;
 
             inicia();
 
@@ -71,6 +74,25 @@
 
 
             function guardar() {
+
+                vm.mostrarSpiner = true;
+
+                var temasVacios = false;
+                angular.forEach(vm.registroEdicion.temario, function(record) {
+                      if(record.tema == '')
+                      temasVacios = true;
+                });
+
+                if(temasVacios == true)
+                {
+                    vm.mostrarSpiner = false;
+                    vm.mostrar_msg_error = true;
+                    $timeout(function(){
+                         vm.mostrar_msg_error = false;
+                    }, 2000);
+                    return;                        
+                }
+
 
                 var datos = {
                         claveCurso     : vm.registroEdicion.claveCurso,

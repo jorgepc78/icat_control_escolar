@@ -76,6 +76,38 @@
       },
       "_selectable": true
     },
+    "horasSeparadas": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "horas_separadas",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "horasAplicadas": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "horas_aplicadas",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "estatus": {
       "type": "Number",
       "required": false,
@@ -199,6 +231,11 @@
     "cursos_programados": {
       "type": "hasMany",
       "model": "CursosPtc",
+      "foreignKey": "idPtc"
+    },
+    "cursos_no_programados": {
+      "type": "hasMany",
+      "model": "CursosOficiales",
       "foreignKey": "idPtc"
     }
   },

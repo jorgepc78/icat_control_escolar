@@ -132,5 +132,9 @@
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "HorasAsignadasUnidad": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
   }
 }

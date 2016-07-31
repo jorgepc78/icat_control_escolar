@@ -214,7 +214,7 @@
                     $timeout(function(){
                          vm.mostrar_msg_error = false;
                          vm.mensaje = '';
-                    }, 3000);
+                    }, 2000);
                     return;
                 }
 
@@ -237,7 +237,7 @@
                             $timeout(function(){
                                  vm.mostrar_msg_error = false;
                                  vm.mensaje = '';
-                            }, 3000);
+                            }, 2000);
                         }
                         else
                         {
@@ -261,7 +261,7 @@
                                         $timeout(function(){
                                              vm.mostrar_msg_error = false;
                                              vm.mensaje = '';
-                                        }, 3000);
+                                        }, 2000);
 
                                     }
                                     else
@@ -285,7 +285,7 @@
                                                 $timeout(function(){
                                                      vm.mostrar_msg_error = false;
                                                      vm.mensaje = '';
-                                                }, 3000);
+                                                }, 2000);
 
                                             }
                                             else

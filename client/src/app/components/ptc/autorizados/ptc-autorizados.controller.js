@@ -11,6 +11,17 @@
 
             var vm = this;
 
+            /****** DEFINICION DE FUNCIONES DE LA TABLA PRINCIPAL ******/
+            vm.muestra_ptc_unidad     = muestra_ptc_unidad;
+            vm.muestra_ptc_estatus    = muestra_ptc_estatus;
+            
+            vm.muestraCursosPTCActual = muestraCursosPTCActual;
+            vm.cambiarPaginaPrincipal = cambiarPaginaPrincipal;
+            vm.cambiarPaginaDetalle   = cambiarPaginaDetalle;
+            
+            vm.muestraCursoPreapertura = muestraCursoPreapertura;
+
+
             /****** ELEMENTOS DE LA TABLA PRINCIPAL ******/
             vm.tablaListaPTCs = {
               totalElementos     : 0,
@@ -49,16 +60,6 @@
             vm.registrosCursosPTCs = {};
             vm.icono = '';
 
-
-            /****** DEFINICION DE FUNCIONES DE LA TABLA PRINCIPAL ******/
-            vm.muestra_ptc_unidad     = muestra_ptc_unidad;
-            vm.muestra_ptc_estatus    = muestra_ptc_estatus;
-            
-            vm.muestraCursosPTCActual = muestraCursosPTCActual;
-            vm.cambiarPaginaPrincipal = cambiarPaginaPrincipal;
-            vm.cambiarPaginaDetalle   = cambiarPaginaDetalle;
-            
-            vm.muestraCursoPreapertura = muestraCursoPreapertura;
 
             inicia();
             
@@ -133,6 +134,13 @@
                                 {
                                     relation: 'cursos_programados',
                                     scope: {
+                                      fields: ['idCursoPTC']
+                                    }
+                                },
+                                {
+                                    relation: 'cursos_no_programados',
+                                    scope: {
+                                      where: {programadoPTC: false},
                                       fields: ['idCurso']
                                     }
                                 },

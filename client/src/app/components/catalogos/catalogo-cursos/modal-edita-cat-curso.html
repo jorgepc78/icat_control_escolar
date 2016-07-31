@@ -69,7 +69,7 @@
                                 <tr>
                                     <th>N&uacute;m.</th>
                                     <th>Tema</th>
-                                    <th><button type="button" ng-click="vm.agregaTema()" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar tema</button></th>
+                                    <th><button type="button" ng-click="vm.agregaTema()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar tema</button></th>
                                 </tr>
                               </thead>
                             </table>
@@ -103,7 +103,23 @@
 
       </div>
       <div class="modal-footer">
-          <button type="button" ng-click="$dismiss()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
-          <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+
+          <div class="row">
+              <div class="col-md-5">
+              </div>
+              <div class="col-md-4">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">El nombre del tema no puede estar en blanco</div>
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
       </div>
 </div>

@@ -124,7 +124,7 @@
 
                   vm.tablaListaCursos.condicion = {
                       and: [
-                        {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
+                        {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                         {or: [{estatus: 2}, {estatus: 4}]},
                         condicion_busqueda
                       ]
@@ -167,7 +167,7 @@
 
                   vm.tablaListaCursos.condicion = {
                       and: [
-                        {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
+                        {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                         {or: [{estatus: 2}, {estatus: 4}]}
                       ]
                   };

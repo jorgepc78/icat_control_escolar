@@ -36,9 +36,12 @@
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil == 'academica' || currentUser.perfil == 'planeacion')">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Planeaci&oacute;n de Cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id == 1">
+                            <a ui-sref="ptc.asigna_horas">    <span class="nav-label"> Asingaci&oacute;n de horas por unidad </span></a>
+                        </li>
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
                             <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC </span></a>
                         </li>

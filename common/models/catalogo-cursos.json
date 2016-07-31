@@ -59,22 +59,6 @@
       },
       "_selectable": true
     },
-    "idEspecialidad": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 32,
-      "scale": 0,
-      "postgresql": {
-        "columnName": "id_especialidad",
-        "dataType": "integer",
-        "dataLength": null,
-        "dataPrecision": 32,
-        "dataScale": 0,
-        "nullable": "YES"
-      },
-      "_selectable": true
-    },
     "modalidad": {
       "type": "String",
       "required": false,
@@ -122,6 +106,38 @@
         "nullable": "YES"
       },
       "_selectable": true
+    },
+    "idEspecialidad": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_especialidad",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "activo": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "activo",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
     }
   },
   "validations": [],
@@ -142,6 +158,11 @@
       "foreignKey": "idCatalogoCurso",
       "through": "RelInstrucCatCurso",
       "keyThrough": "idInstructor"
+    },
+    "cursosPTC_pertenece": {
+      "type": "hasMany",
+      "model": "CursosPtc",
+      "foreignKey": "idCatalogoCurso"
     }
   },
   "acls": [],

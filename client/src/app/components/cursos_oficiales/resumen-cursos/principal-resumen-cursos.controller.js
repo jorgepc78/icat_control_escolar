@@ -773,7 +773,7 @@
                                           '        <thead>'+
                                           '            <tr>'+
                                           '                <th>Fecha de inscripci&oacute;n</th>'+
-                                          '                <th>Curso pagado</th>'+
+                                          '                <th>Estatus pago</th>'+
                                           '                <th>Fecha de pago</th>'+
                                           '                <th>N&uacute;m. recibo</th>'+
                                           '                <th>Calificaci&oacute;n</th>'+
@@ -833,12 +833,20 @@
                                                   var fechaInscripcionTXT = fechaInscripcion.getDate() +'/'+ meses[fechaInscripcion.getMonth()] +'-'+ fechaInscripcion.getFullYear();
                                                   var fechaPagoTXT        = fechaPago.getDate() +'/'+ meses[fechaPago.getMonth()] +'-'+ fechaPago.getFullYear();
 
+                                                  if(registro.pagado == 0)
+                                                    var pagadoTXT = 'No pagado';
+                                                  else if(registro.pagado == 1)
+                                                    var pagadoTXT = 'Pagado';
+                                                  else if(registro.pagado == 2)
+                                                    var pagadoTXT = 'Condonado';
+                                                  else if(registro.pagado == 3)
+                                                    var pagadoTXT = 'Becado';
+
                                                  contenido += '<tr>'+
                                                               '    <td>'+fechaInscripcionTXT+'</td>'+
-                                                              '    <td>'+(registro.pagado                                                                == true ? 'S&iacute;' : 'No')+'</td>'+
+                                                              '    <td>'+pagadoTXT+'</td>'+
                                                               '    <td>'+fechaPagoTXT+'</td>'+
                                                               '    <td>'+(registro.numFactura                                                            == undefined ? ''     : registro.numFactura) +'</td>'+
-                                                              '    <td>'+registro.numFactura+'</td>'+
                                                               '    <td>'+registro.calificacion+'</td>'+
                                                               '    <td>'+registro.numDocAcreditacion+'</td>'+
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.apellidoPaterno                 == undefined ? ''     : registro.Capacitandos.apellidoPaterno)) +'</td>'+
@@ -853,8 +861,8 @@
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.domicilio                       == undefined ? ''     : registro.Capacitandos.domicilio)) +'</td>'+
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.colonia                         == undefined ? ''     : registro.Capacitandos.colonia)) +'</td>'+
                                                               '    <td>'+(registro.Capacitandos.codigoPostal                                             == undefined ? ''     : registro.Capacitandos.codigoPostal) +'</td>'+
-                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.localidad_pertenece.nombre      == undefined ? ''     : registro.Capacitandos.localidad_pertenece.nombre)) +'</td>'+
-                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.nivel_estudios.nivelEstudios    == undefined ? ''     : registro.Capacitandos.nivel_estudios.nivelEstudios)) +'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.localidad_pertenece             == undefined ? ''     : registro.Capacitandos.localidad_pertenece.nombre)) +'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.nivel_estudios                  == undefined ? ''     : registro.Capacitandos.nivel_estudios.nivelEstudios)) +'</td>'+
                                                               '    <td>'+(registro.Capacitandos.estadoCivil                                              == undefined ? ''     : registro.Capacitandos.estadoCivil) +'</td>'+
 
                                                               '    <td>'+(registro.Capacitandos.disVisual                                                == undefined ? ''     : (registro.Capacitandos.disVisual == true ? 'S&iacute;' : 'No' ) )+'</td>'+
@@ -879,15 +887,15 @@
                                                               '    <td>'+(registro.Capacitandos.docCompMigratorio                                        == undefined ? ''     : (registro.Capacitandos.docCompMigratorio == true ? 'S&iacute;' : 'No' ) )+'</td>'+
                                                               '    <td>'+(registro.Capacitandos.docCompDomicilio                                         == undefined ? ''     : (registro.Capacitandos.docCompDomicilio == true ? 'S&iacute;' : 'No' ) )+'</td>'+
                                                               '    <td>'+(registro.Capacitandos.docCurpTutor                                             == undefined ? ''     : (registro.Capacitandos.docCurpTutor == true ? 'S&iacute;' : 'No' ) )+'</td>'+
-                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.actividades_desempena.actividad == undefined ? ''     : registro.Capacitandos.actividades_desempena.actividad))+'</td>'+
-                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.experiencia_laboral.experiencia == undefined ? ''     : registro.Capacitandos.experiencia_laboral.experiencia))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.actividades_desempena           == undefined ? ''     : registro.Capacitandos.actividades_desempena.actividad))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.experiencia_laboral             == undefined ? ''     : registro.Capacitandos.experiencia_laboral.experiencia))+'</td>'+
                                                               
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.empresaTrabaja                  == undefined ? ''     : registro.Capacitandos.empresaTrabaja))+'</td>'+
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.empresaPuesto                   == undefined ? ''     : registro.Capacitandos.empresaPuesto))+'</td>'+
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.empresaAntiguedad               == undefined ? ''     : registro.Capacitandos.empresaAntiguedad))+'</td>'+
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.empresaDireccion                == undefined ? ''     : registro.Capacitandos.empresaDireccion))+'</td>'+
                                                               '    <td>'+(registro.Capacitandos.empresaTelefono                                          == undefined ? ''     : registro.Capacitandos.empresaTelefono)+'</td>'+
-                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.motivos_capacitarse.motivo      == undefined ? ''     : registro.Capacitandos.motivos_capacitarse.motivo))+'</td>'+
+                                                              '    <td>'+codifica_caracteres_html((registro.Capacitandos.motivos_capacitarse             == undefined ? ''     : registro.Capacitandos.motivos_capacitarse.motivo))+'</td>'+
                                                               ' </tr>';
                                           });
 

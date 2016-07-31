@@ -402,6 +402,47 @@
                                   vm.RegistroPTCSeleccionado.estatus         = respuesta.estatus;
                                   vm.RegistroPTCSeleccionado.fechaAceptacion = respuesta.fechaAceptacion;
 
+
+                                  /*ProgTrimCursos.find({
+                                      filter: {
+                                          where: {
+                                            and: [
+                                                {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                                {anio: vm.anioSeleccionado.anio},
+                                                {or: [
+                                                  {estatus: 2},
+                                                  {estatus: 4}
+                                                ]}
+                                            ]
+                                          },
+                                          fields: ['idPtc','horasSeparadas','estatus']
+                                      }
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+
+                                      var num_horas_separadas = 0;
+                                      angular.forEach(resp, function(registro) {
+                                          num_horas_separadas += registro.horasSeparadas;
+                                      });
+                                      
+                                      vm.horas_disponibles = vm.anioSeleccionado.horasAsignadas - num_horas_separadas;
+
+                                  });*/
+
+                                  /*HorasAsignadasUnidad.prototype$updateAttributes(
+                                  {
+                                      id: vm.anioSeleccionado.id
+                                  },{
+                                      horasSeparadas: num_horas_separadas
+                                  })
+                                  .$promise
+                                  .then(function(respuesta) {
+                                  })
+                                  .catch(function(error) {
+                                  }); */                   
+
+
                                   ControlProcesos
                                   .create({
                                       proceso         : 'PTC',

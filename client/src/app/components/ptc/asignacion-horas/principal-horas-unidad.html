@@ -1,0 +1,160 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+                <div class="col-md-7">
+    
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <div class="row">
+                                        <div class="col-md-12">
+                                                <h2>Horas asignadas para cursos por unidad</h2>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                            <tr>
+                                                <th width="40%">Unidad</th>
+                                                <th>&Uacute;ltimo a&ntilde;o asignado</th>
+                                                <th>Cantidad de horas asignadas</th>
+                                                <th>Cantidad de horas separadas</th>
+                                                <th>Cantidad de horas aplicadas</th>
+                                            </tr>
+                                          </thead>
+                                         <tbody>
+                                            <tr ng-repeat="registro in vm.registros" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaRegistros.fila_seleccionada}" class="pointer">
+                                                <td> {{registro.nombre}}</td>
+                                                <td> {{registro.horas_asignadas[0].anio}}</td>
+                                                <td> {{registro.horas_asignadas[0].horasAsignadas | number:0}}</td>
+                                                <td> {{registro.horas_asignadas[0].horasSeparadas | number:0}}</td>
+                                                <td> {{registro.horas_asignadas[0].horasAplicadas | number:0}}</td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+                                        <tabla-paginacion config="vm.tablaListaRegistros" paginar="vm.cambiarPagina()"></tabla-paginacion>
+
+                            </div>
+                        </div>
+                
+                </div> <!-- column1 -->
+                <div class="col-md-5">
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+
+                                <div class="ibox">
+                                    <div class="ibox-content" style="height:280px;">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 text-center">
+                                                                <p>
+                                                                    <h2>Seleccione un registro para ver los detalles</h2>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane active" ng-show="vm.client == 2">
+                                                        <div class="panel blank-panel">
+                                                                            <ul class="list-group clear-list">
+                                                                                <li class="list-group-item fist-item">
+                                                                                    <span style="width: 300px;text-align: right;" class="pull-right"> {{vm.RegistroSeleccionado.nombre}} </span>
+                                                                                    Unidad
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.horas_asignadas[0].anio}} </span>
+                                                                                    &Uacute;ltimo a&ntilde;o asignado
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.horas_asignadas[0].horasAsignadas | number:0}} </span>
+                                                                                    &Uacute;ltima cantidad de horas asignadas
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.horas_asignadas[0].horasSeparadas | number:0}} </span>
+                                                                                    &Uacute;ltima cantidad de horas separadas
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.horas_asignadas[0].horasAplicadas | number:0}} </span>
+                                                                                    &Uacute;ltima cantidad de horas aplicadas
+                                                                                </li>
+                                                                            </ul>
+                                                                    <br>
+                                                                    <div class="row" ng-if="currentUser.unidad_pertenece_id == 1">
+                                                                        <div class="col-md-12 text-center">
+                                                                            <button type="button" ng-click="vm.nuevo_registro(vm.RegistroSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo a&ntilde;o</button>
+                                                                            <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar este a&ntilde;o</button>
+                                                                            <button type="button" ng-click="vm.elimina_registro(vm.RegistroSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar este a&ntilde;o</button>
+                                                                        </div>
+                                                                    </div>
+                                                        </div> <!--panel blank-panel-->
+                          
+                                            </div> <!-- client == 2 -->
+                                        </div>
+                                    </div>
+                                </div> <!-- class ibox -->
+                                <div class="ibox">
+                                    <div class="ibox-title">
+                                        <h2>Historial</h2>
+                                    </div>
+                                    <div class="ibox-content" style="height:350px;padding: 0 10px 0 10px;">
+                                       
+                                            <div class="tab-pane active" ng-show="vm.historial.length == 0">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 text-center">
+                                                                <p>
+                                                                    <h2>Sin historial</h2>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane active" ng-show="vm.historial.length > 0">
+                    
+                                                <table class="tablaDatos table table-condensed no-footer">
+                                                  <thead>
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                                    <col width="25%">
+                                                    <tr>
+                                                        <th>A&ntilde;o</th>
+                                                        <th>Horas asignadas</th>
+                                                        <th>Horas separadas</th>
+                                                        <th>Horas aplicadas</th>
+                                                    </tr>
+                                                  </thead>
+                                                </table>
+
+                                                <div style="width:100%;height:290px">
+                                                    <div class="full-height-scroll" full-scroll>
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <col width="25%">
+                                                                <col width="25%">
+                                                                <col width="25%">
+                                                                <col width="25%">
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr ng-repeat="record in vm.historial">
+                                                                <td> {{record.anio}}</td>
+                                                                <td> {{record.horasAsignadas | number:0}}</td>
+                                                                <td> {{record.horasSeparadas | number:0}}</td>
+                                                                <td> {{record.horasAplicadas | number:0}}</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- client == 2 -->
+                                        
+                                    </div>
+                                </div> <!-- class ibox -->
+
+                        </div>
+                    </div> <!-- row -->
+
+                </div> <!-- column2 -->
+
+    </div><!-- row principal -->
+</div>

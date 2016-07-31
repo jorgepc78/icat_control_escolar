@@ -5,15 +5,28 @@
         .module('icat_control_escolar')
         .controller('ModalNuevoCursoPTCController', ModalNuevoCursoPTCController);
 
-        ModalNuevoCursoPTCController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'ProgTrimCursos', 'CursosPtc', 'CatalogoCursos', 'CatalogoInstructores'];
+        ModalNuevoCursoPTCController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'ProgTrimCursos', 'CursosPtc', 'CatalogoCursos', 'CatalogoInstructores'];
 
-    function ModalNuevoCursoPTCController($scope, $modalInstance, registroEditar, ProgTrimCursos, CursosPtc, CatalogoCursos, CatalogoInstructores) {
+    function ModalNuevoCursoPTCController($scope, $timeout, $modalInstance, registroEditar, ProgTrimCursos, CursosPtc, CatalogoCursos, CatalogoInstructores) {
 
             var vm = this;
+
+            vm.sort_by = sort_by;
+            vm.openCalendar1 = openCalendar1;
+            vm.openCalendar2 = openCalendar2;
+
+            vm.muestraInstructoresCurso = muestraInstructoresCurso;
+            vm.guardar = guardar;
+            vm.agregaInstructor = agregaInstructor;
+            vm.eliminaInstructor = eliminaInstructor;
+
+
             vm.opened1 = false;
             vm.opened2 = false;
 
             vm.mostrarSpiner = false;
+            vm.mostrar_msg_error = false;
+            vm.mensaje = '';
             vm.EdicionCurso = false;
 
             vm.cursoSeleccionado = 0;
@@ -21,10 +34,12 @@
            
             vm.instructorSeleccionado = {};
             vm.listaInstructores = [];
-           
+
+            vm.horas_disponibles = registroEditar.horas_disponibles - registroEditar.horas_usadas;
 
             vm.registroEdicion = {
-                    idPtc           : registroEditar.idPtc,
+                    idPtc           : registroEditar.recordPTC.idPtc,
+                    idCursoPTC      : 0,
                     idCatalogoCurso : 0,
                     nombreCurso     : '',
                     modalidad       : '',
@@ -43,14 +58,6 @@
                     instructores_propuestos: []
             };
 
-            vm.sort_by = sort_by;
-            vm.openCalendar1 = openCalendar1;
-            vm.openCalendar2 = openCalendar2;
-
-            vm.muestraInstructoresCurso = muestraInstructoresCurso;
-            vm.guardar = guardar;
-            vm.agregaInstructor = agregaInstructor;
-            vm.eliminaInstructor = eliminaInstructor;
 
             inicia();
 
@@ -85,6 +92,9 @@
 
 
             function muestraInstructoresCurso(){
+
+                vm.registroEdicion.claveCurso = vm.cursoSeleccionado.claveCurso;
+                vm.registroEdicion.modalidad = vm.cursoSeleccionado.modalidad;
 
                 vm.listaInstructores = [];
                 CatalogoCursos.instructores_habilitados({
@@ -172,54 +182,92 @@
             function guardar() {
 
                 vm.mostrarSpiner = true;
-                
-                CursosPtc
-                .create({
-                    idPtc           : vm.registroEdicion.idPtc,
-                    idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
-                    horario         : vm.registroEdicion.horario,
-                    aulaAsignada    : vm.registroEdicion.aulaAsignada,
-                    capacitandos    : vm.registroEdicion.capacitandos,
-                    semanas         : vm.registroEdicion.semanas,
-                    total           : vm.registroEdicion.total,
-                    fechaInicio     : vm.registroEdicion.fechaInicio,
-                    fechaFin        : vm.registroEdicion.fechaFin,
-                    observaciones   : vm.registroEdicion.observaciones
-                })
-                .$promise
-                .then(function(respuesta) {
-                    if(vm.registroEdicion.instructores_propuestos.length > 0)
-                    {
-                            angular.forEach(vm.registroEdicion.instructores_propuestos, function(record) {
 
-                                    CursosPtc.instructores_propuestos.link({
-                                          id: respuesta.idCursoPTC,
-                                          fk: record.idInstructor
-                                    },{
-                                    }) 
-                                    .$promise
-                                    .then(function() {
-                                    });
+                if((registroEditar.horas_usadas + vm.registroEdicion.total) > registroEditar.horas_disponibles)
+                {
+                        vm.mostrarSpiner = false;
+                        vm.mensaje = 'El número de horas de este curso incrementa las horas total del PTC ('+(registroEditar.horas_usadas + vm.registroEdicion.total)+' horas) siendo mayor a las horas disponibles para la unidad ('+registroEditar.horas_disponibles+' horas)';
+                        vm.mostrar_msg_error = true;
+                        $timeout(function(){
+                             vm.mensaje = '';
+                             vm.mostrar_msg_error = false;
+                        }, 6000);
+                        return;
+                }
+                else
+                {
+                            CursosPtc
+                            .create({
+                                idPtc           : vm.registroEdicion.idPtc,
+                                idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
+                                horario         : vm.registroEdicion.horario,
+                                aulaAsignada    : vm.registroEdicion.aulaAsignada,
+                                capacitandos    : vm.registroEdicion.capacitandos,
+                                semanas         : vm.registroEdicion.semanas,
+                                total           : vm.registroEdicion.total,
+                                fechaInicio     : vm.registroEdicion.fechaInicio,
+                                fechaFin        : vm.registroEdicion.fechaFin,
+                                observaciones   : vm.registroEdicion.observaciones
+                            })
+                            .$promise
+                            .then(function(respuesta) {
+                                
+                                vm.registroEdicion.idCursoPTC = respuesta.idCursoPTC;
+
+                                if(vm.registroEdicion.instructores_propuestos.length > 0)
+                                {
+                                        angular.forEach(vm.registroEdicion.instructores_propuestos, function(record) {
+
+                                                CursosPtc.instructores_propuestos.link({
+                                                      id: respuesta.idCursoPTC,
+                                                      fk: record.idInstructor
+                                                },{
+                                                }) 
+                                                .$promise
+                                                .then(function() {
+                                                });
+                                        });
+                                }
+
+                                CursosPtc.find({
+                                  filter: {
+                                      where: {idPtc: vm.registroEdicion.idPtc},
+                                      fields: ['total']
+                                  }
+                                })
+                                .$promise
+                                .then(function(resp) {
+
+                                        var total_horas_separadas = 0;
+                                        angular.forEach(resp, function(record) {
+
+                                                total_horas_separadas += record.total;
+                                        });
+
+                                        ProgTrimCursos.prototype$updateAttributes(
+                                        {
+                                            id: vm.registroEdicion.idPtc
+                                        },{
+                                            estatus: 0,
+                                            horasSeparadas :total_horas_separadas,
+                                            fechaModificacion : Date()
+                                        })
+                                        .$promise
+                                        .then(function(respuesta) {
+                                                vm.registroEdicion.estatusPTC = 0;
+                                                vm.registroEdicion.horasSeparadas = respuesta.horasSeparadas;
+                                                vm.registroEdicion.fechaModificacionPTC = respuesta.fechaModificacion;
+                                                $modalInstance.close(vm.registroEdicion);
+                                        });
+
+                                });
+
+                            })
+                            .catch(function(error) {
                             });
-                    }
+                }
 
-                    ProgTrimCursos.prototype$updateAttributes(
-                    {
-                        id: vm.registroEdicion.idPtc
-                    },{
-                        estatus: 0,
-                        fechaModificacion : Date()
-                    })
-                    .$promise
-                    .then(function(respuesta) {
-                            vm.registroEdicion.estatusPTC = 0;
-                            vm.registroEdicion.fechaModificacionPTC = respuesta.fechaModificacion;
-                            $modalInstance.close(vm.registroEdicion);
-                    });
 
-                })
-                .catch(function(error) {
-                });
 
             };
     };

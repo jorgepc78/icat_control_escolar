@@ -16,6 +16,8 @@
             vm.cambiarPagina              = cambiarPagina;
             vm.edita_datos_registro       = edita_datos_registro;
             vm.nuevo_registro             = nuevo_registro;
+            vm.desactiva_registro         = desactiva_registro;
+            vm.activa_registro            = activa_registro;
             vm.elimina_registro           = elimina_registro;
 
             vm.tablaListaRegistros = {
@@ -36,7 +38,7 @@
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
                               where: vm.tablaListaRegistros.condicion,
-                              fields: ['idCatalogoCurso','claveCurso','descripcion','idEspecialidad','modalidad','nombreCurso','numeroHoras'],
+                              fields: ['idCatalogoCurso','claveCurso','descripcion','idEspecialidad','modalidad','nombreCurso','numeroHoras','activo'],
                               order: ['nombreCurso ASC'],
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
@@ -232,14 +234,14 @@
             };
 
 
-            function elimina_registro(RegistroSeleccionado) {
+            function desactiva_registro(RegistroSeleccionado) {
 
                   swal({
                     title: "Confirmar",
-                    html: 'Se eliminar&aacute; el curso <strong>'+ RegistroSeleccionado.nombreCurso +'</strong>, ¿Continuar?',
+                    html: 'El curso <strong>'+ RegistroSeleccionado.nombreCurso +'</strong> ser&aacute; desactivado y no aparecer&aacute; en la lista de cursos para el armado del PTC, ¿Continuar?',
                     type: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
+                    confirmButtonColor: "#9a0000",
                     confirmButtonText: "Aceptar",
                     cancelButtonText: "Cancelar",
                     closeOnConfirm: false,
@@ -247,20 +249,121 @@
                   }, function(){
                           swal.disableButtons();
 
-                            CatalogoCursos.temario.destroyAll({ id: RegistroSeleccionado.idCatalogoCurso })
-                              .$promise
-                              .then(function() { 
-
-                                    CatalogoCursos.deleteById({ id: RegistroSeleccionado.idCatalogoCurso })
-                                    .$promise
-                                    .then(function() { 
-                                          vm.limpiaBusqueda();
-                                          swal('Curso eliminado', '', 'success');
-                                    });
-
+                            CatalogoCursos.prototype$updateAttributes(
+                            {
+                                id: RegistroSeleccionado.idCatalogoCurso
+                            },{
+                                activo: false
+                            })
+                            .$promise
+                            .then(function(respuesta) {
+                                  vm.RegistroSeleccionado.activo = respuesta.activo;
+                                  swal('Curso desactivado', '', 'success');
                             });
 
                   });
+
+            }
+
+
+            function activa_registro(RegistroSeleccionado) {
+
+                  swal({
+                    title: "Confirmar",
+                    html: 'El curso <strong>'+ RegistroSeleccionado.nombreCurso +'</strong> ser&aacute; activado y podr&aacute; ser visualizado en la lista de cursos para el armado del PTC, ¿Continuar?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#9a0000",
+                    confirmButtonText: "Aceptar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                  }, function(){
+                          swal.disableButtons();
+
+                            CatalogoCursos.prototype$updateAttributes(
+                            {
+                                id: RegistroSeleccionado.idCatalogoCurso
+                            },{
+                                activo: true
+                            })
+                            .$promise
+                            .then(function(respuesta) {
+                                  vm.RegistroSeleccionado.activo = respuesta.activo;
+                                  swal('Curso activado', '', 'success');
+                            });
+
+                  });
+
+            }
+
+
+            function elimina_registro(RegistroSeleccionado) {
+
+                  CatalogoCursos.instructores_habilitados.count({ id: RegistroSeleccionado.idCatalogoCurso })
+                  .$promise
+                  .then(function(resultado) {
+                      if(resultado.count > 0)
+                      {
+                            swal({
+                              title: 'Error',
+                              html: 'No se puede eliminar el curso seleccionado porque tiene instructores relacionados',
+                              type: 'error',
+                              showCancelButton: false,
+                              confirmButtonColor: "#9a0000",
+                              confirmButtonText: "Aceptar"
+                            });
+                      }
+                      else
+                      {
+                            CatalogoCursos.cursosPTC_pertenece.count({id: RegistroSeleccionado.idCatalogoCurso})
+                            .$promise
+                            .then(function(resultado) {
+                                  if(resultado.count > 0)
+                                  {
+                                        swal({
+                                          title: 'Error',
+                                          html: 'No se puede eliminar el curso seleccionado porque se encuentra registrado en alg&uacute;n PTC',
+                                          type: 'error',
+                                          showCancelButton: false,
+                                          confirmButtonColor: "#9a0000",
+                                          confirmButtonText: "Aceptar"
+                                        });
+                                  }
+                                  else
+                                  {
+                                        swal({
+                                          title: "Confirmar",
+                                          html: 'Se eliminar&aacute; el curso <strong>'+ RegistroSeleccionado.nombreCurso +'</strong>, ¿Continuar?',
+                                          type: "warning",
+                                          showCancelButton: true,
+                                          confirmButtonColor: "#3085d6",
+                                          confirmButtonText: "Aceptar",
+                                          cancelButtonText: "Cancelar",
+                                          closeOnConfirm: false,
+                                          closeOnCancel: true
+                                        }, function(){
+                                                swal.disableButtons();
+
+                                                  CatalogoCursos.temario.destroyAll({ id: RegistroSeleccionado.idCatalogoCurso })
+                                                    .$promise
+                                                    .then(function() { 
+
+                                                          CatalogoCursos.deleteById({ id: RegistroSeleccionado.idCatalogoCurso })
+                                                          .$promise
+                                                          .then(function() { 
+                                                                vm.limpiaBusqueda();
+                                                                swal('Curso eliminado', '', 'success');
+                                                          });
+
+                                                  });
+
+                                        });                                    
+                                  }
+                            });
+                      }
+                  });
+
 
             };
 

@@ -45,7 +45,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "horas_asignadas": {
+      "type": "hasMany",
+      "model": "HorasAsignadasUnidad",
+      "foreignKey": "idUnidadAdmtva"
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -21,16 +21,16 @@
                           <div class="row">
 
                               <div class="col-md-5">
-                                      <span class="btn btn-info btn-sm btn-labeled btn-file"> 
+                                      <span class="btn btn-default btn-sm btn-labeled btn-file"> 
                                       <span class="btn-label"><i class="fa fa-plus"></i></span>Seleccione
                                           <input type="file" ng-model="vm.imagenTemp" name="file" base-sixty-four-input onload="vm.cargaImagen" maxsize="200" accept="image/*">
                                       </span>
                                       <span ng-show="( (vm.imagenTemp.filesize / 1024) >= 200)"><p class="text-danger">El archivo no debe exceder los 200 KB</p></span>
-                                      <img style="margin-top:20px; height:300px;" base-sixty-four-image="vm.imagenTemp" alt="" data-ng-src="{{vm.registroEdicion.fotoInicio}}">
+                                      <img style="margin-top:20px; height:250px;" base-sixty-four-image="vm.imagenTemp" alt="" data-ng-src="{{vm.registroEdicion.fotoInicio}}">
                               </div>
 
                               <div class="col-md-2">
-                                      <button type="button" class="btn btn-danger" ng-click="vm.borraFoto()">Borrar foto</button>
+                                      <button type="button" class="btn btn-danger btn-labeled" ng-click="vm.borraFoto()"><span class="btn-label"><i class="fa fa-trash-o"></i></span>Borrar foto</button>
                               </div>
 
                           </div>
@@ -41,7 +41,7 @@
 
       </div>
       <div class="modal-footer">
-          <button type="button" ng-click="$dismiss()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
-          <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+          <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+          <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
       </div>
 </div>

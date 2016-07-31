@@ -5,11 +5,18 @@
         .module('icat_control_escolar')
         .controller('ModalnuevoCatCursoController', ModalnuevoCatCursoController);
 
-        ModalnuevoCatCursoController.$inject = ['$scope', '$modalInstance', 'CatalogoCursos', 'CatalogoEspecialidades'];
+        ModalnuevoCatCursoController.$inject = ['$scope', '$timeout', '$modalInstance', 'CatalogoCursos', 'CatalogoEspecialidades'];
 
-    function ModalnuevoCatCursoController($scope, $modalInstance, CatalogoCursos, CatalogoEspecialidades) {
+    function ModalnuevoCatCursoController($scope, $timeout, $modalInstance, CatalogoCursos, CatalogoEspecialidades) {
 
             var vm = this;
+
+            vm.guardar = guardar;
+            vm.agregaTema = agregaTema;
+            vm.eliminaRegistro = eliminaRegistro;
+
+            vm.mostrarSpiner = false;
+            vm.mostrar_msg_error = false;
 
             vm.especialidadSeleccionada = 0;
             vm.listaEspecialidades = {};
@@ -25,10 +32,6 @@
                     numeroHoras     : '',
                     temario         : []
             };
-
-            vm.guardar = guardar;
-            vm.agregaTema = agregaTema;
-            vm.eliminaRegistro = eliminaRegistro;
 
             inicia();
 
@@ -59,6 +62,25 @@
 
 
             function guardar() {
+
+                    vm.mostrarSpiner = true;
+
+                    var temasVacios = false;
+                    angular.forEach(vm.registroEdicion.temario, function(record) {
+                          if(record.tema == '')
+                          temasVacios = true;
+                    });
+
+                    if(temasVacios == true)
+                    {
+                        vm.mostrarSpiner = false;
+                        vm.mostrar_msg_error = true;
+                        $timeout(function(){
+                             vm.mostrar_msg_error = false;
+                        }, 2000);
+                        return;                        
+                    }
+
 
                     var datos = {
                             claveCurso     : vm.registroEdicion.claveCurso,

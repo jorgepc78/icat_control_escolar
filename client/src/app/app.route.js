@@ -82,6 +82,13 @@
                 url: '/ptc',
                 templateUrl: 'app/shared/layout/content-top-navigation.html',
             })
+            .state('ptc.asigna_horas', {
+                url: '/asigna_horas',
+                templateUrl: 'app/components/ptc/asignacion-horas/principal-horas-unidad.html',
+                controller: 'PrincipalHorasUnidadController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
             .state('ptc.planeacion_ptc', {
                 url: '/planeacion_ptc',
                 templateUrl: 'app/components/ptc/ptc-unidad/principal-ptc-unidad.html',

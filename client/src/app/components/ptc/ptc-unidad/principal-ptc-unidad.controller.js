@@ -5,11 +5,32 @@
         .module('icat_control_escolar')
         .controller('PrincipalPTCUnidadController', PrincipalPTCUnidadController);
 
-    PrincipalPTCUnidadController.$inject = ['$scope', '$modal', '$q', 'tablaDatosService', 'ProgTrimCursos', 'CursosPtc', 'ControlProcesos'];
+    PrincipalPTCUnidadController.$inject = ['$scope', '$modal', '$q', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'ControlProcesos'];
 
-    function PrincipalPTCUnidadController($scope, $modal, $q, tablaDatosService, ProgTrimCursos, CursosPtc, ControlProcesos) {
+    function PrincipalPTCUnidadController($scope, $modal, $q, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, ControlProcesos) {
 
             var vm = this;
+
+            /****** DEFINICION DE FUNCIONES DE LA TABLA PRINCIPAL ******/
+            vm.muestra_ptc_anio       = muestra_ptc_anio;
+            vm.muestra_ptc_estatus    = muestra_ptc_estatus;
+            
+            vm.muestraCursosPTCActual = muestraCursosPTCActual;
+            //vm.cambiarPaginaPrincipal = cambiarPaginaPrincipal;
+            vm.cambiarPaginaDetalle   = cambiarPaginaDetalle;
+            
+            vm.editaPTC        = editaPTC;
+            vm.nuevoPTC        = nuevoPTC;
+            vm.eliminaPTC      = eliminaPTC;
+            vm.enviaRevisionPTC  = enviaRevisionPTC;
+
+            vm.editaCursoPTC   = editaCursoPTC;
+            vm.nuevoCursoPTC   = nuevoCursoPTC;
+            vm.eliminaCursoPTC = eliminaCursoPTC;
+
+
+            vm.anioSeleccionado = {};
+            vm.horas_disponibles = 0;
 
             /****** ELEMENTOS DE LA TABLA PRINCIPAL ******/
             vm.tablaListaPTCs = {
@@ -35,7 +56,7 @@
             vm.tablaListaCursos = {
               totalElementos     : 0,
               paginaActual       : 1,
-              registrosPorPagina : 10,
+              registrosPorPagina : 5,
               inicio             : 0,
               fin                : 1,
               condicion          : {},
@@ -43,24 +64,8 @@
               fila_seleccionada  : 0
             };
 
-            vm.registrosCursosPTCs = {};
+            vm.registrosCursosPTCs = [];
 
-
-            /****** DEFINICION DE FUNCIONES DE LA TABLA PRINCIPAL ******/
-            vm.muestra_ptc_estatus    = muestra_ptc_estatus;
-            
-            vm.muestraCursosPTCActual = muestraCursosPTCActual;
-            vm.cambiarPaginaPrincipal = cambiarPaginaPrincipal;
-            vm.cambiarPaginaDetalle   = cambiarPaginaDetalle;
-            
-            vm.editaPTC        = editaPTC;
-            vm.nuevoPTC        = nuevoPTC;
-            vm.eliminaPTC      = eliminaPTC;
-            vm.enviaRevisionPTC  = enviaRevisionPTC;
-
-            vm.editaCursoPTC   = editaCursoPTC;
-            vm.nuevoCursoPTC   = nuevoCursoPTC;
-            vm.eliminaCursoPTC = eliminaCursoPTC;
 
             inicia();
             
@@ -74,21 +79,8 @@
                       {valor: 3, texto: 'Rechazado'}
                   ];
 
-                  vm.tablaListaPTCs.condicion = {
-                      and: [
-                        {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                        {
-                            or: [
-                              {estatus: 0},
-                              {estatus: 1},
-                              {estatus: 3}
-                            ]
-                        },
-                      ]
-                  };
-
                   vm.estatusSeleccionado = vm.listaEstatus[0];
-                  
+
                   vm.tablaListaPTCs.filtro_datos = {
                           filter: {
                               where: vm.tablaListaPTCs.condicion,
@@ -123,7 +115,7 @@
                                   {
                                       relation: 'instructores_propuestos',
                                       scope: {
-                                        fields: ['apellidoPaterno','apellidoMaterno','nombre'],
+                                        fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre'],
                                         order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
                                       }
                                   }
@@ -131,22 +123,21 @@
                           }
                   };
 
+                  HorasAsignadasUnidad.find({
+                      filter: {
+                          where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                          fields: ['id','anio','horasAsignadas'],
+                          order: 'anio DESC'
+                      }
+                  })
+                  .$promise
+                  .then(function(resp) {
 
-                  tablaDatosService.obtiene_datos_tabla(ProgTrimCursos, vm.tablaListaPTCs)
-                  .then(function(respuesta) {
+                        vm.listaAniosDisp = resp;
+                        vm.anioSeleccionado = vm.listaAniosDisp[0];
 
-                        vm.tablaListaPTCs.totalElementos = respuesta.total_registros;
-                        vm.tablaListaPTCs.inicio = respuesta.inicio;
-                        vm.tablaListaPTCs.fin = respuesta.fin;
+                        vm.muestra_ptc_anio();
 
-                        if(vm.tablaListaPTCs.totalElementos > 0)
-                        {
-                            vm.registrosPTCs = respuesta.datos;
-                            vm.RegistroPTCSeleccionado = vm.registrosPTCs[0];
-                            vm.tablaListaPTCs.fila_seleccionada = 0;
-                            vm.client = 2;
-                            muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
-                        }
                   });
 
             }
@@ -154,7 +145,7 @@
 
 
 
-            function cambiarPaginaPrincipal() {
+            /*function cambiarPaginaPrincipal() {
 
                   if(vm.tablaListaPTCs.totalElementos > 0)
                   {
@@ -171,7 +162,7 @@
                             muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
                         });
                   }
-            }
+            }*/
 
 
 
@@ -204,7 +195,7 @@
                   vm.tablaListaCursos.fin = 1;
                   vm.tablaListaCursos.condicion = {idPtc: seleccion.idPtc};
 
-                  vm.registrosCursosPTCs = {};
+                  vm.registrosCursosPTCs = [];
                   tablaDatosService.obtiene_datos_tabla(CursosPtc, vm.tablaListaCursos)
                   .then(function(respuesta) {
 
@@ -224,6 +215,53 @@
 
 
 
+            function muestra_ptc_anio() {
+
+                  vm.registrosPTCs = {};
+                  vm.RegistroPTCSeleccionado = {};
+                  vm.tablaListaPTCs.fila_seleccionada = undefined;
+                  vm.client = 1;
+                  vm.tablaListaPTCs.paginaActual = 1;
+                  vm.tablaListaPTCs.inicio = 0;
+                  vm.tablaListaPTCs.fin = 1;
+
+                  vm.tablaListaPTCs.condicion = {
+                      and: [
+                        {anio: vm.anioSeleccionado.anio},
+                        {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                        {
+                            or: [
+                              {estatus: 0},
+                              {estatus: 1},
+                              {estatus: 3}
+                            ]
+                        },
+                      ]
+                  };
+
+                  vm.estatusSeleccionado = vm.listaEstatus[0];
+
+                  tablaDatosService.obtiene_datos_tabla(ProgTrimCursos, vm.tablaListaPTCs)
+                  .then(function(respuesta) {
+
+                        vm.tablaListaPTCs.totalElementos = respuesta.total_registros;
+                        vm.tablaListaPTCs.inicio = respuesta.inicio;
+                        vm.tablaListaPTCs.fin = respuesta.fin;
+
+                        if(vm.tablaListaPTCs.totalElementos > 0)
+                        {
+                            vm.registrosPTCs = respuesta.datos;
+                            vm.RegistroPTCSeleccionado = vm.registrosPTCs[0];
+                            vm.client = 2;
+                            vm.tablaListaPTCs.fila_seleccionada = 0;
+                            muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
+                        }
+
+                        calcula_horas_disponibles();
+                  });
+            };
+
+
             function muestra_ptc_estatus() {
 
                   vm.registrosPTCs = {};
@@ -234,10 +272,11 @@
                   vm.tablaListaPTCs.inicio = 0;
                   vm.tablaListaPTCs.fin = 1;
 
-                  if(vm.estatusSeleccionado.valor == -1)
+                  if(vm.estatusSeleccionado.valor == -1 || vm.estatusSeleccionado.valor == undefined)
                   {
                         vm.tablaListaPTCs.condicion = {
                             and: [
+                              {anio: vm.anioSeleccionado.anio},
                               {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                               {
                                   or: [
@@ -253,6 +292,7 @@
                   {
                         vm.tablaListaPTCs.condicion = {
                             and: [
+                              {anio: vm.anioSeleccionado.anio},
                               {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                               {estatus: vm.estatusSeleccionado.valor}
                             ]
@@ -345,6 +385,9 @@
                                 var deferred = $q.defer();
                                 var total_cursos = registrosCursosPTCs.length;
                                 var indice = 0;
+                                
+                                if(total_cursos == 0)
+                                  deferred.resolve();
 
                                 angular.forEach(registrosCursosPTCs, function(curso) {
 
@@ -469,7 +512,7 @@
                         controller: 'ModalEditaCursoPTCController as vm',
                         windowClass: 'app-modal-window',
                         resolve: {
-                          registroEditar: function () { return seleccion }
+                          registroEditar: function () { return {horas_disponibles: vm.horas_disponibles, horas_usadas: vm.RegistroPTCSeleccionado.horasSeparadas, recordPTC: seleccion} }
                         }
 
                     });
@@ -488,12 +531,16 @@
                         seleccion.observaciones             = respuesta.observaciones;
                         
                         vm.RegistroPTCSeleccionado.estatus           = respuesta.estatusPTC;
+                        vm.RegistroPTCSeleccionado.horasSeparadas    = respuesta.horasSeparadas;
                         vm.RegistroPTCSeleccionado.fechaModificacion = respuesta.fechaModificacionPTC;
+
+                        calcula_horas_disponibles();
 
                         seleccion.instructores_propuestos = [];
 
                         angular.forEach(respuesta.instructores_propuestos, function(record) {
                             seleccion.instructores_propuestos.push({
+                                idInstructor    : record.idInstructor,
                                 apellidoPaterno : record.apellidoPaterno,
                                 apellidoMaterno : record.apellidoMaterno,
                                 nombre          : record.nombre
@@ -505,6 +552,7 @@
             };
 
 
+
             function nuevoCursoPTC() {
 
                     var modalInstance = $modal.open({
@@ -513,46 +561,25 @@
                         controller: 'ModalNuevoCursoPTCController as vm',
                         windowClass: 'app-modal-window',
                         resolve: {
-                          registroEditar: function () { return vm.RegistroPTCSeleccionado }
+                          registroEditar: function () { return {horas_disponibles: vm.horas_disponibles, horas_usadas: vm.RegistroPTCSeleccionado.horasSeparadas, recordPTC: vm.RegistroPTCSeleccionado} }
                         }
                     });
 
                     modalInstance.result.then(function (respuesta1) {
 
                         vm.RegistroPTCSeleccionado.estatus           = respuesta1.estatusPTC;
+                        vm.RegistroPTCSeleccionado.horasSeparadas    = respuesta1.horasSeparadas;
                         vm.RegistroPTCSeleccionado.fechaModificacion = respuesta1.fechaModificacionPTC;
 
-                        vm.client = 1;
-                        vm.tablaListaCursos.paginaActual = 1;
-                        vm.tablaListaCursos.inicio = 0;
-                        vm.tablaListaCursos.fin = 1;
-                        vm.tablaListaCursos.condicion = {idPtc: vm.RegistroPTCSeleccionado.idPtc};
-
-                        vm.registrosCursosPTCs = {};
-                        tablaDatosService.obtiene_datos_tabla(CursosPtc, vm.tablaListaCursos)
-                        .then(function(respuesta) {
-
-                              vm.RegistroPTCSeleccionado.cursos_programados = [];
-                              
-                              angular.forEach(respuesta.datos, function(record) {                                  
-                                  
-                                  vm.RegistroPTCSeleccionado.cursos_programados.push({
-                                      idCursoPTC : record.idCursoPTC,
-                                      idPtc   : vm.RegistroPTCSeleccionado.idPtc
-                                  });
-
-                              });
-
-                              vm.tablaListaCursos.totalElementos = respuesta.total_registros;
-                              vm.tablaListaCursos.inicio = respuesta.inicio;
-                              vm.tablaListaCursos.fin = respuesta.fin;
-
-                              if(vm.tablaListaCursos.totalElementos > 0)
-                              {
-                                  vm.client = 2;
-                                  vm.registrosCursosPTCs = respuesta.datos;
-                              }
+                        vm.RegistroPTCSeleccionado.cursos_programados.push({
+                            idCursoPTC : respuesta1.idCursoPTC,
+                            idPtc   : vm.RegistroPTCSeleccionado.idPtc
                         });
+
+                        calcula_horas_disponibles();
+
+                        muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
+
                     }, function () {
                     });
             };
@@ -588,25 +615,44 @@
                                           if(index >= 0)
                                             vm.RegistroPTCSeleccionado.cursos_programados.splice(index, 1);
 
-                                          vm.client = 1;
-                                          vm.tablaListaCursos.paginaActual = 1;
-                                          vm.tablaListaCursos.inicio = 0;
-                                          vm.tablaListaCursos.fin = 1;
-                                          vm.tablaListaCursos.condicion = {idPtc: vm.RegistroPTCSeleccionado.idPtc};
 
-                                          vm.registrosCursosPTCs = {};
-                                          tablaDatosService.obtiene_datos_tabla(CursosPtc, vm.tablaListaCursos)
-                                          .then(function(respuesta) {
-                                                vm.tablaListaCursos.totalElementos = respuesta.total_registros;
-                                                vm.tablaListaCursos.inicio = respuesta.inicio;
-                                                vm.tablaListaCursos.fin = respuesta.fin;
+                                          CursosPtc.find({
+                                            filter: {
+                                                where: {idPtc: vm.RegistroPTCSeleccionado.idPtc},
+                                                fields: ['total']
+                                            }
+                                          })
+                                          .$promise
+                                          .then(function(resp) {
 
-                                                if(vm.tablaListaCursos.totalElementos > 0)
-                                                {
-                                                    vm.client = 2;
-                                                    vm.registrosCursosPTCs = respuesta.datos;
-                                                }
+                                                  var total_horas_separadas = 0;
+                                                  angular.forEach(resp, function(record) {
+                                                          total_horas_separadas += record.total;
+                                                  });
+
+                                                  ProgTrimCursos.prototype$updateAttributes(
+                                                  {
+                                                      id: vm.RegistroPTCSeleccionado.idPtc
+                                                  },{
+                                                      estatus: 0,
+                                                      horasSeparadas :total_horas_separadas,
+                                                      fechaModificacion : Date()
+                                                  })
+                                                  .$promise
+                                                  .then(function(respuesta) {
+
+                                                          vm.RegistroPTCSeleccionado.estatusPTC = respuesta.estatus;
+                                                          vm.RegistroPTCSeleccionado.horasSeparadas = respuesta.horasSeparadas;
+                                                          vm.RegistroPTCSeleccionado.fechaModificacionPTC = respuesta.fechaModificacion;
+                                                          calcula_horas_disponibles();
+                                                  });
+
+
                                           });
+
+
+                                          muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
+
                                           swal('Curso eliminado', '', 'success');
 
                                     });
@@ -616,6 +662,38 @@
                   });
 
             };
+
+
+            function calcula_horas_disponibles() {
+
+                  ProgTrimCursos.find({
+                      filter: {
+                          where: {
+                            and: [
+                                {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                {anio: vm.anioSeleccionado.anio},
+                                {or: [
+                                  {estatus: 2},
+                                  {estatus: 4}
+                                ]}
+                            ]
+                          },
+                          fields: ['idPtc','horasSeparadas','estatus']
+                      }
+                  })
+                  .$promise
+                  .then(function(resp) {
+
+                      var num_horas_separadas = 0;
+                      angular.forEach(resp, function(registro) {
+                          num_horas_separadas += registro.horasSeparadas;
+                      });
+                      
+                      vm.horas_disponibles = vm.anioSeleccionado.horasAsignadas - num_horas_separadas;
+
+                  });
+
+            }
 
 
     };

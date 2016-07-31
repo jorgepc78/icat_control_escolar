@@ -96,7 +96,7 @@
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Observaciones</label>
                               <div class="col-sm-9">
-                                  <textarea class="form-control" ng-model="vm.registroEdicion.observaciones" rows="4" cols="90" required></textarea>
+                                  <textarea class="form-control" ng-model="vm.registroEdicion.observaciones" rows="4" cols="90"></textarea>
                               </div>
                           </div>
                     </form>
@@ -151,9 +151,8 @@
       <div class="modal-footer">
 
           <div class="row">
-              <div class="col-md-7">
-              </div>
-              <div class="col-md-2">
+              <div class="col-md-9">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje}}</div>
                   <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
                       <div class="sk-bounce1"></div>
                       <div class="sk-bounce2"></div>

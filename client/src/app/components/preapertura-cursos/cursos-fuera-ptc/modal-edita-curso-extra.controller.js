@@ -11,8 +11,17 @@
 
             var vm = this;
 
+            vm.sort_by = sort_by;
+            vm.openCalendar1 = openCalendar1;
+            vm.openCalendar2 = openCalendar2;
+
+            vm.muestraInstructoresCurso = muestraInstructoresCurso;
+            vm.guardar = guardar;
+
             vm.mostrarSpiner = false;
             vm.EdicionCurso = true;
+            vm.mostrar_msg_error = false;
+            vm.mensaje = '';
 
             vm.listaCursos = {};
             vm.cursoSeleccionado = {};
@@ -22,39 +31,35 @@
            
             vm.instructorSeleccionado = "";
             vm.listaInstructores = [];
-         
+            
+            vm.horas_disponibles = registroEditar.horas_disponibles;
+
             vm.registroEdicion = {
-                    idCurso                 : registroEditar.idCurso,
-                    idPtc                   : registroEditar.idPtc,
-                    idCatalogoCurso         : registroEditar.idCatalogoCurso,
-                    nombreCurso             : registroEditar.nombreCurso,
-                    modalidad               : registroEditar.modalidad,
-                    claveCurso              : registroEditar.claveCurso,
-                    descripcion             : registroEditar.descripcionCurso,
-                    horario                 : registroEditar.horario,
-                    aulaAsignada            : registroEditar.aulaAsignada,
-                    semanas                 : registroEditar.horasSemana,
-                    total                   : registroEditar.numeroHoras,
-                    costo                   : registroEditar.costo,
-                    capacitandos            : registroEditar.cupoMaximo,
-                    min_requerido_inscritos : registroEditar.minRequeridoInscritos,
-                    min_requerido_pago      : registroEditar.minRequeridoPago,
-                    fechaInicio             : registroEditar.fechaInicio,
-                    fechaFin                : registroEditar.fechaFin,
-                    idLocalidad             : registroEditar.idLocalidad,
+                    idCurso                 : registroEditar.record.idCurso,
+                    idPtc                   : registroEditar.record.idPtc,
+                    idCatalogoCurso         : registroEditar.record.idCatalogoCurso,
+                    nombreCurso             : registroEditar.record.nombreCurso,
+                    modalidad               : registroEditar.record.modalidad,
+                    claveCurso              : registroEditar.record.claveCurso,
+                    descripcion             : registroEditar.record.descripcionCurso,
+                    horario                 : registroEditar.record.horario,
+                    aulaAsignada            : registroEditar.record.aulaAsignada,
+                    semanas                 : registroEditar.record.horasSemana,
+                    total                   : registroEditar.record.numeroHoras,
+                    costo                   : registroEditar.record.costo,
+                    capacitandos            : registroEditar.record.cupoMaximo,
+                    min_requerido_inscritos : registroEditar.record.minRequeridoInscritos,
+                    min_requerido_pago      : registroEditar.record.minRequeridoPago,
+                    fechaInicio             : registroEditar.record.fechaInicio,
+                    fechaFin                : registroEditar.record.fechaFin,
+                    idLocalidad             : registroEditar.record.idLocalidad,
                     nombreLocalidad         : '',
-                    idInstructor            : registroEditar.idInstructor,
-                    nombreInstructor        : registroEditar.nombreInstructor,
-                    publico                 : registroEditar.publico,
-                    observaciones           : registroEditar.observaciones
+                    idInstructor            : registroEditar.record.idInstructor,
+                    nombreInstructor        : registroEditar.record.nombreInstructor,
+                    publico                 : registroEditar.record.publico,
+                    observaciones           : registroEditar.record.observaciones
             };
 
-            vm.sort_by = sort_by;
-            vm.openCalendar1 = openCalendar1;
-            vm.openCalendar2 = openCalendar2;
-
-            vm.muestraInstructoresCurso = muestraInstructoresCurso;
-            vm.guardar = guardar;
 
             inicia();
 
@@ -195,51 +200,66 @@
 
                 vm.mostrarSpiner = true;
 
-                CursosOficiales
-                .prototype$updateAttributes({
-                    id: vm.registroEdicion.idCurso
-                },{
-                    idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
-                    idCursoPTC            : 0,
-                    idPtc                 : vm.registroEdicion.idPtc,
-                    idLocalidad           : vm.localidadSeleccionada.idLocalidad,
-                    nombreCurso           : vm.registroEdicion.nombreCurso,
-                    claveCurso            : vm.registroEdicion.claveCurso,
-                    descripcionCurso      : vm.registroEdicion.descripcion,
-                    modalidad             : vm.registroEdicion.modalidad,
-                    horario               : vm.registroEdicion.horario,
-                    aulaAsignada          : vm.registroEdicion.aulaAsignada,
-                    horasSemana           : vm.registroEdicion.semanas,
-                    numeroHoras           : vm.registroEdicion.total,
-                    costo                 : vm.registroEdicion.costo,
-                    cupoMaximo            : vm.registroEdicion.capacitandos,
-                    minRequeridoInscritos : vm.registroEdicion.min_requerido_inscritos,
-                    minRequeridoPago      : vm.registroEdicion.min_requerido_pago,
-                    fechaInicio           : vm.registroEdicion.fechaInicio,
-                    fechaFin              : vm.registroEdicion.fechaFin,
-                    publico               : vm.registroEdicion.publico,
+                if(vm.registroEdicion.total > vm.horas_disponibles)
+                {
+                        vm.mostrarSpiner = false;
+                        vm.mensaje = 'El número de horas de este curso ('+vm.registroEdicion.total+' horas) sobrepasa las horas disponibles para la unidad ('+registroEditar.horas_disponibles+' horas)';
+                        vm.mostrar_msg_error = true;
+                        $timeout(function(){
+                             vm.mensaje = '';
+                             vm.mostrar_msg_error = false;
+                        }, 6000);
+                        return;
+                }
+                else
+                {
 
-                    idInstructor          : vm.instructorSeleccionado.idInstructor,
-                    curpInstructor        : vm.instructorSeleccionado.curp,
-                    nombreInstructor      : vm.instructorSeleccionado.nombre_completo,
+                        CursosOficiales
+                        .prototype$updateAttributes({
+                            id: vm.registroEdicion.idCurso
+                        },{
+                            idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
+                            idCursoPTC            : 0,
+                            idPtc                 : vm.registroEdicion.idPtc,
+                            idLocalidad           : vm.localidadSeleccionada.idLocalidad,
+                            nombreCurso           : vm.registroEdicion.nombreCurso,
+                            claveCurso            : vm.registroEdicion.claveCurso,
+                            descripcionCurso      : vm.registroEdicion.descripcion,
+                            modalidad             : vm.registroEdicion.modalidad,
+                            horario               : vm.registroEdicion.horario,
+                            aulaAsignada          : vm.registroEdicion.aulaAsignada,
+                            horasSemana           : vm.registroEdicion.semanas,
+                            numeroHoras           : vm.registroEdicion.total,
+                            costo                 : vm.registroEdicion.costo,
+                            cupoMaximo            : vm.registroEdicion.capacitandos,
+                            minRequeridoInscritos : vm.registroEdicion.min_requerido_inscritos,
+                            minRequeridoPago      : vm.registroEdicion.min_requerido_pago,
+                            fechaInicio           : vm.registroEdicion.fechaInicio,
+                            fechaFin              : vm.registroEdicion.fechaFin,
+                            publico               : vm.registroEdicion.publico,
 
-                    observaciones         : vm.registroEdicion.observaciones,
-                    estatus               : 0,
-                    programadoPTC         : false
-                })
-                .$promise
-                .then(function(respuesta) {
+                            idInstructor          : vm.instructorSeleccionado.idInstructor,
+                            curpInstructor        : vm.instructorSeleccionado.curp,
+                            nombreInstructor      : vm.instructorSeleccionado.nombre_completo,
 
-                        vm.registroEdicion.idInstructor     = vm.instructorSeleccionado.idInstructor;
-                        vm.registroEdicion.nombreInstructor = vm.instructorSeleccionado.nombre_completo;
-                        vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.idLocalidad;
-                        vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.nombre;
+                            observaciones         : vm.registroEdicion.observaciones,
+                            estatus               : 0,
+                            programadoPTC         : false
+                        })
+                        .$promise
+                        .then(function(respuesta) {
 
-                        $modalInstance.close(vm.registroEdicion);
-                })
-                .catch(function(error) {
-                });
+                                vm.registroEdicion.idInstructor     = vm.instructorSeleccionado.idInstructor;
+                                vm.registroEdicion.nombreInstructor = vm.instructorSeleccionado.nombre_completo;
+                                vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.idLocalidad;
+                                vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.nombre;
 
+                                $modalInstance.close(vm.registroEdicion);
+                        })
+                        .catch(function(error) {
+                        });
+
+                }
 
             };
     };

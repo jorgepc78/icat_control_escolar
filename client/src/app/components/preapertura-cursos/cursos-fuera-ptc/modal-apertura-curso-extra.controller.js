@@ -11,8 +11,17 @@
 
             var vm = this;
 
+            vm.sort_by = sort_by;
+            vm.openCalendar1 = openCalendar1;
+            vm.openCalendar2 = openCalendar2;
+
+            vm.muestraInstructoresCurso = muestraInstructoresCurso;
+            vm.guardar = guardar;
+
             vm.mostrarSpiner = false;
             vm.EdicionCurso = false;
+            vm.mostrar_msg_error = false;
+            vm.mensaje = '';
 
             vm.listaCursos = {};
             vm.cursoSeleccionado = {};
@@ -23,9 +32,11 @@
             vm.instructorSeleccionado = "";
             vm.listaInstructores = [];
            
+            vm.horas_disponibles = registroEditar.horas_disponibles;
+
             vm.registroEdicion = {
                     idCurso                 : 0,
-                    idPtc                   : registroEditar.idPtc,
+                    idPtc                   : registroEditar.record.idPtc,
                     idCatalogoCurso         : 0,
                     nombreCurso             : '',
                     modalidad               : '',
@@ -50,12 +61,6 @@
                     instructores_propuestos : []
             };
 
-            vm.sort_by = sort_by;
-            vm.openCalendar1 = openCalendar1;
-            vm.openCalendar2 = openCalendar2;
-
-            vm.muestraInstructoresCurso = muestraInstructoresCurso;
-            vm.guardar = guardar;
 
             inicia();
 
@@ -157,43 +162,57 @@
 
                 vm.mostrarSpiner = true;
 
-                CursosOficiales
-                .create({
-                    idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
-                    idCursoPTC            : 0,
-                    idPtc                 : vm.registroEdicion.idPtc,
-                    idLocalidad           : vm.localidadSeleccionada.idLocalidad,
-                    nombreCurso           : vm.registroEdicion.nombreCurso,
-                    claveCurso            : vm.registroEdicion.claveCurso,
-                    descripcionCurso      : vm.registroEdicion.descripcion,
-                    modalidad             : vm.registroEdicion.modalidad,
-                    horario               : vm.registroEdicion.horario,
-                    aulaAsignada          : vm.registroEdicion.aulaAsignada,
-                    horasSemana           : vm.registroEdicion.semanas,
-                    numeroHoras           : vm.registroEdicion.total,
-                    costo                 : vm.registroEdicion.costo,
-                    cupoMaximo            : vm.registroEdicion.capacitandos,
-                    minRequeridoInscritos : vm.registroEdicion.min_requerido_inscritos,
-                    minRequeridoPago      : vm.registroEdicion.min_requerido_pago,
-                    fechaInicio           : vm.registroEdicion.fechaInicio,
-                    fechaFin              : vm.registroEdicion.fechaFin,
-                    publico               : vm.registroEdicion.publico,
+                if(vm.registroEdicion.total > vm.horas_disponibles)
+                {
+                        vm.mostrarSpiner = false;
+                        vm.mensaje = 'El número de horas de este curso ('+vm.registroEdicion.total+' horas) sobrepasa las horas disponibles para la unidad ('+registroEditar.horas_disponibles+' horas)';
+                        vm.mostrar_msg_error = true;
+                        $timeout(function(){
+                             vm.mensaje = '';
+                             vm.mostrar_msg_error = false;
+                        }, 6000);
+                        return;
+                }
+                else
+                {
+                        CursosOficiales
+                        .create({
+                            idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
+                            idCursoPTC            : 0,
+                            idPtc                 : vm.registroEdicion.idPtc,
+                            idLocalidad           : vm.localidadSeleccionada.idLocalidad,
+                            idCatalogoCurso       : vm.registroEdicion.idCatalogoCurso,
+                            nombreCurso           : vm.registroEdicion.nombreCurso,
+                            claveCurso            : vm.registroEdicion.claveCurso,
+                            descripcionCurso      : vm.registroEdicion.descripcion,
+                            modalidad             : vm.registroEdicion.modalidad,
+                            horario               : vm.registroEdicion.horario,
+                            aulaAsignada          : vm.registroEdicion.aulaAsignada,
+                            horasSemana           : vm.registroEdicion.semanas,
+                            numeroHoras           : vm.registroEdicion.total,
+                            costo                 : vm.registroEdicion.costo,
+                            cupoMaximo            : vm.registroEdicion.capacitandos,
+                            minRequeridoInscritos : vm.registroEdicion.min_requerido_inscritos,
+                            minRequeridoPago      : vm.registroEdicion.min_requerido_pago,
+                            fechaInicio           : vm.registroEdicion.fechaInicio,
+                            fechaFin              : vm.registroEdicion.fechaFin,
+                            publico               : vm.registroEdicion.publico,
 
-                    idInstructor          : vm.instructorSeleccionado.idInstructor,
-                    curpInstructor        : vm.instructorSeleccionado.curp,
-                    nombreInstructor      : vm.instructorSeleccionado.nombre_completo,
+                            idInstructor          : vm.instructorSeleccionado.idInstructor,
+                            curpInstructor        : vm.instructorSeleccionado.curp,
+                            nombreInstructor      : vm.instructorSeleccionado.nombre_completo,
 
-                    observaciones         : vm.registroEdicion.observaciones,
-                    estatus               : 0,
-                    programadoPTC         : false
-                })
-                .$promise
-                .then(function(respuesta) {
-                      $modalInstance.close(vm.registroEdicion);
-                })
-                .catch(function(error) {
-                });
-
+                            observaciones         : vm.registroEdicion.observaciones,
+                            estatus               : 0,
+                            programadoPTC         : false
+                        })
+                        .$promise
+                        .then(function(respuesta) {
+                              $modalInstance.close(vm.registroEdicion);
+                        })
+                        .catch(function(error) {
+                        });
+                }
 
             };
     };

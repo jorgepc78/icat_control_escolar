@@ -219,6 +219,7 @@
                                                     return instructor.idInstructor;
                                                   }).indexOf( parseInt(vm.radioidInstructorSeleccionado) );
 
+                        
                         CursosOficiales
                         .create({
                             idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
@@ -231,6 +232,7 @@
                             modalidad             : vm.registroEdicion.modalidad,
                             horario               : vm.registroEdicion.horario,
                             aulaAsignada          : vm.registroEdicion.aulaAsignada,
+                            horasSemana           : vm.registroEdicion.semanas,
                             numeroHoras           : vm.registroEdicion.total,
                             costo                 : vm.registroEdicion.costo,
                             cupoMaximo            : vm.registroEdicion.capacitandos,

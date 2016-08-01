@@ -8,25 +8,33 @@
                         <div class="ibox">
                             <div class="ibox-title">
                                 <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                                 <h2 style="font-size:1.8em;">Programa Trimestral de Cursos</h2>
                                         </div>
                                         <div class="col-md-4">
-                                                        <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:17px;width: 300px;">
+                                                        <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:7px;width: 300px;">
                                                                 <label class="col-md-3 control-label" style="margin-top:7px;">Unidad:</label>
                                                                 <div class="col-md-9">
                                                                     <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.muestra_ptc_unidad()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
                                                             </div>
                                                         </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
+                                                        <div class="input-group" style="margin-top:7px;">
+                                                                <label class="col-md-3 control-label" style="margin-top:7px;">A&ntilde;o:</label>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control m-b" ng-model="vm.anioSeleccionado" ng-change="vm.muestra_ptc_unidad_anio()" ng-options="registro as registro.anio for registro in vm.listaAniosDisp"></select>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                                        <!-- <div class="col-md-4">
                                                         <div class="input-group" style="margin-top:17px;width: 300px;">
                                                                 <label class="col-md-3 control-label" style="margin-top:7px;">Estatus:</label>
                                                                 <div class="col-md-9">
                                                                     <select class="form-control m-b" ng-model="vm.estatusSeleccionado" ng-change="vm.muestra_ptc_estatus()" ng-options="estatus as estatus.texto for estatus in vm.listaEstatus"></select>
                                                             </div>
                                                         </div>
-                                        </div>
+                                        </div> -->
                                 </div>
                             </div>
                             <div class="ibox-content">
@@ -38,7 +46,8 @@
                                                 <th>Ciclo escolar</th>
                                                 <th>Trimestre</th>
                                                 <th>Fecha Aceptaci&oacute;n</th>
-                                                <th>N&uacute;m cursos</th>
+                                                <th>N&uacute;m. cursos</th>
+                                                <th>Total horas</th>
                                                 <th>Estatus</th>
                                                 <th></th>
                                             </tr>
@@ -56,6 +65,7 @@
 
                                                 <td> {{registro.fechaAceptacion | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.cursos_programados.length}}</td>
+                                                <td> {{registro.horasSeparadas}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
                                                     <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>

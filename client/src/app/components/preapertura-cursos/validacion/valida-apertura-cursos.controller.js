@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ValidaAperturaCursosController', ValidaAperturaCursosController);
 
-    ValidaAperturaCursosController.$inject = ['$scope', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'ControlProcesos'];
+    ValidaAperturaCursosController.$inject = ['$scope', '$modal', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'ControlProcesos'];
 
-    function ValidaAperturaCursosController($scope, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, CursosOficiales, ControlProcesos ) {
+    function ValidaAperturaCursosController($scope, $modal, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, CatalogoUnidadesAdmtvas, CursosOficiales, ControlProcesos ) {
 
             var vm = this;
 
@@ -96,7 +96,7 @@
                                   {
                                       relation: 'ptc_pertenece',
                                       scope: {
-                                        fields: ['anio','trimestre']
+                                        fields: ['anio','trimestre','horasSeparadas']
                                       }
                                   },
                                   {
@@ -260,6 +260,92 @@
                             .then(function(respuesta) {
 
                                   vm.cursoSeleccionado.estatus = respuesta.estatus;
+
+                                  if(seleccion.programadoPTC == false)
+                                  {
+                                          ProgTrimCursos.find({
+                                              filter: {
+                                                  where: {
+                                                    and: [
+                                                        {idUnidadAdmtva: vm.cursoSeleccionado.idUnidadAdmtva},
+                                                        {anio: vm.cursoSeleccionado.ptc_pertenece.anio},
+                                                        {or: [
+                                                          {estatus: 2},
+                                                          {estatus: 4}
+                                                        ]}
+                                                    ]
+                                                  },
+                                                  fields: ['idPtc','horasSeparadas']
+                                              }
+                                          })
+                                          .$promise
+                                          .then(function(resp) {
+
+                                                var num_horas_separadas = 0;
+                                                angular.forEach(resp, function(registro) {
+                                                    num_horas_separadas += registro.horasSeparadas;
+                                                });
+
+                                                num_horas_separadas += vm.cursoSeleccionado.numeroHoras;
+                                                
+                                                var num_horas_separdas_ptc = vm.cursoSeleccionado.ptc_pertenece.horasSeparadas + vm.cursoSeleccionado.numeroHoras;
+                                                ProgTrimCursos.prototype$updateAttributes(
+                                                {
+                                                    id: vm.cursoSeleccionado.idPtc
+                                                },{
+                                                    horasSeparadas: num_horas_separdas_ptc
+                                                })
+                                                .$promise
+                                                .then(function(respuesta) {
+                                                })
+                                                .catch(function(error) {
+                                                });
+
+                                                HorasAsignadasUnidad.find({
+                                                    filter: {
+                                                        where: {
+                                                          and: [
+                                                              {idUnidadAdmtva: vm.cursoSeleccionado.idUnidadAdmtva},
+                                                              {anio: vm.cursoSeleccionado.ptc_pertenece.anio},
+                                                          ]
+                                                        },
+                                                        fields: ['id']
+                                                    }
+                                                })
+                                                .$promise
+                                                .then(function(respuesta) {
+                                                      
+                                                      HorasAsignadasUnidad.prototype$updateAttributes(
+                                                      {
+                                                          id: respuesta[0].id
+                                                      },{
+                                                          horasSeparadas: num_horas_separadas
+                                                      })
+                                                      .$promise
+                                                      .then(function(respuesta) {
+                                                      })
+                                                      .catch(function(error) {
+                                                      });
+
+                                                });
+
+                                          });
+                                  }
+                                  else
+                                  {
+                                          CursosPtc.prototype$updateAttributes(
+                                          {
+                                              id: vm.cursoSeleccionado.idCursoPTC
+                                          },{
+                                              estatus: 1
+                                          })
+                                          .$promise
+                                          .then(function(respuesta) {
+                                          })
+                                          .catch(function(error) {
+                                          });
+                                  }
+
 
                                   if(seleccion.programadoPTC == true)
                                     var txt = 'Pre-Apertura Curso PTC';

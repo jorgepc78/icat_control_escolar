@@ -16,9 +16,9 @@
             vm.openCalendar2 = openCalendar2;
 
             vm.muestraInstructoresCurso = muestraInstructoresCurso;
-            vm.guardar = guardar;
             vm.agregaInstructor = agregaInstructor;
             vm.eliminaInstructor = eliminaInstructor;
+            vm.guardar = guardar;
 
 
             vm.opened1 = false;

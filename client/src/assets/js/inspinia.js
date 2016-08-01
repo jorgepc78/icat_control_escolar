@@ -15,7 +15,7 @@ $(document).ready(function () {
     //fix_height2();
     setTimeout(function(){
         fix_height2();
-    },2000);
+    },2500);
 
     // Full height of sidebar
     function fix_height() {

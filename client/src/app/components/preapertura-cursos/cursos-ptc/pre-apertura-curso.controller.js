@@ -11,6 +11,15 @@
 
             var vm = this;
 
+            vm.muestraCursosPTCseleccionado = muestraCursosPTCseleccionado;
+            vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
+            vm.cambiarPagina                = cambiarPagina;
+
+            vm.editaCurso = editaCurso;
+            vm.abreCurso = abreCurso;
+            vm.enviaCursoRevision = enviaCursoRevision;
+            vm.eliminaCurso = eliminaCurso;
+
             vm.listaPTCautorizados = [];
             vm.PTCSeleccionado = {};
 
@@ -30,14 +39,6 @@
             vm.registrosCursosPTCs = {};
             vm.CursoPTCSeleccionado = {};
 
-            vm.muestraCursosPTCseleccionado = muestraCursosPTCseleccionado;
-            vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
-            vm.cambiarPagina                = cambiarPagina;
-
-            vm.editaCurso = editaCurso;
-            vm.abreCurso = abreCurso;
-            vm.enviaCursoRevision = enviaCursoRevision;
-            vm.eliminaCurso = eliminaCurso;
 
             inicia();
 

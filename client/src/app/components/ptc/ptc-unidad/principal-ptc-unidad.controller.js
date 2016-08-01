@@ -13,7 +13,6 @@
 
             /****** DEFINICION DE FUNCIONES DE LA TABLA PRINCIPAL ******/
             vm.muestra_ptc_anio       = muestra_ptc_anio;
-            vm.muestra_ptc_estatus    = muestra_ptc_estatus;
             
             vm.muestraCursosPTCActual = muestraCursosPTCActual;
             //vm.cambiarPaginaPrincipal = cambiarPaginaPrincipal;
@@ -29,6 +28,7 @@
             vm.eliminaCursoPTC = eliminaCursoPTC;
 
 
+            vm.listaAniosDisp = [];
             vm.anioSeleccionado = {};
             vm.horas_disponibles = 0;
 
@@ -47,9 +47,6 @@
             vm.tablaListaPTCs.fila_seleccionada = undefined;
             vm.registrosPTCs = {};
             vm.RegistroPTCSeleccionado = {};
-
-            vm.listaEstatus = [];
-            vm.estatusSeleccionado = undefined;
 
             /****** ELEMENTOS DE LA TABLA DE CURSOS ******/
 
@@ -72,14 +69,6 @@
 
             function inicia() {
 
-                  vm.listaEstatus = [
-                      {valor: -1, texto: 'Todos'},
-                      {valor: 0, texto: 'Sin revisar'},
-                      {valor: 1, texto: 'En proceso de revisión'},
-                      {valor: 3, texto: 'Rechazado'}
-                  ];
-
-                  vm.estatusSeleccionado = vm.listaEstatus[0];
 
                   vm.tablaListaPTCs.filtro_datos = {
                           filter: {
@@ -123,9 +112,16 @@
                           }
                   };
 
+                  var fechaHoy = new Date();
+
                   HorasAsignadasUnidad.find({
                       filter: {
-                          where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                          where: {
+                            and: [
+                              {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                              {anio:{gte: fechaHoy.getFullYear()}}
+                            ]
+                          },
                           fields: ['id','anio','horasAsignadas'],
                           order: 'anio DESC'
                       }
@@ -239,8 +235,6 @@
                       ]
                   };
 
-                  vm.estatusSeleccionado = vm.listaEstatus[0];
-
                   tablaDatosService.obtiene_datos_tabla(ProgTrimCursos, vm.tablaListaPTCs)
                   .then(function(respuesta) {
 
@@ -262,61 +256,6 @@
             };
 
 
-            function muestra_ptc_estatus() {
-
-                  vm.registrosPTCs = {};
-                  vm.RegistroPTCSeleccionado = {};
-                  vm.tablaListaPTCs.fila_seleccionada = undefined;
-                  vm.client = 1;
-                  vm.tablaListaPTCs.paginaActual = 1;
-                  vm.tablaListaPTCs.inicio = 0;
-                  vm.tablaListaPTCs.fin = 1;
-
-                  if(vm.estatusSeleccionado.valor == -1 || vm.estatusSeleccionado.valor == undefined)
-                  {
-                        vm.tablaListaPTCs.condicion = {
-                            and: [
-                              {anio: vm.anioSeleccionado.anio},
-                              {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                              {
-                                  or: [
-                                    {estatus: 0},
-                                    {estatus: 1},
-                                    {estatus: 3}
-                                  ]
-                              },
-                            ]
-                        };
-                  }
-                  else
-                  {
-                        vm.tablaListaPTCs.condicion = {
-                            and: [
-                              {anio: vm.anioSeleccionado.anio},
-                              {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                              {estatus: vm.estatusSeleccionado.valor}
-                            ]
-                        };
-                  }
-
-                  tablaDatosService.obtiene_datos_tabla(ProgTrimCursos, vm.tablaListaPTCs)
-                  .then(function(respuesta) {
-
-                        vm.tablaListaPTCs.totalElementos = respuesta.total_registros;
-                        vm.tablaListaPTCs.inicio = respuesta.inicio;
-                        vm.tablaListaPTCs.fin = respuesta.fin;
-
-                        if(vm.tablaListaPTCs.totalElementos > 0)
-                        {
-                            vm.registrosPTCs = respuesta.datos;
-                            vm.RegistroPTCSeleccionado = vm.registrosPTCs[0];
-                            vm.client = 2;
-                            vm.tablaListaPTCs.fila_seleccionada = 0;
-                            muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
-                        }
-
-                  });
-            };
 
 
 /************ SECCION DE EDICION *****************/

@@ -1,20 +1,53 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
                 <div class="col-md-7">
-    
-                        <div class="ibox">
-                            <div class="ibox-title">
-                                <h2>Pre apertura de cursos fuera del PTC</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-3">
+                                    <div class="ibox">
+                                        <div class="ibox-content" style="height:240px;">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" ng-show="(vm.anioSeleccionado.anio == undefined)" ng-init="(vm.anioSeleccionado.anio == undefined)">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 text-center">
+                                                                    <p>
+                                                                        <h3>Seleccione per&iacute;odo para detalles</h3>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                                <div class="tab-pane active" ng-show="(vm.anioSeleccionado.anio !== undefined)">
+                                                            <div class="panel blank-panel text-center">
+
+                                                                    <h2>A&ntilde;o</h2>
+                                                                    <h4>{{vm.anioSeleccionado.anio}}</h4>
+                                                                    <h3>Horas asignadas</h3>
+                                                                    <span>{{vm.anioSeleccionado.horasAsignadas | number:0}}</span>
+                                                                    <h3>Horas disponibles</h3>
+                                                                    <span>{{vm.horas_disponibles | number:0}}</span>
+                                                            </div> <!--panel blank-panel-->
+                              
+                                                </div> <!-- client == 2 -->
+                                            </div>
+                                        </div>
+                                    </div> <!-- class ibox -->
                             </div>
-                            <div class="ibox-content">
-                                <div class="input-group" style="width: 600px;">
-                                        <label class="col-md-5 control-label" style="margin-top:7px;">Periodo (relacionado a un PTC):</label>
-                                        <div class="col-md-7">
-                                            <select class="form-control m-b" ng-model="vm.PTCSeleccionado" ng-change="vm.muestraCursosExtrasPTCseleccionado()" ng-options="ptc as (ptc.trimestretxt +' - '+ ptc.anio) for ptc in vm.listaPTCautorizados"></select>
-                                    </div>
-                                </div>
+                            <div class="col-md-9">
+                                    <div class="ibox">
+                                        <div class="ibox-title">
+                                            <h2>Pre apertura de cursos fuera del PTC</h2>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div class="input-group" style="width: 550px;">
+                                                    <label class="col-md-5 control-label" style="margin-top:7px;">Per&iacute;odo (relacionado a un PTC):</label>
+                                                    <div class="col-md-7">
+                                                        <select class="form-control m-b" ng-model="vm.PTCSeleccionado" ng-change="vm.muestraCursosExtrasPTCseleccionado()" ng-options="ptc as (ptc.trimestretxt +' - '+ ptc.anio) for ptc in vm.listaPTCautorizados"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- class ibox -->
                             </div>
-                        </div> <!-- class ibox -->
+                        </div>
 
                         <div class="ibox">
                             <div class="ibox-title">
@@ -37,9 +70,9 @@
                                                 <th>Curso o m&oacute;dulo</th>
                                                 <th>Tipo</th>
                                                 <th>Horario</th>
-                                                <th>Aula asignada</th>
                                                 <th>Fecha inicio</th>
                                                 <th>Fecha fin</th>
+                                                <th>Horas</th>
                                                 <th>Estatus</th>
                                             </tr>
                                           </thead>
@@ -48,9 +81,9 @@
                                                 <td> {{registro.nombreCurso}}</td>
                                                 <td> {{registro.modalidad}}</td>
                                                 <td> {{registro.horario}}</td>
-                                                <td> {{registro.aulaAsignada}}</td>
                                                 <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.fechaFin | date:'d/MMMM/yyyy'}}</td>
+                                                <td> {{registro.numeroHoras}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
                                                     <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
@@ -75,7 +108,7 @@
                         <div class="col-md-12">
 
                                 <div class="ibox">
-                                    <div class="ibox-content" style="height:680px;">
+                                    <div class="ibox-content" style="height:760px;">
                                         <div class="tab-content">
                                             <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                                         <div class="row">
@@ -105,6 +138,14 @@
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.CursoExtraSeleccionado.horario}} </span>
                                                                         Horario
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{vm.CursoExtraSeleccionado.horasSemana}} </span>
+                                                                        Horas semana
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{vm.CursoExtraSeleccionado.numeroHoras}} </span>
+                                                                        Horas total
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.CursoExtraSeleccionado.aulaAsignada}} </span>

@@ -5,12 +5,24 @@
         .module('icat_control_escolar')
         .controller('PreAperturaCursoExtraController', PreAperturaCursoExtraController);
 
-    PreAperturaCursoExtraController.$inject = ['$scope', '$modal', 'tablaDatosService', 'ProgTrimCursos', 'CursosOficiales', 'ControlProcesos'];
+    PreAperturaCursoExtraController.$inject = ['$scope', '$modal', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosOficiales', 'ControlProcesos'];
 
-    function PreAperturaCursoExtraController($scope, $modal, tablaDatosService, ProgTrimCursos, CursosOficiales, ControlProcesos ) {
+    function PreAperturaCursoExtraController($scope, $modal, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosOficiales, ControlProcesos ) {
 
             var vm = this;
 
+            vm.muestraCursosExtrasPTCseleccionado = muestraCursosExtrasPTCseleccionado;
+            vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
+            vm.cambiarPagina                = cambiarPagina;
+
+            vm.abreExtraCurso = abreExtraCurso;
+            vm.editaCurso = editaCurso;
+            vm.enviaCursoRevision = enviaCursoRevision;
+            vm.eliminaCurso = eliminaCurso;
+
+
+            vm.anioSeleccionado = [];
+            vm.horas_disponibles = 0;
             vm.listaPTCautorizados = [];
             vm.PTCSeleccionado = {};
 
@@ -27,15 +39,6 @@
 
             vm.registrosCursosExtras = {};
             vm.CursoExtraSeleccionado = {};
-
-            vm.muestraCursosExtrasPTCseleccionado = muestraCursosExtrasPTCseleccionado;
-            vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
-            vm.cambiarPagina                = cambiarPagina;
-
-            vm.abreExtraCurso = abreExtraCurso;
-            vm.editaCurso = editaCurso;
-            vm.enviaCursoRevision = enviaCursoRevision;
-            vm.eliminaCurso = eliminaCurso;
 
             inicia();
 
@@ -68,7 +71,6 @@
                   });
 
 
-
                   vm.tablaListaCursos.filtro_datos = {
                           filter: {
                               where: vm.tablaListaCursos.condicion,
@@ -91,6 +93,23 @@
 
             
             function muestraCursosExtrasPTCseleccionado() {
+
+                  HorasAsignadasUnidad.find({
+                      filter: {
+                          where: {
+                            and: [
+                              {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                              {anio: vm.PTCSeleccionado.anio}
+                            ]
+                          },
+                          fields: ['id','anio','horasAsignadas'],
+                          order: 'anio DESC'
+                      }
+                  })
+                  .$promise
+                  .then(function(resp) {
+                        vm.anioSeleccionado = resp[0];
+                  });
 
                   vm.client = 1;
                   vm.tablaListaCursos.paginaActual = 1;
@@ -119,6 +138,8 @@
                             vm.tablaListaCursos.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.CursoExtraSeleccionado);
                         }
+                        
+                        calcula_horas_disponibles();
                   });
 
             }
@@ -162,7 +183,7 @@
                         controller: 'ModalAperturaCursoExtraController as vm',
                         windowClass: 'app-modal-window',
                         resolve: {
-                          registroEditar: function () { return PTCSeleccionado }
+                          registroEditar: function () { return {horas_disponibles: vm.horas_disponibles, record: PTCSeleccionado} }
                         }
                     });
 
@@ -170,7 +191,7 @@
 
                         swal({
                           title: 'Curso creado',
-                          html: 'EL curso <strong>'+ respuesta.nombreCurso+'</strong> se registr&oacute; como un curso pendiente de validaci&oacute;n de apertura',
+                          html: 'EL curso <strong>'+ respuesta.nombreCurso+'</strong> se registr&oacute; como un curso pendiente de enviar a validaci&oacute;n de apertura',
                           type: 'success',
                           showCancelButton: false,
                           confirmButtonColor: "#9a0000",
@@ -186,13 +207,15 @@
 
             function editaCurso(seleccion) {
 
+                    var temp_horas_disponibles = vm.horas_disponibles + seleccion.numeroHoras;
+
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/preapertura-cursos/cursos-fuera-ptc/modal-apertura-curso-extra.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalEditaaCursoExtraController as vm',
                         windowClass: 'app-modal-window',
                         resolve: {
-                          registroEditar: function () { return seleccion }
+                          registroEditar: function () { return {horas_disponibles: temp_horas_disponibles, record: seleccion} }
                         }
 
                     });
@@ -219,6 +242,7 @@
                         vm.CursoExtraSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;
                         vm.CursoExtraSeleccionado.localidad_pertenece.nombre = respuesta.nombreLocalidad;
 
+                        calcula_horas_disponibles();
                     }, function () {
                     });
 
@@ -316,6 +340,42 @@
                   });
 
             }
+
+            function calcula_horas_disponibles() {
+
+                  ProgTrimCursos.find({
+                      filter: {
+                          where: {
+                            and: [
+                                {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                {anio: vm.anioSeleccionado.anio},
+                                {or: [
+                                  {estatus: 2},
+                                  {estatus: 4}
+                                ]}
+                            ]
+                          },
+                          fields: ['idPtc','horasSeparadas','estatus']
+                      }
+                  })
+                  .$promise
+                  .then(function(resp) {
+
+                      var num_horas_separadas = 0;
+                      angular.forEach(resp, function(registro) {
+                          num_horas_separadas += registro.horasSeparadas;
+                      });
+                      
+                      angular.forEach(vm.registrosCursosExtras, function(registro) {
+                          num_horas_separadas += registro.numeroHoras;
+                      });
+
+                      vm.horas_disponibles = vm.anioSeleccionado.horasAsignadas - num_horas_separadas;
+
+                  });
+
+            }
+
 
 
     };

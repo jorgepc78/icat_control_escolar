@@ -308,7 +308,7 @@
 
                                         ControlProcesos
                                         .create({
-                                            proceso         : 'Pre-Apertura Curso',
+                                            proceso         : 'Pre-Apertura Curso PTC',
                                             accion          : 'ENVIO VALIDACION',
                                             idDocumento     : seleccion.curso_oficial_registrado[0].idCurso,
                                             idUsuario       : $scope.currentUser.id_usuario,

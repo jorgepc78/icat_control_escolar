@@ -13,19 +13,19 @@
                                 <div class="col-sm-10">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.apellidoPaterno" required>
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.apellidoPaterno" required ng-readonly="vm.soloLectura">
                                         </div>
                                         <div class="col-md-2 text-right">
                                             <label class="control-label">Apellido materno</label>
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.apellidoMaterno" required>
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.apellidoMaterno" required ng-readonly="vm.soloLectura">
                                         </div>
                                         <div class="col-md-1 text-right">
                                             <label class="control-label">Nombre</label>
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.nombre" required>
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.nombre" required ng-readonly="vm.soloLectura">
                                         </div>
                                     </div>
                                 </div>
@@ -34,13 +34,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Sexo</label>
                                 <div class="col-sm-10">
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="sexo" ng-model="vm.registroEditar.sexo" value="H"> Hombre </label></div>
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="sexo" ng-model="vm.registroEditar.sexo" value="M"> Mujer </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="sexo" ng-model="vm.registroEditar.sexo" value="H" ng-disabled="vm.soloLectura"> Hombre </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="sexo" ng-model="vm.registroEditar.sexo" value="M" ng-disabled="vm.soloLectura"> Mujer </label></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Correo electr&oacute;nico</label>
-                                <div class="col-sm-5"><input type="email" class="form-control" ng-model="vm.registroEditar.email" required></div>
+                                <div class="col-sm-5"><input type="email" class="form-control" ng-model="vm.registroEditar.email" required ng-readonly="vm.soloLectura"></div>
                             </div>
 
                             <div class="form-group">
@@ -48,7 +48,7 @@
                                 <div class="col-sm-8">
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" ng-change="vm.calculaNacim()" ng-model="vm.registroEditar.curp" required>
+                                            <input type="text" class="form-control" ng-change="vm.calculaNacim()" ng-model="vm.registroEditar.curp" required ng-readonly="vm.soloLectura">
                                         </div>
                                         <div class="col-md-1 text-right">
                                             <label class="control-label">Edad</label>
@@ -65,20 +65,20 @@
                                 <div class="col-sm-10">
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.telefono">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.telefono" ng-readonly="vm.soloLectura">
                                         </div>
                                         <div class="col-md-2 text-right">
                                             <label class="control-label">Celular</label>
                                         </div>
                                         <div class="col-md-5">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.celular">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.celular" ng-readonly="vm.soloLectura">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Domicilio</label>
-                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.domicilio"></div>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.domicilio" ng-readonly="vm.soloLectura"></div>
                             </div>
 
                             <div class="form-group">
@@ -86,13 +86,13 @@
                                 <div class="col-sm-10">
                                     <div class="row">
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.colonia">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.colonia" ng-readonly="vm.soloLectura">
                                         </div>
                                         <div class="col-md-2 text-right">
                                             <label class="control-label">C&oacute;digo postal</label>
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.codigoPostal">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.codigoPostal" ng-readonly="vm.soloLectura">
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                         <div class="col-md-6">
                                             <select class="form-control m-b" 
                                                 ng-model="vm.registroEditar.idLocalidad"
-                                                ng-options="localidad.idLocalidad as localidad.nombre for localidad in vm.listaLocalidades" required>
+                                                ng-options="localidad.idLocalidad as localidad.nombre for localidad in vm.listaLocalidades" required ng-disabled="vm.soloLectura">
                                             </select>
                                         </div>
                                         <div class="col-md-2 text-right">
@@ -114,7 +114,7 @@
                                         <div class="col-md-4">
                                             <select class="form-control m-b" 
                                                 ng-model="vm.registroEditar.idNivelEstudios"
-                                                ng-options="nivel.idNivelEstudios as nivel.nivelEstudios for nivel in vm.listaNivelEstudios">
+                                                ng-options="nivel.idNivelEstudios as nivel.nivelEstudios for nivel in vm.listaNivelEstudios" ng-disabled="vm.soloLectura">
                                             </select>
                                         </div>
                                     </div>
@@ -124,11 +124,11 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Estado civil</label>
                                 <div class="col-sm-10">
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="soltero"> Soltero </label></div>
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="casado"> Casado </label></div>
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="viudo"> Viudo </label></div>
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="divorciado"> Divorciado </label></div>
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-model="vm.registroEditar.estadoCivil" value="union_libre"> Uni&oacute;n libre </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.estadoCivil" value="soltero"> Soltero </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.estadoCivil" value="casado"> Casado </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.estadoCivil" value="viudo"> Viudo </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.estadoCivil" value="divorciado"> Divorciado </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="estado_civil" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.estadoCivil" value="union_libre"> Uni&oacute;n libre </label></div>
                                 </div>
                             </div>
                     </tab>
@@ -139,13 +139,13 @@
                                 <div class="col-sm-5">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disVisual"  > Visual </label></div>
-                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disAuditiva"> Auditiva </label></div>
-                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disLenguaje"> Lenguaje </label></div>
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.disVisual"  > Visual </label></div>
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.disAuditiva"> Auditiva </label></div>
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.disLenguaje"> Lenguaje </label></div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disMotriz"  > Motr&iacute;z o m&uacute;sculo-esquel&eacute;tico </label></div>
-                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.disMental"  > Mental </label></div>
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.disMotriz"  > Motr&iacute;z o m&uacute;sculo-esquel&eacute;tico </label></div>
+                                            <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.disMental"  > Mental </label></div>
                                         </div>
                                     </div>
                                 </div>
@@ -154,13 +154,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Padece alguna enfermedad o alergia</label>
                                 <div class="col-sm-10">
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="enfermedad" ng-model="vm.registroEditar.enfermedadPadece" value="si"> SI </label></div>
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="enfermedad" ng-model="vm.registroEditar.enfermedadPadece" value="no"> NO </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="enfermedad" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.enfermedadPadece" value="si"> SI </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="enfermedad" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.enfermedadPadece" value="no"> NO </label></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Cual</label>
-                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.enfermedadCual"></div>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.enfermedadCual" ng-readonly="vm.soloLectura"></div>
                             </div>
                             
                             <div class="hr-line-dashed"></div>
@@ -170,15 +170,15 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre del tutor</label>
-                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorNombre"></div>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorNombre" ng-readonly="vm.soloLectura"></div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">CURP</label>
-                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorCurp"></div>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorCurp" ng-readonly="vm.soloLectura"></div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Parentesco</label>
-                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorParentesco"></div>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.tutorParentesco" ng-readonly="vm.soloLectura"></div>
                             </div>
 
                             <div class="form-group">
@@ -186,13 +186,13 @@
                                 <div class="col-sm-10">
                                     <div class="row">
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.tutorDireccion">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.tutorDireccion" ng-readonly="vm.soloLectura">
                                         </div>
                                         <div class="col-md-1 text-right">
                                             <label class="control-label">Tel&eacute;fono</label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.tutorTelefono">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.tutorTelefono" ng-readonly="vm.soloLectura">
                                         </div>
                                     </div>
                                 </div>
@@ -204,14 +204,14 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Documentaci&oacute;n entregada</label>
                                 <div class="col-sm-10">
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docActaNacimiento"> Acta de nacimiento </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docCompEstudios"  > Comprobante de estudios </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docIdentOficial"  > Identificaci&oacute;n oficial </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docConstCurp"     > Constancia de la CURP</label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docFotografias"   > 3 fotograf&iacute;as </label></div>                                                                
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docCompMigratorio"> Comprobante de calidad migratoria con la que se encuentra en el territorio nacional </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docCompDomicilio" > Comprobante de domicilio </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.docCurpTutor"     > CURP del tutor </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.docActaNacimiento"> Acta de nacimiento </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.docCompEstudios"  > Comprobante de estudios </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.docIdentOficial"  > Identificaci&oacute;n oficial </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.docConstCurp"     > Constancia de la CURP</label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.docFotografias"   > 3 fotograf&iacute;as </label></div>                                                                
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.docCompMigratorio"> Comprobante de calidad migratoria con la que se encuentra en el territorio nacional </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.docCompDomicilio" > Comprobante de domicilio </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.docCurpTutor"     > CURP del tutor </label></div>
                                 </div>
                             </div>
                     </tab>
@@ -220,8 +220,8 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Trabaja actualmente</label>
                                 <div class="col-sm-10">
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="trabaja" ng-model="vm.registroEditar.trabajaActualmente" value="si"> SI </label></div>
-                                    <div class="radio-inline"><label> <input icheck type="radio" name="trabaja" ng-model="vm.registroEditar.trabajaActualmente" value="no"> NO </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="trabaja" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.trabajaActualmente" value="si"> SI </label></div>
+                                    <div class="radio-inline"><label> <input icheck type="radio" name="trabaja" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.trabajaActualmente" value="no"> NO </label></div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -229,13 +229,13 @@
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" 
                                         ng-model="vm.registroEditar.idActividad"
-                                        ng-options="actividad.idActividad as actividad.actividad for actividad in vm.listaActividades">
+                                        ng-options="actividad.idActividad as actividad.actividad for actividad in vm.listaActividades" ng-disabled="vm.soloLectura">
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Empresa donde trabaja</label>
-                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.empresaTrabaja"></div>
+                                <div class="col-sm-10"><input type="text" class="form-control" ng-model="vm.registroEditar.empresaTrabaja" ng-readonly="vm.soloLectura"></div>
                             </div>
                             
                             <div class="form-group">
@@ -243,13 +243,13 @@
                                 <div class="col-sm-10">
                                     <div class="row">
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaPuesto">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaPuesto" ng-readonly="vm.soloLectura">
                                         </div>
                                         <div class="col-md-1 text-right">
                                             <label class="control-label">Antig&uuml;edad</label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaAntiguedad">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaAntiguedad" ng-readonly="vm.soloLectura">
                                         </div>
                                     </div>
                                 </div>
@@ -261,13 +261,13 @@
                                 <div class="col-sm-10">
                                     <div class="row">
                                         <div class="col-md-7">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaDireccion">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaDireccion" ng-readonly="vm.soloLectura">
                                         </div>
                                         <div class="col-md-1 text-right">
                                             <label class="control-label">Tel&eacute;fono</label>
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaTelefono">
+                                            <input type="text" class="form-control" ng-model="vm.registroEditar.empresaTelefono" ng-readonly="vm.soloLectura">
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" 
                                         ng-model="vm.registroEditar.idExperiencia"
-                                        ng-options="experiencia.idExperiencia as experiencia.experiencia for experiencia in vm.listaExperiencia">
+                                        ng-options="experiencia.idExperiencia as experiencia.experiencia for experiencia in vm.listaExperiencia" ng-disabled="vm.soloLectura">
                                     </select>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" 
                                         ng-model="vm.registroEditar.idMedio"
-                                        ng-options="motivos.idMedio as motivos.medio for motivos in vm.listaMedios">
+                                        ng-options="motivos.idMedio as motivos.medio for motivos in vm.listaMedios" ng-disabled="vm.soloLectura">
                                     </select>
                                 </div>
                             </div>
@@ -296,7 +296,7 @@
                                 <div class="col-sm-10">
                                     <select class="form-control m-b" 
                                         ng-model="vm.registroEditar.idMotivo"
-                                        ng-options="motivos.idMotivo as motivos.motivo for motivos in vm.listaMotivos">
+                                        ng-options="motivos.idMotivo as motivos.motivo for motivos in vm.listaMotivos" ng-disabled="vm.soloLectura">
                                     </select>
                                 </div>
                             </div>
@@ -307,16 +307,16 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Grupos a los que pertenece (cuando aplica)</label>
                                 <div class="col-sm-10">
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoJefasFamilia" > Mujeres jefas de familia </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoSitViolencia" > Mujeres en situaci&oacute;n de violencia </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoAdolCalle"    > Adolescentes en condiciones de calle (15 a 29 a&ntilde;os) </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoIndigenas"    > Personas ind&iacute;genas</label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoAdultoMayor"  > Persona adulta mayor (60 a&ntilde;os o m&aacute;s) </label></div>                                                                
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoLgbttti"      > Comunidad LGBTTTI </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoDentroCereso" > Personas recluidas en centros de rehabilitaci&oacute;n social (CERESO) </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoCapDiferentes"> Personas con capacidades diferentes </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoMenorReadap"  > Menores recluidos en centros de readaptaci&oacute;n </label></div>
-                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-model="vm.registroEditar.gpoFueraCereso"  > Personas liberadas del centro de rehabilitaci&oacute;n social (CERESO) </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoJefasFamilia" > Mujeres jefas de familia </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoSitViolencia" > Mujeres en situaci&oacute;n de violencia </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoAdolCalle"    > Adolescentes en condiciones de calle (15 a 29 a&ntilde;os) </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoIndigenas"    > Personas ind&iacute;genas</label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoAdultoMayor"  > Persona adulta mayor (60 a&ntilde;os o m&aacute;s) </label></div>                                                                
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoLgbttti"      > Comunidad LGBTTTI </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoDentroCereso" > Personas recluidas en centros de rehabilitaci&oacute;n social (CERESO) </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoCapDiferentes"> Personas con capacidades diferentes </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoMenorReadap"  > Menores recluidos en centros de readaptaci&oacute;n </label></div>
+                                    <div class="checkbox"><label> <input icheck type="checkbox" ng-disabled="vm.soloLectura" ng-model="vm.registroEditar.gpoFueraCereso"  > Personas liberadas del centro de rehabilitaci&oacute;n social (CERESO) </label></div>
                                 </div>
                             </div>
                     </tab>
@@ -355,7 +355,7 @@
               </div>
               <div class="col-md-3">
                   <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
-                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+                  <button type="button" ng-show="!vm.soloLectura" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
               </div>
           </div>
 

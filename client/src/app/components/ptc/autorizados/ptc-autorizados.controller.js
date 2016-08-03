@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('PTCAutorizadosController', PTCAutorizadosController);
 
-    PTCAutorizadosController.$inject = ['$scope', '$modal', '$q', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'CatalogoUnidadesAdmtvas', 'ControlProcesos'];
+    PTCAutorizadosController.$inject = ['$scope', '$modal', '$q', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'CursosOficiales', 'CatalogoUnidadesAdmtvas', 'ControlProcesos'];
 
-    function PTCAutorizadosController($scope, $modal, $q, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, CatalogoUnidadesAdmtvas, ControlProcesos) {
+    function PTCAutorizadosController($scope, $modal, $q, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, CursosOficiales, CatalogoUnidadesAdmtvas, ControlProcesos) {
 
             var vm = this;
 
@@ -44,7 +44,7 @@
             vm.listaUnidades = [];
             vm.unidadSeleccionada = undefined;
 
-            /****** ELEMENTOS DE LA TABLA DE CURSOS ******/
+            /****** ELEMENTOS DE LA TABLA DE CURSOS PROGRAMADOS EN EL PTC******/
 
             vm.tablaListaCursos = {
               totalElementos     : 0,
@@ -59,6 +59,21 @@
 
             vm.registrosCursosPTCs = {};
             vm.icono = '';
+
+            /****** ELEMENTOS DE LA TABLA DE CURSOS PROGRAMADOS EN EL PTC******/
+
+            vm.tablaListaCursosExtra = {
+              totalElementos     : 0,
+              paginaActual       : 1,
+              registrosPorPagina : 5,
+              inicio             : 0,
+              fin                : 1,
+              condicion          : {},
+              filtro_datos       : {},
+              fila_seleccionada  : 0
+            };
+
+            vm.registrosCursosExtras = {};
 
 
             inicia();
@@ -119,6 +134,16 @@
                                       }
                                   }
                               ]
+                          }
+                  };
+
+                  vm.tablaListaCursosExtra.filtro_datos = {
+                          filter: {
+                              where: vm.tablaListaCursosExtra.condicion,
+                              order: ['nombreCurso ASC'],
+                              limit: vm.tablaListaCursosExtra.registrosPorPagina,
+                              skip: vm.tablaListaCursosExtra.paginaActual - 1,
+                              fields: ['idCurso','idLocalidad','nombreCurso','claveCurso','modalidad','horario','aulaAsignada','numeroHoras','costo','cupoMaximo','minRequeridoInscritos','minRequeridoPago','fechaInicio','fechaFin','nombreInstructor','observaciones','estatus','publico']
                           }
                   };
 
@@ -382,6 +407,28 @@
                                   });
                             });
 
+                        }
+                  });
+
+                  vm.tablaListaCursosExtra.condicion = {
+                    and: [
+                      {idPtc: seleccion.idPtc},
+                      {programadoPTC: false},
+                      {estatus: {gt:0}}
+                    ]
+                  };
+
+                  vm.registrosCursosExtras = [];
+                  tablaDatosService.obtiene_datos_tabla(CursosOficiales, vm.tablaListaCursosExtra)
+                  .then(function(respuesta) {
+
+                        vm.tablaListaCursosExtra.totalElementos = respuesta.total_registros;
+                        vm.tablaListaCursosExtra.inicio = respuesta.inicio;
+                        vm.tablaListaCursosExtra.fin = respuesta.fin;
+
+                        if(vm.tablaListaCursosExtra.totalElementos > 0)
+                        {
+                            vm.registrosCursosExtras = respuesta.datos;
                         }
                   });
 

@@ -19,6 +19,7 @@
 
             vm.nuevoCapacitando           = nuevoCapacitando;
             vm.editaCapacitando           = editaCapacitando;
+            vm.muestraCapacitando         = muestraCapacitando;
             vm.eliminaCapacitando         = eliminaCapacitando;
 
             vm.mostrarbtnLimpiar = false;
@@ -293,6 +294,27 @@
                         vm.personaSeleccionada.fechaRegistro       = respuesta.fechaRegistro;
                         vm.personaSeleccionada.ultimaActualizacion = respuesta.ultimaActualizacion;
 
+                    }, function () {
+                    });
+
+            }
+
+
+
+            function muestraCapacitando(seleccion) {
+
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/components/capacitandos/modal-datos-capacitando.html',
+                        windowClass: "animated fadeIn",
+                        controller: 'ModalVisualizaCapacitandoController as vm',
+                        windowClass: 'app-modal-window',
+                        resolve: {
+                          registroEditar: function () { return seleccion }
+                        }
+
+                    });
+
+                    modalInstance.result.then(function () {
                     }, function () {
                     });
 

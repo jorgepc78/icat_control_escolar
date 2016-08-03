@@ -48,7 +48,7 @@
                       filter: {
                           where: {
                               and: [
-                                {and:[{estatus:2}]},
+                                {estatus:2},
                                 {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id}
                               ]                            
                           },

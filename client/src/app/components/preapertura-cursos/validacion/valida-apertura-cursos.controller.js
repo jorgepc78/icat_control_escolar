@@ -11,6 +11,13 @@
 
             var vm = this;
 
+            vm.muestra_cursos_unidad        = muestra_cursos_unidad;
+            vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
+            vm.cambiarPagina                = cambiarPagina;
+
+            vm.apruebaCurso = apruebaCurso;
+            vm.rechazaCurso = rechazaCurso;
+
             vm.trimestres = ['PRIMER TRIMESTRE','SEGUNDO TRIMESTRE','TERCER TRIMESTRE','CUARTO TRIMESTRE'];
 
             vm.tabs = [{active: true}, {active: false}];
@@ -32,12 +39,6 @@
               fila_seleccionada  : 0
             };
 
-            vm.muestra_cursos_unidad     = muestra_cursos_unidad;
-            vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
-            vm.cambiarPagina                = cambiarPagina;
-
-            vm.apruebaCurso = apruebaCurso;
-            vm.rechazaCurso = rechazaCurso;
 
             inicia();
 

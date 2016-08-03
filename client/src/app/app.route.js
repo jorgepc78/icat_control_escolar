@@ -194,6 +194,20 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+
+            /*** seccion de la inscripcion a un curso y registro del pago ***/
+            .state('reportes', {
+                abstract: true,
+                url: '/reportes',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('reportes.bitacora', {
+                url: '/bitacora',
+                templateUrl: 'app/components/bitacora/bitacora-eventos.html',
+                controller: 'BitacoraController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
     }
 
 })();

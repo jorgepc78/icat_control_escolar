@@ -107,8 +107,9 @@
 
                                                                 <div class="row">
                                                                     <div class="col-md-12 text-center">
-                                                                        <button type="button" ng-click="vm.editaCapacitando(vm.personaSeleccionada)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Edita capacitando</button>
-                                                                        <button type="button" ng-click="vm.eliminaCapacitando(vm.personaSeleccionada)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-times"></i></span> Elimina capacitando</button>
+                                                                        <button type="button" ng-show="(currentUser.unidad_pertenece_id == vm.personaSeleccionada.idUnidadAdmtva)" ng-click="vm.editaCapacitando(vm.personaSeleccionada)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Edita capacitando</button>
+                                                                        <button type="button" ng-show="(currentUser.unidad_pertenece_id == vm.personaSeleccionada.idUnidadAdmtva)" ng-click="vm.eliminaCapacitando(vm.personaSeleccionada)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-times"></i></span> Elimina capacitando</button>
+                                                                        <button type="button" ng-click="vm.muestraCapacitando(vm.personaSeleccionada)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-eye"></i></span> Ver datos completos</button>
                                                                     </div>
                                                                 </div>
 

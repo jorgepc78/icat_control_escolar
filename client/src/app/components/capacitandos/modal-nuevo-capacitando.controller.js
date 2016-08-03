@@ -14,6 +14,7 @@
             vm.calculaNacim = calculaNacim;
             vm.guardar      = guardar;
 
+            vm.soloLectura = false;
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
             vm.mensaje = '';

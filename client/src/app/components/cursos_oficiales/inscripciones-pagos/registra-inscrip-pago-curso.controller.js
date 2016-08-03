@@ -68,8 +68,7 @@
                                           include:{
                                               relation: 'Capacitandos',
                                               scope: {
-                                                  fields:['apellidoPaterno','apellidoMaterno','nombre','curp'],
-                                                  order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+                                                  fields:['apellidoPaterno','apellidoMaterno','nombre','curp']
                                               }
                                           }
                                       }
@@ -243,10 +242,57 @@
 
                     modalInstance.result.then(function (respuesta) {
 
-                        vm.cursoSeleccionado.inscripcionesCursos.push(
-                            respuesta
-                        );
-                        agregaNombreCompleto();
+                          vm.cursoSeleccionado.inscripcionesCursos.push(
+                              respuesta
+                          );
+                          agregaNombreCompleto();
+
+
+                          CursosOficiales.findById({ 
+                              id: seleccion.idCurso,
+                              filter: {
+                                fields : ['idCurso','minRequeridoInscritos'],
+                                include: [
+                                    {
+                                        relation: 'inscripcionesCursos',
+                                        scope: {
+                                            fields:['id','idAlumno']
+                                        }
+                                    }
+                                ]
+                              }
+                          })
+                          .$promise
+                          .then(function(curso) {
+
+                                if(curso.inscripcionesCursos.length == curso.minRequeridoInscritos)
+                                {
+                                        ControlProcesos
+                                        .create({
+                                            proceso         : 'Inscripcion a curso',
+                                            accion          : 'ALCANCE MINIMO INSCRITOS',
+                                            idDocumento     : curso.idCurso,
+                                            idUsuario       : $scope.currentUser.id_usuario,
+                                            idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                        })
+                                        .$promise
+                                        .then(function(resp) {
+
+                                              ControlProcesos.findById({ 
+                                                  id: resp.id,
+                                                  filter: {
+                                                    fields : ['identificador']
+                                                  }
+                                              })
+                                              .$promise
+                                              .then(function(resp_control) {
+
+                                              });
+                                        });
+                                }
+
+                          });
+                        
 
                     }, function () {
                     });
@@ -275,6 +321,70 @@
 
                             vm.cursoSeleccionado.inscripcionesCursos[index].pagado = respuesta.pagado;
                             vm.cursoSeleccionado.inscripcionesCursos[index].numFactura = respuesta.numFactura;
+
+                            CursosOficiales.findById({ 
+                                id: seleccion.idCurso,
+                                filter: {
+                                  fields : ['idCurso','minRequeridoPago'],
+                                  include: [
+                                      {
+                                          relation: 'inscripcionesCursos',
+                                          scope: {
+                                              fields:['id','pagado','idAlumno']
+                                          }
+                                      }
+                                  ]
+                                }
+                            })
+                            .$promise
+                            .then(function(curso) {
+
+                                  var num_pagados = 0;
+                                  angular.forEach(curso.inscripcionesCursos, function(registro) {
+                                      if(registro.pagado > 0)
+                                        num_pagados++;
+                                  });
+
+                                  if(num_pagados == curso.minRequeridoPago)
+                                  {
+                                        CursosOficiales.prototype$updateAttributes(
+                                        {
+                                            id: seleccion.idCurso
+                                        },{
+                                            estatus: 4
+                                        })
+                                        .$promise
+                                        .then(function(respuesta) {
+
+                                              vm.cursoSeleccionado.estatus = respuesta.estatus;
+
+                                              ControlProcesos
+                                              .create({
+                                                  proceso         : 'Inscripcion a curso',
+                                                  accion          : 'ALCANCE MINIMO PAGADOS',
+                                                  idDocumento     : curso.idCurso,
+                                                  idUsuario       : $scope.currentUser.id_usuario,
+                                                  idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                              })
+                                              .$promise
+                                              .then(function(resp) {
+
+                                                    ControlProcesos.findById({ 
+                                                        id: resp.id,
+                                                        filter: {
+                                                          fields : ['identificador']
+                                                        }
+                                                    })
+                                                    .$promise
+                                                    .then(function(resp_control) {
+
+                                                    });
+                                              });
+
+                                        });
+                                  }
+
+                            });
 
                     }, function () {
                     });
@@ -339,6 +449,72 @@
                                     vm.cursoSeleccionado.inscripcionesCursos.splice(index, 1);
 
                                 swal('Capacitando eliminado', '', 'success');
+
+                                /* cuando se elimina una persona checar si modifica el estatus del curso ya que baja el numero de inscritos pgados*/
+                                CursosOficiales.findById({ 
+                                    id: seleccion.idCurso,
+                                    filter: {
+                                      fields : ['idCurso','minRequeridoPago'],
+                                      include: [
+                                          {
+                                              relation: 'inscripcionesCursos',
+                                              scope: {
+                                                  fields:['id','pagado','idAlumno']
+                                              }
+                                          }
+                                      ]
+                                    }
+                                })
+                                .$promise
+                                .then(function(curso) {
+
+                                      var num_pagados = 0;
+                                      angular.forEach(curso.inscripcionesCursos, function(registro) {
+                                          if(registro.pagado > 0)
+                                            num_pagados++;
+                                      });
+
+                                      if(num_pagados < curso.minRequeridoPago)
+                                      {
+                                            CursosOficiales.prototype$updateAttributes(
+                                            {
+                                                id: seleccion.idCurso
+                                            },{
+                                                estatus: 2
+                                            })
+                                            .$promise
+                                            .then(function(respuesta) {
+
+                                                  vm.cursoSeleccionado.estatus = respuesta.estatus;
+
+                                                  ControlProcesos
+                                                  .create({
+                                                      proceso         : 'Inscripcion a curso',
+                                                      accion          : 'REVERSION MINIMO PAGADOS',
+                                                      idDocumento     : curso.idCurso,
+                                                      idUsuario       : $scope.currentUser.id_usuario,
+                                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                                  })
+                                                  .$promise
+                                                  .then(function(resp) {
+
+                                                        ControlProcesos.findById({ 
+                                                            id: resp.id,
+                                                            filter: {
+                                                              fields : ['identificador']
+                                                            }
+                                                        })
+                                                        .$promise
+                                                        .then(function(resp_control) {
+
+                                                        });
+                                                  });
+
+                                            });
+                                      }
+
+                                });
+
                             });
                   });
 
@@ -347,10 +523,17 @@
 
             function agregaNombreCompleto() {
                   
-                  for(var i=0; i < vm.cursoSeleccionado.inscripcionesCursos.length; i++)
-                  {
-                      vm.cursoSeleccionado.inscripcionesCursos[i].Capacitandos.nombreCompleto = vm.cursoSeleccionado.inscripcionesCursos[i].Capacitandos.apellidoPaterno + ' ' + vm.cursoSeleccionado.inscripcionesCursos[i].Capacitandos.apellidoMaterno + ' ' + vm.cursoSeleccionado.inscripcionesCursos[i].Capacitandos.nombre;
-                  }
+                  angular.forEach(vm.listaCursos, function(curso) {
+
+                        if(curso.inscripcionesCursos !== undefined)
+                        {
+                            for(var i=0; i < curso.inscripcionesCursos.length; i++)
+                            {
+                                curso.inscripcionesCursos[i].Capacitandos.nombreCompleto = curso.inscripcionesCursos[i].Capacitandos.apellidoPaterno + ' ' + curso.inscripcionesCursos[i].Capacitandos.apellidoMaterno + ' ' + curso.inscripcionesCursos[i].Capacitandos.nombre;
+                            }                    
+                        }
+
+                  });
             }
 
 

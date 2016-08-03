@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ResumenCursosController', ResumenCursosController);
 
-    ResumenCursosController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'InscripcionCurso', 'ControlProcesos'];
+    ResumenCursosController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosOficiales', 'InscripcionCurso', 'ControlProcesos'];
 
-    function ResumenCursosController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, CursosOficiales, InscripcionCurso, ControlProcesos ) {
+    function ResumenCursosController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, HorasAsignadasUnidad, ProgTrimCursos, CursosOficiales, InscripcionCurso, ControlProcesos ) {
 
             var vm = this;
 
@@ -155,6 +155,12 @@
                                       relation: 'unidad_pertenece',
                                       scope: {
                                         fields: ['nombre']
+                                      }
+                                  },
+                                  {
+                                      relation: 'ptc_pertenece',
+                                      scope: {
+                                        fields: ['anio','trimestre']
                                       }
                                   },
                                   {
@@ -544,6 +550,83 @@
                             .then(function(respuesta) {
 
                                   vm.cursoSeleccionado.estatus = respuesta.estatus;
+                                  
+
+                                  ProgTrimCursos.findById({ 
+                                      id: vm.cursoSeleccionado.idPtc,
+                                      filter: {
+                                        fields : ['idPtc','horasAplicadas']
+                                      }
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+
+                                       var horas_aplicadas = resp.horasAplicadas + vm.cursoSeleccionado.numeroHoras;
+
+                                        ProgTrimCursos.prototype$updateAttributes(
+                                        {
+                                            id: vm.cursoSeleccionado.idPtc
+                                        },{
+                                            horasAplicadas: horas_aplicadas
+                                        })
+                                        .$promise
+                                        .then(function(respuesta) {
+
+                                              ProgTrimCursos.find({
+                                                  filter: {
+                                                      where: {
+                                                        and: [
+                                                            {idUnidadAdmtva: vm.cursoSeleccionado.idUnidadAdmtva},
+                                                            {anio: vm.cursoSeleccionado.ptc_pertenece.anio}
+                                                        ]
+                                                      },
+                                                      fields: ['idPtc','horasAplicadas']
+                                                  }
+                                              })
+                                              .$promise
+                                              .then(function(resp) {
+
+                                                    var suma = 0;
+                                                    angular.forEach(resp, function(resultado) {
+                                                      suma += resultado.horasAplicadas;
+                                                    });
+
+                                                    HorasAsignadasUnidad.find({
+                                                        filter: {
+                                                            where: {
+                                                              and: [
+                                                                  {idUnidadAdmtva: vm.cursoSeleccionado.idUnidadAdmtva},
+                                                                  {anio: vm.cursoSeleccionado.ptc_pertenece.anio},
+                                                              ]
+                                                            },
+                                                            fields: ['id']
+                                                        }
+                                                    })
+                                                    .$promise
+                                                    .then(function(respuesta) {
+                                                          
+                                                          HorasAsignadasUnidad.prototype$updateAttributes(
+                                                          {
+                                                              id: respuesta[0].id
+                                                          },{
+                                                              horasAplicadas: suma
+                                                          })
+                                                          .$promise
+                                                          .then(function(respuesta) {
+                                                          })
+                                                          .catch(function(error) {
+                                                          });
+
+                                                    });
+
+                                              });
+
+                                        })
+                                        .catch(function(error) {
+                                        });
+
+                                  });
+
 
                                   ControlProcesos
                                   .create({

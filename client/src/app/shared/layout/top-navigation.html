@@ -8,8 +8,13 @@
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-top-links">
 
-                <li ui-sref-active="active" ng-if="currentUser.perfil == 'admin_sistema'">
-                    <a ui-sref="admin.usuarios"><i class="fa fa-user"></i> <span class="nav-label">Usuarios del sistema </span></a>
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'admin_sistema'">
+                    <a class="dropdown-toggle" href dropdown-toggle  style="color: #fff;">Usuarios <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id == 1">
+                            <a ui-sref="admin.usuarios"><i class="fa fa-user"></i> <span class="nav-label">Usuarios del sistema </span></a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
@@ -98,15 +103,15 @@
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown" dropdown>
+                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'academica'">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Reportes y bit&aacute;cora <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="cursos_autorizados.cursos_vigentes">    <span class="nav-label"> Resumen de alumnos y cursos </span></a>
+                            <a ui-sref="reportes.resumen_general">    <span class="nav-label"> Resumen de alumnos y cursos </span></a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="reportes.bitacora">   <span class="nav-label">Bit&aacute;cora de eventos </span></a>
+                            <a ui-sref="reportes.bitacora">           <span class="nav-label">Bit&aacute;cora de eventos </span></a>
                         </li>
                     </ul>
                 </li>

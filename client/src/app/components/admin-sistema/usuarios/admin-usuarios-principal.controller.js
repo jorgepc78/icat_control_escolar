@@ -36,7 +36,7 @@
                   vm.tablaListaUsuarios.filtro_datos = {
                           filter: {
                               where: vm.tablaListaUsuarios.condicion,
-                              fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','avisoCurso','activo'],
+                              fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','avisosPTC','avisosPreaperturaCursos','avisosInscripcion','avisosCierreCursos','activo'],
                               order: ['nombre ASC'],
                               limit: vm.tablaListaUsuarios.registrosPorPagina,
                               skip: vm.tablaListaUsuarios.paginaActual - 1,
@@ -183,25 +183,13 @@
 
             function edita_datos_usuario(UsuarioSeleccionado) {
 
-                    vm.usuarioEditar = {
-                        idUsuario      : UsuarioSeleccionado.idUsuario,
-                        nombre         : UsuarioSeleccionado.nombre,
-                        puesto         : UsuarioSeleccionado.puesto,
-                        email          : UsuarioSeleccionado.email,
-                        username       : UsuarioSeleccionado.username,
-                        idUnidadAdmtva : UsuarioSeleccionado.idUnidadAdmtva,
-                        avisoCurso     : UsuarioSeleccionado.avisoCurso,
-                        activo         : UsuarioSeleccionado.activo,
-                        idPerfil       : (UsuarioSeleccionado.perfil.length > 0 ? UsuarioSeleccionado.perfil[0].id : 0)
-                   };
-
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/admin-sistema/usuarios/modal-edita-usuario.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalEditaUsuarioController as vm',
-                        //size: 'lg',
+                        size: 'lg',
                         resolve: {
-                          usuarioEditar: function () { return vm.usuarioEditar }
+                          usuarioEditar: function () { return UsuarioSeleccionado }
                         }
 
                     });
@@ -213,13 +201,16 @@
                         vm.UsuarioSeleccionado.username                        = respuesta.username;
                         vm.UsuarioSeleccionado.unidad_pertenece.idUnidadAdmtva = respuesta.idUnidadAdmtva;
                         vm.UsuarioSeleccionado.unidad_pertenece.nombre         = respuesta.UnidadAdmtva;
-                        vm.UsuarioSeleccionado.avisoCurso                      = respuesta.avisoCurso;
+                        vm.UsuarioSeleccionado.avisosPTC                       = respuesta.avisosPTC;
+                        vm.UsuarioSeleccionado.avisosPreaperturaCursos         = respuesta.avisosPreaperturaCursos;
+                        vm.UsuarioSeleccionado.avisosInscripcion               = respuesta.avisosInscripcion;
+                        vm.UsuarioSeleccionado.avisosCierreCursos              = respuesta.avisosCierreCursos;
                         vm.UsuarioSeleccionado.activo                          = respuesta.activo;
                         if(vm.UsuarioSeleccionado.perfil.length > 0)
                         {
-                            vm.UsuarioSeleccionado.perfil[0].id                    = respuesta.perfil.id;
-                            vm.UsuarioSeleccionado.perfil[0].description           = respuesta.perfil.description;
-                            vm.UsuarioSeleccionado.perfil[0].name                  = respuesta.perfil.name;                          
+                            vm.UsuarioSeleccionado.perfil[0].id                = respuesta.perfil.id;
+                            vm.UsuarioSeleccionado.perfil[0].description       = respuesta.perfil.description;
+                            vm.UsuarioSeleccionado.perfil[0].name              = respuesta.perfil.name;                          
                         }
                         else
                         {

@@ -4,12 +4,12 @@
             <div class="ibox">
                 <div class="ibox-title">
                     <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                     <h2>Lista de usuarios del sistema</h2>
                             </div>
-                            <div class="col-md-8 text-right">
+                            <div class="col-md-6 text-right">
                                     <div class="mail-tools">
-                                            <button class="btn btn-primary btn-labeled" ng-click="vm.nuevo_usuario()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo usuario</button>
+                                            <button class="btn btn-default btn-labeled" ng-click="vm.nuevo_usuario()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo usuario</button>
                                     </div>
                             </div>
                     </div>
@@ -21,15 +21,16 @@
                             <div class="input-group" style="margin-top:16px;">
                                 <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Nombre del usuario" class="input form-control" ng-model="vm.nombre_buscar" required>
                                         <span class="input-group-btn">
-                                                <button class="btn btn-success" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><i class="fa fa-trash-o"></i> Limpiar</button>
-                                                <button class="btn btn-primary" ng-click="vm.muestraResultadosBusqueda()"><i class="fa fa-search"></i> Buscar</button>
+                                                <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
+                                                <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
+
                                         </span>
                             </div>
                         </div>
                     </div>
                   
                     <br>
-                            <table class="tablaDatos table table-condensed table-hover no-footer">
+                            <table class="tablaDatos table table-condensed no-footer">
                               <thead>
                                 <tr>
                                     <th>Unidad</th>
@@ -59,7 +60,7 @@
         <div class="col-md-4">
             <div class="ibox ">
         
-                <div class="ibox-content" style="height:400px;">
+                <div class="ibox-content" style="height:540px;">
                     <div class="tab-content">
         
                         <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
@@ -103,26 +104,41 @@
                                                                 Perfil de usuario
                                                             </li>
                                                             <li class="list-group-item">
-                                                                <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                Aviso apertura cursos
-                                                            </li>
-                                                            <li class="list-group-item">
                                                                 <span class="pull-right label label-{{vm.UsuarioSeleccionado.activo === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.activo === true ? 'S&iacute;' : 'No'}}</span>
                                                                 Usuario activo
                                                             </li>
                                                         </ul>
-        
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-12 text-center">
+                                                        <br>
+                                                        <strong>Configuraci&oacute;n de avisos en los procesos del sistema</strong>
+                                                        <ul class="list-group clear-list">
+                                                            <li class="list-group-item fist-item">
+                                                                <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisosPTC === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisosPTC === true ? 'S&iacute;' : 'No'}}</span>
+                                                                Recibir avisos de los eventos en el PTC
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisosPreaperturaCursos === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisosPreaperturaCursos === true ? 'S&iacute;' : 'No'}}</span>
+                                                                Recibir avisos de los eventos de pre-apertura de cursos
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisosInscripcion === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisosInscripcion === true ? 'S&iacute;' : 'No'}}</span>
+                                                                Recibir avisos de los eventos de inscripci&oacute;n en los cursos
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisosCierreCursos === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisosCierreCursos === true ? 'S&iacute;' : 'No'}}</span>
+                                                                Recibir avisos cuando se terminen y cierren los cursos
+                                                            </li>
+                                                        </ul>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
                                                                 <div class="col-md-6">
                                                                     <button type="button" ng-click="vm.edita_datos_usuario(vm.UsuarioSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar usuario</button>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <button type="button" ng-click="vm.elimina_usuario(vm.UsuarioSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar usuario</button>
                                                                 </div>
-                                                    </div>
-                                                </div>
+                                                            </div>
+                                                        </div>
 
                                     </div>
 

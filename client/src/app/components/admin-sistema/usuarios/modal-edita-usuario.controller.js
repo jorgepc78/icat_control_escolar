@@ -11,27 +11,32 @@
 
             var vm = this;
 
+            vm.guardar = guardar;
+
+            vm.mostrarSpiner = false;
             vm.msg_password = false;
             vm.txt_msg_password = '';
             
             vm.usuarioEditar = {
-                    idUsuario      : usuarioEditar.idUsuario,
-                    nombre         : usuarioEditar.nombre,
-                    puesto         : usuarioEditar.puesto,
-                    email          : usuarioEditar.email,
-                    username       : usuarioEditar.username,
-                    idUnidadAdmtva : usuarioEditar.idUnidadAdmtva,
-                    UnidadAdmtva   : '',
-                    avisoCurso     : usuarioEditar.avisoCurso,
-                    activo         : usuarioEditar.activo,
-                    idPerfil       : usuarioEditar.idPerfil,
-                    perfil         : ''
+                    idUsuario               : usuarioEditar.idUsuario,
+                    nombre                  : usuarioEditar.nombre,
+                    puesto                  : usuarioEditar.puesto,
+                    email                   : usuarioEditar.email,
+                    username                : usuarioEditar.username,
+                    idUnidadAdmtva          : usuarioEditar.idUnidadAdmtva,
+                    UnidadAdmtva            : '',
+                    avisosPTC               : usuarioEditar.avisosPTC,
+                    avisosPreaperturaCursos : usuarioEditar.avisosPreaperturaCursos,
+                    avisosInscripcion       : usuarioEditar.avisosInscripcion,
+                    avisosCierreCursos      : usuarioEditar.avisosCierreCursos,
+                    activo                  : usuarioEditar.activo,
+                    idPerfil                : (usuarioEditar.perfil.length > 0 ? usuarioEditar.perfil[0].id : 0),
+                    perfil                  : ''
             };
 
             vm.perfilSeleccionado = 0;
             vm.unidadSelecccionada = 0;
 
-            vm.guardar = guardar;
 
             inicia();
 
@@ -74,30 +79,38 @@
 
             function guardar() {
 
+                vm.mostrarSpiner = true;
+
                 if(vm.usuarioEditar.password == '' || vm.usuarioEditar.password === undefined)
                 {
                     var datos = {
 
-                            nombre         : vm.usuarioEditar.nombre,
-                            puesto         : vm.usuarioEditar.puesto,
-                            email          : vm.usuarioEditar.email,
-                            username       : vm.usuarioEditar.username,
-                            idUnidadAdmtva : vm.unidadSelecccionada.idUnidadAdmtva,
-                            avisoCurso     : vm.usuarioEditar.avisoCurso,
-                            activo         : vm.usuarioEditar.activo
+                            nombre                  : vm.usuarioEditar.nombre,
+                            puesto                  : vm.usuarioEditar.puesto,
+                            email                   : vm.usuarioEditar.email,
+                            username                : vm.usuarioEditar.username,
+                            idUnidadAdmtva          : vm.unidadSelecccionada.idUnidadAdmtva,
+                            avisosPTC               : vm.usuarioEditar.avisosPTC,
+                            avisosPreaperturaCursos : vm.usuarioEditar.avisosPreaperturaCursos,
+                            avisosInscripcion       : vm.usuarioEditar.avisosInscripcion,
+                            avisosCierreCursos      : vm.usuarioEditar.avisosCierreCursos,
+                            activo                  : vm.usuarioEditar.activo
                     };
                 }
                 else
                 {
                     var datos = {
-                            nombre         : vm.usuarioEditar.nombre,
-                            puesto         : vm.usuarioEditar.puesto,
-                            email          : vm.usuarioEditar.email,
-                            username       : vm.usuarioEditar.username,
-                            password       : vm.usuarioEditar.password,
-                            idUnidadAdmtva : vm.unidadSelecccionada.idUnidadAdmtva,
-                            avisoCurso     : vm.usuarioEditar.avisoCurso,
-                            activo         : vm.usuarioEditar.activo
+                            nombre                  : vm.usuarioEditar.nombre,
+                            puesto                  : vm.usuarioEditar.puesto,
+                            email                   : vm.usuarioEditar.email,
+                            username                : vm.usuarioEditar.username,
+                            password                : vm.usuarioEditar.password,
+                            idUnidadAdmtva          : vm.unidadSelecccionada.idUnidadAdmtva,
+                            avisosPTC               : vm.usuarioEditar.avisosPTC,
+                            avisosPreaperturaCursos : vm.usuarioEditar.avisosPreaperturaCursos,
+                            avisosInscripcion       : vm.usuarioEditar.avisosInscripcion,
+                            avisosCierreCursos      : vm.usuarioEditar.avisosCierreCursos,
+                            activo                  : vm.usuarioEditar.activo
                     };
                 }
 
@@ -142,6 +155,7 @@
                 })
                 .catch(function(error) {
                     if(error.status == 422) {
+                            vm.mostrarSpiner = false;
                             vm.txt_msg_password = 'El email ya existe';
                             vm.msg_password = true;
                             $timeout(function(){

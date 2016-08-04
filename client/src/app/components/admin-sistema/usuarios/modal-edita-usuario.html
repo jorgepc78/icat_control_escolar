@@ -6,49 +6,50 @@
             <form name="form_datos" class="form-horizontal">
 
                   <div class="form-group">
-                      <label class="col-sm-3 control-label">Perfil</label>
-                      <div class="col-sm-7">
-                          <select class="form-control m-b" 
-                              ng-model="vm.perfilSeleccionado"
-                              ng-options="rol as rol.description for rol in vm.listaRoles" required>
-                          </select>
-                      </div>
-                  </div>
-
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Unidad</label>
-                      <div class="col-sm-7">
-                          <select class="form-control m-b" 
-                              ng-model="vm.unidadSelecccionada"
-                              ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades" required>
-                          </select>
+                      <label class="col-sm-1 control-label">Perfil</label>
+                      <div class="col-sm-11">
+                          <div class="row">
+                              <div class="col-md-5">
+                                  <select class="form-control m-b" 
+                                      ng-model="vm.perfilSeleccionado"
+                                      ng-options="rol as rol.description for rol in vm.listaRoles" required>
+                                  </select>
+                              </div>
+                              <div class="col-md-1 text-right">
+                                  <label class="control-label">Unidad</label>
+                              </div>
+                              <div class="col-md-5">
+                                  <select class="form-control m-b" 
+                                      ng-model="vm.unidadSelecccionada"
+                                      ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades" required>
+                                  </select>
+                              </div>
+                          </div>
                       </div>
                   </div>
 
                   <div class="hr-line-dashed"></div>
 
                   <div class="form-group">
-                      <label class="col-sm-3 control-label">Nombre</label>
-                      <div class="col-sm-7">
-                          <input type="text" class="form-control" ng-model="vm.usuarioEditar.nombre" required>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Puesto</label>
-                      <div class="col-sm-7">
-                          <input type="text" class="form-control" ng-model="vm.usuarioEditar.puesto" required>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Email</label>
-                      <div class="col-sm-7">
-                          <input type="email" class="form-control" ng-model="vm.usuarioEditar.email" required>
+                      <label class="col-sm-1 control-label">Nombre</label>
+                      <div class="col-sm-11">
+                          <div class="row">
+                              <div class="col-md-5">
+                                  <input type="text" class="form-control" ng-model="vm.usuarioEditar.nombre" required>
+                              </div>
+                              <div class="col-md-1 text-right">
+                                  <label class="control-label">Puesto</label>
+                              </div>
+                              <div class="col-md-6">
+                                  <input type="text" class="form-control" ng-model="vm.usuarioEditar.puesto" required>
+                              </div>
+                          </div>
                       </div>
                   </div>
 
                   <div class="form-group">
-                      <label class="col-sm-3 control-label">Nombre de usuario</label>
-                      <div class="col-sm-9">
+                      <label class="col-sm-1 control-label">Usuario</label>
+                      <div class="col-sm-11">
                           <div class="row">
                               <div class="col-md-4">
                                   <input type="text" class="form-control" ng-model="vm.usuarioEditar.username" required>
@@ -64,16 +65,46 @@
                       </div>
                   </div>
 
+                  <div class="form-group">
+                      <label class="col-sm-1 control-label">Email</label>
+                      <div class="col-sm-11">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <input type="email" class="form-control" ng-model="vm.usuarioEditar.email" required>
+                              </div>
+                              <div class="col-md-2 text-right">
+                                  <label class="control-label">Usuario activo</label>
+                              </div>
+                              <div class="col-md-4">
+                                  <input ng-if="vm.usuarioEditar.activo!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.activo"/>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
                   <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                      <div class="col-sm-10"><p class="form-control-static"><strong>Configuraci&oacute;n de avisos en los procesos del sistema</strong></p></div>
+                  </div>
 
                   <div class="form-group">
-                      <label class="col-sm-3 control-label">Aviso apertura cursos</label>
+                      <label class="col-sm-3 control-label">Recibir avisos de los eventos en el PTC</label>
                       <div class="col-sm-3">
-                          <input ng-if="vm.usuarioEditar.avisoCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoCurso"/>
+                          <input ng-if="vm.usuarioEditar.avisosPTC!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisosPTC"/>
                       </div>
-                      <label class="col-sm-3 control-label">Usuario activo</label>
+                      <label class="col-sm-3 control-label">Recibir avisos de los eventos de pre-apertura de cursos</label>
                       <div class="col-sm-3">
-                          <input ng-if="vm.usuarioEditar.activo!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.activo"/>
+                          <input ng-if="vm.usuarioEditar.avisosPreaperturaCursos!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisosPreaperturaCursos"/>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-sm-3 control-label">Recibir avisos de los eventos de inscripci&oacute;n en los cursos</label>
+                      <div class="col-sm-3">
+                          <input ng-if="vm.usuarioEditar.avisosInscripcion!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisosInscripcion"/>
+                      </div>
+                      <label class="col-sm-3 control-label">Recibir avisos cuando se terminen y cierren los cursos</label>
+                      <div class="col-sm-3">
+                          <input ng-if="vm.usuarioEditar.avisosCierreCursos!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisosCierreCursos"/>
                       </div>
                   </div>
 
@@ -81,8 +112,23 @@
 
       </div>
       <div class="modal-footer">
-          <span class="text-danger" ng-show="vm.msg_password">{{vm.txt_msg_password}}</span>
-          <button type="button" class="btn btn-white" ng-click="$dismiss()">Cancelar</button>
-          <button type="button" class="btn btn-primary" ng-disabled="form_datos.$invalid" ng-click="vm.guardar()">Guardar</button>
+
+          <div class="row">
+              <div class="col-md-4">
+              </div>
+              <div class="col-md-4">
+                  <div ng-show="vm.msg_password" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.txt_msg_password}}</div>
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
       </div>
 </div>

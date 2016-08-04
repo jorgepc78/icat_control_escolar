@@ -1,0 +1,119 @@
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+        <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+
+                        <form name="form_datos" class="form-horizontal">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">A&ntilde;o</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control m-b"
+                                              ng-model="vm.anio" ng-change="vm.calculaDatos()">
+                                              <option value="2015">2015</option>
+                                              <option value="2016">2016</option>
+                                              <option value="2017">2017</option>
+                                              <option value="2018">2018</option>
+                                              <option value="2019">2019</option>
+                                              <option value="2020">2020</option>
+                                              <option value="2021">2021</option>
+                                              <option value="2022">2022</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Unidad</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.calculaDatos()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
+                                    </div>
+                                </div>
+                                
+                                <div class="hr-line-dashed"></div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Trimestre</label>
+                                    <div class="col-sm-10">
+
+
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="0"> Todos</label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="1"> Primer trimestre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="2"> Segundo trimestre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="3"> Tercero trimestre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="4"> Cuarto trimestre </label></div>
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Mes</label>
+                                    <div class="col-sm-10">
+
+
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="11"> Enero</label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="12"> Febrero </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="13"> Marzo </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="14"> Abril </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="15"> Mayo </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="16"> Junio </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="17"> Julio </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="18"> Agosto </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="19"> Septiembre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="20"> Octubre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="21"> Noviembre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="22"> Diciembre </label></div>
+                                    </div>
+                                </div>
+
+                        </form>
+                    </div>
+                </div>
+        </div>
+        <div class="col-lg-9">
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Capacitandos registrados</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">{{vm.datos.total_capacitandos | number:0}}</h1>
+                                <small>Total en sistema</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Cursos aperturados</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">{{vm.datos.cursos_activados | number:0}}</h1>
+
+                                <small>Activos y realizados</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Capacitandos activos</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">{{vm.datos.capacitandos_activos | number:0}}</h1>
+
+                                <small>Inscritos y con pago en alg&uacute;n curso</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+</div>
+

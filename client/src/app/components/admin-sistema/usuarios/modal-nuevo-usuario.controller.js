@@ -11,26 +11,31 @@
 
             var vm = this;
             
+            vm.guardar = guardar;
+
+            vm.mostrarSpiner = false;
             vm.msg_password = false;
             vm.txt_msg_password = '';
 
             vm.usuarioEditar = {
-                    nombre         : '',
-                    puesto         : '',
-                    email          : '',
-                    username       : '',
-                    idUnidadAdmtva : 0,
-                    UnidadAdmtva   : '',
-                    avisoCurso     : false,
-                    activo         : true,
-                    idPerfil       : 0,
-                    perfil         : ''
+                    nombre                  : '',
+                    puesto                  : '',
+                    email                   : '',
+                    username                : '',
+                    idUnidadAdmtva          : 0,
+                    UnidadAdmtva            : '',
+                    avisosPTC               : false,
+                    avisosPreaperturaCursos : false,
+                    avisosInscripcion       : false,
+                    avisosCierreCursos      : false,
+                    activo                  : true,
+                    idPerfil                : 0,
+                    perfil                  : ''
             };
 
             vm.perfilSeleccionado = 0;
             vm.unidadSelecccionada = 0;
 
-            vm.guardar = guardar;
 
             inicia();
 
@@ -61,8 +66,11 @@
 
             function guardar() {
 
+                vm.mostrarSpiner = true;
+
                 if(vm.usuarioEditar.password == '' || vm.usuarioEditar.password === undefined)
                 {
+                    vm.mostrarSpiner = false;
                     vm.txt_msg_password = 'En necesario escribir el password';
                     vm.msg_password = true;
                     $timeout(function(){
@@ -99,6 +107,7 @@
                     })
                     .catch(function(error) {
                         if(error.status == 422) {
+                                vm.mostrarSpiner = false;
                                 vm.txt_msg_password = 'El nombre de usuario o el email ya existen';
                                 vm.msg_password = true;
                                 $timeout(function(){

@@ -208,6 +208,13 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+            .state('reportes.resumen_general', {
+                url: '/resumen_general',
+                templateUrl: 'app/components/resumen/resumen-general.html',
+                controller: 'ResumenGeneralController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
     }
 
 })();

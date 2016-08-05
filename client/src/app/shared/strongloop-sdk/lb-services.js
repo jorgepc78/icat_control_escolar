@@ -17084,6 +17084,8 @@ module.factory(
          *
          * @param {Object=} parameters Request parameters.
          *
+         *  - `id_unidad` – `{number}` - 
+         *
          *  - `anio` – `{number}` - 
          *
          *  - `meses` – `{string}` - 
@@ -17106,6 +17108,44 @@ module.factory(
         "cursos_mes": {
           isArray: true,
           url: urlBase + "/CursosOficiales/cursos_mes",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CursosOficiales#resumen_total
+         * @methodOf lbServices.CursosOficiales
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id_unidad` – `{number}` - 
+         *
+         *  - `anio` – `{number}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `CursosOficiales` object.)
+         * </em>
+         */
+        "resumen_total": {
+          isArray: true,
+          url: urlBase + "/CursosOficiales/resumen_total",
           method: "GET"
         },
 

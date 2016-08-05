@@ -24,7 +24,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" ng-show="(currentUser.unidad_pertenece_id == 1)">
                                     <label class="col-sm-2 control-label">Unidad</label>
                                     <div class="col-sm-10">
                                         <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.calculaDatos()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
@@ -78,35 +78,35 @@
                     <div class="col-lg-4">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Capacitandos registrados</h5>
+                                <h5>Total capacitandos</h5>
                             </div>
                             <div class="ibox-content">
                                 <h1 class="no-margins">{{vm.datos.total_capacitandos | number:0}}</h1>
-                                <small>Total en sistema</small>
+                                <small>Registrados en sistema</small>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Cursos aperturados</h5>
+                                <h5>Total cursos aperturados</h5>
                             </div>
                             <div class="ibox-content">
                                 <h1 class="no-margins">{{vm.datos.cursos_activados | number:0}}</h1>
 
-                                <small>Activos y realizados</small>
+                                <small>Activos y realizados en el a&ntilde;o seleccionado</small>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Capacitandos activos</h5>
+                                <h5>Total capacitandos activos</h5>
                             </div>
                             <div class="ibox-content">
                                 <h1 class="no-margins">{{vm.datos.capacitandos_activos | number:0}}</h1>
 
-                                <small>Inscritos y con pago en alg&uacute;n curso</small>
+                                <small>Inscritos pagados en el a&ntilde;o seleccionado</small>
                             </div>
                         </div>
                     </div>
@@ -138,46 +138,34 @@
                     </div>
                 </div><!-- end row -->
 
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-lg-12">
                 
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <h5>Orders</h5>
+                                    <h5>Eficiencia terminal</h5>
                                 </div>
                                 <div class="ibox-content">
                                     
                                     <div class="row">
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-10">
                                             <div class="flot-chart">
-                                                <div flot class="flot-chart-content" dataset="vm.flotData" options="vm.flotOptions"></div>
+                                                <div flot class="flot-chart-content" dataset="vm.flotData2" options="vm.flotOptions2"></div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-2">
                                             <ul class="stat-list">
                                                 <li>
-                                                    <h2 class="no-margins">2,346</h2>
-                                                    <small>Total orders in period</small>
-                                                    <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
-                                                    <div class="progress progress-mini">
-                                                        <div style="width: 48%;" class="progress-bar"></div>
-                                                    </div>
+                                                    <h2 class="no-margins">{{vm.datos2.capacitandos_inscritos | number:0}}</h2>
+                                                    <small>Personas inscritas a un curso</small>
                                                 </li>
                                                 <li>
-                                                    <h2 class="no-margins ">4,422</h2>
-                                                    <small>Orders in last month</small>
-                                                    <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
-                                                    <div class="progress progress-mini">
-                                                        <div style="width: 60%;" class="progress-bar"></div>
-                                                    </div>
+                                                    <h2 class="no-margins ">{{vm.datos2.capacitandos_terminaron | number:0}}</h2>
+                                                    <small>Personas que aprobaron el curso</small>
                                                 </li>
                                                 <li>
-                                                    <h2 class="no-margins ">9,180</h2>
-                                                    <small>Monthly income from orders</small>
-                                                    <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
-                                                    <div class="progress progress-mini">
-                                                        <div style="width: 22%;" class="progress-bar"></div>
-                                                    </div>
+                                                    <h2 class="no-margins ">{{vm.datos2.eficiencia_terminal | number:1}}%</h2>
+                                                    <small>Eficiencia terminal</small>
                                                 </li>
                                             </ul>
                                         </div>
@@ -188,7 +176,7 @@
                             </div>
                 
                     </div>
-                </div> --><!-- end row -->
+                </div> <!-- end row -->
 
         </div>
     </div>

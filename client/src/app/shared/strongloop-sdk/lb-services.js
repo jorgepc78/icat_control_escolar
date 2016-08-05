@@ -17071,6 +17071,44 @@ module.factory(
           method: "POST"
         },
 
+        /**
+         * @ngdoc method
+         * @name lbServices.CursosOficiales#cursos_mes
+         * @methodOf lbServices.CursosOficiales
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `anio` – `{number}` - 
+         *
+         *  - `meses` – `{string}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `CursosOficiales` object.)
+         * </em>
+         */
+        "cursos_mes": {
+          isArray: true,
+          url: urlBase + "/CursosOficiales/cursos_mes",
+          method: "GET"
+        },
+
         // INTERNAL. Use ProgTrimCursos.cursos_no_programados.findById() instead.
         "::findById::ProgTrimCursos::cursos_no_programados": {
           params: {

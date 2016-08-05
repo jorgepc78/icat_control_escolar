@@ -1,8 +1,32 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 Develer S.r.L.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 /* global $ */
 /* global angular */
 /* global jQuery */
 
-angular.module('angular-flot', []).directive('flot', function () {
+angular.module('angular-flot', []).directive('flot', ['$timeout', function ($timeout) {
   return {
     restrict: 'EA',
     template: '<div></div>',
@@ -11,7 +35,8 @@ angular.module('angular-flot', []).directive('flot', function () {
       options: '=',
       callback: '=',
       onPlotClick: '&',
-      onPlotHover: '&'
+      onPlotHover: '&',
+      onPlotSelected: '&'
     },
     link: function (scope, element, attributes) {
       var plot = null;
@@ -21,7 +46,7 @@ angular.module('angular-flot', []).directive('flot', function () {
       // Bug: Passing a jQuery object causes an infinite loop within Angular. Fail hard telling
       // users that they should pass us a jQuery expression as string instead.
       if ((((scope.options || {}).legend || {}).container) instanceof jQuery) {
-        throw new Error('Please use a jQuery expression string with the "legend.container" option.')
+        throw new Error('Please use a jQuery expression string with the "legend.container" option.');
       }
 
       if (!scope.dataset) {
@@ -58,7 +83,7 @@ angular.module('angular-flot', []).directive('flot', function () {
       //
 
       plotArea.on('plotclick', function onPlotClick (event, pos, item) {
-        scope.$apply(function onApplyPlotClick () {
+        $timeout(function onApplyPlotClick () {
           scope.onPlotClick({
             event: event,
             pos: pos,
@@ -67,8 +92,17 @@ angular.module('angular-flot', []).directive('flot', function () {
         });
       });
 
+      plotArea.on('plotselected', function onPlotSelected (event, ranges) {
+        $timeout(function onApplyPlotSelected () {
+          scope.onPlotSelected({
+            event: event,
+            ranges: ranges
+          });
+        });
+      });
+
       plotArea.on('plothover', function onPlotHover (event, pos, item) {
-        scope.$apply(function onApplyPlotHover () {
+        $timeout(function onApplyPlotHover () {
           scope.onPlotHover({
             event: event,
             pos: pos,
@@ -80,6 +114,12 @@ angular.module('angular-flot', []).directive('flot', function () {
       //
       // Watches
       //
+
+      var onOptionsChanged = function () {
+        plot = init();
+      };
+
+      var unwatchOptions = scope.$watch('options', onOptionsChanged, true);
 
       var onDatasetChanged = function (dataset) {
         if (plot) {
@@ -94,11 +134,17 @@ angular.module('angular-flot', []).directive('flot', function () {
 
       var unwatchDataset = scope.$watch('dataset', onDatasetChanged, true);
 
-      var onOptionsChanged = function () {
-        plot = init();
-      };
+      attributes.$observe('width', function (value) {
+        if (!value) return;
+        width = value;
+        plotArea.css('width', value);
+      });
 
-      var unwatchOptions = scope.$watch('options', onOptionsChanged, true);
+      attributes.$observe('height', function (value) {
+        if (!value) return;
+        height = value;
+        plotArea.css('height', value);
+      });
 
       //
       // Tear Down
@@ -107,10 +153,12 @@ angular.module('angular-flot', []).directive('flot', function () {
       element.on('$destroy', function onDestroy () {
         plotArea.off('plotclick');
         plotArea.off('plothover');
+        plotArea.off('plotselected');
 
+        plot.shutdown();
         unwatchDataset();
         unwatchOptions();
       });
     }
   };
-});
+}]);

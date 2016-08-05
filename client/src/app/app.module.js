@@ -13,7 +13,8 @@
         'naif.base64',
         'ngDropdowns',
         'ngFileSaver',
-        'ngOrderObjectBy'
+        'ngOrderObjectBy',
+        'angular-flot'
     	/*'templates'*/
     ]);
 })();

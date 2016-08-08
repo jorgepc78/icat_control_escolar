@@ -141,7 +141,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "registro_destinatarios": {
+      "type": "hasMany",
+      "model": "DestinatariosAvisos",
+      "foreignKey": "idControlProcesos"
+    }
+  },
   "acls": [],
   "methods": {}
 }

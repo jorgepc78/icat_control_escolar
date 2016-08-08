@@ -20,6 +20,7 @@
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
             vm.cambiarPagina              = cambiarPagina;
             vm.reprogramaCurso            = reprogramaCurso;
+            vm.cancelaCurso               = cancelaCurso;
             vm.concluyeCurso              = concluyeCurso;
             vm.cierraCurso                = cierraCurso;
             vm.asientaCalificaciones      = asientaCalificaciones;
@@ -490,10 +491,111 @@
                         vm.cursoSeleccionado.nombreInstructor      = respuesta.nombreInstructor;
                         vm.cursoSeleccionado.observaciones         = respuesta.observaciones;
                         formateaListado();
+
+                        ControlProcesos
+                        .create({
+                            proceso         : 'Cursos vigentes',
+                            accion          : 'REPROGRAMACION DE CURSO',
+                            idDocumento     : seleccion.idCurso,
+                            idUsuario       : $scope.currentUser.id_usuario,
+                            idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                        })
+                        .$promise
+                        .then(function(resp) {
+
+                              ControlProcesos.findById({ 
+                                  id: resp.id,
+                                  filter: {
+                                    fields : ['identificador']
+                                  }
+                              })
+                              .$promise
+                              .then(function(resp_control) {
+
+                                    swal({
+                                      title: 'Reprogramación de curso',
+                                      html: 'se realiz&oacute; el cambio de fechas del curso seleccionado y se envi&oacute; el aviso de cambio a las personas inscritas. Se gener&oacute; de igual manera el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                      type: 'success',
+                                      showCancelButton: false,
+                                      confirmButtonColor: "#9a0000",
+                                      confirmButtonText: "Aceptar"
+                                    });
+
+                              });
+                        });
+
                     }, function () {
                     });
 
             }
+
+
+
+            function cierraCurso(seleccion) {
+
+                  swal({
+                    title: "Confirmar",
+                    html: 'El curso <strong>'+ seleccion.nombreCurso +'</strong> cambiar&aacute; su estatus a cerrado, una vez realizado esto el curso pasar&aacute; a la secci&oacute;n de hist&oacute;ricos, ¿Continuar?',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#9a0000",
+                    confirmButtonText: "Aceptar",
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                    closeOnCancel: true
+                  }, function(){
+                          swal.disableButtons();
+
+                            CursosOficiales.prototype$updateAttributes(
+                            {
+                                id: seleccion.idCurso
+                            },{
+                                estatus: 6
+                            })
+                            .$promise
+                            .then(function(respuesta) {
+
+                                  vm.cursoSeleccionado.estatus = respuesta.estatus;
+
+                                  ControlProcesos
+                                  .create({
+                                      proceso         : 'Cursos vigentes',
+                                      accion          : 'CIERRE DE CURSO',
+                                      idDocumento     : seleccion.idCurso,
+                                      idUsuario       : $scope.currentUser.id_usuario,
+                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+
+                                        ControlProcesos.findById({ 
+                                            id: resp.id,
+                                            filter: {
+                                              fields : ['identificador']
+                                            }
+                                        })
+                                        .$promise
+                                        .then(function(resp_control) {
+
+                                              swal({
+                                                title: 'Cambio de estatus registrado',
+                                                html: 'se realiz&oacute; el cambio de estatus del curso a cerrado y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                type: 'success',
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#9a0000",
+                                                confirmButtonText: "Aceptar"
+                                              });
+
+                                              vm.limpiaBusqueda();
+                                        });
+                                  });
+
+                            });
+
+                  });
+
+            }
+
 
 
             function asientaCalificaciones(seleccion) {
@@ -667,11 +769,11 @@
             }
 
 
-            function cierraCurso(seleccion) {
+            function cancelaCurso(seleccion) {
 
                   swal({
                     title: "Confirmar",
-                    html: 'El curso <strong>'+ seleccion.nombreCurso +'</strong> cambiar&aacute; su estatus a cerrado, una vez realizado esto el curso pasar&aacute; a la secci&oacute;n de hist&oacute;ricos, ¿Continuar?',
+                    html: 'El curso <strong>'+ seleccion.nombreCurso +'</strong> se marcar&aacute; como cancelado y se les avisar&aacute; a las personas inscritas de la cancelaci&oacute;n, una vez realizado este cambio el curso pasar&aacute; a la secci&oacute;n de hist&oacute;ricos, ¿Continuar?',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -686,7 +788,7 @@
                             {
                                 id: seleccion.idCurso
                             },{
-                                estatus: 6
+                                estatus: 7
                             })
                             .$promise
                             .then(function(respuesta) {
@@ -696,7 +798,7 @@
                                   ControlProcesos
                                   .create({
                                       proceso         : 'Cursos vigentes',
-                                      accion          : 'CIERRE DE CURSO',
+                                      accion          : 'CANCELACION DE CURSO',
                                       idDocumento     : seleccion.idCurso,
                                       idUsuario       : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
@@ -715,7 +817,7 @@
 
                                               swal({
                                                 title: 'Cambio de estatus registrado',
-                                                html: 'se realiz&oacute; el cambio de estatus del curso a cerrado y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                html: 'se realiz&oacute; el cambio de estatus del curso a cancelado y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
                                                 type: 'success',
                                                 showCancelButton: false,
                                                 confirmButtonColor: "#9a0000",

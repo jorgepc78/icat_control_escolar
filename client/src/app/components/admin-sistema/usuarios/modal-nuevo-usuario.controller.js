@@ -82,14 +82,17 @@
                 {
                     Usuario
                     .create({
-                            nombre         : vm.usuarioEditar.nombre,
-                            puesto         : vm.usuarioEditar.puesto,
-                            email          : vm.usuarioEditar.email,
-                            username       : vm.usuarioEditar.username,
-                            password       : vm.usuarioEditar.password,
-                            idUnidadAdmtva : vm.unidadSelecccionada.idUnidadAdmtva,
-                            avisoCurso     : vm.usuarioEditar.avisoCurso,
-                            activo         : vm.usuarioEditar.activo
+                            nombre                  : vm.usuarioEditar.nombre,
+                            puesto                  : vm.usuarioEditar.puesto,
+                            email                   : vm.usuarioEditar.email,
+                            username                : vm.usuarioEditar.username,
+                            password                : vm.usuarioEditar.password,
+                            idUnidadAdmtva          : vm.unidadSelecccionada.idUnidadAdmtva,
+                            avisosPTC               : vm.usuarioEditar.avisosPTC,
+                            avisosPreaperturaCursos : vm.usuarioEditar.avisosPreaperturaCursos,
+                            avisosInscripcion       : vm.usuarioEditar.avisosInscripcion,
+                            avisosCierreCursos      : vm.usuarioEditar.avisosCierreCursos,
+                            activo                  : vm.usuarioEditar.activo
                     })
                     .$promise
                     .then(function(respuesta) {

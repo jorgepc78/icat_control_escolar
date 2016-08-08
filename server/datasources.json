@@ -8,5 +8,24 @@
     "name": "icat_control_escolar_ds",
     "connector": "postgresql",
     "debug": false
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "correo.icatqr.edu.mx",
+        "secure": false,
+        "port": 26,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "control-escolar@icatqr.edu.mx",
+          "pass": "icatctrle"
+        }
+      }
+    ]
   }
 }

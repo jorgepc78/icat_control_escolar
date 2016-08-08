@@ -8,5 +8,24 @@
     "name": "icat_control_escolar_ds",
     "connector": "postgresql",
     "debug": false
+  },
+  "emailDs": {
+    "name": "emailDs",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "smtp",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "jorgepc78@gmail.com",
+          "pass": "Txfiles1*1978"
+        }
+      }
+    ]
   }
 }

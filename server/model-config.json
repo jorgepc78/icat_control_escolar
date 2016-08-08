@@ -33,6 +33,9 @@
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },
+  "Email": {
+    "dataSource": "emailDs"
+  },
   "Usuario": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
@@ -138,6 +141,10 @@
     "public": true
   },
   "VistaControlProcesos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "DestinatariosAvisos": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
   }

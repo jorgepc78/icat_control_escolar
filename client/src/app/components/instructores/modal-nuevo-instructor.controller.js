@@ -11,6 +11,11 @@
 
             var vm = this;
 
+            vm.guardar = guardar;
+            vm.muestraCursosEspecialidad = muestraCursosEspecialidad;
+            vm.agregaCurso = agregaCurso;
+            vm.eliminaRegistro = eliminaRegistro;
+
             vm.mostrarSpiner = false;
 
             vm.listaUnidades = {};
@@ -40,13 +45,10 @@
                     escolaridad        : '',
                     idLocalidad        : 0,
                     activo             : true,
-                    cursos_habilitados : []
+                    evaluacion_curso : []
             };
 
-            vm.guardar = guardar;
-            vm.muestraCursosEspecialidad = muestraCursosEspecialidad;
-            vm.agregaCurso = agregaCurso;
-            vm.eliminaRegistro = eliminaRegistro;
+            vm.cursos_habilitados = [];
 
             inicia();
 
@@ -132,14 +134,15 @@
 
 
             function agregaCurso() {
-                vm.registroEdicion.cursos_habilitados.push({
+                vm.cursos_habilitados.push({
                     idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
                     nombreCurso     : vm.cursoSeleccionado.nombreCurso,
-                    modalidad       : vm.cursoSeleccionado.modalidad
+                    modalidad       : vm.cursoSeleccionado.modalidad,
+                    calificacion    : 0
                 });
 
                 vm.cursoSeleccionado = {};
-                angular.forEach(vm.registroEdicion.cursos_habilitados, function(record) {
+                angular.forEach(vm.cursos_habilitados, function(record) {
                     
                     var index = vm.listaCursos.map(function(registro) {
                                                         return registro.idCatalogoCurso;
@@ -151,8 +154,9 @@
             };
 
 
-            function eliminaRegistro(indice) {
-                vm.registroEdicion.cursos_habilitados.splice(indice, 1);
+            function eliminaRegistro(seleccion) {
+                var indice = vm.cursos_habilitados.indexOf(seleccion);
+                vm.cursos_habilitados.splice(indice, 1);
                 vm.muestraCursosEspecialidad();
             };
 
@@ -160,6 +164,8 @@
             function guardar() {
 
                 vm.mostrarSpiner = true;
+                vm.registroEdicion.UnidadAdmtva = vm.unidadSeleccionada.nombre;
+                vm.registroEdicion.localidad = vm.localidadSeleccionada.nombre;
 
                 CatalogoInstructores
                 .create({
@@ -179,20 +185,25 @@
                 .$promise
                 .then(function(respuesta) {
 
-                        if(vm.registroEdicion.cursos_habilitados.length > 0)
+                        if(vm.cursos_habilitados.length > 0)
                         {
-                                angular.forEach(vm.registroEdicion.cursos_habilitados, function(record) {
+                                var totalregistros = 0;
+                                angular.forEach(vm.cursos_habilitados, function(record) {
 
                                         CatalogoInstructores.cursos_habilitados.link({
-                                              id: respuesta.idInstructor,
-                                              fk: record.idCatalogoCurso
+                                            id: respuesta.idInstructor,
+                                            fk: record.idCatalogoCurso
                                         },{
+                                            calificacion: record.calificacion
                                         }) 
                                         .$promise
                                         .then(function() {
+                                            totalregistros++;
+                                            if(totalregistros == vm.cursos_habilitados.length)
+                                                $modalInstance.close();
                                         });
                                 });
-                                $modalInstance.close();
+                                
                         }
                         else
                         {

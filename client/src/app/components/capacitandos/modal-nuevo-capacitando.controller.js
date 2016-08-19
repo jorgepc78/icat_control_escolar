@@ -14,10 +14,12 @@
             vm.calculaNacim = calculaNacim;
             vm.guardar      = guardar;
 
+            vm.mostrarNumControl = false;
             vm.soloLectura = false;
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
             vm.mensaje = '';
+            vm.correoCompartido = false;
 
             vm.listaLocalidades = [];
             vm.listaNivelEstudios = [];
@@ -28,6 +30,7 @@
 
             vm.registroEditar = {
                 idUnidadAdmtva      : $scope.currentUser.unidad_pertenece_id,
+                numControl          : '',
                 apellidoPaterno     : '',
                 apellidoMaterno     : '',
                 nombre              : '',
@@ -223,7 +226,7 @@
                 .$promise
                 .then(function(resp) {
                     
-                        if(resp.count > 0)
+                        if((resp.count > 0)&&(vm.correoCompartido == false))
                         {
                             vm.mostrarSpiner = false;
                             vm.mostrar_msg_error = true;

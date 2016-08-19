@@ -186,7 +186,7 @@
                                                                                             <thead>
                                                                                             <tr>
                                                                                                 <th></th>
-                                                                                                <th>ID</th>
+                                                                                                <th>N&uacute;m. Control</th>
                                                                                                 <th>Nombre</th>
                                                                                                 <th ng-show="(vm.cursoSeleccionado.estatus < 5)">Pago</th>
                                                                                                 <th ng-show="(vm.cursoSeleccionado.estatus >= 5)">Calif.</th>
@@ -195,13 +195,13 @@
                                                                                             <tbody>
                                                                                             <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesCursos">
                                                                                                 <td> {{$index + 1}}</td>
-                                                                                                <td> {{inscripcion.Capacitandos.idAlumno}}</td>
+                                                                                                <td> {{inscripcion.Capacitandos.numControl}}</td>
                                                                                                 <td> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
                                                                                                 <td class="client-status" ng-switch on="inscripcion.pagado" ng-show="(vm.cursoSeleccionado.estatus < 5)">
                                                                                                     <span ng-switch-when="0" class="label label-warning texto-estatus-ptc">Pendiente</span>
                                                                                                     <span ng-switch-when="1" class="label label-success texto-estatus-ptc">Pagado</span>
-                                                                                                    <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Condonado</span>
-                                                                                                    <span ng-switch-when="3" class="label label-info texto-estatus-ptc">Becado</span>
+                                                                                                    <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Exento al 100%</span>
+                                                                                                    <span ng-switch-when="3" class="label label-primary texto-estatus-ptc">Exento con porcentaje</span>
                                                                                                 </td>
                                                                                                 <td ng-show="(vm.cursoSeleccionado.estatus >= 5)"> {{inscripcion.calificacion}}</td>
                                                                                             </tr>

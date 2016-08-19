@@ -44,6 +44,7 @@
 
             function inicia() {
 
+                  vm.listaUnidades = [];
                   CatalogoUnidadesAdmtvas.find({
                       filter: {
                           where: {idUnidadAdmtva: {gt: 1}},
@@ -238,9 +239,39 @@
 
             function apruebaCurso(seleccion) {
 
+                  var datos;
+                  var mensaje_confirmacion = '';
+                  var mensaje_accion = '';
+                  if($scope.currentUser.perfil == 'academica')
+                  {
+                      datos = {
+                        aprobadoAcademica: true
+                      };
+                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; marcada como <strong>APROBADA</strong> por el &aacute;rea acad&eacute;mica, ¿Continuar?';
+                      mensaje_accion = 'CURSO APROBADO ACADEMICA';
+                  }
+                  else if($scope.currentUser.perfil == 'planeacion')
+                  {
+                      datos = {
+                        aprobadoPlaneacion: true
+                      };
+                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; marcada como <strong>APROBADA</strong> por el &aacute;rea de planeaci&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'CURSO APROBADO PLANEACION';
+                  }
+                  else if($scope.currentUser.perfil == 'direccion')
+                  {
+                      datos = {
+                        aprobadoDireccionGral: true,
+                        estatus: 2
+                      };
+                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como<strong>APROBADA Y ACEPTADA</strong> para su pre-apertura y promoci&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'CURSO APROBADO - ACEPTADO DIR GRAL';
+                  }
+
+
                   swal({
                     title: "Confirmar",
-                    html: 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como aprobada para su pre-apertura y promoci&oacute;n, ¿Continuar?',
+                    html: mensaje_confirmacion,
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -254,73 +285,49 @@
                             CursosOficiales.prototype$updateAttributes(
                             {
                                 id: seleccion.idCurso
-                            },{
-                                estatus: 2
-                            })
+                            },
+                                datos
+                            )
                             .$promise
                             .then(function(respuesta) {
 
-                                  vm.cursoSeleccionado.estatus = respuesta.estatus;
-
-                                  if(seleccion.programadoPTC == false)
+                                  if($scope.currentUser.perfil == 'direccion')
                                   {
-                                          ProgTrimCursos.find({
-                                              filter: {
-                                                  where: {
-                                                    and: [
-                                                        {idUnidadAdmtva: vm.cursoSeleccionado.idUnidadAdmtva},
-                                                        {anio: vm.cursoSeleccionado.ptc_pertenece.anio},
-                                                        {or: [
-                                                          {estatus: 2},
-                                                          {estatus: 4}
-                                                        ]}
-                                                    ]
-                                                  },
-                                                  fields: ['idPtc','horasSeparadas']
-                                              }
-                                          })
-                                          .$promise
-                                          .then(function(resp) {
+                                        vm.cursoSeleccionado.estatus = respuesta.estatus;
 
-                                                var num_horas_separadas = 0;
-                                                angular.forEach(resp, function(registro) {
-                                                    num_horas_separadas += registro.horasSeparadas;
-                                                });
-
-                                                num_horas_separadas += vm.cursoSeleccionado.numeroHoras;
-                                                
-                                                var num_horas_separdas_ptc = vm.cursoSeleccionado.ptc_pertenece.horasSeparadas + vm.cursoSeleccionado.numeroHoras;
-                                                ProgTrimCursos.prototype$updateAttributes(
-                                                {
-                                                    id: vm.cursoSeleccionado.idPtc
-                                                },{
-                                                    horasSeparadas: num_horas_separdas_ptc
-                                                })
-                                                .$promise
-                                                .then(function(respuesta) {
-                                                })
-                                                .catch(function(error) {
-                                                });
-
-                                                HorasAsignadasUnidad.find({
+                                        if(seleccion.programadoPTC == false)
+                                        {
+                                                ProgTrimCursos.find({
                                                     filter: {
                                                         where: {
                                                           and: [
                                                               {idUnidadAdmtva: vm.cursoSeleccionado.idUnidadAdmtva},
                                                               {anio: vm.cursoSeleccionado.ptc_pertenece.anio},
+                                                              {or: [
+                                                                {estatus: 2},
+                                                                {estatus: 4}
+                                                              ]}
                                                           ]
                                                         },
-                                                        fields: ['id']
+                                                        fields: ['idPtc','horasSeparadas']
                                                     }
                                                 })
                                                 .$promise
-                                                .then(function(respuesta) {
+                                                .then(function(resp) {
+
+                                                      var num_horas_separadas = 0;
+                                                      angular.forEach(resp, function(registro) {
+                                                          num_horas_separadas += registro.horasSeparadas;
+                                                      });
+
+                                                      num_horas_separadas += vm.cursoSeleccionado.numeroHoras;
                                                       
-                                                      HorasAsignadasUnidad.prototype$updateAttributes(
+                                                      var num_horas_separdas_ptc = vm.cursoSeleccionado.ptc_pertenece.horasSeparadas + vm.cursoSeleccionado.numeroHoras;
+                                                      ProgTrimCursos.prototype$updateAttributes(
                                                       {
-                                                          id: respuesta[0].id
+                                                          id: vm.cursoSeleccionado.idPtc
                                                       },{
-                                                          horasSeparadas: num_horas_separadas
+                                                          horasSeparadas: num_horas_separdas_ptc
                                                       })
                                                       .$promise
                                                       .then(function(respuesta) {
@@ -328,23 +335,51 @@
                                                       .catch(function(error) {
                                                       });
 
-                                                });
+                                                      HorasAsignadasUnidad.find({
+                                                          filter: {
+                                                              where: {
+                                                                and: [
+                                                                    {idUnidadAdmtva: vm.cursoSeleccionado.idUnidadAdmtva},
+                                                                    {anio: vm.cursoSeleccionado.ptc_pertenece.anio},
+                                                                ]
+                                                              },
+                                                              fields: ['id']
+                                                          }
+                                                      })
+                                                      .$promise
+                                                      .then(function(respuesta) {
+                                                            
+                                                            HorasAsignadasUnidad.prototype$updateAttributes(
+                                                            {
+                                                                id: respuesta[0].id
+                                                            },{
+                                                                horasSeparadas: num_horas_separadas
+                                                            })
+                                                            .$promise
+                                                            .then(function(respuesta) {
+                                                            })
+                                                            .catch(function(error) {
+                                                            });
 
-                                          });
-                                  }
-                                  else
-                                  {
-                                          CursosPtc.prototype$updateAttributes(
-                                          {
-                                              id: vm.cursoSeleccionado.idCursoPTC
-                                          },{
-                                              estatus: 1
-                                          })
-                                          .$promise
-                                          .then(function(respuesta) {
-                                          })
-                                          .catch(function(error) {
-                                          });
+                                                      });
+
+                                                });
+                                        }
+                                        else
+                                        {
+                                                CursosPtc.prototype$updateAttributes(
+                                                {
+                                                    id: vm.cursoSeleccionado.idCursoPTC
+                                                },{
+                                                    estatus: 1
+                                                })
+                                                .$promise
+                                                .then(function(respuesta) {
+                                                })
+                                                .catch(function(error) {
+                                                });
+                                        }
+
                                   }
 
 
@@ -356,7 +391,7 @@
                                   ControlProcesos
                                   .create({
                                       proceso         : txt,
-                                      accion          : 'ACEPTACION PRE-APERTURA',
+                                      accion          : mensaje_accion,
                                       idDocumento     : seleccion.idCurso,
                                       idUsuario       : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
@@ -373,9 +408,21 @@
                                         .$promise
                                         .then(function(resp_control) {
 
+                                              var titulo_ventana_aviso = 'Curso Revisado';
+                                              
+                                              if($scope.currentUser.perfil == 'academica')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como aprobado por el &aacute;rea acad&eacute;mica; se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              else if($scope.currentUser.perfil == 'planeacion')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como aprobado por el &aacute;rea de planeaci&oacute;n; se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              else if($scope.currentUser.perfil == 'direccion')
+                                              {
+                                                  titulo_ventana_aviso = 'Curso Aceptado';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como aprobado y aceptado para su pre-apertura y promoci&oacute;n; se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              }
+
                                               swal({
-                                                title: 'Aprobación enviada',
-                                                html: 'se registr&oacute; el curso como autorizado para su pre-apertura y promoci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                title: titulo_ventana_aviso,
+                                                html: mensaje_ventana_aviso,
                                                 type: 'success',
                                                 showCancelButton: false,
                                                 confirmButtonColor: "#9a0000",

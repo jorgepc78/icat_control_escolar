@@ -21,17 +21,15 @@
                           <table class="tablaDatos table table-condensed no-footer">
                             <thead>
                               <tr>
+                                  <th>N&uacute;m. control</th>
                                   <th>Nombre</th>
-                                  <th>Domicilio</th>
-                                  <th>Email</th>
                                   <th>Unidad registro</th>
                               </tr>
                             </thead>
                            <tbody>
                               <tr ng-repeat="registro in vm.listaCapacitandos" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablalListaCapacitados.fila_seleccionada}" class="pointer">
+                                  <td> {{registro.numControl}}</td>
                                   <td> {{registro.apellidoPaterno +' '+ registro.apellidoMaterno +' '+ registro.nombre}}</td>
-                                  <td> {{registro.domicilio}}</td>
-                                  <td> {{registro.email}}</td>
                                   <td> {{registro.unidad_pertenece.nombre}}</td>
                               </tr>
                             </tbody>

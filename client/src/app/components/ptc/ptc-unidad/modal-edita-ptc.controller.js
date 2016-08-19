@@ -5,25 +5,118 @@
         .module('icat_control_escolar')
         .controller('ModalEditaPTCController', ModalEditaPTCController);
 
-        ModalEditaPTCController.$inject = ['$modalInstance', 'registroEditar', 'ProgTrimCursos'];
+        ModalEditaPTCController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'HorasAsignadasUnidad', 'ProgTrimCursos'];
 
-    function ModalEditaPTCController($modalInstance, registroEditar, ProgTrimCursos) {
+    function ModalEditaPTCController($scope, $modalInstance, registroEditar, HorasAsignadasUnidad, ProgTrimCursos) {
 
             var vm = this;
 
+            vm.muestraTrimestres = muestraTrimestres;
+            vm.guardar = guardar;
+
             vm.registroEdicion = {
                 anio              : registroEditar.anio,
-                trimestre         : registroEditar.trimestre.toString(),
+                trimestre         : registroEditar.trimestre,
                 fechaModificacion : ''
             };
 
-            vm.guardar = guardar;
 
             inicia();
 
             function inicia() {
    
+                   var fechaHoy = new Date();
+
+                   HorasAsignadasUnidad.find({
+                    filter: {
+                        where: {
+                            and: [
+                                {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                {anio: {gte: vm.registroEdicion.anio}}
+                            ]
+                        },
+                        fields: ['anio'],
+                        order: 'anio ASC'
+                    }
+                })
+                .$promise
+                .then(function(resp) {
+                        vm.listaAniosDisp = resp;
+
+                        ProgTrimCursos.find({
+                            filter: {
+                                where: {
+                                    and: [
+                                        {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                        {anio: vm.registroEdicion.anio},
+                                        {trimestre:{neq:vm.registroEdicion.trimestre}}
+                                    ]
+                                },
+                                fields: ['trimestre'],
+                                order: ['trimestre ASC']
+                            }
+                        })
+                        .$promise
+                        .then(function(respuesta) {
+
+                            vm.listaTrimestres = [
+                                {trimestre: 1, alias: 'PRIMERO'},
+                                {trimestre: 2, alias: 'SEGUNDO'},
+                                {trimestre: 3, alias: 'TERCERO'},
+                                {trimestre: 4, alias: 'CUARTO'}
+                            ];
+
+                            angular.forEach(respuesta, function(record) {
+                                  var index = vm.listaTrimestres.map(function(registro) {
+                                                                      return registro.trimestre;
+                                                                    }).indexOf(record.trimestre);
+
+                                  if(index >= 0)
+                                    vm.listaTrimestres.splice(index, 1);
+                            });                            
+                        });
+
+                });
+
             };
+
+
+            function muestraTrimestres() {
+
+                ProgTrimCursos.find({
+                    filter: {
+                        where: {
+                            and: [
+                                {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                {anio: vm.registroEdicion.anio}
+                            ]
+                        },
+                        fields: ['trimestre'],
+                        order: ['trimestre ASC']
+                    }
+                })
+                .$promise
+                .then(function(respuesta) {
+
+                    vm.listaTrimestres = [
+                        {trimestre: 1, alias: 'PRIMERO'},
+                        {trimestre: 2, alias: 'SEGUNDO'},
+                        {trimestre: 3, alias: 'TERCERO'},
+                        {trimestre: 4, alias: 'CUARTO'}
+                    ];
+
+                    angular.forEach(respuesta, function(record) {
+                          var index = vm.listaTrimestres.map(function(registro) {
+                                                              return registro.trimestre;
+                                                            }).indexOf(record.trimestre);
+
+                          if(index >= 0)
+                            vm.listaTrimestres.splice(index, 1);
+                    });
+                    
+                });
+            }
+
 
             function guardar() {
 

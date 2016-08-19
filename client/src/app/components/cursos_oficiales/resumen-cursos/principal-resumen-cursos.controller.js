@@ -171,7 +171,7 @@
                                           include:{
                                               relation: 'Capacitandos',
                                               scope: {
-                                                  fields:['apellidoPaterno','apellidoMaterno','nombre','curp'],
+                                                  fields:['numControl','apellidoPaterno','apellidoMaterno','nombre','curp'],
                                                   order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
                                               }
                                           }
@@ -963,6 +963,7 @@
                                           '                <th>N&uacute;m. recibo</th>'+
                                           '                <th>Calificaci&oacute;n</th>'+
                                           '                <th>N&uacute;m. documento acreditaci&oacute;n</th>'+
+                                          '                <th>N&uacute;m. control</th>'+
                                           '                <th>Apellido Paterno</th>'+
                                           '                <th>Apellido Materno</th>'+
                                           '                <th>Nombre(s)</th>'+
@@ -1023,9 +1024,9 @@
                                                   else if(registro.pagado == 1)
                                                     var pagadoTXT = 'Pagado';
                                                   else if(registro.pagado == 2)
-                                                    var pagadoTXT = 'Condonado';
+                                                    var pagadoTXT = 'Exento al 100%';
                                                   else if(registro.pagado == 3)
-                                                    var pagadoTXT = 'Becado';
+                                                    var pagadoTXT = 'Exento con porcentaje';
 
                                                  contenido += '<tr>'+
                                                               '    <td>'+fechaInscripcionTXT+'</td>'+
@@ -1034,6 +1035,7 @@
                                                               '    <td>'+(registro.numFactura                                                            == undefined ? ''     : registro.numFactura) +'</td>'+
                                                               '    <td>'+registro.calificacion+'</td>'+
                                                               '    <td>'+registro.numDocAcreditacion+'</td>'+
+                                                              '    <td>'+registro.Capacitandos.numControl+'</td>'+
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.apellidoPaterno                 == undefined ? ''     : registro.Capacitandos.apellidoPaterno)) +'</td>'+
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.apellidoMaterno                 == undefined ? ''     : registro.Capacitandos.apellidoMaterno)) +'</td>'+
                                                               '    <td>'+codifica_caracteres_html((registro.Capacitandos.nombre                          == undefined ? ''     : registro.Capacitandos.nombre)) +'</td>'+

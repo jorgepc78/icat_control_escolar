@@ -226,6 +226,7 @@
                             idCursoPTC            : vm.registroEdicion.idCursoPTC,
                             idPtc                 : vm.registroEdicion.idPtc,
                             idLocalidad           : vm.localidadSeleccionada.idLocalidad,
+                            idCatalogoCurso       : vm.registroEdicion.idCatalogoCurso,
                             nombreCurso           : vm.registroEdicion.nombreCurso,
                             claveCurso            : vm.registroEdicion.claveCurso,
                             descripcionCurso      : vm.registroEdicion.descripcion,

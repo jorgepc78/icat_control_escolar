@@ -87,9 +87,16 @@
                                 'unidad_pertenece',
                                 'localidad_pertenece',
                                 {
-                                    relation: 'cursos_habilitados',
+                                    relation: 'evaluacion_curso',
                                     scope: {
-                                        fields:['idCatalogoCurso','nombreCurso','modalidad']
+                                        fields:['id','idInstructor','idCatalogoCurso','calificacion'],
+                                        include:{
+                                            relation: 'CatalogoCursos',
+                                            scope: {
+                                                fields:['idCatalogoCurso','nombreCurso','modalidad'],
+                                                order: ['nombreCurso ASC']
+                                            }
+                                        }
                                     }
                                 }
                               ]
@@ -356,15 +363,20 @@
                         vm.RegistroSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;
                         vm.RegistroSeleccionado.localidad_pertenece.nombre      = respuesta.localidad;
 
-                        if(respuesta.cursos_habilitados.length > 0)
+                        if(respuesta.evaluacion_curso.length > 0)
                         {
-                              vm.RegistroSeleccionado.cursos_habilitados = [];
-                              angular.forEach(respuesta.cursos_habilitados, function(record) {
-                                    vm.RegistroSeleccionado.cursos_habilitados.push({
-
+                              vm.RegistroSeleccionado.evaluacion_curso = [];
+                              angular.forEach(respuesta.evaluacion_curso, function(record) {
+                                    vm.RegistroSeleccionado.evaluacion_curso.push({
+                                        id              : record.id,
+                                        idInstructor    : record.idInstructor,
                                         idCatalogoCurso : record.idCatalogoCurso,
-                                        nombreCurso     : record.nombreCurso,
-                                        modalidad       : record.modalidad
+                                        calificacion    : record.calificacion,
+                                        CatalogoCursos  : {
+                                            idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
+                                            nombreCurso     : record.CatalogoCursos.nombreCurso,
+                                            modalidad       : record.CatalogoCursos.modalidad
+                                        }
                                     });
                               });
                         }

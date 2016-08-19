@@ -65,10 +65,10 @@
                 .then(function(respuesta) {
 
                     vm.listaTrimestres = [
-                        {trimestre: 1, alias: 'PRIMERO'},
-                        {trimestre: 2, alias: 'SEGUNDO'},
-                        {trimestre: 3, alias: 'TERCERO'},
-                        {trimestre: 4, alias: 'CUARTO'}
+                        {trimestre: 1, alias: 'PRIMERO (ENERO - MARZO)'},
+                        {trimestre: 2, alias: 'SEGUNDO (ABRIL - JUNIO)'},
+                        {trimestre: 3, alias: 'TERCERO (JULIO - SEPTIEMBRE)'},
+                        {trimestre: 4, alias: 'CUARTO (OCTUBRE - DICIEMBRE)'}
                     ];
 
                     angular.forEach(respuesta, function(record) {

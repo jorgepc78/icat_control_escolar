@@ -135,12 +135,14 @@
                         <div class="col-md-12">
                             <table class="tablaDatos table table-condensed no-footer">
                               <thead>
-                                <col width="60%">
-                                <col width="30%">
+                                <col width="55%">
+                                <col width="20%">
+                                <col width="15%">
                                 <col width="10%">
                                 <tr>
                                     <th>Curso</th>
                                     <th>Modalidad</th>
+                                    <th>Calif.</th>
                                     <th></th>
                                 </tr>
                               </thead>
@@ -152,16 +154,18 @@
                             <div class="full-height-scroll" full-scroll>
                                   <table class="tablaDatos table table-condensed no-footer">
                                     <thead>
-                                      <col width="60%">
-                                      <col width="30%">
+                                      <col width="55%">
+                                      <col width="20%">
+                                      <col width="15%">
                                       <col width="10%">
                                     </thead>
                                    <tbody>
-                                      <tr ng-repeat="registro in vm.registroEdicion.cursos_habilitados" class="pointer">
+                                      <tr ng-repeat="registro in vm.cursos_habilitados | orderBy:'nombreCurso'" class="pointer">
                                           <td>{{registro.nombreCurso}}</td>
                                           <td>{{registro.modalidad}}</td>
+                                          <td><input type="number" class="form-control" ng-model="registro.calificacion"></td>
                                           <td style="width:170px">
-                                                  <button type="button" ng-click="vm.eliminaRegistro($index)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                  <button type="button" ng-click="vm.eliminaRegistro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                                           </td>
                                       </tr>
                                     </tbody>

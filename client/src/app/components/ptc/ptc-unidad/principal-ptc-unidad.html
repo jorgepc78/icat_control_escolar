@@ -58,7 +58,7 @@
                                         <table class="tablaDatos table table-condensed no-footer">
                                           <thead>
                                             <tr>
-                                                <th>Ciclo escolar</th>
+                                                <th>A&ntilde;o</th>
                                                 <th>Trimestre</th>
                                                 <th>Fecha creaci&oacute;n</th>
                                                 <th>Fecha modificaci&oacute;n</th>
@@ -73,10 +73,10 @@
                                             <tr ng-repeat="registro in vm.registrosPTCs" ng-click="vm.muestraCursosPTCActual(registro)" ng-class="{seleccion:$index==vm.tablaListaPTCs.fila_seleccionada}" class="pointer">
                                                 <td> {{registro.anio}}</td>
                                                 <td class="client-status" ng-switch on="registro.trimestre">
-                                                    <span ng-switch-when="1">PRIMERO</span>
-                                                    <span ng-switch-when="2">SEGUNDO</span>
-                                                    <span ng-switch-when="3">TERCERO</span>
-                                                    <span ng-switch-when="4">CUARTO</span>
+                                                    <span ng-switch-when="1">PRIMERO (ENERO - MARZO)</span>
+                                                    <span ng-switch-when="2">SEGUNDO (ABRIL - JUNIO)</span>
+                                                    <span ng-switch-when="3">TERCERO (JULIO - SEPTIEMBRE)</span>
+                                                    <span ng-switch-when="4">CUARTO (OCTUBRE - DICIEMBRE)</span>
                                                 </td>
 
                                                 <td> {{registro.fechaElaboracion | date:'d/MMMM/yyyy'}}</td>
@@ -93,7 +93,7 @@
                                                 </td>
                                                 <td style="width:160px">
                                                     <button type="button" class="btn btn-sm" tooltip-placement="top" tooltip="Imprime el PTC completo"><i class="fa fa-print"></i></button>
-                                                    <button type="button" ng-show="( ((registro.estatus == 0)||(registro.estatus == 3)) )" ng-click="vm.editaPTC(registro)" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Edita este PTC"><i class="fa fa-pencil"></i></button>
+                                                    <!-- <button type="button" ng-show="( ((registro.estatus == 0)||(registro.estatus == 3)) )" ng-click="vm.editaPTC(registro)" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Edita este PTC"><i class="fa fa-pencil"></i></button> -->
                                                     <button type="button" ng-show="( ((registro.estatus == 0)||(registro.estatus == 3)) )" ng-click="vm.eliminaPTC(registro)" class="btn btn-danger btn-sm" tooltip-placement="top" tooltip="Eliminar este PTC"><i class="fa fa-trash-o"></i></button>
                                                     
                                                     <button type="button" ng-show="( (registro.estatus == 0) && (registro.cursos_programados.length > 0) )" ng-click="vm.enviaRevisionPTC(registro)" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Env&iacute;a este PTC a revisi&oacute;n"><i class="fa fa-upload"></i></button>                                                    

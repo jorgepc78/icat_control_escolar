@@ -237,6 +237,7 @@
                         vm.CursoExtraSeleccionado.horasSemana           = respuesta.semanas;
                         vm.CursoExtraSeleccionado.numeroHoras           = respuesta.total;
                         vm.CursoExtraSeleccionado.costo                 = respuesta.costo;
+                        vm.CursoExtraSeleccionado.estatus                 = respuesta.estatus;
                         vm.CursoExtraSeleccionado.publico               = respuesta.publico;
 
                         vm.CursoExtraSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;

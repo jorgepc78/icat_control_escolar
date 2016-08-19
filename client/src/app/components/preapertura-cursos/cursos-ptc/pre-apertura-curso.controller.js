@@ -226,6 +226,8 @@
                             }
                         }];
 
+                        vm.tabs = [{active: true}, {active: false}];
+
                     }, function () {
                     });
 

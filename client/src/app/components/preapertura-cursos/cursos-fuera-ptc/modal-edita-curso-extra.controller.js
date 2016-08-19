@@ -57,6 +57,7 @@
                     idInstructor            : registroEditar.record.idInstructor,
                     nombreInstructor        : registroEditar.record.nombreInstructor,
                     publico                 : registroEditar.record.publico,
+                    estatus                 : registroEditar.record.estatus,
                     observaciones           : registroEditar.record.observaciones
             };
 
@@ -253,6 +254,7 @@
                                 vm.registroEdicion.nombreInstructor = vm.instructorSeleccionado.nombre_completo;
                                 vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.idLocalidad;
                                 vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.nombre;
+                                vm.registroEdicion.estatus          = 0;
 
                                 $modalInstance.close(vm.registroEdicion);
                         })

@@ -171,6 +171,7 @@
                                                                                 <thead>
                                                                                 <tr>
                                                                                     <th></th>
+                                                                                    <th>N&uacute;m. control</th>
                                                                                     <th>Nombre</th>
                                                                                     <th>Pago</th>
                                                                                     <th>Recibo</th>
@@ -180,12 +181,13 @@
                                                                                 <tbody>
                                                                                 <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesCursos | orderObjectBy: 'Capacitandos.nombreCompleto' ">
                                                                                     <td> {{$index + 1}}</td>
+                                                                                    <td> {{inscripcion.Capacitandos.numControl}}</td>
                                                                                     <td> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
                                                                                     <td class="client-status" ng-switch on="inscripcion.pagado">
                                                                                         <span ng-switch-when="0" class="label label-warning texto-estatus-ptc">Pendiente</span>
                                                                                         <span ng-switch-when="1" class="label label-success texto-estatus-ptc">Pagado</span>
-                                                                                        <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Condonado</span>
-                                                                                        <span ng-switch-when="3" class="label label-info texto-estatus-ptc">Becado</span>
+                                                                                        <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Exento al 100%</span>
+                                                                                        <span ng-switch-when="3" class="label label-primary texto-estatus-ptc">Exento con porcentaje</span>
                                                                                     </td>
                                                                                     <td>{{inscripcion.numFactura}}</td>
                                                                                     <td>

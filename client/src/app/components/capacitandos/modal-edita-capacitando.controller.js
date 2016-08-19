@@ -14,10 +14,12 @@
             vm.calculaNacim = calculaNacim;
             vm.guardar      = guardar;
 
+            vm.mostrarNumControl = true;
             vm.soloLectura = false;            
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
             vm.mensaje = '';
+            vm.correoCompartido = false;
 
             vm.listaLocalidades = [];
             vm.listaNivelEstudios = [];
@@ -29,6 +31,7 @@
             vm.registroEditar = {
                 idAlumno            : registroEditar.idAlumno,
                 idUnidadAdmtva      : registroEditar.idUnidadAdmtva,
+                numControl          : registroEditar.numControl,
                 apellidoPaterno     : registroEditar.apellidoPaterno,
                 apellidoMaterno     : registroEditar.apellidoMaterno,
                 nombre              : registroEditar.nombre,
@@ -230,7 +233,7 @@
                 .$promise
                 .then(function(resp) {
                     
-                        if(resp.count > 0)
+                        if((resp.count > 0)&&(vm.correoCompartido == false))
                         {
                             vm.mostrarSpiner = false;
                             vm.mostrar_msg_error = true;

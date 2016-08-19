@@ -11,6 +11,11 @@
 
             var vm = this;
 
+            vm.guardar = guardar;
+            vm.muestraCursosEspecialidad = muestraCursosEspecialidad;
+            vm.agregaCurso = agregaCurso;
+            vm.eliminaRegistro = eliminaRegistro;
+
             vm.mostrarSpiner = false;
 
             vm.listaUnidades = {};
@@ -42,21 +47,20 @@
                     idLocalidad        : registroEditar.idLocalidad,
                     localidad          : '',
                     activo             : registroEditar.activo,
-                    cursos_habilitados : []
+                    evaluacion_curso   : []
             };
 
-            angular.forEach(registroEditar.cursos_habilitados, function(record) {
-                  vm.registroEdicion.cursos_habilitados.push({
-                      idCatalogoCurso : record.idCatalogoCurso,
-                      nombreCurso     : record.nombreCurso,
-                      modalidad       : record.modalidad
+            vm.cursos_habilitados = [];
+            
+            angular.forEach(registroEditar.evaluacion_curso, function(record) {
+                  vm.cursos_habilitados.push({
+                      idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
+                      nombreCurso     : record.CatalogoCursos.nombreCurso,
+                      modalidad       : record.CatalogoCursos.modalidad,
+                      calificacion    : record.calificacion
                   });
             });
 
-            vm.guardar = guardar;
-            vm.muestraCursosEspecialidad = muestraCursosEspecialidad;
-            vm.agregaCurso = agregaCurso;
-            vm.eliminaRegistro = eliminaRegistro;
 
             inicia();
 
@@ -143,14 +147,15 @@
 
 
             function agregaCurso() {
-                vm.registroEdicion.cursos_habilitados.push({
+                vm.cursos_habilitados.push({
                     idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
                     nombreCurso     : vm.cursoSeleccionado.nombreCurso,
-                    modalidad       : vm.cursoSeleccionado.modalidad
+                    modalidad       : vm.cursoSeleccionado.modalidad,
+                    calificacion    : 0
                 });
 
                 vm.cursoSeleccionado = {};
-                angular.forEach(vm.registroEdicion.cursos_habilitados, function(record) {
+                angular.forEach(vm.cursos_habilitados, function(record) {
                     
                     var index = vm.listaCursos.map(function(registro) {
                                                         return registro.idCatalogoCurso;
@@ -162,8 +167,9 @@
             };
 
 
-            function eliminaRegistro(indice) {
-                vm.registroEdicion.cursos_habilitados.splice(indice, 1);
+            function eliminaRegistro(seleccion) {
+                var indice = vm.cursos_habilitados.indexOf(seleccion);
+                vm.cursos_habilitados.splice(indice, 1);
                 vm.muestraCursosEspecialidad();
             };
 
@@ -204,22 +210,45 @@
                       .$promise
                       .then(function() { 
 
-                            if(vm.registroEdicion.cursos_habilitados.length > 0)
+                            if(vm.cursos_habilitados.length > 0)
                             {
-                                    angular.forEach(vm.registroEdicion.cursos_habilitados, function(record) {
+                                    var totalregistros = 0;
+                                    angular.forEach(vm.cursos_habilitados, function(record) {
 
                                             CatalogoInstructores.cursos_habilitados.link({
-                                                  id: vm.registroEdicion.idInstructor,
-                                                  fk: record.idCatalogoCurso
+                                                id: vm.registroEdicion.idInstructor,
+                                                fk: record.idCatalogoCurso
                                             },{
+                                                calificacion: record.calificacion
                                             }) 
                                             .$promise
-                                            .then(function() {
+                                            .then(function(resp) {
+
+                                                    var index = vm.cursos_habilitados.map(function(registro) {
+                                                                                        return registro.idCatalogoCurso;
+                                                                                      }).indexOf(resp.idCatalogoCurso);
+
+                                                    vm.registroEdicion.evaluacion_curso.push({
+                                                        id              : resp.id,
+                                                        idInstructor    : resp.idInstructor,
+                                                        idCatalogoCurso : resp.idCatalogoCurso,
+                                                        calificacion    : resp.calificacion,
+                                                        CatalogoCursos  : {
+                                                            idCatalogoCurso : resp.idCatalogoCurso,
+                                                            nombreCurso     : vm.cursos_habilitados[index].nombreCurso,
+                                                            modalidad       : vm.cursos_habilitados[index].modalidad
+                                                        }
+                                                    });
+                                                    totalregistros++;
+                                                    if(totalregistros == vm.cursos_habilitados.length)
+                                                        $modalInstance.close(vm.registroEdicion);
+
                                             });
                                     });
+                                    
                             }
-                            
-                            $modalInstance.close(vm.registroEdicion);
+                            else
+                                $modalInstance.close(vm.registroEdicion);
 
                     });
 

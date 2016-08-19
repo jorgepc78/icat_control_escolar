@@ -43,7 +43,7 @@
                                           <thead>
                                             <tr>
                                                 <th ng-show="(currentUser.unidad_pertenece_id == 1)">Unidad</th>
-                                                <th>Ciclo escolar</th>
+                                                <th>A&ntilde;o</th>
                                                 <th>Trimestre</th>
                                                 <th>Fecha Aceptaci&oacute;n</th>
                                                 <th>N&uacute;m. cursos</th>
@@ -57,10 +57,10 @@
                                                 <td ng-show="(currentUser.unidad_pertenece_id == 1)"> {{registro.unidad_pertenece.nombre}}</td>
                                                 <td> {{registro.anio}}</td>
                                                 <td class="client-status" ng-switch on="registro.trimestre">
-                                                    <span ng-switch-when="1">PRIMERO</span>
-                                                    <span ng-switch-when="2">SEGUNDO</span>
-                                                    <span ng-switch-when="3">TERCERO</span>
-                                                    <span ng-switch-when="4">CUARTO</span>
+                                                    <span ng-switch-when="1">PRIMERO (ENERO - MARZO)</span>
+                                                    <span ng-switch-when="2">SEGUNDO (ABRIL - JUNIO)</span>
+                                                    <span ng-switch-when="3">TERCERO (JULIO - SEPTIEMBRE)</span>
+                                                    <span ng-switch-when="4">CUARTO (OCTUBRE - DICIEMBRE)</span>
                                                 </td>
 
                                                 <td> {{registro.fechaAceptacion | date:'d/MMMM/yyyy'}}</td>
@@ -101,7 +101,7 @@
                                             <tabset>
                                                 <tab heading="Cursos programados" active>
 
-                                                        <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
+                                                        <div class="tab-pane active" ng-show="(vm.registrosCursosPTCs.length == 0)" ng-init="vm.client = 1">
                                                                     <div class="row">
                                                                         <div class="col-lg-12 text-center">
                                                                             <p>

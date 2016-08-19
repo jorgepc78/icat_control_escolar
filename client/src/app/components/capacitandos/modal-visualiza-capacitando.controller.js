@@ -26,6 +26,7 @@
             vm.registroEditar = {
                 idAlumno            : registroEditar.idAlumno,
                 idUnidadAdmtva      : registroEditar.idUnidadAdmtva,
+                numControl          : registroEditar.numControl,
                 apellidoPaterno     : registroEditar.apellidoPaterno,
                 apellidoMaterno     : registroEditar.apellidoMaterno,
                 nombre              : registroEditar.nombre,

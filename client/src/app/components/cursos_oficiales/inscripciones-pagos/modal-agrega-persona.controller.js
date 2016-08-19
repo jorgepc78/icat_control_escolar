@@ -47,7 +47,7 @@
                   vm.tablalListaCapacitados.filtro_datos = {
                           filter: {
                               where: vm.tablalListaCapacitados.condicion,
-                              order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','curp ASC'],
+                              order: ['numControl','apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','curp ASC'],
                               limit: vm.tablalListaCapacitados.registrosPorPagina,
                               skip: vm.tablalListaCapacitados.paginaActual - 1,
                               include: [
@@ -226,6 +226,7 @@
                         pagado           : 0,
                         Capacitandos     : {
                             idAlumno         : vm.personaSeleccionada.idAlumno,
+                            numControl       : vm.personaSeleccionada.numControl,
                             apellidoPaterno  : vm.personaSeleccionada.apellidoPaterno,
                             apellidoMaterno  : vm.personaSeleccionada.apellidoMaterno,
                             nombre           : vm.personaSeleccionada.nombre,

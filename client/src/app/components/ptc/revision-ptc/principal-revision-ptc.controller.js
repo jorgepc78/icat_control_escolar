@@ -19,9 +19,9 @@
             vm.cambiarPaginaPrincipal  = cambiarPaginaPrincipal;
             vm.cambiarPaginaDetalle    = cambiarPaginaDetalle;
             
-            vm.aceptaPTC       = aceptaPTC;
-            vm.rechazaPTC      = rechazaPTC;
-            vm.agregaObserRevision = agregaObserRevision;
+            vm.aceptaPTC              = aceptaPTC;
+            vm.rechazaPTC             = rechazaPTC;
+            vm.agregaObserRevision    = agregaObserRevision;
 
 
             /****** ELEMENTOS DE LA TABLA PRINCIPAL ******/
@@ -365,10 +365,41 @@
 
             function aceptaPTC(RegistroSeleccionado) {
 
-                  var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
+                  var trimestres = ['PRIMER','SEGUNDO','TERCER','CUARTO'];
+
+                  var datos;
+                  var mensaje_confirmacion = '';
+                  var mensaje_accion = '';
+                  if($scope.currentUser.perfil == 'academica')
+                  {
+                      datos = {
+                        aprobadoAcademica: true
+                      };
+                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>APROBADO</strong> por el &aacute;rea acad&eacute;mica, ¿Continuar?';
+                      mensaje_accion = 'PTC APROBADO ACADEMICA';
+                  }
+                  else if($scope.currentUser.perfil == 'planeacion')
+                  {
+                      datos = {
+                        aprobadoPlaneacion: true
+                      };
+                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'PTC APROBADO PLANEACION';
+                  }
+                  else if($scope.currentUser.perfil == 'direccion')
+                  {
+                      datos = {
+                        aprobadoDireccionGral: true,
+                        estatus: 2,
+                        fechaAceptacion: Date()
+                      };
+                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>APROBADO Y ACEPTADO</strong>, ¿Continuar?';
+                      mensaje_accion = 'PTC APROBADO - ACEPTADO DIR GRAL';
+                  }
+
                   swal({
                     title: "Confirmar",
-                    html: 'Se confirma que el PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>ACEPTADO</strong>, ¿Continuar?',
+                    html: mensaje_confirmacion,
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -382,57 +413,59 @@
                             ProgTrimCursos.prototype$updateAttributes(
                             {
                                 id: RegistroSeleccionado.idPtc
-                            },{
-                                estatus: 2,
-                                fechaAceptacion: Date()
-                            })
+                            },
+                                datos
+                            )
                             .$promise
                             .then(function(respuesta) {
 
-                                  ProgTrimCursos.find({
-                                      filter: {
-                                          where: {
-                                            and: [
-                                                {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
-                                                {anio: vm.anioSeleccionado.anio},
-                                                {or: [
-                                                  {estatus: 2},
-                                                  {estatus: 4}
-                                                ]}
-                                            ]
-                                          },
-                                          fields: ['idPtc','horasSeparadas']
-                                      }
-                                  })
-                                  .$promise
-                                  .then(function(resp) {
-
-                                        var num_horas_separadas = 0;
-                                        angular.forEach(resp, function(registro) {
-                                            num_horas_separadas += registro.horasSeparadas;
-                                        });
-                                        
-                                        vm.horas_disponibles = vm.anioSeleccionado.horasAsignadas - num_horas_separadas;
-
-                                        HorasAsignadasUnidad.prototype$updateAttributes(
-                                        {
-                                            id: vm.anioSeleccionado.id
-                                        },{
-                                            horasSeparadas: num_horas_separadas
+                                  if($scope.currentUser.perfil == 'direccion')
+                                  {
+                                        ProgTrimCursos.find({
+                                            filter: {
+                                                where: {
+                                                  and: [
+                                                      {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
+                                                      {anio: vm.anioSeleccionado.anio},
+                                                      {or: [
+                                                        {estatus: 2},
+                                                        {estatus: 4}
+                                                      ]}
+                                                  ]
+                                                },
+                                                fields: ['idPtc','horasSeparadas']
+                                            }
                                         })
                                         .$promise
-                                        .then(function(respuesta) {
-                                        })
-                                        .catch(function(error) {
-                                        });
+                                        .then(function(resp) {
 
-                                  });
+                                              var num_horas_separadas = 0;
+                                              angular.forEach(resp, function(registro) {
+                                                  num_horas_separadas += registro.horasSeparadas;
+                                              });
+                                              
+                                              vm.horas_disponibles = vm.anioSeleccionado.horasAsignadas - num_horas_separadas;
+
+                                              HorasAsignadasUnidad.prototype$updateAttributes(
+                                              {
+                                                  id: vm.anioSeleccionado.id
+                                              },{
+                                                  horasSeparadas: num_horas_separadas
+                                              })
+                                              .$promise
+                                              .then(function(respuesta) {
+                                              })
+                                              .catch(function(error) {
+                                              });
+
+                                        });                                    
+                                  }
 
 
                                   ControlProcesos
                                   .create({
                                       proceso         : 'PTC',
-                                      accion          : 'PTC ACEPTADO',
+                                      accion          : mensaje_accion,
                                       idDocumento     : RegistroSeleccionado.idPtc,
                                       idUsuario       : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
@@ -451,9 +484,21 @@
 
                                               vm.muestra_ptc_unidad_anio();
 
+                                              var titulo_ventana_aviso = 'PTC aprobado';
+                                              
+                                              if($scope.currentUser.perfil == 'academica')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como aprobado por el &aacute;rea acad&eacute;mica y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              else if($scope.currentUser.perfil == 'planeacion')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como aprobado por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              else if($scope.currentUser.perfil == 'direccion')
+                                              {
+                                                  titulo_ventana_aviso = 'PTC Aceptado';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como aprobado y aceptado y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              }
+
                                               swal({
-                                                title: 'PTC enviado',
-                                                html: 'se marc&oacute; el PTC como aceptado y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                title: titulo_ventana_aviso,
+                                                html: mensaje_ventana_aviso,
                                                 type: 'success',
                                                 showCancelButton: false,
                                                 confirmButtonColor: "#9a0000",

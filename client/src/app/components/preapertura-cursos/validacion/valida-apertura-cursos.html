@@ -26,10 +26,10 @@
                                                 <th>Unidad</th>
                                                 <th>Curso o m&oacute;dulo</th>
                                                 <th>Tipo</th>
-                                                <th>Horario</th>
                                                 <th>Fecha inicio</th>
-                                                <th>Fecha fin</th>
                                                 <th>Estatus</th>
+                                                <th>Aprobado Acad&eacute;mica</th>
+                                                <th>Aprobado Planeaci&oacute;n</th>
                                             </tr>
                                           </thead>
                                          <tbody>
@@ -37,17 +37,17 @@
                                                 <td> {{registro.unidad_pertenece.nombre}}</td>
                                                 <td> {{registro.nombreCurso}}</td>
                                                 <td> {{registro.modalidad}}</td>
-                                                <td> {{registro.horario}}</td>
                                                 <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
-                                                <td> {{registro.fechaFin | date:'d/MMMM/yyyy'}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
-                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
+                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En revisi&oacute;n</span>
                                                     <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
                                                     <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
                                                     <span ng-switch-when="4" class="label label-info texto-estatus-ptc">Activo</span>
                                                     <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cerrado</span>
                                                 </td>
+                                                <td class="client-status"><span class="label label-{{registro.aprobadoAcademica === true ? 'primary' : 'warning'}}">{{registro.aprobadoAcademica === true ? 'S&iacute;' : 'No'}}</span></td>
+                                                <td class="client-status"><span class="label label-{{registro.aprobadoPlaneacion === true ? 'primary' : 'warning'}}">{{registro.aprobadoPlaneacion === true ? 'S&iacute;' : 'No'}}</span></td>
                                             </tr>
                                           </tbody>
                                         </table>
@@ -134,8 +134,8 @@
                                                                                     M&iacute;nimo inscritos: {{vm.cursoSeleccionado.minRequeridoInscritos}}
                                                                                 </li>
                                                                                 <li class="list-group-item">
-                                                                                    <span class="pull-right"> Fecha t&eacute;rmino: {{vm.cursoSeleccionado.fechaFin | date:'d/MMMM/yyyy'}} </span>
-                                                                                    Fecha inicio: {{vm.cursoSeleccionado.fechaInicio | date:'d/MMMM/yyyy'}}
+                                                                                    <span class="pull-right"> Fecha t&eacute;rmino: <strong>{{vm.cursoSeleccionado.fechaFin | date:'d/MMMM/yyyy'}}</strong> </span>
+                                                                                    Fecha inicio: <strong>{{vm.cursoSeleccionado.fechaInicio | date:'d/MMMM/yyyy'}}</strong>
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.cursoSeleccionado.nombreInstructor}} </span>
@@ -204,8 +204,11 @@
                                                                 </tabset>
                                                                 <div class="row">
                                                                     <div class="col-md-12 text-center">
-                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 1)" ng-click="vm.apruebaCurso(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Aprobar pre-apertura</button>
-                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 1)" ng-click="vm.rechazaCurso(vm.cursoSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-times"></i></span> Rechazar pre-apertura</button>
+                                                                        <button type="button" ng-show="( (vm.cursoSeleccionado.estatus == 1) && (currentUser.perfil == 'academica') && (vm.cursoSeleccionado.aprobadoAcademica == false) )" ng-click="vm.apruebaCurso(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Aprobar pre-apertura</button>
+                                                                        <button type="button" ng-show="( (vm.cursoSeleccionado.estatus == 1) && (currentUser.perfil == 'planeacion') && (vm.cursoSeleccionado.aprobadoAcademica == true) && (vm.cursoSeleccionado.aprobadoPlaneacion == false) )" ng-click="vm.apruebaCurso(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Aprobar pre-apertura</button>
+                                                                        <button type="button" ng-show="( (vm.cursoSeleccionado.estatus == 1) && (currentUser.perfil == 'direccion') && (vm.cursoSeleccionado.aprobadoAcademica == true) && (vm.cursoSeleccionado.aprobadoPlaneacion == true) && (vm.cursoSeleccionado.aprobadoDireccionGral == false) )" ng-click="vm.apruebaCurso(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Aprobar pre-apertura</button>
+                                                                        
+                                                                        <button type="button" ng-show="( (vm.cursoSeleccionado.estatus == 1) && (currentUser.perfil == 'academica') && (vm.cursoSeleccionado.aprobadoAcademica == false) )" ng-click="vm.rechazaCurso(vm.cursoSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-times"></i></span> Rechazar pre-apertura</button>
                                                                     </div>
                                                                 </div>
 

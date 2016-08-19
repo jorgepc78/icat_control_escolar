@@ -68,7 +68,7 @@
                                           include:{
                                               relation: 'Capacitandos',
                                               scope: {
-                                                  fields:['apellidoPaterno','apellidoMaterno','nombre','curp']
+                                                  fields:['numControl','apellidoPaterno','apellidoMaterno','nombre','curp']
                                               }
                                           }
                                       }

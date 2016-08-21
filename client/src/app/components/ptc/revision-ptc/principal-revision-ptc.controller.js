@@ -111,7 +111,7 @@
                                     scope: {
                                       fields: ['idCursoPTC']
                                     }
-                                },
+                                }
                               ]
                           }
                   };

@@ -101,7 +101,16 @@
                         id: vm.cursoSeleccionado.idCatalogoCurso,
                         filter: {
                             where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre']
+                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','efTerminal'],
+                            include: [
+                                {
+                                    relation: 'evaluacion_curso',
+                                    scope: {
+                                        where: {idCatalogoCurso: vm.cursoSeleccionado.idCatalogoCurso},
+                                        fields:['calificacion']
+                                    }
+                                }
+                            ]
                         }
                 })
                 .$promise
@@ -113,7 +122,9 @@
                                 apellidoPaterno : record.apellidoPaterno,
                                 apellidoMaterno : record.apellidoMaterno,
                                 nombre          : record.nombre,
-                                nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre
+                                nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre,
+                                calificacion    : record.evaluacion_curso[0].calificacion,
+                                efTerminal      : record.efTerminal
                             });
                     });
 
@@ -146,7 +157,9 @@
                             apellidoPaterno : vm.instructorSeleccionado.apellidoPaterno,
                             apellidoMaterno : vm.instructorSeleccionado.apellidoMaterno,
                             nombre          : vm.instructorSeleccionado.nombre,
-                            nombre_completo : vm.instructorSeleccionado.apellidoPaterno + ' ' + vm.instructorSeleccionado.apellidoMaterno + ' ' + vm.instructorSeleccionado.nombre
+                            nombre_completo : vm.instructorSeleccionado.apellidoPaterno + ' ' + vm.instructorSeleccionado.apellidoMaterno + ' ' + vm.instructorSeleccionado.nombre,
+                            calificacion    : vm.instructorSeleccionado.calificacion,
+                            efTerminal      : vm.instructorSeleccionado.efTerminal
                         });
 
                         var index;
@@ -171,7 +184,9 @@
                     apellidoPaterno : vm.registroEdicion.instructores_propuestos[indice].apellidoPaterno,
                     apellidoMaterno : vm.registroEdicion.instructores_propuestos[indice].apellidoMaterno,
                     nombre          : vm.registroEdicion.instructores_propuestos[indice].nombre,
-                    nombre_completo : vm.registroEdicion.instructores_propuestos[indice].apellidoPaterno + ' ' + vm.registroEdicion.instructores_propuestos[indice].apellidoMaterno + ' ' + vm.registroEdicion.instructores_propuestos[indice].nombre
+                    nombre_completo : vm.registroEdicion.instructores_propuestos[indice].apellidoPaterno + ' ' + vm.registroEdicion.instructores_propuestos[indice].apellidoMaterno + ' ' + vm.registroEdicion.instructores_propuestos[indice].nombre,
+                    calificacion    : vm.registroEdicion.instructores_propuestos[indice].calificacion,
+                    efTerminal      : vm.registroEdicion.instructores_propuestos[indice].efTerminal
                 });
                 
                 vm.registroEdicion.instructores_propuestos.splice(indice, 1);

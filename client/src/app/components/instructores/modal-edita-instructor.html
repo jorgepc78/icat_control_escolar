@@ -163,7 +163,7 @@
                                       <tr ng-repeat="registro in vm.cursos_habilitados | orderBy:'nombreCurso'" class="pointer">
                                           <td>{{registro.nombreCurso}}</td>
                                           <td>{{registro.modalidad}}</td>
-                                          <td><input type="number" class="form-control" ng-model="registro.calificacion"></td>
+                                          <td><input type="number" min="0" class="form-control" ng-model="registro.calificacion"></td>
                                           <td style="width:170px">
                                                   <button type="button" ng-click="vm.eliminaRegistro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                                           </td>

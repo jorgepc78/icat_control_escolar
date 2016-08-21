@@ -204,6 +204,22 @@
       },
       "_selectable": true
     },
+    "efTerminal": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 53,
+      "scale": null,
+      "postgresql": {
+        "columnName": "ef_terminal",
+        "dataType": "double precision",
+        "dataLength": null,
+        "dataPrecision": 53,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "activo": {
       "type": "Boolean",
       "required": false,

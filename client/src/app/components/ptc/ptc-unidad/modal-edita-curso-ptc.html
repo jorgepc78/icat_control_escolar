@@ -110,14 +110,14 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                               <select class="form-control m-b" 
                                   ng-model="vm.instructorSeleccionado"
-                                  ng-options="instructor as instructor.nombre_completo for instructor in vm.listaInstructores" required>
+                                  ng-options="instructor as (instructor.nombre_completo + ' (Calif.: ' + instructor.calificacion + ', Ef. Term.: ' + instructor.efTerminal + ')') for instructor in vm.listaInstructores" required>
                               </select>                        
                         </div>
-                        <div class="col-md-4">
-                              <button type="button" ng-disabled="(vm.instructorSeleccionado.idInstructor === undefined)" ng-click="vm.agregaInstructor()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar instructor</button>
+                        <div class="col-md-3">
+                              <button type="button" ng-disabled="(vm.instructorSeleccionado.idInstructor === undefined)" ng-click="vm.agregaInstructor()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar</button>
                         </div>
                     </div>
                     <br>
@@ -128,14 +128,18 @@
                                       <tr>
                                           <th>N&uacute;m.</th>
                                           <th>Instructor</th>
-                                          <th></th>
+                                          <th>Calif.</th>
+                                          <th>Ef. Term.</th>
+                                          <th style="width:40px"></th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <tr ng-repeat="registro in vm.registroEdicion.instructores_propuestos" class="pointer">
                                           <td style="width:30px">{{$index + 1}}</td>
                                           <td>{{registro.nombre_completo}}</td>
-                                          <td style="width:40px">
+                                          <td>{{registro.calificacion}}</td>
+                                          <td>{{registro.efTerminal}}%</td>
+                                          <td>
                                               <button type="button" ng-click="vm.eliminaInstructor($index)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                                           </td>
                                       </tr>

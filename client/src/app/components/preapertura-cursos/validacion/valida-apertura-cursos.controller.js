@@ -45,6 +45,8 @@
             function inicia() {
 
                   vm.listaUnidades = [];
+                  vm.unidadSeleccionada = undefined;
+                  
                   CatalogoUnidadesAdmtvas.find({
                       filter: {
                           where: {idUnidadAdmtva: {gt: 1}},

@@ -27,5 +27,12 @@
         }
       }
     ]
+  },
+  "icat_app_ds": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "icat_app",
+    "name": "icat_app_ds",
+    "connector": "mongodb"
   }
 }

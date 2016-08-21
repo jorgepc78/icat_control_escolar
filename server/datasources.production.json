@@ -15,15 +15,15 @@
     "transports": [
       {
         "type": "smtp",
-        "host": "smtp.gmail.com",
-        "secure": true,
-        "port": 465,
+        "host": "correo.icatqr.edu.mx",
+        "secure": false,
+        "port": 26,
         "tls": {
           "rejectUnauthorized": false
         },
         "auth": {
-          "user": "jorgepc78@gmail.com",
-          "pass": "Txfiles1*1978"
+          "user": "control-escolar@icatqr.edu.mx",
+          "pass": "icatctrle"
         }
       }
     ]

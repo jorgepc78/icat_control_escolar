@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ResumenCursosController', ResumenCursosController);
 
-    ResumenCursosController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosOficiales', 'InscripcionCurso', 'ControlProcesos'];
+    ResumenCursosController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosOficiales', 'InscripcionCurso', 'CatalogoInstructores', 'ControlProcesos'];
 
-    function ResumenCursosController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, HorasAsignadasUnidad, ProgTrimCursos, CursosOficiales, InscripcionCurso, ControlProcesos ) {
+    function ResumenCursosController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, HorasAsignadasUnidad, ProgTrimCursos, CursosOficiales, InscripcionCurso, CatalogoInstructores, ControlProcesos ) {
 
             var vm = this;
 
@@ -556,6 +556,30 @@
                             .then(function(respuesta) {
 
                                   vm.cursoSeleccionado.estatus = respuesta.estatus;
+
+                                  CatalogoInstructores.ef_ter_anio({
+                                    id_instructor: seleccion.idInstructor
+                                  })
+                                  .$promise
+                                  .then(function(resp) {
+                                        
+                                        if(resp.length == 0)
+                                          var valor = 0;
+                                        else
+                                          var valor = resp[0].eficiencia_terminal;
+                                        
+                                        CatalogoInstructores.prototype$updateAttributes(
+                                        {
+                                            id: seleccion.idInstructor
+                                        },{
+                                            efTerminal: valor
+                                        })
+                                        .$promise
+                                        .then(function(resp) {
+                                        });
+
+                                  });
+
 
                                   ControlProcesos
                                   .create({

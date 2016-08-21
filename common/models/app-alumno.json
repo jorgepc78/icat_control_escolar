@@ -1,0 +1,191 @@
+{
+  "name": "AppAlumno",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mongodb": {
+      "collection": "Alumno"
+    }
+  },
+  "properties": {
+    "nombre_completo": {
+      "type": "string",
+      "required": true
+    },
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "apellidos": {
+      "type": "string",
+      "required": true
+    },
+    "curp": {
+      "type": "string"
+    },
+    "sexo": {
+      "type": "string"
+    },
+    "edad": {
+      "type": "number"
+    },
+    "telefono": {
+      "type": "string"
+    },
+    "direccion": {
+      "type": "string"
+    },
+    "colonia": {
+      "type": "string"
+    },
+    "codigo_postal": {
+      "type": "string"
+    },
+    "localidad": {
+      "type": "string"
+    },
+    "estudios": {
+      "type": "string"
+    },
+    "estado_civil": {
+      "type": "string"
+    },
+    "dis_visual": {
+      "type": "string"
+    },
+    "dis_auditiva": {
+      "type": "boolean"
+    },
+    "dis_lenguaje": {
+      "type": "boolean"
+    },
+    "dis_motriz": {
+      "type": "boolean"
+    },
+    "dis_mental": {
+      "type": "boolean"
+    },
+    "enfermedad": {
+      "type": "string"
+    },
+    "enfermedad_cual": {
+      "type": "string"
+    },
+    "tutor_nombre": {
+      "type": "string"
+    },
+    "tutor_curp": {
+      "type": "string"
+    },
+    "tutor_parentesco": {
+      "type": "string"
+    },
+    "tutor_direccion": {
+      "type": "string"
+    },
+    "tutor_telefono": {
+      "type": "string"
+    },
+    "acta_nacimiento": {
+      "type": "boolean"
+    },
+    "comp_estudios": {
+      "type": "boolean"
+    },
+    "ident_oficial": {
+      "type": "boolean"
+    },
+    "const_curp": {
+      "type": "boolean"
+    },
+    "fotografias": {
+      "type": "boolean"
+    },
+    "comp_migratorio": {
+      "type": "boolean"
+    },
+    "comp_domicilio": {
+      "type": "boolean"
+    },
+    "curp_tutor": {
+      "type": "boolean"
+    },
+    "licencia_conducir": {
+      "type": "boolean"
+    },
+    "cartilla_militar": {
+      "type": "boolean"
+    },
+    "credencial_imss_issste": {
+      "type": "boolean"
+    },
+    "actividad": {
+      "type": "string"
+    },
+    "experiencia": {
+      "type": "string"
+    },
+    "tipo_empresa": {
+      "type": "string"
+    },
+    "tamanio_empresa": {
+      "type": "string"
+    },
+    "empresa_trabaja": {
+      "type": "string"
+    },
+    "empresa_puesto": {
+      "type": "string"
+    },
+    "empresa_antiguedad": {
+      "type": "string"
+    },
+    "empresa_direccion": {
+      "type": "string"
+    },
+    "empresa_telefono": {
+      "type": "string"
+    },
+    "motivos": {
+      "type": "string"
+    },
+    "fecha_registro": {
+      "type": "date"
+    },
+    "foto": {
+      "type": "string"
+    },
+    "registro_remoto": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cursos_inscritos": {
+      "type": "hasMany",
+      "model": "Curso",
+      "foreignKey": "alumnoId",
+      "through": "InscripcionesCurso"
+    },
+    "inscripcionesCursos": {
+      "type": "hasMany",
+      "model": "InscripcionesCurso",
+      "foreignKey": "alumnoId"
+    },
+    "TemasPreferidos": {
+      "type": "hasAndBelongsToMany",
+      "model": "CatEspecialidad",
+      "foreignKey": ""
+    },
+    "ciudad_pertenece": {
+      "type": "belongsTo",
+      "model": "Ciudad",
+      "foreignKey": "ciudad_perteneceId"
+    }
+  },
+  "acls": [
+  ],
+  "methods": {}
+}

@@ -84,8 +84,8 @@
                                                                     <div class="row" ng-if="currentUser.unidad_pertenece_id == 1">
                                                                         <div class="col-md-12 text-center">
                                                                             <button type="button" ng-click="vm.nuevo_registro(vm.RegistroSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo a&ntilde;o</button>
-                                                                            <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar este a&ntilde;o</button>
-                                                                            <button type="button" ng-click="vm.elimina_registro(vm.RegistroSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar este a&ntilde;o</button>
+                                                                            <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" ng-disabled="(vm.RegistroSeleccionado.horas_asignadas == 0)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar este a&ntilde;o</button>
+                                                                            <button type="button" ng-click="vm.elimina_registro(vm.RegistroSeleccionado)" ng-disabled="(vm.RegistroSeleccionado.horas_asignadas == 0)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar este a&ntilde;o</button>
                                                                         </div>
                                                                     </div>
                                                         </div> <!--panel blank-panel-->

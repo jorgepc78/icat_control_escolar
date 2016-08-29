@@ -154,6 +154,38 @@
         "nullable": "YES"
       },
       "_selectable": true
+    },
+    "alumno_id": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "alumno_id",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "curso_id": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "curso_id",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
     }
   },
   "validations": [],

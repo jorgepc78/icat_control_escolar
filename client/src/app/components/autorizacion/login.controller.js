@@ -14,8 +14,8 @@
         vm.login = login;
 
         vm.user = {
-            username: 'jorgepc',
-            password: 'jorgepc'
+            username: '',
+            password: ''
         };
 
         vm.mostrar_msg_login = false;

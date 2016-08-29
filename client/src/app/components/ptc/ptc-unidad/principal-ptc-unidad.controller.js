@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('PrincipalPTCUnidadController', PrincipalPTCUnidadController);
 
-    PrincipalPTCUnidadController.$inject = ['$scope', '$modal', '$q', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'ControlProcesos'];
+    PrincipalPTCUnidadController.$inject = ['$scope', '$http', '$modal', '$q', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'ControlProcesos'];
 
-    function PrincipalPTCUnidadController($scope, $modal, $q, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, ControlProcesos) {
+    function PrincipalPTCUnidadController($scope, $http, $modal, $q, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, ControlProcesos) {
 
             var vm = this;
 
@@ -18,6 +18,7 @@
             //vm.cambiarPaginaPrincipal = cambiarPaginaPrincipal;
             vm.cambiarPaginaDetalle   = cambiarPaginaDetalle;
             
+            vm.abreDocPTC      = abreDocPTC;
             vm.editaPTC        = editaPTC;
             vm.nuevoPTC        = nuevoPTC;
             vm.eliminaPTC      = eliminaPTC;
@@ -128,11 +129,13 @@
                   })
                   .$promise
                   .then(function(resp) {
+                        if(resp.length > 0)
+                        {
+                            vm.listaAniosDisp = resp;
+                            vm.anioSeleccionado = vm.listaAniosDisp[0];
 
-                        vm.listaAniosDisp = resp;
-                        vm.anioSeleccionado = vm.listaAniosDisp[0];
-
-                        vm.muestra_ptc_anio();
+                            vm.muestra_ptc_anio();                          
+                        }
 
                   });
 
@@ -259,6 +262,18 @@
 
 
 /************ SECCION DE EDICION *****************/
+
+            function abreDocPTC(seleccion) {
+
+                    var link = angular.element('<a href="api/ProgTrimCursos/exporta_doc_ptc/'+seleccion.idPtc+'" target="_blank"></a>');
+
+                    angular.element(document.body).append(link);
+
+                    link[0].click();
+                    link.remove();
+
+            };
+
 
             function editaPTC(seleccion) {
 

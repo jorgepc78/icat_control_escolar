@@ -45,6 +45,7 @@
                                                 <th ng-show="(currentUser.unidad_pertenece_id == 1)">Unidad</th>
                                                 <th>A&ntilde;o</th>
                                                 <th>Trimestre</th>
+                                                <th>Fecha creaci&oacute;n</th>
                                                 <th>Fecha Aceptaci&oacute;n</th>
                                                 <th>N&uacute;m. cursos</th>
                                                 <th>Total horas</th>
@@ -63,6 +64,7 @@
                                                     <span ng-switch-when="4">CUARTO (OCTUBRE - DICIEMBRE)</span>
                                                 </td>
 
+                                                <td> {{registro.fechaElaboracion | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.fechaAceptacion | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.cursos_programados.length + registro.cursos_no_programados.length}}</td>
                                                 <td> {{registro.horasSeparadas}}</td>
@@ -71,7 +73,7 @@
                                                     <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
                                                 </td>
                                                 <td style="width:60px">
-                                                    <button type="button" class="btn btn-sm"><i class="fa fa-print" tooltip-placement="top" tooltip="Imprime el PTC completo"></i></button>
+                                                    <button type="button" ng-click="vm.abreDocPTC(registro)" class="btn btn-sm"><i class="fa fa-print" tooltip-placement="top" tooltip="Imprime el PTC completo"></i></button>
                                                 </td>
                                             </tr>
                                           </tbody>

@@ -10,7 +10,6 @@
     <!-- Page title set in pageTitle directive -->
     <title page-title></title>
 
-    <!-- build:css css/style.min.css -->
             <!-- Font awesome -->
             <link href="assets/libs/fontawesome/css/font-awesome.min.css" rel="stylesheet">
 
@@ -41,6 +40,7 @@
             <!-- jquery-ui -->
             <link href="assets/libs/jquery-ui/themes/base/jquery-ui.css" rel="stylesheet">
 
+    <!-- build:css css/style.min.css -->
             <link id="loadBefore" href="assets/css/google_fonts.css" rel="stylesheet">
             <link id="loadBefore" href="assets/css/style-red.css" rel="stylesheet">
             <link id="loadBefore" href="assets/css/mis_estilos.css" rel="stylesheet">
@@ -126,7 +126,11 @@
             <script src="assets/libs/angular-order-object-by/src/ng-order-object-by.js"></script>
             <script src="assets/libs/angular-flot/angular-flot.js"></script>
 
-    <!-- build:js js/app.min.js -->
+            <!-- Plantillas -->
+            <script src="app/templates.js"></script>
+
+    <!-- build:js app/app.min.js -->
+
 
             <!-- Anglar App Script -->
             <script src="app/app.module.js"></script>

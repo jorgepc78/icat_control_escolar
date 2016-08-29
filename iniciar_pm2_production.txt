@@ -1,0 +1,7 @@
+pm2 start server.js -i 0 --name "icat_control_escolar" --env production
+
+pm2 start process.json --env production
+
+
+firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=443
+firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=3000

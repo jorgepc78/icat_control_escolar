@@ -143,6 +143,7 @@
                               idUnidadAdmtva : vm.RegistroSeleccionado.idUnidadAdmtva,
                               anio           : respuesta.anio,
                               horasAsignadas : respuesta.horasAsignadas,
+                              horasSeparadas : 0,
                               horasAplicadas : 0
                           });
                           vm.historial = [];

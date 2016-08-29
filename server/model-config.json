@@ -147,9 +147,5 @@
   "DestinatariosAvisos": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
-  },
-  "AppAlumno": {
-    "dataSource": "icat_app_ds",
-    "public": true
   }
 }

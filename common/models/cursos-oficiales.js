@@ -56,12 +56,12 @@ module.exports = function(CursosOficiales) {
 		var codigo = '';
 		
 		if(id_unidad == 0)
-			codigo = 'id_unidad_admtva > 1';
+			codigo = 'id_unidad_admtva >= 0';
 		else
 			codigo = 'id_unidad_admtva = '+id_unidad+' ';
 
 		var sql = 'SELECT a.id_unidad_admtva, (CASE WHEN a.total_inscritos is null THEN 0 ELSE a.total_inscritos END) as total_inscritos, (CASE WHEN b.num_cursos is null THEN 0 ELSE b.num_cursos END) as num_cursos, (CASE WHEN c.num_personas_inscritas is null THEN 0 ELSE c.num_personas_inscritas END) as num_personas_inscritas FROM '+
-					'(SELECT id_unidad_admtva, COUNT(id_alumno) as total_inscritos FROM cursos_ofertados.capacitandos WHERE '+codigo+' GROUP BY id_unidad_admtva) as a '+
+					'(SELECT id_unidad_admtva, COUNT(id_alumno) as total_inscritos FROM cursos_ofertados.capacitandos WHERE '+codigo+' AND EXTRACT(year FROM fecha_registro) = '+anio+' GROUP BY id_unidad_admtva) as a '+
 					'LEFT JOIN '+
 					'(SELECT id_unidad_admtva, COUNT(id_curso) as num_cursos FROM cursos_ofertados.cursos_oficiales WHERE '+codigo+' AND estatus IN (2,4,5,6) AND EXTRACT(year FROM fecha_inicio) = '+anio+' GROUP BY id_unidad_admtva) as b ON a.id_unidad_admtva = b.id_unidad_admtva '+
 					'LEFT JOIN '+

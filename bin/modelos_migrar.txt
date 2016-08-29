@@ -1,0 +1,10 @@
+OK Alumnos             => capacitandos
+OK Cursos              => cursos_oficiales
+OK InscripcionesCursos => InscripcionCurso
+OK Catalogo_cursos     => CatalogoCursos
+OK Especialidades      => CatalogoEspecialidades
+OK CatEspecialidads    => CatalogoTemas
+OK Ciudades            => CatalogoLocalidades
+
+Usuarios               => Usuario "MANUAL A TRAVES DE IMPORTAR DIRECTO A A LA TABLA"
+UnidadesAdmtvas        => CatalogoUnidadesAdmtvas "MANUAL"

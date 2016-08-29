@@ -20,6 +20,7 @@
             vm.cambiarPaginaDetalle    = cambiarPaginaDetalle;
             
             vm.muestraCursoPreapertura = muestraCursoPreapertura;
+            vm.abreDocPTC              = abreDocPTC;
 
 
             /****** ELEMENTOS DE LA TABLA PRINCIPAL ******/
@@ -431,6 +432,18 @@
                             vm.registrosCursosExtras = respuesta.datos;
                         }
                   });
+
+            };
+
+
+            function abreDocPTC(seleccion) {
+
+                    var link = angular.element('<a href="api/ProgTrimCursos/exporta_doc_ptc/'+seleccion.idPtc+'" target="_blank"></a>');
+
+                    angular.element(document.body).append(link);
+
+                    link[0].click();
+                    link.remove();
 
             };
 

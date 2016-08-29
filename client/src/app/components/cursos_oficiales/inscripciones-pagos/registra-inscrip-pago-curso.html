@@ -175,7 +175,7 @@
                                                                                     <th>Nombre</th>
                                                                                     <th>Pago</th>
                                                                                     <th>Recibo</th>
-                                                                                    <th width="90">Acciones</th>
+                                                                                    <th width="125">Acciones</th>
                                                                                 </tr>
                                                                                 </thead>
                                                                                 <tbody>
@@ -191,8 +191,9 @@
                                                                                     </td>
                                                                                     <td>{{inscripcion.numFactura}}</td>
                                                                                     <td>
-                                                                                        <button ng-show="(inscripcion.pagado > 0)" type="button" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Editar n&uacute;m. factura" ng-click="vm.editaNumFactura(inscripcion)"><i class="fa fa-pencil"></i></button>
-                                                                                        <button ng-show="(inscripcion.pagado == 0)" type="button" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Registrar pago" ng-click="vm.registraPago(inscripcion)"><i class="fa fa-usd"></i></button>
+                                                                                        <button type="button" class="btn btn-sm" tooltip-placement="top" tooltip="Imprimir hoja de inscripci&oacute;n" ng-click="vm.muestraDocInscripcion(inscripcion)"><i class="fa fa-print"></i></button>
+                                                                                        <button type="button" ng-show="(inscripcion.pagado > 0) " class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Editar n&uacute;m. factura" ng-click="vm.editaNumFactura(inscripcion)"><i class="fa fa-pencil"></i></button>
+                                                                                        <button type="button" ng-show="(inscripcion.pagado == 0)" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Registrar pago" ng-click="vm.registraPago(inscripcion)"><i class="fa fa-usd"></i></button>
                                                                                         <button type="button" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Eliminar capacitando" ng-click="vm.eliminaInscrito(inscripcion)"><i class="fa fa-trash-o"></i></button>
                                                                                     </td>
                                                                                 </tr>

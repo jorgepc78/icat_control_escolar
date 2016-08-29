@@ -490,6 +490,70 @@
         "nullable": "YES"
       },
       "_selectable": true
+    },
+    "id_anterior": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "id_anterior",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "catalogo_curso_id": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "catalogo_curso_id",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "ciudad_pertenece_id": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "ciudad_pertenece_id",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "unidad_pertenece_id": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "unidad_pertenece_id",
+        "dataType": "character varying",
+        "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
     }
   },
   "validations": [],

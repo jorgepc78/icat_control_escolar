@@ -51,6 +51,7 @@ module.exports = function(ProgTrimCursos) {
 						//console.log(PTCencontrado.cursos_programados[0].horario);
 						//console.log("****************************************");
 
+						var nombre_archivo = '';
 						var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
 						var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 						//set the templateVariables
@@ -66,6 +67,8 @@ module.exports = function(ProgTrimCursos) {
 							"curso_programado"   : []
 						};
 
+						nombre_archivo = 'PTC_' + PTCencontrado.unidad_pertenece.nombre + '_' +trimestres[PTCencontrado.trimestre-1] + '_TRIMESTRE_' + PTCencontrado.anio;
+
 						var suma_capacitandos = 0;
 						var suma_semanas = 0;
 						var suma_total = 0;
@@ -73,8 +76,8 @@ module.exports = function(ProgTrimCursos) {
 						{
 
 							var listaInstructores = JSON.parse( JSON.stringify( PTCencontrado.cursos_programados[i].instructores_propuestos ) );
-							console.log("****************************************");
-							console.log(listaInstructores);
+							//console.log("****************************************");
+							//console.log(listaInstructores);
 
 							var array_instructores = [];
 							for(var j = 0; j < listaInstructores.length; j++)
@@ -128,7 +131,7 @@ module.exports = function(ProgTrimCursos) {
 						res.set('Content-Type','application/force-download');
 						res.set('Content-Type','application/octet-stream');
 						res.set('Content-Type','application/download');
-						res.set('Content-Disposition','attachment;filename=ptc.docx');
+						res.set('Content-Disposition','attachment;filename='+nombre_archivo+'.docx');
 						res.set('Content-Transfer-Encoding','binary');
 						res.send(buf); //@todo: insert your CSV data here.
 

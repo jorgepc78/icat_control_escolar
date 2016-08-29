@@ -14,7 +14,7 @@
         'ngDropdowns',
         'ngFileSaver',
         'ngOrderObjectBy',
-        'angular-flot'
-    	/*'templates'*/
+        'angular-flot',
+    	'templates'
     ]);
 })();

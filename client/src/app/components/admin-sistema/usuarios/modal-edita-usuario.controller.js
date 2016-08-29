@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalEditaUsuarioController', ModalEditaUsuarioController);
 
-        ModalEditaUsuarioController.$inject = ['$scope', '$modalInstance', 'usuarioEditar', 'Usuario', 'Role', 'CatalogoUnidadesAdmtvas'];
+        ModalEditaUsuarioController.$inject = ['$scope', '$timeout', '$modalInstance', 'usuarioEditar', 'Usuario', 'Role', 'CatalogoUnidadesAdmtvas'];
 
-    function ModalEditaUsuarioController($scope, $modalInstance, usuarioEditar, Usuario, Role, CatalogoUnidadesAdmtvas) {
+    function ModalEditaUsuarioController($scope, $timeout, $modalInstance, usuarioEditar, Usuario, Role, CatalogoUnidadesAdmtvas) {
 
             var vm = this;
 

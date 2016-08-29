@@ -92,7 +92,7 @@
                                                     <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
                                                 </td>
                                                 <td style="width:160px">
-                                                    <button type="button" class="btn btn-sm" tooltip-placement="top" tooltip="Imprime el PTC completo"><i class="fa fa-print"></i></button>
+                                                    <button type="button" ng-click="vm.abreDocPTC(registro)" class="btn btn-sm" tooltip-placement="top" tooltip="Imprime el PTC completo"><i class="fa fa-print"></i></button>
                                                     <!-- <button type="button" ng-show="( ((registro.estatus == 0)||(registro.estatus == 3)) )" ng-click="vm.editaPTC(registro)" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Edita este PTC"><i class="fa fa-pencil"></i></button> -->
                                                     <button type="button" ng-show="( ((registro.estatus == 0)||(registro.estatus == 3)) )" ng-click="vm.eliminaPTC(registro)" class="btn btn-danger btn-sm" tooltip-placement="top" tooltip="Eliminar este PTC"><i class="fa fa-trash-o"></i></button>
                                                     

@@ -11,7 +11,7 @@
                                     <label class="col-sm-2 control-label">A&ntilde;o</label>
                                     <div class="col-sm-10">
                                         <select class="form-control m-b"
-                                              ng-model="vm.anio" ng-change="vm.calculaDatos()">
+                                              ng-model="vm.anio" ng-change="vm.cambiaAnioUnidad()">
                                               <option value="2015">2015</option>
                                               <option value="2016">2016</option>
                                               <option value="2017">2017</option>
@@ -27,7 +27,7 @@
                                 <div class="form-group" ng-show="(currentUser.unidad_pertenece_id == 1)">
                                     <label class="col-sm-2 control-label">Unidad</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.calculaDatos()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
+                                        <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.cambiaAnioUnidad()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
                                     </div>
                                 </div>
                                 
@@ -38,11 +38,11 @@
                                     <div class="col-sm-10">
 
 
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="0"> Todos</label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="1"> Primer trimestre </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="2"> Segundo trimestre </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="3"> Tercero trimestre </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="4"> Cuarto trimestre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="0"> Todos</label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="1"> Primer trimestre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="2"> Segundo trimestre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="3"> Tercero trimestre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="4"> Cuarto trimestre </label></div>
                                     </div>
                                 </div>
 
@@ -53,18 +53,18 @@
                                     <div class="col-sm-10">
 
 
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="11"> Enero</label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="12"> Febrero </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="13"> Marzo </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="14"> Abril </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="15"> Mayo </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="16"> Junio </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="17"> Julio </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="18"> Agosto </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="19"> Septiembre </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="20"> Octubre </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="21"> Noviembre </label></div>
-                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.calculaDatos()" value="22"> Diciembre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="11"> Enero</label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="12"> Febrero </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="13"> Marzo </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="14"> Abril </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="15"> Mayo </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="16"> Junio </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="17"> Julio </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="18"> Agosto </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="19"> Septiembre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="20"> Octubre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="21"> Noviembre </label></div>
+                                        <div class="radio"><label> <input icheck type="radio" name="trimestre" ng-model="vm.trimestre" ng-change="vm.cambiaPeriodo()" value="22"> Diciembre </label></div>
                                     </div>
                                 </div>
 
@@ -101,7 +101,7 @@
                     <div class="col-lg-4">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Total capacitandos activos</h5>
+                                <h5>Total capacitandos activos &uacute;nicos</h5>
                             </div>
                             <div class="ibox-content">
                                 <h1 class="no-margins">{{vm.datos.capacitandos_activos | number:0}}</h1>
@@ -124,7 +124,7 @@
                                     <div class="row">
                                         <div class="col-lg-10">
                                             <div class="flot-chart">
-                                                <div flot class="flot-chart-content" dataset="vm.flotData" options="vm.flotOptions"></div>
+                                                <div flot class="flot-chart-content" dataset="vm.flotDataCursos" options="vm.flotOptionsCursos"></div>
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
@@ -150,7 +150,7 @@
                                     <div class="row">
                                         <div class="col-lg-10">
                                             <div class="flot-chart">
-                                                <div flot class="flot-chart-content" dataset="vm.flotData2" options="vm.flotOptions2"></div>
+                                                <div flot class="flot-chart-content" dataset="vm.flotDataEficiencia" options="vm.flotOptionsEficiencia"></div>
                                             </div>
                                         </div>
                                         <div class="col-lg-2">

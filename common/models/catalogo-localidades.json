@@ -27,22 +27,6 @@
       },
       "_selectable": false
     },
-    "Id": {
-      "type": "String",
-      "required": true,
-      "length": 32,
-      "precision": null,
-      "scale": null,
-      "postgresql": {
-        "columnName": "_id",
-        "dataType": "character varying",
-        "dataLength": 32,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "NO"
-      },
-      "_selectable": false
-    },
     "nombre": {
       "type": "String",
       "required": false,
@@ -53,6 +37,22 @@
         "columnName": "nombre",
         "dataType": "character varying",
         "dataLength": 66,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+      "id_anterior": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "id_anterior",
+        "dataType": "character varying",
+        "dataLength": 45,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"

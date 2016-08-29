@@ -15,24 +15,10 @@
     "transports": [
       {
         "type": "smtp",
-        "host": "correo.icatqr.edu.mx",
+        "host": "localhost",
         "secure": false,
-        "port": 26,
-        "tls": {
-          "rejectUnauthorized": false
-        },
-        "auth": {
-          "user": "control-escolar@icatqr.edu.mx",
-          "pass": "icatctrle"
-        }
+        "port": 25
       }
     ]
-  },
-  "icat_app_ds": {
-    "host": "localhost",
-    "port": 27017,
-    "database": "icat_app",
-    "name": "icat_app_ds",
-    "connector": "mongodb"
   }
 }

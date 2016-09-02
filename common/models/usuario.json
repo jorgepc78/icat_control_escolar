@@ -127,14 +127,14 @@
       },
       "_selectable": true
     },
-    "avisosPTC": {
+    "PTCEnvioRevision": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "avisos_ptc",
+        "columnName": "ptc_envio_revision",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,

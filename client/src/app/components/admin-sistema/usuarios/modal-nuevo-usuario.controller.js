@@ -11,11 +11,14 @@
 
             var vm = this;
             
-            vm.guardar = guardar;
+            vm.muestraPerfilesUnidad = muestraPerfilesUnidad;
+            vm.guardar               = guardar;
 
             vm.mostrarSpiner = false;
             vm.msg_password = false;
             vm.txt_msg_password = '';
+            vm.listaUnidades = [];
+            vm.listaRoles = [];
 
             vm.usuarioEditar = {
                     nombre                  : '',
@@ -33,25 +36,14 @@
                     perfil                  : ''
             };
 
-            vm.perfilSeleccionado = 0;
-            vm.unidadSelecccionada = 0;
+            vm.unidadSelecccionada = {};
+            vm.perfilSeleccionado = {};
 
 
             inicia();
 
             function inicia() {
-    
-                    Role.find({
-                    filter: {
-                        where: { name: {neq: 'admin_sistema'} },
-                        order: 'description ASC'
-                    }
-                })
-                .$promise
-                .then(function(resp) {
-                    vm.listaRoles = resp;
-                });
-    
+       
                 CatalogoUnidadesAdmtvas.find({
                     filter: {
                         order: 'nombre ASC'
@@ -63,6 +55,32 @@
                 });
 
             };
+
+
+
+            function muestraPerfilesUnidad() {
+
+                vm.listaRoles = [];
+
+                if(vm.unidadSelecccionada.idUnidadAdmtva == 1)
+                    var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula"]}};
+                else
+                    var condicion = {name: {inq: ["unidad_capacit", "unidad_inscrip","unidad_admin","unidad_vincula"]}};
+
+                Role.find({
+                    filter: {
+                        where: condicion,
+                        order: 'description ASC'
+                    }
+                })
+                .$promise
+                .then(function(resp) {
+                    vm.listaRoles = resp;
+                });    
+
+            }
+
+
 
             function guardar() {
 

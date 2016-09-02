@@ -11,11 +11,14 @@
 
             var vm = this;
 
-            vm.guardar = guardar;
+            vm.muestraPerfilesUnidad = muestraPerfilesUnidad;
+            vm.guardar               = guardar;
 
             vm.mostrarSpiner = false;
             vm.msg_password = false;
             vm.txt_msg_password = '';
+            vm.listaUnidades = [];
+            vm.listaRoles = [];
             
             vm.usuarioEditar = {
                     idUsuario               : usuarioEditar.idUsuario,
@@ -34,31 +37,14 @@
                     perfil                  : ''
             };
 
-            vm.perfilSeleccionado = 0;
-            vm.unidadSelecccionada = 0;
+            vm.unidadSelecccionada = {};
+            vm.perfilSeleccionado = {};
 
 
             inicia();
 
             function inicia() {
 
-                Role.find({
-                    filter: {
-                        where: { name: {neq: 'admin_sistema'} },
-                        order: 'description ASC'
-                    }
-                })
-                .$promise
-                .then(function(resp) {
-                    vm.listaRoles = resp;
-
-                    var perfilSeleccionadoIndex = vm.listaRoles.map(function(rol) {
-                                                        return rol.id;
-                                                      }).indexOf(vm.usuarioEditar.idPerfil);
-
-                    vm.perfilSeleccionado = vm.listaRoles[perfilSeleccionadoIndex];
-                });
-    
                 CatalogoUnidadesAdmtvas.find({
                     filter: {
                         order: 'nombre ASC'
@@ -66,16 +52,66 @@
                 })
                 .$promise
                 .then(function(resp) {
-                    vm.listaUnidades = resp;
 
-                    var unidadSelecccionadaIndex = vm.listaUnidades.map(function(unidad) {
-                                                        return unidad.idUnidadAdmtva;
-                                                      }).indexOf(vm.usuarioEditar.idUnidadAdmtva);
+                        vm.listaUnidades = resp;
 
-                    vm.unidadSelecccionada = vm.listaUnidades[unidadSelecccionadaIndex];
+                        var unidadSelecccionadaIndex = vm.listaUnidades.map(function(unidad) {
+                                                            return unidad.idUnidadAdmtva;
+                                                          }).indexOf(vm.usuarioEditar.idUnidadAdmtva);
+
+                        vm.unidadSelecccionada = vm.listaUnidades[unidadSelecccionadaIndex];
+
+                        if(vm.unidadSelecccionada.idUnidadAdmtva == 1)
+                            var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula"]}};
+                        else
+                            var condicion = {name: {inq: ["unidad_capacit", "unidad_inscrip","unidad_admin","unidad_vincula"]}};
+
+                        Role.find({
+                            filter: {
+                                where: condicion,
+                                order: 'description ASC'
+                            }
+                        })
+                        .$promise
+                        .then(function(resp) {
+                            vm.listaRoles = resp;
+
+                            var perfilSeleccionadoIndex = vm.listaRoles.map(function(rol) {
+                                                                return rol.id;
+                                                              }).indexOf(vm.usuarioEditar.idPerfil);
+
+                            vm.perfilSeleccionado = vm.listaRoles[perfilSeleccionadoIndex];
+                        });
+
                 });
-    
+        
             };
+
+
+
+            function muestraPerfilesUnidad() {
+
+                vm.listaRoles = [];
+
+                if(vm.unidadSelecccionada.idUnidadAdmtva == 1)
+                    var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula"]}};
+                else
+                    var condicion = {name: {inq: ["unidad_capacit", "unidad_inscrip","unidad_admin","unidad_vincula"]}};
+
+                Role.find({
+                    filter: {
+                        where: condicion,
+                        order: 'description ASC'
+                    }
+                })
+                .$promise
+                .then(function(resp) {
+                    vm.listaRoles = resp;
+                });    
+
+            }
+
+
 
             function guardar() {
 

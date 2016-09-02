@@ -124,6 +124,22 @@
       },
       "_selectable": true
     },
+    "revisadoProgramas": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "revisado_programas",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "aprobadoAcademica": {
       "type": "Boolean",
       "required": false,

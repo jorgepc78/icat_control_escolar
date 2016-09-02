@@ -1,6 +1,6 @@
 module.exports = function(ControlProcesos) {
 	
-	ControlProcesos.observe('after save', function(ctx, next) {
+	/*ControlProcesos.observe('after save', function(ctx, next) {
       	
 		// El mensaje se le debe enviar a tres personas o entidades, la primera es la persona que realiza el proceso la segunda es la encargada de la unidad y la tercera es la responsable de oficinas centrales
 		//cada una tiene un mensaje diferente en cuanto a su redacción.
@@ -16,9 +16,34 @@ module.exports = function(ControlProcesos) {
 		};
 
 		if(ctx.instance.proceso == 'PTC')
-			condicion = {avisosPTC: true};
+		{
+			if(ctx.instance.accion == 'ENVIO REVISION')
+			{
+				condicion = {
+					and: [{
+							or: [
+								{idUnidadAdmtva: ctx.instance.idUnidadAdmtva },
+								{idUnidadAdmtva: 1 }
+							]
+						},
+						{PTCEnvioRevision: true}
+					]
+				};
+			}
+		}
 		else if( (ctx.instance.proceso == 'Pre-Apertura Curso PTC') || (ctx.instance.proceso == 'Pre-Apertura Curso Extra') )
-			condicion = {avisosPreaperturaCursos: true};
+		{
+				condicion = {
+					and: [{
+							or: [
+								{idUnidadAdmtva: ctx.instance.idUnidadAdmtva },
+								{idUnidadAdmtva: 1 }
+							]
+						},
+						{avisosPreaperturaCursos: true}
+					]
+				};
+		}
 		else if(ctx.instance.proceso == 'Inscripcion a curso')
 			condicion = {avisosInscripcion: true};
 		else if(ctx.instance.proceso == 'Cursos vigentes')
@@ -41,16 +66,7 @@ module.exports = function(ControlProcesos) {
 
 				
 				Usuario.find({
-					where: {
-						and: [{
-								or: [
-									{idUnidadAdmtva: ctx.instance.idUnidadAdmtva },
-									{idUnidadAdmtva: 1 }
-								]
-							},
-							condicion
-						]
-					},
+					where: condicion,
 					fields: {idUsuario: true, idUnidadAdmtva:true, nombre: true, email: true}
 				},
 				function(err, usuarioEncontrado2) {
@@ -537,6 +553,6 @@ module.exports = function(ControlProcesos) {
 
     	
     	next();
-	});
+	});*/
 
 };

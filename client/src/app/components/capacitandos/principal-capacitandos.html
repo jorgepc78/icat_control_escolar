@@ -8,7 +8,7 @@
                                         <div class="col-md-6">
                                                 <h2>Lista de capacitandos</h2>
                                         </div>
-                                        <div class="col-md-6 text-right" ng-if="currentUser.unidad_pertenece_id > 1">
+                                        <div class="col-md-6 text-right" ng-if="(currentUser.perfil == 'unidad_capacit' || currentUser.perfil == 'unidad_inscrip')">
                                                 <div class="mail-tools">
                                                         <button class="btn btn-default btn-labeled" ng-click="vm.nuevoCapacitando()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
                                                 </div>
@@ -111,8 +111,8 @@
 
                                                                 <div class="row">
                                                                     <div class="col-md-12 text-center">
-                                                                        <button type="button" ng-show="(currentUser.unidad_pertenece_id == vm.personaSeleccionada.idUnidadAdmtva)" ng-click="vm.editaCapacitando(vm.personaSeleccionada)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Edita capacitando</button>
-                                                                        <button type="button" ng-show="(currentUser.unidad_pertenece_id == vm.personaSeleccionada.idUnidadAdmtva)" ng-click="vm.eliminaCapacitando(vm.personaSeleccionada)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-times"></i></span> Elimina capacitando</button>
+                                                                        <button type="button" ng-show="( (currentUser.perfil == 'unidad_capacit' || currentUser.perfil == 'unidad_inscrip') && (currentUser.unidad_pertenece_id > 1) && (vm.personaSeleccionada.idUnidadAdmtva == 0 || currentUser.unidad_pertenece_id == vm.personaSeleccionada.idUnidadAdmtva) )" ng-click="vm.editaCapacitando(vm.personaSeleccionada)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Edita capacitando</button>
+                                                                        <button type="button" ng-show="( (currentUser.perfil == 'unidad_capacit' || currentUser.perfil == 'unidad_inscrip') && (currentUser.unidad_pertenece_id > 1) && (vm.personaSeleccionada.idUnidadAdmtva == 0 || currentUser.unidad_pertenece_id == vm.personaSeleccionada.idUnidadAdmtva) )" ng-click="vm.eliminaCapacitando(vm.personaSeleccionada)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-times"></i></span> Elimina capacitando</button>
                                                                         <button type="button" ng-click="vm.muestraCapacitando(vm.personaSeleccionada)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-eye"></i></span> Ver datos completos</button>
                                                                     </div>
                                                                 </div>

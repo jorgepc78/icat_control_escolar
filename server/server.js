@@ -1,4 +1,4 @@
-/*var loopback = require('loopback');
+var loopback = require('loopback');
 var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
@@ -25,8 +25,8 @@ boot(app, __dirname, function(err) {
   if (require.main === module)
     app.start();
 });
-*/
 
+/*
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
@@ -71,4 +71,4 @@ app.start = function(httpOnly) {
 // start the server if `$ node server.js`
 if (require.main === module) {
   app.start();
-}
+}*/

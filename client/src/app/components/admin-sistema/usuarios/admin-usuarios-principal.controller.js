@@ -37,7 +37,7 @@
                           filter: {
                               where: vm.tablaListaUsuarios.condicion,
                               fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','avisosPTC','avisosPreaperturaCursos','avisosInscripcion','avisosCierreCursos','activo'],
-                              order: ['nombre ASC'],
+                              order: ['idUnidadAdmtva ASC','nombre ASC'],
                               limit: vm.tablaListaUsuarios.registrosPorPagina,
                               skip: vm.tablaListaUsuarios.paginaActual - 1,
                               include: [

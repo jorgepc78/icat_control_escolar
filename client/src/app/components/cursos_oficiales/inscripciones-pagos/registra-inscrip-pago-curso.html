@@ -23,7 +23,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <br>
                                         </div>
                                         <div class="ibox-content">
                                             
@@ -43,7 +42,7 @@
                                                             <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
                                                             <td class="client-status" ng-switch on="registro.estatus">
                                                                 <span ng-switch-when="2" class="label label-warning texto-estatus-ptc">En espera</span>
-                                                                <span ng-switch-when="4" class="label label-primary texto-estatus-ptc">Activo</span>
+                                                                <span ng-switch-when="4" class="label label-primary texto-estatus-ptc">Activo {{registro.diasDif <= 0 ? 'iniciado' : ''}}</span>
                                                                 <span ng-switch-when="5" class="label label-success texto-estatus-ptc">Concluido</span>
                                                                 <span ng-switch-when="6" class="label label-default texto-estatus-ptc">Cerrado</span>
                                                                 <span ng-switch-when="7" class="label label-danger texto-estatus-ptc">Cancelado</span>
@@ -66,7 +65,7 @@
                             <div class="col-md-10">
 
                                     <div class="ibox">
-                                        <div class="ibox-content" style="height:240px;">
+                                        <div class="ibox-content" style="height:230px;">
                                             <div class="tab-content">
                                                 <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                                             <div class="row">
@@ -155,7 +154,7 @@
                                                                 </div>
                                                                 <ul class="list-group clear-list">
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right"> <button type="button" ng-disabled="((vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length) == 0)" ng-click="vm.registraInscripcion(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Registrar inscripci&oacute;n</button> </span>
+                                                                        <span class="pull-right"> <button type="button" ng-show="(currentUser.perfil == 'unidad_inscrip' || currentUser.perfil == 'unidad_capacit')" ng-disabled="((vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length) == 0) || (vm.cursoSeleccionado.diasDif < -1)" ng-click="vm.registraInscripcion(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Registrar inscripci&oacute;n</button> </span>
                                                                         <h3>Lugares disponibles:
                                                                             <span class="label label-success" ng-show="((vm.cursoSeleccionado.inscripcionesCursos.length / vm.cursoSeleccionado.cupoMaximo) <= 0.25)">{{vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length}}</span>
                                                                             <span class="label label-warning" ng-show="((vm.cursoSeleccionado.inscripcionesCursos.length / vm.cursoSeleccionado.cupoMaximo) > 0.25 && (vm.cursoSeleccionado.inscripcionesCursos.length / vm.cursoSeleccionado.cupoMaximo) <= 0.75)">{{vm.cursoSeleccionado.cupoMaximo - vm.cursoSeleccionado.inscripcionesCursos.length}}</span>
@@ -191,10 +190,10 @@
                                                                                     </td>
                                                                                     <td>{{inscripcion.numFactura}}</td>
                                                                                     <td>
-                                                                                        <button type="button" class="btn btn-sm" tooltip-placement="top" tooltip="Imprimir hoja de inscripci&oacute;n" ng-click="vm.muestraDocInscripcion(inscripcion)"><i class="fa fa-print"></i></button>
+                                                                                        <button type="button" ng-show="(currentUser.perfil == 'unidad_inscrip' || currentUser.perfil == 'unidad_capacit')" class="btn btn-sm" tooltip-placement="top" tooltip="Imprimir hoja de inscripci&oacute;n" ng-click="vm.muestraDocInscripcion(inscripcion)"><i class="fa fa-print"></i></button>
                                                                                         <button type="button" ng-show="(inscripcion.pagado > 0) " class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Editar n&uacute;m. factura" ng-click="vm.editaNumFactura(inscripcion)"><i class="fa fa-pencil"></i></button>
                                                                                         <button type="button" ng-show="(inscripcion.pagado == 0)" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Registrar pago" ng-click="vm.registraPago(inscripcion)"><i class="fa fa-usd"></i></button>
-                                                                                        <button type="button" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Eliminar capacitando" ng-click="vm.eliminaInscrito(inscripcion)"><i class="fa fa-trash-o"></i></button>
+                                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.diasDif > -1) && (currentUser.perfil == 'unidad_inscrip' || currentUser.perfil == 'unidad_capacit')" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Eliminar capacitando" ng-click="vm.eliminaInscrito(inscripcion)"><i class="fa fa-trash-o"></i></button>
                                                                                     </td>
                                                                                 </tr>
 

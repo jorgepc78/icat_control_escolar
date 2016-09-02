@@ -72,11 +72,6 @@
 
             function inicia() {
 
-                  vm.listaEstatus = [
-                      {valor: -1, texto: 'Todos'},
-                      {valor: 1, texto: 'En proceso de revisión'},
-                      {valor: 3, texto: 'Rechazado'}
-                  ];
 
                   vm.tablaListaPTCs.condicion = {
                       or: [
@@ -370,7 +365,15 @@
                   var datos;
                   var mensaje_confirmacion = '';
                   var mensaje_accion = '';
-                  if($scope.currentUser.perfil == 'academica')
+                  if($scope.currentUser.perfil == 'programas')
+                  {
+                      datos = {
+                        revisadoProgramas: true
+                      };
+                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>REVISADO</strong> por el &aacute;rea de programas de capacitaci&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'PTC REVISADO PROGRAMAS';
+                  }
+                  if($scope.currentUser.perfil == 'dir_academica')
                   {
                       datos = {
                         aprobadoAcademica: true
@@ -378,7 +381,7 @@
                       mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>APROBADO</strong> por el &aacute;rea acad&eacute;mica, ¿Continuar?';
                       mensaje_accion = 'PTC APROBADO ACADEMICA';
                   }
-                  else if($scope.currentUser.perfil == 'planeacion')
+                  else if($scope.currentUser.perfil == 'dir_planeacion')
                   {
                       datos = {
                         aprobadoPlaneacion: true
@@ -386,14 +389,14 @@
                       mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n, ¿Continuar?';
                       mensaje_accion = 'PTC APROBADO PLANEACION';
                   }
-                  else if($scope.currentUser.perfil == 'direccion')
+                  else if($scope.currentUser.perfil == 'dir_gral')
                   {
                       datos = {
                         aprobadoDireccionGral: true,
                         estatus: 2,
                         fechaAceptacion: Date()
                       };
-                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>APROBADO Y ACEPTADO</strong>, ¿Continuar?';
+                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>AUTORIZADo</strong>, ¿Continuar?';
                       mensaje_accion = 'PTC APROBADO - ACEPTADO DIR GRAL';
                   }
 
@@ -419,7 +422,7 @@
                             .$promise
                             .then(function(respuesta) {
 
-                                  if($scope.currentUser.perfil == 'direccion')
+                                  if($scope.currentUser.perfil == 'dir_gral')
                                   {
                                         ProgTrimCursos.find({
                                             filter: {
@@ -486,14 +489,18 @@
 
                                               var titulo_ventana_aviso = 'PTC aprobado';
                                               
-                                              if($scope.currentUser.perfil == 'academica')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como aprobado por el &aacute;rea acad&eacute;mica y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              else if($scope.currentUser.perfil == 'planeacion')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como aprobado por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              else if($scope.currentUser.perfil == 'direccion')
+                                              if($scope.currentUser.perfil == 'programas') {
+                                                  titulo_ventana_aviso = 'PTC Revisado';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como <strong>REVISADO</strong> por el &aacute;rea de programas de capacitaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              }
+                                              if($scope.currentUser.perfil == 'dir_academica')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como <strong>APROBADO</strong> por el &aacute;rea acad&eacute;mica y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              else if($scope.currentUser.perfil == 'dir_planeacion')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              else if($scope.currentUser.perfil == 'dir_gral')
                                               {
                                                   titulo_ventana_aviso = 'PTC Aceptado';
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como aprobado y aceptado y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como <strong>AUTORIZADO</strong> y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               }
 
                                               swal({
@@ -518,9 +525,46 @@
             function rechazaPTC(RegistroSeleccionado) {
 
                   var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
+                  var datos;
+                  var mensaje_confirmacion = '';
+                  var mensaje_accion = '';
+                  if($scope.currentUser.perfil == 'programas')
+                  {
+                      datos = {
+                        estatus: 3,
+                        fechaRechazo: Date()
+                      };
+                      mensaje_confirmacion = 'Se confirma que el PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>RECHAZADO</strong> y ser&aacute; regresado a la unidad, ¿Continuar?';
+                      mensaje_accion = 'PTC RECHAZADO';
+                  }
+                  if($scope.currentUser.perfil == 'dir_academica')
+                  {
+                      datos = {
+                        revisadoProgramas: false
+                      };
+                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; regresado al &aacute;rea de programas para una nueva revisi&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'PTC RECHAZADO ACADEMICA';
+                  }
+                  else if($scope.currentUser.perfil == 'dir_planeacion')
+                  {
+                      datos = {
+                        aprobadoAcademica: false
+                      };
+                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; regresado al &aacute;rea acad&eacute;mica para una nueva revisi&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'PTC RECHAZADO PLANEACION';
+                  }
+                  else if($scope.currentUser.perfil == 'dir_gral')
+                  {
+                      datos = {
+                        aprobadoPlaneacion: false
+                      };
+                      mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; regresado al &aacute;rea de planeaci&oacute;n para una nueva revisi&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'PTC RECHAZADO DIR GRAL';
+                  }
+
                   swal({
                     title: "Confirmar",
-                    html: 'Se confirma que el PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>RECHAZADO</strong>, ¿Continuar?',
+                    html: mensaje_confirmacion,
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -534,25 +578,29 @@
                             ProgTrimCursos.prototype$updateAttributes(
                             {
                                 id: RegistroSeleccionado.idPtc
-                            },{
-                                estatus: 3,
-                                fechaRechazo: Date()
-                            })
+                            },
+                                datos
+                            )
                             .$promise
                             .then(function(respuesta) {
-                                  vm.RegistroPTCSeleccionado.estatus      = respuesta.estatus;
-                                  vm.RegistroPTCSeleccionado.fechaRechazo = respuesta.fechaRechazo;
+                                  if($scope.currentUser.perfil == 'programas')
+                                  {
+                                      vm.RegistroPTCSeleccionado.estatus      = respuesta.estatus;
+                                      vm.RegistroPTCSeleccionado.fechaRechazo = respuesta.fechaRechazo;                                    
+                                  }
 
                                   ControlProcesos
                                   .create({
                                       proceso         : 'PTC',
-                                      accion          : 'PTC RECHAZADO',
+                                      accion          : mensaje_accion,
                                       idDocumento     : RegistroSeleccionado.idPtc,
                                       idUsuario       : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
                                   })
                                   .$promise
                                   .then(function(resp) {
+
+                                        vm.muestra_ptc_unidad_anio();
 
                                         ControlProcesos.findById({ 
                                             id: resp.id,
@@ -564,8 +612,8 @@
                                         .then(function(resp_control) {
 
                                               swal({
-                                                title: 'PTC enviado',
-                                                html: 'se marc&oacute; el PTC como rechazado y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                title: 'PTC Rechazado',
+                                                html: 'se marc&oacute; el PTC como <strong>RECHAZADO</strong> y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
                                                 type: 'success',
                                                 showCancelButton: false,
                                                 confirmButtonColor: "#9a0000",

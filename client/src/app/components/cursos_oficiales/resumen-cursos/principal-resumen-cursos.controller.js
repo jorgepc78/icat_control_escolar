@@ -1157,17 +1157,37 @@
 
                   for(var i=0; i < vm.listaCursos.length; i++)
                   {
-                      var fecha_inicio = new Date(vm.listaCursos[i].fechaInicio);
+                      if(vm.listaCursos[i].estatus == 6 || vm.listaCursos[i].estatus == 7)
+                      {
+                            vm.listaCursos[i].diasDif = 0;
+                            vm.listaCursos[i].diasTermine = 0;
+                      }
+                      else
+                      {
+                            var fecha_inicio = new Date(vm.listaCursos[i].fechaInicio);
 
-                      fecha_inicio.setHours(0);
-                      fecha_inicio.setMinutes(0);
-                      fecha_inicio.setSeconds(0);
-                      fecha_inicio.setMilliseconds(0);
+                            fecha_inicio.setHours(0);
+                            fecha_inicio.setMinutes(0);
+                            fecha_inicio.setSeconds(0);
+                            fecha_inicio.setMilliseconds(0);
 
-                      var dif = fecha_inicio - hoy;
-                      var num_dias_falta = Math.floor(dif / (1000 * 60 * 60 * 24)); 
+                            var dif = fecha_inicio - hoy;
+                            var num_dias_falta = Math.floor(dif / (1000 * 60 * 60 * 24)); 
 
-                      vm.listaCursos[i].diasDif = num_dias_falta;
+                            vm.listaCursos[i].diasDif = num_dias_falta;
+
+                            var fecha_fin = new Date(vm.listaCursos[i].fechaFin);
+
+                            fecha_fin.setHours(0);
+                            fecha_fin.setMinutes(0);
+                            fecha_fin.setSeconds(0);
+                            fecha_fin.setMilliseconds(0);
+
+                            dif = fecha_fin - hoy;
+                            num_dias_falta = Math.floor(dif / (1000 * 60 * 60 * 24)); 
+
+                            vm.listaCursos[i].diasTermine = num_dias_falta;
+                      }
                   }
             }
 

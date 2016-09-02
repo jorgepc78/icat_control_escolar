@@ -6,22 +6,23 @@
             <form name="form_datos" class="form-horizontal">
 
                   <div class="form-group">
-                      <label class="col-sm-1 control-label">Perfil</label>
+                      <label class="col-sm-1 control-label">Unidad</label>
                       <div class="col-sm-11">
                           <div class="row">
                               <div class="col-md-5">
                                   <select class="form-control m-b" 
-                                      ng-model="vm.perfilSeleccionado"
-                                      ng-options="rol as rol.description for rol in vm.listaRoles" required>
+                                      ng-model="vm.unidadSelecccionada"
+                                      ng-change="vm.muestraPerfilesUnidad()"
+                                      ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades" required>
                                   </select>
                               </div>
                               <div class="col-md-1 text-right">
-                                  <label class="control-label">Unidad</label>
+                                  <label class="control-label">Perfil</label>
                               </div>
                               <div class="col-md-5">
                                   <select class="form-control m-b" 
-                                      ng-model="vm.unidadSelecccionada"
-                                      ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades" required>
+                                      ng-model="vm.perfilSeleccionado"
+                                      ng-options="rol as rol.description for rol in vm.listaRoles" required>
                                   </select>
                               </div>
                           </div>

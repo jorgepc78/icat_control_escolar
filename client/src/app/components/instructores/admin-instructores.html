@@ -8,7 +8,7 @@
                                         <div class="col-md-6">
                                                 <h2>Registro de instructores</h2>
                                         </div>
-                                        <div class="col-md-6 text-right">
+                                        <div class="col-md-6 text-right" ng-if="(currentUser.perfil == 'programas')">
                                                 <div class="mail-tools">
                                                         <button class="btn btn-default btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
                                                 </div>
@@ -44,7 +44,7 @@
                                         <table class="tablaDatos table table-condensed no-footer">
                                           <thead>
                                             <tr>
-                                                <th ng-show="(currentUser.unidad_pertenece_id == 1)">Unidad registrado</th>
+                                                <th ng-show="(currentUser.unidad_pertenece_id == 1)">Unidad</th>
                                                 <th>Apellido paterno</th>
                                                 <th>Apellido materno</th>
                                                 <th>Nombre</th>
@@ -193,7 +193,7 @@
                                                                     </tab>
                                                                 </tabset>
                                                                 <br>
-                                                                <div class="row">
+                                                                <div class="row" ng-if="(currentUser.perfil == 'programas')">
                                                                     <div class="col-md-12 text-center">
                                                                                 <div class="col-md-6">
                                                                                     <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar registro</button>

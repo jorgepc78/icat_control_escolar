@@ -1,0 +1,78 @@
+{
+  "name": "RelInstrucUnidad",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "instructores",
+    "table": "rel_instruc_unidad"
+  },
+  "properties": {
+    "id": {
+      "type": "Number",
+      "id": true,
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "NO"
+      },
+      "_selectable": false
+    },
+    "idInstructor": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_instructor",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "idUnidadAdmtva": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_unidad_admtva",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "CatalogoInstructores": {
+      "type": "belongsTo",
+      "model": "CatalogoInstructores",
+      "foreignKey": "idInstructor"
+    },
+    "CatalogoUnidadesAdmtvas": {
+      "type": "belongsTo",
+      "model": "CatalogoUnidadesAdmtvas",
+      "foreignKey": "idUnidadAdmtva"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -66,6 +66,13 @@
       "type": "hasMany",
       "model": "HorasAsignadasUnidad",
       "foreignKey": "idUnidadAdmtva"
+    },
+    "instructores_asignados": {
+      "type": "hasMany",
+      "model": "CatalogoInstructores",
+      "foreignKey": "idUnidadAdmtva",
+      "through": "RelInstrucUnidad",
+      "keyThrough": "idInstructor"
     }
   },
   "acls": [],

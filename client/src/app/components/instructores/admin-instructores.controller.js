@@ -84,8 +84,19 @@
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
                               include: [
-                                'unidad_pertenece',
                                 'localidad_pertenece',
+                                {
+                                    relation: 'unidad_pertenece',
+                                    scope: {
+                                        fields:['idUnidadAdmtva','nombre']
+                                    }
+                                },
+                                {
+                                    relation: 'otras_unidades',
+                                    scope: {
+                                        fields:['idUnidadAdmtva','nombre']
+                                    }
+                                },
                                 {
                                     relation: 'evaluacion_curso',
                                     scope: {
@@ -362,6 +373,17 @@
 
                         vm.RegistroSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;
                         vm.RegistroSeleccionado.localidad_pertenece.nombre      = respuesta.localidad;
+
+                        if(respuesta.otras_unidades.length > 0)
+                        {
+                              vm.RegistroSeleccionado.otras_unidades = [];
+                              angular.forEach(respuesta.otras_unidades, function(record) {
+                                    vm.RegistroSeleccionado.otras_unidades.push({
+                                        idUnidadAdmtva : record.idUnidadAdmtva,
+                                        nombre         : record.nombre,
+                                    });
+                              });
+                        }
 
                         if(respuesta.evaluacion_curso.length > 0)
                         {

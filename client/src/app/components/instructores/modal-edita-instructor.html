@@ -4,179 +4,203 @@
       </div>
       <div class="modal-body" style="background: #fff;padding-bottom:0;">
 
-        <div class="row">
-                <div class="col-lg-6">
-
+            <tabset>
+                <tab heading="Datos generales">
+                <br>
                     <form name="form_datos" class="form-horizontal">
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Ap. paterno</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.apellidoPaterno" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Ap. materno</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.apellidoMaterno" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Nombre</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.nombre" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">RFC</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.rfc" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">CURP</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.curp" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Grado acad&eacute;mico</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.gradoAcademico" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Tel&eacute;fono</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.telefono" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Email</label>
-                              <div class="col-sm-9">
-                                  <input type="email" class="form-control" ng-model="vm.registroEdicion.email" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Escolaridad</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.escolaridad" required>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Localidad</label>
-                              <div class="col-sm-9">
-                                  <select class="form-control m-b" 
-                                      ng-model="vm.localidadSeleccionada"
-                                      ng-options="localidad as localidad.nombre for localidad in vm.listaLocalidades" required>
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Unidad asignada</label>
-                              <div class="col-sm-9">
-                                  <select class="form-control m-b" 
-                                      ng-model="vm.unidadSeleccionada"
-                                      ng-disabled="(currentUser.unidad_pertenece_id > 1)"
-                                      ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades" required>
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Activo</label>
-                              <div class="col-sm-9">
-                                  <input ng-if="vm.registroEdicion.activo!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.registroEdicion.activo"/>
-                              </div>
-                          </div>
+
+                        <div class="row">
+                                <div class="col-lg-6">
+
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Ap. paterno</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.apellidoPaterno" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Ap. materno</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.apellidoMaterno" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Nombre</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.nombre" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">RFC</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.rfc" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">CURP</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.curp" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Grado acad&eacute;mico</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.gradoAcademico" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Tel&eacute;fono</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.telefono" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Email</label>
+                                          <div class="col-sm-9">
+                                              <input type="email" class="form-control" ng-model="vm.registroEdicion.email" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Escolaridad</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.escolaridad" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Localidad</label>
+                                          <div class="col-sm-9">
+                                              <select class="form-control m-b" 
+                                                  ng-model="vm.localidadSeleccionada"
+                                                  ng-options="localidad as localidad.nombre for localidad in vm.listaLocalidades" required>
+                                              </select>
+                                          </div>
+                                      </div>
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Unidad de registro</label>
+                                          <div class="col-sm-9">
+                                              <select class="form-control m-b" 
+                                                  ng-model="vm.unidadSeleccionada"
+                                                  ng-disabled="(currentUser.unidad_pertenece_id > 1)"
+                                                  ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades" required>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Otras unidades donde puede impartir cursos</label>
+                                          <div class="col-sm-9">
+                                              <div class="checkbox" ng-repeat="registro in vm.unidades_checkbox"><label> <input icheck type="checkbox" ng-model="registro.seleccionado"> {{registro.nombre}} </label></div>
+                                          </div>
+                                      </div>
+                                      <br>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Activo</label>
+                                          <div class="col-sm-9">
+                                              <input ng-if="vm.registroEdicion.activo!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.registroEdicion.activo"/>
+                                          </div>
+                                      </div>
+
+                                </div>
+                        </div>
+
                     </form>
+                </tab>
 
-                </div>
-                <div class="col-lg-6">
+                <tab heading="Cursos que puede impartir">
+                <br>
                     <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h2 style="margin-top:0;">Cursos que puede impartir</h2>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-3">
-                              <label class="col-sm-3 control-label">Especialidad</label>
-                        </div>
-                        <div class="col-md-9">
-                              <select class="form-control m-b" 
-                                  ng-model="vm.especialidadSeleccionada"
-                                  ng-change="vm.muestraCursosEspecialidad()"
-                                  ng-options="especialidad as especialidad.nombre for especialidad in vm.listaEspecialidades" required>
-                              </select>                        
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                              <label class="col-sm-3 control-label">Curso</label>
-                        </div>
-                        <div class="col-md-9">
-                              <select class="form-control m-b" 
-                                  ng-model="vm.cursoSeleccionado"
-                                  ng-disabled="vm.listaCursosInhabilit"
-                                  ng-options="curso as (curso.nombreCurso + ' - ' + curso.modalidad) for curso in vm.listaCursos" required>
-                              </select>                        
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-8 text-center">
-                              <button type="button" ng-disabled="(vm.cursoSeleccionado.idCatalogoCurso === undefined)" ng-click="vm.agregaCurso()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar curso</button>
-                        </div>
-                        <div class="col-md-2">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="tablaDatos table table-condensed no-footer">
-                              <thead>
-                                <col width="55%">
-                                <col width="20%">
-                                <col width="15%">
-                                <col width="10%">
-                                <tr>
-                                    <th>Curso</th>
-                                    <th>Modalidad</th>
-                                    <th>Puntaje</th>
-                                    <th></th>
-                                </tr>
-                              </thead>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12" style="height: 350px;">
-                            <div class="full-height-scroll" full-scroll>
-                                  <table class="tablaDatos table table-condensed no-footer">
-                                    <thead>
-                                      <col width="55%">
-                                      <col width="20%">
-                                      <col width="15%">
-                                      <col width="10%">
-                                    </thead>
-                                   <tbody>
-                                      <tr ng-repeat="registro in vm.cursos_habilitados | orderBy:'nombreCurso'" class="pointer">
-                                          <td>{{registro.nombreCurso}}</td>
-                                          <td>{{registro.modalidad}}</td>
-                                          <td><input type="number" min="0" class="form-control" ng-model="registro.calificacion"></td>
-                                          <td style="width:170px">
-                                                  <button type="button" ng-click="vm.eliminaRegistro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-                                          </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
+                            <div class="col-lg-1">
                             </div>
-                        </div>
+                            <div class="col-lg-10">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                          <label class="col-sm-3 control-label">Especialidad</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                          <select class="form-control m-b" 
+                                              ng-model="vm.especialidadSeleccionada"
+                                              ng-change="vm.muestraCursosEspecialidad()"
+                                              ng-options="especialidad as especialidad.nombre for especialidad in vm.listaEspecialidades" required>
+                                          </select>                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                          <label class="col-sm-3 control-label">Curso</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                          <select class="form-control m-b" 
+                                              ng-model="vm.cursoSeleccionado"
+                                              ng-disabled="vm.listaCursosInhabilit"
+                                              ng-options="curso as (curso.nombreCurso + ' - ' + curso.modalidad) for curso in vm.listaCursos" required>
+                                          </select>                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-8 text-center">
+                                          <button type="button" ng-disabled="(vm.cursoSeleccionado.idCatalogoCurso === undefined)" ng-click="vm.agregaCurso()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar curso</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                            <col width="55%">
+                                            <col width="20%">
+                                            <col width="15%">
+                                            <col width="10%">
+                                            <tr>
+                                                <th>Curso</th>
+                                                <th>Modalidad</th>
+                                                <th>Puntaje</th>
+                                                <th></th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="height: 350px;">
+                                        <div class="full-height-scroll" full-scroll>
+                                              <table class="tablaDatos table table-condensed no-footer">
+                                                <thead>
+                                                  <col width="55%">
+                                                  <col width="20%">
+                                                  <col width="15%">
+                                                  <col width="10%">
+                                                </thead>
+                                               <tbody>
+                                                  <tr ng-repeat="registro in vm.cursos_habilitados | orderBy:'nombreCurso'" class="pointer">
+                                                      <td>{{registro.nombreCurso}}</td>
+                                                      <td>{{registro.modalidad}}</td>
+                                                      <td><input type="number" min="0" class="form-control" ng-model="registro.calificacion"></td>
+                                                      <td style="width:170px">
+                                                              <button type="button" ng-click="vm.eliminaRegistro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                      </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                            </div>
+
                     </div>
-                </div>
+
+                </tab>
+            </tabset>
 
 
-        </div>
 
 
       </div>

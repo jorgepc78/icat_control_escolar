@@ -45,10 +45,12 @@
                     escolaridad        : '',
                     idLocalidad        : 0,
                     activo             : true,
-                    evaluacion_curso : []
+                    evaluacion_curso   : [],
+                    otras_unidades     : []
             };
 
             vm.cursos_habilitados = [];
+            vm.unidades_checkbox = [];
 
             inicia();
 
@@ -56,6 +58,7 @@
 
                 CatalogoUnidadesAdmtvas.find({
                     filter: {
+                        where: {idUnidadAdmtva : {gt: 1}},
                         fields: ['idUnidadAdmtva','nombre'],
                         order: 'nombre ASC'
                     }
@@ -72,6 +75,17 @@
 
                         vm.unidadSeleccionada = vm.listaUnidades[index];                        
                     }
+
+                    angular.forEach(vm.listaUnidades, function(registro) {
+
+                        vm.unidades_checkbox.push({
+                          idUnidadAdmtva : registro.idUnidadAdmtva,
+                          nombre         : registro.nombre,
+                          seleccionado   : false
+                        });
+
+                    });
+
                 });
     
 
@@ -184,6 +198,29 @@
                 })
                 .$promise
                 .then(function(respuesta) {
+
+                        for(var i=0; i < vm.unidades_checkbox.length; i++)
+                        {
+                            if( (vm.unidades_checkbox[i].seleccionado == true) || (vm.unidades_checkbox[i].idUnidadAdmtva == vm.unidadSeleccionada.idUnidadAdmtva) )
+                            {
+                                    vm.registroEdicion.otras_unidades.push({
+                                      idUnidadAdmtva : vm.unidades_checkbox[i].idUnidadAdmtva,
+                                      nombre         : vm.unidades_checkbox[i].nombre
+                                    });
+                            }
+                        }
+
+                        angular.forEach(vm.registroEdicion.otras_unidades, function(registro) {
+
+                                CatalogoInstructores.otras_unidades.link({
+                                    id: respuesta.idInstructor,
+                                    fk: registro.idUnidadAdmtva
+                                },{}) 
+                                .$promise
+                                .then(function(resp) {
+                                });
+
+                        });
 
                         if(vm.cursos_habilitados.length > 0)
                         {

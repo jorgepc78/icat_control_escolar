@@ -263,6 +263,13 @@
       "model": "CatalogoUnidadesAdmtvas",
       "foreignKey": "idUnidadAdmtva"
     },
+    "otras_unidades": {
+      "type": "hasMany",
+      "model": "CatalogoUnidadesAdmtvas",
+      "foreignKey": "idInstructor",
+      "through": "RelInstrucUnidad",
+      "keyThrough": "idUnidadAdmtva"
+    },
     "localidad_pertenece": {
       "type": "belongsTo",
       "model": "CatalogoLocalidades",

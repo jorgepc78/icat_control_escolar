@@ -94,6 +94,10 @@
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },
+  "RelInstrucUnidad": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
   "CursosOficiales": {
     "dataSource": "icat_control_escolar_ds",
     "public": true

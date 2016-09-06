@@ -47,10 +47,12 @@
                     idLocalidad        : registroEditar.idLocalidad,
                     localidad          : '',
                     activo             : registroEditar.activo,
-                    evaluacion_curso   : []
+                    evaluacion_curso   : [],
+                    otras_unidades     : []
             };
 
             vm.cursos_habilitados = [];
+            vm.unidades_checkbox = [];
             
             angular.forEach(registroEditar.evaluacion_curso, function(record) {
                   vm.cursos_habilitados.push({
@@ -68,6 +70,7 @@
 
                 CatalogoUnidadesAdmtvas.find({
                     filter: {
+                        where: {idUnidadAdmtva : {gt: 1}},
                         fields: ['idUnidadAdmtva','nombre'],
                         order: 'nombre ASC'
                     }
@@ -81,6 +84,37 @@
                                                       }).indexOf(vm.registroEdicion.idUnidadAdmtva);
 
                     vm.unidadSeleccionada = vm.listaUnidades[index];
+
+                    
+                    angular.forEach(vm.listaUnidades, function(registro) {
+
+                            var index = registroEditar.otras_unidades.map(function(record) {
+                                                            return record.idUnidadAdmtva;
+                                                          }).indexOf(registro.idUnidadAdmtva);
+                            
+                            if(registro.idUnidadAdmtva == vm.registroEdicion.idUnidadAdmtva)
+                                var nombre_txt = registro.nombre + ' (Default)';
+                            else
+                                var nombre_txt = registro.nombre;
+
+                            if(index >= 0)
+                            {
+                                vm.unidades_checkbox.push({
+                                  idUnidadAdmtva : registro.idUnidadAdmtva,
+                                  nombre         : nombre_txt,
+                                  seleccionado   : true
+                                });
+                            }
+                            else
+                            {
+                                vm.unidades_checkbox.push({
+                                  idUnidadAdmtva : registro.idUnidadAdmtva,
+                                  nombre         : nombre_txt,
+                                  seleccionado   : false
+                                });
+                            }
+                    });
+
                 });
     
                 CatalogoLocalidades.find({
@@ -194,6 +228,7 @@
                 };
 
 
+                vm.registroEdicion.idUnidadAdmtva = vm.unidadSeleccionada.idUnidadAdmtva;
                 vm.registroEdicion.UnidadAdmtva = vm.unidadSeleccionada.nombre;
                 vm.registroEdicion.localidad = vm.localidadSeleccionada.nombre;
 
@@ -206,51 +241,79 @@
                 .$promise
                 .then(function(respuesta) {
 
-                    CatalogoInstructores.cursos_habilitados.destroyAll({ id: vm.registroEdicion.idInstructor })
-                      .$promise
-                      .then(function() { 
+                          CatalogoInstructores.otras_unidades.destroyAll({ id: vm.registroEdicion.idInstructor })
+                          .$promise
+                          .then(function() {
 
-                            if(vm.cursos_habilitados.length > 0)
-                            {
-                                    var totalregistros = 0;
-                                    angular.forEach(vm.cursos_habilitados, function(record) {
-
-                                            CatalogoInstructores.cursos_habilitados.link({
-                                                id: vm.registroEdicion.idInstructor,
-                                                fk: record.idCatalogoCurso
-                                            },{
-                                                calificacion: record.calificacion
-                                            }) 
-                                            .$promise
-                                            .then(function(resp) {
-
-                                                    var index = vm.cursos_habilitados.map(function(registro) {
-                                                                                        return registro.idCatalogoCurso;
-                                                                                      }).indexOf(resp.idCatalogoCurso);
-
-                                                    vm.registroEdicion.evaluacion_curso.push({
-                                                        id              : resp.id,
-                                                        idInstructor    : resp.idInstructor,
-                                                        idCatalogoCurso : resp.idCatalogoCurso,
-                                                        calificacion    : resp.calificacion,
-                                                        CatalogoCursos  : {
-                                                            idCatalogoCurso : resp.idCatalogoCurso,
-                                                            nombreCurso     : vm.cursos_habilitados[index].nombreCurso,
-                                                            modalidad       : vm.cursos_habilitados[index].modalidad
-                                                        }
-                                                    });
-                                                    totalregistros++;
-                                                    if(totalregistros == vm.cursos_habilitados.length)
-                                                        $modalInstance.close(vm.registroEdicion);
-
+                                for(var i=0; i < vm.unidades_checkbox.length; i++)
+                                {
+                                    if( (vm.unidades_checkbox[i].seleccionado == true) || (vm.unidades_checkbox[i].idUnidadAdmtva == vm.unidadSeleccionada.idUnidadAdmtva) )
+                                    {
+                                            vm.registroEdicion.otras_unidades.push({
+                                              idUnidadAdmtva : vm.unidades_checkbox[i].idUnidadAdmtva,
+                                              nombre         : vm.unidades_checkbox[i].nombre
                                             });
-                                    });
-                                    
-                            }
-                            else
-                                $modalInstance.close(vm.registroEdicion);
+                                    }
+                                }
 
-                    });
+                                angular.forEach(vm.registroEdicion.otras_unidades, function(registro) {
+
+                                        CatalogoInstructores.otras_unidades.link({
+                                            id: vm.registroEdicion.idInstructor,
+                                            fk: registro.idUnidadAdmtva
+                                        },{}) 
+                                        .$promise
+                                        .then(function(resp) {
+                                        });
+
+                                });
+
+                                CatalogoInstructores.cursos_habilitados.destroyAll({ id: vm.registroEdicion.idInstructor })
+                                .$promise
+                                .then(function() { 
+
+                                        if(vm.cursos_habilitados.length > 0)
+                                        {
+                                                var totalregistros = 0;
+                                                angular.forEach(vm.cursos_habilitados, function(record) {
+
+                                                        CatalogoInstructores.cursos_habilitados.link({
+                                                            id: vm.registroEdicion.idInstructor,
+                                                            fk: record.idCatalogoCurso
+                                                        },{
+                                                            calificacion: record.calificacion
+                                                        }) 
+                                                        .$promise
+                                                        .then(function(resp) {
+
+                                                                var index = vm.cursos_habilitados.map(function(registro) {
+                                                                                                    return registro.idCatalogoCurso;
+                                                                                                  }).indexOf(resp.idCatalogoCurso);
+
+                                                                vm.registroEdicion.evaluacion_curso.push({
+                                                                    id              : resp.id,
+                                                                    idInstructor    : resp.idInstructor,
+                                                                    idCatalogoCurso : resp.idCatalogoCurso,
+                                                                    calificacion    : resp.calificacion,
+                                                                    CatalogoCursos  : {
+                                                                        idCatalogoCurso : resp.idCatalogoCurso,
+                                                                        nombreCurso     : vm.cursos_habilitados[index].nombreCurso,
+                                                                        modalidad       : vm.cursos_habilitados[index].modalidad
+                                                                    }
+                                                                });
+                                                                totalregistros++;
+                                                                if(totalregistros == vm.cursos_habilitados.length)
+                                                                    $modalInstance.close(vm.registroEdicion);
+
+                                                        });
+                                                });
+                                                
+                                        }
+                                        else
+                                            $modalInstance.close(vm.registroEdicion);
+
+                                });
+                          });
 
                 })
                 .catch(function(error) {

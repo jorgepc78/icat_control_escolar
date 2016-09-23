@@ -123,6 +123,22 @@
       },
       "_selectable": true
     },
+    "idUnidadAdmtvaRecibe": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_unidad_admtva_recibe",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "fechaGeneracion": {
       "type": "String",
       "required": false,

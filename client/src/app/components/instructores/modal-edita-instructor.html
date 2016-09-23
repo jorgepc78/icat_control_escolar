@@ -4,10 +4,10 @@
       </div>
       <div class="modal-body" style="background: #fff;padding-bottom:0;">
 
+        <form name="form_datos" class="form-horizontal">
             <tabset>
                 <tab heading="Datos generales">
                 <br>
-                    <form name="form_datos" class="form-horizontal">
 
                         <div class="row">
                                 <div class="col-lg-6">
@@ -45,7 +45,13 @@
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Grado acad&eacute;mico</label>
                                           <div class="col-sm-9">
-                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.gradoAcademico" required>
+                                              <textarea class="form-control" ng-model="vm.registroEdicion.gradoAcademico" rows="5" cols="90" required></textarea>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Certificaciones</label>
+                                          <div class="col-sm-9">
+                                              <textarea class="form-control" ng-model="vm.registroEdicion.certificacion" rows="3" cols="90" required></textarea>
                                           </div>
                                       </div>
                                       <div class="form-group">
@@ -85,6 +91,7 @@
                                               <select class="form-control m-b" 
                                                   ng-model="vm.unidadSeleccionada"
                                                   ng-disabled="(currentUser.unidad_pertenece_id > 1)"
+                                                  ng-change="vm.ocultaUnidadCheckbox()" 
                                                   ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades" required>
                                               </select>
                                           </div>
@@ -92,7 +99,7 @@
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Otras unidades donde puede impartir cursos</label>
                                           <div class="col-sm-9">
-                                              <div class="checkbox" ng-repeat="registro in vm.unidades_checkbox"><label> <input icheck type="checkbox" ng-model="registro.seleccionado"> {{registro.nombre}} </label></div>
+                                              <div class="checkbox" ng-repeat="registro in vm.unidades_checkbox" ng-show="registro.mostrar" ><label> <input icheck type="checkbox" ng-model="registro.seleccionado"> {{registro.nombre}} </label></div>
                                           </div>
                                       </div>
                                       <br>
@@ -106,7 +113,6 @@
                                 </div>
                         </div>
 
-                    </form>
                 </tab>
 
                 <tab heading="Cursos que puede impartir">
@@ -123,7 +129,7 @@
                                           <select class="form-control m-b" 
                                               ng-model="vm.especialidadSeleccionada"
                                               ng-change="vm.muestraCursosEspecialidad()"
-                                              ng-options="especialidad as especialidad.nombre for especialidad in vm.listaEspecialidades" required>
+                                              ng-options="especialidad as especialidad.nombre for especialidad in vm.listaEspecialidades">
                                           </select>                        
                                     </div>
                                 </div>
@@ -135,7 +141,7 @@
                                           <select class="form-control m-b" 
                                               ng-model="vm.cursoSeleccionado"
                                               ng-disabled="vm.listaCursosInhabilit"
-                                              ng-options="curso as (curso.nombreCurso + ' - ' + curso.modalidad) for curso in vm.listaCursos" required>
+                                              ng-options="curso as (curso.nombreCurso + ' - ' + curso.modalidad) for curso in vm.listaCursos">
                                           </select>                        
                                     </div>
                                 </div>
@@ -200,6 +206,7 @@
                 </tab>
             </tabset>
 
+        </form>
 
 
 

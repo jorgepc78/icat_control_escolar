@@ -17,9 +17,12 @@
 			       	var inicio = 0;
 			       	var total_registros = 0;
 
-			        modelo.count({
-						where: obj_config_tabla.condicion
-					})
+			        if(obj_config_tabla.filtro_datos.id !== undefined)
+					    var cond = {id: obj_config_tabla.filtro_datos.id};
+			        else
+					    var cond = {where: obj_config_tabla.condicion};
+
+			        modelo.count(cond)
 			        .$promise
 			        .then(function(resp) {
 
@@ -36,17 +39,35 @@
 							obj_config_tabla.filtro_datos.filter.limit = obj_config_tabla.registrosPorPagina;
 							obj_config_tabla.filtro_datos.filter.skip  = obj_config_tabla.paginaActual - 1;
 
-							modelo.find(obj_config_tabla.filtro_datos)
-							.$promise
-							.then(function(resultado) {
-									defer.resolve({
-										total_registros : total_registros,
-										inicio          : inicio,
-										fin             : fin,
-										datos 			: resultado
-									});
-							});
+					        if(obj_config_tabla.filtro_datos.id !== undefined) 
+					        {
+								modelo(obj_config_tabla.filtro_datos)
+								.$promise
+								.then(function(resultado) {
+										defer.resolve({
+											total_registros : total_registros,
+											inicio          : inicio,
+											fin             : fin,
+											datos 			: resultado
+										});
+								});
+					        }
+					        else
+					        {
+								modelo.find(obj_config_tabla.filtro_datos)
+								.$promise
+								.then(function(resultado) {
+										defer.resolve({
+											total_registros : total_registros,
+											inicio          : inicio,
+											fin             : fin,
+											datos 			: resultado
+										});
+								});
+					        }
+
 					});
+
 
 					return defer.promise;
 			}

@@ -300,17 +300,17 @@
       "_selectable": true
     },
     "idLocalidad": {
-      "type": "String",
+      "type": "Number",
       "required": false,
-      "length": 45,
-      "precision": null,
-      "scale": null,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
       "postgresql": {
         "columnName": "id_localidad",
-        "dataType": "character varying",
-        "dataLength": 45,
-        "dataPrecision": null,
-        "dataScale": null,
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
         "nullable": "YES"
       },
       "_selectable": true

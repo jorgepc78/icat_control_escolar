@@ -1,0 +1,68 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Formatos oficiales del curso</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;">
+
+        <div ng-show="vm.modalidad == 'Extension'">
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('aci')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Asignaci&oacute;n de instructores (ACI)</button>
+              </div>
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('rdod-10')" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro y Control de Diplomas De Especialidad Otorgados (RDOD-10)</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('rcdod-11')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro y Control de Duplicados Otorgados (RCDOD-11)</button>
+              </div>
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('resd-05')" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de Evaluaci&oacute;n por Subobjetivos (RESD-05)</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('lad-06')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Lista de Asistencia (LAD-06)</button>
+              </div>
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('rae')" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de Acreditaci&oacute;n de Especialidad (RAE)</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('riacd-02')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de Inscripci&oacute;n Acreditación y Certificaci&oacute;n (RIACD-02)</button>
+              </div>
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('ri')" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de Inscripci&oacute;n (RI)</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-12">
+                  <button type="button" ng-click="vm.generaFormato('riact')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de Acreditci&oacute;n y Certificaci&oacute;n de Cursos T&eacute;cnicos (RIACT)</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-12">
+                  <button type="button" ng-click="vm.generaFormato('contrato_regular')" class="btn btn-info btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Contrato del Instructor</button>
+              </div>
+            </div>
+            <br>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-12">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cerrar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

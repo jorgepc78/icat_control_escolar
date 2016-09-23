@@ -1,6 +1,6 @@
 {
-  "name": "CatalogoInstructores",
-  "plural": "CatalogoInstructores",
+  "name": "VistaCatalogoInstructores",
+  "plural": "VistaCatalogoInstructores",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
@@ -8,7 +8,7 @@
   },
   "postgresql": {
     "schema": "instructores",
-    "table": "catalogo_instructores"
+    "table": "vista_catalogo_instructores_unidad"
   },
   "properties": {
     "idInstructor": {
@@ -102,6 +102,22 @@
         "columnName": "nombre",
         "dataType": "character varying",
         "dataLength": 45,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "nombre_completo": {
+      "type": "String",
+      "required": false,
+      "length": 96,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "nombre_completo",
+        "dataType": "character varying",
+        "dataLength": 96,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"

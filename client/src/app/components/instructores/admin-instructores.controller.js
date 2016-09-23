@@ -11,6 +11,17 @@
 
             var vm = this;
 
+            vm.muestra_ptc_unidad     = muestra_ptc_unidad;
+
+            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
+            vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
+            vm.limpiaBusqueda             = limpiaBusqueda;
+            vm.cambiarPagina              = cambiarPagina;
+            vm.edita_datos_registro       = edita_datos_registro;
+            vm.nuevo_registro             = nuevo_registro;
+            vm.elimina_registro           = elimina_registro;
+
+
             vm.listaUnidades = [];
             vm.unidadSeleccionada = undefined;
 
@@ -24,16 +35,6 @@
               filtro_datos       : {},
               fila_seleccionada  : 0
             };
-
-            vm.muestra_ptc_unidad     = muestra_ptc_unidad;
-
-            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
-            vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
-            vm.limpiaBusqueda             = limpiaBusqueda;
-            vm.cambiarPagina              = cambiarPagina;
-            vm.edita_datos_registro       = edita_datos_registro;
-            vm.nuevo_registro             = nuevo_registro;
-            vm.elimina_registro           = elimina_registro;
 
 
             inicia();
@@ -61,6 +62,9 @@
                           vm.listaUnidades.push({
                               idUnidadAdmtva  : -1,
                               nombre          : 'Todas'
+                          },{
+                              idUnidadAdmtva  : 0,
+                              nombre          : 'Sin asignar'
                           });
 
                           angular.forEach(resp, function(unidad) {
@@ -85,6 +89,7 @@
                               skip: vm.tablaListaRegistros.paginaActual - 1,
                               include: [
                                 'localidad_pertenece',
+                                'nivel_estudios',
                                 {
                                     relation: 'unidad_pertenece',
                                     scope: {
@@ -362,6 +367,7 @@
                         vm.RegistroSeleccionado.telefono           = respuesta.telefono;
                         vm.RegistroSeleccionado.email              = respuesta.email;
                         vm.RegistroSeleccionado.escolaridad        = respuesta.escolaridad;
+                        vm.RegistroSeleccionado.certificacion      = respuesta.certificacion;
                         vm.RegistroSeleccionado.idLocalidad        = respuesta.idLocalidad;
                         vm.RegistroSeleccionado.activo             = respuesta.activo;
 

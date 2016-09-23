@@ -417,11 +417,12 @@
 
                                   ControlProcesos
                                   .create({
-                                      proceso         : 'PTC',
-                                      accion          : 'ENVIO REVISION',
-                                      idDocumento     : RegistroSeleccionado.idPtc,
-                                      idUsuario       : $scope.currentUser.id_usuario,
-                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                      proceso              : 'PTC',
+                                      accion               : 'ENVIO REVISION',
+                                      idDocumento          : RegistroSeleccionado.idPtc,
+                                      idUsuario            : $scope.currentUser.id_usuario,
+                                      idUnidadAdmtva       : $scope.currentUser.unidad_pertenece_id,
+                                      idUnidadAdmtvaRecibe : 1
                                   })
                                   .$promise
                                   .then(function(resp) {

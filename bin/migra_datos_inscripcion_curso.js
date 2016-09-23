@@ -5,7 +5,7 @@ var http = require('http');
 
 //Creacion de los modelos
 var ModeloActualizar = models.InscripcionCurso;
-var token = 'rvOwUEvDAeDXbEEfdnInZKGUbfzHCcew1twqM2oyDspek1YLvC7iAleWQa6GaeD3';
+var token = 'C5wg8WgFaIqGfs59n1q25Js96gNj4wYtDkNR9eQG8jl1yhaRFGKqv0XrvLCJwAk3';
 var host = '69.28.92.27';
 var port = 80;
 

@@ -113,7 +113,7 @@
                         <div class="col-md-9">
                               <select class="form-control m-b" 
                                   ng-model="vm.instructorSeleccionado"
-                                  ng-options="instructor as (instructor.nombre_completo + ' (Calif.: ' + instructor.calificacion + ', Ef. Term.: ' + instructor.efTerminal + ')') for instructor in vm.listaInstructores" required>
+                                  ng-options="instructor as (instructor.nombre_completo + ' (Puntaje: ' + instructor.calificacion + ', Ef. Term.: ' + instructor.efTerminal + '%)') for instructor in vm.listaInstructores" required>
                               </select>                        
                         </div>
                         <div class="col-md-3">

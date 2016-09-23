@@ -5,12 +5,12 @@ var http = require('http');
 
 //Creacion de los modelos
 var ModeloActualizar = models.Capacitandos;
-var token = 'qzN7wjVKP3Qu4b2FoiR0r0Axp3SzdGRTNAlwEu2LnGIEWJ7CwJ30yRP1KICr5nwT';
+var token = 'C5wg8WgFaIqGfs59n1q25Js96gNj4wYtDkNR9eQG8jl1yhaRFGKqv0XrvLCJwAk3';
 var host = '69.28.92.27';
 var port = 80;
 
 console.log("Migrando los datos del modelo de alumnos a capacitandos");
-http://69.28.92.27:80/api/Alumnos/count?access_token=YrbGVK7AxM4BG3HoH2pGNdBFF6W9IngENfuC6ApTj69WkCDkG9tnqBgXSo9gBTS4
+
 http.get({
     host: host,
     port: port,
@@ -56,16 +56,19 @@ http.get({
 								for (var i = 0; i < resultado.length; i++) {
 									
 										var posicion = resultado[i].apellidos.indexOf(" ");
-										var paterno = resultado[i].apellidos.substr(0, posicion);
-										var materno = resultado[i].apellidos.substr( (posicion+1), resultado[i].apellidos.length);
+										if(posicion < 0)
+										{
+											var paterno = resultado[i].apellidos;
+											var materno = '';
+										}
+										else
+										{											
+											var paterno = resultado[i].apellidos.substr(0, posicion);
+											var materno = resultado[i].apellidos.substr( (posicion+1), resultado[i].apellidos.length);
+										}
 										var telefono = (resultado[i].telefono.length > 10 ? resultado[i].telefono.substr( (resultado[i].telefono.length-10), resultado[i].telefono.length) : resultado[i].telefono);
 										
-										if(resultado[i].empresa_telefono == undefined)
-											var curp = '';
-										else
-											var curp = (resultado[i].curp.length > 22 ? resultado[i].curp.substr( 0, 22) : resultado[i].curp);
-
-										if(resultado[i].empresa_telefono == undefined)
+										if(resultado[i].curp == undefined)
 											var curp = '';
 										else
 											var curp = (resultado[i].curp.length > 22 ? resultado[i].curp.substr( 0, 22) : resultado[i].curp);

@@ -106,23 +106,52 @@
                 CatalogoCursos.instructores_habilitados({
                         id: vm.cursoSeleccionado.idCatalogoCurso,
                         filter: {
-                            where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp']
+                            //where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp','efTerminal'],
+                            include: [
+                                {
+                                    relation: 'evaluacion_curso',
+                                    scope: {
+                                        where: {idCatalogoCurso: vm.registroEdicion.idCatalogoCurso},
+                                        fields:['calificacion']
+                                    }
+                                },
+                                {
+                                    relation: 'otras_unidades',
+                                    scope: {
+                                        where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                        fields:['idUnidadAdmtva']
+                                    }
+                                }
+                            ]
                         }
                 })
                 .$promise
                 .then(function(resp) {
 
+                    var index;
                     angular.forEach(resp, function(record) {
-                            vm.listaInstructores.push({
-                                idInstructor    : record.idInstructor,
-                                apellidoPaterno : record.apellidoPaterno,
-                                apellidoMaterno : record.apellidoMaterno,
-                                nombre          : record.nombre,
-                                curp            : record.curp,
-                                nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre
-                            });
+
+                            index = record.otras_unidades.map(function(unidad) {
+                                                                return unidad.idUnidadAdmtva;
+                                                              }).indexOf($scope.currentUser.unidad_pertenece_id);
+
+                            if(index >= 0)
+                            {
+                                vm.listaInstructores.push({
+                                    idInstructor    : record.idInstructor,
+                                    apellidoPaterno : record.apellidoPaterno,
+                                    apellidoMaterno : record.apellidoMaterno,
+                                    nombre          : record.nombre,
+                                    curp            : record.curp,
+                                    nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre,
+                                    calificacion    : record.evaluacion_curso[0].calificacion,
+                                    efTerminal      : record.efTerminal
+                                });
+                            }
+
                     });
+
 
                     vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
 

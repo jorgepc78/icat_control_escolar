@@ -117,10 +117,17 @@
                 url: '/instructores',
                 templateUrl: 'app/shared/layout/content-top-navigation.html',
             })
-            .state('ptc.cat_instructores', {
-                url: '/cat_instructores',
+            .state('instructores.admin_instructores', {
+                url: '/admin_instructores',
                 templateUrl: 'app/components/instructores/admin-instructores.html',
                 controller: 'AdminInstructoresController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+            .state('instructores.consulta_instructores', {
+                url: '/consulta_instructores',
+                templateUrl: 'app/components/instructores/admin-instructores.html',
+                controller: 'ConsultaInstructoresController',
                 controllerAs: 'vm',
                 authenticate: true
             })

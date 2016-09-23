@@ -591,11 +591,12 @@
 
                                   ControlProcesos
                                   .create({
-                                      proceso         : 'PTC',
-                                      accion          : mensaje_accion,
-                                      idDocumento     : RegistroSeleccionado.idPtc,
-                                      idUsuario       : $scope.currentUser.id_usuario,
-                                      idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
+                                      proceso              : 'PTC',
+                                      accion               : mensaje_accion,
+                                      idDocumento          : RegistroSeleccionado.idPtc,
+                                      idUsuario            : $scope.currentUser.id_usuario,
+                                      idUnidadAdmtva       : $scope.currentUser.unidad_pertenece_id,
+                                      idUnidadAdmtvaRecibe : RegistroSeleccionado.idUnidadAdmtva
                                   })
                                   .$promise
                                   .then(function(resp) {

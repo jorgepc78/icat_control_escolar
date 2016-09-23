@@ -1,6 +1,6 @@
 <div class="inmodal">
       <div class="modal-header">
-          <h4 class="modal-title"> Pre apertura curso del PTC</h4>
+          <h4 class="modal-title"> Pre apertura curso Extra</h4>
       </div>
       <div class="modal-body" style="background: #fff;">
 
@@ -52,7 +52,7 @@
                               <div class="col-sm-10">
                                   <select class="form-control m-b" 
                                       ng-model="vm.instructorSeleccionado"
-                                      ng-options="instructor as instructor.nombre_completo for instructor in vm.listaInstructores" required>
+                                      ng-options="instructor as (instructor.nombre_completo + ' (Puntaje: ' + instructor.calificacion + ', Ef. Term.: ' + instructor.efTerminal + '%)') for instructor in vm.listaInstructores" required>
                                   </select>
                               </div>
                           </div>

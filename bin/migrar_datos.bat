@@ -1,0 +1,3 @@
+node migra_datos_capacitandos.js
+node migra_datos_cursos_oficiales.js
+node migra_datos_inscripcion_curso.js

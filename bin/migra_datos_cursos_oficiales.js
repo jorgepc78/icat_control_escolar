@@ -5,7 +5,7 @@ var http = require('http');
 
 //Creacion de los modelos
 var ModeloActualizar = models.CursosOficiales;
-var token = 'YrbGVK7AxM4BG3HoH2pGNdBFF6W9IngENfuC6ApTj69WkCDkG9tnqBgXSo9gBTS4';
+var token = 'C5wg8WgFaIqGfs59n1q25Js96gNj4wYtDkNR9eQG8jl1yhaRFGKqv0XrvLCJwAk3';
 var host = '69.28.92.27';
 var port = 80;
 
@@ -109,7 +109,7 @@ http.get({
 									if(err)
 									{
 										console.log(err);
-										console.log(datos);
+										//console.log(datos);
 										index = num_vueltas;
 										resolve();
 									}

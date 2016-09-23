@@ -4585,6 +4585,98 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use VistaCatalogoInstructores.unidad_pertenece() instead.
+            "::get::VistaCatalogoInstructores::unidad_pertenece": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/unidad_pertenece",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.findById() instead.
+            "::findById::VistaCatalogoInstructores::otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.destroyById() instead.
+            "::destroyById::VistaCatalogoInstructores::otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.updateById() instead.
+            "::updateById::VistaCatalogoInstructores::otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.link() instead.
+            "::link::VistaCatalogoInstructores::otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.unlink() instead.
+            "::unlink::VistaCatalogoInstructores::otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.exists() instead.
+            "::exists::VistaCatalogoInstructores::otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades() instead.
+            "::get::VistaCatalogoInstructores::otras_unidades": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.create() instead.
+            "::create::VistaCatalogoInstructores::otras_unidades": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.createMany() instead.
+            "::createMany::VistaCatalogoInstructores::otras_unidades": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.destroyAll() instead.
+            "::delete::VistaCatalogoInstructores::otras_unidades": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.count() instead.
+            "::count::VistaCatalogoInstructores::otras_unidades": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/count",
+              method: "GET",
+            },
+
             // INTERNAL. Use RelInstrucUnidad.CatalogoUnidadesAdmtvas() instead.
             "::get::RelInstrucUnidad::CatalogoUnidadesAdmtvas": {
               url: urlBase + "/RelInstrucUnidads/:id/CatalogoUnidadesAdmtvas",
@@ -9078,6 +9170,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use VistaCatalogoInstructores.localidad_pertenece() instead.
+            "::get::VistaCatalogoInstructores::localidad_pertenece": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/localidad_pertenece",
+              method: "GET",
+            },
+
             // INTERNAL. Use CursosOficiales.localidad_pertenece() instead.
             "::get::CursosOficiales::localidad_pertenece": {
               url: urlBase + "/CursosOficiales/:id/localidad_pertenece",
@@ -10147,6 +10245,92 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use CatalogoInstructores.cursos_habilitados.count() instead.
             "::count::CatalogoInstructores::cursos_habilitados": {
               url: urlBase + "/CatalogoInstructores/:id/cursos_habilitados/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.findById() instead.
+            "::findById::VistaCatalogoInstructores::cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.destroyById() instead.
+            "::destroyById::VistaCatalogoInstructores::cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.updateById() instead.
+            "::updateById::VistaCatalogoInstructores::cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.link() instead.
+            "::link::VistaCatalogoInstructores::cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.unlink() instead.
+            "::unlink::VistaCatalogoInstructores::cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.exists() instead.
+            "::exists::VistaCatalogoInstructores::cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados() instead.
+            "::get::VistaCatalogoInstructores::cursos_habilitados": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.create() instead.
+            "::create::VistaCatalogoInstructores::cursos_habilitados": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.createMany() instead.
+            "::createMany::VistaCatalogoInstructores::cursos_habilitados": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.destroyAll() instead.
+            "::delete::VistaCatalogoInstructores::cursos_habilitados": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.count() instead.
+            "::count::VistaCatalogoInstructores::cursos_habilitados": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/count",
               method: "GET",
             },
 
@@ -13775,6 +13959,92 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.findById() instead.
+            "::findById::VistaCatalogoInstructores::cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.destroyById() instead.
+            "::destroyById::VistaCatalogoInstructores::cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.updateById() instead.
+            "::updateById::VistaCatalogoInstructores::cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.link() instead.
+            "::link::VistaCatalogoInstructores::cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.unlink() instead.
+            "::unlink::VistaCatalogoInstructores::cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.exists() instead.
+            "::exists::VistaCatalogoInstructores::cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos() instead.
+            "::get::VistaCatalogoInstructores::cursos_propuestos": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.create() instead.
+            "::create::VistaCatalogoInstructores::cursos_propuestos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.createMany() instead.
+            "::createMany::VistaCatalogoInstructores::cursos_propuestos": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.destroyAll() instead.
+            "::delete::VistaCatalogoInstructores::cursos_propuestos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.count() instead.
+            "::count::VistaCatalogoInstructores::cursos_propuestos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/count",
+              method: "GET",
+            },
+
             // INTERNAL. Use RelInstrucPtc.CursosPtc() instead.
             "::get::RelInstrucPtc::CursosPtc": {
               url: urlBase + "/RelInstrucPtcs/:id/CursosPtc",
@@ -14963,6 +15233,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               },
               url: urlBase + "/CatalogoInstructores/:id/otras_unidades/rel/:fk",
               method: "HEAD",
+            },
+
+            // INTERNAL. Use CatalogoInstructores.nivel_estudios() instead.
+            "prototype$__get__nivel_estudios": {
+              url: urlBase + "/CatalogoInstructores/:id/nivel_estudios",
+              method: "GET",
             },
 
             // INTERNAL. Use CatalogoInstructores.cursos_propuestos() instead.
@@ -17669,6 +17945,2708 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           return action.apply(R, arguments);
         };
 
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoInstructores#nivel_estudios
+             * @methodOf lbServices.CatalogoInstructores
+             *
+             * @description
+             *
+             * Fetches belongsTo relation nivel_estudios.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoNivelEstudios` object.)
+             * </em>
+             */
+        R.nivel_estudios = function() {
+          var TargetResource = $injector.get("CatalogoNivelEstudios");
+          var action = TargetResource["::get::CatalogoInstructores::nivel_estudios"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.VistaCatalogoInstructores
+ * @header lbServices.VistaCatalogoInstructores
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `VistaCatalogoInstructores` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "VistaCatalogoInstructores",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector',
+      function(Resource, LoopBackAuth, $injector) {
+        var R = Resource(
+        urlBase + "/VistaCatalogoInstructores/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use VistaCatalogoInstructores.unidad_pertenece() instead.
+            "prototype$__get__unidad_pertenece": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/unidad_pertenece",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.localidad_pertenece() instead.
+            "prototype$__get__localidad_pertenece": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/localidad_pertenece",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.findById() instead.
+            "prototype$__findById__cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.destroyById() instead.
+            "prototype$__destroyById__cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.updateById() instead.
+            "prototype$__updateById__cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.link() instead.
+            "prototype$__link__cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.unlink() instead.
+            "prototype$__unlink__cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.exists() instead.
+            "prototype$__exists__cursos_propuestos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.findById() instead.
+            "prototype$__findById__cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.destroyById() instead.
+            "prototype$__destroyById__cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.updateById() instead.
+            "prototype$__updateById__cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.link() instead.
+            "prototype$__link__cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.unlink() instead.
+            "prototype$__unlink__cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.exists() instead.
+            "prototype$__exists__cursos_habilitados": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.findById() instead.
+            "prototype$__findById__evaluacion_curso": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.destroyById() instead.
+            "prototype$__destroyById__evaluacion_curso": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.updateById() instead.
+            "prototype$__updateById__evaluacion_curso": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.findById() instead.
+            "prototype$__findById__otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.destroyById() instead.
+            "prototype$__destroyById__otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.updateById() instead.
+            "prototype$__updateById__otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.link() instead.
+            "prototype$__link__otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/rel/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.unlink() instead.
+            "prototype$__unlink__otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/rel/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.exists() instead.
+            "prototype$__exists__otras_unidades": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/rel/:fk",
+              method: "HEAD",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.nivel_estudios() instead.
+            "prototype$__get__nivel_estudios": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/nivel_estudios",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos() instead.
+            "prototype$__get__cursos_propuestos": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.create() instead.
+            "prototype$__create__cursos_propuestos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.destroyAll() instead.
+            "prototype$__delete__cursos_propuestos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos.count() instead.
+            "prototype$__count__cursos_propuestos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_propuestos/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados() instead.
+            "prototype$__get__cursos_habilitados": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.create() instead.
+            "prototype$__create__cursos_habilitados": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.destroyAll() instead.
+            "prototype$__delete__cursos_habilitados": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.cursos_habilitados.count() instead.
+            "prototype$__count__cursos_habilitados": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/cursos_habilitados/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso() instead.
+            "prototype$__get__evaluacion_curso": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.create() instead.
+            "prototype$__create__evaluacion_curso": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.destroyAll() instead.
+            "prototype$__delete__evaluacion_curso": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.count() instead.
+            "prototype$__count__evaluacion_curso": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades() instead.
+            "prototype$__get__otras_unidades": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.create() instead.
+            "prototype$__create__otras_unidades": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.destroyAll() instead.
+            "prototype$__delete__otras_unidades": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.count() instead.
+            "prototype$__count__otras_unidades": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#create
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/VistaCatalogoInstructores",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#createMany
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#upsert
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/VistaCatalogoInstructores",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#replaceOrCreate
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Replace an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "replaceOrCreate": {
+              url: urlBase + "/VistaCatalogoInstructores/replaceOrCreate",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#exists
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#findById
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/VistaCatalogoInstructores/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#replaceById
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Replace attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "replaceById": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/replace",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#find
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#findOne
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/VistaCatalogoInstructores/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#updateAll
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/VistaCatalogoInstructores/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#deleteById
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/VistaCatalogoInstructores/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#count
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/VistaCatalogoInstructores/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#prototype$updateAttributes
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/VistaCatalogoInstructores/:id",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#createChangeStream
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/VistaCatalogoInstructores/change-stream",
+              method: "POST",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#patchOrCreate
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+        R["patchOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#updateOrCreate
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#update
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#destroyById
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#removeById
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#patchAttributes
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VistaCatalogoInstructores` object.)
+             * </em>
+             */
+        R["patchAttributes"] = R["prototype$updateAttributes"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.VistaCatalogoInstructores#modelName
+        * @propertyOf lbServices.VistaCatalogoInstructores
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `VistaCatalogoInstructores`.
+        */
+        R.modelName = "VistaCatalogoInstructores";
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#unidad_pertenece
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Fetches belongsTo relation unidad_pertenece.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoUnidadesAdmtvas` object.)
+             * </em>
+             */
+        R.unidad_pertenece = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::get::VistaCatalogoInstructores::unidad_pertenece"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#localidad_pertenece
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Fetches belongsTo relation localidad_pertenece.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoLocalidades` object.)
+             * </em>
+             */
+        R.localidad_pertenece = function() {
+          var TargetResource = $injector.get("CatalogoLocalidades");
+          var action = TargetResource["::get::VistaCatalogoInstructores::localidad_pertenece"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.VistaCatalogoInstructores.cursos_propuestos
+     * @header lbServices.VistaCatalogoInstructores.cursos_propuestos
+     * @object
+     * @description
+     *
+     * The object `VistaCatalogoInstructores.cursos_propuestos` groups methods
+     * manipulating `CursosPtc` instances related to `VistaCatalogoInstructores`.
+     *
+     * Call {@link lbServices.VistaCatalogoInstructores#cursos_propuestos VistaCatalogoInstructores.cursos_propuestos()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#cursos_propuestos
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Queries cursos_propuestos of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CursosPtc` object.)
+             * </em>
+             */
+        R.cursos_propuestos = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::get::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#count
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Counts cursos_propuestos of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.cursos_propuestos.count = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::count::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#create
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Creates a new instance in cursos_propuestos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CursosPtc` object.)
+             * </em>
+             */
+        R.cursos_propuestos.create = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::create::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#createMany
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Creates a new instance in cursos_propuestos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CursosPtc` object.)
+             * </em>
+             */
+        R.cursos_propuestos.createMany = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::createMany::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#destroyAll
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Deletes all cursos_propuestos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cursos_propuestos.destroyAll = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::delete::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#destroyById
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Delete a related item by id for cursos_propuestos.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_propuestos
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cursos_propuestos.destroyById = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::destroyById::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#exists
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Check the existence of cursos_propuestos relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_propuestos
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CursosPtc` object.)
+             * </em>
+             */
+        R.cursos_propuestos.exists = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::exists::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#findById
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Find a related item by id for cursos_propuestos.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_propuestos
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CursosPtc` object.)
+             * </em>
+             */
+        R.cursos_propuestos.findById = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::findById::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#link
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Add a related item by id for cursos_propuestos.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_propuestos
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CursosPtc` object.)
+             * </em>
+             */
+        R.cursos_propuestos.link = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::link::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#unlink
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Remove the cursos_propuestos relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_propuestos
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cursos_propuestos.unlink = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::unlink::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_propuestos#updateById
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_propuestos
+             *
+             * @description
+             *
+             * Update a related item by id for cursos_propuestos.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_propuestos
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CursosPtc` object.)
+             * </em>
+             */
+        R.cursos_propuestos.updateById = function() {
+          var TargetResource = $injector.get("CursosPtc");
+          var action = TargetResource["::updateById::VistaCatalogoInstructores::cursos_propuestos"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.VistaCatalogoInstructores.cursos_habilitados
+     * @header lbServices.VistaCatalogoInstructores.cursos_habilitados
+     * @object
+     * @description
+     *
+     * The object `VistaCatalogoInstructores.cursos_habilitados` groups methods
+     * manipulating `CatalogoCursos` instances related to `VistaCatalogoInstructores`.
+     *
+     * Call {@link lbServices.VistaCatalogoInstructores#cursos_habilitados VistaCatalogoInstructores.cursos_habilitados()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#cursos_habilitados
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Queries cursos_habilitados of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoCursos` object.)
+             * </em>
+             */
+        R.cursos_habilitados = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::get::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#count
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Counts cursos_habilitados of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.cursos_habilitados.count = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::count::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#create
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Creates a new instance in cursos_habilitados of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoCursos` object.)
+             * </em>
+             */
+        R.cursos_habilitados.create = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::create::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#createMany
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Creates a new instance in cursos_habilitados of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoCursos` object.)
+             * </em>
+             */
+        R.cursos_habilitados.createMany = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::createMany::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#destroyAll
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Deletes all cursos_habilitados of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cursos_habilitados.destroyAll = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::delete::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#destroyById
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Delete a related item by id for cursos_habilitados.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_habilitados
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cursos_habilitados.destroyById = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::destroyById::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#exists
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Check the existence of cursos_habilitados relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_habilitados
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoCursos` object.)
+             * </em>
+             */
+        R.cursos_habilitados.exists = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::exists::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#findById
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Find a related item by id for cursos_habilitados.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_habilitados
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoCursos` object.)
+             * </em>
+             */
+        R.cursos_habilitados.findById = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::findById::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#link
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Add a related item by id for cursos_habilitados.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_habilitados
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoCursos` object.)
+             * </em>
+             */
+        R.cursos_habilitados.link = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::link::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#unlink
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Remove the cursos_habilitados relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_habilitados
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.cursos_habilitados.unlink = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::unlink::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.cursos_habilitados#updateById
+             * @methodOf lbServices.VistaCatalogoInstructores.cursos_habilitados
+             *
+             * @description
+             *
+             * Update a related item by id for cursos_habilitados.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for cursos_habilitados
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoCursos` object.)
+             * </em>
+             */
+        R.cursos_habilitados.updateById = function() {
+          var TargetResource = $injector.get("CatalogoCursos");
+          var action = TargetResource["::updateById::VistaCatalogoInstructores::cursos_habilitados"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.VistaCatalogoInstructores.evaluacion_curso
+     * @header lbServices.VistaCatalogoInstructores.evaluacion_curso
+     * @object
+     * @description
+     *
+     * The object `VistaCatalogoInstructores.evaluacion_curso` groups methods
+     * manipulating `RelInstrucCatCurso` instances related to `VistaCatalogoInstructores`.
+     *
+     * Call {@link lbServices.VistaCatalogoInstructores#evaluacion_curso VistaCatalogoInstructores.evaluacion_curso()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#evaluacion_curso
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Queries evaluacion_curso of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `RelInstrucCatCurso` object.)
+             * </em>
+             */
+        R.evaluacion_curso = function() {
+          var TargetResource = $injector.get("RelInstrucCatCurso");
+          var action = TargetResource["::get::VistaCatalogoInstructores::evaluacion_curso"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.evaluacion_curso#count
+             * @methodOf lbServices.VistaCatalogoInstructores.evaluacion_curso
+             *
+             * @description
+             *
+             * Counts evaluacion_curso of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.evaluacion_curso.count = function() {
+          var TargetResource = $injector.get("RelInstrucCatCurso");
+          var action = TargetResource["::count::VistaCatalogoInstructores::evaluacion_curso"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.evaluacion_curso#create
+             * @methodOf lbServices.VistaCatalogoInstructores.evaluacion_curso
+             *
+             * @description
+             *
+             * Creates a new instance in evaluacion_curso of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `RelInstrucCatCurso` object.)
+             * </em>
+             */
+        R.evaluacion_curso.create = function() {
+          var TargetResource = $injector.get("RelInstrucCatCurso");
+          var action = TargetResource["::create::VistaCatalogoInstructores::evaluacion_curso"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.evaluacion_curso#createMany
+             * @methodOf lbServices.VistaCatalogoInstructores.evaluacion_curso
+             *
+             * @description
+             *
+             * Creates a new instance in evaluacion_curso of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `RelInstrucCatCurso` object.)
+             * </em>
+             */
+        R.evaluacion_curso.createMany = function() {
+          var TargetResource = $injector.get("RelInstrucCatCurso");
+          var action = TargetResource["::createMany::VistaCatalogoInstructores::evaluacion_curso"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.evaluacion_curso#destroyAll
+             * @methodOf lbServices.VistaCatalogoInstructores.evaluacion_curso
+             *
+             * @description
+             *
+             * Deletes all evaluacion_curso of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.evaluacion_curso.destroyAll = function() {
+          var TargetResource = $injector.get("RelInstrucCatCurso");
+          var action = TargetResource["::delete::VistaCatalogoInstructores::evaluacion_curso"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.evaluacion_curso#destroyById
+             * @methodOf lbServices.VistaCatalogoInstructores.evaluacion_curso
+             *
+             * @description
+             *
+             * Delete a related item by id for evaluacion_curso.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for evaluacion_curso
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.evaluacion_curso.destroyById = function() {
+          var TargetResource = $injector.get("RelInstrucCatCurso");
+          var action = TargetResource["::destroyById::VistaCatalogoInstructores::evaluacion_curso"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.evaluacion_curso#findById
+             * @methodOf lbServices.VistaCatalogoInstructores.evaluacion_curso
+             *
+             * @description
+             *
+             * Find a related item by id for evaluacion_curso.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for evaluacion_curso
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `RelInstrucCatCurso` object.)
+             * </em>
+             */
+        R.evaluacion_curso.findById = function() {
+          var TargetResource = $injector.get("RelInstrucCatCurso");
+          var action = TargetResource["::findById::VistaCatalogoInstructores::evaluacion_curso"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.evaluacion_curso#updateById
+             * @methodOf lbServices.VistaCatalogoInstructores.evaluacion_curso
+             *
+             * @description
+             *
+             * Update a related item by id for evaluacion_curso.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for evaluacion_curso
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `RelInstrucCatCurso` object.)
+             * </em>
+             */
+        R.evaluacion_curso.updateById = function() {
+          var TargetResource = $injector.get("RelInstrucCatCurso");
+          var action = TargetResource["::updateById::VistaCatalogoInstructores::evaluacion_curso"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.VistaCatalogoInstructores.otras_unidades
+     * @header lbServices.VistaCatalogoInstructores.otras_unidades
+     * @object
+     * @description
+     *
+     * The object `VistaCatalogoInstructores.otras_unidades` groups methods
+     * manipulating `CatalogoUnidadesAdmtvas` instances related to `VistaCatalogoInstructores`.
+     *
+     * Call {@link lbServices.VistaCatalogoInstructores#otras_unidades VistaCatalogoInstructores.otras_unidades()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#otras_unidades
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Queries otras_unidades of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoUnidadesAdmtvas` object.)
+             * </em>
+             */
+        R.otras_unidades = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::get::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#count
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Counts otras_unidades of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.otras_unidades.count = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::count::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#create
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Creates a new instance in otras_unidades of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoUnidadesAdmtvas` object.)
+             * </em>
+             */
+        R.otras_unidades.create = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::create::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#createMany
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Creates a new instance in otras_unidades of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoUnidadesAdmtvas` object.)
+             * </em>
+             */
+        R.otras_unidades.createMany = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::createMany::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#destroyAll
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Deletes all otras_unidades of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.otras_unidades.destroyAll = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::delete::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#destroyById
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Delete a related item by id for otras_unidades.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for otras_unidades
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.otras_unidades.destroyById = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::destroyById::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#exists
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Check the existence of otras_unidades relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for otras_unidades
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoUnidadesAdmtvas` object.)
+             * </em>
+             */
+        R.otras_unidades.exists = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::exists::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#findById
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Find a related item by id for otras_unidades.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for otras_unidades
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoUnidadesAdmtvas` object.)
+             * </em>
+             */
+        R.otras_unidades.findById = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::findById::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#link
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Add a related item by id for otras_unidades.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for otras_unidades
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoUnidadesAdmtvas` object.)
+             * </em>
+             */
+        R.otras_unidades.link = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::link::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#unlink
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Remove the otras_unidades relation to an item by id.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for otras_unidades
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.otras_unidades.unlink = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::unlink::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.otras_unidades#updateById
+             * @methodOf lbServices.VistaCatalogoInstructores.otras_unidades
+             *
+             * @description
+             *
+             * Update a related item by id for otras_unidades.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for otras_unidades
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoUnidadesAdmtvas` object.)
+             * </em>
+             */
+        R.otras_unidades.updateById = function() {
+          var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
+          var action = TargetResource["::updateById::VistaCatalogoInstructores::otras_unidades"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#nivel_estudios
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Fetches belongsTo relation nivel_estudios.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `CatalogoNivelEstudios` object.)
+             * </em>
+             */
+        R.nivel_estudios = function() {
+          var TargetResource = $injector.get("CatalogoNivelEstudios");
+          var action = TargetResource["::get::VistaCatalogoInstructores::nivel_estudios"];
+          return action.apply(R, arguments);
+        };
+
 
         return R;
       }]);
@@ -20135,6 +23113,65 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use CatalogoInstructores.evaluacion_curso.count() instead.
             "::count::CatalogoInstructores::evaluacion_curso": {
               url: urlBase + "/CatalogoInstructores/:id/evaluacion_curso/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.findById() instead.
+            "::findById::VistaCatalogoInstructores::evaluacion_curso": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.destroyById() instead.
+            "::destroyById::VistaCatalogoInstructores::evaluacion_curso": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.updateById() instead.
+            "::updateById::VistaCatalogoInstructores::evaluacion_curso": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso() instead.
+            "::get::VistaCatalogoInstructores::evaluacion_curso": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.create() instead.
+            "::create::VistaCatalogoInstructores::evaluacion_curso": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.createMany() instead.
+            "::createMany::VistaCatalogoInstructores::evaluacion_curso": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.destroyAll() instead.
+            "::delete::VistaCatalogoInstructores::evaluacion_curso": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.evaluacion_curso.count() instead.
+            "::count::VistaCatalogoInstructores::evaluacion_curso": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/evaluacion_curso/count",
               method: "GET",
             },
           }
@@ -29560,6 +32597,18 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             "createChangeStream": {
               url: urlBase + "/CatalogoNivelEstudios/change-stream",
               method: "POST",
+            },
+
+            // INTERNAL. Use CatalogoInstructores.nivel_estudios() instead.
+            "::get::CatalogoInstructores::nivel_estudios": {
+              url: urlBase + "/CatalogoInstructores/:id/nivel_estudios",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.nivel_estudios() instead.
+            "::get::VistaCatalogoInstructores::nivel_estudios": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/nivel_estudios",
+              method: "GET",
             },
 
             // INTERNAL. Use Capacitandos.nivel_estudios() instead.

@@ -11,10 +11,11 @@
 
             var vm = this;
 
-            vm.guardar = guardar;
+            vm.guardar                   = guardar;
             vm.muestraCursosEspecialidad = muestraCursosEspecialidad;
-            vm.agregaCurso = agregaCurso;
-            vm.eliminaRegistro = eliminaRegistro;
+            vm.ocultaUnidadCheckbox      = ocultaUnidadCheckbox;
+            vm.agregaCurso               = agregaCurso;
+            vm.eliminaRegistro           = eliminaRegistro;
 
             vm.mostrarSpiner = false;
 
@@ -44,6 +45,7 @@
                     telefono           : registroEditar.telefono,
                     email              : registroEditar.email,
                     escolaridad        : registroEditar.escolaridad,
+                    certificacion      : registroEditar.certificacion,
                     idLocalidad        : registroEditar.idLocalidad,
                     localidad          : '',
                     activo             : registroEditar.activo,
@@ -93,15 +95,16 @@
                                                           }).indexOf(registro.idUnidadAdmtva);
                             
                             if(registro.idUnidadAdmtva == vm.registroEdicion.idUnidadAdmtva)
-                                var nombre_txt = registro.nombre + ' (Default)';
+                                var mostrar = false;
                             else
-                                var nombre_txt = registro.nombre;
+                                var mostrar = true;
 
                             if(index >= 0)
                             {
                                 vm.unidades_checkbox.push({
                                   idUnidadAdmtva : registro.idUnidadAdmtva,
-                                  nombre         : nombre_txt,
+                                  nombre         : registro.nombre,
+                                  mostrar        : mostrar,
                                   seleccionado   : true
                                 });
                             }
@@ -109,7 +112,8 @@
                             {
                                 vm.unidades_checkbox.push({
                                   idUnidadAdmtva : registro.idUnidadAdmtva,
-                                  nombre         : nombre_txt,
+                                  nombre         : registro.nombre,
+                                  mostrar        : mostrar,
                                   seleccionado   : false
                                 });
                             }
@@ -131,7 +135,8 @@
                                                         return record.idLocalidad;
                                                       }).indexOf(vm.registroEdicion.idLocalidad);
 
-                    vm.localidadSeleccionada = vm.listaLocalidades[index];
+                    if(index >= 0)
+                        vm.localidadSeleccionada = vm.listaLocalidades[index];
                 });
     
                 CatalogoEspecialidades.find({
@@ -180,6 +185,19 @@
             };
 
 
+            function ocultaUnidadCheckbox(){
+
+                angular.forEach(vm.unidades_checkbox, function(registro) {
+                    if(registro.idUnidadAdmtva == vm.unidadSeleccionada.idUnidadAdmtva) {
+                        registro.mostrar = false;
+                    }
+                    else
+                        registro.mostrar = true;
+                });
+
+            };
+
+
             function agregaCurso() {
                 vm.cursos_habilitados.push({
                     idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
@@ -204,7 +222,8 @@
             function eliminaRegistro(seleccion) {
                 var indice = vm.cursos_habilitados.indexOf(seleccion);
                 vm.cursos_habilitados.splice(indice, 1);
-                vm.muestraCursosEspecialidad();
+                vm.especialidadSeleccionada = undefined;
+                //vm.muestraCursosEspecialidad();
             };
 
 
@@ -223,6 +242,8 @@
                         telefono           : vm.registroEdicion.telefono,
                         email              : vm.registroEdicion.email,
                         escolaridad        : vm.registroEdicion.escolaridad,
+                        certificacion      : vm.registroEdicion.certificacion,
+                        idLocalidad        : vm.localidadSeleccionada.idLocalidad,
                         idLocalidad        : vm.localidadSeleccionada.idLocalidad,
                         activo             : vm.registroEdicion.activo
                 };
@@ -230,6 +251,7 @@
 
                 vm.registroEdicion.idUnidadAdmtva = vm.unidadSeleccionada.idUnidadAdmtva;
                 vm.registroEdicion.UnidadAdmtva = vm.unidadSeleccionada.nombre;
+                vm.registroEdicion.idLocalidad = vm.localidadSeleccionada.idLocalidad;
                 vm.registroEdicion.localidad = vm.localidadSeleccionada.nombre;
 
                 CatalogoInstructores.prototype$updateAttributes(

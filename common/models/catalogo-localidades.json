@@ -43,6 +43,22 @@
       },
       "_selectable": true
     },
+    "municipio": {
+      "type": "String",
+      "required": false,
+      "length": 24,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "municipio",
+        "dataType": "character varying",
+        "dataLength": 24,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
       "id_anterior": {
       "type": "String",
       "required": false,

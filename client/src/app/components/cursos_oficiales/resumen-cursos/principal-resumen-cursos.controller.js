@@ -24,6 +24,7 @@
             vm.concluyeCurso              = concluyeCurso;
             vm.cierraCurso                = cierraCurso;
             vm.asientaCalificaciones      = asientaCalificaciones;
+            vm.ventanaListaFormatos       = ventanaListaFormatos;
             vm.generaListados             = generaListados;
 
 
@@ -628,7 +629,6 @@
                         templateUrl: 'app/components/cursos_oficiales/resumen-cursos/modal-asienta-calificaciones.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalAsientaCalificacionesController as vm',
-                        size: 'lg',
                         resolve: {
                           registroEditar: function () { return seleccion }
                         }
@@ -858,6 +858,20 @@
 
             }
 
+
+            function ventanaListaFormatos(seleccion) {
+
+                    var modalInstance = $modal.open({
+                        templateUrl: 'app/components/cursos_oficiales/resumen-cursos/modal-lista-formatos.html',
+                        windowClass: "animated fadeIn",
+                        controller: 'ModalListaFormatosController as vm',
+                        windowClass: 'app-modal-window',
+                        resolve: {
+                          registroEditar: function () { return seleccion }
+                        }
+                    });
+
+            }
 
             function generaListados(seleccion) {
 

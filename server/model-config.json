@@ -82,6 +82,12 @@
     "$promise": {},
     "$resolved": true
   },
+  "VistaCatalogoInstructores": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
   "RelInstrucPtc": {
     "dataSource": "icat_control_escolar_ds",
     "public": true

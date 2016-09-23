@@ -100,7 +100,7 @@
                 CatalogoCursos.instructores_habilitados({
                         id: vm.cursoSeleccionado.idCatalogoCurso,
                         filter: {
-                            where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                            //where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                             fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','efTerminal'],
                             include: [
                                 {
@@ -108,6 +108,13 @@
                                     scope: {
                                         where: {idCatalogoCurso: vm.cursoSeleccionado.idCatalogoCurso},
                                         fields:['calificacion']
+                                    }
+                                },
+                                {
+                                    relation: 'otras_unidades',
+                                    scope: {
+                                        where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                        fields:['idUnidadAdmtva']
                                     }
                                 }
                             ]
@@ -117,6 +124,13 @@
                 .then(function(resp) {
 
                     angular.forEach(resp, function(record) {
+
+                        var index = record.otras_unidades.map(function(unidad) {
+                                                            return unidad.idUnidadAdmtva;
+                                                          }).indexOf($scope.currentUser.unidad_pertenece_id);
+
+                        if(index >= 0)
+                        {
                             vm.listaInstructores.push({
                                 idInstructor    : record.idInstructor,
                                 apellidoPaterno : record.apellidoPaterno,
@@ -126,6 +140,7 @@
                                 calificacion    : record.evaluacion_curso[0].calificacion,
                                 efTerminal      : record.efTerminal
                             });
+                        }
                     });
 
                     vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));

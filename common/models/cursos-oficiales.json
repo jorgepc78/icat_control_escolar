@@ -579,6 +579,11 @@
       "model": "CatalogoUnidadesAdmtvas",
       "foreignKey": "idUnidadAdmtva"
     },
+    "catalogo_curso_pertenece": {
+      "type": "belongsTo",
+      "model": "CatalogoCursos",
+      "foreignKey": "idCatalogoCurso"
+    },
     "curso_ptc_pertenece": {
       "type": "belongsTo",
       "model": "CursosPtc",
@@ -605,6 +610,11 @@
       "type": "hasMany",
       "model": "InscripcionCurso",
       "foreignKey": "idCurso"
+    },
+    "instructor": {
+      "type": "belongsTo",
+      "model": "CatalogoInstructores",
+      "foreignKey": "idInstructor"
     }
   },
   "acls": [],

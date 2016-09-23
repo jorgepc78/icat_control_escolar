@@ -87,7 +87,7 @@
                 CatalogoCursos.instructores_habilitados({
                         id: vm.registroEdicion.idCatalogoCurso,
                         filter: {
-                            where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                            //where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                             fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','efTerminal'],
                             include: [
                                 {
@@ -96,6 +96,13 @@
                                         where: {idCatalogoCurso: vm.registroEdicion.idCatalogoCurso},
                                         fields:['calificacion']
                                     }
+                                },
+                                {
+                                    relation: 'otras_unidades',
+                                    scope: {
+                                        where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                        fields:['idUnidadAdmtva']
+                                    }
                                 }
                             ]
                         }
@@ -103,19 +110,28 @@
                 .$promise
                 .then(function(resp) {
 
+                        var index;
                         angular.forEach(resp, function(record) {
-                                vm.listaInstructores.push({
-                                    idInstructor    : record.idInstructor,
-                                    apellidoPaterno : record.apellidoPaterno,
-                                    apellidoMaterno : record.apellidoMaterno,
-                                    nombre          : record.nombre,
-                                    nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre,
-                                    calificacion    : record.evaluacion_curso[0].calificacion,
-                                    efTerminal      : record.efTerminal
-                                });
+
+                                index = record.otras_unidades.map(function(unidad) {
+                                                                    return unidad.idUnidadAdmtva;
+                                                                  }).indexOf($scope.currentUser.unidad_pertenece_id);
+
+                                if(index >= 0)
+                                {
+                                    vm.listaInstructores.push({
+                                        idInstructor    : record.idInstructor,
+                                        apellidoPaterno : record.apellidoPaterno,
+                                        apellidoMaterno : record.apellidoMaterno,
+                                        nombre          : record.nombre,
+                                        nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre,
+                                        calificacion    : record.evaluacion_curso[0].calificacion,
+                                        efTerminal      : record.efTerminal
+                                    });
+                                }
+
                         });
 
-                        var index;
                         angular.forEach(registroEditar.recordPTC.instructores_propuestos, function(record) {
                                 
                                 index = vm.listaInstructores.map(function(instructor) {

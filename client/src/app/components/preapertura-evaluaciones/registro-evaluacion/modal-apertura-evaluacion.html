@@ -1,0 +1,167 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> ROCO y Evaluaci&oacute;n de competencias</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;">
+
+        <div class="row">
+            <form name="form_datos" class="form-horizontal">
+            
+                <div class="col-lg-6">
+
+                          <div class="form-group" ng-show="!vm.EdicionCurso">
+                              <label class="col-sm-2 control-label">Evaluaci&oacute;n</label>
+                              <div class="col-sm-10">
+                                  <select class="form-control m-b" 
+                                      ng-change="vm.muestraInstructoresCurso()"
+                                      ng-model="vm.cursoSeleccionado"
+                                      ng-disabled="vm.EdicionCurso"
+                                      ng-options="curso as (curso.nombreCurso + ' (' + curso.modalidad + ')' ) for curso in vm.listaCursos" required>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Nombre curso</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCurso" readonly>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Clave curso</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.claveCurso" readonly>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Tipo</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.modalidad" readonly>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Evaluador</label>
+                              <div class="col-sm-10">
+                                  <select class="form-control m-b" 
+                                      ng-model="vm.instructorSeleccionado"
+                                      ng-options="instructor as (instructor.nombre_completo + ' (Puntaje: ' + instructor.calificacion + ', Ef. Term.: ' + instructor.efTerminal + '%)') for instructor in vm.listaInstructores" required>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Fecha</label>
+                              <div class="col-sm-10">
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                          <div class="input-group date" style="width: 155px;">
+                                              <input type="text" readonly class="form-control" is-open="vm.opened1" datepicker-popup="d/M/yyyy" ui-date="dateOptions" ng-model="vm.registroEdicion.fechaEvaluacion" required>
+                                              <span class="input-group-addon" ng-click="vm.openCalendar1($event)"><i class="fa fa-calendar"></i></span>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-2 text-right">
+                                          <label class="control-label">Hora</label>
+                                      </div>
+                                      <div class="col-md-6">
+                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.horaEvaluacion" required>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Lugar evaluaci&oacute;n</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.aulaAsignada">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Costo</label>
+                              <div class="col-sm-4">
+                                  <input type="number" class="form-control" ng-model="vm.registroEdicion.costo" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Observaciones</label>
+                              <div class="col-sm-10">
+                                  <textarea class="form-control" ng-model="vm.registroEdicion.observaciones" rows="4" cols="90"></textarea>
+                              </div>
+                          </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Capacitando</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.NombreAlumno" readonly required>
+                              </div>
+                          </div>
+                          <br>
+                          <br>
+
+                          <div class="row">
+                              <div class="col-md-12 text-center">
+                                  <h3 style="margin-top:0;">Seleccione al capacitando que tomar&aacute; la evaluaci&oacute;n</h3>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="input-group" style="margin-top:16px;">
+                                      <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Persona a buscar" class="input form-control" ng-model="vm.cadena_buscar">
+                                              <span class="input-group-btn">
+                                                      <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
+                                                      <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
+                                              </span>
+                                  </div>
+                              </div>
+                          </div>
+                          <br>
+                          <div class="row">
+                              <div class="col-md-12" style="height: 380px;">
+                                  <table class="tablaDatos table table-condensed no-footer">
+                                    <thead>
+                                      <tr>
+                                          <th>N&uacute;m. control</th>
+                                          <th>Nombre</th>
+                                          <th>Unidad registro</th>
+                                      </tr>
+                                    </thead>
+                                   <tbody>
+                                      <tr ng-repeat="registro in vm.listaCapacitandos" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablalListaCapacitados.fila_seleccionada}" class="pointer">
+                                          <td> {{registro.numControl}}</td>
+                                          <td> {{registro.apellidoPaterno +' '+ registro.apellidoMaterno +' '+ registro.nombre}}</td>
+                                          <td> {{registro.unidad_pertenece.nombre}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                                  <tabla-paginacion config="vm.tablalListaCapacitados" paginar="vm.cambiarPagina()"></tabla-paginacion>
+                              </div>
+
+                          </div>
+
+
+                </div>
+
+            </form>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-9">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje}}</div>
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

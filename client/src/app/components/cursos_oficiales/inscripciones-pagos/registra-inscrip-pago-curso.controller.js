@@ -19,6 +19,7 @@
             vm.registraInscripcion        = registraInscripcion;
             vm.muestraDocInscripcion      = muestraDocInscripcion;
             vm.registraPago               = registraPago;
+            vm.generaFormato              = generaFormato;
             vm.editaNumFactura            = editaNumFactura;
             vm.eliminaInscrito            = eliminaInscrito;
 
@@ -405,6 +406,18 @@
                     });
 
             }
+
+
+            function generaFormato(seleccion) {
+
+                    var link = angular.element('<a href="api/Capacitandos/exporta_doc_inscrip/'+seleccion.idCurso+'/'+seleccion.Capacitandos.idAlumno+'" target="_blank"></a>');
+
+                    angular.element(document.body).append(link);
+
+                    link[0].click();
+                    link.remove();
+
+            };
 
 
             function editaNumFactura(seleccion) {

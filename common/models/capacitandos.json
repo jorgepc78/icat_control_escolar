@@ -1163,7 +1163,6 @@
       },
       "_selectable": true
     }
-
   },
   "validations": [],
   "relations": {
@@ -1177,6 +1176,18 @@
     "inscripcionesCursos": {
       "type": "hasMany",
       "model": "InscripcionCurso",
+      "foreignKey": "idAlumno"
+    },
+    "evaluaciones_inscritas": {
+      "type": "hasMany",
+      "model": "Evaluaciones",
+      "foreignKey": "idAlumno",
+      "through": "InscripcionEvaluaciones",
+      "keyThrough": "idEvaluacion"
+    },
+    "inscripcionesEvaluaciones": {
+      "type": "hasMany",
+      "model": "Evaluaciones",
       "foreignKey": "idAlumno"
     },
     "unidad_pertenece": {

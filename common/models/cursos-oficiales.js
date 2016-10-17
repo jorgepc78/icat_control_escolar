@@ -142,7 +142,7 @@ module.exports = function(CursosOficiales) {
 					};
 
 
-					if(documento == 'rdod-10' || documento == 'rcdod-11' || documento == 'resd-05' || documento == 'lad-06' || documento == 'rae' || documento == 'riacd-02' || documento == 'ri' || documento == 'riact')
+					if(documento == 'rdod-10' || documento == 'rcdod-11' || documento == 'resd-05' || documento == 'lad-06' || documento == 'rae' || documento == 'riacd-02' || documento == 'ri' || documento == 'riact' || documento == 'rdoe' || documento == 'rescnr' || documento == 'lacnr' || documento == 'riacnr')
 					{
 						for(var i = 0; i < CUrsoEncontrado.inscripcionesCursos.length; i++)
 						{
@@ -179,7 +179,7 @@ module.exports = function(CursosOficiales) {
 								"discapacidad"   : discapacidad.toString(),
 								"sexo"           : CUrsoEncontrado.inscripcionesCursos[i].Capacitandos.sexo,
 								"edad"           : edad,
-								"escolaridad"    : CUrsoEncontrado.inscripcionesCursos[i].Capacitandos.nivel_estudios.nivelEstudios,
+								"escolaridad"    : (parseInt(CUrsoEncontrado.inscripcionesCursos[i].Capacitandos.idNivelEstudios) + 1),
 								"calificacion"   : CUrsoEncontrado.inscripcionesCursos[i].calificacion,
 								"acreditado"  	 : (CUrsoEncontrado.inscripcionesCursos[i].calificacion == 'ACREDITADO' ? 'X' : ''),
 								"no_acreditado"	 : (CUrsoEncontrado.inscripcionesCursos[i].calificacion == 'NO ACREDITADO' ? 'X' : ''),
@@ -194,6 +194,9 @@ module.exports = function(CursosOficiales) {
 					//Load the docx file as a binary
 					if(documento == 'contrato_regular' || documento == 'aci' || documento == 'rdod-10' || documento == 'rcdod-11' || documento == 'resd-05' || documento == 'lad-06' || documento == 'rae' || documento == 'riacd-02' || documento == 'ri' || documento == 'riact')
 						var content = fs.readFileSync(__dirname + "/../../templates/cursos_regulares/plantilla_"+documento+".docx", "binary");
+					
+					else if(documento == 'contrato_no_regular' || documento == 'rdoe' || documento == 'rescnr' || documento == 'lacnr' || documento == 'riacnr')
+						var content = fs.readFileSync(__dirname + "/../../templates/cursos_no_regulares/plantilla_"+documento+".docx", "binary");
 
 					var doc = new Docxtemplater(content);
 

@@ -75,7 +75,7 @@
       },
       "_selectable": true
     },
-      "id_anterior": {
+    "id_anterior": {
       "type": "String",
       "required": false,
       "length": 45,
@@ -107,7 +107,7 @@
       },
       "_selectable": true
     }
-},
+  },
   "validations": [],
   "relations": {
     "RegistroCursos": {

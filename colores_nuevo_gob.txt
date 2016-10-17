@@ -1,0 +1,4 @@
+rgba(69,156,193,1)  azul
+#28afcd  otro azul
+rgba(141,178,53,1)  verde
+rgba(141,178,53,0.7)  verde transparente

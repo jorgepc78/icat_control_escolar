@@ -47,7 +47,8 @@
                   vm.tablalListaCapacitados.filtro_datos = {
                           filter: {
                               where: vm.tablalListaCapacitados.condicion,
-                              order: ['numControl','apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','curp ASC'],
+                              fields: ['idAlumno', 'numControl', 'apellidoPaterno','apellidoMaterno','nombre','curp','idUnidadAdmtva'],
+                              order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','curp ASC'],
                               limit: vm.tablalListaCapacitados.registrosPorPagina,
                               skip: vm.tablalListaCapacitados.paginaActual - 1,
                               include: [

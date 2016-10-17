@@ -4,7 +4,7 @@
       </div>
       <div class="modal-body" style="background: #fff;">
 
-        <div ng-show="vm.modalidad == 'Extension'">
+        <div ng-show="vm.modalidad == 'Regular'">
             <div class="row">
               <div class="col-md-6">
                   <button type="button" ng-click="vm.generaFormato('aci')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Asignaci&oacute;n de instructores (ACI)</button>
@@ -42,25 +42,59 @@
             </div>
             <br>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                   <button type="button" ng-click="vm.generaFormato('riact')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de Acreditci&oacute;n y Certificaci&oacute;n de Cursos T&eacute;cnicos (RIACT)</button>
               </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                   <button type="button" ng-click="vm.generaFormato('contrato_regular')" class="btn btn-info btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Contrato del Instructor</button>
               </div>
             </div>
             <br>
         </div>
 
+        <div ng-show="vm.modalidad != 'Regular'">
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('rdoe')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Reporte de Documentos Oficiales Expedidos (RDOE)</button>
+              </div>
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('rescnr')" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de Evaluaci&oacute;n por Subobjetivos de Cursos No Regulares (RESCNR)</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('lacnr')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Lissta de Asistencia de Cursos no Rgulares (LACNR)</button>
+              </div>
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('riacnr')" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de inscrici&oacute;n, Acreditaci&oacute;n y Certificaci&oacute;n de cursos no Regulares (RIACNR)</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('ri')" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Registro de Inscripci&oacute;n (RI)</button>
+              </div>
+              <div class="col-md-6" ng-show="vm.modalidad == 'Extension'">
+                  <button type="button" ng-click="vm.generaFormato('aci')" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Asignaci&oacute;n de instructores (ACI)</button>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button" ng-click="vm.generaFormato('contrato_no_regular')" class="btn btn-info btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-file-text-o"></i></span> Contrato del Instructor</button>
+              </div>
+            </div>
+            <br>
+        </div>
+
+
       </div>
       <div class="modal-footer">
 
           <div class="row">
               <div class="col-md-12">
-                  <button type="button" ng-click="$dismiss()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cerrar</button>
+                  <button type="button" ng-click="$dismiss()" class="btn btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cerrar</button>
               </div>
           </div>
 

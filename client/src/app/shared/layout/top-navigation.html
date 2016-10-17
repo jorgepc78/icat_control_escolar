@@ -63,8 +63,7 @@
                 </li>
 
                 <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'unidad_inscrip' && currentUser.perfil != 'dir_vincula' && currentUser.perfil != 'unidad_admin' && currentUser.perfil != 'serv_escolar')">
-                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Pre-apertura de cursos <span class="caret"></span></a>
-                    <!-- <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Pre-apertura de cursos y evaluaciones <span class="caret"></span></a> -->
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Pre-apertura de cursos y evaluaciones <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
                             <a ui-sref="pre_apertura.cursos_ptc">    <span class="nav-label"> Cursos del PTC </span></a>
@@ -76,14 +75,14 @@
                             <a ui-sref="pre_apertura.valida_apertura_cursos"><span class="nav-label"> Validaci&oacute;n de cursos para pre-apertura </span></a>
                         </li>
 
-                        <!-- <li style="border: 1px solid #e7eaec"></li>
+                        <li style="border: 1px solid #e7eaec"></li>
                         
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
-                            <a ui-sref="pre_apertura.evaluaciones">   <span class="nav-label"> ROCO y Evaluaci&oacute;n de Est&aacute;ndares </span></a>
+                            <a ui-sref="pre_apertura.roco_estandares">   <span class="nav-label"> ROCO y Est&aacute;ndares de competencia</span></a>
                         </li>
                         <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_planeacion' || currentUser.perfil == 'dir_gral')">
                             <a ui-sref="pre_apertura.valida_evaluaciones"><span class="nav-label"> Validaci&oacute;n de evaluaciones </span></a>
-                        </li> -->
+                        </li>
                     </ul>
                 </li>
 

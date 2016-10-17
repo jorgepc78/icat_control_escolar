@@ -157,5 +157,15 @@
   "DestinatariosAvisos": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
+  },
+  "InscripcionEvaluaciones": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "Evaluacion": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   }
 }

@@ -1,0 +1,153 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+                <div class="col-md-7">
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <div class="ibox">
+                                        <div class="ibox-title">
+                                            <h2>Pre apertura de ROCOS - Evaluaciones de Est&aacute;ndares</h2>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <div class="input-group" style="width: 550px;">
+                                                    <label class="col-md-5 control-label" style="margin-top:7px;">Per&iacute;odo :</label>
+                                                    <div class="col-md-7">
+                                                        <select class="form-control m-b" ng-model="vm.PTCSeleccionado" ng-change="vm.muestraEvaluacionesPTCseleccionado()" ng-options="ptc as (ptc.trimestretxt +' - '+ ptc.anio) for ptc in vm.listaPTCautorizados"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- class ibox -->
+                            </div>
+                        </div>
+
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <div class="row">
+                                        <div class="col-md-7">
+                                                <h2>Evaluaciones ROCO y de Est&aacute;ndares</h2>
+                                        </div>
+                                        <div class="col-md-5 text-right">
+                                                <div class="mail-tools">
+                                                        <button class="btn btn-default btn-labeled" ng-disabled="(vm.PTCSeleccionado.idPtc === undefined)" ng-click="vm.abreEvaluacion(vm.PTCSeleccionado)"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar evaluaci&oacute;n</button>
+                                                </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                            <tr>
+                                                <th>Evaluaci&oacute;n</th>
+                                                <th>Tipo</th>
+                                                <th>Fecha Evaluaci&oacute;n</th>
+                                                <th>Hora</th>
+                                                <th>Estatus</th>
+                                            </tr>
+                                          </thead>
+                                         <tbody>
+                                            <tr ng-repeat="registro in vm.registrosEvaluaciones" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaEvaluaciones.fila_seleccionada}" class="pointer">
+                                                <td> {{registro.nombreCurso}}</td>
+                                                <td> {{registro.modalidad}}</td>
+                                                <td> {{registro.fechaEvaluacion | date:'d/MMMM/yyyy'}}</td>
+                                                <td> {{registro.horaEvaluacion}}</td>
+                                                <td class="client-status" ng-switch on="registro.estatus">
+                                                    <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
+                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
+                                                    <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
+                                                    <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
+                                                    <span ng-switch-when="4" class="label label-info texto-estatus-ptc">Activo</span>
+                                                    <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cerrado</span>
+                                                </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+                                        <tabla-paginacion config="vm.tablaListaEvaluaciones" paginar="vm.cambiarPagina()"></tabla-paginacion>
+
+                            </div>
+                        </div>
+                
+                </div> <!-- column1 -->
+                <div class="col-md-5">
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+
+                                <div class="ibox">
+                                    <div class="ibox-content" style="height:500px;">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 text-center">
+                                                                <p>
+                                                                    <h2>Seleccione un registro para ver los detalles</h2>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane active" ng-show="vm.client == 2">
+                                                        <div class="panel blank-panel">
+
+                                                                <ul class="list-group clear-list">
+                                                                    <li style="height: 60px" class="list-group-item fist-item">
+                                                                        <span style="width: 300px;text-align: right;" class="pull-right"> {{vm.EvaluacionSeleccionada.nombreCurso}} </span>
+                                                                        Evaluaci&oacute;n
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{vm.EvaluacionSeleccionada.modalidad}} </span>
+                                                                        Tipo
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{vm.EvaluacionSeleccionada.aulaAsignada}} </span>
+                                                                        Lugar evaluaci&oacute;n
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{vm.EvaluacionSeleccionada.costo | currency}} </span>
+                                                                        Costo
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{vm.EvaluacionSeleccionada.fechaEvaluacion | date:'d/MMMM/yyyy'}} </span>
+                                                                        Fecha inicio
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{vm.EvaluacionSeleccionada.horaEvaluacion}} </span>
+                                                                        Hora
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{vm.EvaluacionSeleccionada.nombreInstructor}} </span>
+                                                                        Evaluador
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right"> {{ (vm.EvaluacionSeleccionada.alumnos_inscritos[0].apellidoPaterno + ' ' + vm.EvaluacionSeleccionada.alumnos_inscritos[0].apellidoMaterno + ' ' + vm.EvaluacionSeleccionada.alumnos_inscritos[0].nombre)}} </span>
+                                                                        Capacitando
+                                                                    </li>
+                                                                    <li style="height: 80px" class="list-group-item">
+                                                                        <span class="pull-right" style="width: 300px;text-align: right;"> {{vm.EvaluacionSeleccionada.observaciones}} </span>
+                                                                        Observaciones
+                                                                    </li>
+                                                                </ul>
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0 || vm.EvaluacionSeleccionada.estatus == 3)" ng-click="vm.editaEvaluacion(vm.EvaluacionSeleccionada)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span>Editar evaluaci&oacute;n</button>
+                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0)" ng-click="vm.enviaEvaluacionRevision(vm.EvaluacionSeleccionada)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-upload"></i></span> Enviar a revisi&oacute;n</button>
+                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0)" ng-click="vm.eliminaEvaluacion(vm.EvaluacionSeleccionada)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar evaluaci&oacute;n</button>
+                                                                        <!-- <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 3)" ng-click="vm.imprimeDocValidacion(vm.EvaluacionSeleccionada)" class="btn btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-print"></i></span> Imprimir Doc. validaci&oacute;n</button> -->
+                                                                    </div>
+                                                                </div>
+                                                        </div> <!--panel blank-panel-->
+                          
+                                            </div> <!-- client == 2 -->
+                                        </div>
+                                    </div>
+                                </div> <!-- class ibox -->
+
+
+                        </div>
+                    </div> <!-- row -->
+
+                </div> <!-- column2 -->
+
+    </div><!-- row principal -->
+</div>

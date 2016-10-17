@@ -160,6 +160,21 @@
                 authenticate: true
             })
 
+            .state('pre_apertura.roco_estandares', {
+                url: '/roco_estandares',
+                templateUrl: 'app/components/preapertura-evaluaciones/registro-evaluacion/pre-apertura-roco-estandares.html',
+                controller: 'PreAperturaRocoEstandaresController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+            .state('pre_apertura.valida_evaluaciones', {
+                url: '/valida_evaluaciones',
+                templateUrl: 'app/components/preapertura-evaluaciones/validacion/valida-apertura-evaluacion.html',
+                controller: 'ValidaAperturaEvaluacionController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+
             /*** seccion del manejo de los cursos (resumen, inscripcion y cierre) ***/
             .state('cursos_autorizados', {
                 abstract: true,

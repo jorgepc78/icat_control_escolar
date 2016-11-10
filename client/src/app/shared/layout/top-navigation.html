@@ -87,8 +87,8 @@
                 </li>
 
                 <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'unidad_inscrip')">
-                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Cursos autorizados <span class="caret"></span></a>
-                    <!-- <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Cursos y evaluaciones autorizados <span class="caret"></span></a> -->
+                    <!-- <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Cursos autorizados <span class="caret"></span></a> -->
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Cursos y evaluaciones autorizados <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active">
                             <a ui-sref="cursos_autorizados.resumen_cursos({ tipo: 'activos' })">        <span class="nav-label"> Cursos vigentes </span></a>
@@ -97,14 +97,14 @@
                             <a ui-sref="cursos_autorizados.resumen_cursos({ tipo: 'historicos' })">  <span class="nav-label">Hist&oacute;rico de cursos </span></a>
                         </li>
 
-                        <!-- <li style="border: 1px solid #e7eaec"></li>
+                        <li style="border: 1px solid #e7eaec"></li>
                         
                         <li ui-sref-active="active">
-                            <a ui-sref="cursos_autorizados.resumen_evaluaciones({ tipo: 'activos' })">        <span class="nav-label"> Evaluaciones vigentes </span></a>
+                            <a ui-sref="evaluaciones_autorizadas.resumen_evaluaciones({ tipo: 'activos' })">        <span class="nav-label"> Evaluaciones vigentes </span></a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="cursos_autorizados.resumen_evaluaciones({ tipo: 'historicos' })">  <span class="nav-label">Hist&oacute;rico de evaluaciones </span></a>
-                        </li> -->
+                            <a ui-sref="evaluaciones_autorizadas.resumen_evaluaciones({ tipo: 'historicos' })">  <span class="nav-label">Hist&oacute;rico de evaluaciones </span></a>
+                        </li>
                     </ul>
                 </li>
 
@@ -121,7 +121,11 @@
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Inscripciones y pagos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active">
-                            <a ui-sref="inscripcion.registro_inscripcion_pagos"> <span class="nav-label"> Registro de Inscripci&oacute;n o pago </span></a>
+                            <a ui-sref="inscripcion.registro_inscripcion_pagos_cursos"> <span class="nav-label"> Registro de Inscripci&oacute;n o pago a cursos</span></a>
+                        </li>
+                        <li style="border: 1px solid #e7eaec"></li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="inscripcion.registro_pagos_evaluaciones"> <span class="nav-label"> Registro de pago evaluaciones</span></a>
                         </li>
                     </ul>
                 </li>

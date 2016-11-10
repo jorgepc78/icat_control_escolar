@@ -182,9 +182,23 @@
                 templateUrl: 'app/shared/layout/content-top-navigation.html',
             })
             .state('cursos_autorizados.resumen_cursos', {
-                url: '/resumen_cursos:tipo',
+                url: '/resumen_cursos/:tipo',
                 templateUrl: 'app/components/cursos_oficiales/resumen-cursos/principal-resumen-cursos.html',
                 controller: 'ResumenCursosController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+
+            /*** seccion del manejo de las evaluaciones ***/
+            .state('evaluaciones_autorizadas', {
+                abstract: true,
+                url: '/evaluaciones_autorizadas',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('evaluaciones_autorizadas.resumen_evaluaciones', {
+                url: '/resumen_evaluaciones/:tipo',
+                templateUrl: 'app/components/cursos_oficiales/evaluaciones/principal-resumen-evaluaciones.html',
+                controller: 'ResumenEvaluacionesController',
                 controllerAs: 'vm',
                 authenticate: true
             })
@@ -209,10 +223,17 @@
                 url: '/inscripcion',
                 templateUrl: 'app/shared/layout/content-top-navigation.html',
             })
-            .state('inscripcion.registro_inscripcion_pagos', {
-                url: '/registro_inscripcion_pagos',
-                templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/registra-inscrip-pago-curso.html',
+            .state('inscripcion.registro_inscripcion_pagos_cursos', {
+                url: '/registro_inscripcion_pagos_cursos',
+                templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/cursos/registra-inscrip-pago-curso.html',
                 controller: 'RegistroInscripPagoCursoController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+            .state('inscripcion.registro_pagos_evaluaciones', {
+                url: '/registro_pagos_evaluaciones',
+                templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/evaluaciones/registra-pago-evaluacion.html',
+                controller: 'RegistroPagoEvaluacionController',
                 controllerAs: 'vm',
                 authenticate: true
             })

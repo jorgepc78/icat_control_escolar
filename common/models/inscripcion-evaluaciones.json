@@ -77,7 +77,7 @@
       "_selectable": true
     },
     "fechaPago": {
-      "type": "String",
+      "type": "Date",
       "required": false,
       "length": null,
       "precision": null,

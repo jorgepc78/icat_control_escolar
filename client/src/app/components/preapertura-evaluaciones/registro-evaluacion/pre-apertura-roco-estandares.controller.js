@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('PreAperturaRocoEstandaresController', PreAperturaRocoEstandaresController);
 
-    PreAperturaRocoEstandaresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'Evaluacion', 'ControlProcesos'];
+    PreAperturaRocoEstandaresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'ProgTrimCursos', 'Evaluacion', 'ControlProcesos'];
 
-    function PreAperturaRocoEstandaresController($scope, $modal, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, Evaluacion, ControlProcesos ) {
+    function PreAperturaRocoEstandaresController($scope, $modal, tablaDatosService, ProgTrimCursos, Evaluacion, ControlProcesos ) {
 
             var vm = this;
 

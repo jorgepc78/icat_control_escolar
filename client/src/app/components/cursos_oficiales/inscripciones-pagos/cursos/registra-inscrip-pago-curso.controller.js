@@ -232,7 +232,7 @@
             function registraInscripcion(seleccion) {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/modal-agrega-persona.html',
+                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/cursos/modal-agrega-persona.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalAgregaPersonaController as vm',
                         size: 'lg',
@@ -320,7 +320,7 @@
             function registraPago(seleccion) {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/modal-captura-num-factura.html',
+                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/cursos/modal-captura-num-factura.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalCapturaNumFacturaController as vm',
                         resolve: {
@@ -423,7 +423,7 @@
             function editaNumFactura(seleccion) {
 
                     var modalInstance = $modal.open({
-                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/modal-captura-num-factura.html',
+                        templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/cursos/modal-captura-num-factura.html',
                         windowClass: "animated fadeIn",
                         controller: 'ModalCapturaNumFacturaController as vm',
                         resolve: {

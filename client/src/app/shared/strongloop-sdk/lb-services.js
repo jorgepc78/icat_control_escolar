@@ -59,9 +59,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "RoleMapping",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/RoleMappings/:id",
           { 'id': '@id' },
           {
@@ -880,9 +880,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "Role",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/Roles/:id",
           { 'id': '@id' },
           {
@@ -2045,9 +2045,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "Email",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/Emails/:id",
           { 'id': '@id' },
           {
@@ -2092,9 +2092,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "Usuario",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/Usuarios/:id",
           { 'id': '@id' },
           {
@@ -3139,6 +3139,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
                   LoopBackAuth.currentUserData = response.data;
                   return response.resource;
                 },
+                responseError: function(responseError) {
+                  LoopBackAuth.clearUser();
+                  LoopBackAuth.clearStorage();
+                  return $q.reject(responseError);
+                },
               },
               __isGetCurrentUser__: true,
             },
@@ -3853,9 +3858,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoUnidadesAdmtvas",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoUnidadesAdmtvas/:id",
           { 'id': '@id' },
           {
@@ -3941,6 +3946,33 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "PUT",
             },
 
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.findById() instead.
+            "prototype$__findById__metas_asignadas": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.destroyById() instead.
+            "prototype$__destroyById__metas_asignadas": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.updateById() instead.
+            "prototype$__updateById__metas_asignadas": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas/:fk",
+              method: "PUT",
+            },
+
             // INTERNAL. Use CatalogoUnidadesAdmtvas.instructores_asignados() instead.
             "prototype$__get__instructores_asignados": {
               isArray: true,
@@ -3988,6 +4020,31 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use CatalogoUnidadesAdmtvas.horas_asignadas.count() instead.
             "prototype$__count__horas_asignadas": {
               url: urlBase + "/CatalogoUnidadesAdmtvas/:id/horas_asignadas/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas() instead.
+            "prototype$__get__metas_asignadas": {
+              isArray: true,
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas",
+              method: "GET",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.create() instead.
+            "prototype$__create__metas_asignadas": {
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas",
+              method: "POST",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.destroyAll() instead.
+            "prototype$__delete__metas_asignadas": {
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.count() instead.
+            "prototype$__count__metas_asignadas": {
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas/count",
               method: "GET",
             },
 
@@ -5610,6 +5667,307 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           var action = TargetResource["::updateById::CatalogoUnidadesAdmtvas::horas_asignadas"];
           return action.apply(R, arguments);
         };
+    /**
+     * @ngdoc object
+     * @name lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+     * @header lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+     * @object
+     * @description
+     *
+     * The object `CatalogoUnidadesAdmtvas.metas_asignadas` groups methods
+     * manipulating `MetasCapacUnidad` instances related to `CatalogoUnidadesAdmtvas`.
+     *
+     * Call {@link lbServices.CatalogoUnidadesAdmtvas#metas_asignadas CatalogoUnidadesAdmtvas.metas_asignadas()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoUnidadesAdmtvas#metas_asignadas
+             * @methodOf lbServices.CatalogoUnidadesAdmtvas
+             *
+             * @description
+             *
+             * Queries metas_asignadas of CatalogoUnidadesAdmtvas.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R.metas_asignadas = function() {
+          var TargetResource = $injector.get("MetasCapacUnidad");
+          var action = TargetResource["::get::CatalogoUnidadesAdmtvas::metas_asignadas"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoUnidadesAdmtvas.metas_asignadas#count
+             * @methodOf lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+             *
+             * @description
+             *
+             * Counts metas_asignadas of CatalogoUnidadesAdmtvas.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.metas_asignadas.count = function() {
+          var TargetResource = $injector.get("MetasCapacUnidad");
+          var action = TargetResource["::count::CatalogoUnidadesAdmtvas::metas_asignadas"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoUnidadesAdmtvas.metas_asignadas#create
+             * @methodOf lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+             *
+             * @description
+             *
+             * Creates a new instance in metas_asignadas of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R.metas_asignadas.create = function() {
+          var TargetResource = $injector.get("MetasCapacUnidad");
+          var action = TargetResource["::create::CatalogoUnidadesAdmtvas::metas_asignadas"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoUnidadesAdmtvas.metas_asignadas#createMany
+             * @methodOf lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+             *
+             * @description
+             *
+             * Creates a new instance in metas_asignadas of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R.metas_asignadas.createMany = function() {
+          var TargetResource = $injector.get("MetasCapacUnidad");
+          var action = TargetResource["::createMany::CatalogoUnidadesAdmtvas::metas_asignadas"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoUnidadesAdmtvas.metas_asignadas#destroyAll
+             * @methodOf lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+             *
+             * @description
+             *
+             * Deletes all metas_asignadas of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.metas_asignadas.destroyAll = function() {
+          var TargetResource = $injector.get("MetasCapacUnidad");
+          var action = TargetResource["::delete::CatalogoUnidadesAdmtvas::metas_asignadas"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoUnidadesAdmtvas.metas_asignadas#destroyById
+             * @methodOf lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+             *
+             * @description
+             *
+             * Delete a related item by id for metas_asignadas.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for metas_asignadas
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.metas_asignadas.destroyById = function() {
+          var TargetResource = $injector.get("MetasCapacUnidad");
+          var action = TargetResource["::destroyById::CatalogoUnidadesAdmtvas::metas_asignadas"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoUnidadesAdmtvas.metas_asignadas#findById
+             * @methodOf lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+             *
+             * @description
+             *
+             * Find a related item by id for metas_asignadas.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for metas_asignadas
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R.metas_asignadas.findById = function() {
+          var TargetResource = $injector.get("MetasCapacUnidad");
+          var action = TargetResource["::findById::CatalogoUnidadesAdmtvas::metas_asignadas"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.CatalogoUnidadesAdmtvas.metas_asignadas#updateById
+             * @methodOf lbServices.CatalogoUnidadesAdmtvas.metas_asignadas
+             *
+             * @description
+             *
+             * Update a related item by id for metas_asignadas.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for metas_asignadas
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R.metas_asignadas.updateById = function() {
+          var TargetResource = $injector.get("MetasCapacUnidad");
+          var action = TargetResource["::updateById::CatalogoUnidadesAdmtvas::metas_asignadas"];
+          return action.apply(R, arguments);
+        };
 
 
         return R;
@@ -5635,9 +5993,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoTemas",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoTemas/:id",
           { 'id': '@id' },
           {
@@ -6714,9 +7072,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoTemarioCursos",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoTemarioCursos/:id",
           { 'id': '@id' },
           {
@@ -7493,9 +7851,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoEspecialidades",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoEspecialidades/:id",
           { 'id': '@id' },
           {
@@ -8673,9 +9031,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoLocalidades",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoLocalidades/:id",
           { 'id': '@id' },
           {
@@ -9423,9 +9781,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoCursos",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoCursos/:id",
           { 'id': '@id' },
           {
@@ -11635,9 +11993,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "ProgTrimCursos",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/ProgTrimCursos/:id",
           { 'id': '@id' },
           {
@@ -13151,9 +13509,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CursosPtc",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CursosPtcs/:id",
           { 'id': '@id' },
           {
@@ -15057,9 +15415,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoInstructores",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoInstructores/:id",
           { 'id': '@id' },
           {
@@ -18047,9 +18405,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "VistaCatalogoInstructores",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/VistaCatalogoInstructores/:id",
           { 'id': '@id' },
           {
@@ -20713,9 +21071,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "RelInstrucPtc",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/RelInstrucPtcs/:id",
           { 'id': '@id' },
           {
@@ -21517,9 +21875,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "ControlProcesos",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/ControlProcesos/:id",
           { 'id': '@id' },
           {
@@ -22590,9 +22948,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "RelInstrucCatCurso",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/RelInstrucCatCursos/:id",
           { 'id': '@id' },
           {
@@ -23512,9 +23870,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "RelInstrucUnidad",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/RelInstrucUnidads/:id",
           { 'id': '@id' },
           {
@@ -24316,9 +24674,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CursosOficiales",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CursosOficiales/:id",
           { 'id': '@id' },
           {
@@ -26456,9 +26814,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "Capacitandos",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/Capacitandos/:id",
           { 'id': '@id' },
           {
@@ -28534,9 +28892,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "InscripcionCurso",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/InscripcionCursos/:id",
           { 'id': '@id' },
           {
@@ -29492,9 +29850,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoActividades",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoActividades/:id",
           { 'id': '@id' },
           {
@@ -30218,9 +30576,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoExperiencias",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoExperiencias/:id",
           { 'id': '@id' },
           {
@@ -30944,9 +31302,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoMotivos",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoMotivos/:id",
           { 'id': '@id' },
           {
@@ -31670,9 +32028,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoMedios",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoMedios/:id",
           { 'id': '@id' },
           {
@@ -32396,9 +32754,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "CatalogoNivelEstudios",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/CatalogoNivelEstudios/:id",
           { 'id': '@id' },
           {
@@ -33134,9 +33492,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "HorasAsignadasUnidad",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/HorasAsignadasUnidads/:id",
           { 'id': '@id' },
           {
@@ -33895,6 +34253,785 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
 /**
  * @ngdoc object
+ * @name lbServices.MetasCapacUnidad
+ * @header lbServices.MetasCapacUnidad
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `MetasCapacUnidad` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "MetasCapacUnidad",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/MetasCapacUnidads/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#create
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/MetasCapacUnidads",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#createMany
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/MetasCapacUnidads",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#upsert
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/MetasCapacUnidads",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#replaceOrCreate
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Replace an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "replaceOrCreate": {
+              url: urlBase + "/MetasCapacUnidads/replaceOrCreate",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#exists
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/MetasCapacUnidads/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#findById
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/MetasCapacUnidads/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#replaceById
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Replace attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "replaceById": {
+              url: urlBase + "/MetasCapacUnidads/:id/replace",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#find
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/MetasCapacUnidads",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#findOne
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/MetasCapacUnidads/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#updateAll
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/MetasCapacUnidads/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#deleteById
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/MetasCapacUnidads/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#count
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/MetasCapacUnidads/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#prototype$updateAttributes
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/MetasCapacUnidads/:id",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#createChangeStream
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/MetasCapacUnidads/change-stream",
+              method: "POST",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.findById() instead.
+            "::findById::CatalogoUnidadesAdmtvas::metas_asignadas": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.destroyById() instead.
+            "::destroyById::CatalogoUnidadesAdmtvas::metas_asignadas": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.updateById() instead.
+            "::updateById::CatalogoUnidadesAdmtvas::metas_asignadas": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas() instead.
+            "::get::CatalogoUnidadesAdmtvas::metas_asignadas": {
+              isArray: true,
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas",
+              method: "GET",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.create() instead.
+            "::create::CatalogoUnidadesAdmtvas::metas_asignadas": {
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas",
+              method: "POST",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.createMany() instead.
+            "::createMany::CatalogoUnidadesAdmtvas::metas_asignadas": {
+              isArray: true,
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas",
+              method: "POST",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.destroyAll() instead.
+            "::delete::CatalogoUnidadesAdmtvas::metas_asignadas": {
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use CatalogoUnidadesAdmtvas.metas_asignadas.count() instead.
+            "::count::CatalogoUnidadesAdmtvas::metas_asignadas": {
+              url: urlBase + "/CatalogoUnidadesAdmtvas/:id/metas_asignadas/count",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#patchOrCreate
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R["patchOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#updateOrCreate
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#update
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#destroyById
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#removeById
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MetasCapacUnidad#patchAttributes
+             * @methodOf lbServices.MetasCapacUnidad
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MetasCapacUnidad` object.)
+             * </em>
+             */
+        R["patchAttributes"] = R["prototype$updateAttributes"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.MetasCapacUnidad#modelName
+        * @propertyOf lbServices.MetasCapacUnidad
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `MetasCapacUnidad`.
+        */
+        R.modelName = "MetasCapacUnidad";
+
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
  * @name lbServices.VistaControlProcesos
  * @header lbServices.VistaControlProcesos
  * @object
@@ -33913,9 +35050,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "VistaControlProcesos",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/VistaControlProcesos/:id",
           { 'id': '@id' },
           {
@@ -34633,9 +35770,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "DestinatariosAvisos",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/DestinatariosAvisos/:id",
           { 'id': '@id' },
           {
@@ -35454,9 +36591,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "InscripcionEvaluaciones",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/InscripcionEvaluaciones/:id",
           { 'id': '@id' },
           {
@@ -36275,9 +37412,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
   module.factory(
     "Evaluacion",
     [
-      'LoopBackResource', 'LoopBackAuth', '$injector',
-      function(Resource, LoopBackAuth, $injector) {
-        var R = Resource(
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
         urlBase + "/Evaluaciones/:id",
           { 'id': '@id' },
           {

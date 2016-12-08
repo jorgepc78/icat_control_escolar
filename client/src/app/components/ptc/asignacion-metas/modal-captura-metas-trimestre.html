@@ -1,0 +1,149 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Asigna metas a la unidad</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;padding-bottom:0;">
+
+            <form name="form_datos" class="form-horizontal">
+                  <div class="form-group">
+                      <div class="col-sm-3"></div>
+                      <label class="col-sm-2 control-label">A&ntilde;o</label>
+                      <div class="col-sm-3">
+                          <select class="form-control m-b"
+                              ng-model="vm.registroEdicion.anio" required ng-disabled="vm.habilitar">
+                              <option value="2016">2016</option>
+                              <option value="2017">2017</option>
+                              <option value="2018">2018</option>
+                              <option value="2019">2019</option>
+                              <option value="2020">2020</option>
+                              <option value="2021">2021</option>
+                          </select>
+                      </div>
+                      <div class="col-sm-3"></div>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="row">
+                      <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class="col-sm-12 text-center"><p class="form-control-static">1er Trimestre</p></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Curso regular</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.reg1Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Curso extensi&oacute;n</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.ext1Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">ROCO</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.roco1Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">ECL</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.ecl1Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">CAE</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.cae1Trim" required></div>
+                            </div>
+                      </div>
+                    <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class="col-sm-12 text-center"><p class="form-control-static">2o Trimestre</p></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Curso regular</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.reg2Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Curso extensi&oacute;n</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.ext2Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">ROCO</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.roco2Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">ECL</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.ecl2Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">CAE</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.cae2Trim" required></div>
+                            </div>
+                      </div>
+                    <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class="col-sm-12 text-center"><p class="form-control-static">3er Trimestre</p></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Curso regular</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.reg3Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Curso extensi&oacute;n</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.ext3Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">ROCO</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.roco3Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">ECL</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.ecl3Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">CAE</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.cae3Trim" required></div>
+                            </div>
+                      </div>
+                    <div class="col-sm-3">
+                            <div class="form-group">
+                                <div class="col-sm-12 text-center"><p class="form-control-static">4o Trimestre</p></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Curso regular</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.reg4Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Curso extensi&oacute;n</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.ext4Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">ROCO</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.roco4Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">ECL</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.ecl4Trim" required></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">CAE</label>
+                                <div class="col-sm-7"><input type="number" min="1" class="form-control" ng-model="vm.registroEdicion.cae4Trim" required></div>
+                            </div>
+                      </div>
+                  </div>
+            </form>
+      </div>
+
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-3">
+              </div>
+              <div class="col-md-4">
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-5">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Aceptar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

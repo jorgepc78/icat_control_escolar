@@ -67,6 +67,11 @@
       "model": "HorasAsignadasUnidad",
       "foreignKey": "idUnidadAdmtva"
     },
+    "metas_asignadas": {
+      "type": "hasMany",
+      "model": "MetasCapacUnidad",
+      "foreignKey": "idUnidadAdmtva"
+    },
     "instructores_asignados": {
       "type": "hasMany",
       "model": "CatalogoInstructores",

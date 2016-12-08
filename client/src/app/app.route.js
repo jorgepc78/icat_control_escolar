@@ -89,6 +89,13 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+            .state('ptc.asigna_metas', {
+                url: '/asigna_metas',
+                templateUrl: 'app/components/ptc/asignacion-metas/principal-metas-trimestre.html',
+                controller: 'PrincipalMetasTrimestreController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
             .state('ptc.planeacion_ptc', {
                 url: '/planeacion_ptc',
                 templateUrl: 'app/components/ptc/ptc-unidad/principal-ptc-unidad.html',

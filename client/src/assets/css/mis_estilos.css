@@ -193,3 +193,7 @@ body.fixed-nav #wrapper #page-wrapper {
 .texto-estatus-ptc {
   font-size: 12px;
 }
+
+.linea_izq_celda {
+  border-left: 1px solid #000;
+}

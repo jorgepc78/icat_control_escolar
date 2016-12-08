@@ -1,0 +1,331 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+                <div class="col-md-3">
+    
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <div class="row">
+                                        <div class="col-md-12">
+                                                <h2>Metas de capacitandos asignadas por unidad y trimestre</h2>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                            <tr>
+                                                <th>Unidad</th>
+                                                <th width="25%" class="text-center">&Uacute;ltimo a&ntilde;o asignado</th>
+                                            </tr>
+                                          </thead>
+                                         <tbody>
+                                            <tr ng-repeat="registro in vm.registros" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaRegistros.fila_seleccionada}" class="pointer">
+                                                <td> {{registro.nombre}}</td>
+                                                <td class="text-center"> {{registro.metas_asignadas[0].anio}}</td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+                                        <!-- <tabla-paginacion config="vm.tablaListaRegistros" paginar="vm.cambiarPagina()"></tabla-paginacion> -->
+
+                            </div>
+                        </div>
+                
+                </div> <!-- column1 -->
+                <div class="col-md-9">
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+
+                                <div class="ibox">
+                                    <div class="ibox-content" style="height:390px;">
+                                        <div class="tab-content">
+                                            <div class="panel blank-panel">
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 text-center">
+                                                                            <h2>{{vm.RegistroSeleccionado.nombre}}</h2>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-2">
+                                                                        <ul class="list-group clear-list">
+                                                                            <li class="list-group-item fist-item text-center" style="height: 40px;">
+                                                                                Servicio
+                                                                            </li>
+                                                                            <li class="list-group-item" style="height: 40px;">
+                                                                                Curso regular
+                                                                            </li>
+                                                                            <li class="list-group-item" style="height: 40px;">
+                                                                                Curso extensi&oacute;n
+                                                                            </li>
+                                                                            <li class="list-group-item" style="height: 40px;">
+                                                                                ROCO
+                                                                            </li>
+                                                                            <li class="list-group-item" style="height: 40px;">
+                                                                                ECL
+                                                                            </li>
+                                                                            <li class="list-group-item" style="height: 40px;">
+                                                                                Curso CAE
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <ul class="list-group clear-list">
+                                                                            <li class="list-group-item fist-item text-center" style="height: 40px;">
+                                                                                1 Trimestre
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].reg1Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].ext1Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].roco1Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].roco1Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].cae1Trim | number:0}}
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <ul class="list-group clear-list">
+                                                                            <li class="list-group-item fist-item text-center" style="height: 40px;">
+                                                                                2 Trimestre
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].reg2Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].ext2Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].roco2Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].roco2Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].cae2Trim | number:0}}
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <ul class="list-group clear-list">
+                                                                            <li class="list-group-item fist-item text-center" style="height: 40px;">
+                                                                                3 Trimestre
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].reg3Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].ext3Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].roco3Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].roco3Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].cae3Trim | number:0}}
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <ul class="list-group clear-list">
+                                                                            <li class="list-group-item fist-item text-center" style="height: 40px;">
+                                                                                4 Trimestre
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].reg4Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].ext4Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].roco4Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].roco4Trim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].cae4Trim | number:0}}
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <ul class="list-group clear-list">
+                                                                            <li class="list-group-item fist-item text-center" style="height: 40px;">
+                                                                                Total
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].regTotalTrim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].extTotalTrim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].rocoTotalTrim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].eclTotalTrim | number:0}}
+                                                                            </li>
+                                                                            <li class="list-group-item text-center" style="height: 40px;">
+                                                                                {{vm.RegistroSeleccionado.metas_asignadas[0].caeTotalTrim | number:0}}
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+
+                                                        <br>
+                                                        <div class="row" ng-if="currentUser.unidad_pertenece_id == 1">
+                                                            <div class="col-md-12 text-center">
+                                                                <button type="button" ng-click="vm.nuevo_registro(vm.RegistroSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo a&ntilde;o</button>
+                                                                <button type="button" ng-click="vm.edita_datos_registro(vm.RegistroSeleccionado)" ng-disabled="(vm.RegistroSeleccionado.metas_asignadas == 0)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar este a&ntilde;o</button>
+                                                                <button type="button" ng-click="vm.elimina_registro(vm.RegistroSeleccionado)" ng-disabled="(vm.RegistroSeleccionado.metas_asignadas == 0)" class="btn btn-warning btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar este a&ntilde;o</button>
+                                                            </div>
+                                                        </div>
+                                            </div> <!--panel blank-panel-->
+              
+                                </div> <!-- client == 2 -->
+                                    </div>
+                                </div> <!-- class ibox -->
+                                <div class="ibox">
+                                    <div class="ibox-title">
+                                        <h2>Historial</h2>
+                                    </div>
+                                    <div class="ibox-content" style="height:350px;padding: 0 10px 0 10px;">
+                                       
+                                            <div class="tab-pane active" ng-show="vm.historial.length == 0">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 text-center">
+                                                                <p>
+                                                                    <h2>Sin historial</h2>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane active" ng-show="vm.historial.length > 0">
+                    
+                                                <table class="tablaDatos table table-condensed no-footer">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-center">&nbsp;</th>
+                                                        <th colspan="5" class="text-center">1er Trimestre</th>
+                                                        <th colspan="5" class="text-center">2o Trimestre</th>
+                                                        <th colspan="5" class="text-center">3er Trimestre</th>
+                                                        <th colspan="5" class="text-center">4o Trimestre</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th class="text-center" width="10%">A&ntilde;o</td>
+
+                                                            <th class="text-center" width="4.5%">Reg.</td>
+                                                            <th class="text-center" width="4.5%">Ext.</td>
+                                                            <th class="text-center" width="4.5%">ROCO</td>
+                                                            <th class="text-center" width="4.5%">ECL</td>
+                                                            <th class="text-center" width="4.5%">CAE</td>
+
+                                                            <th class="text-center" width="4.5%">Reg.</td>
+                                                            <th class="text-center" width="4.5%">Ext.</td>
+                                                            <th class="text-center" width="4.5%">ROCO</td>
+                                                            <th class="text-center" width="4.5%">ECL</td>
+                                                            <th class="text-center" width="4.5%">CAE</td>
+
+                                                            <th class="text-center" width="4.5%">Reg.</td>
+                                                            <th class="text-center" width="4.5%">Ext.</td>
+                                                            <th class="text-center" width="4.5%">ROCO</td>
+                                                            <th class="text-center" width="4.5%">ECL</td>
+                                                            <th class="text-center" width="4.5%">CAE</td>
+
+                                                            <th class="text-center" width="4.5%">Reg.</td>
+                                                            <th class="text-center" width="4.5%">Ext.</td>
+                                                            <th class="text-center" width="4.5%">ROCO</td>
+                                                            <th class="text-center" width="4.5%">ECL</td>
+                                                            <th class="text-center" width="4.5%">CAE</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div style="width:100%;height:290px">
+                                                    <div class="full-height-scroll" full-scroll>
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <col class="text-center" width="10%">
+
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                                <col width="4.5%">
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="record in vm.historial">
+                                                                    <td class="text-center"> {{record.anio}}</td>
+                                                                    
+                                                                    <td class="text-center linea_izq_celda"> {{record.reg1Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.ext1Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.roco1Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.ecl1Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.cae1Trim | number:0}}</td>
+                                                                    
+                                                                    <td class="text-center linea_izq_celda"> {{record.reg2Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.ext2Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.roco2Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.ecl2Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.cae2Trim | number:0}}</td>
+                                                                    
+                                                                    <td class="text-center linea_izq_celda"> {{record.reg3Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.ext3Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.roco3Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.ecl3Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.cae3Trim | number:0}}</td>
+
+                                                                    <td class="text-center linea_izq_celda"> {{record.reg4Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.ext4Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.roco4Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.ecl4Trim | number:0}}</td>
+                                                                    <td class="text-center"> {{record.cae4Trim | number:0}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- client == 2 -->
+                                        
+                                    </div>
+                                </div> <!-- class ibox -->
+
+                        </div>
+                    </div> <!-- row -->
+
+                </div> <!-- column2 -->
+
+    </div><!-- row principal -->
+</div>

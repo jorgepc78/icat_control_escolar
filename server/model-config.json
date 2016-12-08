@@ -150,6 +150,10 @@
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },
+  "MetasCapacUnidad": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
   "VistaControlProcesos": {
     "dataSource": "icat_control_escolar_ds",
     "public": true

@@ -50,6 +50,9 @@
                         <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id == 1 && currentUser.perfil == 'dir_planeacion')">
                             <a ui-sref="ptc.asigna_horas">    <span class="nav-label"> Asingaci&oacute;n de horas por unidad </span></a>
                         </li>
+                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id == 1 && currentUser.perfil == 'dir_planeacion')">
+                            <a ui-sref="ptc.asigna_metas">    <span class="nav-label"> Asingaci&oacute;n de metas de capacitandos </span></a>
+                        </li>
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
                             <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC </span></a>
                         </li>

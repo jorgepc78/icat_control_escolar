@@ -95,6 +95,10 @@
                                                                         Tipo
                                                                     </li>
                                                                     <li class="list-group-item">
+                                                                        <span class="pull-right"> {{ (vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].Capacitandos.apellidoPaterno + ' ' + vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].Capacitandos.apellidoMaterno + ' ' + vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].Capacitandos.nombre)}} </span>
+                                                                        Capacitando
+                                                                    </li>
+                                                                    <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.EvaluacionSeleccionada.aulaAsignada}} </span>
                                                                         Lugar evaluaci&oacute;n
                                                                     </li>
@@ -117,10 +121,6 @@
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.EvaluacionSeleccionada.nombreInstructor}} </span>
                                                                         Evaluador
-                                                                    </li>
-                                                                    <li class="list-group-item">
-                                                                        <span class="pull-right"> {{ (vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].Capacitandos.apellidoPaterno + ' ' + vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].Capacitandos.apellidoMaterno + ' ' + vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].Capacitandos.nombre)}} </span>
-                                                                        Capacitando
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right" ng-switch on="vm.EvaluacionSeleccionada.estatus">

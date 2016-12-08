@@ -60,7 +60,7 @@
                   .then(function(resp) {
                       angular.forEach(resp, function(registro) {
                             
-                            var trimestres = ['PRIMER TRIMESTRE','SEGUNDO TRIMESTRE','TERCER TRIMESTRE','CUARTO TRIMESTRE'];
+                            var trimestres = ['PRIMER TRIMESTRE (Enero - Marzo)','SEGUNDO TRIMESTRE (Abril - Junio)','TERCER TRIMESTRE (Julio - Septiembre)','CUARTO TRIMESTRE (Octubre - Dciembre)'];
                             vm.listaPTCautorizados.push({
                                 idPtc        : registro.idPtc,
                                 anio         : registro.anio,

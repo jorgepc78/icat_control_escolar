@@ -28,21 +28,27 @@
                     idEvaluacion              : registroEditar.idEvaluacion,
                     nombreCurso               : registroEditar.nombreCurso,
                     nombreInstructor          : registroEditar.nombreInstructor,
-                    inscripcionesEvaluaciones : registroEditar.inscripcionesEvaluaciones
+                    inscripcionesEvaluaciones : []
             };
+
+            angular.forEach(registroEditar.inscripcionesEvaluaciones, function(registro) {
+              vm.registroEdicion.inscripcionesEvaluaciones.push({
+                  id: registro.id,
+                  numDocAcreditacion: registro.numDocAcreditacion,
+                  calificacion: registro.calificacion,
+                  Capacitandos: registro.Capacitandos
+              });
+            });
+
 
             vm.ddSelectOptions = [
                   {
-                      text: 'ACREDITADO',
-                      value: 'ACREDITADO'
+                      text: 'COMPETENTE',
+                      value: 'COMPETENTE'
                   },
                   {
-                      text: 'NO ACREDITADO',
-                      value: 'NO ACREDITADO'
-                  },
-                  {
-                      text: 'DESERTOR',
-                      value: 'DESERTOR'
+                      text: 'NO COMPETENTE',
+                      value: 'NO COMPETENTE'
                   }
               ];
 

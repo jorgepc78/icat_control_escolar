@@ -58,7 +58,7 @@
                   .then(function(resp) {
                       angular.forEach(resp, function(registro) {
                             
-                            var trimestres = ['PRIMER TRIMESTRE','SEGUNDO TRIMESTRE','TERCER TRIMESTRE','CUARTO TRIMESTRE'];
+                            var trimestres = ['PRIMER TRIMESTRE (Enero - Marzo)','SEGUNDO TRIMESTRE (Abril - Junio)','TERCER TRIMESTRE (Julio - Septiembre)','CUARTO TRIMESTRE (Octubre - Dciembre)'];
                             vm.listaPTCautorizados.push({
                                 idPtc        : registro.idPtc,
                                 anio         : registro.anio,
@@ -80,6 +80,12 @@
                                       relation: 'alumnos_inscritos',
                                       scope: {
                                         fields: ['idAlumno', 'numControl', 'apellidoPaterno','apellidoMaterno','nombre','curp','idUnidadAdmtva'],
+                                      }
+                                  },
+                                  {
+                                      relation: 'inscripcionesEvaluaciones',
+                                      scope: {
+                                        fields: ['id', 'idAlumno', 'pagado', 'fechaPago','numFactura','calificacion','numDocAcreditacion']
                                       }
                                   }
                               ]

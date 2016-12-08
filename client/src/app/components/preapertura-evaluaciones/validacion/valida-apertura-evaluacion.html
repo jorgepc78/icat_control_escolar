@@ -98,6 +98,10 @@
                                                                         Tipo
                                                                     </li>
                                                                     <li class="list-group-item">
+                                                                        <span class="pull-right"> {{ (vm.cursoSeleccionado.alumnos_inscritos[0].apellidoPaterno + ' ' + vm.cursoSeleccionado.alumnos_inscritos[0].apellidoMaterno + ' ' + vm.cursoSeleccionado.alumnos_inscritos[0].nombre)}} </span>
+                                                                        Capacitando
+                                                                    </li>
+                                                                    <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.cursoSeleccionado.aulaAsignada}} </span>
                                                                         Aula asignada
                                                                     </li>
@@ -116,10 +120,6 @@
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.cursoSeleccionado.nombreInstructor}} </span>
                                                                         EValuador
-                                                                    </li>
-                                                                    <li class="list-group-item">
-                                                                        <span class="pull-right"> {{ (vm.cursoSeleccionado.alumnos_inscritos[0].apellidoPaterno + ' ' + vm.cursoSeleccionado.alumnos_inscritos[0].apellidoMaterno + ' ' + vm.cursoSeleccionado.alumnos_inscritos[0].nombre)}} </span>
-                                                                        Capacitando
                                                                     </li>
                                                                     <li style="height: 80px" class="list-group-item">
                                                                         <span class="pull-right" style="width: 300px;text-align: right;"> {{vm.cursoSeleccionado.observaciones}} </span>

@@ -10,8 +10,8 @@
                                         </div>
                                         <div class="ibox-content">
                                             <div class="input-group" style="width: 550px;">
-                                                    <label class="col-md-5 control-label" style="margin-top:7px;">Per&iacute;odo :</label>
-                                                    <div class="col-md-7">
+                                                    <label class="col-md-3 control-label" style="margin-top:7px;">Per&iacute;odo :</label>
+                                                    <div class="col-md-9">
                                                         <select class="form-control m-b" ng-model="vm.PTCSeleccionado" ng-change="vm.muestraEvaluacionesPTCseleccionado()" ng-options="ptc as (ptc.trimestretxt +' - '+ ptc.anio) for ptc in vm.listaPTCautorizados"></select>
                                                 </div>
                                             </div>
@@ -52,7 +52,7 @@
                                                 <td> {{registro.fechaEvaluacion | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.horaEvaluacion}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
-                                                    <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
+                                                    <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Registrado</span>
                                                     <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
                                                     <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
                                                     <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
@@ -75,7 +75,7 @@
                         <div class="col-md-12">
 
                                 <div class="ibox">
-                                    <div class="ibox-content" style="height:500px;">
+                                    <div class="ibox-content" style="height:530px;">
                                         <div class="tab-content">
                                             <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                                         <div class="row">
@@ -99,6 +99,10 @@
                                                                         Tipo
                                                                     </li>
                                                                     <li class="list-group-item">
+                                                                        <span class="pull-right"> {{ (vm.EvaluacionSeleccionada.alumnos_inscritos[0].apellidoPaterno + ' ' + vm.EvaluacionSeleccionada.alumnos_inscritos[0].apellidoMaterno + ' ' + vm.EvaluacionSeleccionada.alumnos_inscritos[0].nombre)}} </span>
+                                                                        Capacitando
+                                                                    </li>
+                                                                    <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.EvaluacionSeleccionada.aulaAsignada}} </span>
                                                                         Lugar evaluaci&oacute;n
                                                                     </li>
@@ -107,8 +111,12 @@
                                                                         Costo
                                                                     </li>
                                                                     <li class="list-group-item">
+                                                                        <span class="pull-right label texto-estatus-ptc label-{{vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].pagado === true ? 'primary' : 'warning'}}">{{vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].pagado === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Pagado
+                                                                    </li>
+                                                                    <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.EvaluacionSeleccionada.fechaEvaluacion | date:'d/MMMM/yyyy'}} </span>
-                                                                        Fecha inicio
+                                                                        Fecha evaluaci&oacute;n
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right"> {{vm.EvaluacionSeleccionada.horaEvaluacion}} </span>
@@ -118,10 +126,6 @@
                                                                         <span class="pull-right"> {{vm.EvaluacionSeleccionada.nombreInstructor}} </span>
                                                                         Evaluador
                                                                     </li>
-                                                                    <li class="list-group-item">
-                                                                        <span class="pull-right"> {{ (vm.EvaluacionSeleccionada.alumnos_inscritos[0].apellidoPaterno + ' ' + vm.EvaluacionSeleccionada.alumnos_inscritos[0].apellidoMaterno + ' ' + vm.EvaluacionSeleccionada.alumnos_inscritos[0].nombre)}} </span>
-                                                                        Capacitando
-                                                                    </li>
                                                                     <li style="height: 80px" class="list-group-item">
                                                                         <span class="pull-right" style="width: 300px;text-align: right;"> {{vm.EvaluacionSeleccionada.observaciones}} </span>
                                                                         Observaciones
@@ -130,9 +134,9 @@
                                                                 <br>
                                                                 <div class="row">
                                                                     <div class="col-md-12 text-center">
-                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0 || vm.EvaluacionSeleccionada.estatus == 3)" ng-click="vm.editaEvaluacion(vm.EvaluacionSeleccionada)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span>Editar evaluaci&oacute;n</button>
-                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0)" ng-click="vm.enviaEvaluacionRevision(vm.EvaluacionSeleccionada)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-upload"></i></span> Enviar a revisi&oacute;n</button>
-                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0)" ng-click="vm.eliminaEvaluacion(vm.EvaluacionSeleccionada)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar evaluaci&oacute;n</button>
+                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0 || vm.EvaluacionSeleccionada.estatus == 3)" ng-click="vm.editaEvaluacion(vm.EvaluacionSeleccionada)" class="btn btn-info btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span>Editar evaluaci&oacute;n</button>
+                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0 && vm.EvaluacionSeleccionada.inscripcionesEvaluaciones[0].pagado == true)" ng-click="vm.enviaEvaluacionRevision(vm.EvaluacionSeleccionada)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-upload"></i></span> Enviar a revisi&oacute;n</button>
+                                                                        <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 0)" ng-click="vm.eliminaEvaluacion(vm.EvaluacionSeleccionada)" class="btn btn-warning btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar evaluaci&oacute;n</button>
                                                                         <!-- <button type="button" ng-show="(vm.EvaluacionSeleccionada.estatus == 3)" ng-click="vm.imprimeDocValidacion(vm.EvaluacionSeleccionada)" class="btn btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-print"></i></span> Imprimir Doc. validaci&oacute;n</button> -->
                                                                     </div>
                                                                 </div>

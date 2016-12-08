@@ -17,7 +17,7 @@
                                                     <div class="input-group" style="margin-top:16px;">
                                                         <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Curso a buscar" class="input form-control" ng-model="vm.cadena_buscar">
                                                                 <span class="input-group-btn">
-                                                                        <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
+                                                                        <button class="btn btn-info btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
                                                                         <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
                                                                 </span>
                                                     </div>
@@ -44,6 +44,8 @@
                                                             <td> {{registro.fechaEvaluacion | date:'d/MMMM/yyyy'}}</td>
                                                             <td> {{registro.horaEvaluacion}}</td>
                                                             <td class="client-status" ng-switch on="registro.estatus">
+                                                                <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Registrado</span>
+                                                                <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de validaci&oacute;n</span>
                                                                 <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">{{registro.diasDif < 0 ? 'En espera' : 'Activo'}}</span>
                                                                 <span ng-switch-when="4" class="label label-default texto-estatus-ptc">Concluida</span>
                                                                 <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cancelada</span>
@@ -100,6 +102,7 @@
                                                                             <span class="pull-right"> 
                                                                                 <strong>Estatus:</strong>
                                                                                 <span ng-switch on="vm.cursoSeleccionado.estatus">
+                                                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de validaci&oacute;n</span>
                                                                                     <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">{{registro.diasDif < 0 ? 'En espera' : 'Activo'}}</span>
                                                                                     <span ng-switch-when="4" class="label label-default texto-estatus-ptc">Concluida</span>
                                                                                     <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cancelada</span>
@@ -174,8 +177,8 @@
                                                                                     </td>
                                                                                     <td>{{inscripcion.numFactura}}</td>
                                                                                     <td>
-                                                                                        <button type="button" ng-show="(currentUser.perfil == 'unidad_inscrip' || currentUser.perfil == 'unidad_capacit')" class="btn btn-sm" tooltip-placement="top" tooltip="Imprimir hoja de inscripci&oacute;n" ng-click="vm.generaFormato(inscripcion)"><i class="fa fa-print"></i></button>
-                                                                                        <button type="button" ng-show="(inscripcion.pagado == true) " class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Editar n&uacute;m. factura" ng-click="vm.editaNumFactura(inscripcion)"><i class="fa fa-pencil"></i></button>
+                                                                                        <!-- <button type="button" ng-show="(currentUser.perfil == 'unidad_inscrip' || currentUser.perfil == 'unidad_capacit')" class="btn btn-sm" tooltip-placement="top" tooltip="Imprimir hoja de inscripci&oacute;n" ng-click="vm.generaFormato(inscripcion)"><i class="fa fa-print"></i></button> -->
+                                                                                        <button type="button" ng-show="(inscripcion.pagado == true && vm.cursoSeleccionado.estatus == 0)" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Editar n&uacute;m. factura" ng-click="vm.editaNumFactura(inscripcion)"><i class="fa fa-pencil"></i></button>
                                                                                         <button type="button" ng-show="(inscripcion.pagado == false)" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Registrar pago" ng-click="vm.registraPago(inscripcion)"><i class="fa fa-usd"></i></button>
                                                                                     </td>
                                                                                 </tr>

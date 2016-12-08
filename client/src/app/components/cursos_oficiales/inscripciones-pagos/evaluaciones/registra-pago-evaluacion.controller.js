@@ -117,7 +117,6 @@
                   vm.tablaListaEvaluaciones.condicion = {
                       and: [
                         {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                        {or: [{estatus: 2}, {estatus: 4}]},
                         condicion_busqueda
                       ]
                   };

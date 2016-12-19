@@ -107,6 +107,22 @@
       },
       "_selectable": true
     },
+    "nombreCompleto": {
+      "type": "String",
+      "required": false,
+      "length": 45,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "nombre_completo",
+        "dataType": "character varying",
+        "dataLength": 135,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "sexo": {
       "type": "String",
       "required": false,

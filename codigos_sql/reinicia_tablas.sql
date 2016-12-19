@@ -32,6 +32,9 @@ TRUNCATE ptc.prog_trim_cursos RESTART IDENTITY;
 TRUNCATE ptc.rel_instruc_ptc RESTART IDENTITY;
 TRUNCATE public.accesstoken RESTART IDENTITY;
 
+TRUNCATE cursos_ofertados.evaluaciones RESTART IDENTITY;
+TRUNCATE cursos_ofertados.inscripcion_evaluaciones RESTART IDENTITY;
+
 /* tablas que se actualizan del otro sistema */
 TRUNCATE cursos_ofertados.capacitandos RESTART IDENTITY;
 TRUNCATE cursos_ofertados.cursos_oficiales RESTART IDENTITY;

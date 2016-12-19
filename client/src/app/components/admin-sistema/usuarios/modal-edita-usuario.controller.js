@@ -21,20 +21,33 @@
             vm.listaRoles = [];
             
             vm.usuarioEditar = {
-                    idUsuario               : usuarioEditar.idUsuario,
-                    nombre                  : usuarioEditar.nombre,
-                    puesto                  : usuarioEditar.puesto,
-                    email                   : usuarioEditar.email,
-                    username                : usuarioEditar.username,
-                    idUnidadAdmtva          : usuarioEditar.idUnidadAdmtva,
-                    UnidadAdmtva            : '',
-                    avisosPTC               : usuarioEditar.avisosPTC,
-                    avisosPreaperturaCursos : usuarioEditar.avisosPreaperturaCursos,
-                    avisosInscripcion       : usuarioEditar.avisosInscripcion,
-                    avisosCierreCursos      : usuarioEditar.avisosCierreCursos,
-                    activo                  : usuarioEditar.activo,
-                    idPerfil                : (usuarioEditar.perfil.length > 0 ? usuarioEditar.perfil[0].id : 0),
-                    perfil                  : ''
+                    idUsuario                 : usuarioEditar.idUsuario,
+                    nombre                    : usuarioEditar.nombre,
+                    puesto                    : usuarioEditar.puesto,
+                    email                     : usuarioEditar.email,
+                    username                  : usuarioEditar.username,
+                    idUnidadAdmtva            : usuarioEditar.idUnidadAdmtva,
+                    UnidadAdmtva              : '',
+                    avisoEnvioPTC             : usuarioEditar.avisoEnvioPTC,
+                    avisoRechazoPTC           : usuarioEditar.avisoRechazoPTC,
+                    avisoRevisonPTC           : usuarioEditar.avisoRevisonPTC,
+                    avisoAceptacionPTC        : usuarioEditar.avisoAceptacionPTC,
+                    avisoEnvioPreapCurso      : usuarioEditar.avisoEnvioPreapCurso,
+                    avisoRechazoPreapCurso    : usuarioEditar.avisoRechazoPreapCurso,
+                    avisoRevisionPreapCurso   : usuarioEditar.avisoRevisionPreapCurso,
+                    avisoAceptacionPreapCurso : usuarioEditar.avisoAceptacionPreapCurso,
+                    avisoMinimosCurso         : usuarioEditar.avisoMinimosCurso,
+                    avisoCancelacionCurso     : usuarioEditar.avisoCancelacionCurso,
+                    avisoReprogCurso          : usuarioEditar.avisoReprogCurso,
+                    avisoTerminacionCurso     : usuarioEditar.avisoTerminacionCurso,
+                    avisoCierreCurso          : usuarioEditar.avisoCierreCurso,
+                    avisoEnvioEvaluacion      : usuarioEditar.avisoEnvioEvaluacion,
+                    avisoRechazoEvaluacion    : usuarioEditar.avisoRechazoEvaluacion,
+                    avisoAceptacionEvaluacion : usuarioEditar.avisoAceptacionEvaluacion,
+                    avisoCierreEvaluacion     : usuarioEditar.avisoCierreEvaluacion,
+                    activo                    : usuarioEditar.activo,
+                    idPerfil                  : (usuarioEditar.perfil.length > 0 ? usuarioEditar.perfil[0].id : 0),
+                    perfil                    : ''
             };
 
             vm.unidadSelecccionada = {};
@@ -62,7 +75,7 @@
                         vm.unidadSelecccionada = vm.listaUnidades[unidadSelecccionadaIndex];
 
                         if(vm.unidadSelecccionada.idUnidadAdmtva == 1)
-                            var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula"]}};
+                            var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula","certificacion"]}};
                         else
                             var condicion = {name: {inq: ["unidad_capacit", "unidad_inscrip","unidad_admin","unidad_vincula"]}};
 
@@ -94,7 +107,7 @@
                 vm.listaRoles = [];
 
                 if(vm.unidadSelecccionada.idUnidadAdmtva == 1)
-                    var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula"]}};
+                    var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula","certificacion"]}};
                 else
                     var condicion = {name: {inq: ["unidad_capacit", "unidad_inscrip","unidad_admin","unidad_vincula"]}};
 
@@ -120,33 +133,58 @@
                 if(vm.usuarioEditar.password == '' || vm.usuarioEditar.password === undefined)
                 {
                     var datos = {
-
-                            nombre                  : vm.usuarioEditar.nombre,
-                            puesto                  : vm.usuarioEditar.puesto,
-                            email                   : vm.usuarioEditar.email,
-                            username                : vm.usuarioEditar.username,
-                            idUnidadAdmtva          : vm.unidadSelecccionada.idUnidadAdmtva,
-                            avisosPTC               : vm.usuarioEditar.avisosPTC,
-                            avisosPreaperturaCursos : vm.usuarioEditar.avisosPreaperturaCursos,
-                            avisosInscripcion       : vm.usuarioEditar.avisosInscripcion,
-                            avisosCierreCursos      : vm.usuarioEditar.avisosCierreCursos,
-                            activo                  : vm.usuarioEditar.activo
+                            nombre                    : vm.usuarioEditar.nombre,
+                            puesto                    : vm.usuarioEditar.puesto,
+                            email                     : vm.usuarioEditar.email,
+                            username                  : vm.usuarioEditar.username,
+                            idUnidadAdmtva            : vm.unidadSelecccionada.idUnidadAdmtva,
+                            avisoEnvioPTC             : vm.usuarioEditar.avisoEnvioPTC,
+                            avisoRechazoPTC           : vm.usuarioEditar.avisoRechazoPTC,
+                            avisoRevisonPTC           : vm.usuarioEditar.avisoRevisonPTC,
+                            avisoAceptacionPTC        : vm.usuarioEditar.avisoAceptacionPTC,
+                            avisoEnvioPreapCurso      : vm.usuarioEditar.avisoEnvioPreapCurso,
+                            avisoRechazoPreapCurso    : vm.usuarioEditar.avisoRechazoPreapCurso,
+                            avisoRevisionPreapCurso   : vm.usuarioEditar.avisoRevisionPreapCurso,
+                            avisoAceptacionPreapCurso : vm.usuarioEditar.avisoAceptacionPreapCurso,
+                            avisoMinimosCurso         : vm.usuarioEditar.avisoMinimosCurso,
+                            avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
+                            avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
+                            avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,
+                            avisoCierreCurso          : vm.usuarioEditar.avisoCierreCurso,
+                            avisoEnvioEvaluacion      : vm.usuarioEditar.avisoEnvioEvaluacion,
+                            avisoRechazoEvaluacion    : vm.usuarioEditar.avisoRechazoEvaluacion,
+                            avisoAceptacionEvaluacion : vm.usuarioEditar.avisoAceptacionEvaluacion,
+                            avisoCierreEvaluacion     : vm.usuarioEditar.avisoCierreEvaluacion,
+                            activo                    : vm.usuarioEditar.activo
                     };
                 }
                 else
                 {
                     var datos = {
-                            nombre                  : vm.usuarioEditar.nombre,
-                            puesto                  : vm.usuarioEditar.puesto,
-                            email                   : vm.usuarioEditar.email,
-                            username                : vm.usuarioEditar.username,
-                            password                : vm.usuarioEditar.password,
-                            idUnidadAdmtva          : vm.unidadSelecccionada.idUnidadAdmtva,
-                            avisosPTC               : vm.usuarioEditar.avisosPTC,
-                            avisosPreaperturaCursos : vm.usuarioEditar.avisosPreaperturaCursos,
-                            avisosInscripcion       : vm.usuarioEditar.avisosInscripcion,
-                            avisosCierreCursos      : vm.usuarioEditar.avisosCierreCursos,
-                            activo                  : vm.usuarioEditar.activo
+                            nombre                    : vm.usuarioEditar.nombre,
+                            puesto                    : vm.usuarioEditar.puesto,
+                            email                     : vm.usuarioEditar.email,
+                            username                  : vm.usuarioEditar.username,
+                            password                  : vm.usuarioEditar.password,
+                            idUnidadAdmtva            : vm.unidadSelecccionada.idUnidadAdmtva,
+                            avisoEnvioPTC             : vm.usuarioEditar.avisoEnvioPTC,
+                            avisoRechazoPTC           : vm.usuarioEditar.avisoRechazoPTC,
+                            avisoRevisonPTC           : vm.usuarioEditar.avisoRevisonPTC,
+                            avisoAceptacionPTC        : vm.usuarioEditar.avisoAceptacionPTC,
+                            avisoEnvioPreapCurso      : vm.usuarioEditar.avisoEnvioPreapCurso,
+                            avisoRechazoPreapCurso    : vm.usuarioEditar.avisoRechazoPreapCurso,
+                            avisoRevisionPreapCurso   : vm.usuarioEditar.avisoRevisionPreapCurso,
+                            avisoAceptacionPreapCurso : vm.usuarioEditar.avisoAceptacionPreapCurso,
+                            avisoMinimosCurso         : vm.usuarioEditar.avisoMinimosCurso,
+                            avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
+                            avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
+                            avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,
+                            avisoCierreCurso          : vm.usuarioEditar.avisoCierreCurso,
+                            avisoEnvioEvaluacion      : vm.usuarioEditar.avisoEnvioEvaluacion,
+                            avisoRechazoEvaluacion    : vm.usuarioEditar.avisoRechazoEvaluacion,
+                            avisoAceptacionEvaluacion : vm.usuarioEditar.avisoAceptacionEvaluacion,
+                            avisoCierreEvaluacion     : vm.usuarioEditar.avisoCierreEvaluacion,
+                            activo                    : vm.usuarioEditar.activo
                     };
                 }
 

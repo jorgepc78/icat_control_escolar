@@ -27,6 +27,22 @@
       },
       "_selectable": false
     },
+    "idProcesoPadre": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_proceso_padre",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "identificador": {
       "type": "String",
       "required": false,
@@ -162,6 +178,11 @@
       "type": "hasMany",
       "model": "DestinatariosAvisos",
       "foreignKey": "idControlProcesos"
+    },
+    "usuario_pertenece": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": "idUsuario"
     }
   },
   "acls": [],

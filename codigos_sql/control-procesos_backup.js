@@ -126,7 +126,7 @@ module.exports = function(ControlProcesos) {
 										idUsuario : usuarioRecord2.idUsuario,
 										nombre    : usuarioRecord2.nombre,
 										email     : usuarioRecord2.email
-									});								
+									});
 
 								};
 

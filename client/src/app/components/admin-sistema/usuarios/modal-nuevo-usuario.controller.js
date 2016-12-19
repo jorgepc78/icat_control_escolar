@@ -21,19 +21,32 @@
             vm.listaRoles = [];
 
             vm.usuarioEditar = {
-                    nombre                  : '',
-                    puesto                  : '',
-                    email                   : '',
-                    username                : '',
-                    idUnidadAdmtva          : 0,
-                    UnidadAdmtva            : '',
-                    avisosPTC               : false,
-                    avisosPreaperturaCursos : false,
-                    avisosInscripcion       : false,
-                    avisosCierreCursos      : false,
-                    activo                  : true,
-                    idPerfil                : 0,
-                    perfil                  : ''
+                    nombre                    : '',
+                    puesto                    : '',
+                    email                     : '',
+                    username                  : '',
+                    idUnidadAdmtva            : 0,
+                    UnidadAdmtva              : '',
+                    avisoEnvioPTC             : false,
+                    avisoRechazoPTC           : false,
+                    avisoRevisonPTC           : false,
+                    avisoAceptacionPTC        : false,
+                    avisoEnvioPreapCurso      : false,
+                    avisoRechazoPreapCurso    : false,
+                    avisoRevisionPreapCurso   : false,
+                    avisoAceptacionPreapCurso : false,
+                    avisoMinimosCurso         : false,
+                    avisoCancelacionCurso     : false,
+                    avisoReprogCurso          : false,
+                    avisoTerminacionCurso     : false,
+                    avisoCierreCurso          : false,
+                    avisoEnvioEvaluacion      : false,
+                    avisoRechazoEvaluacion    : false,
+                    avisoAceptacionEvaluacion : false,
+                    avisoCierreEvaluacion     : false,
+                    activo                    : true,
+                    idPerfil                  : 0,
+                    perfil                    : ''
             };
 
             vm.unidadSelecccionada = {};
@@ -63,7 +76,7 @@
                 vm.listaRoles = [];
 
                 if(vm.unidadSelecccionada.idUnidadAdmtva == 1)
-                    var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula"]}};
+                    var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula","certificacion"]}};
                 else
                     var condicion = {name: {inq: ["unidad_capacit", "unidad_inscrip","unidad_admin","unidad_vincula"]}};
 
@@ -100,17 +113,30 @@
                 {
                     Usuario
                     .create({
-                            nombre                  : vm.usuarioEditar.nombre,
-                            puesto                  : vm.usuarioEditar.puesto,
-                            email                   : vm.usuarioEditar.email,
-                            username                : vm.usuarioEditar.username,
-                            password                : vm.usuarioEditar.password,
-                            idUnidadAdmtva          : vm.unidadSelecccionada.idUnidadAdmtva,
-                            avisosPTC               : vm.usuarioEditar.avisosPTC,
-                            avisosPreaperturaCursos : vm.usuarioEditar.avisosPreaperturaCursos,
-                            avisosInscripcion       : vm.usuarioEditar.avisosInscripcion,
-                            avisosCierreCursos      : vm.usuarioEditar.avisosCierreCursos,
-                            activo                  : vm.usuarioEditar.activo
+                            nombre                    : vm.usuarioEditar.nombre,
+                            puesto                    : vm.usuarioEditar.puesto,
+                            email                     : vm.usuarioEditar.email,
+                            username                  : vm.usuarioEditar.username,
+                            password                  : vm.usuarioEditar.password,
+                            idUnidadAdmtva            : vm.unidadSelecccionada.idUnidadAdmtva,
+                            avisoEnvioPTC             : vm.usuarioEditar.avisoEnvioPTC,
+                            avisoRechazoPTC           : vm.usuarioEditar.avisoRechazoPTC,
+                            avisoRevisonPTC           : vm.usuarioEditar.avisoRevisonPTC,
+                            avisoAceptacionPTC        : vm.usuarioEditar.avisoAceptacionPTC,
+                            avisoEnvioPreapCurso      : vm.usuarioEditar.avisoEnvioPreapCurso,
+                            avisoRechazoPreapCurso    : vm.usuarioEditar.avisoRechazoPreapCurso,
+                            avisoRevisionPreapCurso   : vm.usuarioEditar.avisoRevisionPreapCurso,
+                            avisoAceptacionPreapCurso : vm.usuarioEditar.avisoAceptacionPreapCurso,
+                            avisoMinimosCurso         : vm.usuarioEditar.avisoMinimosCurso,
+                            avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
+                            avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
+                            avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,
+                            avisoCierreCurso          : vm.usuarioEditar.avisoCierreCurso,
+                            avisoEnvioEvaluacion      : vm.usuarioEditar.avisoEnvioEvaluacion,
+                            avisoRechazoEvaluacion    : vm.usuarioEditar.avisoRechazoEvaluacion,
+                            avisoAceptacionEvaluacion : vm.usuarioEditar.avisoAceptacionEvaluacion,
+                            avisoCierreEvaluacion     : vm.usuarioEditar.avisoCierreEvaluacion,
+                            activo                    : vm.usuarioEditar.activo
                     })
                     .$promise
                     .then(function(respuesta) {

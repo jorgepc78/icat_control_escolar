@@ -84,30 +84,110 @@
                   </div>
 
                   <div class="hr-line-dashed"></div>
-                  <div class="form-group">
+                  <div class="form-group" ng-show="(vm.unidadSelecccionada.idUnidadAdmtva == 1)">
                       <div class="col-sm-10"><p class="form-control-static"><strong>Configuraci&oacute;n de avisos en los procesos del sistema</strong></p></div>
                   </div>
 
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Recibir avisos de los eventos en el PTC</label>
-                      <div class="col-sm-3">
-                          <input ng-if="vm.usuarioEditar.avisosPTC!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisosPTC"/>
-                      </div>
-                      <label class="col-sm-3 control-label">Recibir avisos de los eventos de pre-apertura de cursos</label>
-                      <div class="col-sm-3">
-                          <input ng-if="vm.usuarioEditar.avisosPreaperturaCursos!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisosPreaperturaCursos"/>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-sm-3 control-label">Recibir avisos de los eventos de inscripci&oacute;n en los cursos</label>
-                      <div class="col-sm-3">
-                          <input ng-if="vm.usuarioEditar.avisosInscripcion!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisosInscripcion"/>
-                      </div>
-                      <label class="col-sm-3 control-label">Recibir avisos cuando se terminen y cierren los cursos</label>
-                      <div class="col-sm-3">
-                          <input ng-if="vm.usuarioEditar.avisosCierreCursos!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisosCierreCursos"/>
-                      </div>
-                  </div>
+                  <tabset ng-show="(vm.unidadSelecccionada.idUnidadAdmtva == 1)">
+                      <tab heading="Eventos del PTC">
+                          <br>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de env&iacute;o del PTC a revisi&oacute;n</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoEnvioPTC!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoEnvioPTC"/>
+                              </div>
+                              <label class="col-sm-4 control-label">Recibir el aviso de rechazo del PTC</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoRechazoPTC!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoRechazoPTC"/>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de revisi&oacute;n realizada del PTC</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoRevisonPTC!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoRevisonPTC"/>
+                              </div>
+                              <label class="col-sm-4 control-label">Recibir el aviso de aceptaci&oacute;n del PTC</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoAceptacionPTC!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoAceptacionPTC"/>
+                              </div>
+                          </div>
+                      </tab>
+                      <tab heading="Eventos Preapertura Cursos">
+                          <br>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de env&iacute;o de la pre-apertura a revisi&oacute;n</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoEnvioPreapCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoEnvioPreapCurso"/>
+                              </div>
+                              <label class="col-sm-4 control-label">Recibir el aviso de rechazo de la pre-apertura</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoRechazoPreapCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoRechazoPreapCurso"/>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de revisi&oacute;n realizada de la pre-apertura</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoRevisionPreapCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoRevisionPreapCurso"/>
+                              </div>
+                              <label class="col-sm-4 control-label">Recibir el aviso de aceptaci&oacute;n de la pre-apertura</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoAceptacionPreapCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoAceptacionPreapCurso"/>
+                              </div>
+                          </div>
+                      </tab>
+                      <tab heading="Eventos Cursos Activos">
+                          <br>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de cumplimiento m&iacute;nimo de inscritos pagados</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoMinimosCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoMinimosCurso"/>
+                              </div>
+                              <label class="col-sm-4 control-label">Recibir el aviso de cancelaci&oacute;n del curso</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoCancelacionCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoCancelacionCurso"/>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de reprogramaci&oacute;n del curso</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoReprogCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoReprogCurso"/>
+                              </div>
+                              <label class="col-sm-4 control-label">Recibir el aviso de terminaci&oacute;n del curso</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoTerminacionCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoTerminacionCurso"/>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de cierre del curso</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoCierreCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoCierreCurso"/>
+                              </div>
+                          </div>
+                      </tab>
+                      <tab heading="Eventos Evaluaciones">
+                          <br>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de env&iacute;o de la evaluaci&oacute;n a revisi&oacute;n</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoEnvioEvaluacion!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoEnvioEvaluacion"/>
+                              </div>
+                              <label class="col-sm-4 control-label">Recibir el aviso de rechazo de la evaluaci&oacute;n</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoRechazoEvaluacion!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoRechazoEvaluacion"/>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-5 control-label">Recibir el aviso de aceptaci&oacute;n de la evaluaci&oacute;n</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoAceptacionEvaluacion!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoAceptacionEvaluacion"/>
+                              </div>
+                              <label class="col-sm-4 control-label">Recibir el aviso de cierre de la evaluaci&oacute;n</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoCierreEvaluacion!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoCierreEvaluacion"/>
+                              </div>
+                          </div>
+                      </tab>
+                  </tabset>
 
             </form>
 

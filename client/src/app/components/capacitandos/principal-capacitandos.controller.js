@@ -120,14 +120,7 @@
                   vm.mostrarbtnLimpiar = true;
 
 
-                  vm.tablalListaCapacitados.condicion = {
-                                    or: [
-                                      {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                      {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                      {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-
-                                    ]
-                                };
+                  vm.tablalListaCapacitados.condicion = {nombreCompleto: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}};
 
                   tablaDatosService.obtiene_datos_tabla(Capacitandos, vm.tablalListaCapacitados)
                   .then(function(respuesta) {
@@ -230,6 +223,7 @@
 
                     modalInstance.result.then(function (respuesta) {
 
+                        vm.personaSeleccionada.numControl          = respuesta.numControl;
                         vm.personaSeleccionada.apellidoPaterno     = respuesta.apellidoPaterno;
                         vm.personaSeleccionada.apellidoMaterno     = respuesta.apellidoMaterno;
                         vm.personaSeleccionada.nombre              = respuesta.nombre;

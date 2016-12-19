@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalEditaCapacitandoController', ModalEditaCapacitandoController);
 
-        ModalEditaCapacitandoController.$inject = ['$modalInstance', '$timeout', 'registroEditar', 'Capacitandos', 'CatalogoLocalidades', 'CatalogoNivelEstudios', 'CatalogoActividades', 'CatalogoExperiencias', 'CatalogoMedios', 'CatalogoMotivos'];
+        ModalEditaCapacitandoController.$inject = ['$modalInstance', '$timeout', '$rootScope', 'registroEditar', 'Capacitandos', 'CatalogoLocalidades', 'CatalogoNivelEstudios', 'CatalogoActividades', 'CatalogoExperiencias', 'CatalogoMedios', 'CatalogoMotivos'];
 
-    function ModalEditaCapacitandoController($modalInstance, $timeout, registroEditar, Capacitandos, CatalogoLocalidades, CatalogoNivelEstudios, CatalogoActividades, CatalogoExperiencias, CatalogoMedios, CatalogoMotivos) {
+    function ModalEditaCapacitandoController($modalInstance, $timeout, $rootScope, registroEditar, Capacitandos, CatalogoLocalidades, CatalogoNivelEstudios, CatalogoActividades, CatalogoExperiencias, CatalogoMedios, CatalogoMotivos) {
 
             var vm = this;
 
@@ -15,7 +15,8 @@
             vm.guardar      = guardar;
 
             vm.mostrarNumControl = true;
-            vm.soloLectura = false;            
+            vm.soloLecturaNumControl = false;
+            vm.soloLectura = false;
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
             vm.mensaje = '';
@@ -102,6 +103,9 @@
             inicia();
 
             function inicia() {
+
+                if($rootScope.currentUser.perfil == 'unidad_inscrip')
+                    vm.soloLecturaNumControl = true;
 
                 CatalogoLocalidades.find({
                     filter: {
@@ -294,79 +298,111 @@
                                             }
                                             else
                                             {
-                                                vm.registroEditar.ultimaActualizacion =  Date();
 
-                                                Capacitandos.prototype$updateAttributes(
-                                                {
-                                                    id: vm.registroEditar.idAlumno
-                                                },{
-                                                    idUnidadAdmtva      : vm.registroEditar.idUnidadAdmtva,
-                                                    apellidoPaterno     : vm.registroEditar.apellidoPaterno,
-                                                    apellidoMaterno     : vm.registroEditar.apellidoMaterno,
-                                                    nombre              : vm.registroEditar.nombre,
-                                                    sexo                : vm.registroEditar.sexo,
-                                                    email               : vm.registroEditar.email,
-                                                    diaNacimiento       : vm.registroEditar.diaNacimiento,
-                                                    mesNacimiento       : vm.registroEditar.mesNacimiento,
-                                                    anioNacimiento      : vm.registroEditar.anioNacimiento,
-                                                    edad                : vm.registroEditar.edad,
-                                                    telefono            : vm.registroEditar.telefono,
-                                                    celular             : vm.registroEditar.celular,
-                                                    curp                : vm.registroEditar.curp,
-                                                    domicilio           : vm.registroEditar.domicilio,
-                                                    colonia             : vm.registroEditar.colonia,
-                                                    codigoPostal        : vm.registroEditar.codigoPostal,
-                                                    idLocalidad         : vm.registroEditar.idLocalidad,
-                                                    idNivelEstudios     : vm.registroEditar.idNivelEstudios,
-                                                    estadoCivil         : vm.registroEditar.estadoCivil,
-                                                    foto                : vm.registroEditar.foto,
-                                                    disVisual           : vm.registroEditar.disVisual,
-                                                    disAuditiva         : vm.registroEditar.disAuditiva,
-                                                    disLenguaje         : vm.registroEditar.disLenguaje,
-                                                    disMotriz           : vm.registroEditar.disMotriz,
-                                                    disMental           : vm.registroEditar.disMental,
-                                                    enfermedadPadece    : vm.registroEditar.enfermedadPadece,
-                                                    enfermedadCual      : vm.registroEditar.enfermedadCual,
-                                                    tutorNombre         : vm.registroEditar.tutorNombre,
-                                                    tutorCurp           : vm.registroEditar.tutorCurp,
-                                                    tutorParentesco     : vm.registroEditar.tutorParentesco,
-                                                    tutorDireccion      : vm.registroEditar.tutorDireccion,
-                                                    tutorTelefono       : vm.registroEditar.tutorTelefono,
-                                                    docActaNacimiento   : vm.registroEditar.docActaNacimiento,
-                                                    docCompEstudios     : vm.registroEditar.docCompEstudios,
-                                                    docIdentOficial     : vm.registroEditar.docIdentOficial,
-                                                    docConstCurp        : vm.registroEditar.docConstCurp,
-                                                    docFotografias      : vm.registroEditar.docFotografias,
-                                                    docCompMigratorio   : vm.registroEditar.docCompMigratorio,
-                                                    docCompDomicilio    : vm.registroEditar.docCompDomicilio,
-                                                    docCurpTutor        : vm.registroEditar.docCurpTutor,
-                                                    trabajaActualmente  : vm.registroEditar.trabajaActualmente,
-                                                    idActividad         : vm.registroEditar.idActividad,
-                                                    empresaTrabaja      : vm.registroEditar.empresaTrabaja,
-                                                    empresaPuesto       : vm.registroEditar.empresaPuesto,
-                                                    empresaAntiguedad   : vm.registroEditar.empresaAntiguedad,
-                                                    empresaDireccion    : vm.registroEditar.empresaDireccion,
-                                                    empresaTelefono     : vm.registroEditar.empresaTelefono,
-                                                    idExperiencia       : vm.registroEditar.idExperiencia,
-                                                    idMedio             : vm.registroEditar.idMedio,
-                                                    idMotivo            : vm.registroEditar.idMotivo,
-                                                    idGrupoPertenece    : vm.registroEditar.idGrupoPertenece,
-                                                    gpoJefasFamilia     : vm.registroEditar.gpoJefasFamilia,
-                                                    gpoSitViolencia     : vm.registroEditar.gpoSitViolencia,
-                                                    gpoAdolCalle        : vm.registroEditar.gpoAdolCalle,
-                                                    gpoIndigenas        : vm.registroEditar.gpoIndigenas,
-                                                    gpoAdultoMayor      : vm.registroEditar.gpoAdultoMayor,
-                                                    gpoLgbttti          : vm.registroEditar.gpoLgbttti,
-                                                    gpoDentroCereso     : vm.registroEditar.gpoDentroCereso,
-                                                    gpoCapDiferentes    : vm.registroEditar.gpoCapDiferentes,
-                                                    gpoMenorReadap      : vm.registroEditar.gpoMenorReadap,
-                                                    gpoFueraCereso      : vm.registroEditar.gpoFueraCereso,
-                                                    ultimaActualizacion : vm.registroEditar.ultimaActualizacion
-                                                })
-                                                .$promise
-                                                .then(function(respuesta) {
-                                                      $modalInstance.close(vm.registroEditar);
-                                                });
+                                                    Capacitandos.count({
+                                                        where: {
+                                                            and: [
+                                                                {numControl: vm.registroEditar.numControl},
+                                                                {numControl: {neq: ''}},
+                                                                {idAlumno : {neq: vm.registroEditar.idAlumno}}
+                                                            ]
+                                                        }
+                                                    })
+                                                    .$promise
+                                                    .then(function(resp) {
+                                                        
+                                                        if(resp.count > 0)
+                                                        {
+                                                            vm.mostrarSpiner = false;
+                                                            vm.mostrar_msg_error = true;
+                                                            vm.mensaje = 'El número de control ya se encuentra asignado a otra persona';
+                                                            $timeout(function(){
+                                                                 vm.mostrar_msg_error = false;
+                                                                 vm.mensaje = '';
+                                                            }, 2000);
+
+                                                        }
+                                                        else
+                                                        {
+                                                            vm.registroEditar.ultimaActualizacion =  Date();
+
+                                                            Capacitandos.prototype$updateAttributes(
+                                                            {
+                                                                id: vm.registroEditar.idAlumno
+                                                            },{
+                                                                idUnidadAdmtva      : vm.registroEditar.idUnidadAdmtva,
+                                                                numControl          : vm.registroEditar.numControl,
+                                                                apellidoPaterno     : vm.registroEditar.apellidoPaterno,
+                                                                apellidoMaterno     : vm.registroEditar.apellidoMaterno,
+                                                                nombre              : vm.registroEditar.nombre,
+                                                                nombreCompleto      : vm.registroEditar.apellidoPaterno + ' ' + vm.registroEditar.apellidoMaterno + ' ' + vm.registroEditar.nombre,
+                                                                sexo                : vm.registroEditar.sexo,
+                                                                email               : vm.registroEditar.email,
+                                                                diaNacimiento       : vm.registroEditar.diaNacimiento,
+                                                                mesNacimiento       : vm.registroEditar.mesNacimiento,
+                                                                anioNacimiento      : vm.registroEditar.anioNacimiento,
+                                                                edad                : vm.registroEditar.edad,
+                                                                telefono            : vm.registroEditar.telefono,
+                                                                celular             : vm.registroEditar.celular,
+                                                                curp                : vm.registroEditar.curp,
+                                                                domicilio           : vm.registroEditar.domicilio,
+                                                                colonia             : vm.registroEditar.colonia,
+                                                                codigoPostal        : vm.registroEditar.codigoPostal,
+                                                                idLocalidad         : vm.registroEditar.idLocalidad,
+                                                                idNivelEstudios     : vm.registroEditar.idNivelEstudios,
+                                                                estadoCivil         : vm.registroEditar.estadoCivil,
+                                                                foto                : vm.registroEditar.foto,
+                                                                disVisual           : vm.registroEditar.disVisual,
+                                                                disAuditiva         : vm.registroEditar.disAuditiva,
+                                                                disLenguaje         : vm.registroEditar.disLenguaje,
+                                                                disMotriz           : vm.registroEditar.disMotriz,
+                                                                disMental           : vm.registroEditar.disMental,
+                                                                enfermedadPadece    : vm.registroEditar.enfermedadPadece,
+                                                                enfermedadCual      : vm.registroEditar.enfermedadCual,
+                                                                tutorNombre         : vm.registroEditar.tutorNombre,
+                                                                tutorCurp           : vm.registroEditar.tutorCurp,
+                                                                tutorParentesco     : vm.registroEditar.tutorParentesco,
+                                                                tutorDireccion      : vm.registroEditar.tutorDireccion,
+                                                                tutorTelefono       : vm.registroEditar.tutorTelefono,
+                                                                docActaNacimiento   : vm.registroEditar.docActaNacimiento,
+                                                                docCompEstudios     : vm.registroEditar.docCompEstudios,
+                                                                docIdentOficial     : vm.registroEditar.docIdentOficial,
+                                                                docConstCurp        : vm.registroEditar.docConstCurp,
+                                                                docFotografias      : vm.registroEditar.docFotografias,
+                                                                docCompMigratorio   : vm.registroEditar.docCompMigratorio,
+                                                                docCompDomicilio    : vm.registroEditar.docCompDomicilio,
+                                                                docCurpTutor        : vm.registroEditar.docCurpTutor,
+                                                                trabajaActualmente  : vm.registroEditar.trabajaActualmente,
+                                                                idActividad         : vm.registroEditar.idActividad,
+                                                                empresaTrabaja      : vm.registroEditar.empresaTrabaja,
+                                                                empresaPuesto       : vm.registroEditar.empresaPuesto,
+                                                                empresaAntiguedad   : vm.registroEditar.empresaAntiguedad,
+                                                                empresaDireccion    : vm.registroEditar.empresaDireccion,
+                                                                empresaTelefono     : vm.registroEditar.empresaTelefono,
+                                                                idExperiencia       : vm.registroEditar.idExperiencia,
+                                                                idMedio             : vm.registroEditar.idMedio,
+                                                                idMotivo            : vm.registroEditar.idMotivo,
+                                                                idGrupoPertenece    : vm.registroEditar.idGrupoPertenece,
+                                                                gpoJefasFamilia     : vm.registroEditar.gpoJefasFamilia,
+                                                                gpoSitViolencia     : vm.registroEditar.gpoSitViolencia,
+                                                                gpoAdolCalle        : vm.registroEditar.gpoAdolCalle,
+                                                                gpoIndigenas        : vm.registroEditar.gpoIndigenas,
+                                                                gpoAdultoMayor      : vm.registroEditar.gpoAdultoMayor,
+                                                                gpoLgbttti          : vm.registroEditar.gpoLgbttti,
+                                                                gpoDentroCereso     : vm.registroEditar.gpoDentroCereso,
+                                                                gpoCapDiferentes    : vm.registroEditar.gpoCapDiferentes,
+                                                                gpoMenorReadap      : vm.registroEditar.gpoMenorReadap,
+                                                                gpoFueraCereso      : vm.registroEditar.gpoFueraCereso,
+                                                                ultimaActualizacion : vm.registroEditar.ultimaActualizacion
+                                                            })
+                                                            .$promise
+                                                            .then(function(respuesta) {
+                                                                  $modalInstance.close(vm.registroEditar);
+                                                            });
+
+                                                        }
+
+                                                    });
 
                                             }
 

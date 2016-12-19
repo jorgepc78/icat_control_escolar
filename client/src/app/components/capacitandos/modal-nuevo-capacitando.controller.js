@@ -289,6 +289,7 @@
                                                     apellidoPaterno     : vm.registroEditar.apellidoPaterno,
                                                     apellidoMaterno     : vm.registroEditar.apellidoMaterno,
                                                     nombre              : vm.registroEditar.nombre,
+                                                    nombreCompleto      : vm.registroEditar.apellidoPaterno + ' ' + vm.registroEditar.apellidoMaterno + ' ' + vm.registroEditar.nombre,
                                                     sexo                : vm.registroEditar.sexo,
                                                     email               : vm.registroEditar.email,
                                                     diaNacimiento       : vm.registroEditar.diaNacimiento,

@@ -36,7 +36,7 @@
                   vm.tablaListaUsuarios.filtro_datos = {
                           filter: {
                               where: vm.tablaListaUsuarios.condicion,
-                              fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','avisosPTC','avisosPreaperturaCursos','avisosInscripcion','avisosCierreCursos','activo'],
+                              fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','activo','avisoEnvioPTC','avisoRechazoPTC','avisoRevisonPTC','avisoAceptacionPTC','avisoEnvioPreapCurso','avisoRechazoPreapCurso','avisoRevisionPreapCurso','avisoAceptacionPreapCurso','avisoMinimosCurso','avisoCancelacionCurso','avisoReprogCurso','avisoTerminacionCurso','avisoCierreCurso','avisoEnvioEvaluacion','avisoRechazoEvaluacion','avisoAceptacionEvaluacion','avisoCierreEvaluacion'],
                               order: ['idUnidadAdmtva ASC','nombre ASC'],
                               limit: vm.tablaListaUsuarios.registrosPorPagina,
                               skip: vm.tablaListaUsuarios.paginaActual - 1,
@@ -201,10 +201,23 @@
                         vm.UsuarioSeleccionado.username                        = respuesta.username;
                         vm.UsuarioSeleccionado.unidad_pertenece.idUnidadAdmtva = respuesta.idUnidadAdmtva;
                         vm.UsuarioSeleccionado.unidad_pertenece.nombre         = respuesta.UnidadAdmtva;
-                        vm.UsuarioSeleccionado.avisosPTC                       = respuesta.avisosPTC;
-                        vm.UsuarioSeleccionado.avisosPreaperturaCursos         = respuesta.avisosPreaperturaCursos;
-                        vm.UsuarioSeleccionado.avisosInscripcion               = respuesta.avisosInscripcion;
-                        vm.UsuarioSeleccionado.avisosCierreCursos              = respuesta.avisosCierreCursos;
+                        vm.UsuarioSeleccionado.avisoEnvioPTC                   = respuesta.avisoEnvioPTC;
+                        vm.UsuarioSeleccionado.avisoRechazoPTC                 = respuesta.avisoRechazoPTC;
+                        vm.UsuarioSeleccionado.avisoRevisonPTC                 = respuesta.avisoRevisonPTC;
+                        vm.UsuarioSeleccionado.avisoAceptacionPTC              = respuesta.avisoAceptacionPTC;
+                        vm.UsuarioSeleccionado.avisoEnvioPreapCurso            = respuesta.avisoEnvioPreapCurso;
+                        vm.UsuarioSeleccionado.avisoRechazoPreapCurso          = respuesta.avisoRechazoPreapCurso;
+                        vm.UsuarioSeleccionado.avisoRevisionPreapCurso         = respuesta.avisoRevisionPreapCurso;
+                        vm.UsuarioSeleccionado.avisoAceptacionPreapCurso       = respuesta.avisoAceptacionPreapCurso;
+                        vm.UsuarioSeleccionado.avisoMinimosCurso               = respuesta.avisoMinimosCurso;
+                        vm.UsuarioSeleccionado.avisoCancelacionCurso           = respuesta.avisoCancelacionCurso;
+                        vm.UsuarioSeleccionado.avisoReprogCurso                = respuesta.avisoReprogCurso;
+                        vm.UsuarioSeleccionado.avisoTerminacionCurso           = respuesta.avisoTerminacionCurso;
+                        vm.UsuarioSeleccionado.avisoCierreCurso                = respuesta.avisoCierreCurso;
+                        vm.UsuarioSeleccionado.avisoEnvioEvaluacion            = respuesta.avisoEnvioEvaluacion;
+                        vm.UsuarioSeleccionado.avisoRechazoEvaluacion          = respuesta.avisoRechazoEvaluacion;
+                        vm.UsuarioSeleccionado.avisoAceptacionEvaluacion       = respuesta.avisoAceptacionEvaluacion;
+                        vm.UsuarioSeleccionado.avisoCierreEvaluacion           = respuesta.avisoCierreEvaluacion;
                         vm.UsuarioSeleccionado.activo                          = respuesta.activo;
                         if(vm.UsuarioSeleccionado.perfil.length > 0)
                         {

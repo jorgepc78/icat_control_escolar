@@ -397,7 +397,7 @@
                         fechaAceptacion: Date()
                       };
                       mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>AUTORIZADo</strong>, ¿Continuar?';
-                      mensaje_accion = 'PTC APROBADO - ACEPTADO DIR GRAL';
+                      mensaje_accion = 'PTC APROBADO DIR GRAL';
                   }
 
                   swal({
@@ -535,7 +535,7 @@
                         fechaRechazo: Date()
                       };
                       mensaje_confirmacion = 'Se confirma que el PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>RECHAZADO</strong> y ser&aacute; regresado a la unidad, ¿Continuar?';
-                      mensaje_accion = 'PTC RECHAZADO';
+                      mensaje_accion = 'PTC RECHAZADO PROGRAMAS';
                   }
                   if($scope.currentUser.perfil == 'dir_academica')
                   {

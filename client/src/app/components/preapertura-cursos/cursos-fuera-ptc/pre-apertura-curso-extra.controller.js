@@ -279,7 +279,7 @@
                                   ControlProcesos
                                   .create({
                                       proceso         : 'Pre-Apertura Curso Extra',
-                                      accion          : 'ENVIO VALIDACION',
+                                      accion          : 'ENVIO VALIDACION CURSO',
                                       idDocumento     : seleccion.idCurso,
                                       idUsuario       : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id

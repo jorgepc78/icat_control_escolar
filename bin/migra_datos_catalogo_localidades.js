@@ -5,7 +5,7 @@ var http = require('http');
 
 //Creacion de los modelos
 var ModeloActualizar = models.CatalogoLocalidades;
-var token = 'YrbGVK7AxM4BG3HoH2pGNdBFF6W9IngENfuC6ApTj69WkCDkG9tnqBgXSo9gBTS4';
+var token = 'QsZ6RbI45mArq9okd4AZBbkMGObdG9MeuTJjKOJzTO3TbMnoQGHzGNu0ZANQ003s';
 var host = '69.28.92.27';
 var port = 80;
 

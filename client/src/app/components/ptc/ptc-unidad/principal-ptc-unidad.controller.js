@@ -418,7 +418,7 @@
                                   ControlProcesos
                                   .create({
                                       proceso              : 'PTC',
-                                      accion               : 'ENVIO REVISION',
+                                      accion               : 'ENVIO REVISION PTC',
                                       idDocumento          : RegistroSeleccionado.idPtc,
                                       idUsuario            : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva       : $scope.currentUser.unidad_pertenece_id,

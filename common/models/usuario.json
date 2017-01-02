@@ -143,22 +143,6 @@
       },
       "_selectable": true
     },
-    "avisoRechazoPTC": {
-      "type": "Boolean",
-      "required": false,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "postgresql": {
-        "columnName": "aviso_rechazo_ptc",
-        "dataType": "boolean",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "YES"
-      },
-      "_selectable": true
-    },
     "avisoRevisonPTCProgr": {
       "type": "Boolean",
       "required": false,
@@ -167,6 +151,22 @@
       "scale": null,
       "postgresql": {
         "columnName": "aviso_revison_ptc_progr",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRechazoPTCProgr": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_ptc_progr",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,
@@ -191,6 +191,22 @@
       },
       "_selectable": true
     },
+    "avisoRechazoPTCAcad": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_ptc_acad",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "avisoRevisonPTCPlan": {
       "type": "Boolean",
       "required": false,
@@ -207,14 +223,46 @@
       },
       "_selectable": true
     },
-    "avisoAceptacionPTC": {
+    "avisoRechazoPTCPlan": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "aviso_aceptacion_ptc",
+        "columnName": "aviso_rechazo_ptc_plan",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRevisionPTCGral": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_revision_ptc_gral",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRechazoPTCGral": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_ptc_gral",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,
@@ -239,14 +287,14 @@
       },
       "_selectable": true
     },
-    "avisoRechazoPreapCurso": {
+    "avisoRevisionPreapCursoProgr": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "aviso_rechazo_preap_curso",
+        "columnName": "aviso_revision_preap_curso_progr",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,
@@ -255,14 +303,14 @@
       },
       "_selectable": true
     },
-    "avisoRevisionPreapCurso": {
+    "avisoRechazoPreapCursoProgr": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "aviso_revision_preap_curso",
+        "columnName": "aviso_rechazo_preap_curso_progr",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,
@@ -271,14 +319,94 @@
       },
       "_selectable": true
     },
-    "avisoAceptacionPreapCurso": {
+    "avisoRevisionPreapCursoAcad": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "aviso_aceptacion_preap_curso",
+        "columnName": "aviso_revision_preap_curso_acad",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRechazoPreapCursoAcad": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_preap_curso_acad",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRevisionPreapCursoPlan": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_revision_preap_curso_plan",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRechazoPreapCursoPlan": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_preap_curso_plan",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRevisionPreapCursoGral": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_revision_preap_curso_gral",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRechazoPreapCursoGral": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_preap_curso_gral",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,

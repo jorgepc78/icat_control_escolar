@@ -44,12 +44,16 @@
 
             function inicia() {
 
+                  var fechaHoy = new Date();
+                  var ultimo_anio = fechaHoy.getFullYear();
+
                   ProgTrimCursos.find({
                       filter: {
                           where: {
                               and: [
-                                {and:[{estatus:2}]},
-                                {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id}
+                                {estatus:2},
+                                {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                {anio: ultimo_anio}
                               ]                            
                           },
                           fields: ['idPtc','anio','trimestre'],
@@ -311,7 +315,7 @@
                                         ControlProcesos
                                         .create({
                                             proceso         : 'Pre-Apertura Curso PTC',
-                                            accion          : 'ENVIO VALIDACION',
+                                            accion          : 'ENVIO VALIDACION CURSO',
                                             idDocumento     : seleccion.curso_oficial_registrado[0].idCurso,
                                             idUsuario       : $scope.currentUser.id_usuario,
                                             idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id

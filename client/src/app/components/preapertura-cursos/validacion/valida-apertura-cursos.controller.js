@@ -300,7 +300,7 @@
                         estatus: 2
                       };
                       mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>AUTORIZADA</strong> para su pre-apertura y promoci&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'CURSO APROBADO - ACEPTADO DIR GRAL';
+                      mensaje_accion = 'CURSO APROBADO DIR GRAL';
                   }
 
 
@@ -489,7 +489,7 @@
                         estatus: 3
                       };
                       mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>RECHAZADA</strong> y regresada a la unidad, ¿Continuar?';
-                      mensaje_accion = 'RECHAZO PRE-APERTURA';
+                      mensaje_accion = 'CURSO RECHAZADO PROGRAMAS';
                   }
                   if($scope.currentUser.perfil == 'dir_academica')
                   {

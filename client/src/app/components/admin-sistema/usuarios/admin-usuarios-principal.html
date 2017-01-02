@@ -59,7 +59,7 @@
 
         <div class="col-md-5">
             <div class="ibox ">
-                <div class="ibox-content" style="height:650px;">
+                <div class="ibox-content" style="height:810px;">
                     <div class="tab-content">
                         <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                     <div class="row">
@@ -105,23 +105,44 @@
                                                         <br>
                                                         <strong ng-show="(vm.UsuarioSeleccionado.idUnidadAdmtva == 1)">Configuraci&oacute;n de avisos en los procesos del sistema</strong>
                                                         <tabset ng-show="(vm.UsuarioSeleccionado.idUnidadAdmtva == 1)" style="padding-top: 25px;">
+                                                            
                                                             <tab heading="PTC">
                                                                 <ul class="list-group clear-list">
                                                                     <li class="list-group-item fist-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoEnvioPTC === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoEnvioPTC === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de env&iacute;o del PTC a revisi&oacute;n
+                                                                        Aviso de env&iacute;o del PTC a revisi&oacute;n
                                                                     </li>
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPTC === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPTC === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de rechazo del PTC
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisonPTCProgr === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisonPTCProgr === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n del PTC por parte de programas
                                                                     </li>
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisonPTC === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisonPTC === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de revisi&oacute;n realizada del PTC
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPTCProgr === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPTCProgr === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo del PTC por parte de programas
                                                                     </li>
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoAceptacionPTC === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoAceptacionPTC === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de aceptaci&oacute;n del PTC
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisonPTCAcad === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisonPTCAcad === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n del PTC por parte de dir. Acad&eacute;mica
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPTCAcad === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPTCAcad === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo del PTC por parte de dir. Acad&eacute;mica
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisonPTCPlan === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisonPTCPlan === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n del PTC por parte de Planeaci&oacute;n
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPTCPlan === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPTCPlan === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo del PTC por parte de Planeaci&oacute;n
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionPTCGral === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionPTCGral === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n del PTC por parte de dir. Gral
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPTCGral === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPTCGral === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo del PTC por parte de dir. Gral
                                                                     </li>
                                                                 </ul>
                                                             </tab>
@@ -129,19 +150,39 @@
                                                                 <ul class="list-group clear-list">
                                                                     <li class="list-group-item fist-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoEnvioPreapCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoEnvioPreapCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de env&iacute;o de la pre-apertura a revisi&oacute;n
+                                                                        Aviso de env&iacute;o del curso a revisi&oacute;n
                                                                     </li>
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPreapCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPreapCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de rechazo de la pre-apertura
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionPreapCursoProgr === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionPreapCursoProgr === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n del curso por parte de programas
                                                                     </li>
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionPreapCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionPreapCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de revisi&oacute;n realizada de la pre-apertura
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPreapCursoProgr === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPreapCursoProgr === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo del curso por parte de programas
                                                                     </li>
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoAceptacionPreapCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoAceptacionPreapCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de aceptaci&oacute;n de la pre-apertura
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionPreapCursoAcad === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionPreapCursoAcad === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n del curso por parte de dir. Acad&eacute;mica
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPreapCursoAcad === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPreapCursoAcad === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo del curso por parte de dir. Acad&eacute;mica
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionPreapCursoPlan === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionPreapCursoPlan === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n del curso por parte de Planeaci&oacute;n
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPreapCursoPlan === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPreapCursoPlan === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo del curso por parte de Planeaci&oacute;n
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionPreapCursoGral === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionPreapCursoGral === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n del curso por parte de dir. Gral
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoPreapCursoGral === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoPreapCursoGral === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo del curso por parte de dir. Gral
                                                                     </li>
                                                                 </ul>
                                                             </tab>

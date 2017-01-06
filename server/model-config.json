@@ -166,10 +166,18 @@
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },
+  "DocumentosInstructores": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
   "Evaluacion": {
     "dataSource": "icat_control_escolar_ds",
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "AlmacenDocumentos": {
+    "dataSource": "almacenamiento",
+    "public": true
   }
 }

@@ -45,7 +45,7 @@
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Grado acad&eacute;mico</label>
                                           <div class="col-sm-9">
-                                              <textarea class="form-control" ng-model="vm.registroEdicion.gradoAcademico" rows="5" cols="90" required></textarea>
+                                              <textarea class="form-control" ng-model="vm.registroEdicion.gradoAcademico" rows="4" cols="90" required></textarea>
                                           </div>
                                       </div>
                                       <div class="form-group">
@@ -200,10 +200,85 @@
                             </div>
                             <div class="col-lg-1">
                             </div>
+                    </div>
+                </tab>
+                <tab heading="Documentos">
+                <br>
+                    <div class="container">
+                          <div class="row">
+                                  <div class="col-md-6" style="margin-bottom: 40px">
+                                      <input nv-file-select uploader="vm.uploader" type="file"/>
+                                      <br>
+                                      <h3>Cola de subida</h3>
+                                      <p>Total archivos: {{ vm.uploader.queue.length }}</p>
+                                      <table class="table">
+                                          <thead>
+                                          <tr>
+                                              <th width="50%">Nombre</th>
+                                              <th ng-show="vm.uploader.isHTML5">Tama&ntilde;o</th>
+                                              <th ng-show="vm.uploader.isHTML5">Progreso</th>
+                                              <th>Estatus</th>
+                                              <th>Acciones</th>
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr ng-repeat="item in vm.uploader.queue">
+                                              <td><strong>{{ item.file.name }}</strong></td>
+                                              <td ng-show="vm.uploader.isHTML5" nowrap>{{
+                                                  item.file.size/1024/1024|number:2 }} MB
+                                              </td>
+                                              <td ng-show="vm.uploader.isHTML5">
+                                                  <div class="progress" style="margin-bottom: 0;">
+                                                      <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                                  </div>
+                                              </td>
+                                              <td class="text-center">
+                                                  <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                  <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                  <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                              </td>
+                                              <td nowrap>
+                                                  <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                      <span class="glyphicon glyphicon-trash"></span>
+                                                      Eliminar
+                                                  </button>
+                                              </td>
+                                          </tr>
+                                          </tbody>
+                                      </table>
+
+                                      <div>
+                                          <p>
+                                              Progreso de la cola:
+                                              <div class="progress" style="">
+                                                  <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                              </div>
+                                          </p>
+                                          <button type="button" class="btn btn-success btn-s" ng-click="vm.uploader.uploadAll()" ng-disabled="!vm.uploader.getNotUploadedItems().length">
+                                              <span class="glyphicon glyphicon-upload"></span> Cargar todos
+                                          </button>
+                                          <button type="button" class="btn btn-warning btn-s" ng-click="vm.uploader.cancelAll()" ng-disabled="!vm.uploader.isUploading">
+                                              <span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+                                              all
+                                          </button>
+                                          <button type="button" class="btn btn-danger btn-s" ng-click="vm.uploader.clearQueue()" ng-disabled="!vm.uploader.queue.length">
+                                              <span class="glyphicon glyphicon-trash"></span> Eliminar todos
+                                          </button>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+
+                                  </div>
+
+
+                              </div>
+
+
+                          </div>
 
                     </div>
 
-                </tab>
+                </tab>                
             </tabset>
 
         </form>
@@ -214,9 +289,8 @@
       <div class="modal-footer">
 
           <div class="row">
-              <div class="col-md-7">
-              </div>
-              <div class="col-md-2">
+              <div class="col-md-9">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje}}</div>
                   <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
                       <div class="sk-bounce1"></div>
                       <div class="sk-bounce2"></div>

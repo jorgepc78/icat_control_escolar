@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalEditaInstructorController', ModalEditaInstructorController);
 
-        ModalEditaInstructorController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'CatalogoLocalidades', 'CatalogoEspecialidades', 'CatalogoCursos'];
+        ModalEditaInstructorController.$inject = ['$scope', '$timeout', '$modalInstance', 'FileUploader', 'registroEditar', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'CatalogoLocalidades', 'CatalogoEspecialidades', 'CatalogoCursos'];
 
-    function ModalEditaInstructorController($scope, $modalInstance, registroEditar, CatalogoInstructores, CatalogoUnidadesAdmtvas, CatalogoLocalidades, CatalogoEspecialidades, CatalogoCursos) {
+    function ModalEditaInstructorController($scope, $timeout, $modalInstance, FileUploader, registroEditar, CatalogoInstructores, CatalogoUnidadesAdmtvas, CatalogoLocalidades, CatalogoEspecialidades, CatalogoCursos) {
 
             var vm = this;
 
@@ -18,6 +18,8 @@
             vm.eliminaRegistro           = eliminaRegistro;
 
             vm.mostrarSpiner = false;
+            vm.mensaje = '';
+            vm.mostrar_msg_error = false;
 
             vm.listaUnidades = {};
             vm.unidadSeleccionada = {};
@@ -64,6 +66,96 @@
                       calificacion    : record.calificacion
                   });
             });
+
+
+            vm.uploader = new FileUploader({
+              scope: vm,                          // to automatically update the html. Default: $rootScope
+              url: '/api/AlmacenDocumentos/instructores/upload',
+              formData: [
+                { key: 'value' }
+              ]
+            });
+
+            // ADDING FILTERS
+            vm.uploader.filters.push({
+                name: 'imageFilter',
+                fn: function(item /*{File|FileLikeObject}*/, options) {
+                    var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                    return '|jpg|png|jpeg|pdf|'.indexOf(type) !== -1;
+                }
+            });
+
+
+            // REGISTER HANDLERS
+            // --------------------
+            vm.uploader.onAfterAddingFile = function(item) {
+              //console.info('After adding a file', item);
+            };
+            // --------------------
+            vm.uploader.onAfterAddingAll = function(items) {
+              //console.info('After adding all files', items);
+            };
+            // --------------------
+            vm.uploader.onWhenAddingFileFailed = function(item, filter, options) {
+
+                vm.mostrarSpiner = false;
+                vm.mensaje = 'Tipo de archivo no permitido, solo se permite .jpg, .jpeg, .png, .pdf';
+                vm.mostrar_msg_error = true;
+                $timeout(function(){
+                     vm.mensaje = '';
+                     vm.mostrar_msg_error = false;
+                }, 4000);
+            };
+            // --------------------
+            vm.uploader.onBeforeUploadItem = function(item) {
+               item.file.name = vm.registroEdicion.idInstructor + '_' + item.file.name;
+            };
+            // --------------------
+            vm.uploader.onProgressItem = function(item, progress) {
+              //console.info('Progress: ' + progress, item);
+            };
+            // --------------------
+            vm.uploader.onProgressAll = function(progress) {
+              //console.info('Total progress: ' + progress);
+            };
+            // --------------------
+            vm.uploader.onSuccessItem = function(item, response, status, headers) {
+              //console.info('Success', response, status, headers);
+
+                CatalogoInstructores.documentos.create({
+                    id: vm.registroEdicion.idInstructor
+                },{
+                    documento: '',
+                    nombreArchivo: item.file.name,
+                    tipoArchivo: item.file.type,
+                    tamanio: item.file.size
+                }) 
+                .$promise
+                .then(function(response) {
+                    $scope.$broadcast('uploadCompleted', item);
+                });
+
+            };
+            // --------------------
+            vm.uploader.onErrorItem = function(item, response, status, headers) {
+              console.info('Error', response, status, headers);
+            };
+            // --------------------
+            vm.uploader.onCancelItem = function(item, response, status, headers) {
+              //console.info('Cancel', response, status);
+            };
+            // --------------------
+            vm.uploader.onCompleteItem = function(item, response, status, headers) {
+              //console.info('Complete', response, status, headers);
+            };
+            // --------------------
+            vm.uploader.onCompleteAll = function() {
+              //console.info('Complete all');
+            };
+            // --------------------
+          
+
+
 
 
             inicia();

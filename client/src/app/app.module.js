@@ -13,6 +13,7 @@
         'naif.base64',
         'ngDropdowns',
         'ngFileSaver',
+        'angularFileUpload',
         'ngOrderObjectBy',
         'angular-flot',
     	'templates'

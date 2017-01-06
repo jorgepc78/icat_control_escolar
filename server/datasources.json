@@ -20,5 +20,11 @@
         "port": 25
       }
     ]
+  },
+  "almacenamiento": {
+    "name": "almacenamiento",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/documentos"
   }
 }

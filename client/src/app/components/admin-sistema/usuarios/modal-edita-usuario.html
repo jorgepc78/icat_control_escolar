@@ -184,29 +184,37 @@
                       <tab heading="Eventos Cursos Activos">
                           <br>
                           <div class="form-group">
-                              <label class="col-sm-5 control-label">Aviso de cumplimiento m&iacute;nimo de inscritos pagados</label>
+                              <label class="col-sm-3 control-label">Aviso de cumplimiento m&iacute;nimo de inscritos</label>
                               <div class="col-sm-1">
-                                  <input ng-if="vm.usuarioEditar.avisoMinimosCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoMinimosCurso"/>
+                                  <input ng-if="vm.usuarioEditar.avisoMinimoInscritosCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoMinimoInscritosCurso"/>
                               </div>
-                              <label class="col-sm-4 control-label">Aviso de cancelaci&oacute;n del curso</label>
+                              <label class="col-sm-3 control-label">Aviso de cancelaci&oacute;n del curso</label>
                               <div class="col-sm-1">
                                   <input ng-if="vm.usuarioEditar.avisoCancelacionCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoCancelacionCurso"/>
                               </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-5 control-label">Aviso de reprogramaci&oacute;n del curso</label>
-                              <div class="col-sm-1">
-                                  <input ng-if="vm.usuarioEditar.avisoReprogCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoReprogCurso"/>
-                              </div>
-                              <label class="col-sm-4 control-label">Aviso de terminaci&oacute;n del curso</label>
+                              <label class="col-sm-3 control-label">Aviso de terminaci&oacute;n del curso</label>
                               <div class="col-sm-1">
                                   <input ng-if="vm.usuarioEditar.avisoTerminacionCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoTerminacionCurso"/>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-5 control-label">Aviso de cierre del curso</label>
+                              <label class="col-sm-3 control-label">Aviso de cumplimiento m&iacute;nimo de inscritos pagados</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoMinimoPagadosCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoMinimoPagadosCurso"/>
+                              </div>
+                              <label class="col-sm-3 control-label">Aviso de reprogramaci&oacute;n del curso</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoReprogCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoReprogCurso"/>
+                              </div>
+                              <label class="col-sm-3 control-label">Aviso de cierre del curso</label>
                               <div class="col-sm-1">
                                   <input ng-if="vm.usuarioEditar.avisoCierreCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoCierreCurso"/>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Aviso de reversi&oacute;n de inscritos</label>
+                              <div class="col-sm-1">
+                                  <input ng-if="vm.usuarioEditar.avisoReversionPagadosCurso!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoReversionPagadosCurso"/>
                               </div>
                           </div>
                       </tab>

@@ -49,7 +49,9 @@
                     avisoRevisionPreapCursoGral  : (usuarioEditar.avisoRevisionPreapCursoGral === true ? true : false),
                     avisoRechazoPreapCursoGral   : (usuarioEditar.avisoRechazoPreapCursoGral === true ? true : false),
                     
-                    avisoMinimosCurso            : usuarioEditar.avisoMinimosCurso,
+                    avisoMinimoInscritosCurso            : usuarioEditar.avisoMinimoInscritosCurso,
+                    avisoMinimoPagadosCurso            : usuarioEditar.avisoMinimoPagadosCurso,
+                    avisoReversionPagadosCurso            : usuarioEditar.avisoReversionPagadosCurso,
                     avisoCancelacionCurso        : usuarioEditar.avisoCancelacionCurso,
                     avisoReprogCurso             : usuarioEditar.avisoReprogCurso,
                     avisoTerminacionCurso        : usuarioEditar.avisoTerminacionCurso,
@@ -172,7 +174,10 @@
                             avisoRevisionPreapCursoGral  : vm.usuarioEditar.avisoRevisionPreapCursoGral,
                             avisoRechazoPreapCursoGral   : vm.usuarioEditar.avisoRechazoPreapCursoGral,
 
-                            avisoMinimosCurso         : vm.usuarioEditar.avisoMinimosCurso,
+                            avisoMinimoInscritosCurso         : vm.usuarioEditar.avisoMinimoInscritosCurso,
+                            avisoMinimoPagadosCurso            : vm.usuarioEditar.avisoMinimoPagadosCurso,
+                            avisoReversionPagadosCurso            : vm.usuarioEditar.avisoReversionPagadosCurso,
+
                             avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
                             avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
                             avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,
@@ -214,7 +219,10 @@
                             avisoRevisionPreapCursoGral  : vm.usuarioEditar.avisoRevisionPreapCursoGral,
                             avisoRechazoPreapCursoGral   : vm.usuarioEditar.avisoRechazoPreapCursoGral,
 
-                            avisoMinimosCurso         : vm.usuarioEditar.avisoMinimosCurso,
+                            avisoMinimoInscritosCurso         : vm.usuarioEditar.avisoMinimoInscritosCurso,
+                            avisoMinimoPagadosCurso            : vm.usuarioEditar.avisoMinimoPagadosCurso,
+                            avisoReversionPagadosCurso            : vm.usuarioEditar.avisoReversionPagadosCurso,
+
                             avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
                             avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
                             avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,

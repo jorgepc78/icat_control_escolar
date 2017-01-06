@@ -48,7 +48,10 @@
                     avisoRevisionPreapCursoGral  : false,
                     avisoRechazoPreapCursoGral   : false,
 
-                    avisoMinimosCurso         : false,
+                    avisoMinimoInscritosCurso    : false,
+                    avisoMinimoPagadosCurso    : false,
+                    avisoReversionPagadosCurso    : false,
+
                     avisoCancelacionCurso     : false,
                     avisoReprogCurso          : false,
                     avisoTerminacionCurso     : false,
@@ -153,7 +156,10 @@
                             avisoRevisionPreapCursoGral  : vm.usuarioEditar.avisoRevisionPreapCursoGral,
                             avisoRechazoPreapCursoGral   : vm.usuarioEditar.avisoRechazoPreapCursoGral,
 
-                            avisoMinimosCurso         : vm.usuarioEditar.avisoMinimosCurso,
+                            avisoMinimoInscritosCurso         : vm.usuarioEditar.avisoMinimoInscritosCurso,
+                            avisoMinimoPagadosCurso         : vm.usuarioEditar.avisoMinimoPagadosCurso,
+                            avisoReversionPagadosCurso         : vm.usuarioEditar.avisoReversionPagadosCurso,
+
                             avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
                             avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
                             avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,

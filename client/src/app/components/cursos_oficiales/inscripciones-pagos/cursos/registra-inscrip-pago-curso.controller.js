@@ -17,7 +17,6 @@
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
             vm.cambiarPagina              = cambiarPagina;
             vm.registraInscripcion        = registraInscripcion;
-            vm.muestraDocInscripcion      = muestraDocInscripcion;
             vm.registraPago               = registraPago;
             vm.generaFormato              = generaFormato;
             vm.editaNumFactura            = editaNumFactura;
@@ -300,20 +299,6 @@
                     });
 
             }
-
-
-
-            function muestraDocInscripcion(seleccion) {
-
-                    console.log(seleccion.id);
-                    /*var link = angular.element('<a href="api/ProgTrimCursos/exporta_doc_ptc/'+seleccion.idPtc+'" target="_blank"></a>');
-
-                    angular.element(document.body).append(link);
-
-                    link[0].click();
-                    link.remove();*/
-
-            };
 
 
 

@@ -122,6 +122,12 @@ module.exports = function(ControlProcesos) {
                                 else if(ctx.instance.accion == 'CIERRE DE CURSO')
                                   var tipo_aviso = {avisoCierreCurso: true}
 
+                                else if(ctx.instance.accion == 'ALCANCE MINIMO INSCRITOS')
+                                  var tipo_aviso = {avisoMinimoInscritosCurso: true}
+                                else if(ctx.instance.accion == 'ALCANCE MINIMO PAGADOS')
+                                  var tipo_aviso = {avisoMinimoPagadosCurso: true}
+                                else if(ctx.instance.accion == 'REVERSION MINIMO PAGADOS')
+                                  var tipo_aviso = {avisoReversionPagadosCurso: true}
 
                                 condicion = {
                                     and: [
@@ -400,7 +406,6 @@ module.exports = function(ControlProcesos) {
                                 var registro = JSON.parse( JSON.stringify( registrosEncontrados[0] ) );
 
                                 var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
-                                var estatus = ['Pendiente','Pagado','Condonado','Becado'];
                                 var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
                                 var fechaInicio = new Date(registro.fechaInicio);
@@ -504,6 +509,115 @@ module.exports = function(ControlProcesos) {
                                 enviaCorreos(ctx.instance.id, mensajes, array_envia, array_recibe);
                             });
                         }
+
+                        else if(ctx.instance.proceso == 'Inscripcion a curso')
+                        {
+                            //Obtenemos los datos para armar el mensaje
+                            var CursosOficiales = ControlProcesos.app.models.CursosOficiales;
+
+                            CursosOficiales.find({
+                              where: {idCurso: ctx.instance.idDocumento },
+                                    include: [{
+                                relation: 'ptc_pertenece',
+                                scope: {
+                                  fields:['idPtc','anio','trimestre'],
+                                }
+                                  },{
+                                relation: 'unidad_pertenece',
+                                scope: {
+                                  fields:['idUnidadAdmtva','nombre']
+                                }
+                                  },{
+                                relation: 'localidad_pertenece',
+                                scope: {
+                                  fields:['idLocalidad','nombre']
+                                }
+                                  },{
+                                relation: 'inscripcionesCursos',
+                                scope: {
+                                  fields:['id','pagado','idAlumno','calificacion','numFactura'],
+                                  include: {
+                                    relation: 'Capacitandos',
+                                    scope: {
+                                      fields:['apellidoPaterno','apellidoMaterno','nombre','curp'],
+                                      order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+                                    }
+                                  }
+                                }
+                              }]
+                            },
+                            function(err, registrosEncontrados) {
+
+                                var registro = JSON.parse( JSON.stringify( registrosEncontrados[0] ) );
+
+                                var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
+                                var estatus = ['No pagado','Pagado','Exento al 100%','Exento con porcentaje'];
+                                
+                                if(ctx.instance.accion == 'ALCANCE MINIMO INSCRITOS')
+                                {
+                                    mensajes.titulo  = 'Aviso alcance de mínimo de inscripción';
+                                    mensajes.envia   = 'El Curso <strong>'+ registro.nombreCurso +'</strong> con la modalidad <strong>'+ registro.modalidad +'</strong> del Trimestre <strong>'+ trimestres[(registro.ptc_pertenece.trimestre-1)] +'</strong> del a&ntilde;o <strong>'+ registro.ptc_pertenece.anio +'</strong>, ha alcanzado el m&iacute;nimo de personas inscritas';
+                                    mensajes.recibe = 'El Curso <strong>'+ registro.nombreCurso +'</strong> con la modalidad <strong>'+ registro.modalidad +'</strong> del Trimestre <strong>'+ trimestres[(registro.ptc_pertenece.trimestre-1)] +'</strong> del a&ntilde;o <strong>'+ registro.ptc_pertenece.anio +'</strong> de la <strong>'+ registro.unidad_pertenece.nombre +'</strong>, ha alcanzado el m&iacute;nimo de personas inscritas';
+                                }
+                                else if(ctx.instance.accion == 'ALCANCE MINIMO PAGADOS')
+                                {         
+                                    mensajes.titulo  = 'Aviso alcance de mínimo de inscritos pagados';
+                                    mensajes.envia   = 'El Curso <strong>'+ registro.nombreCurso +'</strong> con la modalidad <strong>'+ registro.modalidad +'</strong> del Trimestre <strong>'+ trimestres[(registro.ptc_pertenece.trimestre-1)] +'</strong> del a&ntilde;o <strong>'+ registro.ptc_pertenece.anio +'</strong>, ha alcanzado el m&iacute;nimo de personas inscritas y se ha marcado el curso como <strong>ACTIVO</strong>';
+                                    mensajes.recibe = 'El Curso <strong>'+ registro.nombreCurso +'</strong> con la modalidad <strong>'+ registro.modalidad +'</strong> del Trimestre <strong>'+ trimestres[(registro.ptc_pertenece.trimestre-1)] +'</strong> del a&ntilde;o <strong>'+ registro.ptc_pertenece.anio +'</strong> de la <strong>'+ registro.unidad_pertenece.nombre +'</strong>, ha alcanzado el m&iacute;nimo de personas inscritas y se ha marcado el curso como <strong>ACTIVO</strong>';
+
+                                    var anexo = '';
+                                    for(var i = 0; i < registro.inscripcionesCursos.length; i++)
+                                      anexo += '<tr><td>'+ (i+1) +'</<td><td>'+ registro.inscripcionesCursos[i].Capacitandos.apellidoPaterno + ' ' + registro.inscripcionesCursos[i].Capacitandos.apellidoMaterno + ' ' + registro.inscripcionesCursos[i].Capacitandos.nombre +'</<td><td>'+ estatus[registro.inscripcionesCursos[i].pagado] +'</<td><td>'+ registro.inscripcionesCursos[i].numFactura +'&nbsp;</<td></tr>';
+                                
+                                    var anexo = '<br><br>Esta es la lista de personas inscritas:<br><br>'+
+                                               '<table cellspacing="0" cellpadding="2" border="1" align="left">'+                                  
+                                               '<thead>'+
+                                               '<th>N&uacute;m.</th>'+
+                                               '<th>Nombre</th>'+
+                                               '<th>Estatus pago</th>'+
+                                               '<th>N&uacute;m. Factura</th>'+
+                                               '</thead>'+
+                                               '<tbody>'+
+                                               anexo+
+                                               '</tbody>'+
+                                               '</table>';
+
+                                    mensajes.envia   += anexo;
+                                    mensajes.recibe  += anexo;
+                                }
+                                else if(ctx.instance.accion == 'REVERSION MINIMO PAGADOS')
+                                {         
+                                    mensajes.titulo  = 'Aviso del cambio de inscritos pagados';
+                                    mensajes.envia   = 'La inscripci&oacute;n del Curso <strong>'+ registro.nombreCurso +'</strong> con la modalidad <strong>'+ registro.modalidad +'</strong> del Trimestre <strong>'+ trimestres[(registro.ptc_pertenece.trimestre-1)] +'</strong> del a&ntilde;o <strong>'+ registro.ptc_pertenece.anio +'</strong> ha variado y ha quedado abajo del m&iacute;nimo de inscritos pagados y se ha marcado el curso como <strong>EN ESPERA</strong>';
+                                    mensajes.recibe = 'La inscripci&oacute;n del Curso <strong>'+ registro.nombreCurso +'</strong> con la modalidad <strong>'+ registro.modalidad +'</strong> del Trimestre <strong>'+ trimestres[(registro.ptc_pertenece.trimestre-1)] +'</strong> del a&ntilde;o <strong>'+ registro.ptc_pertenece.anio +'</strong> de la <strong>'+ registro.unidad_pertenece.nombre +'</strong> ha variado y ha quedado abajo del m&iacute;nimo de inscritos pagados y se ha marcado el curso como <strong>EN ESPERA</strong>';
+
+                                    var anexo = '';
+                                    for(var i = 0; i < registro.inscripcionesCursos.length; i++)
+                                      anexo += '<tr><td>'+ (i+1) +'</<td><td>'+ registro.inscripcionesCursos[i].Capacitandos.apellidoPaterno + ' ' + registro.inscripcionesCursos[i].Capacitandos.apellidoMaterno + ' ' + registro.inscripcionesCursos[i].Capacitandos.nombre +'</<td><td>'+ estatus[registro.inscripcionesCursos[i].pagado] +'</<td><td>'+ registro.inscripcionesCursos[i].numFactura +'&nbsp;</<td></tr>';
+                                
+                                    var anexo = '<br><br>Esta es la lista de personas inscritas:<br><br>'+
+                                               '<table cellspacing="0" cellpadding="2" border="1" align="left">'+                                  
+                                               '<thead>'+
+                                               '<th>N&uacute;m.</th>'+
+                                               '<th>Nombre</th>'+
+                                               '<th>Estatus pago</th>'+
+                                               '<th>N&uacute;m. Factura</th>'+
+                                               '</thead>'+
+                                               '<tbody>'+
+                                               anexo+
+                                               '</tbody>'+
+                                               '</table>';
+
+                                    mensajes.envia   += anexo;
+                                    mensajes.recibe  += anexo;
+                                }
+
+                                enviaCorreos(ctx.instance.id, mensajes, array_envia, array_recibe);
+                            });
+
+                        }
+
+
               }
 
 

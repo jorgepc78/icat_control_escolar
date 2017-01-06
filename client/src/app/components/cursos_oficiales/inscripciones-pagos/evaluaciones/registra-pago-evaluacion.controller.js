@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('RegistroPagoEvaluacionController', RegistroPagoEvaluacionController);
 
-    RegistroPagoEvaluacionController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'Evaluacion', 'InscripcionCurso', 'ControlProcesos'];
+    RegistroPagoEvaluacionController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'Evaluacion', 'ControlProcesos'];
 
-    function RegistroPagoEvaluacionController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, Evaluacion, InscripcionCurso, ControlProcesos ) {
+    function RegistroPagoEvaluacionController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, Evaluacion, ControlProcesos ) {
 
             var vm = this;
 
@@ -16,7 +16,7 @@
 
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
             vm.cambiarPagina              = cambiarPagina;
-            vm.registraPago               = registraPago;
+            vm.registraPagoEval           = registraPagoEval;
             vm.generaFormato              = generaFormato;
             vm.editaNumFactura            = editaNumFactura;
 
@@ -220,12 +220,12 @@
 
 
 
-            function registraPago(seleccion) {
+            function registraPagoEval(seleccion) {
 
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/evaluaciones/modal-captura-num-factura-eval.html',
                         windowClass: "animated fadeIn",
-                        controller: 'ModalCapturaNumFacturaController as vm',
+                        controller: 'ModalCapturaNumFacturaEvalController as vm',
                         resolve: {
                           registroEditar: function () { return {nombreCurso: vm.cursoSeleccionado.nombreCurso ,seleccion: seleccion} }
                         }
@@ -264,7 +264,7 @@
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/cursos_oficiales/inscripciones-pagos/evaluaciones/modal-captura-num-factura-eval.html',
                         windowClass: "animated fadeIn",
-                        controller: 'ModalCapturaNumFacturaController as vm',
+                        controller: 'ModalCapturaNumFacturaEvalController as vm',
                         resolve: {
                           registroEditar: function () { return {nombreCurso: vm.cursoSeleccionado.nombreCurso ,seleccion: seleccion} }
                         }

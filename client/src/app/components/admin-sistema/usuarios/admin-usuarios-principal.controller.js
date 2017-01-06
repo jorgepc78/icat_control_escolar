@@ -36,7 +36,7 @@
                   vm.tablaListaUsuarios.filtro_datos = {
                           filter: {
                               where: vm.tablaListaUsuarios.condicion,
-                              fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','activo','avisoEnvioPTC','avisoRevisonPTCProgr','avisoRechazoPTCProgr','avisoRevisonPTCAcad','avisoRechazoPTCAcad','avisoRevisonPTCPlan','avisoRechazoPTCPlan','avisoRevisionPTCGral','avisoRechazoPTCGral','avisoEnvioPreapCurso','avisoRevisionPreapCursoProgr','avisoRechazoPreapCursoProgr','avisoRevisionPreapCursoAcad','avisoRechazoPreapCursoAcad','avisoRevisionPreapCursoPlan','avisoRechazoPreapCursoPlan','avisoRevisionPreapCursoGral','avisoRechazoPreapCursoGral','avisoMinimosCurso','avisoCancelacionCurso','avisoReprogCurso','avisoTerminacionCurso','avisoCierreCurso','avisoEnvioEvaluacion','avisoRechazoEvaluacion','avisoAceptacionEvaluacion','avisoCierreEvaluacion'],
+                              fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','activo','avisoEnvioPTC','avisoRevisonPTCProgr','avisoRechazoPTCProgr','avisoRevisonPTCAcad','avisoRechazoPTCAcad','avisoRevisonPTCPlan','avisoRechazoPTCPlan','avisoRevisionPTCGral','avisoRechazoPTCGral','avisoEnvioPreapCurso','avisoRevisionPreapCursoProgr','avisoRechazoPreapCursoProgr','avisoRevisionPreapCursoAcad','avisoRechazoPreapCursoAcad','avisoRevisionPreapCursoPlan','avisoRechazoPreapCursoPlan','avisoRevisionPreapCursoGral','avisoRechazoPreapCursoGral','avisoMinimoInscritosCurso','avisoMinimoPagadosCurso','avisoReversionPagadosCurso','avisoCancelacionCurso','avisoReprogCurso','avisoTerminacionCurso','avisoCierreCurso','avisoEnvioEvaluacion','avisoRechazoEvaluacion','avisoAceptacionEvaluacion','avisoCierreEvaluacion'],
                               order: ['idUnidadAdmtva ASC','nombre ASC'],
                               limit: vm.tablaListaUsuarios.registrosPorPagina,
                               skip: vm.tablaListaUsuarios.paginaActual - 1,
@@ -222,7 +222,9 @@
                         vm.UsuarioSeleccionado.avisoRevisionPreapCursoGral  = respuesta.avisoRevisionPreapCursoGral,
                         vm.UsuarioSeleccionado.avisoRechazoPreapCursoGral   = respuesta.avisoRechazoPreapCursoGral,
 
-                        vm.UsuarioSeleccionado.avisoMinimosCurso               = respuesta.avisoMinimosCurso;
+                        vm.UsuarioSeleccionado.avisoMinimoInscritosCurso               = respuesta.avisoMinimoInscritosCurso;
+                        vm.UsuarioSeleccionado.avisoMinimoPagadosCurso               = respuesta.avisoMinimoPagadosCurso;
+                        vm.UsuarioSeleccionado.avisoReversionPagadosCurso               = respuesta.avisoReversionPagadosCurso;
                         vm.UsuarioSeleccionado.avisoCancelacionCurso           = respuesta.avisoCancelacionCurso;
                         vm.UsuarioSeleccionado.avisoReprogCurso                = respuesta.avisoReprogCurso;
                         vm.UsuarioSeleccionado.avisoTerminacionCurso           = respuesta.avisoTerminacionCurso;

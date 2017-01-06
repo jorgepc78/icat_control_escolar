@@ -415,14 +415,46 @@
       },
       "_selectable": true
     },
-    "avisoMinimosCurso": {
+    "avisoMinimoInscritosCurso": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "aviso_minimos_curso",
+        "columnName": "aviso_minimo_inscritos_curso",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoMinimoPagadosCurso": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_minimo_pagados_curso",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoReversionPagadosCurso": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_reversion_pagados_curso",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,

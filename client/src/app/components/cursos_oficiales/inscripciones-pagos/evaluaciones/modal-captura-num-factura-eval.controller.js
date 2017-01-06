@@ -3,11 +3,11 @@
 
     angular
         .module('icat_control_escolar')
-        .controller('ModalCapturaNumFacturaController', ModalCapturaNumFacturaController);
+        .controller('ModalCapturaNumFacturaEvalController', ModalCapturaNumFacturaEvalController);
 
-        ModalCapturaNumFacturaController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'InscripcionEvaluaciones'];
+        ModalCapturaNumFacturaEvalController.$inject = ['$scope', '$modalInstance', 'registroEditar', 'InscripcionEvaluaciones'];
 
-    function ModalCapturaNumFacturaController($scope, $modalInstance, registroEditar, InscripcionEvaluaciones) {
+    function ModalCapturaNumFacturaEvalController($scope, $modalInstance, registroEditar, InscripcionEvaluaciones) {
 
             var vm = this;
 

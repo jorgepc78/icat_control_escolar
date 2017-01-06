@@ -59,7 +59,7 @@
 
         <div class="col-md-5">
             <div class="ibox ">
-                <div class="ibox-content" style="height:810px;">
+                <div class="ibox-content" style="height:790px;">
                     <div class="tab-content">
                         <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                     <div class="row">
@@ -189,8 +189,16 @@
                                                             <tab heading="Cursos Activos">
                                                                 <ul class="list-group clear-list">
                                                                     <li class="list-group-item fist-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoMinimosCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoMinimosCurso === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoMinimoInscritosCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoMinimoInscritosCurso === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Recibir el aviso de cumplimiento m&iacute;nimo de inscritos
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoMinimoPagadosCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoMinimoPagadosCurso === true ? 'S&iacute;' : 'No'}}</span>
                                                                         Recibir el aviso de cumplimiento m&iacute;nimo de inscritos pagados
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoReversionPagadosCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoReversionPagadosCurso === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Recibir el aviso de reversi&oacute;n de inscritos
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoCancelacionCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoCancelacionCurso === true ? 'S&iacute;' : 'No'}}</span>

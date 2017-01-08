@@ -11,6 +11,9 @@
 
             var vm = this;
 
+            vm.cambiarPagina = cambiarPagina;
+            vm.guardar       = guardar;
+
             vm.mostrarSpiner = false;
           
             vm.instructorSeleccionado = "";
@@ -48,9 +51,6 @@
                       value: 'DESERTOR'
                   }
               ];
-
-            vm.cambiarPagina = cambiarPagina;
-            vm.guardar       = guardar;
 
             inicia();
 

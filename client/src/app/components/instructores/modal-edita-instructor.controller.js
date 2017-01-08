@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalEditaInstructorController', ModalEditaInstructorController);
 
-        ModalEditaInstructorController.$inject = ['$scope', '$timeout', '$modalInstance', 'FileUploader', 'registroEditar', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'CatalogoLocalidades', 'CatalogoEspecialidades', 'CatalogoCursos'];
+        ModalEditaInstructorController.$inject = ['$scope', '$timeout', '$modalInstance', 'FileUploader', 'registroEditar', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'CatalogoLocalidades', 'CatalogoEspecialidades', 'CatalogoCursos', 'CatalogoDocumentos', 'AlmacenDocumentos','DocumentosInstructores'];
 
-    function ModalEditaInstructorController($scope, $timeout, $modalInstance, FileUploader, registroEditar, CatalogoInstructores, CatalogoUnidadesAdmtvas, CatalogoLocalidades, CatalogoEspecialidades, CatalogoCursos) {
+    function ModalEditaInstructorController($scope, $timeout, $modalInstance, FileUploader, registroEditar, CatalogoInstructores, CatalogoUnidadesAdmtvas, CatalogoLocalidades, CatalogoEspecialidades, CatalogoCursos, CatalogoDocumentos, AlmacenDocumentos, DocumentosInstructores) {
 
             var vm = this;
 
@@ -16,6 +16,7 @@
             vm.ocultaUnidadCheckbox      = ocultaUnidadCheckbox;
             vm.agregaCurso               = agregaCurso;
             vm.eliminaRegistro           = eliminaRegistro;
+            vm.eliminaDocumento          = eliminaDocumento;
 
             vm.mostrarSpiner = false;
             vm.mensaje = '';
@@ -52,24 +53,29 @@
                     localidad          : '',
                     activo             : registroEditar.activo,
                     evaluacion_curso   : [],
-                    otras_unidades     : []
+                    otras_unidades     : [],
+                    documentos         : registroEditar.documentos
             };
+
+            vm.tablaListaDocumentos = {
+              totalElementos     : 0,
+              paginaActual       : 1,
+              registrosPorPagina : 5,
+              inicio             : 0,
+              fin                : 1,
+              condicion          : {},
+              filtro_datos       : {},
+              fila_seleccionada  : 0
+            };
+
+            vm.ddSelectOptions = [];
 
             vm.cursos_habilitados = [];
             vm.unidades_checkbox = [];
+            vm.documentos_temp = [];
             
-            angular.forEach(registroEditar.evaluacion_curso, function(record) {
-                  vm.cursos_habilitados.push({
-                      idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
-                      nombreCurso     : record.CatalogoCursos.nombreCurso,
-                      modalidad       : record.CatalogoCursos.modalidad,
-                      calificacion    : record.calificacion
-                  });
-            });
-
-
             vm.uploader = new FileUploader({
-              scope: vm,                          // to automatically update the html. Default: $rootScope
+              scope: vm,
               url: '/api/AlmacenDocumentos/instructores/upload',
               formData: [
                 { key: 'value' }
@@ -132,13 +138,27 @@
                 }) 
                 .$promise
                 .then(function(response) {
+                    vm.registroEdicion.documentos.push({
+                        idDocumento: response.idDocumento,
+                        idInstructor: response.idInstructor,
+                        documento: response.documento,
+                        nombreArchivo: response.nombreArchivo,
+                        tipoArchivo: response.tipoArchivo
+                    });
+                    vm.documentos_temp.push({
+                        idDocumento: response.idDocumento,
+                        idInstructor: response.idInstructor,
+                        documento: {text: "Seleccione", value: ''},
+                        nombreArchivo: response.nombreArchivo,
+                        tipoArchivo: response.tipoArchivo
+                    });
                     $scope.$broadcast('uploadCompleted', item);
                 });
 
             };
             // --------------------
             vm.uploader.onErrorItem = function(item, response, status, headers) {
-              console.info('Error', response, status, headers);
+              //console.info('Error', response, status, headers);
             };
             // --------------------
             vm.uploader.onCancelItem = function(item, response, status, headers) {
@@ -153,7 +173,6 @@
               //console.info('Complete all');
             };
             // --------------------
-          
 
 
 
@@ -161,6 +180,61 @@
             inicia();
 
             function inicia() {
+
+                angular.forEach(registroEditar.evaluacion_curso, function(record) {
+                      vm.cursos_habilitados.push({
+                          idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
+                          nombreCurso     : record.CatalogoCursos.nombreCurso,
+                          modalidad       : record.CatalogoCursos.modalidad,
+                          calificacion    : record.calificacion
+                      });
+                });
+
+                angular.forEach(registroEditar.documentos, function(record) {
+
+                      if(record.documento === undefined || record.documento == '')
+                        var seleccion = {text: "Seleccione", value: ''};
+                      else
+                        var seleccion = {text: record.documento, value: record.documento};
+
+                      vm.documentos_temp.push({
+                            idDocumento: record.idDocumento,
+                            idInstructor: record.idInstructor,
+                            documento: seleccion,
+                            nombreArchivo: record.nombreArchivo,
+                            tipoArchivo: record.tipoArchivo
+                      });
+                });
+
+                vm.tablaListaDocumentos.paginaActual = 1;
+                vm.tablaListaDocumentos.inicio = 0;
+                vm.tablaListaDocumentos.fin = 1;
+                vm.tablaListaDocumentos.totalElementos = vm.documentos_temp.length;
+                if(vm.tablaListaDocumentos.totalElementos <= vm.tablaListaDocumentos.registrosPorPagina)
+                    vm.tablaListaDocumentos.fin = vm.tablaListaDocumentos.totalElementos;
+                else
+                    vm.tablaListaDocumentos.fin = vm.tablaListaDocumentos.registrosPorPagina;
+                    
+                if(vm.tablaListaDocumentos.totalElementos == 0) {
+                    vm.tablaListaDocumentos.inicio = -1;
+                    vm.tablaListaDocumentos.fin = 0;
+                }
+
+                CatalogoDocumentos.find({
+                    filter: {
+                        order: 'nombreDocumento ASC'
+                    }
+                })
+                .$promise
+                .then(function(resp) {
+                        angular.forEach(resp, function(record) {
+                              vm.ddSelectOptions.push({
+                                  text  : record.nombreDocumento,
+                                  value : record.nombreDocumento
+                              });
+                        });
+                });
+
 
                 CatalogoUnidadesAdmtvas.find({
                     filter: {
@@ -319,6 +393,43 @@
             };
 
 
+            function eliminaDocumento(seleccion) {
+                
+                AlmacenDocumentos.removeFile({
+                    container: 'instructores',
+                    file: seleccion.nombreArchivo
+                })
+                .$promise
+                .then(function() {
+                        DocumentosInstructores.deleteById({ id: seleccion.idDocumento })
+                        .$promise
+                        .then(function() { 
+                                var indice = vm.documentos_temp.indexOf(seleccion);
+                                vm.documentos_temp.splice(indice, 1);
+                                
+                                indice = vm.registroEdicion.documentos.map(function(registro) {
+                                                                    return registro.idDocumento;
+                                                                  }).indexOf(seleccion.idDocumento);
+
+                                vm.registroEdicion.documentos.splice(indice, 1);
+
+                                vm.tablaListaDocumentos.paginaActual = 1;
+                                vm.tablaListaDocumentos.inicio = 0;
+                                vm.tablaListaDocumentos.fin = 1;
+                                vm.tablaListaDocumentos.totalElementos = vm.registroEdicion.documentos.length;
+                                if(vm.tablaListaDocumentos.totalElementos <= vm.tablaListaDocumentos.registrosPorPagina)
+                                    vm.tablaListaDocumentos.fin = vm.tablaListaDocumentos.totalElementos;
+                                else
+                                    vm.tablaListaDocumentos.fin = vm.tablaListaDocumentos.registrosPorPagina;
+                                if(vm.tablaListaDocumentos.totalElementos == 0) {
+                                    vm.tablaListaDocumentos.inicio = -1;
+                                    vm.tablaListaDocumentos.fin = 0;
+                                }
+                        });
+                });
+            }
+
+
             function guardar() {
 
                 vm.mostrarSpiner = true;
@@ -355,9 +466,28 @@
                 .$promise
                 .then(function(respuesta) {
 
-                          CatalogoInstructores.otras_unidades.destroyAll({ id: vm.registroEdicion.idInstructor })
-                          .$promise
-                          .then(function() {
+                            angular.forEach(vm.documentos_temp, function(seleccion) {
+
+                                if(seleccion.documento.value != '')
+                                {
+                                    var indice = vm.registroEdicion.documentos.map(function(registro) {
+                                                                        return registro.idDocumento;
+                                                                      }).indexOf(seleccion.idDocumento);
+
+                                    vm.registroEdicion.documentos[indice].documento = seleccion.documento.value;
+
+                                    DocumentosInstructores.prototype$updateAttributes(
+                                        {id: seleccion.idDocumento }, 
+                                        {documento : seleccion.documento.value}
+                                    )
+                                    .$promise.then(function() {
+                                    });
+                                }
+                            });
+
+                            CatalogoInstructores.otras_unidades.destroyAll({ id: vm.registroEdicion.idInstructor })
+                            .$promise
+                            .then(function() {
 
                                 for(var i=0; i < vm.unidades_checkbox.length; i++)
                                 {
@@ -427,7 +557,7 @@
                                             $modalInstance.close(vm.registroEdicion);
 
                                 });
-                          });
+                            });
 
                 })
                 .catch(function(error) {

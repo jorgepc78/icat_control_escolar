@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-7">
     
                         <div class="ibox">
                             <div class="ibox-title">
@@ -28,9 +28,9 @@
                                                     </span>
                                         </div>
                                     </div>
-                                    <div class="col-md-{{ (currentUser.unidad_pertenece_id > 1 ? 1 : 5) }}">
+                                    <div class="col-md-{{ (currentUser.unidad_pertenece_id > 1 ? 1 : 5) }}" style="padding-left: 0;">
                                                     <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:17px;width: 350px;">
-                                                            <label class="col-md-3 control-label" style="margin-top:7px;">Unidad:</label>
+                                                            <label class="col-md-2 control-label" style="margin-top:7px;">Unidad:</label>
                                                             <div class="col-md-9">
                                                                 <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.muestra_ptc_unidad()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
                                                         </div>
@@ -68,7 +68,7 @@
                         </div>
                 
                 </div> <!-- column1 -->
-                <div class="col-md-4">
+                <div class="col-md-5">
                     
                     <div class="row">
                         <div class="col-md-12">
@@ -116,7 +116,7 @@
                                                                                     Grado acad&eacute;mico
                                                                                 </li>
                                                                                 <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.nivel_estudios.nivelEstudios}} </span>
+                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.escolaridad}} </span>
                                                                                     Escolaridad
                                                                                 </li>
                                                                                 <li class="list-group-item" style="height: 60px">
@@ -218,6 +218,44 @@
                                                                                                     <tr ng-repeat="unidad in vm.RegistroSeleccionado.otras_unidades">
                                                                                                         <td> {{$index + 1}}</td>
                                                                                                         <td> {{unidad.nombre}}</td>
+                                                                                                    </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            <!-- </div> -->
+                                                                                        </div>
+                                                                                    </div> <!-- client == 2 -->
+                                                                                
+                                                                    </tab>
+                                                                    <tab heading="Documentos">
+
+                                                                                    <div class="tab-pane active">
+                                                            
+                                                                                        <table class="tablaDatos table table-condensed no-footer">
+                                                                                          <thead>
+                                                                                              <col width="2%">
+                                                                                              <col width="96%">
+                                                                                              <col width="2%">
+                                                                                            <tr>
+                                                                                                <th>N&uacute;m.</th>
+                                                                                                <th>Documento</th>
+                                                                                                <th></th>
+                                                                                            </tr>
+                                                                                          </thead>
+                                                                                        </table>
+
+                                                                                        <div style="width:100%;height:549px">
+                                                                                            <!-- <div class="full-height-scroll" full-scroll> -->
+                                                                                                <table class="table table-striped">
+                                                                                                    <thead>
+                                                                                                      <col width="10%">
+                                                                                                      <col width="90%">
+                                                                                                      <col width="2%">
+                                                                                                    </thead>
+                                                                                                    <tbody>
+                                                                                                    <tr ng-repeat="doc in vm.RegistroSeleccionado.documentos">
+                                                                                                        <td> {{$index + 1}}</td>
+                                                                                                        <td> <img ng-src="assets/img/{{(doc.tipoArchivo == 'application/pdf' ? 'pdf.png' : 'picture.png')}}" alt=""> {{doc.documento}}</td>
+                                                                                                        <td> <button type="button" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Ver documento" ng-click="vm.abreDocumento(doc)"><i class="fa fa-eye"></i></button> </td>
                                                                                                     </tr>
                                                                                                     </tbody>
                                                                                                 </table>

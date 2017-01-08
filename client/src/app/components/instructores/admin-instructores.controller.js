@@ -17,6 +17,7 @@
             vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
             vm.limpiaBusqueda             = limpiaBusqueda;
             vm.cambiarPagina              = cambiarPagina;
+            vm.abreDocumento              = abreDocumento;
             vm.edita_datos_registro       = edita_datos_registro;
             vm.nuevo_registro             = nuevo_registro;
             vm.elimina_registro           = elimina_registro;
@@ -100,6 +101,12 @@
                                     relation: 'otras_unidades',
                                     scope: {
                                         fields:['idUnidadAdmtva','nombre']
+                                    }
+                                },
+                                {
+                                    relation: 'documentos',
+                                    scope: {
+                                        fields:['idDocumento','documento','nombreArchivo','tipoArchivo']
                                     }
                                 },
                                 {
@@ -333,6 +340,16 @@
             }
 
 
+            function abreDocumento(seleccion) {
+                    var link = angular.element('<a href="api/AlmacenDocumentos/instructores/download/'+seleccion.nombreArchivo+'" target="_blank"></a>');
+
+                    angular.element(document.body).append(link);
+
+                    link[0].click();
+                    link.remove();
+            }
+
+
             function muestraDatosRegistroActual(seleccion) {
 
                   var index = vm.registros.indexOf(seleccion);
@@ -377,8 +394,18 @@
                         vm.RegistroSeleccionado.unidad_pertenece.UnidadAdmtva   = respuesta.idUnidadAdmtva;
                         vm.RegistroSeleccionado.unidad_pertenece.nombre         = respuesta.UnidadAdmtva;
 
-                        vm.RegistroSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;
-                        vm.RegistroSeleccionado.localidad_pertenece.nombre      = respuesta.localidad;
+                        if(vm.RegistroSeleccionado.localidad_pertenece === undefined)
+                        {
+                            vm.RegistroSeleccionado.localidad_pertenece = {
+                                idLocalidad : respuesta.idLocalidad,
+                                nombre      : respuesta.localidad
+                            };
+                        }
+                        else
+                        {
+                            vm.RegistroSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;
+                            vm.RegistroSeleccionado.localidad_pertenece.nombre      = respuesta.localidad;
+                        }
 
                         if(respuesta.otras_unidades.length > 0)
                         {

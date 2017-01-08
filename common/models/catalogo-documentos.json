@@ -1,0 +1,52 @@
+{
+  "name": "CatalogoDocumentos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "catalogos",
+    "table": "catalogo_documentos"
+  },
+  "properties": {
+    "idDocumento": {
+      "type": "number",
+      "id": true,
+      "required": false,
+      "index": true,
+      "length": null,
+      "precision": 16,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_documento",
+        "dataType": "smallint",
+        "dataLength": null,
+        "dataPrecision": 16,
+        "dataScale": 0,
+        "nullable": "NO"
+      },
+      "_selectable": false
+    },
+    "nombreDocumento": {
+      "type": "string",
+      "required": true,
+      "length": 65,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "nombre_documento",
+        "dataType": "character varying",
+        "dataLength": 65,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

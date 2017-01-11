@@ -2965,7 +2965,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "login": {
               params: {
-                include: 'user',
               },
               interceptor: {
                 response: function(response) {

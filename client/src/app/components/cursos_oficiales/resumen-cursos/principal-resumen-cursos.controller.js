@@ -627,8 +627,9 @@
 
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/cursos_oficiales/resumen-cursos/modal-asienta-calificaciones.html',
-                        windowClass: "animated fadeIn",
+                        //windowClass: "animated fadeIn",
                         controller: 'ModalAsientaCalificacionesController as vm',
+                        windowClass: 'app-modal-window',
                         resolve: {
                           registroEditar: function () { return seleccion }
                         }
@@ -641,7 +642,7 @@
                               var index = vm.cursoSeleccionado.inscripcionesCursos.map(function(record) {
                                                                                     return record.id;
                                                                                   }).indexOf(registro.id);
-                              vm.cursoSeleccionado.inscripcionesCursos[index].calificacion = registro.calificacion.value;
+                              vm.cursoSeleccionado.inscripcionesCursos[index].calificacion = registro.calificacion;
                               vm.cursoSeleccionado.inscripcionesCursos[index].numDocAcreditacion = registro.numDocAcreditacion;
                         });
 

@@ -79,7 +79,7 @@
                                   {
                                       relation: 'alumnos_inscritos',
                                       scope: {
-                                        fields: ['idAlumno', 'numControl', 'apellidoPaterno','apellidoMaterno','nombre','curp','idUnidadAdmtva'],
+                                        fields: ['idAlumno', 'numControl', 'nombreCompleto','idUnidadAdmtva'],
                                       }
                                   },
                                   {
@@ -188,38 +188,49 @@
 
             function editaEvaluacion(seleccion) {
 
-                    var modalInstance = $modal.open({
-                        templateUrl: 'app/components/preapertura-evaluaciones/registro-evaluacion/modal-apertura-evaluacion.html',
-                        windowClass: "animated fadeIn",
-                        controller: 'ModalEditaEvaluacionController as vm',
-                        windowClass: 'app-modal-window',
-                        resolve: {
-                          registroEditar: function () { return {record: seleccion} }
-                        }
+                    if(seleccion.inscripcionesEvaluaciones[0].pagado === true) 
+                    {
+                          swal({
+                            title: 'Error',
+                            html: 'La evaluaci&oacute;n <strong>'+ seleccion.nombreCurso+'</strong> no puede ser editada ya que el capacitando ha realizado el pago correspondiente.',
+                            type: 'error',
+                            showCancelButton: false,
+                            confirmButtonColor: "#9a0000",
+                            confirmButtonText: "Aceptar"
+                          });
+                    }
+                    else
+                    {
+                          var modalInstance = $modal.open({
+                              templateUrl: 'app/components/preapertura-evaluaciones/registro-evaluacion/modal-apertura-evaluacion.html',
+                              windowClass: "animated fadeIn",
+                              controller: 'ModalEditaEvaluacionController as vm',
+                              windowClass: 'app-modal-window',
+                              resolve: {
+                                registroEditar: function () { return {record: seleccion} }
+                              }
 
-                    });
+                          });
 
-                    modalInstance.result.then(function (respuesta) {
+                          modalInstance.result.then(function (respuesta) {
 
-                        vm.EvaluacionSeleccionada.horaEvaluacion                    = respuesta.horaEvaluacion;
-                        vm.EvaluacionSeleccionada.aulaAsignada                      = respuesta.aulaAsignada;
-                        vm.EvaluacionSeleccionada.fechaEvaluacion                   = respuesta.fechaEvaluacion;
-                        vm.EvaluacionSeleccionada.idInstructor                      = respuesta.idInstructor;
-                        vm.EvaluacionSeleccionada.curpInstructor                    = respuesta.curpInstructor;
-                        vm.EvaluacionSeleccionada.nombreInstructor                  = respuesta.nombreInstructor;
-                        vm.EvaluacionSeleccionada.observaciones                     = respuesta.observaciones;
-                        
-                        vm.EvaluacionSeleccionada.costo                             = respuesta.costo;
-                        vm.EvaluacionSeleccionada.estatus                           = respuesta.estatus;
-                        
-                        vm.EvaluacionSeleccionada.alumnos_inscritos.idAlumno        = respuesta.idAlumno;
-                        vm.EvaluacionSeleccionada.alumnos_inscritos.apellidoPaterno = respuesta.apellidoPaternoAl;
-                        vm.EvaluacionSeleccionada.alumnos_inscritos.apellidoMaterno = respuesta.apellidoMaternoAl;
-                        vm.EvaluacionSeleccionada.alumnos_inscritos.nombre          = respuesta.nombreAl;
+                              vm.EvaluacionSeleccionada.horaEvaluacion                    = respuesta.horaEvaluacion;
+                              vm.EvaluacionSeleccionada.aulaAsignada                      = respuesta.aulaAsignada;
+                              vm.EvaluacionSeleccionada.fechaEvaluacion                   = respuesta.fechaEvaluacion;
+                              vm.EvaluacionSeleccionada.idInstructor                      = respuesta.idInstructor;
+                              vm.EvaluacionSeleccionada.curpInstructor                    = respuesta.curpInstructor;
+                              vm.EvaluacionSeleccionada.nombreInstructor                  = respuesta.nombreInstructor;
+                              vm.EvaluacionSeleccionada.observaciones                     = respuesta.observaciones;
+                              
+                              vm.EvaluacionSeleccionada.costo                             = respuesta.costo;
+                              vm.EvaluacionSeleccionada.estatus                           = respuesta.estatus;
+                              
+                              vm.EvaluacionSeleccionada.alumnos_inscritos[0].idAlumno        = respuesta.idAlumno;
+                              vm.EvaluacionSeleccionada.alumnos_inscritos[0].nombreCompleto  = respuesta.nombreCompleto;
 
-                    }, function () {
-                    });
-
+                          }, function () {
+                          });
+                    }
             }
 
 
@@ -290,36 +301,47 @@
 
             function eliminaEvaluacion(seleccion) {
                   
-                  swal({
-                    title: "Confirmar",
-                    html: 'Se eliminar&aacute; la evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong>, ¿Continuar?',
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#9a0000",
-                    confirmButtonText: "Aceptar",
-                    cancelButtonText: "Cancelar",
-                    closeOnConfirm: false,
-                    closeOnCancel: true
-                  }, function(){
-                          swal.disableButtons();
+                    if(seleccion.inscripcionesEvaluaciones[0].pagado === true) 
+                    {
+                          swal({
+                            title: 'Error',
+                            html: 'La evaluaci&oacute;n <strong>'+ seleccion.nombreCurso+'</strong> no puede ser eliminada ya que el capacitando ha realizado el pago correspondiente.',
+                            type: 'error',
+                            showCancelButton: false,
+                            confirmButtonColor: "#9a0000",
+                            confirmButtonText: "Aceptar"
+                          });
+                    }
+                    else
+                    {
+                          swal({
+                            title: "Confirmar",
+                            html: 'Se eliminar&aacute; la evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong>, ¿Continuar?',
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#9a0000",
+                            confirmButtonText: "Aceptar",
+                            cancelButtonText: "Cancelar",
+                            closeOnConfirm: false,
+                            closeOnCancel: true
+                          }, function(){
+                                  swal.disableButtons();
 
-                        Evaluacion.alumnos_inscritos.destroyById({
-                            id: seleccion.idEvaluacion 
-                        })
-                        .$promise
-                        .then(function() {
+                                Evaluacion.alumnos_inscritos.destroyById({
+                                    id: seleccion.idEvaluacion 
+                                })
+                                .$promise
+                                .then(function() {
 
-                            Evaluacion.deleteById({ id: seleccion.idEvaluacion })
-                            .$promise
-                            .then(function() {
-                                  vm.muestraEvaluacionesPTCseleccionado();
-                                  swal('Evaluación eliminada', '', 'success');
-
-                            });
-
-                        });
-
-                  });
+                                    Evaluacion.deleteById({ id: seleccion.idEvaluacion })
+                                    .$promise
+                                    .then(function() {
+                                          vm.muestraEvaluacionesPTCseleccionado();
+                                          swal('Evaluación eliminada', '', 'success');
+                                    });
+                                });
+                          });
+                    }
 
             }
 

@@ -212,7 +212,7 @@
 
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/capacitandos/modal-datos-capacitando.html',
-                        windowClass: "animated fadeIn",
+                        //windowClass: "animated fadeIn",
                         controller: 'ModalEditaCapacitandoController as vm',
                         windowClass: 'app-modal-window',
                         resolve: {
@@ -299,7 +299,7 @@
 
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/capacitandos/modal-datos-capacitando.html',
-                        windowClass: "animated fadeIn",
+                        //windowClass: "animated fadeIn",
                         controller: 'ModalVisualizaCapacitandoController as vm',
                         windowClass: 'app-modal-window',
                         resolve: {
@@ -320,7 +320,7 @@
 
                     var modalInstance = $modal.open({
                         templateUrl: 'app/components/capacitandos/modal-datos-capacitando.html',
-                        windowClass: "animated fadeIn",
+                        //windowClass: "animated fadeIn",
                         controller: 'ModalNuevoCapacitandoController as vm',
                         windowClass: 'app-modal-window'
                     });

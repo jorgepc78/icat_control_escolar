@@ -543,14 +543,14 @@
       },
       "_selectable": true
     },
-    "avisoRechazoEvaluacion": {
+    "avisoRevisionEvaluacionProgr": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "aviso_rechazo_evaluacion",
+        "columnName": "aviso_revision_evaluacion_progr",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,
@@ -559,14 +559,126 @@
       },
       "_selectable": true
     },
-    "avisoAceptacionEvaluacion": {
+    "avisoRechazoEvaluacionProgr": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "aviso_aceptacion_evaluacion",
+        "columnName": "aviso_rechazo_evaluacion_progr",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRevisionEvaluacionAcad": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_revision_evaluacion_acad",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRechazoEvaluacionAcad": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_evaluacion_acad",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRevisionEvaluacionPlan": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_revision_evaluacion_plan",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRechazoEvaluacionPlan": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_evaluacion_plan",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRevisionEvaluacionGral": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_revision_evaluacion_gral",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoRechazoEvaluacionGral": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_rechazo_evaluacion_gral",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "avisoCancelacionEvaluacion": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "aviso_cancelacion_evaluacion",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,

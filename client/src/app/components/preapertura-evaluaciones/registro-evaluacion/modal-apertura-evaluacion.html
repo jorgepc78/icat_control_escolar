@@ -90,8 +90,11 @@
 
                           <div class="form-group">
                               <label class="col-sm-2 control-label">Capacitando</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.NombreAlumno" readonly required>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCompleto" readonly required>
+                              </div>
+                              <div class="col-sm-1">
+                                  <button type="button" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Eliminar persona" ng-click="vm.eliminaAlumno()"><i class="fa fa-times"></i></button>
                               </div>
                           </div>
                           <br>
@@ -122,13 +125,15 @@
                                           <th>N&uacute;m. control</th>
                                           <th>Nombre</th>
                                           <th>Unidad registro</th>
+                                          <th width="2%">&nbsp;</th>
                                       </tr>
                                     </thead>
                                    <tbody>
-                                      <tr ng-repeat="registro in vm.listaCapacitandos" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablalListaCapacitados.fila_seleccionada}" class="pointer">
+                                      <tr ng-repeat="registro in vm.listaCapacitandos" ng-class="{seleccion:$index==vm.tablalListaCapacitados.fila_seleccionada}">
                                           <td> {{registro.numControl}}</td>
-                                          <td> {{registro.apellidoPaterno +' '+ registro.apellidoMaterno +' '+ registro.nombre}}</td>
+                                          <td> {{registro.nombreCompleto}}</td>
                                           <td> {{registro.unidad_pertenece.nombre}}</td>
+                                          <td width="2%"> <button type="button" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Seleccionar persona" ng-click="vm.seleccionaAlumno(registro)"><i class="fa fa-plus"></i></button> </td>
                                       </tr>
                                     </tbody>
                                   </table>

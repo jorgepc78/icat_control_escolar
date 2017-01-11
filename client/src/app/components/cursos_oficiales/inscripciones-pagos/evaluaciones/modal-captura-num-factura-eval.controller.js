@@ -18,6 +18,7 @@
             vm.registroEdicion = {
               id             : registroEditar.seleccion.id,
               idAlumno       : registroEditar.seleccion.idAlumno,
+              nombreCompleto : registroEditar.seleccion.Capacitandos.nombreCompleto,
               idEvaluacion   : registroEditar.seleccion.idEvaluacion,
               nombreCurso    : registroEditar.nombreCurso,
               numFactura     : registroEditar.seleccion.numFactura,

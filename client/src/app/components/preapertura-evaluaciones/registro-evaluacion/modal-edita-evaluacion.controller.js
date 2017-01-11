@@ -16,7 +16,8 @@
 
             vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
             vm.limpiaBusqueda             = limpiaBusqueda;
-            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
+            vm.seleccionaAlumno           = seleccionaAlumno;
+            vm.eliminaAlumno              = eliminaAlumno;
             vm.cambiarPagina              = cambiarPagina;
 
             vm.muestraInstructoresCurso = muestraInstructoresCurso;
@@ -36,7 +37,7 @@
               fin                : 0,
               condicion          : {},
               filtro_datos       : {},
-              fila_seleccionada  : 0
+              fila_seleccionada  : undefined
             };
 
 
@@ -69,10 +70,7 @@
                     estatus                 : registroEditar.record.estatus,
                     observaciones           : registroEditar.record.observaciones,
                     idAlumno                : registroEditar.record.alumnos_inscritos[0].idAlumno,
-                    apellidoPaternoAl       : registroEditar.record.alumnos_inscritos[0].apellidoPaterno,
-                    apellidoMaternoAl       : registroEditar.record.alumnos_inscritos[0].apellidoMaterno,
-                    nombreAl                : registroEditar.record.alumnos_inscritos[0].nombre,
-                    NombreAlumno            : registroEditar.record.alumnos_inscritos[0].apellidoPaterno + ' ' + registroEditar.record.alumnos_inscritos[0].apellidoMaterno + ' ' + registroEditar.record.alumnos_inscritos[0].nombre
+                    nombreCompleto          : registroEditar.record.alumnos_inscritos[0].nombreCompleto
             };
 
 
@@ -158,8 +156,8 @@
                 vm.tablalListaCapacitados.filtro_datos = {
                       filter: {
                           where: vm.tablalListaCapacitados.condicion,
-                          fields: ['idAlumno', 'numControl', 'apellidoPaterno','apellidoMaterno','nombre','curp','idUnidadAdmtva'],
-                          order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','curp ASC'],
+                          fields: ['idAlumno', 'numControl', 'nombreCompleto','idUnidadAdmtva'],
+                          order: ['nombreCompleto ASC'],
                           limit: vm.tablalListaCapacitados.registrosPorPagina,
                           skip: vm.tablalListaCapacitados.paginaActual - 1,
                           include: [
@@ -187,13 +185,7 @@
                   vm.tablalListaCapacitados.fin = 1;
                   vm.mostrarbtnLimpiar = true;
 
-                  vm.tablalListaCapacitados.condicion = {
-                                    or: [
-                                      {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                      {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                      {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
-                                    ]
-                                };
+                  vm.tablalListaCapacitados.condicion = {nombreCompleto: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}};
 
                   tablaDatosService.obtiene_datos_tabla(Capacitandos, vm.tablalListaCapacitados)
                   .then(function(respuesta) {
@@ -205,9 +197,6 @@
                         if(vm.tablalListaCapacitados.totalElementos > 0)
                         {
                             vm.listaCapacitandos = respuesta.datos;
-                            vm.personaSeleccionada = vm.listaCapacitandos[0];
-                            vm.tablalListaCapacitados.fila_seleccionada = 0;
-                            muestraDatosRegistroActual(vm.personaSeleccionada);
                         }
                   });
 
@@ -220,31 +209,28 @@
                   vm.cadena_buscar = '';
                   vm.listaCapacitandos = {};
                   vm.personaSeleccionada = {};
-                  vm.tablalListaCapacitados.fila_seleccionada = undefined;
                   vm.tablalListaCapacitados.paginaActual = 1;
                   vm.tablalListaCapacitados.inicio = -1;
                   vm.tablalListaCapacitados.fin = 0;
                   vm.tablalListaCapacitados.totalElementos = 0;
-
                   vm.tablalListaCapacitados.condicion = {};
-                  vm.registroEdicion.apellidoPaternoAl = '';
-                  vm.registroEdicion.apellidoPaternoAl = '';
-                  vm.registroEdicion.nombreAl = '';
-                  vm.registroEdicion.NombreAlumno = '';
-                  vm.registroEdicion.idAlumno = 0;
             };
 
 
-            function muestraDatosRegistroActual(seleccion) {
-
+            function seleccionaAlumno(seleccion) {
                   var index = vm.listaCapacitandos.indexOf(seleccion);
                   vm.personaSeleccionada = seleccion;
                   vm.tablalListaCapacitados.fila_seleccionada = index;
-                  vm.registroEdicion.apellidoPaternoAl = vm.personaSeleccionada.apellidoPaterno;
-                  vm.registroEdicion.apellidoPaternoAl = vm.personaSeleccionada.apellidoMaterno;
-                  vm.registroEdicion.nombreAl = vm.personaSeleccionada.nombre;
-                  vm.registroEdicion.NombreAlumno = vm.personaSeleccionada.apellidoPaterno + ' ' + vm.personaSeleccionada.apellidoMaterno + ' ' + vm.personaSeleccionada.nombre;
-                  vm.registroEdicion.idAlumno = vm.personaSeleccionada.idAlumno;
+                  vm.registroEdicion.nombreCompleto = vm.personaSeleccionada.nombreCompleto;
+                  vm.registroEdicion.idAlumno = vm.personaSeleccionada.idAlumno;              
+            };
+
+
+            function eliminaAlumno() {
+                  vm.personaSeleccionada = {};
+                  vm.tablalListaCapacitados.fila_seleccionada = undefined;
+                  vm.registroEdicion.nombreCompleto = '';
+                  vm.registroEdicion.idAlumno = 0;
             };
 
 
@@ -257,11 +243,8 @@
 
                             vm.tablalListaCapacitados.inicio = respuesta.inicio;
                             vm.tablalListaCapacitados.fin = respuesta.fin;
-
                             vm.listaCapacitandos = respuesta.datos;
-                            vm.personaSeleccionada = vm.listaCapacitandos[0];
-                            vm.tablalListaCapacitados.fila_seleccionada = 0;
-                            muestraDatosRegistroActual(vm.personaSeleccionada);
+                            vm.tablalListaCapacitados.fila_seleccionada = undefined;
                         });
                   }
             }
@@ -330,10 +313,10 @@
 
                 vm.mostrarSpiner = true;
 
-                if(vm.registroEdicion.total > vm.horas_disponibles)
+                if(vm.registroEdicion.idAlumno == 0)
                 {
                         vm.mostrarSpiner = false;
-                        vm.mensaje = 'El número de horas de este curso ('+vm.registroEdicion.total+' horas) sobrepasa las horas disponibles para la unidad ('+registroEditar.horas_disponibles+' horas)';
+                        vm.mensaje = 'Falta seleccionar el capacitando que tomará la evaluación';
                         vm.mostrar_msg_error = true;
                         $timeout(function(){
                              vm.mensaje = '';
@@ -390,7 +373,6 @@
                                                 vm.registroEdicion.nombreInstructor = vm.instructorSeleccionado.nombre_completo;
                                                 vm.registroEdicion.estatus          = 0;
                                                 $modalInstance.close(vm.registroEdicion);
-
                                         });
 
                                 })
@@ -399,7 +381,6 @@
                         })
                         .catch(function(error) {
                         });
-
                 }
 
             };

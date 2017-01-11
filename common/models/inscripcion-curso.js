@@ -21,7 +21,7 @@ module.exports = function(InscripcionCurso) {
 
 							      		var email_alumno  = alumnoEncontrado.email;
 							      		var nombre_alumno = alumnoEncontrado.nombre;
-							      		
+
 							      		if(ctx.isNewInstance == true)
 							      		{
 								    					var texto_alumno = "Hola <strong>"+ alumnoEncontrado.nombre + "</strong>, tu inscripci&oacute;n al curso <strong>"+ cursoEncontrado.nombreCurso + "</strong> ha sido registrada, "+
@@ -41,7 +41,7 @@ module.exports = function(InscripcionCurso) {
 																//console.log('> Correo enviado a ' + alumnoEncontrado.email);
 															});
 							      		}
-							      		else if(ctx.instance.pagado > 0)
+							      		else if(ctx.instance.pagado > 0 && (cursoEncontrado.estatus == 2 || cursoEncontrado.estatus == 4))
 							      		{
 								    					var texto_alumno = "Hola <strong>"+ alumnoEncontrado.nombre + "</strong>, el pago del curso <strong>"+ cursoEncontrado.nombreCurso + "</strong> que realizaste ha sido registrado con el n&uacute;mero de pago <strong>"+ctx.instance.numFactura+"</strong>, "+
 								    					"Solamente queda que est&eacute;s pendiente del inicio del curso. ¡Muchas gracias por participar con nosotros!";

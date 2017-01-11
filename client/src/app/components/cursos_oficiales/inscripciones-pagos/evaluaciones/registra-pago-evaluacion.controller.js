@@ -41,7 +41,7 @@
 
                   vm.tablaListaEvaluaciones.condicion = {
                       and: [
-                        {estatus: 2},
+                        {estatus: 0},
                         {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id}
                       ]
                   };
@@ -61,7 +61,7 @@
                                         include:{
                                             relation: 'Capacitandos',
                                             scope: {
-                                                fields:['numControl','apellidoPaterno','apellidoMaterno','nombre','curp']
+                                                fields:['numControl','nombreCompleto']
                                             }
                                         }
                                       }
@@ -88,7 +88,6 @@
                             vm.listaCursos = respuesta.datos;
                             formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
-                            agregaNombreCompleto();
                             vm.client = 2;
                             vm.tablaListaEvaluaciones.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
@@ -133,7 +132,6 @@
                             vm.listaCursos = respuesta.datos;
                             formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
-                            agregaNombreCompleto();
                             vm.client = 2;
                             vm.tablaListaEvaluaciones.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
@@ -175,7 +173,6 @@
                             vm.listaCursos = respuesta.datos;
                             formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
-                            agregaNombreCompleto();
                             vm.client = 2;
                             vm.tablaListaEvaluaciones.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
@@ -209,7 +206,6 @@
                             vm.listaCursos = respuesta.datos;
                             formateaListado();
                             vm.cursoSeleccionado = vm.listaCursos[0];
-                            agregaNombreCompleto();
                             vm.client = 2;
                             vm.tablaListaEvaluaciones.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
@@ -283,23 +279,6 @@
                     }, function () {
                     });
 
-            }
-
-
-
-            function agregaNombreCompleto() {
-                  
-                  angular.forEach(vm.listaCursos, function(curso) {
-
-                        if(curso.inscripcionesEvaluaciones !== undefined)
-                        {
-                            for(var i=0; i < curso.inscripcionesEvaluaciones.length; i++)
-                            {
-                                curso.inscripcionesEvaluaciones[i].Capacitandos.nombreCompleto = curso.inscripcionesEvaluaciones[i].Capacitandos.apellidoPaterno + ' ' + curso.inscripcionesEvaluaciones[i].Capacitandos.apellidoMaterno + ' ' + curso.inscripcionesEvaluaciones[i].Capacitandos.nombre;
-                            }                    
-                        }
-
-                  });
             }
 
 

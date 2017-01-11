@@ -280,7 +280,7 @@
                         estatus: 2
                       };
                       mensaje_confirmacion = 'La propuesta de la evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>AUTORIZADA</strong> para su aplicaci&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'EVALUACION APROBADA - ACEPTADA DIR GRAL';
+                      mensaje_accion = 'EVALUACION APROBADA DIR GRAL';
                   }
 
 
@@ -329,15 +329,15 @@
                                               var titulo_ventana_aviso = 'Evaluación Revisada';
                                               
                                               if($scope.currentUser.perfil == 'programas')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>REVISADA</strong> por el &aacute;rea de programas de capacitaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>REVISADA</strong> por el &aacute;rea de programas de capacitaci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               else if($scope.currentUser.perfil == 'dir_academica')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>APROBADA</strong> por el &aacute;rea acad&eacute;mica; y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>APROBADA</strong> por el &aacute;rea acad&eacute;mica; y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               else if($scope.currentUser.perfil == 'dir_planeacion')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>APROBADA</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>APROBADA</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               else if($scope.currentUser.perfil == 'dir_gral')
                                               {
                                                   titulo_ventana_aviso = 'Evaluación Aceptada';
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>AUTORIZADA</strong> para su aplicaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>AUTORIZADA</strong> para su aplicaci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               }
 
                                               swal({
@@ -371,32 +371,32 @@
                       datos = {
                         estatus: 3
                       };
-                      mensaje_confirmacion = 'La propuesta de la evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>RECHAZADA</strong> y regresada a la unidad, ¿Continuar?';
-                      mensaje_accion = 'RECHAZO PRE-APERTURA';
+                      mensaje_confirmacion = 'La evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>RECHAZADA</strong> y regresada a la unidad, ¿Continuar?';
+                      mensaje_accion = 'EVALUACION RECHAZADA PROGRAMAS';
                   }
                   if($scope.currentUser.perfil == 'dir_academica')
                   {
                       datos = {
                         revisadoProgramas: false
                       };
-                      mensaje_confirmacion = 'La propuesta de la evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea de programas para una nueva revisi&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'CURSO RECHAZADO ACADEMICA';
+                      mensaje_confirmacion = 'La evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea de programas para una nueva revisi&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'EVALUACION RECHAZADA ACADEMICA';
                   }
                   else if($scope.currentUser.perfil == 'dir_planeacion')
                   {
                       datos = {
                         aprobadoAcademica: false
                       };
-                      mensaje_confirmacion = 'La propuesta de la evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea acad&eacute;mica para una nueva revisi&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'CURSO RECHAZADO PLANEACION';
+                      mensaje_confirmacion = 'La evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea acad&eacute;mica para una nueva revisi&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'EVALUACION RECHAZADA PLANEACION';
                   }
                   else if($scope.currentUser.perfil == 'dir_gral')
                   {
                       datos = {
                         aprobadoPlaneacion: false
                       };
-                      mensaje_confirmacion = 'La propuesta de la evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea de planeaci&oacute;n para una nueva revisi&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'EVALUACION RECHAZADO DIR GRAL';
+                      mensaje_confirmacion = 'La evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea de planeaci&oacute;n para una nueva revisi&oacute;n, ¿Continuar?';
+                      mensaje_accion = 'EVALUACION RECHAZADA DIR GRAL';
                   }
 
                   swal({
@@ -451,11 +451,11 @@
                                               if($scope.currentUser.perfil == 'programas')
                                                   var mensaje_ventana_aviso = 'se registr&oacute; la evaluaci&oacute;n como <strong>RECHAZADA</strong> para su aplicaci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               if($scope.currentUser.perfil == 'dir_academica')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>RECHAZADA</strong> por el &aacute;rea acad&eacute;mica y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>RECHAZADA</strong> por el &aacute;rea acad&eacute;mica y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               else if($scope.currentUser.perfil == 'dir_planeacion')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>RECHAZADA</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>RECHAZADA</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               else if($scope.currentUser.perfil == 'dir_gral')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>RECHAZADA</strong> y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; la evaluaci&oacute;n como <strong>RECHAZADA</strong> y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
 
 
                                               swal({

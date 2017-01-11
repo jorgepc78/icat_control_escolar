@@ -46,7 +46,8 @@
                                                             <td class="client-status" ng-switch on="registro.estatus">
                                                                 <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Registrado</span>
                                                                 <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de validaci&oacute;n</span>
-                                                                <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">{{registro.diasDif < 0 ? 'En espera' : 'Activo'}}</span>
+                                                                <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">Aprobada</span>
+                                                                <span ng-switch-when="3" class="label label-warning texto-estatus-ptc">Rechazada</span>
                                                                 <span ng-switch-when="4" class="label label-default texto-estatus-ptc">Concluida</span>
                                                                 <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cancelada</span>
                                                             </td>
@@ -102,8 +103,10 @@
                                                                             <span class="pull-right"> 
                                                                                 <strong>Estatus:</strong>
                                                                                 <span ng-switch on="vm.cursoSeleccionado.estatus">
+                                                                                    <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Registrado</span>
                                                                                     <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de validaci&oacute;n</span>
-                                                                                    <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">{{registro.diasDif < 0 ? 'En espera' : 'Activo'}}</span>
+                                                                                    <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">Aprobada</span>
+                                                                                    <span ng-switch-when="3" class="label label-warning texto-estatus-ptc">Rechazada</span>
                                                                                     <span ng-switch-when="4" class="label label-default texto-estatus-ptc">Concluida</span>
                                                                                     <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cancelada</span>
                                                                                 </span>
@@ -163,21 +166,20 @@
                                                                                     <th>Nombre</th>
                                                                                     <th>Pago</th>
                                                                                     <th>Recibo</th>
-                                                                                    <th width="125">Acciones</th>
+                                                                                    <th width="85">Acciones</th>
                                                                                 </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                 <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesEvaluaciones | orderObjectBy: 'Capacitandos.nombreCompleto' ">
                                                                                     <td> {{$index + 1}}</td>
                                                                                     <td> {{inscripcion.Capacitandos.numControl}}</td>
-                                                                                    <td> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
+                                                                                    <td> {{inscripcion.Capacitandos.nombreCompleto}}</td>
                                                                                     <td class="client-status" ng-switch on="inscripcion.pagado">
                                                                                         <span ng-switch-when="false" class="label label-warning texto-estatus-ptc">Pendiente</span>
                                                                                         <span ng-switch-when="true" class="label label-success texto-estatus-ptc">Pagado</span>
                                                                                     </td>
                                                                                     <td>{{inscripcion.numFactura}}</td>
                                                                                     <td>
-                                                                                        <!-- <button type="button" ng-show="(currentUser.perfil == 'unidad_inscrip' || currentUser.perfil == 'unidad_capacit')" class="btn btn-sm" tooltip-placement="top" tooltip="Imprimir hoja de inscripci&oacute;n" ng-click="vm.generaFormato(inscripcion)"><i class="fa fa-print"></i></button> -->
                                                                                         <button type="button" ng-show="(inscripcion.pagado == true && vm.cursoSeleccionado.estatus == 0)" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Editar n&uacute;m. factura" ng-click="vm.editaNumFactura(inscripcion)"><i class="fa fa-pencil"></i></button>
                                                                                         <button type="button" ng-show="(inscripcion.pagado == false)" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Registrar pago" ng-click="vm.registraPagoEval(inscripcion)"><i class="fa fa-usd"></i></button>
                                                                                     </td>

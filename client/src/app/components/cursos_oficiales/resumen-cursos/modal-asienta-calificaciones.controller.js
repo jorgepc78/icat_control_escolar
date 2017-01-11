@@ -37,6 +37,8 @@
                     inscripcionesCursos     : registroEditar.inscripcionesCursos
             };
 
+            vm.inscripcionesCursos_temp = [];
+
             vm.ddSelectOptions = [
                   {
                       text: 'ACREDITADO',
@@ -60,32 +62,50 @@
                     vm.tablaListaAlumnos.inicio = 0;
                     vm.tablaListaAlumnos.fin = 1;
                     vm.tablaListaAlumnos.totalElementos = vm.registroEdicion.inscripcionesCursos.length;
-
-                    for (var i = 0; i < vm.registroEdicion.inscripcionesCursos.length; i++) {
-
-                        if(vm.registroEdicion.inscripcionesCursos[i].numDocAcreditacion === undefined)
-                          vm.registroEdicion.inscripcionesCursos[i].numDocAcreditacion = '';
-
-                        if(vm.registroEdicion.inscripcionesCursos[i].calificacion === undefined || vm.registroEdicion.inscripcionesCursos[i].calificacion == '')
-                          vm.registroEdicion.inscripcionesCursos[i].calificacion = {text: "Seleccione",value: ''};
-                        else
-                          vm.registroEdicion.inscripcionesCursos[i].calificacion = {text: vm.registroEdicion.inscripcionesCursos[i].calificacion ,value: vm.registroEdicion.inscripcionesCursos[i].calificacion};
-
+    
+                    if(vm.tablaListaAlumnos.totalElementos <= vm.tablaListaAlumnos.registrosPorPagina)
+                        vm.tablaListaAlumnos.fin = vm.tablaListaAlumnos.totalElementos;
+                    else
+                        vm.tablaListaAlumnos.fin = vm.tablaListaAlumnos.registrosPorPagina;
+                        
+                    if(vm.tablaListaAlumnos.totalElementos == 0) {
+                        vm.tablaListaAlumnos.inicio = -1;
+                        vm.tablaListaAlumnos.fin = 0;
                     }
+
+                    angular.forEach(vm.registroEdicion.inscripcionesCursos, function(record) {
+
+                          if(record.numDocAcreditacion === undefined)
+                            var numDocAcreditacion = '';
+                          else
+                            var numDocAcreditacion = record.numDocAcreditacion;
+
+                          if(record.calificacion === undefined || record.calificacion == '')
+                            var calificacion = {text: "Seleccione", value: ''};
+                          else
+                            var calificacion = {text: record.calificacion, value: record.calificacion};
+
+                          vm.inscripcionesCursos_temp.push({
+                                id: record.id,
+                                numDocAcreditacion: numDocAcreditacion,
+                                calificacion: calificacion,
+                                Capacitandos: record.Capacitandos
+                          });
+                    });
 
             };
 
 
             function cambiarPagina(value) {
        
-                var inicio  = (vm.tablaListaCursos.paginaActual - 1) * vm.tablaListaCursos.registrosPorPagina;
-                var fin     = inicio + vm.tablaListaCursos.registrosPorPagina;
+                vm.tablaListaAlumnos.inicio  = (vm.tablaListaAlumnos.paginaActual - 1) * vm.tablaListaAlumnos.registrosPorPagina;
+                vm.tablaListaAlumnos.fin     = inicio + vm.tablaListaAlumnos.registrosPorPagina;
 
-                if(fin > vm.tablaListaCursos.totalElementos)
-                    fin = vm.tablaListaCursos.totalElementos;
+                if(vm.tablaListaAlumnos.fin > vm.tablaListaAlumnos.totalElementos)
+                    vm.tablaListaAlumnos.fin = vm.tablaListaAlumnos.totalElementos;
 
                 var index = vm.registroEdicion.inscripcionesCursos.indexOf(value);
-                return (vm.tablaListaCursos.inicio <= index && index < vm.tablaListaCursos.fin);            
+                return (vm.tablaListaAlumnos.inicio <= index && index < vm.tablaListaAlumnos.fin);            
             }
 
 
@@ -94,12 +114,20 @@
 
                 vm.mostrarSpiner = true;
 
-                angular.forEach(vm.registroEdicion.inscripcionesCursos, function(registro) {
-                    if(registro.calificacion.value != '')
+                angular.forEach(vm.inscripcionesCursos_temp, function(seleccion) {
+
+                    if(seleccion.calificacion.value != '')
                     {
+                        var indice = vm.registroEdicion.inscripcionesCursos.map(function(registro) {
+                                                            return registro.id;
+                                                          }).indexOf(seleccion.id);
+
+                        vm.registroEdicion.inscripcionesCursos[indice].calificacion = seleccion.calificacion.value;
+                        vm.registroEdicion.inscripcionesCursos[indice].numDocAcreditacion = seleccion.numDocAcreditacion;
+
                         InscripcionCurso.prototype$updateAttributes(
-                            {id: registro.id }, 
-                            {calificacion : registro.calificacion.value, numDocAcreditacion : registro.numDocAcreditacion}
+                            {id: seleccion.id }, 
+                            {calificacion : seleccion.calificacion.value, numDocAcreditacion : seleccion.numDocAcreditacion}
                         )
                         .$promise.then(function() {
                         });

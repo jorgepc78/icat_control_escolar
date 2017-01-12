@@ -36,7 +36,7 @@
                   vm.tablaListaUsuarios.filtro_datos = {
                           filter: {
                               where: vm.tablaListaUsuarios.condicion,
-                              fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','activo','avisoEnvioPTC','avisoRevisonPTCProgr','avisoRechazoPTCProgr','avisoRevisonPTCAcad','avisoRechazoPTCAcad','avisoRevisonPTCPlan','avisoRechazoPTCPlan','avisoRevisionPTCGral','avisoRechazoPTCGral','avisoEnvioPreapCurso','avisoRevisionPreapCursoProgr','avisoRechazoPreapCursoProgr','avisoRevisionPreapCursoAcad','avisoRechazoPreapCursoAcad','avisoRevisionPreapCursoPlan','avisoRechazoPreapCursoPlan','avisoRevisionPreapCursoGral','avisoRechazoPreapCursoGral','avisoMinimoInscritosCurso','avisoMinimoPagadosCurso','avisoReversionPagadosCurso','avisoCancelacionCurso','avisoReprogCurso','avisoTerminacionCurso','avisoCierreCurso','avisoEnvioEvaluacion','avisoRechazoEvaluacion','avisoAceptacionEvaluacion','avisoCierreEvaluacion'],
+                              fields: ['idUsuario','username','email','nombre','puesto','idUnidadAdmtva','activo','avisoEnvioPTC','avisoRevisonPTCProgr','avisoRechazoPTCProgr','avisoRevisonPTCAcad','avisoRechazoPTCAcad','avisoRevisonPTCPlan','avisoRechazoPTCPlan','avisoRevisionPTCGral','avisoRechazoPTCGral','avisoEnvioPreapCurso','avisoRevisionPreapCursoProgr','avisoRechazoPreapCursoProgr','avisoRevisionPreapCursoAcad','avisoRechazoPreapCursoAcad','avisoRevisionPreapCursoPlan','avisoRechazoPreapCursoPlan','avisoRevisionPreapCursoGral','avisoRechazoPreapCursoGral','avisoMinimoInscritosCurso','avisoMinimoPagadosCurso','avisoReversionPagadosCurso','avisoCancelacionCurso','avisoReprogCurso','avisoTerminacionCurso','avisoCierreCurso', 'avisoEnvioEvaluacion','avisoRevisionEvaluacionProgr','avisoRechazoEvaluacionProgr','avisoRevisionEvaluacionAcad','avisoRechazoEvaluacionAcad','avisoRevisionEvaluacionPlan','avisoRechazoEvaluacionPlan','avisoRevisionEvaluacionGral','avisoRechazoEvaluacionGral','avisoCancelacionEvaluacion','avisoCierreEvaluacion'],
                               order: ['idUnidadAdmtva ASC','nombre ASC'],
                               limit: vm.tablaListaUsuarios.registrosPorPagina,
                               skip: vm.tablaListaUsuarios.paginaActual - 1,
@@ -202,37 +202,46 @@
                         vm.UsuarioSeleccionado.unidad_pertenece.idUnidadAdmtva = respuesta.idUnidadAdmtva;
                         vm.UsuarioSeleccionado.unidad_pertenece.nombre         = respuesta.UnidadAdmtva;
 
-                        vm.UsuarioSeleccionado.avisoEnvioPTC                = respuesta.avisoEnvioPTC,
-                        vm.UsuarioSeleccionado.avisoRevisonPTCProgr         = respuesta.avisoRevisonPTCProgr,
-                        vm.UsuarioSeleccionado.avisoRechazoPTCProgr         = respuesta.avisoRechazoPTCProgr,
-                        vm.UsuarioSeleccionado.avisoRevisonPTCAcad          = respuesta.avisoRevisonPTCAcad,
-                        vm.UsuarioSeleccionado.avisoRechazoPTCAcad          = respuesta.avisoRechazoPTCAcad,
-                        vm.UsuarioSeleccionado.avisoRevisonPTCPlan          = respuesta.avisoRevisonPTCPlan,
-                        vm.UsuarioSeleccionado.avisoRechazoPTCPlan          = respuesta.avisoRechazoPTCPlan,
-                        vm.UsuarioSeleccionado.avisoRevisionPTCGral         = respuesta.avisoRevisionPTCGral,
-                        vm.UsuarioSeleccionado.avisoRechazoPTCGral          = respuesta.avisoRechazoPTCGral,
+                        vm.UsuarioSeleccionado.avisoEnvioPTC                   = respuesta.avisoEnvioPTC,
+                        vm.UsuarioSeleccionado.avisoRevisonPTCProgr            = respuesta.avisoRevisonPTCProgr,
+                        vm.UsuarioSeleccionado.avisoRechazoPTCProgr            = respuesta.avisoRechazoPTCProgr,
+                        vm.UsuarioSeleccionado.avisoRevisonPTCAcad             = respuesta.avisoRevisonPTCAcad,
+                        vm.UsuarioSeleccionado.avisoRechazoPTCAcad             = respuesta.avisoRechazoPTCAcad,
+                        vm.UsuarioSeleccionado.avisoRevisonPTCPlan             = respuesta.avisoRevisonPTCPlan,
+                        vm.UsuarioSeleccionado.avisoRechazoPTCPlan             = respuesta.avisoRechazoPTCPlan,
+                        vm.UsuarioSeleccionado.avisoRevisionPTCGral            = respuesta.avisoRevisionPTCGral,
+                        vm.UsuarioSeleccionado.avisoRechazoPTCGral             = respuesta.avisoRechazoPTCGral,
                         
-                        vm.UsuarioSeleccionado.avisoEnvioPreapCurso         = respuesta.avisoEnvioPreapCurso,
-                        vm.UsuarioSeleccionado.avisoRevisionPreapCursoProgr = respuesta.avisoRevisionPreapCursoProgr,
-                        vm.UsuarioSeleccionado.avisoRechazoPreapCursoProgr  = respuesta.avisoRechazoPreapCursoProgr,
-                        vm.UsuarioSeleccionado.avisoRevisionPreapCursoAcad  = respuesta.avisoRevisionPreapCursoAcad,
-                        vm.UsuarioSeleccionado.avisoRechazoPreapCursoAcad   = respuesta.avisoRechazoPreapCursoAcad,
-                        vm.UsuarioSeleccionado.avisoRevisionPreapCursoPlan  = respuesta.avisoRevisionPreapCursoPlan,
-                        vm.UsuarioSeleccionado.avisoRechazoPreapCursoPlan   = respuesta.avisoRechazoPreapCursoPlan,
-                        vm.UsuarioSeleccionado.avisoRevisionPreapCursoGral  = respuesta.avisoRevisionPreapCursoGral,
-                        vm.UsuarioSeleccionado.avisoRechazoPreapCursoGral   = respuesta.avisoRechazoPreapCursoGral,
+                        vm.UsuarioSeleccionado.avisoEnvioPreapCurso            = respuesta.avisoEnvioPreapCurso,
+                        vm.UsuarioSeleccionado.avisoRevisionPreapCursoProgr    = respuesta.avisoRevisionPreapCursoProgr,
+                        vm.UsuarioSeleccionado.avisoRechazoPreapCursoProgr     = respuesta.avisoRechazoPreapCursoProgr,
+                        vm.UsuarioSeleccionado.avisoRevisionPreapCursoAcad     = respuesta.avisoRevisionPreapCursoAcad,
+                        vm.UsuarioSeleccionado.avisoRechazoPreapCursoAcad      = respuesta.avisoRechazoPreapCursoAcad,
+                        vm.UsuarioSeleccionado.avisoRevisionPreapCursoPlan     = respuesta.avisoRevisionPreapCursoPlan,
+                        vm.UsuarioSeleccionado.avisoRechazoPreapCursoPlan      = respuesta.avisoRechazoPreapCursoPlan,
+                        vm.UsuarioSeleccionado.avisoRevisionPreapCursoGral     = respuesta.avisoRevisionPreapCursoGral,
+                        vm.UsuarioSeleccionado.avisoRechazoPreapCursoGral      = respuesta.avisoRechazoPreapCursoGral,
 
-                        vm.UsuarioSeleccionado.avisoMinimoInscritosCurso               = respuesta.avisoMinimoInscritosCurso;
-                        vm.UsuarioSeleccionado.avisoMinimoPagadosCurso               = respuesta.avisoMinimoPagadosCurso;
-                        vm.UsuarioSeleccionado.avisoReversionPagadosCurso               = respuesta.avisoReversionPagadosCurso;
+                        vm.UsuarioSeleccionado.avisoMinimoInscritosCurso       = respuesta.avisoMinimoInscritosCurso;
+                        vm.UsuarioSeleccionado.avisoMinimoPagadosCurso         = respuesta.avisoMinimoPagadosCurso;
+                        vm.UsuarioSeleccionado.avisoReversionPagadosCurso      = respuesta.avisoReversionPagadosCurso;
                         vm.UsuarioSeleccionado.avisoCancelacionCurso           = respuesta.avisoCancelacionCurso;
                         vm.UsuarioSeleccionado.avisoReprogCurso                = respuesta.avisoReprogCurso;
                         vm.UsuarioSeleccionado.avisoTerminacionCurso           = respuesta.avisoTerminacionCurso;
                         vm.UsuarioSeleccionado.avisoCierreCurso                = respuesta.avisoCierreCurso;
+                        
                         vm.UsuarioSeleccionado.avisoEnvioEvaluacion            = respuesta.avisoEnvioEvaluacion;
-                        vm.UsuarioSeleccionado.avisoRechazoEvaluacion          = respuesta.avisoRechazoEvaluacion;
-                        vm.UsuarioSeleccionado.avisoAceptacionEvaluacion       = respuesta.avisoAceptacionEvaluacion;
+                        vm.UsuarioSeleccionado.avisoRevisionEvaluacionProgr    = respuesta.avisoRevisionEvaluacionProgr;
+                        vm.UsuarioSeleccionado.avisoRechazoEvaluacionProgr     = respuesta.avisoRechazoEvaluacionProgr;
+                        vm.UsuarioSeleccionado.avisoRevisionEvaluacionAcad     = respuesta.avisoRevisionEvaluacionAcad;
+                        vm.UsuarioSeleccionado.avisoRechazoEvaluacionAcad      = respuesta.avisoRechazoEvaluacionAcad;
+                        vm.UsuarioSeleccionado.avisoRevisionEvaluacionPlan     = respuesta.avisoRevisionEvaluacionPlan;
+                        vm.UsuarioSeleccionado.avisoRechazoEvaluacionPlan      = respuesta.avisoRechazoEvaluacionPlan;
+                        vm.UsuarioSeleccionado.avisoRevisionEvaluacionGral     = respuesta.avisoRevisionEvaluacionGral;
+                        vm.UsuarioSeleccionado.avisoRechazoEvaluacionGral      = respuesta.avisoRechazoEvaluacionGral;
+                        vm.UsuarioSeleccionado.avisoCancelacionEvaluacion      = respuesta.avisoCancelacionEvaluacion;
                         vm.UsuarioSeleccionado.avisoCierreEvaluacion           = respuesta.avisoCierreEvaluacion;
+                        
                         vm.UsuarioSeleccionado.activo                          = respuesta.activo;
                         if(vm.UsuarioSeleccionado.perfil.length > 0)
                         {

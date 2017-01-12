@@ -190,7 +190,7 @@
                     }
 
                 },{
-                    label: "Cursos impartidos",
+                    label: "Cursos abiertos",
                     grow:{stepMode:"linear"},
                     data: vm.data_cursos_impartidos,
                     yaxis: 2,

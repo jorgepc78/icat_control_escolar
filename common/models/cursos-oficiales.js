@@ -330,18 +330,55 @@ module.exports = function(CursosOficiales) {
 
 		var sql = 'SELECT a.id_unidad_admtva, a.anio, a.mes, (CASE WHEN a.num_cursos is null THEN 0 ELSE a.num_cursos END) as num_cursos, (CASE WHEN b.num_personas is null THEN 0 ELSE b.num_personas END) as num_personas, (CASE WHEN c.num_personas_terminan is null THEN 0 ELSE c.num_personas_terminan END) as num_personas_terminan FROM '+
 				  '(SELECT id_unidad_admtva, EXTRACT(year FROM fecha_inicio) as anio, EXTRACT(month FROM fecha_inicio) as mes, COUNT(id_curso) as num_cursos '+
-				  'FROM cursos_ofertados.cursos_oficiales WHERE estatus IN (2,4,5,6) '+codigo+'AND EXTRACT(year FROM fecha_inicio) = '+anio+' GROUP BY id_unidad_admtva, anio, mes) as a '+
+				  'FROM cursos_ofertados.cursos_oficiales WHERE estatus IN (5,6) '+codigo+'AND EXTRACT(year FROM fecha_inicio) = '+anio+' GROUP BY id_unidad_admtva, anio, mes) as a '+
 				  ' LEFT JOIN '+
 				  '(SELECT id_unidad_admtva, EXTRACT(month FROM fecha_inicio) as mes, EXTRACT(year FROM fecha_inicio) as anio, COUNT(id_alumno) AS num_personas '+
 				  'FROM cursos_ofertados.inscripcion_curso INNER JOIN cursos_ofertados.cursos_oficiales ON (cursos_ofertados.inscripcion_curso.id_curso = cursos_ofertados.cursos_oficiales.id_curso) '+
-				  'WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.cursos_oficiales.estatus IN (2,4,5,6) '+codigo+'AND EXTRACT(year FROM fecha_inicio) = '+anio+' GROUP BY id_unidad_admtva, anio, mes) as b '+
+				  'WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.cursos_oficiales.estatus IN (5,6) '+codigo+'AND EXTRACT(year FROM fecha_inicio) = '+anio+' GROUP BY id_unidad_admtva, anio, mes) as b '+
 				  'ON a.id_unidad_admtva = b.id_unidad_admtva AND a.anio = b.anio AND a.mes = b.mes '+
 				  'LEFT JOIN '+
 				  '(SELECT id_unidad_admtva, EXTRACT(month FROM fecha_inicio) as mes, EXTRACT(year FROM fecha_inicio) as anio, COUNT(id_alumno) AS num_personas_terminan '+
 				  'FROM cursos_ofertados.inscripcion_curso INNER JOIN cursos_ofertados.cursos_oficiales ON (cursos_ofertados.inscripcion_curso.id_curso = cursos_ofertados.cursos_oficiales.id_curso) '+
-				  'WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.inscripcion_curso.calificacion = \'ACREDITADO\' AND cursos_ofertados.cursos_oficiales.estatus IN (2,4,5,6) '+codigo+
+				  'WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.inscripcion_curso.calificacion = \'ACREDITADO\' AND cursos_ofertados.cursos_oficiales.estatus IN (5,6) '+codigo+
 				  'AND EXTRACT(year FROM fecha_inicio) = '+anio+' GROUP BY id_unidad_admtva, anio, mes)as c	ON a.id_unidad_admtva = c.id_unidad_admtva AND a.anio = c.anio AND a.mes = c.mes '+
 				  codigo2+'ORDER BY a.mes';
+
+
+    /*var sql = `SELECT base.id_unidad_admtva, base.anio, base.mes,
+              base.num_cursos_programados, 
+              (CASE WHEN a.num_personas_inscritas is null THEN 0 ELSE a.num_personas_inscritas END) as num_personas_inscritas, 
+              (CASE WHEN b.num_cursos_cerrados is null THEN 0 ELSE b.num_cursos_cerrados END) as num_cursos_cerrados,
+              (CASE WHEN c.num_personas_terminan is null THEN 0 ELSE c.num_personas_terminan END) as num_personas_terminan,
+              (CASE WHEN d.num_personas_acreditan is null THEN 0 ELSE d.num_personas_acreditan END) as num_personas_acreditan FROM
+
+              (SELECT id_unidad_admtva, EXTRACT(year FROM fecha_inicio) as anio, EXTRACT(month FROM fecha_inicio) as mes, COUNT(id_curso) as num_cursos_programados
+              FROM cursos_ofertados.cursos_oficiales WHERE estatus IN (2,4,5,6) ${codigo}AND EXTRACT(year FROM fecha_inicio) = ${anio} GROUP BY id_unidad_admtva, anio, mes) as base
+              LEFT JOIN
+
+              (SELECT id_unidad_admtva, EXTRACT(month FROM fecha_inicio) as mes, EXTRACT(year FROM fecha_inicio) as anio, COUNT(id_alumno) AS num_personas_inscritas
+              FROM cursos_ofertados.inscripcion_curso INNER JOIN cursos_ofertados.cursos_oficiales ON (cursos_ofertados.inscripcion_curso.id_curso = cursos_ofertados.cursos_oficiales.id_curso)
+              WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.cursos_oficiales.estatus IN (2,4,5,6) ${codigo}AND EXTRACT(year FROM fecha_inicio) = ${anio} GROUP BY id_unidad_admtva, anio, mes) as a
+              ON base.id_unidad_admtva = a.id_unidad_admtva AND base.anio = a.anio AND base.mes = a.mes
+
+              LEFT JOIN
+              (SELECT id_unidad_admtva, EXTRACT(year FROM fecha_inicio) as anio, EXTRACT(month FROM fecha_inicio) as mes, COUNT(id_curso) as num_cursos_cerrados
+              FROM cursos_ofertados.cursos_oficiales WHERE estatus IN (5,6) ${codigo}AND EXTRACT(year FROM fecha_inicio) = ${anio} GROUP BY id_unidad_admtva, anio, mes) as b
+              ON base.id_unidad_admtva = b.id_unidad_admtva AND base.anio = b.anio AND base.mes = b.mes
+
+              LEFT JOIN
+              (SELECT id_unidad_admtva, EXTRACT(month FROM fecha_inicio) as mes, EXTRACT(year FROM fecha_inicio) as anio, COUNT(id_alumno) AS num_personas_terminan
+              FROM cursos_ofertados.inscripcion_curso INNER JOIN cursos_ofertados.cursos_oficiales ON (cursos_ofertados.inscripcion_curso.id_curso = cursos_ofertados.cursos_oficiales.id_curso)
+              WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.cursos_oficiales.estatus IN (5,6) ${codigo}AND EXTRACT(year FROM fecha_inicio) = ${anio} GROUP BY id_unidad_admtva, anio, mes) as c
+              ON base.id_unidad_admtva = c.id_unidad_admtva AND base.anio = c.anio AND base.mes = c.mes
+
+              LEFT JOIN
+              (SELECT id_unidad_admtva, EXTRACT(month FROM fecha_inicio) as mes, EXTRACT(year FROM fecha_inicio) as anio, COUNT(id_alumno) AS num_personas_acreditan
+              FROM cursos_ofertados.inscripcion_curso INNER JOIN cursos_ofertados.cursos_oficiales ON (cursos_ofertados.inscripcion_curso.id_curso = cursos_ofertados.cursos_oficiales.id_curso)
+              WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.inscripcion_curso.calificacion = 'ACREDITADO' AND cursos_ofertados.cursos_oficiales.estatus IN (5,6) ${codigo}AND EXTRACT(year FROM fecha_inicio) = ${anio} GROUP BY id_unidad_admtva, anio, mes)as d
+              ON base.id_unidad_admtva = d.id_unidad_admtva AND base.anio = d.anio AND base.mes = d.mes
+              ${codigo2}ORDER BY base.mes`;*/
+
+
 
 		ds.connector.execute(sql, '', function(err, resultado) {
 			if (err);

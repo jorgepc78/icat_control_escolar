@@ -59,19 +59,11 @@
 
         <div class="col-md-5">
             <div class="ibox ">
-                <div class="ibox-content" style="height:790px;">
-                    <div class="tab-content">
-                        <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
-                                            <p>
-                                                <h2>Seleccione un registro para ver los detalles</h2>
-                                            </p>
-                                        </div>
-                                    </div>
-                        </div>
-                        <div class="tab-pane active" ng-show="vm.client == 2">
-                                    <div class="panel blank-panel">
+                <div class="ibox-content">
+
+                                    <div class="panel blank-panel" style="height:580px;">
+                                            <tabset>                                                
+                                                <tab heading="Datos generales">
                                                         <ul class="list-group clear-list">
                                                             <li class="list-group-item fist-item">
                                                                 <span class="pull-right"> {{vm.UsuarioSeleccionado.nombre}} </span>
@@ -102,9 +94,11 @@
                                                                 Usuario activo
                                                             </li>
                                                         </ul>
-                                                        <br>
-                                                        <strong ng-show="(vm.UsuarioSeleccionado.idUnidadAdmtva == 1)">Configuraci&oacute;n de avisos en los procesos del sistema</strong>
-                                                        <tabset ng-show="(vm.UsuarioSeleccionado.idUnidadAdmtva == 1)" style="padding-top: 25px;">
+                                                </tab>
+                                                <tab heading="Configuraci&oacute;n de avisos">
+
+                                                        <p ng-show="(vm.UsuarioSeleccionado.idUnidadAdmtva > 1)" style="padding-top: 25px;">No aplican los avisos a este usuario</p>
+                                                        <tabset ng-show="(vm.UsuarioSeleccionado.idUnidadAdmtva == 1)" style="padding-top: 15px;">
                                                             
                                                             <tab heading="PTC">
                                                                 <ul class="list-group clear-list">
@@ -190,31 +184,31 @@
                                                                 <ul class="list-group clear-list">
                                                                     <li class="list-group-item fist-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoMinimoInscritosCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoMinimoInscritosCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de cumplimiento m&iacute;nimo de inscritos
+                                                                        Aviso de cumplimiento m&iacute;nimo de inscritos
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoMinimoPagadosCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoMinimoPagadosCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de cumplimiento m&iacute;nimo de inscritos pagados
+                                                                        Aviso de cumplimiento m&iacute;nimo de inscritos pagados
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoReversionPagadosCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoReversionPagadosCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de reversi&oacute;n de inscritos
+                                                                        Aviso de reversi&oacute;n de inscritos
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoCancelacionCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoCancelacionCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de cancelaci&oacute;n del curso
+                                                                        Aviso de cancelaci&oacute;n del curso
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoReprogCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoReprogCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de reprogramaci&oacute;n del curso
+                                                                        Aviso de reprogramaci&oacute;n del curso
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoTerminacionCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoTerminacionCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de terminaci&oacute;n del curso
+                                                                        Aviso de terminaci&oacute;n del curso
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoCierreCurso === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoCierreCurso === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de cierre del curso
+                                                                        Aviso de cierre del curso
                                                                     </li>
                                                                 </ul>
                                                             </tab>
@@ -222,39 +216,66 @@
                                                                 <ul class="list-group clear-list">
                                                                     <li class="list-group-item fist-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoEnvioEvaluacion === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoEnvioEvaluacion === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de env&iacute;o de la evaluaci&oacute;n a revisi&oacute;n
+                                                                        Aviso de env&iacute;o de la evaluaci&oacute;n a revisi&oacute;n
                                                                     </li>
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoEvaluacion === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoEvaluacion === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de rechazo de la evaluaci&oacute;n
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionEvaluacionProgr === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionEvaluacionProgr === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n de la evaluaci&oacute;n por parte de programas
                                                                     </li>
                                                                     <li class="list-group-item">
-                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoAceptacionEvaluacion === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoAceptacionEvaluacion === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de aceptaci&oacute;n de la evaluaci&oacute;n
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoEvaluacionProgr === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoEvaluacionProgr === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo de la evaluaci&oacute;n por parte de programas
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionEvaluacionAcad === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionEvaluacionAcad === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n de la evaluaci&oacute;n por parte de dir. Acad&eacute;mica
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoEvaluacionAcad === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoEvaluacionAcad === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo de la evaluaci&oacute;n por parte de dir. Acad&eacute;mica
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionEvaluacionPlan === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionEvaluacionPlan === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n de la evaluaci&oacute;n por parte de Planeaci&oacute;n
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoEvaluacionPlan === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoEvaluacionPlan === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo de la evaluaci&oacute;n por parte de Planeaci&oacute;n
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRevisionEvaluacionGral === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRevisionEvaluacionGral === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de revisi&oacute;n de la evaluaci&oacute;n por parte de dir. Gral
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoRechazoEvaluacionGral === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoRechazoEvaluacionGral === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de rechazo de la evaluaci&oacute;n por parte de dir. Gral
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoCancelacionEvaluacion === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoCancelacionEvaluacion === true ? 'S&iacute;' : 'No'}}</span>
+                                                                        Aviso de cancelaci&oacute;n de la evaluaci&oacute;n
                                                                     </li>
                                                                     <li class="list-group-item">
                                                                         <span class="pull-right label label-{{vm.UsuarioSeleccionado.avisoCierreEvaluacion === true ? 'primary' : 'warning'}}">{{vm.UsuarioSeleccionado.avisoCierreEvaluacion === true ? 'S&iacute;' : 'No'}}</span>
-                                                                        Recibir el aviso de cierre de la evaluaci&oacute;n
+                                                                        Aviso de cierre de la evaluaci&oacute;n
                                                                     </li>
                                                                 </ul>
                                                             </tab>
                                                         </tabset>
 
-                                                        <div class="row">
-                                                            <div class="col-md-12 text-center">
-                                                                <div class="col-md-6">
-                                                                    <button type="button" ng-click="vm.edita_datos_usuario(vm.UsuarioSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar usuario</button>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <button type="button" ng-click="vm.elimina_usuario(vm.UsuarioSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar usuario</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                </tab>
+                                            </tabset>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <div class="col-md-6">
+                                                <button type="button" ng-click="vm.edita_datos_usuario(vm.UsuarioSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar usuario</button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" ng-click="vm.elimina_usuario(vm.UsuarioSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Eliminar usuario</button>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                </div>
-                        </div> <!-- client == 2 -->
-                    </div>
                 </div>
             </div>
         </div>

@@ -21,12 +21,12 @@
             vm.listaRoles = [];
 
             vm.usuarioEditar = {
-                    nombre                    : '',
-                    puesto                    : '',
-                    email                     : '',
-                    username                  : '',
-                    idUnidadAdmtva            : 0,
-                    UnidadAdmtva              : '',
+                    nombre                       : '',
+                    puesto                       : '',
+                    email                        : '',
+                    username                     : '',
+                    idUnidadAdmtva               : 0,
+                    UnidadAdmtva                 : '',
 
                     avisoEnvioPTC                : false,
                     avisoRevisonPTCProgr         : false,
@@ -49,20 +49,29 @@
                     avisoRechazoPreapCursoGral   : false,
 
                     avisoMinimoInscritosCurso    : false,
-                    avisoMinimoPagadosCurso    : false,
-                    avisoReversionPagadosCurso    : false,
+                    avisoMinimoPagadosCurso      : false,
+                    avisoReversionPagadosCurso   : false,
 
-                    avisoCancelacionCurso     : false,
-                    avisoReprogCurso          : false,
-                    avisoTerminacionCurso     : false,
-                    avisoCierreCurso          : false,
-                    avisoEnvioEvaluacion      : false,
-                    avisoRechazoEvaluacion    : false,
-                    avisoAceptacionEvaluacion : false,
-                    avisoCierreEvaluacion     : false,
-                    activo                    : true,
-                    idPerfil                  : 0,
-                    perfil                    : ''
+                    avisoCancelacionCurso        : false,
+                    avisoReprogCurso             : false,
+                    avisoTerminacionCurso        : false,
+                    avisoCierreCurso             : false,
+                    
+                    avisoEnvioEvaluacion         : false,
+                    avisoRevisionEvaluacionProgr : false,
+                    avisoRechazoEvaluacionProgr  : false,
+                    avisoRevisionEvaluacionAcad  : false,
+                    avisoRechazoEvaluacionAcad   : false,
+                    avisoRevisionEvaluacionPlan  : false,
+                    avisoRechazoEvaluacionPlan   : false,
+                    avisoRevisionEvaluacionGral  : false,
+                    avisoRechazoEvaluacionGral   : false,
+                    avisoCancelacionEvaluacion   : false,
+                    avisoCierreEvaluacion        : false,
+                    
+                    activo                       : true,
+                    idPerfil                     : 0,
+                    perfil                       : ''
             };
 
             vm.unidadSelecccionada = {};
@@ -115,6 +124,50 @@
 
                 vm.mostrarSpiner = true;
 
+                if(vm.unidadSelecccionada.idUnidadAdmtva > 1)
+                {
+                        vm.usuarioEditar.avisoEnvioPTC                = false;
+                        vm.usuarioEditar.avisoRevisonPTCProgr         = false;
+                        vm.usuarioEditar.avisoRechazoPTCProgr         = false;
+                        vm.usuarioEditar.avisoRevisonPTCAcad          = false;
+                        vm.usuarioEditar.avisoRechazoPTCAcad          = false;
+                        vm.usuarioEditar.avisoRevisonPTCPlan          = false;
+                        vm.usuarioEditar.avisoRechazoPTCPlan          = false;
+                        vm.usuarioEditar.avisoRevisionPTCGral         = false;
+                        vm.usuarioEditar.avisoRechazoPTCGral          = false;
+                        
+                        vm.usuarioEditar.avisoEnvioPreapCurso         = false;
+                        vm.usuarioEditar.avisoRevisionPreapCursoProgr = false;
+                        vm.usuarioEditar.avisoRechazoPreapCursoProgr  = false;
+                        vm.usuarioEditar.avisoRevisionPreapCursoAcad  = false;
+                        vm.usuarioEditar.avisoRechazoPreapCursoAcad   = false;
+                        vm.usuarioEditar.avisoRevisionPreapCursoPlan  = false;
+                        vm.usuarioEditar.avisoRechazoPreapCursoPlan   = false;
+                        vm.usuarioEditar.avisoRevisionPreapCursoGral  = false;
+                        vm.usuarioEditar.avisoRechazoPreapCursoGral   = false;
+
+                        vm.usuarioEditar.avisoMinimoInscritosCurso    = false;
+                        vm.usuarioEditar.avisoMinimoPagadosCurso      = false;
+                        vm.usuarioEditar.avisoReversionPagadosCurso   = false;
+
+                        vm.usuarioEditar.avisoCancelacionCurso        = false;
+                        vm.usuarioEditar.avisoReprogCurso             = false;
+                        vm.usuarioEditar.avisoTerminacionCurso        = false;
+                        vm.usuarioEditar.avisoCierreCurso             = false;
+                        
+                        vm.usuarioEditar.avisoEnvioEvaluacion         = false;
+                        vm.usuarioEditar.avisoRevisionEvaluacionProgr = false;
+                        vm.usuarioEditar.avisoRechazoEvaluacionProgr  = false;
+                        vm.usuarioEditar.avisoRevisionEvaluacionAcad  = false;
+                        vm.usuarioEditar.avisoRechazoEvaluacionAcad   = false;
+                        vm.usuarioEditar.avisoRevisionEvaluacionPlan  = false;
+                        vm.usuarioEditar.avisoRechazoEvaluacionPlan   = false;
+                        vm.usuarioEditar.avisoRevisionEvaluacionGral  = false;
+                        vm.usuarioEditar.avisoRechazoEvaluacionGral   = false;
+                        vm.usuarioEditar.avisoCancelacionEvaluacion   = false;
+                        vm.usuarioEditar.avisoCierreEvaluacion        = false;
+                }
+
                 if(vm.usuarioEditar.password == '' || vm.usuarioEditar.password === undefined)
                 {
                     vm.mostrarSpiner = false;
@@ -129,12 +182,12 @@
                 {
                     Usuario
                     .create({
-                            nombre                    : vm.usuarioEditar.nombre,
-                            puesto                    : vm.usuarioEditar.puesto,
-                            email                     : vm.usuarioEditar.email,
-                            username                  : vm.usuarioEditar.username,
-                            password                  : vm.usuarioEditar.password,
-                            idUnidadAdmtva            : vm.unidadSelecccionada.idUnidadAdmtva,
+                            nombre                       : vm.usuarioEditar.nombre,
+                            puesto                       : vm.usuarioEditar.puesto,
+                            email                        : vm.usuarioEditar.email,
+                            username                     : vm.usuarioEditar.username,
+                            password                     : vm.usuarioEditar.password,
+                            idUnidadAdmtva               : vm.unidadSelecccionada.idUnidadAdmtva,
 
                             avisoEnvioPTC                : vm.usuarioEditar.avisoEnvioPTC,
                             avisoRevisonPTCProgr         : vm.usuarioEditar.avisoRevisonPTCProgr,
@@ -156,19 +209,28 @@
                             avisoRevisionPreapCursoGral  : vm.usuarioEditar.avisoRevisionPreapCursoGral,
                             avisoRechazoPreapCursoGral   : vm.usuarioEditar.avisoRechazoPreapCursoGral,
 
-                            avisoMinimoInscritosCurso         : vm.usuarioEditar.avisoMinimoInscritosCurso,
-                            avisoMinimoPagadosCurso         : vm.usuarioEditar.avisoMinimoPagadosCurso,
-                            avisoReversionPagadosCurso         : vm.usuarioEditar.avisoReversionPagadosCurso,
+                            avisoMinimoInscritosCurso    : vm.usuarioEditar.avisoMinimoInscritosCurso,
+                            avisoMinimoPagadosCurso      : vm.usuarioEditar.avisoMinimoPagadosCurso,
+                            avisoReversionPagadosCurso   : vm.usuarioEditar.avisoReversionPagadosCurso,
 
-                            avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
-                            avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
-                            avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,
-                            avisoCierreCurso          : vm.usuarioEditar.avisoCierreCurso,
-                            avisoEnvioEvaluacion      : vm.usuarioEditar.avisoEnvioEvaluacion,
-                            avisoRechazoEvaluacion    : vm.usuarioEditar.avisoRechazoEvaluacion,
-                            avisoAceptacionEvaluacion : vm.usuarioEditar.avisoAceptacionEvaluacion,
-                            avisoCierreEvaluacion     : vm.usuarioEditar.avisoCierreEvaluacion,
-                            activo                    : vm.usuarioEditar.activo
+                            avisoCancelacionCurso        : vm.usuarioEditar.avisoCancelacionCurso,
+                            avisoReprogCurso             : vm.usuarioEditar.avisoReprogCurso,
+                            avisoTerminacionCurso        : vm.usuarioEditar.avisoTerminacionCurso,
+                            avisoCierreCurso             : vm.usuarioEditar.avisoCierreCurso,
+
+                            avisoEnvioEvaluacion         : vm.usuarioEditar.avisoEnvioEvaluacion,
+                            avisoRevisionEvaluacionProgr : vm.usuarioEditar.avisoRevisionEvaluacionProgr,
+                            avisoRechazoEvaluacionProgr  : vm.usuarioEditar.avisoRechazoEvaluacionProgr,
+                            avisoRevisionEvaluacionAcad  : vm.usuarioEditar.avisoRevisionEvaluacionAcad,
+                            avisoRechazoEvaluacionAcad   : vm.usuarioEditar.avisoRechazoEvaluacionAcad,
+                            avisoRevisionEvaluacionPlan  : vm.usuarioEditar.avisoRevisionEvaluacionPlan,
+                            avisoRechazoEvaluacionPlan   : vm.usuarioEditar.avisoRechazoEvaluacionPlan,
+                            avisoRevisionEvaluacionGral  : vm.usuarioEditar.avisoRevisionEvaluacionGral,
+                            avisoRechazoEvaluacionGral   : vm.usuarioEditar.avisoRechazoEvaluacionGral,
+                            avisoCancelacionEvaluacion   : vm.usuarioEditar.avisoCancelacionEvaluacion,
+                            avisoCierreEvaluacion        : vm.usuarioEditar.avisoCierreEvaluacion,
+
+                            activo                       : vm.usuarioEditar.activo
                     })
                     .$promise
                     .then(function(respuesta) {

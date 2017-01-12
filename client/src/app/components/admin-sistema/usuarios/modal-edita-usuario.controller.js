@@ -49,17 +49,26 @@
                     avisoRevisionPreapCursoGral  : (usuarioEditar.avisoRevisionPreapCursoGral === true ? true : false),
                     avisoRechazoPreapCursoGral   : (usuarioEditar.avisoRechazoPreapCursoGral === true ? true : false),
                     
-                    avisoMinimoInscritosCurso            : usuarioEditar.avisoMinimoInscritosCurso,
-                    avisoMinimoPagadosCurso            : usuarioEditar.avisoMinimoPagadosCurso,
-                    avisoReversionPagadosCurso            : usuarioEditar.avisoReversionPagadosCurso,
+                    avisoMinimoInscritosCurso    : usuarioEditar.avisoMinimoInscritosCurso,
+                    avisoMinimoPagadosCurso      : usuarioEditar.avisoMinimoPagadosCurso,
+                    avisoReversionPagadosCurso   : usuarioEditar.avisoReversionPagadosCurso,
                     avisoCancelacionCurso        : usuarioEditar.avisoCancelacionCurso,
                     avisoReprogCurso             : usuarioEditar.avisoReprogCurso,
                     avisoTerminacionCurso        : usuarioEditar.avisoTerminacionCurso,
                     avisoCierreCurso             : usuarioEditar.avisoCierreCurso,
+
                     avisoEnvioEvaluacion         : usuarioEditar.avisoEnvioEvaluacion,
-                    avisoRechazoEvaluacion       : usuarioEditar.avisoRechazoEvaluacion,
-                    avisoAceptacionEvaluacion    : usuarioEditar.avisoAceptacionEvaluacion,
+                    avisoRevisionEvaluacionProgr : usuarioEditar.avisoRevisionEvaluacionProgr,
+                    avisoRechazoEvaluacionProgr  : usuarioEditar.avisoRechazoEvaluacionProgr,
+                    avisoRevisionEvaluacionAcad  : usuarioEditar.avisoRevisionEvaluacionAcad,
+                    avisoRechazoEvaluacionAcad   : usuarioEditar.avisoRechazoEvaluacionAcad,
+                    avisoRevisionEvaluacionPlan  : usuarioEditar.avisoRevisionEvaluacionPlan,
+                    avisoRechazoEvaluacionPlan   : usuarioEditar.avisoRechazoEvaluacionPlan,
+                    avisoRevisionEvaluacionGral  : usuarioEditar.avisoRevisionEvaluacionGral,
+                    avisoRechazoEvaluacionGral   : usuarioEditar.avisoRechazoEvaluacionGral,
+                    avisoCancelacionEvaluacion   : usuarioEditar.avisoCancelacionEvaluacion,
                     avisoCierreEvaluacion        : usuarioEditar.avisoCierreEvaluacion,
+
                     activo                       : usuarioEditar.activo,
                     idPerfil                     : (usuarioEditar.perfil.length > 0 ? usuarioEditar.perfil[0].id : 0),
                     perfil                       : ''
@@ -145,93 +154,155 @@
 
                 vm.mostrarSpiner = true;
 
+                if(vm.unidadSelecccionada.idUnidadAdmtva > 1)
+                {
+                        vm.usuarioEditar.avisoEnvioPTC                = false;
+                        vm.usuarioEditar.avisoRevisonPTCProgr         = false;
+                        vm.usuarioEditar.avisoRechazoPTCProgr         = false;
+                        vm.usuarioEditar.avisoRevisonPTCAcad          = false;
+                        vm.usuarioEditar.avisoRechazoPTCAcad          = false;
+                        vm.usuarioEditar.avisoRevisonPTCPlan          = false;
+                        vm.usuarioEditar.avisoRechazoPTCPlan          = false;
+                        vm.usuarioEditar.avisoRevisionPTCGral         = false;
+                        vm.usuarioEditar.avisoRechazoPTCGral          = false;
+                        
+                        vm.usuarioEditar.avisoEnvioPreapCurso         = false;
+                        vm.usuarioEditar.avisoRevisionPreapCursoProgr = false;
+                        vm.usuarioEditar.avisoRechazoPreapCursoProgr  = false;
+                        vm.usuarioEditar.avisoRevisionPreapCursoAcad  = false;
+                        vm.usuarioEditar.avisoRechazoPreapCursoAcad   = false;
+                        vm.usuarioEditar.avisoRevisionPreapCursoPlan  = false;
+                        vm.usuarioEditar.avisoRechazoPreapCursoPlan   = false;
+                        vm.usuarioEditar.avisoRevisionPreapCursoGral  = false;
+                        vm.usuarioEditar.avisoRechazoPreapCursoGral   = false;
+
+                        vm.usuarioEditar.avisoMinimoInscritosCurso    = false;
+                        vm.usuarioEditar.avisoMinimoPagadosCurso      = false;
+                        vm.usuarioEditar.avisoReversionPagadosCurso   = false;
+
+                        vm.usuarioEditar.avisoCancelacionCurso        = false;
+                        vm.usuarioEditar.avisoReprogCurso             = false;
+                        vm.usuarioEditar.avisoTerminacionCurso        = false;
+                        vm.usuarioEditar.avisoCierreCurso             = false;
+                        
+                        vm.usuarioEditar.avisoEnvioEvaluacion         = false;
+                        vm.usuarioEditar.avisoRevisionEvaluacionProgr = false;
+                        vm.usuarioEditar.avisoRechazoEvaluacionProgr  = false;
+                        vm.usuarioEditar.avisoRevisionEvaluacionAcad  = false;
+                        vm.usuarioEditar.avisoRechazoEvaluacionAcad   = false;
+                        vm.usuarioEditar.avisoRevisionEvaluacionPlan  = false;
+                        vm.usuarioEditar.avisoRechazoEvaluacionPlan   = false;
+                        vm.usuarioEditar.avisoRevisionEvaluacionGral  = false;
+                        vm.usuarioEditar.avisoRechazoEvaluacionGral   = false;
+                        vm.usuarioEditar.avisoCancelacionEvaluacion   = false;
+                        vm.usuarioEditar.avisoCierreEvaluacion        = false;
+                }
+
                 if(vm.usuarioEditar.password == '' || vm.usuarioEditar.password === undefined)
                 {
                     var datos = {
-                            nombre                    : vm.usuarioEditar.nombre,
-                            puesto                    : vm.usuarioEditar.puesto,
-                            email                     : vm.usuarioEditar.email,
-                            username                  : vm.usuarioEditar.username,
-                            idUnidadAdmtva            : vm.unidadSelecccionada.idUnidadAdmtva,
+                    nombre                       : vm.usuarioEditar.nombre,
+                    puesto                       : vm.usuarioEditar.puesto,
+                    email                        : vm.usuarioEditar.email,
+                    username                     : vm.usuarioEditar.username,
+                    idUnidadAdmtva               : vm.unidadSelecccionada.idUnidadAdmtva,
 
-                            avisoEnvioPTC                : vm.usuarioEditar.avisoEnvioPTC,
-                            avisoRevisonPTCProgr         : vm.usuarioEditar.avisoRevisonPTCProgr,
-                            avisoRechazoPTCProgr         : vm.usuarioEditar.avisoRechazoPTCProgr,
-                            avisoRevisonPTCAcad          : vm.usuarioEditar.avisoRevisonPTCAcad,
-                            avisoRechazoPTCAcad          : vm.usuarioEditar.avisoRechazoPTCAcad,
-                            avisoRevisonPTCPlan          : vm.usuarioEditar.avisoRevisonPTCPlan,
-                            avisoRechazoPTCPlan          : vm.usuarioEditar.avisoRechazoPTCPlan,
-                            avisoRevisionPTCGral         : vm.usuarioEditar.avisoRevisionPTCGral,
-                            avisoRechazoPTCGral          : vm.usuarioEditar.avisoRechazoPTCGral,
+                    avisoEnvioPTC                : vm.usuarioEditar.avisoEnvioPTC,
+                    avisoRevisonPTCProgr         : vm.usuarioEditar.avisoRevisonPTCProgr,
+                    avisoRechazoPTCProgr         : vm.usuarioEditar.avisoRechazoPTCProgr,
+                    avisoRevisonPTCAcad          : vm.usuarioEditar.avisoRevisonPTCAcad,
+                    avisoRechazoPTCAcad          : vm.usuarioEditar.avisoRechazoPTCAcad,
+                    avisoRevisonPTCPlan          : vm.usuarioEditar.avisoRevisonPTCPlan,
+                    avisoRechazoPTCPlan          : vm.usuarioEditar.avisoRechazoPTCPlan,
+                    avisoRevisionPTCGral         : vm.usuarioEditar.avisoRevisionPTCGral,
+                    avisoRechazoPTCGral          : vm.usuarioEditar.avisoRechazoPTCGral,
                             
-                            avisoEnvioPreapCurso         : vm.usuarioEditar.avisoEnvioPreapCurso,
-                            avisoRevisionPreapCursoProgr : vm.usuarioEditar.avisoRevisionPreapCursoProgr,
-                            avisoRechazoPreapCursoProgr  : vm.usuarioEditar.avisoRechazoPreapCursoProgr,
-                            avisoRevisionPreapCursoAcad  : vm.usuarioEditar.avisoRevisionPreapCursoAcad,
-                            avisoRechazoPreapCursoAcad   : vm.usuarioEditar.avisoRechazoPreapCursoAcad,
-                            avisoRevisionPreapCursoPlan  : vm.usuarioEditar.avisoRevisionPreapCursoPlan,
-                            avisoRechazoPreapCursoPlan   : vm.usuarioEditar.avisoRechazoPreapCursoPlan,
-                            avisoRevisionPreapCursoGral  : vm.usuarioEditar.avisoRevisionPreapCursoGral,
-                            avisoRechazoPreapCursoGral   : vm.usuarioEditar.avisoRechazoPreapCursoGral,
+                    avisoEnvioPreapCurso         : vm.usuarioEditar.avisoEnvioPreapCurso,
+                    avisoRevisionPreapCursoProgr : vm.usuarioEditar.avisoRevisionPreapCursoProgr,
+                    avisoRechazoPreapCursoProgr  : vm.usuarioEditar.avisoRechazoPreapCursoProgr,
+                    avisoRevisionPreapCursoAcad  : vm.usuarioEditar.avisoRevisionPreapCursoAcad,
+                    avisoRechazoPreapCursoAcad   : vm.usuarioEditar.avisoRechazoPreapCursoAcad,
+                    avisoRevisionPreapCursoPlan  : vm.usuarioEditar.avisoRevisionPreapCursoPlan,
+                    avisoRechazoPreapCursoPlan   : vm.usuarioEditar.avisoRechazoPreapCursoPlan,
+                    avisoRevisionPreapCursoGral  : vm.usuarioEditar.avisoRevisionPreapCursoGral,
+                    avisoRechazoPreapCursoGral   : vm.usuarioEditar.avisoRechazoPreapCursoGral,
 
-                            avisoMinimoInscritosCurso         : vm.usuarioEditar.avisoMinimoInscritosCurso,
-                            avisoMinimoPagadosCurso            : vm.usuarioEditar.avisoMinimoPagadosCurso,
-                            avisoReversionPagadosCurso            : vm.usuarioEditar.avisoReversionPagadosCurso,
+                    avisoMinimoInscritosCurso    : vm.usuarioEditar.avisoMinimoInscritosCurso,
+                    avisoMinimoPagadosCurso      : vm.usuarioEditar.avisoMinimoPagadosCurso,
+                    avisoReversionPagadosCurso   : vm.usuarioEditar.avisoReversionPagadosCurso,
 
-                            avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
-                            avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
-                            avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,
-                            avisoCierreCurso          : vm.usuarioEditar.avisoCierreCurso,
-                            avisoEnvioEvaluacion      : vm.usuarioEditar.avisoEnvioEvaluacion,
-                            avisoRechazoEvaluacion    : vm.usuarioEditar.avisoRechazoEvaluacion,
-                            avisoAceptacionEvaluacion : vm.usuarioEditar.avisoAceptacionEvaluacion,
-                            avisoCierreEvaluacion     : vm.usuarioEditar.avisoCierreEvaluacion,
-                            activo                    : vm.usuarioEditar.activo
+                    avisoCancelacionCurso        : vm.usuarioEditar.avisoCancelacionCurso,
+                    avisoReprogCurso             : vm.usuarioEditar.avisoReprogCurso,
+                    avisoTerminacionCurso        : vm.usuarioEditar.avisoTerminacionCurso,
+                    avisoCierreCurso             : vm.usuarioEditar.avisoCierreCurso,
+
+                    avisoEnvioEvaluacion         : vm.usuarioEditar.avisoEnvioEvaluacion,
+                    avisoRevisionEvaluacionProgr : vm.usuarioEditar.avisoRevisionEvaluacionProgr,
+                    avisoRechazoEvaluacionProgr  : vm.usuarioEditar.avisoRechazoEvaluacionProgr,
+                    avisoRevisionEvaluacionAcad  : vm.usuarioEditar.avisoRevisionEvaluacionAcad,
+                    avisoRechazoEvaluacionAcad   : vm.usuarioEditar.avisoRechazoEvaluacionAcad,
+                    avisoRevisionEvaluacionPlan  : vm.usuarioEditar.avisoRevisionEvaluacionPlan,
+                    avisoRechazoEvaluacionPlan   : vm.usuarioEditar.avisoRechazoEvaluacionPlan,
+                    avisoRevisionEvaluacionGral  : vm.usuarioEditar.avisoRevisionEvaluacionGral,
+                    avisoRechazoEvaluacionGral   : vm.usuarioEditar.avisoRechazoEvaluacionGral,
+                    avisoCancelacionEvaluacion   : vm.usuarioEditar.avisoCancelacionEvaluacion,
+                    avisoCierreEvaluacion        : vm.usuarioEditar.avisoCierreEvaluacion,
+
+                    activo                       : vm.usuarioEditar.activo
                     };
                 }
                 else
                 {
                     var datos = {
-                            nombre                    : vm.usuarioEditar.nombre,
-                            puesto                    : vm.usuarioEditar.puesto,
-                            email                     : vm.usuarioEditar.email,
-                            username                  : vm.usuarioEditar.username,
-                            password                  : vm.usuarioEditar.password,
-                            idUnidadAdmtva            : vm.unidadSelecccionada.idUnidadAdmtva,
+                    nombre                       : vm.usuarioEditar.nombre,
+                    puesto                       : vm.usuarioEditar.puesto,
+                    email                        : vm.usuarioEditar.email,
+                    username                     : vm.usuarioEditar.username,
+                    password                     : vm.usuarioEditar.password,
+                    idUnidadAdmtva               : vm.unidadSelecccionada.idUnidadAdmtva,
 
-                            avisoEnvioPTC                : vm.usuarioEditar.avisoEnvioPTC,
-                            avisoRevisonPTCProgr         : vm.usuarioEditar.avisoRevisonPTCProgr,
-                            avisoRechazoPTCProgr         : vm.usuarioEditar.avisoRechazoPTCProgr,
-                            avisoRevisonPTCAcad          : vm.usuarioEditar.avisoRevisonPTCAcad,
-                            avisoRechazoPTCAcad          : vm.usuarioEditar.avisoRechazoPTCAcad,
-                            avisoRevisonPTCPlan          : vm.usuarioEditar.avisoRevisonPTCPlan,
-                            avisoRechazoPTCPlan          : vm.usuarioEditar.avisoRechazoPTCPlan,
-                            avisoRevisionPTCGral         : vm.usuarioEditar.avisoRevisionPTCGral,
-                            avisoRechazoPTCGral          : vm.usuarioEditar.avisoRechazoPTCGral,
+                    avisoEnvioPTC                : vm.usuarioEditar.avisoEnvioPTC,
+                    avisoRevisonPTCProgr         : vm.usuarioEditar.avisoRevisonPTCProgr,
+                    avisoRechazoPTCProgr         : vm.usuarioEditar.avisoRechazoPTCProgr,
+                    avisoRevisonPTCAcad          : vm.usuarioEditar.avisoRevisonPTCAcad,
+                    avisoRechazoPTCAcad          : vm.usuarioEditar.avisoRechazoPTCAcad,
+                    avisoRevisonPTCPlan          : vm.usuarioEditar.avisoRevisonPTCPlan,
+                    avisoRechazoPTCPlan          : vm.usuarioEditar.avisoRechazoPTCPlan,
+                    avisoRevisionPTCGral         : vm.usuarioEditar.avisoRevisionPTCGral,
+                    avisoRechazoPTCGral          : vm.usuarioEditar.avisoRechazoPTCGral,
                             
-                            avisoEnvioPreapCurso         : vm.usuarioEditar.avisoEnvioPreapCurso,
-                            avisoRevisionPreapCursoProgr : vm.usuarioEditar.avisoRevisionPreapCursoProgr,
-                            avisoRechazoPreapCursoProgr  : vm.usuarioEditar.avisoRechazoPreapCursoProgr,
-                            avisoRevisionPreapCursoAcad  : vm.usuarioEditar.avisoRevisionPreapCursoAcad,
-                            avisoRechazoPreapCursoAcad   : vm.usuarioEditar.avisoRechazoPreapCursoAcad,
-                            avisoRevisionPreapCursoPlan  : vm.usuarioEditar.avisoRevisionPreapCursoPlan,
-                            avisoRechazoPreapCursoPlan   : vm.usuarioEditar.avisoRechazoPreapCursoPlan,
-                            avisoRevisionPreapCursoGral  : vm.usuarioEditar.avisoRevisionPreapCursoGral,
-                            avisoRechazoPreapCursoGral   : vm.usuarioEditar.avisoRechazoPreapCursoGral,
+                    avisoEnvioPreapCurso         : vm.usuarioEditar.avisoEnvioPreapCurso,
+                    avisoRevisionPreapCursoProgr : vm.usuarioEditar.avisoRevisionPreapCursoProgr,
+                    avisoRechazoPreapCursoProgr  : vm.usuarioEditar.avisoRechazoPreapCursoProgr,
+                    avisoRevisionPreapCursoAcad  : vm.usuarioEditar.avisoRevisionPreapCursoAcad,
+                    avisoRechazoPreapCursoAcad   : vm.usuarioEditar.avisoRechazoPreapCursoAcad,
+                    avisoRevisionPreapCursoPlan  : vm.usuarioEditar.avisoRevisionPreapCursoPlan,
+                    avisoRechazoPreapCursoPlan   : vm.usuarioEditar.avisoRechazoPreapCursoPlan,
+                    avisoRevisionPreapCursoGral  : vm.usuarioEditar.avisoRevisionPreapCursoGral,
+                    avisoRechazoPreapCursoGral   : vm.usuarioEditar.avisoRechazoPreapCursoGral,
 
-                            avisoMinimoInscritosCurso         : vm.usuarioEditar.avisoMinimoInscritosCurso,
-                            avisoMinimoPagadosCurso            : vm.usuarioEditar.avisoMinimoPagadosCurso,
-                            avisoReversionPagadosCurso            : vm.usuarioEditar.avisoReversionPagadosCurso,
+                    avisoMinimoInscritosCurso    : vm.usuarioEditar.avisoMinimoInscritosCurso,
+                    avisoMinimoPagadosCurso      : vm.usuarioEditar.avisoMinimoPagadosCurso,
+                    avisoReversionPagadosCurso   : vm.usuarioEditar.avisoReversionPagadosCurso,
 
-                            avisoCancelacionCurso     : vm.usuarioEditar.avisoCancelacionCurso,
-                            avisoReprogCurso          : vm.usuarioEditar.avisoReprogCurso,
-                            avisoTerminacionCurso     : vm.usuarioEditar.avisoTerminacionCurso,
-                            avisoCierreCurso          : vm.usuarioEditar.avisoCierreCurso,
-                            avisoEnvioEvaluacion      : vm.usuarioEditar.avisoEnvioEvaluacion,
-                            avisoRechazoEvaluacion    : vm.usuarioEditar.avisoRechazoEvaluacion,
-                            avisoAceptacionEvaluacion : vm.usuarioEditar.avisoAceptacionEvaluacion,
-                            avisoCierreEvaluacion     : vm.usuarioEditar.avisoCierreEvaluacion,
-                            activo                    : vm.usuarioEditar.activo
+                    avisoCancelacionCurso        : vm.usuarioEditar.avisoCancelacionCurso,
+                    avisoReprogCurso             : vm.usuarioEditar.avisoReprogCurso,
+                    avisoTerminacionCurso        : vm.usuarioEditar.avisoTerminacionCurso,
+                    avisoCierreCurso             : vm.usuarioEditar.avisoCierreCurso,
+
+                    avisoEnvioEvaluacion         : vm.usuarioEditar.avisoEnvioEvaluacion,
+                    avisoRevisionEvaluacionProgr : vm.usuarioEditar.avisoRevisionEvaluacionProgr,
+                    avisoRechazoEvaluacionProgr  : vm.usuarioEditar.avisoRechazoEvaluacionProgr,
+                    avisoRevisionEvaluacionAcad  : vm.usuarioEditar.avisoRevisionEvaluacionAcad,
+                    avisoRechazoEvaluacionAcad   : vm.usuarioEditar.avisoRechazoEvaluacionAcad,
+                    avisoRevisionEvaluacionPlan  : vm.usuarioEditar.avisoRevisionEvaluacionPlan,
+                    avisoRechazoEvaluacionPlan   : vm.usuarioEditar.avisoRechazoEvaluacionPlan,
+                    avisoRevisionEvaluacionGral  : vm.usuarioEditar.avisoRevisionEvaluacionGral,
+                    avisoRechazoEvaluacionGral   : vm.usuarioEditar.avisoRechazoEvaluacionGral,
+                    avisoCancelacionEvaluacion   : vm.usuarioEditar.avisoCancelacionEvaluacion,
+                    avisoCierreEvaluacion        : vm.usuarioEditar.avisoCierreEvaluacion,
+
+                    activo                       : vm.usuarioEditar.activo
                     };
                 }
 

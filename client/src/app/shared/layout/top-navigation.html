@@ -53,6 +53,7 @@
                         <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id == 1 && currentUser.perfil == 'dir_planeacion')">
                             <a ui-sref="ptc.asigna_metas">    <span class="nav-label"> Asingaci&oacute;n de metas de capacitandos </span></a>
                         </li>
+                        <li ng-if="(currentUser.unidad_pertenece_id == 1 && currentUser.perfil == 'dir_planeacion')" style="border: 1px solid #e7eaec"></li>
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
                             <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC </span></a>
                         </li>

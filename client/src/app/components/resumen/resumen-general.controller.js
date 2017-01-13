@@ -33,10 +33,10 @@
         
         vm.datos2 = {
             capacitandos_inscritos       : 0,
-            capacitandos_terminaron      : 0,
+            capacitandos_terminan        : 0,
+            capacitandos_acreditan       : 0,
             eficiencia_terminal          : 0.0
         };
-        
 
         inicia();
 
@@ -109,12 +109,15 @@
 
         function calculaDatosAnuales() {
 
-            vm.data_cursos_impartidos = [];
+            vm.data_cursos_programados = [];
+            vm.data_cursos_cerrados = [];
             vm.data_personas_inscritas = [];
-            vm.data_personas_aprueban = [];
+            vm.data_personas_terminan = [];
+            vm.data_personas_acreditan = [];
 
             vm.datos2.capacitandos_inscritos = 0;
-            vm.datos2.capacitandos_terminaron = 0;
+            vm.datos2.capacitandos_terminan = 0;
+            vm.datos2.capacitandos_acreditan = 0;
             vm.datos2.eficiencia_terminal = 0;
             
             CursosOficiales.cursos_mes({
@@ -125,53 +128,64 @@
             .$promise
             .then(function(resp) {
 
-                var sum_data_cursos_impartidos  = 0;
+                var sum_data_cursos_programados  = 0;
+                var sum_data_cursos_cerrados  = 0;
                 var sum_data_personas_inscritas = 0;
-                var sum_data_personas_aprueban  = 0;
+                var sum_data_personas_terminan  = 0;
+                var sum_data_personas_acreditan  = 0;
                 
                 if(resp.length > 0 )
                 {
-                    
                         var mes = resp[0].mes;
 
                         angular.forEach(resp, function(registro) {
                             
                             if(mes != registro.mes)
                             {
-                                vm.data_cursos_impartidos.push( [gd(registro.anio, mes, 1), sum_data_cursos_impartidos]);
-                                vm.data_personas_inscritas.push([gd(registro.anio, mes, 1), sum_data_personas_inscritas]);
-                                vm.data_personas_aprueban.push( [gd(registro.anio, mes, 1), sum_data_personas_aprueban]);
+                                vm.data_cursos_programados.push( [gd(registro.anio, mes, 1), sum_data_cursos_programados]);
+                                vm.data_cursos_cerrados.push( [gd(registro.anio, mes, 1), sum_data_cursos_cerrados]);
+                                vm.data_personas_inscritas.push( [gd(registro.anio, mes, 1), sum_data_personas_inscritas]);
+                                vm.data_personas_terminan.push( [gd(registro.anio, mes, 1), sum_data_personas_terminan]);
+                                vm.data_personas_acreditan.push( [gd(registro.anio, mes, 1), sum_data_personas_acreditan]);
 
-                                sum_data_cursos_impartidos  = 0;
+                                sum_data_cursos_programados  = 0;
+                                sum_data_cursos_cerrados  = 0;
                                 sum_data_personas_inscritas = 0;
-                                sum_data_personas_aprueban  = 0;
+                                sum_data_personas_terminan  = 0;
+                                sum_data_personas_acreditan  = 0;
                                 mes = registro.mes;
 
-                                sum_data_cursos_impartidos  += parseInt(registro.num_cursos);
-                                sum_data_personas_inscritas += parseInt(registro.num_personas);
-                                sum_data_personas_aprueban  += parseInt(registro.num_personas_terminan);
+                                sum_data_cursos_programados  += parseInt(registro.num_cursos_programados);
+                                sum_data_cursos_cerrados  += parseInt(registro.num_cursos_cerrados);
+                                sum_data_personas_inscritas += parseInt(registro.num_personas_inscritas);
+                                sum_data_personas_terminan  += parseInt(registro.num_personas_terminan);
+                                sum_data_personas_acreditan  += parseInt(registro.num_personas_acreditan);
                             }
                             else
                             {
-                                sum_data_cursos_impartidos  += parseInt(registro.num_cursos);
-                                sum_data_personas_inscritas += parseInt(registro.num_personas);
-                                sum_data_personas_aprueban  += parseInt(registro.num_personas_terminan);
+                                sum_data_cursos_programados  += parseInt(registro.num_cursos_programados);
+                                sum_data_cursos_cerrados  += parseInt(registro.num_cursos_cerrados);
+                                sum_data_personas_inscritas += parseInt(registro.num_personas_inscritas);
+                                sum_data_personas_terminan  += parseInt(registro.num_personas_terminan);
+                                sum_data_personas_acreditan  += parseInt(registro.num_personas_acreditan);
                             }
                             
-                            vm.datos2.capacitandos_inscritos += parseInt(registro.num_personas);
-                            vm.datos2.capacitandos_terminaron += parseInt(registro.num_personas_terminan);
+                            vm.datos2.capacitandos_terminan += parseInt(registro.num_personas_terminan);
+                            vm.datos2.capacitandos_acreditan += parseInt(registro.num_personas_acreditan);
                         });
                         
                         mes = resp[(resp.length-1)].mes;
 
-                        vm.data_cursos_impartidos.push( [gd(resp[(resp.length-1)].anio, mes, 1), sum_data_cursos_impartidos]);
+                        vm.data_cursos_programados.push( [gd(resp[(resp.length-1)].anio, mes, 1), sum_data_cursos_programados]);
+                        vm.data_cursos_cerrados.push( [gd(resp[(resp.length-1)].anio, mes, 1), sum_data_cursos_cerrados]);
                         vm.data_personas_inscritas.push([gd(resp[(resp.length-1)].anio, mes, 1), sum_data_personas_inscritas]);
-                        vm.data_personas_aprueban.push( [gd(resp[(resp.length-1)].anio, mes, 1), sum_data_personas_aprueban]);
+                        vm.data_personas_terminan.push([gd(resp[(resp.length-1)].anio, mes, 1), sum_data_personas_terminan]);
+                        vm.data_personas_acreditan.push( [gd(resp[(resp.length-1)].anio, mes, 1), sum_data_personas_acreditan]);
 
-                        if(vm.datos2.capacitandos_terminaron == 0)
+                        if(vm.datos2.capacitandos_terminan == 0)
                             vm.datos2.eficiencia_terminal = 0;
                         else
-                            vm.datos2.eficiencia_terminal = (vm.datos2.capacitandos_terminaron / vm.datos2.capacitandos_inscritos) * 100;
+                            vm.datos2.eficiencia_terminal = (vm.datos2.capacitandos_acreditan / vm.datos2.capacitandos_terminan) * 100;
                 }
             });
 
@@ -190,9 +204,9 @@
                     }
 
                 },{
-                    label: "Cursos abiertos",
+                    label: "Cursos programados",
                     grow:{stepMode:"linear"},
-                    data: vm.data_cursos_impartidos,
+                    data: vm.data_cursos_programados,
                     yaxis: 2,
                     color: "#1C84C6",
                     lines: {
@@ -272,7 +286,7 @@
                     grow:{stepMode:"linear"},
                     data: vm.data_personas_inscritas,
                     yaxis: 1,
-                    color: "#1ab394",
+                    color: "#0EA64E",
                     bars: {
                         show: true,
                         align: "center",
@@ -281,11 +295,32 @@
                     }
 
                 },{
-                    label: "Personas aprueban el curso",
+                    label: "Personas terminan el curso",
                     grow:{stepMode:"linear"},
-                    data: vm.data_personas_aprueban,
+                    data: vm.data_personas_terminan,
                     yaxis: 1,
                     color: "#1C84C6",
+                    lines: {
+                        lineWidth: 1,
+                        show: true,
+                        fill: true,
+                        fillColor: {
+                            colors: [
+                                {
+                                    opacity: 0.2
+                                },
+                                {
+                                    opacity: 0.2
+                                }
+                            ]
+                        }
+                    }
+                },{
+                    label: "Personas aprueban el curso",
+                    grow:{stepMode:"linear"},
+                    data: vm.data_personas_acreditan,
+                    yaxis: 1,
+                    color: "#BC351A",
                     lines: {
                         lineWidth: 1,
                         show: true,
@@ -407,7 +442,8 @@
                     .then(function(resp) {
     
                             vm.datos2.capacitandos_inscritos = 0;
-                            vm.datos2.capacitandos_terminaron = 0;
+                            vm.datos2.capacitandos_terminan = 0;
+                            vm.datos2.capacitandos_acreditan = 0;
                             vm.datos2.eficiencia_terminal = 0;
 
                             var sum_data_personas_inscritas  = 0;
@@ -425,15 +461,15 @@
                                             sum_data_personas_inscritas  = 0;
                                             mes = registro.mes;
 
-                                            sum_data_personas_inscritas  += parseInt(registro.num_personas);
+                                            sum_data_personas_inscritas  += parseInt(registro.num_personas_inscritas);
                                         }
                                         else
                                         {
-                                            sum_data_personas_inscritas  += parseInt(registro.num_personas);
+                                            sum_data_personas_inscritas  += parseInt(registro.num_personas_inscritas);
                                         }
                                         
-                                        vm.datos2.capacitandos_inscritos += parseInt(registro.num_personas);
-                                        vm.datos2.capacitandos_terminaron += parseInt(registro.num_personas_terminan);
+                                        vm.datos2.capacitandos_terminan += parseInt(registro.num_personas_terminan);
+                                        vm.datos2.capacitandos_acreditan += parseInt(registro.num_personas_acreditan);
                                     });
                                     
                                     mes = resp[(resp.length-1)].mes;
@@ -442,10 +478,10 @@
 
                                 }
 
-                            if(vm.datos2.capacitandos_terminaron == 0)
+                            if(vm.datos2.capacitandos_terminan == 0)
                                 vm.datos2.eficiencia_terminal = 0;
                             else
-                                vm.datos2.eficiencia_terminal = (vm.datos2.capacitandos_terminaron / vm.datos2.capacitandos_inscritos) * 100;
+                                vm.datos2.eficiencia_terminal = (vm.datos2.capacitandos_acreditan / vm.datos2.capacitandos_terminan) * 100;
                         
 
                             vm.flotDataCursos = [
@@ -465,7 +501,7 @@
                                     label: "Meses seleccionados",
                                     grow:{stepMode:"linear"},
                                     data: vm.data_seleccionados,
-                                    color: "#FF0000",
+                                    color: "#F600FF",
                                     bars: {
                                         show: true,
                                         align: "center",
@@ -474,9 +510,9 @@
                                     }
 
                                 },{
-                                    label: "Cursos impartidos",
+                                    label: "Cursos programados",
                                     grow:{stepMode:"linear"},
-                                    data: vm.data_cursos_impartidos,
+                                    data: vm.data_cursos_programados,
                                     yaxis: 2,
                                     color: "#1C84C6",
                                     lines: {
@@ -497,6 +533,7 @@
                                 }
                             ];
 
+
                             vm.flotDataEficiencia = [
                                 {
                                     label: "Personas inscritas",
@@ -516,7 +553,7 @@
                                     grow:{stepMode:"linear"},
                                     data: vm.data_seleccionados,
                                     yaxis: 1,
-                                    color: "#FF0000",
+                                    color: "#F600FF",
                                     bars: {
                                         show: true,
                                         align: "center",
@@ -525,11 +562,32 @@
                                     }
 
                                 },{
-                                    label: "Personas aprueban el curso",
+                                    label: "Personas terminan el curso",
                                     grow:{stepMode:"linear"},
-                                    data: vm.data_personas_aprueban,
+                                    data: vm.data_personas_terminan,
                                     yaxis: 1,
                                     color: "#1C84C6",
+                                    lines: {
+                                        lineWidth: 1,
+                                        show: true,
+                                        fill: true,
+                                        fillColor: {
+                                            colors: [
+                                                {
+                                                    opacity: 0.2
+                                                },
+                                                {
+                                                    opacity: 0.2
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },{
+                                    label: "Personas aprueban el curso",
+                                    grow:{stepMode:"linear"},
+                                    data: vm.data_personas_acreditan,
+                                    yaxis: 1,
+                                    color: "#BC351A",
                                     lines: {
                                         lineWidth: 1,
                                         show: true,

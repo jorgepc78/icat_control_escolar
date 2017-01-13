@@ -62,7 +62,7 @@
                                                 <td> {{registro.fechaFin | date:'d/MMMM/yyyy'}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="2" class="label label-warning texto-estatus-ptc">En espera</span>
-                                                    <span ng-switch-when="4" class="label label-primary texto-estatus-ptc">Activo {{registro.diasDif <= 0 ? 'iniciado' : ''}}</span>
+                                                    <span ng-switch-when="4" class="label label-primary texto-estatus-ptc">Activo <br>{{registro.diasDif <= 0 ? 'iniciado' : ''}}</span>
                                                     <span ng-switch-when="5" class="label label-success texto-estatus-ptc">Concluido</span>
                                                     <span ng-switch-when="6" class="label label-default texto-estatus-ptc">Cerrado</span>
                                                     <span ng-switch-when="7" class="label label-danger texto-estatus-ptc">Cancelado</span>

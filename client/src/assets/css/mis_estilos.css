@@ -197,3 +197,7 @@ body.fixed-nav #wrapper #page-wrapper {
 .linea_izq_celda {
   border-left: 1px solid #000;
 }
+
+.flot-chart-content > div > .legend > table {
+  color: #000 !important;
+}

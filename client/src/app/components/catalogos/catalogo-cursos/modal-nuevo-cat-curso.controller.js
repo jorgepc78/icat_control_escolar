@@ -25,6 +25,8 @@
                     idCatalogoCurso : '',
                     claveCurso      : '',
                     descripcion     : '',
+                    perfilEgresado  : '',
+                    perfilInstructor: '',
                     idEspecialidad  : '',
                     especialidad    : '',
                     modalidad       : '',
@@ -85,6 +87,8 @@
                     var datos = {
                             claveCurso     : vm.registroEdicion.claveCurso,
                             descripcion    : vm.registroEdicion.descripcion,
+                            perfilEgresado  : vm.registroEdicion.perfilEgresado,
+                            perfilInstructor: vm.registroEdicion.perfilInstructor,
                             idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
                             modalidad      : vm.registroEdicion.modalidad,
                             nombreCurso    : vm.registroEdicion.nombreCurso,
@@ -98,6 +102,8 @@
                     .create({
                         claveCurso     : vm.registroEdicion.claveCurso,
                         descripcion    : vm.registroEdicion.descripcion,
+                        perfilEgresado : vm.registroEdicion.perfilEgresado,
+                        perfilInstructor : vm.registroEdicion.perfilInstructor,
                         idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
                         modalidad      : vm.registroEdicion.modalidad,
                         nombreCurso    : vm.registroEdicion.nombreCurso,

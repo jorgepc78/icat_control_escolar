@@ -25,6 +25,8 @@
                     idCatalogoCurso : registroEditar.idCatalogoCurso,
                     claveCurso      : registroEditar.claveCurso,
                     descripcion     : registroEditar.descripcion,
+                    perfilEgresado  : registroEditar.perfilEgresado,
+                    perfilInstructor: registroEditar.perfilInstructor,
                     idEspecialidad  : registroEditar.idEspecialidad,
                     especialidad    : '',
                     modalidad       : registroEditar.modalidad,
@@ -97,6 +99,8 @@
                 var datos = {
                         claveCurso     : vm.registroEdicion.claveCurso,
                         descripcion    : vm.registroEdicion.descripcion,
+                        perfilEgresado  : vm.registroEdicion.perfilEgresado,
+                        perfilInstructor: vm.registroEdicion.perfilInstructor,
                         idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
                         modalidad      : vm.registroEdicion.modalidad,
                         nombreCurso    : vm.registroEdicion.nombreCurso,

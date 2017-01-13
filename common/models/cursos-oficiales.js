@@ -326,9 +326,9 @@ module.exports = function(CursosOficiales) {
 		if(id_unidad == 0)
 			codigo2 = '';
 		else
-			codigo2 = 'WHERE a.id_unidad_admtva = '+id_unidad+' ';
+			codigo2 = 'WHERE base.id_unidad_admtva = '+id_unidad+' ';
 
-		var sql = 'SELECT a.id_unidad_admtva, a.anio, a.mes, (CASE WHEN a.num_cursos is null THEN 0 ELSE a.num_cursos END) as num_cursos, (CASE WHEN b.num_personas is null THEN 0 ELSE b.num_personas END) as num_personas, (CASE WHEN c.num_personas_terminan is null THEN 0 ELSE c.num_personas_terminan END) as num_personas_terminan FROM '+
+		/*var sql = 'SELECT a.id_unidad_admtva, a.anio, a.mes, (CASE WHEN a.num_cursos is null THEN 0 ELSE a.num_cursos END) as num_cursos, (CASE WHEN b.num_personas is null THEN 0 ELSE b.num_personas END) as num_personas, (CASE WHEN c.num_personas_terminan is null THEN 0 ELSE c.num_personas_terminan END) as num_personas_terminan FROM '+
 				  '(SELECT id_unidad_admtva, EXTRACT(year FROM fecha_inicio) as anio, EXTRACT(month FROM fecha_inicio) as mes, COUNT(id_curso) as num_cursos '+
 				  'FROM cursos_ofertados.cursos_oficiales WHERE estatus IN (5,6) '+codigo+'AND EXTRACT(year FROM fecha_inicio) = '+anio+' GROUP BY id_unidad_admtva, anio, mes) as a '+
 				  ' LEFT JOIN '+
@@ -341,10 +341,10 @@ module.exports = function(CursosOficiales) {
 				  'FROM cursos_ofertados.inscripcion_curso INNER JOIN cursos_ofertados.cursos_oficiales ON (cursos_ofertados.inscripcion_curso.id_curso = cursos_ofertados.cursos_oficiales.id_curso) '+
 				  'WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.inscripcion_curso.calificacion = \'ACREDITADO\' AND cursos_ofertados.cursos_oficiales.estatus IN (5,6) '+codigo+
 				  'AND EXTRACT(year FROM fecha_inicio) = '+anio+' GROUP BY id_unidad_admtva, anio, mes)as c	ON a.id_unidad_admtva = c.id_unidad_admtva AND a.anio = c.anio AND a.mes = c.mes '+
-				  codigo2+'ORDER BY a.mes';
+				  codigo2+'ORDER BY a.mes';*/
 
 
-    /*var sql = `SELECT base.id_unidad_admtva, base.anio, base.mes,
+    var sql = `SELECT base.id_unidad_admtva, base.anio, base.mes,
               base.num_cursos_programados, 
               (CASE WHEN a.num_personas_inscritas is null THEN 0 ELSE a.num_personas_inscritas END) as num_personas_inscritas, 
               (CASE WHEN b.num_cursos_cerrados is null THEN 0 ELSE b.num_cursos_cerrados END) as num_cursos_cerrados,
@@ -376,7 +376,7 @@ module.exports = function(CursosOficiales) {
               FROM cursos_ofertados.inscripcion_curso INNER JOIN cursos_ofertados.cursos_oficiales ON (cursos_ofertados.inscripcion_curso.id_curso = cursos_ofertados.cursos_oficiales.id_curso)
               WHERE cursos_ofertados.inscripcion_curso.pagado > 0 AND cursos_ofertados.inscripcion_curso.calificacion = 'ACREDITADO' AND cursos_ofertados.cursos_oficiales.estatus IN (5,6) ${codigo}AND EXTRACT(year FROM fecha_inicio) = ${anio} GROUP BY id_unidad_admtva, anio, mes)as d
               ON base.id_unidad_admtva = d.id_unidad_admtva AND base.anio = d.anio AND base.mes = d.mes
-              ${codigo2}ORDER BY base.mes`;*/
+              ${codigo2}ORDER BY base.mes`;
 
 
 

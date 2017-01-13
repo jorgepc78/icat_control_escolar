@@ -38,7 +38,7 @@
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
                               where: vm.tablaListaRegistros.condicion,
-                              fields: ['idCatalogoCurso','claveCurso','descripcion','idEspecialidad','modalidad','nombreCurso','numeroHoras','activo'],
+                              fields: ['idCatalogoCurso','claveCurso','descripcion','perfilEgresado','perfilInstructor','idEspecialidad','modalidad','nombreCurso','numeroHoras','activo'],
                               order: ['nombreCurso ASC'],
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
@@ -193,6 +193,8 @@
                     modalInstance.result.then(function (respuesta) {
                         vm.RegistroSeleccionado.claveCurso                  = respuesta.claveCurso;
                         vm.RegistroSeleccionado.descripcion                 = respuesta.descripcion;
+                        vm.RegistroSeleccionado.perfilEgresado              = respuesta.perfilEgresado;
+                        vm.RegistroSeleccionado.perfilInstructor            = respuesta.perfilInstructor;
                         vm.RegistroSeleccionado.idEspecialidad              = respuesta.idEspecialidad;
                         vm.RegistroSeleccionado.modalidad                   = respuesta.modalidad;
                         vm.RegistroSeleccionado.nombreCurso                 = respuesta.nombreCurso;

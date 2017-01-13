@@ -27,6 +27,22 @@
       },
       "_selectable": false
     },
+    "idEspecialidad": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_especialidad",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "nombreCurso": {
       "type": "String",
       "required": false,
@@ -107,18 +123,34 @@
       },
       "_selectable": true
     },
-    "idEspecialidad": {
-      "type": "Number",
+    "perfilEgresado": {
+      "type": "String",
       "required": false,
       "length": null,
-      "precision": 32,
-      "scale": 0,
+      "precision": null,
+      "scale": null,
       "postgresql": {
-        "columnName": "id_especialidad",
-        "dataType": "integer",
+        "columnName": "perfil_egresado",
+        "dataType": "text",
         "dataLength": null,
-        "dataPrecision": 32,
-        "dataScale": 0,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "perfilInstructor": {
+      "type": "String",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "perfil_instructor",
+        "dataType": "text",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
         "nullable": "YES"
       },
       "_selectable": true

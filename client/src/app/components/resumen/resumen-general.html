@@ -75,7 +75,7 @@
         <div class="col-lg-9">
 
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>Total capacitandos</h5>
@@ -86,7 +86,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Capacitandos año {{vm.anio}}</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">{{vm.datos.total_capacitandos_anio | number:0}}</h1>
+                                <small>Registrados en sistema</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <h5>Total cursos aperturados</h5>
@@ -94,14 +105,14 @@
                             <div class="ibox-content">
                                 <h1 class="no-margins">{{vm.datos.cursos_activados | number:0}}</h1>
 
-                                <small>Activos y realizados en el a&ntilde;o seleccionado</small>
+                                <small>En espera y activos en el a&ntilde;o seleccionado</small>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Total capacitandos activos &uacute;nicos</h5>
+                                <h5>Capacitandos inscritos</h5>
                             </div>
                             <div class="ibox-content">
                                 <h1 class="no-margins">{{vm.datos.capacitandos_activos | number:0}}</h1>
@@ -161,7 +172,7 @@
                                                 </li>
                                                 <li>
                                                     <h2 class="no-margins ">{{vm.datos2.capacitandos_acreditan | number:0}}</h2>
-                                                    <small>Personas que aprobaron el curso</small>
+                                                    <small>Personas que terminaron y aprobaron el curso</small>
                                                 </li>
                                                 <li>
                                                     <h2 class="no-margins ">{{vm.datos2.eficiencia_terminal | number:1}}%</h2>

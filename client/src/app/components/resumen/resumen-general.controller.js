@@ -26,9 +26,10 @@
         vm.id_unidad_actual = -1;
 
         vm.datos = {
-            total_capacitandos   : 0,
-            cursos_activados     : 0,
-            capacitandos_activos : 0
+            total_capacitandos      : 0,
+            total_capacitandos_anio : 0,
+            cursos_activados        : 0,
+            capacitandos_activos    : 0
         };
         
         vm.datos2 = {
@@ -83,10 +84,11 @@
 
         function cambiaAnioUnidad() {
 
-            vm.trimestre                  = 0;
-            vm.datos.total_capacitandos   = 0;
-            vm.datos.cursos_activados     = 0;
-            vm.datos.capacitandos_activos = 0;
+            vm.trimestre                     = 0;
+            vm.datos.total_capacitandos      = 0;
+            vm.datos.total_capacitandos_anio = 0;
+            vm.datos.cursos_activados        = 0;
+            vm.datos.capacitandos_activos    = 0;
 
             CursosOficiales.resumen_total({
               id_unidad: ($scope.currentUser.unidad_pertenece_id > 1 ? $scope.currentUser.unidad_pertenece_id : vm.unidadSeleccionada.idUnidadAdmtva ),
@@ -95,9 +97,10 @@
             .$promise
             .then(function(resp) {
                 angular.forEach(resp, function(registro) {
-                    vm.datos.total_capacitandos     += parseInt(registro.total_inscritos);
-                    vm.datos.cursos_activados       += parseInt(registro.num_cursos);
-                    vm.datos.capacitandos_activos   += parseInt(registro.num_personas_inscritas);
+                    vm.datos.total_capacitandos       += parseInt(registro.total_inscritos);
+                    vm.datos.total_capacitandos_anio  += parseInt(registro.total_inscritos_anio);
+                    vm.datos.cursos_activados         += parseInt(registro.num_cursos_programados);
+                    vm.datos.capacitandos_activos     += parseInt(registro.num_personas_inscritas);
                 });
             });
 

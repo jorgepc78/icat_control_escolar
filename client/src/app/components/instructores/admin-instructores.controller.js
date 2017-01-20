@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('AdminInstructoresController', AdminInstructoresController);
 
-    AdminInstructoresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas'];
+    AdminInstructoresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'AlmacenDocumentos'];
 
-    function AdminInstructoresController($scope, $modal, tablaDatosService, CatalogoInstructores, CatalogoUnidadesAdmtvas ) {
+    function AdminInstructoresController($scope, $modal, tablaDatosService, CatalogoInstructores, CatalogoUnidadesAdmtvas, AlmacenDocumentos ) {
 
             var vm = this;
 
@@ -489,18 +489,37 @@
                             }, function(){
                                     swal.disableButtons();
 
-                                      CatalogoInstructores.cursos_habilitados.destroyAll({ id: RegistroSeleccionado.idInstructor })
+                                    angular.forEach(RegistroSeleccionado.documentos, function(record) {
+                                          AlmacenDocumentos.removeFile({
+                                              container: 'instructores',
+                                              file: record.nombreArchivo
+                                          })
+                                          .$promise
+                                          .then(function() {
+                                          });
+                                    });
+
+                                    CatalogoInstructores.documentos.destroyAll({ id: RegistroSeleccionado.idInstructor })
+                                    .$promise
+                                    .then(function() { 
+
+                                        CatalogoInstructores.cursos_habilitados.destroyAll({ id: RegistroSeleccionado.idInstructor })
                                         .$promise
                                         .then(function() { 
 
-                                              CatalogoInstructores.deleteById({ id: RegistroSeleccionado.idInstructor })
+                                              CatalogoInstructores.otras_unidades.destroyAll({ id: RegistroSeleccionado.idInstructor })
                                               .$promise
                                               .then(function() { 
-                                                    vm.limpiaBusqueda();
-                                                    swal('Instructor eliminado', '', 'success');
-                                              });
 
-                                      });
+                                                    CatalogoInstructores.deleteById({ id: RegistroSeleccionado.idInstructor })
+                                                    .$promise
+                                                    .then(function() { 
+                                                          vm.limpiaBusqueda();
+                                                          swal('Instructor eliminado', '', 'success');
+                                                    });
+                                              });
+                                        });
+                                    });
 
                             });
                       }

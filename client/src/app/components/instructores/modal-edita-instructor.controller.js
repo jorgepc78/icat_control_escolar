@@ -21,12 +21,13 @@
             vm.mostrarSpiner = false;
             vm.mensaje = '';
             vm.mostrar_msg_error = false;
+            vm.mostrar_pestana = true;
 
             vm.listaUnidades = {};
-            vm.unidadSeleccionada = {};
+            vm.unidadSeleccionada = undefined;
 
             vm.listaLocalidades = {};
-            vm.localidadSeleccionada = {};
+            vm.localidadSeleccionada = undefined;
 
             vm.listaEspecialidades = {};
             vm.especialidadSeleccionada = {};

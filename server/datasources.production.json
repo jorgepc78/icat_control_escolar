@@ -4,7 +4,7 @@
     "port": 5432,
     "database": "icat_control_escolar",
     "username": "postgres",
-    "password": "post",
+    "password": "post01*",
     "name": "icat_control_escolar_ds",
     "connector": "postgresql",
     "debug": false
@@ -16,8 +16,8 @@
       {
         "type": "smtp",
         "host": "correo.icatqr.edu.mx",
-        "secure": false,
-        "port": 26,
+        "secure": true,
+        "port": 465,
         "tls": {
           "rejectUnauthorized": false
         },
@@ -32,6 +32,6 @@
     "name": "almacenamiento",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
-    "root": "./documentos"
+    "root": "../documentos"
   }
 }

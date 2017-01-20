@@ -34,18 +34,18 @@
                               <thead>
                                 <tr>
                                     <th>Unidad</th>
+                                    <th>Perfil</th>
                                     <th>nombre</th>
                                     <th>Puesto</th>
-                                    <th>Perfil</th>
                                     <th>Activo</th>
                                 </tr>
                               </thead>
                              <tbody>
                                 <tr ng-repeat="usuario in vm.usuarios" ng-click="vm.muestraDatosUsuarioActual(usuario)" ng-class="{seleccion:$index==vm.tablaListaUsuarios.fila_seleccionada}" class="pointer">
                                     <td> {{usuario.unidad_pertenece.nombre}}</td>
+                                    <td> {{usuario.perfil[0].description}}</td>
                                     <td> {{usuario.nombre}}</td>
                                     <td> {{usuario.puesto}}</td>
-                                    <td> {{usuario.perfil[0].description}}</td>
                                     <td class="client-status"><span class="label label-{{usuario.activo === true ? 'primary' : 'warning'}}">{{usuario.activo === true ? 'S&iacute;' : 'No'}}</span></td>
                                 </tr>
                               </tbody>

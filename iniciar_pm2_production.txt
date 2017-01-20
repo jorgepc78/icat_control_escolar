@@ -5,3 +5,13 @@ pm2 start process.json --env production
 
 firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=443
 firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=3000
+
+firewall-cmd --list-all
+firewall-cmd --permanent --zone=public --add-port=80/tcp
+firewall-cmd --permanent --zone=public --remove-port=80/tcp
+
+firewall-cmd --permanent --zone=public --add-port=26/tcp
+
+firewall-cmd --reload
+
+firewall-cmd --zone=public --query-port=80/tcp

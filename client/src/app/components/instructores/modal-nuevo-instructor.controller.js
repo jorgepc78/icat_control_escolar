@@ -21,12 +21,13 @@
             vm.mostrarSpiner = false;
             vm.mensaje = '';
             vm.mostrar_msg_error = false;
+            vm.mostrar_pestana = false;
 
             vm.listaUnidades = {};
-            vm.unidadSeleccionada = {};
+            vm.unidadSeleccionada = undefined;
 
             vm.listaLocalidades = {};
-            vm.localidadSeleccionada = {};
+            vm.localidadSeleccionada = undefined;
 
             vm.listaEspecialidades = {};
             vm.especialidadSeleccionada = {};
@@ -36,7 +37,7 @@
             vm.listaCursos = [];
 
             vm.registroEdicion = {
-                    idInstructor       : '',
+                    idInstructor       : 0,
                     idUnidadAdmtva     : 0,
                     curp               : '',
                     apellidoPaterno    : '',

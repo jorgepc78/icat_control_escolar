@@ -161,6 +161,7 @@ module.exports = function(ControlProcesos) {
                                     and: [
                                       {idUsuario: {neq: array_envia[0].idUsuario}},
                                       {idUnidadAdmtva: 1},
+                                      {activo: true},
                                       tipo_aviso
                                     ]
                                 };

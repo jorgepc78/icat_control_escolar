@@ -46,7 +46,7 @@
     }
   },
   "final": {
-    "loopback#urlNotFound": {}
+    "./middleware/custom-error": {}
   },
   "final:after": {
     "loopback#errorHandler": {}

@@ -472,7 +472,7 @@ module.exports = function(ControlProcesos) {
                                           subject : 'Aviso de reprogramación del curso ICAT',
                                           html    : mensaje
                                         }, function(err) {
-                                          if (err) throw err;
+                                          if (err) console.log(err);
                                           //console.log('correo enviado');
                                         });
                                     };
@@ -496,7 +496,7 @@ module.exports = function(ControlProcesos) {
                                           subject : 'Aviso de cancelación de curso ICAT',
                                           html    : mensaje
                                         }, function(err) {
-                                          if (err) throw err;
+                                          if (err) console.log(err);
                                           //console.log('correo enviado');
                                         });
                                     };
@@ -841,7 +841,7 @@ module.exports = function(ControlProcesos) {
                                           subject : 'Aviso de cancelación de evaluación ICAT',
                                           html    : mensaje
                                         }, function(err) {
-                                          if (err) throw err;
+                                          if (err) console.log(err);
                                           //console.log('correo enviado');
                                         });
                                     };
@@ -871,7 +871,7 @@ module.exports = function(ControlProcesos) {
                         subject : mensajes.titulo,
                         html    : mensajes.envia
                       }, function(err) {
-                        if (err) throw err;
+                        if (err) console.log(err);
                         //console.log('> envio del correo de aviso al remitente');
                       });         
 
@@ -893,7 +893,7 @@ module.exports = function(ControlProcesos) {
                             subject : mensajes.titulo,
                             html    : mensajes.recibe
                           }, function(err) {
-                            if (err) throw err;
+                            if (err) console.log(err);
                             //console.log('> envio del correo de aviso a central');
                           });
 
@@ -901,7 +901,7 @@ module.exports = function(ControlProcesos) {
                             idControlProcesos : idControlProcesos,
                             idUsuario         : array_recibe[j].idUsuario
                           }, function(err, respuesta) {
-                            if (err) throw err;
+                            if (err) console.log(err);
                           });
 
                       };

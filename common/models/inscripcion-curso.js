@@ -37,7 +37,7 @@ module.exports = function(InscripcionCurso) {
 																subject: titulo,
 																html: texto_alumno
 															}, function(err) {
-																if (err) throw err;
+																if (err) console.log(err);
 																//console.log('> Correo enviado a ' + alumnoEncontrado.email);
 															});
 							      		}
@@ -53,7 +53,7 @@ module.exports = function(InscripcionCurso) {
 																subject: titulo,
 																html: texto_alumno
 															}, function(err) {
-																if (err) throw err;
+																if (err) console.log(err);
 																//console.log('> Correo enviado a ' + alumnoEncontrado.email);
 															});
 							      		}

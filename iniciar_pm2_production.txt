@@ -11,6 +11,7 @@ firewall-cmd --permanent --zone=public --add-port=80/tcp
 firewall-cmd --permanent --zone=public --remove-port=80/tcp
 
 firewall-cmd --permanent --zone=public --add-port=26/tcp
+firewall-cmd --permanent --zone=public --remove-port=26/tcp
 
 firewall-cmd --reload
 

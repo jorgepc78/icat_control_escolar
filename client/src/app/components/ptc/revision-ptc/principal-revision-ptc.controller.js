@@ -381,14 +381,14 @@
                       mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>APROBADO</strong> por el &aacute;rea acad&eacute;mica, ¿Continuar?';
                       mensaje_accion = 'PTC APROBADO ACADEMICA';
                   }
-                  else if($scope.currentUser.perfil == 'dir_planeacion')
+                  /*else if($scope.currentUser.perfil == 'dir_planeacion')
                   {
                       datos = {
                         aprobadoPlaneacion: true
                       };
                       mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; marcado como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n, ¿Continuar?';
                       mensaje_accion = 'PTC APROBADO PLANEACION';
-                  }
+                  }*/
                   else if($scope.currentUser.perfil == 'dir_gral')
                   {
                       datos = {
@@ -495,8 +495,8 @@
                                               }
                                               if($scope.currentUser.perfil == 'dir_academica')
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el PTC como <strong>APROBADO</strong> por el &aacute;rea acad&eacute;mica y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              else if($scope.currentUser.perfil == 'dir_planeacion')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              /*else if($scope.currentUser.perfil == 'dir_planeacion')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el PTC como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';*/
                                               else if($scope.currentUser.perfil == 'dir_gral')
                                               {
                                                   titulo_ventana_aviso = 'PTC Aceptado';
@@ -545,14 +545,14 @@
                       mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; regresado al &aacute;rea de programas para una nueva revisi&oacute;n, ¿Continuar?';
                       mensaje_accion = 'PTC RECHAZADO ACADEMICA';
                   }
-                  else if($scope.currentUser.perfil == 'dir_planeacion')
+                  /*else if($scope.currentUser.perfil == 'dir_planeacion')
                   {
                       datos = {
                         aprobadoAcademica: false
                       };
                       mensaje_confirmacion = 'El PTC del <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> trimestre, del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; regresado al &aacute;rea acad&eacute;mica para una nueva revisi&oacute;n, ¿Continuar?';
                       mensaje_accion = 'PTC RECHAZADO PLANEACION';
-                  }
+                  }*/
                   else if($scope.currentUser.perfil == 'dir_gral')
                   {
                       datos = {

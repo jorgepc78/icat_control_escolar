@@ -124,16 +124,32 @@
       },
       "_selectable": true
     },
-    "gradoAcademico": {
-      "type": "String",
+    "conPerfilAcademico": {
+      "type": "Boolean",
       "required": false,
-      "length": 95,
+      "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "grado_academico",
+        "columnName": "con_perfil_academico",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "escolaridad": {
+      "type": "String",
+      "required": false,
+      "length": 185,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "escolaridad",
         "dataType": "character varying",
-        "dataLength": 95,
+        "dataLength": 185,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"
@@ -180,22 +196,6 @@
       "scale": null,
       "postgresql": {
         "columnName": "email",
-        "dataType": "character varying",
-        "dataLength": 85,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "YES"
-      },
-      "_selectable": true
-    },
-    "escolaridad": {
-      "type": "String",
-      "required": false,
-      "length": 85,
-      "precision": null,
-      "scale": null,
-      "postgresql": {
-        "columnName": "escolaridad",
         "dataType": "character varying",
         "dataLength": 85,
         "dataPrecision": null,

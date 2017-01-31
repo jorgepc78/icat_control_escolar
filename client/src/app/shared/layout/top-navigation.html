@@ -57,7 +57,7 @@
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
                             <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC </span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_planeacion' || currentUser.perfil == 'dir_gral')">
+                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_gral')">
                             <a ui-sref="ptc.revision_ptc">      <span class="nav-label"> Revisi&oacute;n PTC unidades </span></a>
                         </li>
                         <li ui-sref-active="active">
@@ -75,7 +75,7 @@
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
                             <a ui-sref="pre_apertura.cursos_ptc_extra">   <span class="nav-label"> Cursos fuera del PTC </span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_planeacion' || currentUser.perfil == 'dir_gral')">
+                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_gral')">
                             <a ui-sref="pre_apertura.valida_apertura_cursos"><span class="nav-label"> Validaci&oacute;n de cursos para pre-apertura </span></a>
                         </li>
 
@@ -84,7 +84,7 @@
                         <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
                             <a ui-sref="pre_apertura.roco_estandares">   <span class="nav-label"> ROCO y Est&aacute;ndares de competencia</span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_planeacion' || currentUser.perfil == 'dir_gral')">
+                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_gral')">
                             <a ui-sref="pre_apertura.valida_evaluaciones"><span class="nav-label"> Validaci&oacute;n de evaluaciones </span></a>
                         </li>
                     </ul>

@@ -2,6 +2,10 @@ pm2 start server.js -i 0 --name "icat_control_escolar" --env production
 
 pm2 start process.json --env production
 
+SET NODE_ENV=production //windows
+export NODE_ENV=production //linux
+
+
 
 firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=443
 firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=3000

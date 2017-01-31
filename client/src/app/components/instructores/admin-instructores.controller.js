@@ -380,10 +380,10 @@
                         vm.RegistroSeleccionado.apellidoMaterno    = respuesta.apellidoMaterno;
                         vm.RegistroSeleccionado.nombre             = respuesta.nombre;
                         vm.RegistroSeleccionado.rfc                = respuesta.rfc;
-                        vm.RegistroSeleccionado.gradoAcademico     = respuesta.gradoAcademico;
+                        vm.RegistroSeleccionado.conPerfilAcademico = respuesta.conPerfilAcademico;
+                        vm.RegistroSeleccionado.escolaridad        = respuesta.escolaridad;
                         vm.RegistroSeleccionado.telefono           = respuesta.telefono;
                         vm.RegistroSeleccionado.email              = respuesta.email;
-                        vm.RegistroSeleccionado.escolaridad        = respuesta.escolaridad;
                         vm.RegistroSeleccionado.certificacion      = respuesta.certificacion;
                         vm.RegistroSeleccionado.idLocalidad        = respuesta.idLocalidad;
                         vm.RegistroSeleccionado.activo             = respuesta.activo;

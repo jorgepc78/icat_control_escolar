@@ -15,41 +15,47 @@
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Ap. paterno</label>
                                           <div class="col-sm-9">
-                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.apellidoPaterno" required>
+                                              <input type="text" class="form-control" maxlength="45" ng-model="vm.registroEdicion.apellidoPaterno" required>
                                           </div>
                                       </div>
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Ap. materno</label>
                                           <div class="col-sm-9">
-                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.apellidoMaterno" required>
+                                              <input type="text" class="form-control" maxlength="45" ng-model="vm.registroEdicion.apellidoMaterno" required>
                                           </div>
                                       </div>
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Nombre</label>
                                           <div class="col-sm-9">
-                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.nombre" required>
+                                              <input type="text" class="form-control" maxlength="45" ng-model="vm.registroEdicion.nombre" required>
                                           </div>
                                       </div>
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">RFC</label>
                                           <div class="col-sm-9">
-                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.rfc" required>
+                                              <input type="text" class="form-control" maxlength="14" ng-model="vm.registroEdicion.rfc" required>
                                           </div>
                                       </div>
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">CURP</label>
                                           <div class="col-sm-9">
-                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.curp" required>
+                                              <input type="text" class="form-control" maxlength="22" ng-model="vm.registroEdicion.curp" required>
                                           </div>
                                       </div>
                                       <div class="form-group">
-                                          <label class="col-sm-3 control-label">Grado acad&eacute;mico</label>
+                                          <label class="col-sm-3 control-label">Cuenta con perfil acad&eacute;mico</label>
                                           <div class="col-sm-9">
-                                              <textarea class="form-control" ng-model="vm.registroEdicion.gradoAcademico" rows="4" cols="90" required></textarea>
+                                              <input ng-if="vm.registroEdicion.conPerfilAcademico!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.registroEdicion.conPerfilAcademico"/>
                                           </div>
                                       </div>
                                       <div class="form-group">
-                                          <label class="col-sm-3 control-label">Certificaciones</label>
+                                          <label class="col-sm-3 control-label">Escolaridad</label>
+                                          <div class="col-sm-9">
+                                              <textarea class="form-control" ng-model="vm.registroEdicion.escolaridad" rows="4" cols="90" required></textarea>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Certificaciones en est&aacute;ndares de competencia</label>
                                           <div class="col-sm-9">
                                               <textarea class="form-control" ng-model="vm.registroEdicion.certificacion" rows="3" cols="90"></textarea>
                                           </div>
@@ -57,21 +63,21 @@
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Tel&eacute;fono</label>
                                           <div class="col-sm-9">
-                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.telefono" required>
+                                              <input type="text" class="form-control" maxlength="22" ng-model="vm.registroEdicion.telefono" required>
                                           </div>
                                       </div>
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Email</label>
                                           <div class="col-sm-9">
-                                              <input type="email" class="form-control" ng-model="vm.registroEdicion.email" required>
+                                              <input type="email" class="form-control" maxlength="85" ng-model="vm.registroEdicion.email" required>
                                           </div>
                                       </div>
-                                      <div class="form-group">
+                                      <!-- <div class="form-group">
                                           <label class="col-sm-3 control-label">Escolaridad</label>
                                           <div class="col-sm-9">
                                               <input type="text" class="form-control" ng-model="vm.registroEdicion.escolaridad" required>
                                           </div>
-                                      </div>
+                                      </div> -->
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Localidad</label>
                                           <div class="col-sm-9">
@@ -207,6 +213,7 @@
                     <div class="container">
                           <div class="row">
                                   <div class="col-md-6" style="margin-bottom: 40px">
+                                      <p>* Tama&ntilde;o m&aacute;ximo del archivo: 30MB.</p>
                                       <input nv-file-select uploader="vm.uploader" type="file"/>
                                       <br>
                                       <h3>Cola de subida</h3>

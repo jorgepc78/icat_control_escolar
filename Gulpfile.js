@@ -47,8 +47,8 @@ gulp.task('compress', function() {
 gulp.task('copy', function() {
 	gulp.src('./client/src/assets/libs/fontawesome/fonts/**')
 		.pipe(gulp.dest('./client/dist/assets/libs/fontawesome/fonts'));
-	gulp.src('./client/src/assets/libs/bootstrap/fonts/**')
-		.pipe(gulp.dest('./client/dist/assets/libs/bootstrap/fonts'));
+	gulp.src('./client/src/assets/libs/bootstrap/dist/fonts/**')
+		.pipe(gulp.dest('./client/dist/assets/libs/bootstrap/dist/fonts'));
 	gulp.src('./client/src/assets/fonts/**')
 		.pipe(gulp.dest('./client/dist/fonts'));
 	

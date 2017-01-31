@@ -25,6 +25,7 @@
     "name": "almacenamiento",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
-    "root": "./documentos"
+    "root": "./documentos",
+    "maxFileSize": "33554432"
   }
 }

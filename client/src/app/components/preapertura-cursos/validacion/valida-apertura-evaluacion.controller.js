@@ -285,14 +285,14 @@
                       mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; marcada como <strong>APROBADA</strong> por el &aacute;rea acad&eacute;mica, ¿Continuar?';
                       mensaje_accion = 'CURSO APROBADO ACADEMICA';
                   }
-                  else if($scope.currentUser.perfil == 'dir_planeacion')
+                  /*else if($scope.currentUser.perfil == 'dir_planeacion')
                   {
                       datos = {
                         aprobadoPlaneacion: true
                       };
                       mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; marcada como <strong>APROBADA</strong> por el &aacute;rea de planeaci&oacute;n, ¿Continuar?';
                       mensaje_accion = 'CURSO APROBADO PLANEACION';
-                  }
+                  }*/
                   else if($scope.currentUser.perfil == 'dir_gral')
                   {
                       datos = {
@@ -449,8 +449,8 @@
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>REVISADO</strong> por el &aacute;rea de programas de capacitaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               else if($scope.currentUser.perfil == 'dir_academica')
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>APROBADO</strong> por el &aacute;rea acad&eacute;mica; y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              else if($scope.currentUser.perfil == 'dir_planeacion')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n; se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              /*else if($scope.currentUser.perfil == 'dir_planeacion')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n; se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';*/
                                               else if($scope.currentUser.perfil == 'dir_gral')
                                               {
                                                   titulo_ventana_aviso = 'Curso Aceptado';
@@ -499,14 +499,14 @@
                       mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea de programas para una nueva revisi&oacute;n, ¿Continuar?';
                       mensaje_accion = 'CURSO RECHAZADO ACADEMICA';
                   }
-                  else if($scope.currentUser.perfil == 'dir_planeacion')
+                  /*else if($scope.currentUser.perfil == 'dir_planeacion')
                   {
                       datos = {
                         aprobadoAcademica: false
                       };
                       mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea acad&eacute;mica para una nueva revisi&oacute;n, ¿Continuar?';
                       mensaje_accion = 'CURSO RECHAZADO PLANEACION';
-                  }
+                  }*/
                   else if($scope.currentUser.perfil == 'dir_gral')
                   {
                       datos = {
@@ -574,8 +574,8 @@
                                                   var mensaje_ventana_aviso = 'se registr&oacute; el curso como <strong>RECHAZADO</strong> para su pre-apertura y promoci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               if($scope.currentUser.perfil == 'dir_academica')
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>RECHAZADO</strong> por el &aacute;rea acad&eacute;mica y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              else if($scope.currentUser.perfil == 'dir_planeacion')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>RECHAZADO</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
+                                              /*else if($scope.currentUser.perfil == 'dir_planeacion')
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>RECHAZADO</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';*/
                                               else if($scope.currentUser.perfil == 'dir_gral')
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>RECHAZADO</strong> y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
 

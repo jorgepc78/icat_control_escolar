@@ -11,6 +11,7 @@ firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=443
 firewall-cmd --zone=external --add-forward-port=port=80:proto=tcp:toport=3000
 
 firewall-cmd --list-all
+firewall-cmd --permanent --zone=public --add-port=43554/tcp
 firewall-cmd --permanent --zone=public --add-port=80/tcp
 firewall-cmd --permanent --zone=public --remove-port=80/tcp
 

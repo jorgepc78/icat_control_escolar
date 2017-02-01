@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('PrincipalPTCUnidadController', PrincipalPTCUnidadController);
 
-    PrincipalPTCUnidadController.$inject = ['$scope', '$http', '$modal', '$q', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'ControlProcesos'];
+    PrincipalPTCUnidadController.$inject = ['$scope', '$http', '$modal', '$q', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'ControlProcesos', 'Usuario'];
 
-    function PrincipalPTCUnidadController($scope, $http, $modal, $q, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, ControlProcesos) {
+    function PrincipalPTCUnidadController($scope, $http, $modal, $q, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, ControlProcesos, Usuario) {
 
             var vm = this;
 
@@ -265,13 +265,16 @@
 
             function abreDocPTC(seleccion) {
 
-                    var link = angular.element('<a href="api/ProgTrimCursos/exporta_doc_ptc/'+seleccion.idPtc+'" target="_blank"></a>');
-
-                    angular.element(document.body).append(link);
-
-                    link[0].click();
-                    link.remove();
-
+                    Usuario.prototype$__get__accessTokens({ 
+                        id: $scope.currentUser.id_usuario
+                    })
+                    .$promise
+                    .then(function(resp) {
+                        var link = angular.element('<a href="api/ProgTrimCursos/exporta_doc_ptc/'+seleccion.idPtc+'?access_token='+resp[0].id+'" target="_blank"></a>');
+                        angular.element(document.body).append(link);
+                        link[0].click();
+                        link.remove();
+                    });
             };
 
 

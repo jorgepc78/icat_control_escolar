@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('RegistroInscripPagoCursoController', RegistroInscripPagoCursoController);
 
-    RegistroInscripPagoCursoController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'InscripcionCurso', 'ControlProcesos'];
+    RegistroInscripPagoCursoController.$inject = ['$scope', '$stateParams', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'InscripcionCurso', 'ControlProcesos', 'Usuario'];
 
-    function RegistroInscripPagoCursoController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, CursosOficiales, InscripcionCurso, ControlProcesos ) {
+    function RegistroInscripPagoCursoController($scope, $stateParams, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, CursosOficiales, InscripcionCurso, ControlProcesos, Usuario ) {
 
             var vm = this;
 
@@ -395,13 +395,16 @@
 
             function generaFormato(seleccion) {
 
-                    var link = angular.element('<a href="api/Capacitandos/exporta_doc_inscrip/'+seleccion.idCurso+'/'+seleccion.Capacitandos.idAlumno+'" target="_blank"></a>');
-
-                    angular.element(document.body).append(link);
-
-                    link[0].click();
-                    link.remove();
-
+                    Usuario.prototype$__get__accessTokens({ 
+                        id: $scope.currentUser.id_usuario
+                    })
+                    .$promise
+                    .then(function(resp) {
+                      var link = angular.element('<a href="api/Capacitandos/exporta_doc_inscrip/'+seleccion.idCurso+'/'+seleccion.Capacitandos.idAlumno+'?access_token='+resp[0].id+'" target="_blank"></a>');
+                        angular.element(document.body).append(link);
+                        link[0].click();
+                        link.remove();
+                    });
             };
 
 

@@ -5,18 +5,17 @@
         .module('icat_control_escolar')
         .controller('AdminInstructoresController', AdminInstructoresController);
 
-    AdminInstructoresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'AlmacenDocumentos'];
+    AdminInstructoresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'AlmacenDocumentos', 'Usuario'];
 
-    function AdminInstructoresController($scope, $modal, tablaDatosService, CatalogoInstructores, CatalogoUnidadesAdmtvas, AlmacenDocumentos ) {
+    function AdminInstructoresController($scope, $modal, tablaDatosService, CatalogoInstructores, CatalogoUnidadesAdmtvas, AlmacenDocumentos, Usuario ) {
 
             var vm = this;
-
-            vm.muestra_ptc_unidad     = muestra_ptc_unidad;
 
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
             vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
             vm.limpiaBusqueda             = limpiaBusqueda;
             vm.cambiarPagina              = cambiarPagina;
+            vm.muestra_ptc_unidad         = muestra_ptc_unidad;
             vm.abreDocumento              = abreDocumento;
             vm.edita_datos_registro       = edita_datos_registro;
             vm.nuevo_registro             = nuevo_registro;
@@ -341,12 +340,17 @@
 
 
             function abreDocumento(seleccion) {
-                    var link = angular.element('<a href="api/AlmacenDocumentos/instructores/download/'+seleccion.nombreArchivo+'" target="_blank"></a>');
 
-                    angular.element(document.body).append(link);
-
-                    link[0].click();
-                    link.remove();
+                    Usuario.prototype$__get__accessTokens({ 
+                        id: $scope.currentUser.id_usuario
+                    })
+                    .$promise
+                    .then(function(resp) {
+                      var link = angular.element('<a href="api/AlmacenDocumentos/instructores/download/'+seleccion.nombreArchivo+'?access_token='+resp[0].id+'" target="_blank"></a>');
+                        angular.element(document.body).append(link);
+                        link[0].click();
+                        link.remove();
+                    });
             }
 
 

@@ -5,18 +5,24 @@
         .module('icat_control_escolar')
         .controller('AdminUsuariosPrincipalController', AdminUsuariosPrincipalController);
 
-    AdminUsuariosPrincipalController.$inject = ['$timeout', '$modal', 'tablaDatosService', 'Usuario'];
+    AdminUsuariosPrincipalController.$inject = ['$timeout', '$modal', 'tablaDatosService', 'CatalogoUnidadesAdmtvas', 'Usuario'];
 
-    function AdminUsuariosPrincipalController($timeout, $modal, tablaDatosService, Usuario ) {
+    function AdminUsuariosPrincipalController($timeout, $modal, tablaDatosService, CatalogoUnidadesAdmtvas, Usuario ) {
 
             var vm = this;
             vm.muestraDatosUsuarioActual  = muestraDatosUsuarioActual;
             vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
             vm.limpiaBusqueda             = limpiaBusqueda;
             vm.cambiarPagina              = cambiarPagina;
+            vm.muestra_ptc_unidad         = muestra_ptc_unidad;
             vm.edita_datos_usuario        = edita_datos_usuario;
             vm.nuevo_usuario              = nuevo_usuario;
             vm.elimina_usuario            = elimina_usuario;
+            
+            vm.enviaCorreoUsuario         = enviaCorreoUsuario;
+
+            vm.listaUnidades = [];
+            vm.unidadSeleccionada = undefined;
 
             vm.tablaListaUsuarios = {
               totalElementos     : 0,
@@ -32,6 +38,29 @@
             inicia();
 
             function inicia() {
+
+                  CatalogoUnidadesAdmtvas.find({
+                      filter: {
+                          order: 'nombre ASC'
+                      }
+                  })
+                  .$promise
+                  .then(function(resp) {
+
+                      vm.listaUnidades.push({
+                          idUnidadAdmtva  : -1,
+                          nombre          : 'Todas'
+                      });
+
+                      angular.forEach(resp, function(unidad) {
+                            vm.listaUnidades.push({
+                                idUnidadAdmtva  : unidad.idUnidadAdmtva,
+                                nombre          : unidad.nombre
+                            });
+                      });
+
+                      vm.unidadSeleccionada = vm.listaUnidades[0];
+                  });
 
                   vm.tablaListaUsuarios.filtro_datos = {
                           filter: {
@@ -172,6 +201,46 @@
             }
 
 
+            function muestra_ptc_unidad() {
+
+                  vm.usuarios = {};
+                  vm.UsuarioSeleccionado = {};
+                  vm.tablaListaUsuarios.fila_seleccionada = undefined;
+                  vm.tablaListaUsuarios.paginaActual = 1;
+                  vm.tablaListaUsuarios.inicio = 0;
+                  vm.tablaListaUsuarios.fin = 1;
+                  vm.client = 1;
+                  vm.mostrarbtnLimpiar = false;
+                  vm.nombre_buscar = '';
+
+                  if(vm.unidadSeleccionada.idUnidadAdmtva == -1)
+                  {
+                        vm.tablaListaUsuarios.condicion = {username: {neq: 'adminsystem'} };
+                  }
+                  else
+                  {
+                        vm.tablaListaUsuarios.condicion = {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva};
+                  }
+
+                  tablaDatosService.obtiene_datos_tabla(Usuario, vm.tablaListaUsuarios)
+                  .then(function(respuesta) {
+
+                        vm.tablaListaUsuarios.totalElementos = respuesta.total_registros;
+                        vm.tablaListaUsuarios.inicio = respuesta.inicio;
+                        vm.tablaListaUsuarios.fin = respuesta.fin;
+
+                        if(vm.tablaListaUsuarios.totalElementos > 0)
+                        {
+                            vm.usuarios = respuesta.datos;
+                            vm.UsuarioSeleccionado = vm.usuarios[0];
+                            vm.client = 2;
+                            vm.tablaListaUsuarios.fila_seleccionada = 0;
+                            muestraDatosUsuarioActual(vm.UsuarioSeleccionado);
+                        }
+
+                  });
+            };
+
             function muestraDatosUsuarioActual(seleccion) {
 
                   var index = vm.usuarios.indexOf(seleccion);
@@ -309,6 +378,16 @@
 
                   });
 
+            };
+
+
+            function enviaCorreoUsuario(UsuarioSeleccionado) {
+
+                  Usuario.manda_correo_usuario({ idUsuario: UsuarioSeleccionado.idUsuario })
+                    .$promise
+                    .then(function() { 
+                          swal('Correo enviado', '', 'success');
+                  });
             };
 
     };

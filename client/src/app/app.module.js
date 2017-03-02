@@ -16,6 +16,8 @@
         'angularFileUpload',
         'ngOrderObjectBy',
         'angular-flot',
+        'ui.select',
+        'ngSanitize',
     	'templates'
     ]);
 })();

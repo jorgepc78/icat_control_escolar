@@ -23,13 +23,13 @@
             vm.mostrar_msg_error = false;
             vm.mensaje = '';
 
-            vm.listaCursos = {};
             vm.cursoSeleccionado = {};
+            vm.listaCursos = [];
 
-            vm.listaLocalidades = {};
-            vm.localidadSeleccionada = "";
+            vm.localidadSeleccionada = {};
+            vm.listaLocalidades = [];
            
-            vm.instructorSeleccionado = "";
+            vm.instructorSeleccionado = {};
             vm.listaInstructores = [];
            
             vm.horas_disponibles = registroEditar.horas_disponibles;
@@ -54,6 +54,7 @@
                     fechaFin                : '',
                     idLocalidad             : '',
                     nombreLocalidad         : '',
+                    nombreMunicipio         : '',
                     idInstructor            : '',
                     nombreInstructor        : '',
                     publico                 : false,
@@ -80,7 +81,7 @@
     
                 CatalogoLocalidades.find({
                     filter: {
-                        fields: ['idLocalidad','nombre'],
+                        fields: ['idLocalidad','nombre','municipio'],
                         order: 'nombre ASC'
                     }
                 })
@@ -95,16 +96,17 @@
 
             function muestraInstructoresCurso(){
 
-                vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.idCatalogoCurso;
-                vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.nombreCurso;
-                vm.registroEdicion.claveCurso = vm.cursoSeleccionado.claveCurso;
-                vm.registroEdicion.modalidad = vm.cursoSeleccionado.modalidad;
-                vm.registroEdicion.descripcion = vm.cursoSeleccionado.descripcion;
+                vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.selected.idCatalogoCurso;
+                vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.selected.nombreCurso;
+                vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
+                vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
+                vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
+                vm.registroEdicion.descripcion = vm.cursoSeleccionado.selected.descripcion;
 
                 vm.listaInstructores = [];
                 vm.instructorSeleccionado = "";
                 CatalogoCursos.instructores_habilitados({
-                        id: vm.cursoSeleccionado.idCatalogoCurso,
+                        id: vm.cursoSeleccionado.selected.idCatalogoCurso,
                         filter: {
                             //where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                             fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp','efTerminal'],
@@ -209,7 +211,7 @@
                             idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
                             idCursoPTC            : 0,
                             idPtc                 : vm.registroEdicion.idPtc,
-                            idLocalidad           : vm.localidadSeleccionada.idLocalidad,
+                            idLocalidad           : vm.localidadSeleccionada.selected.idLocalidad,
                             idCatalogoCurso       : vm.registroEdicion.idCatalogoCurso,
                             nombreCurso           : vm.registroEdicion.nombreCurso,
                             claveCurso            : vm.registroEdicion.claveCurso,

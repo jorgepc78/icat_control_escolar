@@ -102,7 +102,7 @@
                                         include: {
                                           relation: 'localidad_pertenece',
                                           scope: {
-                                            fields: ['nombre']
+                                            fields: ['nombre','municipio']
                                           }
                                         }
                                       }
@@ -226,7 +226,8 @@
                             publico               : respuesta.publico,
                             localidad_pertenece   : {
                                 idLocalidad : respuesta.idLocalidad,
-                                nombre      : respuesta.nombreLocalidad
+                                nombre      : respuesta.nombreLocalidad,
+                                municipio   : respuesta.nombreMunicipio
                             }
                         }];
 
@@ -271,6 +272,7 @@
 
                         vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.idLocalidad = respuesta.idLocalidad;
                         vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.nombre = respuesta.nombreLocalidad;
+                        vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.municipio = respuesta.nombreMunicipio;
                     }, function () {
                     });
 

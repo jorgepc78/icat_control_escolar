@@ -14,7 +14,7 @@
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
 
-            vm.listaLocalidades = {};
+            vm.listaLocalidades = [];
             vm.localidadSeleccionada = {};
            
             vm.instructorSeleccionado = {};
@@ -42,6 +42,7 @@
                     fechaFin                : registroEditar.fechaFin,
                     idLocalidad             : '',
                     nombreLocalidad         : '',
+                    nombreMunicipio         : '',
                     idInstructor            : '',
                     nombreInstructor        : '',
                     publico                 : '',
@@ -110,7 +111,7 @@
     
                 CatalogoLocalidades.find({
                     filter: {
-                        fields: ['idLocalidad','nombre'],
+                        fields: ['idLocalidad','nombre','municipio'],
                         order: 'nombre ASC'
                     }
                 })
@@ -225,7 +226,7 @@
                             idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
                             idCursoPTC            : vm.registroEdicion.idCursoPTC,
                             idPtc                 : vm.registroEdicion.idPtc,
-                            idLocalidad           : vm.localidadSeleccionada.idLocalidad,
+                            idLocalidad           : vm.localidadSeleccionada.selected.idLocalidad,
                             idCatalogoCurso       : vm.registroEdicion.idCatalogoCurso,
                             nombreCurso           : vm.registroEdicion.nombreCurso,
                             claveCurso            : vm.registroEdicion.claveCurso,
@@ -258,8 +259,9 @@
                                 vm.registroEdicion.idInstructor     = vm.registroEdicion.instructores_propuestos[index].idInstructor;
                                 vm.registroEdicion.nombreInstructor = vm.registroEdicion.instructores_propuestos[index].nombre_completo;
                                 vm.registroEdicion.observaciones    = vm.registroEdicion.observaciones;
-                                vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.idLocalidad;
-                                vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.nombre;
+                                vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.selected.idLocalidad;
+                                vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.selected.nombre;
+                                vm.registroEdicion.nombreMunicipio  = vm.localidadSeleccionada.selected.municipio;
                                 
                                 vm.registroEdicion.nombreCurso  = vm.registroEdicion.nombreCurso;
                                 vm.registroEdicion.modalidad    = vm.registroEdicion.modalidad;

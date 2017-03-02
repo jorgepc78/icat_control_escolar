@@ -22,6 +22,7 @@
               idCurso        : registroEditar.seleccion.idCurso,
               nombreCurso    : registroEditar.nombreCurso,
               numFactura     : registroEditar.seleccion.numFactura,
+              observPago     : registroEditar.seleccion.observPago,
               pagado         : registroEditar.seleccion.pagado
             };
 
@@ -51,6 +52,7 @@
                 },{
                     pagado     : vm.registroEdicion.pagado,
                     numFactura : vm.registroEdicion.numFactura,
+                    observPago : vm.registroEdicion.observPago,
                     fechaPago  : Date()
                 })
                 .$promise

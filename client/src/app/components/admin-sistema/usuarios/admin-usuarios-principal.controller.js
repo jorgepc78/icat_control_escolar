@@ -156,7 +156,8 @@
                   vm.tablaListaUsuarios.paginaActual = 1;
                   vm.tablaListaUsuarios.inicio = 0;
                   vm.tablaListaUsuarios.fin = 1;
-                  vm.tablaListaUsuarios.condicion = {username: {neq: 'adminsystem'} };
+                  //vm.tablaListaUsuarios.condicion = {username: {neq: 'adminsystem'} };
+                  vm.unidadSeleccionada = vm.listaUnidades[0];
 
                   tablaDatosService.obtiene_datos_tabla(Usuario, vm.tablaListaUsuarios)
                   .then(function(respuesta) {
@@ -219,7 +220,12 @@
                   }
                   else
                   {
-                        vm.tablaListaUsuarios.condicion = {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva};
+                        vm.tablaListaUsuarios.condicion = {
+                                          and: [
+                                            {username: {neq: 'adminsystem'}},
+                                            {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva}
+                                          ]
+                                      };
                   }
 
                   tablaDatosService.obtiene_datos_tabla(Usuario, vm.tablaListaUsuarios)

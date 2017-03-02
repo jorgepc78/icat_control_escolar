@@ -184,9 +184,9 @@
                                                                                     <td> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
                                                                                     <td class="client-status" ng-switch on="inscripcion.pagado">
                                                                                         <span ng-switch-when="0" class="label label-warning texto-estatus-ptc">Pendiente</span>
-                                                                                        <span ng-switch-when="1" class="label label-success texto-estatus-ptc">Pagado</span>
-                                                                                        <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Exento al 100%</span>
-                                                                                        <span ng-switch-when="3" class="label label-primary texto-estatus-ptc">Exento con porcentaje</span>
+                                                                                        <span ng-switch-when="1" class="label label-success texto-estatus-ptc" tooltip-placement="top" tooltip="{{inscripcion.observPago}}">Pagado</span>
+                                                                                        <span ng-switch-when="2" class="label label-info texto-estatus-ptc" tooltip-placement="top" tooltip="{{inscripcion.observPago}}">Exento al 100%</span>
+                                                                                        <span ng-switch-when="3" class="label label-primary texto-estatus-ptc" tooltip-placement="top" tooltip="{{inscripcion.observPago}}">Exento con porcentaje</span>
                                                                                     </td>
                                                                                     <td>{{inscripcion.numFactura}}</td>
                                                                                     <td>

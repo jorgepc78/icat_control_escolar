@@ -23,13 +23,13 @@
             vm.mostrar_msg_error = false;
             vm.mensaje = '';
 
-            vm.listaCursos = {};
             vm.cursoSeleccionado = {};
+            vm.listaCursos = [];
 
-            vm.listaLocalidades = {};
-            vm.localidadSeleccionada = "";
+            vm.localidadSeleccionada = {};
+            vm.listaLocalidades = [];
            
-            vm.instructorSeleccionado = "";
+            vm.instructorSeleccionado = {};
             vm.listaInstructores = [];
             
             vm.horas_disponibles = registroEditar.horas_disponibles;
@@ -54,6 +54,7 @@
                     fechaFin                : registroEditar.record.fechaFin,
                     idLocalidad             : registroEditar.record.idLocalidad,
                     nombreLocalidad         : '',
+                    nombreMunicipio         : '',
                     idInstructor            : registroEditar.record.idInstructor,
                     nombreInstructor        : registroEditar.record.nombreInstructor,
                     publico                 : registroEditar.record.publico,
@@ -79,7 +80,7 @@
                     var index = vm.listaCursos.map(function(record) {
                                                         return record.idCatalogoCurso;
                                                       }).indexOf(vm.registroEdicion.idCatalogoCurso);
-                    vm.cursoSeleccionado = vm.listaCursos[index];
+                    vm.cursoSeleccionado.selected = vm.listaCursos[index];
                 });
 
     
@@ -143,7 +144,7 @@
 
                 CatalogoLocalidades.find({
                     filter: {
-                        fields: ['idLocalidad','nombre'],
+                        fields: ['idLocalidad','nombre','municipio'],
                         order: 'nombre ASC'
                     }
                 })
@@ -154,7 +155,7 @@
                     var index = vm.listaLocalidades.map(function(record) {
                                                         return record.idLocalidad;
                                                       }).indexOf(vm.registroEdicion.idLocalidad);
-                    vm.localidadSeleccionada = vm.listaLocalidades[index];
+                    vm.localidadSeleccionada.selected = vm.listaLocalidades[index];
                 });
 
             };
@@ -162,16 +163,17 @@
 
             function muestraInstructoresCurso(){
 
-                vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.idCatalogoCurso;
-                vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.nombreCurso;
-                vm.registroEdicion.claveCurso = vm.cursoSeleccionado.claveCurso;
-                vm.registroEdicion.modalidad = vm.cursoSeleccionado.modalidad;
-                vm.registroEdicion.descripcion = vm.cursoSeleccionado.descripcion;
+                vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.selected.idCatalogoCurso;
+                vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.selected.nombreCurso;
+                vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
+                vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
+                vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
+                vm.registroEdicion.descripcion = vm.cursoSeleccionado.selected.descripcion;
 
                 vm.listaInstructores = [];
                 vm.instructorSeleccionado = "";
                 CatalogoCursos.instructores_habilitados({
-                        id: vm.cursoSeleccionado.idCatalogoCurso,
+                        id: vm.cursoSeleccionado.selected.idCatalogoCurso,
                         filter: {
                             where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                             fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp']
@@ -250,7 +252,7 @@
                             idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
                             idCursoPTC            : 0,
                             idPtc                 : vm.registroEdicion.idPtc,
-                            idLocalidad           : vm.localidadSeleccionada.idLocalidad,
+                            idLocalidad           : vm.localidadSeleccionada.selected.idLocalidad,
                             nombreCurso           : vm.registroEdicion.nombreCurso,
                             claveCurso            : vm.registroEdicion.claveCurso,
                             descripcionCurso      : vm.registroEdicion.descripcion,
@@ -280,8 +282,9 @@
 
                                 vm.registroEdicion.idInstructor     = vm.instructorSeleccionado.idInstructor;
                                 vm.registroEdicion.nombreInstructor = vm.instructorSeleccionado.nombre_completo;
-                                vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.idLocalidad;
-                                vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.nombre;
+                                vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.selected.idLocalidad;
+                                vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.selected.nombre;
+                                vm.registroEdicion.nombreMunicipio  = vm.localidadSeleccionada.selected.municipio;
                                 vm.registroEdicion.estatus          = 0;
 
                                 $modalInstance.close(vm.registroEdicion);

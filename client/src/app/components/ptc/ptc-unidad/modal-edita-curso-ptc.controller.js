@@ -28,8 +28,8 @@
             vm.mensaje = '';
             vm.EdicionCurso = true;
 
-            vm.cursoSeleccionado = 0;
-            vm.listaCursos = {};
+            vm.cursoSeleccionado = {};
+            vm.listaCursos = [];
            
             vm.instructorSeleccionado = {};
             vm.listaInstructores = [];
@@ -78,9 +78,10 @@
                                                         return curso.idCatalogoCurso;
                                                       }).indexOf(vm.registroEdicion.idCatalogoCurso);
 
-                    vm.cursoSeleccionado = vm.listaCursos[index];
-                    vm.registroEdicion.claveCurso = vm.cursoSeleccionado.claveCurso;
-                    vm.registroEdicion.modalidad = vm.cursoSeleccionado.modalidad;
+                    vm.cursoSeleccionado.selected = vm.listaCursos[index];
+                    vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
+                    vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
+                    vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
                 });
     
 
@@ -251,7 +252,7 @@
                 {
 
                         var datos = {
-                                idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
+                                idCatalogoCurso : vm.cursoSeleccionado.selected.idCatalogoCurso,
                                 horario         : vm.registroEdicion.horario,
                                 aulaAsignada    : vm.registroEdicion.aulaAsignada,
                                 capacitandos    : vm.registroEdicion.capacitandos,
@@ -262,9 +263,9 @@
                                 observaciones   : vm.registroEdicion.observaciones
                         };
 
-                        vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.nombreCurso;
-                        vm.registroEdicion.claveCurso   = vm.cursoSeleccionado.claveCurso;
-                        vm.registroEdicion.modalidad   = vm.cursoSeleccionado.modalidad;
+                        vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.selected.nombreCurso;
+                        vm.registroEdicion.claveCurso   = vm.cursoSeleccionado.selected.claveCurso;
+                        vm.registroEdicion.modalidad   = vm.cursoSeleccionado.selected.modalidad;
 
                         CursosPtc.prototype$updateAttributes(
                         {

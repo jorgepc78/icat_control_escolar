@@ -81,7 +81,7 @@
                                   {
                                       relation: 'localidad_pertenece',
                                       scope: {
-                                        fields: ['nombre']
+                                        fields: ['nombre','municipio']
                                       }
                                   }
                               ]
@@ -242,6 +242,7 @@
 
                         vm.CursoExtraSeleccionado.localidad_pertenece.idLocalidad = respuesta.idLocalidad;
                         vm.CursoExtraSeleccionado.localidad_pertenece.nombre = respuesta.nombreLocalidad;
+                        vm.CursoExtraSeleccionado.localidad_pertenece.municipio = respuesta.nombreMunicipio;
 
                         calcula_horas_disponibles();
                     }, function () {

@@ -28,6 +28,24 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            <div class="input-group" style="margin-top:19px;">
+                                                    <label class="col-md-3 control-label" style="margin-top:9px;">Especialidad:</label>
+                                                    <div class="col-md-9">
+                                                        <select class="form-control m-b" ng-model="vm.especialidadSeleccionada" ng-change="vm.muestra_cursos_especialidad()" ng-options="especialidad as especialidad.nombre for especialidad in vm.listaEspecialidades"></select>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="input-group" style="margin-top:19px;">
+                                                    <label class="col-md-4 control-label" style="margin-top:9px;">Modalidad:</label>
+                                                    <div class="col-md-8">
+                                                        <select class="form-control m-b" ng-model="vm.modalidadSeleccionada" ng-change="vm.muestra_cursos_modalidad()" ng-options="modalidad as modalidad.alias for modalidad in vm.listaModalidades"></select>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
                               
                                 <br>
                                         <table class="tablaDatos table table-condensed no-footer">

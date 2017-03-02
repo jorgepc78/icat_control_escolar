@@ -29,8 +29,8 @@
             vm.mensaje = '';
             vm.EdicionCurso = false;
 
-            vm.cursoSeleccionado = 0;
-            vm.listaCursos = {};
+            vm.cursoSeleccionado = {};
+            vm.listaCursos = [];
            
             vm.instructorSeleccionado = {};
             vm.listaInstructores = [];
@@ -93,12 +93,13 @@
 
             function muestraInstructoresCurso(){
 
-                vm.registroEdicion.claveCurso = vm.cursoSeleccionado.claveCurso;
-                vm.registroEdicion.modalidad = vm.cursoSeleccionado.modalidad;
+                vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
+                vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
+                vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
 
                 vm.listaInstructores = [];
                 CatalogoCursos.instructores_habilitados({
-                        id: vm.cursoSeleccionado.idCatalogoCurso,
+                        id: vm.cursoSeleccionado.selected.idCatalogoCurso,
                         filter: {
                             //where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
                             fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','efTerminal'],
@@ -106,7 +107,7 @@
                                 {
                                     relation: 'evaluacion_curso',
                                     scope: {
-                                        where: {idCatalogoCurso: vm.cursoSeleccionado.idCatalogoCurso},
+                                        where: {idCatalogoCurso: vm.cursoSeleccionado.selected.idCatalogoCurso},
                                         fields:['calificacion']
                                     }
                                 },
@@ -229,7 +230,7 @@
                             CursosPtc
                             .create({
                                 idPtc           : vm.registroEdicion.idPtc,
-                                idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
+                                idCatalogoCurso : vm.cursoSeleccionado.selected.idCatalogoCurso,
                                 horario         : vm.registroEdicion.horario,
                                 aulaAsignada    : vm.registroEdicion.aulaAsignada,
                                 capacitandos    : vm.registroEdicion.capacitandos,

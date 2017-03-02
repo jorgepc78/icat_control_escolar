@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ConsultaInstructoresController', ConsultaInstructoresController);
 
-    ConsultaInstructoresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'VistaCatalogoInstructores'];
+    ConsultaInstructoresController.$inject = ['$scope', '$modal', 'tablaDatosService', 'VistaCatalogoInstructores', 'AlmacenDocumentos', 'Usuario'];
 
-    function ConsultaInstructoresController($scope, $modal, tablaDatosService, VistaCatalogoInstructores ) {
+    function ConsultaInstructoresController($scope, $modal, tablaDatosService, VistaCatalogoInstructores, AlmacenDocumentos, Usuario  ) {
 
             var vm = this;
 
@@ -15,6 +15,7 @@
             vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
             vm.limpiaBusqueda             = limpiaBusqueda;
             vm.cambiarPagina              = cambiarPagina;
+            vm.abreDocumento              = abreDocumento;
             
             vm.ordenaArrayJson            = ordenaArrayJson;
 
@@ -48,6 +49,7 @@
                               skip: vm.tablaListaRegistros.paginaActual - 1,
                               include: [
                                 'localidad_pertenece',
+                                'nivel_estudios',
                                 {
                                     relation: 'unidad_pertenece',
                                     scope: {
@@ -58,6 +60,12 @@
                                     relation: 'otras_unidades',
                                     scope: {
                                         fields:['idUnidadAdmtva','nombre']
+                                    }
+                                },
+                                {
+                                    relation: 'documentos',
+                                    scope: {
+                                        fields:['idDocumento','documento','nombreArchivo','tipoArchivo']
                                     }
                                 },
                                 {
@@ -201,6 +209,20 @@
                   }
             }
 
+
+            function abreDocumento(seleccion) {
+
+                    Usuario.prototype$__get__accessTokens({ 
+                        id: $scope.currentUser.id_usuario
+                    })
+                    .$promise
+                    .then(function(resp) {
+                      var link = angular.element('<a href="api/AlmacenDocumentos/instructores/download/'+seleccion.nombreArchivo+'?access_token='+resp[0].id+'" target="_blank"></a>');
+                        angular.element(document.body).append(link);
+                        link[0].click();
+                        link.remove();
+                    });
+            }
 
             function muestraDatosRegistroActual(seleccion) {
 

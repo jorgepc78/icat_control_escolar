@@ -5,20 +5,36 @@
       <div class="modal-body" style="background: #fff;">
 
         <div class="row">
+          <div class="col-lg-12">
+              <form name="form_search" class="form-horizontal">
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label" style="width: 150px;">Curso</label>
+                              <div class="col-sm-10">
+                                  <input type="text" class="form-control" ng-if="vm.EdicionCurso" ng-model="vm.cursoSeleccionado.selected.nombreCurso" readonly>
+                                  <ui-select ng-model="vm.cursoSeleccionado.selected" theme="bootstrap" ng-if="!vm.EdicionCurso" ng-disabled="vm.EdicionCurso" on-select="vm.muestraInstructoresCurso()">
+                                      <ui-select-match placeholder="Escriba el texto a buscar">
+                                          {{$select.selected.nombreCurso}}
+                                      </ui-select-match>
+                                      <ui-select-choices repeat="curso in vm.listaCursos | filter: { nombreCurso: $select.search } | limitTo: ($select.search.length <= 3) ? 0 : undefined">
+                                          <div ng-bind-html="curso.nombreCurso | highlight: $select.search"></div>
+                                          <small>
+                                            Modalidad: {{curso.modalidad}}, {{curso.numeroHoras}} horas
+                                          </small>
+                                      </ui-select-choices>
+                                      <ui-select-no-choice>
+                                        {{($select.search.length > 3 ? 'No se encontr&oacute; ning&uacute;n curso con el texto escrito' : '')}}
+                                      </ui-select-no-choice>
+                                  </ui-select>
+                              </div>
+                          </div>
+              </form>
+          </div>
+        </div>
+        <br>
+        <div class="row">
                 <div class="col-lg-6">
 
                     <form name="form_datos" class="form-horizontal">
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Cursos</label>
-                              <div class="col-sm-9">
-                                  <select class="form-control m-b" 
-                                      ng-change="vm.muestraInstructoresCurso()"
-                                      ng-model="vm.cursoSeleccionado"
-                                      ng-disabled="vm.EdicionCurso"
-                                      ng-options="curso as (curso.nombreCurso + ' (' + curso.modalidad + ')' ) for curso in vm.listaCursos" required>
-                                  </select>
-                              </div>
-                          </div>
 
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Clave curso</label>

@@ -2964,9 +2964,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              *
              */
             "login": {
-              params: {
-                include: 'user',
-              },
               interceptor: {
                 response: function(response) {
                   var accessToken = response.data;
@@ -19020,6 +19017,33 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.findById() instead.
+            "prototype$__findById__documentos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.destroyById() instead.
+            "prototype$__destroyById__documentos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.updateById() instead.
+            "prototype$__updateById__documentos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos/:fk",
+              method: "PUT",
+            },
+
             // INTERNAL. Use VistaCatalogoInstructores.cursos_propuestos() instead.
             "prototype$__get__cursos_propuestos": {
               isArray: true,
@@ -19117,6 +19141,31 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use VistaCatalogoInstructores.otras_unidades.count() instead.
             "prototype$__count__otras_unidades": {
               url: urlBase + "/VistaCatalogoInstructores/:id/otras_unidades/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos() instead.
+            "prototype$__get__documentos": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.create() instead.
+            "prototype$__create__documentos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.destroyAll() instead.
+            "prototype$__delete__documentos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.count() instead.
+            "prototype$__count__documentos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos/count",
               method: "GET",
             },
 
@@ -21445,6 +21494,307 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.nivel_estudios = function() {
           var TargetResource = $injector.get("CatalogoNivelEstudios");
           var action = TargetResource["::get::VistaCatalogoInstructores::nivel_estudios"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.VistaCatalogoInstructores.documentos
+     * @header lbServices.VistaCatalogoInstructores.documentos
+     * @object
+     * @description
+     *
+     * The object `VistaCatalogoInstructores.documentos` groups methods
+     * manipulating `DocumentosInstructores` instances related to `VistaCatalogoInstructores`.
+     *
+     * Call {@link lbServices.VistaCatalogoInstructores#documentos VistaCatalogoInstructores.documentos()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores#documentos
+             * @methodOf lbServices.VistaCatalogoInstructores
+             *
+             * @description
+             *
+             * Queries documentos of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `DocumentosInstructores` object.)
+             * </em>
+             */
+        R.documentos = function() {
+          var TargetResource = $injector.get("DocumentosInstructores");
+          var action = TargetResource["::get::VistaCatalogoInstructores::documentos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.documentos#count
+             * @methodOf lbServices.VistaCatalogoInstructores.documentos
+             *
+             * @description
+             *
+             * Counts documentos of VistaCatalogoInstructores.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.documentos.count = function() {
+          var TargetResource = $injector.get("DocumentosInstructores");
+          var action = TargetResource["::count::VistaCatalogoInstructores::documentos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.documentos#create
+             * @methodOf lbServices.VistaCatalogoInstructores.documentos
+             *
+             * @description
+             *
+             * Creates a new instance in documentos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `DocumentosInstructores` object.)
+             * </em>
+             */
+        R.documentos.create = function() {
+          var TargetResource = $injector.get("DocumentosInstructores");
+          var action = TargetResource["::create::VistaCatalogoInstructores::documentos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.documentos#createMany
+             * @methodOf lbServices.VistaCatalogoInstructores.documentos
+             *
+             * @description
+             *
+             * Creates a new instance in documentos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `DocumentosInstructores` object.)
+             * </em>
+             */
+        R.documentos.createMany = function() {
+          var TargetResource = $injector.get("DocumentosInstructores");
+          var action = TargetResource["::createMany::VistaCatalogoInstructores::documentos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.documentos#destroyAll
+             * @methodOf lbServices.VistaCatalogoInstructores.documentos
+             *
+             * @description
+             *
+             * Deletes all documentos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.documentos.destroyAll = function() {
+          var TargetResource = $injector.get("DocumentosInstructores");
+          var action = TargetResource["::delete::VistaCatalogoInstructores::documentos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.documentos#destroyById
+             * @methodOf lbServices.VistaCatalogoInstructores.documentos
+             *
+             * @description
+             *
+             * Delete a related item by id for documentos.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for documentos
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.documentos.destroyById = function() {
+          var TargetResource = $injector.get("DocumentosInstructores");
+          var action = TargetResource["::destroyById::VistaCatalogoInstructores::documentos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.documentos#findById
+             * @methodOf lbServices.VistaCatalogoInstructores.documentos
+             *
+             * @description
+             *
+             * Find a related item by id for documentos.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for documentos
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `DocumentosInstructores` object.)
+             * </em>
+             */
+        R.documentos.findById = function() {
+          var TargetResource = $injector.get("DocumentosInstructores");
+          var action = TargetResource["::findById::VistaCatalogoInstructores::documentos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VistaCatalogoInstructores.documentos#updateById
+             * @methodOf lbServices.VistaCatalogoInstructores.documentos
+             *
+             * @description
+             *
+             * Update a related item by id for documentos.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for documentos
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `DocumentosInstructores` object.)
+             * </em>
+             */
+        R.documentos.updateById = function() {
+          var TargetResource = $injector.get("DocumentosInstructores");
+          var action = TargetResource["::updateById::VistaCatalogoInstructores::documentos"];
           return action.apply(R, arguments);
         };
 
@@ -38378,6 +38728,65 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use CatalogoInstructores.documentos.count() instead.
             "::count::CatalogoInstructores::documentos": {
               url: urlBase + "/CatalogoInstructores/:id/documentos/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.findById() instead.
+            "::findById::VistaCatalogoInstructores::documentos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.destroyById() instead.
+            "::destroyById::VistaCatalogoInstructores::documentos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.updateById() instead.
+            "::updateById::VistaCatalogoInstructores::documentos": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos() instead.
+            "::get::VistaCatalogoInstructores::documentos": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.create() instead.
+            "::create::VistaCatalogoInstructores::documentos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.createMany() instead.
+            "::createMany::VistaCatalogoInstructores::documentos": {
+              isArray: true,
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.destroyAll() instead.
+            "::delete::VistaCatalogoInstructores::documentos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VistaCatalogoInstructores.documentos.count() instead.
+            "::count::VistaCatalogoInstructores::documentos": {
+              url: urlBase + "/VistaCatalogoInstructores/:id/documentos/count",
               method: "GET",
             },
           }

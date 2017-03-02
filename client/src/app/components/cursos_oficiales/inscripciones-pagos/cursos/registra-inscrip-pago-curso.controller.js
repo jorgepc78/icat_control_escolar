@@ -65,7 +65,7 @@
                                   {
                                       relation: 'inscripcionesCursos',
                                       scope: {
-                                          fields:['id','pagado','idAlumno','fechaInscripcion','fechaPago','numFactura'],
+                                          fields:['id','pagado','idAlumno','fechaInscripcion','fechaPago','numFactura','observPago'],
                                           include:{
                                               relation: 'Capacitandos',
                                               scope: {
@@ -428,6 +428,7 @@
 
                             vm.cursoSeleccionado.inscripcionesCursos[index].pagado = respuesta.pagado;
                             vm.cursoSeleccionado.inscripcionesCursos[index].numFactura = respuesta.numFactura;
+                            vm.cursoSeleccionado.inscripcionesCursos[index].observPago = respuesta.observPago;
 
                     }, function () {
                     });

@@ -3485,8 +3485,8 @@ ol.unstyled {
 }
 /* FOOTER */
 .footer {
-  background: none repeat scroll 0 0 #1ab394;
-  border-top: 1px solid #1ab394;
+  background: none repeat scroll 0 0 rgba(69,156,193,1);
+  border-top: 1px solid rgba(69,156,193,1);
   bottom: 0;
   left: 0;
   padding: 10px 20px;
@@ -3501,8 +3501,8 @@ ol.unstyled {
   right: 0;
   z-index: 1000;
   padding: 10px 20px;
-  background: none repeat scroll 0 0 #1ab394;
-  border-top: 1px solid #1ab394;
+  background: none repeat scroll 0 0 rgba(69,156,193,1);
+  border-top: 1px solid rgba(69,156,193,1);
 }
 .footer.fixed {
   position: fixed;
@@ -3511,8 +3511,8 @@ ol.unstyled {
   right: 0;
   z-index: 1000;
   padding: 10px 20px;
-  background: none repeat scroll 0 0 #1ab394;
-  border-top: 1px solid #1ab394;
+  background: none repeat scroll 0 0 rgba(69,156,193,1);
+  border-top: 1px solid rgba(69,156,193,1);
   margin-left: 220px;
 }
 body.mini-navbar .footer.fixed,

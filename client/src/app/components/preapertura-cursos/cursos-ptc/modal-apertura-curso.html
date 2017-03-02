@@ -5,15 +5,22 @@
       <div class="modal-body" style="background: #fff;">
 
         <div class="row">
+          <div class="col-lg-12">
+              <form name="form_search" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="width: 170px;">Curso</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCurso" readonly>
+                        </div>
+                    </div>
+              </form>
+          </div>
+        </div>
+        <br>
+        <div class="row">
                 <div class="col-lg-7">
 
                     <form name="form_datos" class="form-horizontal">
-                          <div class="form-group">
-                              <label class="col-sm-3 control-label">Cursos</label>
-                              <div class="col-sm-9">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCurso" readonly>
-                              </div>
-                          </div>
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Clave curso</label>
                               <div class="col-sm-9">
@@ -29,10 +36,20 @@
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Localidad</label>
                               <div class="col-sm-9">
-                                  <select class="form-control m-b" 
-                                      ng-model="vm.localidadSeleccionada"
-                                      ng-options="localidad as localidad.nombre for localidad in vm.listaLocalidades" required>
-                                  </select>
+                                  <ui-select ng-model="vm.localidadSeleccionada.selected" theme="bootstrap">
+                                      <ui-select-match placeholder="Escriba la localidad a buscar">
+                                          {{$select.selected.nombre +', '+$select.selected.municipio}}
+                                      </ui-select-match>
+                                      <ui-select-choices repeat="localidad in vm.listaLocalidades | filter: { nombre: $select.search } | limitTo: ($select.search.length <= 1) ? 0 : undefined">
+                                          <div ng-bind-html="localidad.nombre | highlight: $select.search"></div>
+                                          <small>
+                                            Municipio: {{localidad.municipio}}
+                                          </small>
+                                      </ui-select-choices>
+                                      <ui-select-no-choice>
+                                        {{($select.search.length > 1 ? 'No se encontr&oacute; ninguna localidad con el texto escrito' : '')}}
+                                      </ui-select-no-choice>
+                                  </ui-select>
                               </div>
                           </div>
                           <div class="form-group">

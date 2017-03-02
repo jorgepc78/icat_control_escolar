@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('PrincipalCatalogoCursosController', PrincipalCatalogoCursosController);
 
-    PrincipalCatalogoCursosController.$inject = ['$modal', 'tablaDatosService', 'CatalogoCursos'];
+    PrincipalCatalogoCursosController.$inject = ['$modal', 'tablaDatosService', 'CatalogoCursos', 'CatalogoEspecialidades'];
 
-    function PrincipalCatalogoCursosController($modal, tablaDatosService, CatalogoCursos ) {
+    function PrincipalCatalogoCursosController($modal, tablaDatosService, CatalogoCursos, CatalogoEspecialidades) {
 
             var vm = this;
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
@@ -19,6 +19,14 @@
             vm.desactiva_registro         = desactiva_registro;
             vm.activa_registro            = activa_registro;
             vm.elimina_registro           = elimina_registro;
+
+            vm.muestra_cursos_especialidad = muestra_cursos_especialidad;
+            vm.muestra_cursos_modalidad    = muestra_cursos_modalidad;
+
+            vm.listaEspecialidades = [];
+            vm.especialidadSeleccionada = undefined;
+            vm.listaModalidades = [];
+            vm.modalidadSeleccionada = undefined;
 
             vm.tablaListaRegistros = {
               totalElementos     : 0,
@@ -34,6 +42,38 @@
             inicia();
 
             function inicia() {
+
+                  CatalogoEspecialidades.find({
+                      filter: {
+                          order: 'nombre ASC'
+                      }
+                  })
+                  .$promise
+                  .then(function(resp) {
+
+                      vm.listaEspecialidades.push({
+                          idEspecialidad  : -1,
+                          nombre          : 'Todas'
+                      });
+
+                      angular.forEach(resp, function(record) {
+                            vm.listaEspecialidades.push({
+                                idEspecialidad  : record.idEspecialidad,
+                                nombre          : record.nombre
+                            });
+                      });
+
+                      vm.especialidadSeleccionada = vm.listaEspecialidades[0];
+                  });
+
+                  vm.listaModalidades = [
+                  {modalidad: 't', alias: 'Todas'},
+                  {modalidad: 'CAE', alias: 'CAE'},
+                  {modalidad: 'Extension', alias: 'Extensión'},
+                  {modalidad: 'Regular', alias: 'Regular'}
+                  ];
+
+                  vm.modalidadSeleccionada = vm.listaModalidades[0];
 
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
@@ -79,6 +119,113 @@
             }
 
 
+            function muestra_cursos_especialidad() {
+                  vm.registros = {};
+                  vm.RegistroSeleccionado = {};
+                  vm.tablaListaRegistros.fila_seleccionada = undefined;
+                  vm.tablaListaRegistros.paginaActual = 1;
+                  vm.tablaListaRegistros.inicio = 0;
+                  vm.tablaListaRegistros.fin = 1;
+                  vm.client = 1;
+
+                  vm.mostrarbtnLimpiar = false;
+                  vm.cadena_buscar = '';
+
+                  if(vm.especialidadSeleccionada.idEspecialidad == -1)
+                  {
+                        if(vm.modalidadSeleccionada.modalidad == 't')
+                            vm.tablaListaRegistros.condicion = {};
+                        else
+                            vm.tablaListaRegistros.condicion = {modalidad: vm.modalidadSeleccionada.modalidad};
+                  }
+                  else
+                  {
+                        if(vm.modalidadSeleccionada.modalidad == 't')
+                            vm.tablaListaRegistros.condicion = {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad};
+                        else
+                        {
+                            vm.tablaListaRegistros.condicion = {
+                              and: [
+                                {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
+                                {modalidad: vm.modalidadSeleccionada.modalidad}
+                              ]
+                            };
+                        }
+                        
+                  }
+
+                  tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)
+                  .then(function(respuesta) {
+
+                        vm.tablaListaRegistros.totalElementos = respuesta.total_registros;
+                        vm.tablaListaRegistros.inicio = respuesta.inicio;
+                        vm.tablaListaRegistros.fin = respuesta.fin;
+
+                        if(vm.tablaListaRegistros.totalElementos > 0)
+                        {
+                            vm.registros = respuesta.datos;
+                            vm.RegistroSeleccionado = vm.registros[0];
+                            vm.client = 2;
+                            vm.tablaListaRegistros.fila_seleccionada = 0;
+                            muestraDatosRegistroActual(vm.RegistroSeleccionado);
+                        }
+                  });
+            }
+
+
+            function muestra_cursos_modalidad() {
+                  vm.registros = {};
+                  vm.RegistroSeleccionado = {};
+                  vm.tablaListaRegistros.fila_seleccionada = undefined;
+                  vm.tablaListaRegistros.paginaActual = 1;
+                  vm.tablaListaRegistros.inicio = 0;
+                  vm.tablaListaRegistros.fin = 1;
+                  vm.client = 1;
+
+                  vm.mostrarbtnLimpiar = false;
+                  vm.cadena_buscar = '';
+
+                  if(vm.modalidadSeleccionada.modalidad == 't')
+                  {
+                        if(vm.especialidadSeleccionada.idEspecialidad == -1)
+                              vm.tablaListaRegistros.condicion = {};
+                        else
+                              vm.tablaListaRegistros.condicion = {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad};
+                  }
+                  else
+                  {
+                        if(vm.especialidadSeleccionada.idEspecialidad == -1)
+                              vm.tablaListaRegistros.condicion = {modalidad: vm.modalidadSeleccionada.modalidad};
+                        else
+                        {
+                              vm.tablaListaRegistros.condicion = {
+                                and: [
+                                  {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
+                                  {modalidad: vm.modalidadSeleccionada.modalidad}
+                                ]
+                              };
+                        }
+                  }
+
+                  tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)
+                  .then(function(respuesta) {
+
+                        vm.tablaListaRegistros.totalElementos = respuesta.total_registros;
+                        vm.tablaListaRegistros.inicio = respuesta.inicio;
+                        vm.tablaListaRegistros.fin = respuesta.fin;
+
+                        if(vm.tablaListaRegistros.totalElementos > 0)
+                        {
+                            vm.registros = respuesta.datos;
+                            vm.RegistroSeleccionado = vm.registros[0];
+                            vm.client = 2;
+                            vm.tablaListaRegistros.fila_seleccionada = 0;
+                            muestraDatosRegistroActual(vm.RegistroSeleccionado);
+                        }
+                  });
+            }
+
+
             function muestraResultadosBusqueda() {
 
                   vm.registros = {};
@@ -88,6 +235,10 @@
                   vm.tablaListaRegistros.paginaActual = 1;
                   vm.tablaListaRegistros.inicio = 0;
                   vm.tablaListaRegistros.fin = 1;
+
+                  vm.especialidadSeleccionada = vm.listaEspecialidades[0];
+                  vm.modalidadSeleccionada = vm.listaModalidades[0];
+
                   vm.tablaListaRegistros.condicion = {
                                     nombreCurso: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}
                                 };
@@ -123,6 +274,9 @@
                   vm.tablaListaRegistros.inicio = 0;
                   vm.tablaListaRegistros.fin = 1;
                   vm.tablaListaRegistros.condicion = {};
+
+                  vm.especialidadSeleccionada = vm.listaEspecialidades[0];
+                  vm.modalidadSeleccionada = vm.listaModalidades[0];
 
                   tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)
                   .then(function(respuesta) {

@@ -123,6 +123,22 @@
       },
       "_selectable": true
     },
+    "observPago": {
+      "type": "String",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "observ_pago",
+        "dataType": "text",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "calificacion": {
       "type": "String",
       "required": false,

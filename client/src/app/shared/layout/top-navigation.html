@@ -8,145 +8,143 @@
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-top-links">
 
-                <li class="dropdown" dropdown ng-if="currentUser.perfil == 'admin_sistema'">
+                <li class="dropdown" dropdown ng-if="currentUser.perfil_menu.usuarios_sistema">
                     <a class="dropdown-toggle" href dropdown-toggle  style="color: #fff;">Usuarios <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id == 1">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.usuarios_sistema">
                             <a ui-sref="admin.usuarios"><i class="fa fa-user"></i> <span class="nav-label">Usuarios del sistema </span></a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'unidad_inscrip' && currentUser.perfil != 'dir_vincula' && currentUser.perfil != 'unidad_admin')">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.catalogos_temas || currentUser.perfil_menu.catalogos_especialidades || currentUser.perfil_menu.catalogos_cursos)">
                     <a class="dropdown-toggle" href dropdown-toggle  style="color: #fff;">Cat&aacute;logos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'dir_academica' || currentUser.perfil == 'programas')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.catalogos_temas">
                             <a ui-sref="index.catalogo_temas">          <span class="nav-label"> Temas </span></a>
                         </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.catalogos_especialidades">
                             <a ui-sref="index.catalogo_especialidades"> <span class="nav-label"> Cat&aacute;logo de especialidades </span></a>
                         </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.catalogos_cursos">
                             <a ui-sref="index.catalogo_cursos">         <span class="nav-label"> Cat&aacute;logo general de cursos </span></a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'unidad_inscrip' && currentUser.perfil != 'dir_vincula')">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.instructores_catinstructores || currentUser.perfil_menu.instructores_consinstructores)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Instructores <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'dir_gral' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'programas' || currentUser.perfil == 'serv_escolar' || currentUser.perfil == 'dir_planeacion' || currentUser.perfil == 'dir_admin')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.instructores_catinstructores">
                             <a ui-sref="instructores.admin_instructores">  <span class="nav-label"> Cat&aacute;logo de instructores </span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'unidad_inscrip' || currentUser.perfil == 'unidad_admin' || currentUser.perfil == 'unidad_capacit')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.instructores_consinstructores">
                             <a ui-sref="instructores.consulta_instructores">  <span class="nav-label"> Consulta de instructores </span></a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'unidad_inscrip' && currentUser.perfil != 'dir_vincula' && currentUser.perfil != 'unidad_admin')">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.plan_cursos_horas_unidad || currentUser.perfil_menu.plan_cursos_metas_capacit || currentUser.perfil_menu.plan_cursos_planeacion_ptc || currentUser.perfil_menu.plan_cursos_revision_ptc || currentUser.perfil_menu.plan_cursos_ptc_autorizados)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Planeaci&oacute;n de Cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id == 1 && currentUser.perfil == 'dir_planeacion')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.plan_cursos_horas_unidad">
                             <a ui-sref="ptc.asigna_horas">    <span class="nav-label"> Asingaci&oacute;n de horas por unidad </span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id == 1 && currentUser.perfil == 'dir_planeacion')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.plan_cursos_metas_capacit">
                             <a ui-sref="ptc.asigna_metas">    <span class="nav-label"> Asingaci&oacute;n de metas de capacitandos </span></a>
                         </li>
-                        <li ng-if="(currentUser.unidad_pertenece_id == 1 && currentUser.perfil == 'dir_planeacion')" style="border: 1px solid #e7eaec"></li>
-                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
+                        <li ng-if="currentUser.perfil_menu.plan_cursos_planeacion_ptc" style="border: 1px solid #e7eaec"></li>
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.plan_cursos_planeacion_ptc">
                             <a ui-sref="ptc.planeacion_ptc">    <span class="nav-label"> Planeaci&oacute;n del PTC </span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_gral')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.plan_cursos_revision_ptc">
                             <a ui-sref="ptc.revision_ptc">      <span class="nav-label"> Revisi&oacute;n PTC unidades </span></a>
                         </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.plan_cursos_ptc_autorizados">
                             <a ui-sref="ptc.pct_autorizados">   <span class="nav-label"> PTC autorizados </span></a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'unidad_inscrip' && currentUser.perfil != 'dir_vincula' && currentUser.perfil != 'unidad_admin' && currentUser.perfil != 'serv_escolar')">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.pre_cursos_eval_cursos_ptc || currentUser.perfil_menu.pre_cursos_eval_cursos_fuera_ptc || currentUser.perfil_menu.pre_cursos_eval_validacion_cursos || currentUser.perfil_menu.pre_cursos_eval_roco_estandar || currentUser.perfil_menu.pre_cursos_eval_validacion_roco_estandar)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Pre-apertura de cursos y evaluaciones <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.pre_cursos_eval_cursos_ptc">
                             <a ui-sref="pre_apertura.cursos_ptc">    <span class="nav-label"> Cursos del PTC </span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.pre_cursos_eval_cursos_fuera_ptc">
                             <a ui-sref="pre_apertura.cursos_ptc_extra">   <span class="nav-label"> Cursos fuera del PTC </span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_gral')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.pre_cursos_eval_validacion_cursos">
                             <a ui-sref="pre_apertura.valida_apertura_cursos"><span class="nav-label"> Validaci&oacute;n de cursos para pre-apertura </span></a>
                         </li>
 
                         <li style="border: 1px solid #e7eaec"></li>
                         
-                        <li ui-sref-active="active" ng-if="currentUser.unidad_pertenece_id > 1">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.pre_cursos_eval_roco_estandar">
                             <a ui-sref="pre_apertura.roco_estandares">   <span class="nav-label"> ROCO y Est&aacute;ndares de competencia</span></a>
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_gral')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.pre_cursos_eval_validacion_roco_estandar">
                             <a ui-sref="pre_apertura.valida_evaluaciones"><span class="nav-label"> Validaci&oacute;n de evaluaciones </span></a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'unidad_inscrip')">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.cursos_eval_autorizados_cursos_vigentes || currentUser.perfil_menu.cursos_eval_autorizados_cursos_historicos || currentUser.perfil_menu.cursos_eval_autorizados_eval_vigentes || currentUser.perfil_menu.cursos_eval_autorizados_eval_historicos)">
                     <!-- <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Cursos autorizados <span class="caret"></span></a> -->
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Cursos y evaluaciones autorizados <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.cursos_eval_autorizados_cursos_vigentes">
                             <a ui-sref="cursos_autorizados.resumen_cursos({ tipo: 'activos' })">        <span class="nav-label"> Cursos vigentes </span></a>
                         </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.cursos_eval_autorizados_cursos_historicos">
                             <a ui-sref="cursos_autorizados.resumen_cursos({ tipo: 'historicos' })">  <span class="nav-label">Hist&oacute;rico de cursos </span></a>
                         </li>
 
                         <li style="border: 1px solid #e7eaec"></li>
                         
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.cursos_eval_autorizados_eval_vigentes">
                             <a ui-sref="evaluaciones_autorizadas.resumen_evaluaciones({ tipo: 'activos' })">        <span class="nav-label"> Evaluaciones vigentes </span></a>
                         </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.cursos_eval_autorizados_eval_historicos">
                             <a ui-sref="evaluaciones_autorizadas.resumen_evaluaciones({ tipo: 'historicos' })">  <span class="nav-label">Hist&oacute;rico de evaluaciones </span></a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'dir_planeacion' && currentUser.perfil != 'dir_admin')">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.registro_capacitandos_menu)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Capacitandos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.registro_capacitandos_menu">
                             <a ui-sref="capacitandos.principal_capacitandos">    <span class="nav-label"> Registro de capacitandos </span></a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil == 'unidad_inscrip' || currentUser.perfil == 'unidad_admin')">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.inscrip_pagos_registro_pago_curso || currentUser.perfil_menu.inscrip_pagos_registro_pago_eval)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Inscripciones y pagos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.inscrip_pagos_registro_pago_curso">
                             <a ui-sref="inscripcion.registro_inscripcion_pagos_cursos"> <span class="nav-label"> Registro de Inscripci&oacute;n o pago a cursos</span></a>
                         </li>
                         <li style="border: 1px solid #e7eaec"></li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.inscrip_pagos_registro_pago_eval">
                             <a ui-sref="inscripcion.registro_pagos_evaluaciones"> <span class="nav-label"> Registro de pago evaluaciones</span></a>
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil != 'admin_sistema' && currentUser.perfil != 'unidad_inscrip' && currentUser.perfil != 'unidad_admin')">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.reportes_resumen_alumnos_cursos || currentUser.perfil_menu.reportes_bitacora)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Reportes <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         </li>
-                        <li ui-sref-active="active" ng-if="(currentUser.perfil == 'programas' || currentUser.perfil == 'dir_academica' || currentUser.perfil == 'dir_planeacion' || currentUser.perfil == 'dir_gral' || currentUser.perfil == 'unidad_capacit')">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.reportes_resumen_alumnos_cursos">
                             <a ui-sref="reportes.resumen_general">    <span class="nav-label"> Resumen de alumnos y cursos </span></a>
                         </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.reportes_bitacora">
                             <a ui-sref="reportes.bitacora">           <span class="nav-label">Bit&aacute;cora de eventos </span></a>
                         </li>
                     </ul>
                 </li>
-
-
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <li>

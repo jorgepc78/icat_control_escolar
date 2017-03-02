@@ -206,13 +206,7 @@
                         vm.tablaListaRegistros.condicion = {
                             and: [
                               {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                              {
-                                  or: [
-                                    {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                    {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                    {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
-                                  ]
-                              },
+                              {nombre_completo: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
                             ]
                         };
                   }
@@ -220,26 +214,14 @@
                   {
                         if(vm.unidadSeleccionada.idUnidadAdmtva == -1)
                         {
-                              vm.tablaListaRegistros.condicion = {
-                                  or: [
-                                    {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                    {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                    {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
-                                  ]
-                              };
+                              vm.tablaListaRegistros.condicion = {nombre_completo: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}};
                         }
                         else
                         {
                               vm.tablaListaRegistros.condicion = {
                                   and: [
                                     {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
-                                    {
-                                        or: [
-                                          {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                          {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                          {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
-                                        ]
-                                    },
+                                    {nombre_completo: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}}
                                   ]
                               };
                         }

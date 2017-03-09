@@ -30,13 +30,15 @@
                 <table class="tablaDatos table table-condensed no-footer">
                   <thead>
                     <tr>
+                        <th width="5%">N&uacute;m.</th>
                         <th width="50%">Nombre del alumno</th>
                         <th width="20%">Calificaci&oacute;n</th>
-                        <th width="30%">N&uacute;m. documento</th>
+                        <th width="25%">N&uacute;m. documento</th>
                     </tr>
                   </thead>
                  <tbody>
-                    <tr ng-repeat="registro in vm.inscripcionesCursos_temp | filter : cambiarPagina" class="pointer">
+                    <tr ng-repeat="registro in vm.inscripcionesCursos_temp | filter : vm.cambiarPagina" class="pointer">
+                        <td> {{(registro.num)}}</td>
                         <td> {{registro.Capacitandos.apellidoPaterno +' '+registro.Capacitandos.apellidoMaterno+' '+registro.Capacitandos.nombre}}</td>
                         <td><div dropdown-select="vm.ddSelectOptions" dropdown-model="registro.calificacion" dropdown-item-label="text"></div></td>
                         <td> <input type="text" class="form-control" placeholder="N&uacute;mero de documento" ng-model="registro.numDocAcreditacion"></td>

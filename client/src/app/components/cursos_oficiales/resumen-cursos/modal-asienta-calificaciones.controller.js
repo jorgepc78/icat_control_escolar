@@ -73,7 +73,7 @@
                         vm.tablaListaAlumnos.fin = 0;
                     }
 
-                    angular.forEach(vm.registroEdicion.inscripcionesCursos, function(record) {
+                    angular.forEach(vm.registroEdicion.inscripcionesCursos, function(record, key) {
 
                           if(record.numDocAcreditacion === undefined)
                             var numDocAcreditacion = '';
@@ -87,11 +87,13 @@
 
                           vm.inscripcionesCursos_temp.push({
                                 id: record.id,
+                                num: (key + 1),
                                 numDocAcreditacion: numDocAcreditacion,
                                 calificacion: calificacion,
                                 Capacitandos: record.Capacitandos
                           });
                     });
+                    //vm.cambiarPagina(value);
 
             };
 
@@ -99,12 +101,12 @@
             function cambiarPagina(value) {
        
                 vm.tablaListaAlumnos.inicio  = (vm.tablaListaAlumnos.paginaActual - 1) * vm.tablaListaAlumnos.registrosPorPagina;
-                vm.tablaListaAlumnos.fin     = inicio + vm.tablaListaAlumnos.registrosPorPagina;
+                vm.tablaListaAlumnos.fin     = vm.tablaListaAlumnos.inicio + vm.tablaListaAlumnos.registrosPorPagina;
 
                 if(vm.tablaListaAlumnos.fin > vm.tablaListaAlumnos.totalElementos)
                     vm.tablaListaAlumnos.fin = vm.tablaListaAlumnos.totalElementos;
 
-                var index = vm.registroEdicion.inscripcionesCursos.indexOf(value);
+                var index = vm.inscripcionesCursos_temp.indexOf(value);
                 return (vm.tablaListaAlumnos.inicio <= index && index < vm.tablaListaAlumnos.fin);            
             }
 

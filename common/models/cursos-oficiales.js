@@ -129,7 +129,7 @@ module.exports = function(CursosOficiales) {
                     "curp_instructor"      : CUrsoEncontrado.curpInstructor,
                     "sexo_instructor"      : sexo_instructor,
                     "edo_civil_instructor" : '',
-                    "grado_academico"      : (CUrsoEncontrado.instructor == undefined ? '' : CUrsoEncontrado.instructor.gradoAcademico),
+                    "escolaridad"          : (CUrsoEncontrado.instructor == undefined ? '' : CUrsoEncontrado.instructor.escolaridad),
                     "rfc"                  : (CUrsoEncontrado.instructor == undefined ? '' : CUrsoEncontrado.instructor.rfc),
                     "calle"                : '',
                     "numero"               : '',

@@ -40,6 +40,7 @@ gulp.task('compress', function() {
 		.pipe(useref())
 		.pipe(gulpif('*.js', uglify({mangle: false, compress: true})))
 		.pipe(gulpif('*.css', cleanCSS()))
+		.pipe(gulpif('index.html', htmlmin({removeComments:true, removeCommentsFromCDATA: true, preserveLineBreaks:true, conservativeCollapse:true, minifyJS:true, collapseWhitespace: true, removeTagWhitespace:false})))
 		.pipe(gulp.dest('./client/dist'));
 });
 
@@ -93,7 +94,7 @@ gulp.task('copy', function() {
 
 gulp.task('minify-index', function() {
 	gulp.src('./client/dist/index.html')
-		.pipe(htmlmin({removeComments:true, removeCommentsFromCDATA: true, preserveLineBreaks:true, collapseWhitespace: true, removeTagWhitespace:false}))
+		.pipe(htmlmin({removeComments:true, removeCommentsFromCDATA: true, preserveLineBreaks:true, conservativeCollapse:true, minifyJS:true, collapseWhitespace: true, removeTagWhitespace:false}))
 		.pipe(gulp.dest('./client/dist'));
 });
 

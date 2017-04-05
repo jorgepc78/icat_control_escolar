@@ -25,6 +25,11 @@
                 controller: 'logoutController',
                 controllerAs: 'vm'
             })
+            .state('manual', {
+                url: '/manual',
+                controller: 'logoutController',
+                controllerAs: 'vm'
+            })
 
 
             .state('index', {

@@ -161,11 +161,14 @@
                                                             
                                                                                         <table class="tablaDatos table table-condensed no-footer">
                                                                                           <thead>
-                                                                                            <col width="80%">
-                                                                                            <col width="20%">
+                                                                                            <col width="70%">
+                                                                                            <col width="10%">
+                                                                                            <col width="10%">
+                                                                                            <col width="10%">
                                                                                             <tr>
                                                                                                 <th>Curso</th>
                                                                                                 <th>Modalidad</th>
+                                                                                                <th>Horas</th>
                                                                                                 <th>Puntaje</th>
                                                                                             </tr>
                                                                                           </thead>
@@ -175,13 +178,16 @@
                                                                                             <!-- <div class="full-height-scroll" full-scroll> -->
                                                                                                 <table class="table table-striped">
                                                                                                     <thead>
-                                                                                                      <col width="80%">
-                                                                                                      <col width="20%">
+                                                                                                      <col width="70%">
+                                                                                                      <col width="10%">
+                                                                                                      <col width="10%">
+                                                                                                      <col width="10%">
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                     <tr ng-repeat="curso in vm.RegistroSeleccionado.evaluacion_curso | orderObjectBy: 'CatalogoCursos.nombreCurso' ">
                                                                                                         <td> {{curso.CatalogoCursos.nombreCurso}}</td>
                                                                                                         <td> {{curso.CatalogoCursos.modalidad}}</td>
+                                                                                                        <td> {{curso.CatalogoCursos.numeroHoras}}</td>
                                                                                                         <td> {{curso.calificacion}}</td>
                                                                                                     </tr>
                                                                                                     </tbody>

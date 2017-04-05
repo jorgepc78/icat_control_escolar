@@ -82,12 +82,6 @@
     "$promise": {},
     "$resolved": true
   },
-  "VistaCatalogoInstructores": {
-    "dataSource": "icat_control_escolar_ds",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
   "RelInstrucPtc": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
@@ -154,10 +148,6 @@
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },
-  "VistaControlProcesos": {
-    "dataSource": "icat_control_escolar_ds",
-    "public": true
-  },
   "DestinatariosAvisos": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
@@ -181,6 +171,26 @@
     "public": true
   },
   "CatalogoDocumentos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "VistaControlProcesos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "VistaCatalogoInstructores": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "VistaOfertaCursos": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "MatriculaXUnidadTipo": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "VistaEspecialidadesActivas": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
   }

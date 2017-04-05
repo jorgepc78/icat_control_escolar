@@ -234,7 +234,7 @@
                 CatalogoCursos.find({
                     filter: {
                         where: {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
-                        fields: ['idCatalogoCurso','nombreCurso','modalidad'],
+                        fields: ['idCatalogoCurso','nombreCurso','modalidad','numeroHoras'],
                         order: 'nombreCurso ASC'
                     }
                 })
@@ -276,6 +276,7 @@
                     idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
                     nombreCurso     : vm.cursoSeleccionado.nombreCurso,
                     modalidad       : vm.cursoSeleccionado.modalidad,
+                    numeroHoras     : vm.cursoSeleccionado.numeroHoras,
                     calificacion    : 0
                 });
 
@@ -349,6 +350,7 @@
                     apellidoPaterno    : vm.registroEdicion.apellidoPaterno,
                     apellidoMaterno    : vm.registroEdicion.apellidoMaterno,
                     nombre             : vm.registroEdicion.nombre,
+                    nombre_completo    : (vm.registroEdicion.apellidoPaterno + ' ' + vm.registroEdicion.apellidoMaterno + ' ' + vm.registroEdicion.nombre),
                     rfc                : vm.registroEdicion.rfc,
                     conPerfilAcademico : vm.registroEdicion.conPerfilAcademico,
                     escolaridad        : vm.registroEdicion.escolaridad,

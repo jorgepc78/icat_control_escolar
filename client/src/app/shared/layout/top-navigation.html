@@ -67,7 +67,7 @@
                 </li>
 
                 <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.pre_cursos_eval_cursos_ptc || currentUser.perfil_menu.pre_cursos_eval_cursos_fuera_ptc || currentUser.perfil_menu.pre_cursos_eval_validacion_cursos || currentUser.perfil_menu.pre_cursos_eval_roco_estandar || currentUser.perfil_menu.pre_cursos_eval_validacion_roco_estandar)">
-                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Pre-apertura de cursos y evaluaciones <span class="caret"></span></a>
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Preapertura de cursos y evaluaciones <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active" ng-if="currentUser.perfil_menu.pre_cursos_eval_cursos_ptc">
                             <a ui-sref="pre_apertura.cursos_ptc">    <span class="nav-label"> Cursos del PTC </span></a>
@@ -148,7 +148,11 @@
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <a ui-sref="logout"><i class="fa fa-sign-out"></i> Cerrar sesi&oacute;n</a>
+                    <a ui-sref="logout">Salir <i class="fa fa-sign-out"></i></a>
+                </li>
+                <li ng-if="(currentUser.unidad_pertenece_id > 1)" tooltip-placement="bottom" tooltip="Manual del sistema">
+                    <a href="manual_usuario_unidad_control_escolar.pdf" target="_blank" style="padding: 14px 2px;"><i class="fa fa-question-circle fa-lg"></i></a>
+                    <!-- <a href="manual_usuario_unidad_control_escolar.pdf" target="_blank"><button type="button" class="btn btn-warning btn-sm" tooltip-placement="bottom" tooltip="Manual del sistema"><i class="fa fa-question-circle fa-lg"></i></button></a> -->
                 </li>
             </ul>
         </div>

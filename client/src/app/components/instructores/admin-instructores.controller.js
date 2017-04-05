@@ -115,7 +115,7 @@
                                         include:{
                                             relation: 'CatalogoCursos',
                                             scope: {
-                                                fields:['idCatalogoCurso','nombreCurso','modalidad'],
+                                                fields:['idCatalogoCurso','nombreCurso','modalidad','numeroHoras'],
                                                 order: ['nombreCurso ASC']
                                             }
                                         }
@@ -365,6 +365,7 @@
                         vm.RegistroSeleccionado.apellidoPaterno    = respuesta.apellidoPaterno;
                         vm.RegistroSeleccionado.apellidoMaterno    = respuesta.apellidoMaterno;
                         vm.RegistroSeleccionado.nombre             = respuesta.nombre;
+                        vm.RegistroSeleccionado.nombre_completo    = respuesta.nombre_completo;
                         vm.RegistroSeleccionado.rfc                = respuesta.rfc;
                         vm.RegistroSeleccionado.conPerfilAcademico = respuesta.conPerfilAcademico;
                         vm.RegistroSeleccionado.escolaridad        = respuesta.escolaridad;
@@ -416,6 +417,7 @@
                                         CatalogoCursos  : {
                                             idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
                                             nombreCurso     : record.CatalogoCursos.nombreCurso,
+                                            numeroHoras     : record.CatalogoCursos.numeroHoras,
                                             modalidad       : record.CatalogoCursos.modalidad
                                         }
                                     });
@@ -506,14 +508,10 @@
                                               });
                                         });
                                     });
-
                             });
                       }
                   });
-
-
             };
-
     };
 
 })();

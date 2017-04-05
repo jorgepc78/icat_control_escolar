@@ -1,0 +1,68 @@
+{
+  "name": "VistaEspecialidadesActivas",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "cursos_ofertados",
+    "table": "vista_especialidades_activas"
+  },
+  "properties": {
+    "idEspecialidad": {
+      "type": "number",
+      "id": true,
+      "required": false,
+      "index": true,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_especialidad",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "especialidad": {
+      "type": "String",
+      "required": false,
+      "length": 65,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "especialidad",
+        "dataType": "character varying",
+        "dataLength": 65,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "cursosActivos": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 64,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "cursos_activos",
+        "dataType": "bigint",
+        "dataLength": null,
+        "dataPrecision": 64,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

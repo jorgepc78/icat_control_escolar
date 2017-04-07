@@ -201,3 +201,10 @@ body.fixed-nav #wrapper #page-wrapper {
 .flot-chart-content > div > .legend > table {
   color: #000 !important;
 }
+
+.padding-left-min {
+  padding-left: 3px;
+}
+.padding-right-min {
+  padding-right: 3px;
+}

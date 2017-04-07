@@ -34,7 +34,6 @@
                                                 <th>Horario</th>
                                                 <th>Aula asignada</th>
                                                 <th>Fecha inicio</th>
-                                                <th>Observaciones</th>
                                                 <th>Estatus</th>
                                             </tr>
                                           </thead>
@@ -45,13 +44,12 @@
                                                 <td> {{registro.horario}}</td>
                                                 <td> {{registro.aulaAsignada}}</td>
                                                 <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
-                                                <td> {{registro.observaciones}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
                                                     <span ng-switch-when="1" class="label label-success texto-estatus-ptc">Aprobado</span>
-                                                    <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Listo para enviar</span>
-                                                    <span ng-switch-when="3" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
-                                                    <span ng-switch-when="4" class="label label-danger texto-estatus-ptc">Rechazado</span>
+                                                    <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">Listo para enviar</span>
+                                                    <span ng-switch-when="3" class="label label-info texto-estatus-ptc">En proceso de revisi&oacute;n</span>
+                                                    <span ng-switch-when="4" class="label label-warning texto-estatus-ptc">Rechazado</span>
                                                 </td>
                                             </tr>
                                           </tbody>
@@ -150,10 +148,10 @@
                                                                             </ul>
                                                                             <div class="row">
                                                                                 <div class="col-md-12 text-center">
-                                                                                    <button type="button" ng-show="( (vm.CursoPTCSeleccionado.estatus == 0 || vm.CursoPTCSeleccionado.estatus == 2) && vm.CursoPTCSeleccionado.curso_oficial_registrado.length > 0)" ng-click="vm.editaCurso(vm.CursoPTCSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span>Editar curso propuesto</button>
-                                                                                    <button type="button" ng-show="( (vm.CursoPTCSeleccionado.estatus == 0 || vm.CursoPTCSeleccionado.estatus == 2) && vm.CursoPTCSeleccionado.curso_oficial_registrado.length > 0)" ng-click="vm.eliminaCurso(vm.CursoPTCSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span>Eliminar curso</button>
+                                                                                    <button type="button" ng-show="( (vm.CursoPTCSeleccionado.estatus == 0 || vm.CursoPTCSeleccionado.estatus == 2 || vm.CursoPTCSeleccionado.estatus == 4) && vm.CursoPTCSeleccionado.curso_oficial_registrado.length > 0)" ng-click="vm.editaCurso(vm.CursoPTCSeleccionado)" class="btn btn-primary btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span>Editar curso propuesto</button>
+                                                                                    <button type="button" ng-show="( (vm.CursoPTCSeleccionado.estatus == 0 || vm.CursoPTCSeleccionado.estatus == 2 || vm.CursoPTCSeleccionado.estatus == 4) && vm.CursoPTCSeleccionado.curso_oficial_registrado.length > 0)" ng-click="vm.eliminaCurso(vm.CursoPTCSeleccionado)" class="btn btn-warning btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-trash-o"></i></span>Eliminar curso</button>
                                                                                     <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 2)" ng-click="vm.enviaCursoRevision(vm.CursoPTCSeleccionado)" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-upload"></i></span> Enviar a revisi&oacute;n</button>
-                                                                                    <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 3)" ng-click="vm.imprimeDocValidacion(vm.CursoPTCSeleccionado)" class="btn btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-print"></i></span> Imprimir Doc. validaci&oacute;n</button>
+                                                                                    <!-- <button type="button" ng-show="(vm.CursoPTCSeleccionado.estatus == 3)" ng-click="vm.imprimeDocValidacion(vm.CursoPTCSeleccionado)" class="btn btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-print"></i></span> Imprimir Doc. validaci&oacute;n</button> -->
                                                                                 </div>
                                                                             </div>
                                                                     </tab>

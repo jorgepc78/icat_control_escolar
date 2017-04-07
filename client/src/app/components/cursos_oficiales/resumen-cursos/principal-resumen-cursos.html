@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row" style="margin-bottom: 25px;">
-                <div class="col-md-7">
+                <div class="col-md-7 padding-left-min padding-right-min">
     
                         <div class="ibox">
                             <div class="ibox-title">
@@ -79,13 +79,13 @@
                         </div>
                 
                 </div> <!-- column1 -->
-                <div class="col-md-5">
+                <div class="col-md-5 padding-left-min padding-right-min">
                     
                     <div class="row">
                         <div class="col-md-12">
 
                                 <div class="ibox">
-                                    <div class="ibox-content" style="height:830px;">
+                                    <div class="ibox-content" style="height:710px;">
                                         <div class="tab-content">
                                             <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
                                                         <div class="row">
@@ -98,7 +98,7 @@
                                             </div>
                                             <div class="tab-pane active" ng-show="vm.client == 2">
                                                         <div class="panel blank-panel">
-                                                                <tabset style="height: 720px;">
+                                                                <tabset style="height: 590px;">
                                                                     <tab heading="Detalle del curso" active="vm.tabs[0].active">
 
                                                                             <ul class="list-group clear-list">
@@ -160,8 +160,11 @@
                                                                                 </li>
                                                                             </ul>
 
-                                                                            <strong>Registro actual de inscripciones y pagos</strong>
-                                                                            <ul class="list-group clear-list">
+                                                                    </tab>
+
+                                                                    <tab heading="Registro de inscripci&oacute;n y pagos" ng-init="true" active="vm.tabs[1].active">
+
+                                                                            <ul class="list-group clear-list" style="margin-bottom: 2px;">
                                                                                 <li class="list-group-item fist-item">
                                                                                     
                                                                                     Cupo m&aacute;ximo: {{vm.cursoSeleccionado.cupoMaximo}}
@@ -175,24 +178,30 @@
                                                                                     N&uacute;m. m&iacute;nimo de inscritos pagados: {{vm.cursoSeleccionado.minRequeridoPago}}
                                                                                 </li>
                                                                             </ul>
-                                                                    </tab>
 
-                                                                    <tab heading="Capacitandos inscritos" ng-init="true" active="vm.tabs[1].active">
-
-                                                                            <div  style="height: 650px;">
+                                                                            <table class="table" style="margin-bottom: 0;">
+                                                                                <thead>
+                                                                                <tr>
+                                                                                    <th style="width: 30px;"></th>
+                                                                                    <th style="width: 120px;">N&uacute;m. Control</th>
+                                                                                    <th style="width: 270px;">Nombre</th>
+                                                                                    <th ng-show="(vm.cursoSeleccionado.estatus < 5)">Pago</th>
+                                                                                    <th ng-show="(vm.cursoSeleccionado.estatus >= 5)">Calif.</th>
+                                                                                </tr>
+                                                                                </thead>
+                                                                            </table>
+                                                                            <div  style="height: 380px;">
                                                                                     <div class="full-height-scroll" full-scroll>
-                                                            
-                                                                                        <table class="table table-striped">
-                                                                                            <thead>
+                                                                                        <table class="table" ng-show="(vm.cursoSeleccionado.inscripcionesCursos.length == 0)">
                                                                                             <tr>
-                                                                                                <th></th>
-                                                                                                <th>N&uacute;m. Control</th>
-                                                                                                <th>Nombre</th>
-                                                                                                <th ng-show="(vm.cursoSeleccionado.estatus < 5)">Pago</th>
-                                                                                                <th ng-show="(vm.cursoSeleccionado.estatus >= 5)">Calif.</th>
+                                                                                                <td style="width: 30px;"></td>
+                                                                                                <td style="width: 120px;"></td>
+                                                                                                <td style="width: 270px;">No hay ning&uacute;n inscrito</td>
+                                                                                                <td></td>
                                                                                             </tr>
-                                                                                            </thead>
-                                                                                            <tbody>
+                                                                                        </table>
+
+                                                                                        <table class="table table-striped" ng-show="(vm.cursoSeleccionado.inscripcionesCursos.length > 0)">
                                                                                             <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesCursos">
                                                                                                 <td> {{$index + 1}}</td>
                                                                                                 <td> {{inscripcion.Capacitandos.numControl}}</td>
@@ -205,8 +214,6 @@
                                                                                                 </td>
                                                                                                 <td ng-show="(vm.cursoSeleccionado.estatus >= 5)"> {{inscripcion.calificacion}}</td>
                                                                                             </tr>
-
-                                                                                            </tbody>
                                                                                         </table>
                                                                                         
                                                                                     </div>

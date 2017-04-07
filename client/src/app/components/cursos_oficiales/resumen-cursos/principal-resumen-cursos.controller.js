@@ -443,8 +443,7 @@
                     vm.total_pagados++;
                   });
 
-
-                  vm.tabs = [{active: true}, {active: false}]; 
+                  //vm.tabs = [{active: true}, {active: false}]; 
             };
 
 

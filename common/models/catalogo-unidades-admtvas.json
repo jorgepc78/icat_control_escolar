@@ -58,6 +58,22 @@
         "nullable": "YES"
       },
       "_selectable": true
+    },
+    "nombreDirector": {
+      "type": "String",
+      "required": false,
+      "length": 180,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "nombre_director",
+        "dataType": "character varying",
+        "dataLength": 180,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
     }
   },
   "validations": [],

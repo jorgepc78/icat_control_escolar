@@ -5,18 +5,19 @@
         .module('icat_control_escolar')
         .controller('ValidaAperturaCursosController', ValidaAperturaCursosController);
 
-    ValidaAperturaCursosController.$inject = ['$scope', '$modal', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'ControlProcesos'];
+    ValidaAperturaCursosController.$inject = ['$scope', '$rootScope', '$modal', 'tablaDatosService', 'HorasAsignadasUnidad', 'ProgTrimCursos', 'CursosPtc', 'CatalogoUnidadesAdmtvas', 'CursosOficiales', 'ControlProcesos', 'Usuario'];
 
-    function ValidaAperturaCursosController($scope, $modal, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, CatalogoUnidadesAdmtvas, CursosOficiales, ControlProcesos ) {
+    function ValidaAperturaCursosController($scope, $rootScope, $modal, tablaDatosService, HorasAsignadasUnidad, ProgTrimCursos, CursosPtc, CatalogoUnidadesAdmtvas, CursosOficiales, ControlProcesos, Usuario ) {
 
             var vm = this;
 
-            vm.muestra_cursos_unidad        = muestra_cursos_unidad;
-            vm.muestraDatosRegistroActual   = muestraDatosRegistroActual;
-            vm.cambiarPagina                = cambiarPagina;
+            vm.muestra_cursos_unidad      = muestra_cursos_unidad;
+            vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
+            vm.cambiarPagina              = cambiarPagina;
 
-            vm.apruebaCurso = apruebaCurso;
-            vm.rechazaCurso = rechazaCurso;
+            vm.apruebaCurso               = apruebaCurso;
+            vm.rechazaCurso               = rechazaCurso;
+            vm.generaDocumento            = generaDocumento;
 
             vm.trimestres = ['PRIMER TRIMESTRE','SEGUNDO TRIMESTRE','TERCER TRIMESTRE','CUARTO TRIMESTRE'];
 
@@ -264,12 +265,12 @@
 
 
 
-            function apruebaCurso(seleccion) {
+            function apruebaCurso(seleccion, origen) {
 
                   var datos;
                   var mensaje_confirmacion = '';
                   var mensaje_accion = '';
-                  if($scope.currentUser.perfil == 'programas')
+                  if(origen == 'dp')
                   {
                       datos = {
                         revisadoProgramas: true
@@ -277,23 +278,15 @@
                       mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; marcada como <strong>REVISADA</strong> por el &aacute;rea de programas de capacitaci&oacute;n, ¿Continuar?';
                       mensaje_accion = 'CURSO REVISADO PROGRAMAS';
                   }
-                  if($scope.currentUser.perfil == 'dir_academica')
+                  else if(origen == 'da')
                   {
                       datos = {
                         aprobadoAcademica: true
                       };
-                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; marcada como <strong>APROBADA</strong> por el &aacute;rea acad&eacute;mica, ¿Continuar?';
+                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; marcada como <strong>APROBADA</strong> por la direcci&oacute;n acad&eacute;mica, ¿Continuar?';
                       mensaje_accion = 'CURSO APROBADO ACADEMICA';
                   }
-                  /*else if($scope.currentUser.perfil == 'dir_planeacion')
-                  {
-                      datos = {
-                        aprobadoPlaneacion: true
-                      };
-                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; marcada como <strong>APROBADA</strong> por el &aacute;rea de planeaci&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'CURSO APROBADO PLANEACION';
-                  }*/
-                  else if($scope.currentUser.perfil == 'dir_gral')
+                  else if(origen == 'dg')
                   {
                       datos = {
                         aprobadoDireccionGral: true,
@@ -302,7 +295,6 @@
                       mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>AUTORIZADA</strong> para su pre-apertura y promoci&oacute;n, ¿Continuar?';
                       mensaje_accion = 'CURSO APROBADO DIR GRAL';
                   }
-
 
                   swal({
                     title: "Confirmar",
@@ -326,7 +318,7 @@
                             .$promise
                             .then(function(respuesta) {
 
-                                  if($scope.currentUser.perfil == 'dir_gral')
+                                  if(origen == 'dg')
                                   {
                                         vm.cursoSeleccionado.estatus = respuesta.estatus;
 
@@ -448,9 +440,7 @@
                                               if($scope.currentUser.perfil == 'programas')
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>REVISADO</strong> por el &aacute;rea de programas de capacitaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               else if($scope.currentUser.perfil == 'dir_academica')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>APROBADO</strong> por el &aacute;rea acad&eacute;mica; y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              /*else if($scope.currentUser.perfil == 'dir_planeacion')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>APROBADO</strong> por el &aacute;rea de planeaci&oacute;n; se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';*/
+                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>APROBADO</strong> por la direcci&oacute;n acad&eacute;mica; y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
                                               else if($scope.currentUser.perfil == 'dir_gral')
                                               {
                                                   titulo_ventana_aviso = 'Curso Aceptado';
@@ -480,45 +470,9 @@
 
             function rechazaCurso(seleccion) {
 
-                  var datos;
-                  var mensaje_confirmacion = '';
-                  var mensaje_accion = '';
-                  if($scope.currentUser.perfil == 'programas')
-                  {
-                      datos = {
-                        estatus: 3
-                      };
-                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>RECHAZADA</strong> y regresada a la unidad, ¿Continuar?';
-                      mensaje_accion = 'CURSO RECHAZADO PROGRAMAS';
-                  }
-                  if($scope.currentUser.perfil == 'dir_academica')
-                  {
-                      datos = {
-                        revisadoProgramas: false
-                      };
-                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea de programas para una nueva revisi&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'CURSO RECHAZADO ACADEMICA';
-                  }
-                  /*else if($scope.currentUser.perfil == 'dir_planeacion')
-                  {
-                      datos = {
-                        aprobadoAcademica: false
-                      };
-                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea acad&eacute;mica para una nueva revisi&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'CURSO RECHAZADO PLANEACION';
-                  }*/
-                  else if($scope.currentUser.perfil == 'dir_gral')
-                  {
-                      datos = {
-                        aprobadoPlaneacion: false
-                      };
-                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; regresado al &aacute;rea de planeaci&oacute;n para una nueva revisi&oacute;n, ¿Continuar?';
-                      mensaje_accion = 'CURSO RECHAZADO DIR GRAL';
-                  }
-
                   swal({
                     title: "Confirmar",
-                    html: mensaje_confirmacion,
+                    html: 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>RECHAZADA</strong> y regresada a la unidad, ¿Continuar?',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -532,24 +486,34 @@
                             CursosOficiales.prototype$updateAttributes(
                             {
                                 id: seleccion.idCurso
-                            },
-                                datos
-                            )
+                            },{
+                                estatus: 3
+                            })
                             .$promise
                             .then(function(respuesta) {
 
                                   if($scope.currentUser.perfil == 'programas')
                                       vm.cursoSeleccionado.estatus = respuesta.estatus;
 
+                                  var txt = 'Pre-Apertura Curso Extra';
                                   if(seleccion.programadoPTC == true)
-                                    var txt = 'Pre-Apertura Curso PTC';
-                                  else
-                                    var txt = 'Pre-Apertura Curso Extra';
+                                  {
+                                      txt = 'Pre-Apertura Curso PTC';
+                                      CursosPtc.prototype$updateAttributes(
+                                      {
+                                          id: seleccion.idCursoPTC
+                                      },{
+                                          estatus: 4
+                                      })
+                                      .$promise
+                                      .then(function(respuesta) {
+                                      });
+                                  }
 
                                   ControlProcesos
                                   .create({
                                       proceso         : txt,
-                                      accion          : mensaje_accion,
+                                      accion          : 'CURSO RECHAZADO PROGRAMAS',
                                       idDocumento     : seleccion.idCurso,
                                       idUsuario       : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
@@ -568,21 +532,9 @@
 
                                               vm.muestra_cursos_unidad();
 
-                                              var titulo_ventana_aviso = 'No autorización de pre-apertura';
-                                              
-                                              if($scope.currentUser.perfil == 'programas')
-                                                  var mensaje_ventana_aviso = 'se registr&oacute; el curso como <strong>RECHAZADO</strong> para su pre-apertura y promoci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              if($scope.currentUser.perfil == 'dir_academica')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>RECHAZADO</strong> por el &aacute;rea acad&eacute;mica y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              /*else if($scope.currentUser.perfil == 'dir_planeacion')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>RECHAZADO</strong> por el &aacute;rea de planeaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';*/
-                                              else if($scope.currentUser.perfil == 'dir_gral')
-                                                  var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>RECHAZADO</strong> y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-
-
                                               swal({
-                                                title: titulo_ventana_aviso,
-                                                html: mensaje_ventana_aviso,
+                                                title: 'No autorización de pre-apertura',
+                                                html: 'se registr&oacute; el curso como <strong>RECHAZADO</strong> para su pre-apertura y promoci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
                                                 type: 'success',
                                                 showCancelButton: false,
                                                 confirmButtonColor: "#9a0000",
@@ -590,11 +542,24 @@
                                               });
                                         });
                                   });
-
                             });
+
 
                   });
 
+            }
+
+            function generaDocumento(idCurso) {
+                    Usuario.prototype$__get__accessTokens({ 
+                        id: $rootScope.currentUser.id_usuario
+                    })
+                    .$promise
+                    .then(function(resp) {
+                        var link = angular.element('<a href="api/CursosOficiales/exporta_doc_preapertura_curso/'+idCurso+'?access_token='+resp[0].id+'" target="_blank"></a>');
+                        angular.element(document.body).append(link);
+                        link[0].click();
+                        link.remove();
+                    });
             }
 
     };

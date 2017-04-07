@@ -60,6 +60,10 @@
                                               <textarea class="form-control" ng-model="vm.registroEdicion.certificacion" rows="3" cols="90"></textarea>
                                           </div>
                                       </div>
+
+                                </div>
+                                <div class="col-lg-6">
+
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Tel&eacute;fono</label>
                                           <div class="col-sm-9">
@@ -72,25 +76,15 @@
                                               <input type="email" class="form-control" maxlength="85" ng-model="vm.registroEdicion.email" required>
                                           </div>
                                       </div>
-                                      <!-- <div class="form-group">
-                                          <label class="col-sm-3 control-label">Escolaridad</label>
-                                          <div class="col-sm-9">
-                                              <input type="text" class="form-control" ng-model="vm.registroEdicion.escolaridad" required>
-                                          </div>
-                                      </div> -->
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Localidad</label>
                                           <div class="col-sm-9">
                                               <select class="form-control m-b" 
                                                   ng-model="vm.localidadSeleccionada"
-                                                  ng-options="localidad as localidad.nombre for localidad in vm.listaLocalidades" required>
+                                                  ng-options="localidad as (localidad.nombre + ' (' + localidad.municipio +')') for localidad in vm.listaLocalidades" required>
                                               </select>
                                           </div>
                                       </div>
-
-                                </div>
-                                <div class="col-lg-6">
-
                                       <div class="form-group">
                                           <label class="col-sm-3 control-label">Unidad de registro</label>
                                           <div class="col-sm-9">

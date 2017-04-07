@@ -295,7 +295,7 @@
     
                 CatalogoLocalidades.find({
                     filter: {
-                        fields: ['idLocalidad','nombre'],
+                        fields: ['idLocalidad','nombre','municipio'],
                         order: 'nombre ASC'
                     }
                 })
@@ -356,6 +356,7 @@
                     vm.mostrarSpiner = false;
                 }
             }
+
 
             function muestraCursosEspecialidad() {
 

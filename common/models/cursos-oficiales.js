@@ -435,4 +435,140 @@ module.exports = function(CursosOficiales) {
         }
     );
 
+
+
+
+    CursosOficiales.exporta_doc_preapertura_curso = function(idCurso, res, callback) {
+
+            var fs = require('fs');
+            var Docxtemplater = require('docxtemplater');
+
+
+            CursosOficiales.find({ 
+                        where: {idCurso: idCurso },
+                        include: [
+                            {
+                                relation: 'unidad_pertenece',
+                                scope: {
+                                  fields:['idUnidadAdmtva','nombre','nombreDirector']
+                                }
+                            },
+                            {
+                              relation: 'catalogo_curso_pertenece',
+                              scope: {
+                                  fields:['idCatalogoCurso','idEspecialidad','perfilEgresado'],
+                                  include:{
+                                      relation: 'especialidad',
+                                      scope: {
+                                          fields:['idEspecialidad','nombre','campoFormacion']
+                                      }
+                                  }
+                              }
+                            },
+                            {
+                                relation: 'localidad_pertenece',
+                                scope: {
+                                  fields:['idLocalidad','nombre','municipio']
+                                }
+                            },
+                            {
+                              relation: 'instructor',
+                              scope: {
+                                  include:{
+                                      relation: 'evaluacion_curso',
+                                      scope: {
+                                          fields:['id','idCatalogoCurso','calificacion']
+                                      }
+                                  }
+                              }
+                            }
+                        ]
+                    },
+                    function(err, resultado) {
+
+                            var CUrsoEncontrado = JSON.parse( JSON.stringify( resultado[0] ) );
+
+                            var nombre_archivo = 'oficio_validacion_' + CUrsoEncontrado.unidad_pertenece.nombre + '_' + CUrsoEncontrado.nombreCurso;
+
+                            var meses_nombre = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                            var meses = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+                            //set the templateVariables
+                            var fechaElaboracion = new Date();
+                            var fechaInicio = new Date(CUrsoEncontrado.fechaInicio);
+                            var fechaFin = new Date(CUrsoEncontrado.fechaFin);
+
+                            var calificacion = '';
+                            var idCatalogoCurso = CUrsoEncontrado.idCatalogoCurso;
+                            for(var i=0; i < CUrsoEncontrado.instructor.evaluacion_curso.length; i++)
+                            {
+                                if(CUrsoEncontrado.instructor.evaluacion_curso[i].idCatalogoCurso == idCatalogoCurso)
+                                {
+                                    calificacion = CUrsoEncontrado.instructor.evaluacion_curso[i].calificacion;
+                                    break;
+                                }
+                            }
+
+                            var dirigido = '';
+                            if(CUrsoEncontrado.publico == true)
+                                dirigido = 'Público en general';
+                            else
+                                dirigido = 'Privado';
+
+                            var codigo = {
+                                "fecha_elaboracion"    : fechaElaboracion.getDate() +' de '+ meses_nombre[fechaElaboracion.getMonth()] +' de '+ fechaElaboracion.getUTCFullYear(),
+                                "nombre_director"      : CUrsoEncontrado.unidad_pertenece.nombreDirector.toUpperCase(),
+                                "nombre_unidad"        : CUrsoEncontrado.unidad_pertenece.nombre.toUpperCase(),
+                                "nombre_curso"         : CUrsoEncontrado.nombreCurso.toUpperCase(),
+                                "modalidad"            : CUrsoEncontrado.modalidad.toUpperCase(),
+                                "campo_formacion"      : CUrsoEncontrado.catalogo_curso_pertenece.especialidad.campoFormacion,
+                                "especialidad"         : CUrsoEncontrado.catalogo_curso_pertenece.especialidad.nombre,
+                                "total_horas"          : CUrsoEncontrado.numeroHoras,
+                                "fecha_inicio"         : fechaInicio.getDate() +'/'+ meses[fechaInicio.getMonth()] +'/'+ fechaInicio.getUTCFullYear(),
+                                "fecha_fin"            : fechaFin.getDate() +'/'+ meses[fechaFin.getMonth()] +'/'+ fechaFin.getUTCFullYear(),
+                                "horario"              : CUrsoEncontrado.horario,
+                                "lugar_aplicacion"     : CUrsoEncontrado.aulaAsignada,
+                                "nombre_instructor"    : CUrsoEncontrado.nombreInstructor,
+                                "puntaje"              : calificacion,
+                                "dirigido"             : dirigido
+                            };
+
+                            //console.log(codigo);
+                            //console.log(idCatalogoCurso);
+                            //console.log("**********************************************************************************************************");
+                            //console.log(CUrsoEncontrado.instructor);
+                            //console.log(CUrsoEncontrado.instructor.evaluacion_curso);
+                            //Load the docx file as a binary
+                            var content = fs.readFileSync(__dirname + "/../../templates/oficio_autorizacion_apertura_curso.docx", "binary");
+                            var doc = new Docxtemplater(content);
+                            doc.setData(codigo);
+                            doc.render();
+                            var buf = doc.getZip().generate({type:"nodebuffer"});
+
+                            var datetime = new Date();
+                            res.set('Expires', 'Tue, 03 Jul 2001 06:00:00 GMT');
+                            res.set('Cache-Control', 'max-age=0, no-cache, must-revalidate, proxy-revalidate');
+                            res.set('Last-Modified', datetime +'GMT');
+                            res.set('Content-Type','application/force-download');
+                            res.set('Content-Type','application/octet-stream');
+                            res.set('Content-Type','application/download');
+                            res.set('Content-Disposition','attachment;filename='+nombre_archivo+'.docx');
+                            res.set('Content-Transfer-Encoding','binary');
+                            res.send(buf);
+                    });
+
+    };
+
+    CursosOficiales.remoteMethod(
+    'exporta_doc_preapertura_curso',
+    {
+      accepts: [
+        {arg: 'idCurso',   type: 'string', required: true },
+        {arg: 'res', type: 'object', 'http': {source: 'res'}}
+      ],
+      returns: {},
+      http: {path: '/exporta_doc_preapertura_curso/:idCurso', verb: 'get'}
+    });
+
+
+
 };

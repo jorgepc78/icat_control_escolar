@@ -12,38 +12,38 @@ module.exports = function(ProgTrimCursos) {
 				var doc = new Docxtemplater(content);
 
 
-                ProgTrimCursos.find({ 
+        ProgTrimCursos.find({ 
 					where: {idPtc: id_ptc },
-		            include: [
+		      include: [
 		            	{
-							relation: 'unidad_pertenece',
-							scope: {
-							  fields:['idUnidadAdmtva','nombre']
-							}
-				        },
-	                    {
-	                        relation: 'cursos_programados',
-	                        scope: {
-								include: [
-								  {
-								      relation: 'detalle_curso',
-								      scope: {
-								        fields: ['nombreCurso','modalidad']
-								      }
-								  },
-								  {
-								      relation: 'instructores_propuestos',
-								      scope: {
-								        fields: ['apellidoPaterno','apellidoMaterno','nombre'],
-								        order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
-								      }
-								  }
-								]
-	                        }
-	                    },
-			        ]
-                },
-                function(err, resultado) {
+											relation: 'unidad_pertenece',
+											scope: {
+											  fields:['idUnidadAdmtva','nombre']
+											}
+				        	},
+                  {
+                      relation: 'cursos_programados',
+                      scope: {
+													include: [
+													  {
+													      relation: 'detalle_curso',
+													      scope: {
+													        fields: ['nombreCurso','modalidad']
+													      }
+													  },
+													  {
+													      relation: 'instructores_propuestos',
+													      scope: {
+													        fields: ['apellidoPaterno','apellidoMaterno','nombre'],
+													        order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+													      }
+													  }
+													]
+                      }
+                  }
+		      ]
+        },
+        function(err, resultado) {
 
 						var PTCencontrado = JSON.parse( JSON.stringify( resultado[0] ) );
 						//console.log(PTCencontrado.cursos_programados);
@@ -135,7 +135,7 @@ module.exports = function(ProgTrimCursos) {
 						res.set('Content-Transfer-Encoding','binary');
 						res.send(buf); //@todo: insert your CSV data here.
 
-                });
+      	});
 
 		};
 
@@ -145,11 +145,94 @@ module.exports = function(ProgTrimCursos) {
 		'exporta_doc_ptc',
 		{
 		  accepts: [
-		    {arg: 'id_ptc', type: 'string', required: true },
+		    {arg: 'id_ptc', type: 'number', required: true },
 		    {arg: 'res', type: 'object', 'http': {source: 'res'}}
 		  ],
 		  returns: {},
 		  http: {path: '/exporta_doc_ptc/:id_ptc', verb: 'get'}
 		});
+
+
+
+		/* generacion del documento de autorizacion del ptc*/
+		ProgTrimCursos.exporta_doc_autorizacion_ptc = function(id_ptc, res, callback) {
+
+						var fs = require('fs');
+						var Docxtemplater = require('docxtemplater');
+
+						//Load the docx file as a binary
+						var content = fs
+						    .readFileSync(__dirname + "/../../templates/oficio_autorizacion_ptc.docx", "binary");
+
+						var doc = new Docxtemplater(content);
+
+		        ProgTrimCursos.find({ 
+							where: {idPtc: id_ptc },
+				      include: [
+		            	{
+											relation: 'unidad_pertenece',
+											scope: {
+											  fields:['idUnidadAdmtva','nombre','nombreDirector']
+											}
+				        	}
+				      ]
+		        },
+		        function(err, resultado) {
+
+								var PTCencontrado = JSON.parse( JSON.stringify( resultado[0] ) );
+
+								var nombre_archivo = '';
+								var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
+								var periodo = ['Enero-Marzo','Abril-Junio','Julio-Septiembre','Octubre-Diciembre'];
+								var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+								//set the templateVariables
+								var fechaElaboracion = new Date();
+								var codigo = {
+									"nombre_director"    : PTCencontrado.unidad_pertenece.nombreDirector.toUpperCase(),
+									"nombre_unidad"      : PTCencontrado.unidad_pertenece.nombre.toUpperCase(),
+									"nombre_unidad2"      : PTCencontrado.unidad_pertenece.nombre,
+									"anio"               : PTCencontrado.anio,
+									"trimestre"          : periodo[PTCencontrado.trimestre-1],
+									"anio"  						 : fechaElaboracion.getUTCFullYear(),
+									"fecha_elaboracion"  : fechaElaboracion.getDate() +' de '+ meses[fechaElaboracion.getMonth()] +' de '+ fechaElaboracion.getUTCFullYear()
+
+								};
+
+								nombre_archivo = 'Oficio_autorizacion_ptc_' + PTCencontrado.unidad_pertenece.nombre + '_' +trimestres[PTCencontrado.trimestre-1] + '_TRIMESTRE_' + PTCencontrado.anio;
+
+								doc.setData(codigo);
+
+								doc.render();
+
+								var buf = doc.getZip()
+								             .generate({type:"nodebuffer"});
+
+								//@todo: get your data from database etc...
+								var datetime = new Date();
+								res.set('Expires', 'Tue, 03 Jul 2001 06:00:00 GMT');
+								res.set('Cache-Control', 'max-age=0, no-cache, must-revalidate, proxy-revalidate');
+								res.set('Last-Modified', datetime +'GMT');
+								res.set('Content-Type','application/force-download');
+								res.set('Content-Type','application/octet-stream');
+								res.set('Content-Type','application/download');
+								res.set('Content-Disposition','attachment;filename='+nombre_archivo+'.docx');
+								res.set('Content-Transfer-Encoding','binary');
+								res.send(buf); //@todo: insert your CSV data here.
+
+		      	});
+
+		};
+
+		ProgTrimCursos.remoteMethod(
+		'exporta_doc_autorizacion_ptc',
+		{
+		  accepts: [
+		    {arg: 'id_ptc', type: 'number', required: true },
+		    {arg: 'res', type: 'object', 'http': {source: 'res'}}
+		  ],
+		  returns: {},
+		  http: {path: '/exporta_doc_autorizacion_ptc/:id_ptc', verb: 'get'}
+		});
+
 
 };

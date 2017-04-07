@@ -270,6 +270,8 @@
                         vm.CursoPTCSeleccionado.curso_oficial_registrado[0].costo = respuesta.costo;
                         vm.CursoPTCSeleccionado.curso_oficial_registrado[0].publico = respuesta.publico;
 
+                        vm.CursoPTCSeleccionado.estatus = 2;
+
                         vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.idLocalidad = respuesta.idLocalidad;
                         vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.nombre = respuesta.nombreLocalidad;
                         vm.CursoPTCSeleccionado.curso_oficial_registrado[0].localidad_pertenece.municipio = respuesta.nombreMunicipio;

@@ -31,7 +31,7 @@
             vm.tablalListaCapacitados = {
               totalElementos     : 0,
               paginaActual       : 1,
-              registrosPorPagina : 5,
+              registrosPorPagina : 10,
               inicio             : 0,
               fin                : 1,
               condicion          : {},

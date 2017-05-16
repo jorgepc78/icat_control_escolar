@@ -36,8 +36,8 @@
                     total                   : registroEditar.total,
                     costo                   : 0,
                     capacitandos            : registroEditar.capacitandos,
-                    min_requerido_inscritos : 0,
-                    min_requerido_pago      : 0,
+                    min_requerido_inscritos : Math.round(registroEditar.capacitandos * 0.85),
+                    min_requerido_pago      : Math.round(registroEditar.capacitandos * 0.85),
                     fechaInicio             : registroEditar.fechaInicio,
                     fechaFin                : registroEditar.fechaFin,
                     idLocalidad             : '',
@@ -220,7 +220,7 @@
                                                     return instructor.idInstructor;
                                                   }).indexOf( parseInt(vm.radioidInstructorSeleccionado) );
 
-                        
+
                         CursosOficiales
                         .create({
                             idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,

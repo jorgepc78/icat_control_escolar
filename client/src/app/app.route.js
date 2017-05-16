@@ -122,6 +122,13 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
+            .state('ptc.resumen_ptc_unidades', {
+                url: '/resumen_ptc_unidades',
+                templateUrl: 'app/components/ptc/resumen_ptc_unidades/resumen_ptc_unidades.html',
+                controller: 'ResumenPTCUnidadesController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
 
             /*** seccion de instructores ***/
             .state('instructores', {

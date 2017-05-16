@@ -610,8 +610,11 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .btn-warning.btn-outline {
   color: #f8ac59;
 }
-.btn-danger.btn-outline {
+/* .btn-danger.btn-outline {
   color: #28afcd;
+} */
+.btn-danger.btn-outline {
+  color: #ed5565;
 }
 .btn-primary.btn-outline:hover,
 .btn-success.btn-outline:hover,
@@ -824,9 +827,14 @@ fieldset[disabled] .btn-warning.active {
   background-color: #f9b66d;
   border-color: #f9b66d;
 }
-.btn-danger {
+/* .btn-danger {
   background-color: #28afcd;
   border-color: #28afcd;
+  color: #FFFFFF;
+} */
+.btn-danger {
+  background-color: #ed5565;
+  border-color: #ed5565;
   color: #FFFFFF;
 }
 .btn-danger:hover,
@@ -1077,9 +1085,14 @@ button.dim:active:before {
   background-color: #f8ac59;
   color: #ffffff;
 }
-.label-danger,
+/* .label-danger,
 .badge-danger {
   background-color: #28afcd;
+  color: #FFFFFF;
+} */
+.label-danger,
+.badge-danger {
+  background-color: #ed5565;
   color: #FFFFFF;
 }
 .label-info,
@@ -2482,8 +2495,11 @@ label.error {
 .inspinia-notify.alert-success {
   border-left: 6px solid #1c84c6;
 }
-.inspinia-notify.alert-danger {
+/* .inspinia-notify.alert-danger {
   border-left: 6px solid #28afcd;
+} */
+.inspinia-notify.alert-danger {
+  border-left: 6px solid #ed5565;
 }
 .inspinia-notify.alert-info {
   border-left: 6px solid #1ab394;
@@ -3908,12 +3924,20 @@ table.table-mail tr td {
   border-color: #f8ac59;
   color: #ffffff;
 }
-.panel-danger {
+/* .panel-danger {
   border-color: #28afcd;
 }
 .panel-danger > .panel-heading {
   background-color: #28afcd;
   border-color: #28afcd;
+  color: #ffffff;
+} */
+.panel-danger {
+  border-color: #ed5565;
+}
+.panel-danger > .panel-heading {
+  background-color: #ed5565;
+  border-color: #ed5565;
   color: #ffffff;
 }
 .progress-bar {
@@ -3944,8 +3968,11 @@ table.table-mail tr td {
 .progress-bar-warning {
   background-color: #f8ac59;
 }
-.progress-bar-danger {
+/* .progress-bar-danger {
   background-color: #28afcd;
+} */
+.progress-bar-danger {
+  background-color: #ed5565;
 }
 .panel-title {
   font-size: inherit;
@@ -3973,8 +4000,11 @@ table.table-mail tr td {
 .text-warning {
   color: #f8ac59;
 }
-.text-danger {
+/* .text-danger {
   color: #28afcd;
+} */
+.text-danger {
+  color: #ed5565;
 }
 .text-muted {
   color: #888888;
@@ -5211,8 +5241,11 @@ table.issue-tracker tbody tr td {
 .agile-list li.warning-element {
   border-left: 3px solid #f8ac59;
 }
-.agile-list li.danger-element {
+/* .agile-list li.danger-element {
   border-left: 3px solid #28afcd;
+} */
+.agile-list li.danger-element {
+  border-left: 3px solid #ed5565;
 }
 .agile-list li.info-element {
   border-left: 3px solid #1c84c6;

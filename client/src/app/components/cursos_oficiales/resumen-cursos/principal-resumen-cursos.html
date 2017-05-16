@@ -167,15 +167,15 @@
                                                                             <ul class="list-group clear-list" style="margin-bottom: 2px;">
                                                                                 <li class="list-group-item fist-item">
                                                                                     
-                                                                                    Cupo m&aacute;ximo: {{vm.cursoSeleccionado.cupoMaximo}}
+                                                                                    Cupo m&aacute;ximo: <strong>{{vm.cursoSeleccionado.cupoMaximo}}</strong>
                                                                                 </li>
                                                                                 <li class="list-group-item">
-                                                                                    <span class="pull-right"> Inscritos actual: {{vm.cursoSeleccionado.inscripcionesCursos.length}}</span>
-                                                                                    N&uacute;m. m&iacute;nimo de inscritos: {{vm.cursoSeleccionado.minRequeridoInscritos}}
+                                                                                    <span class="pull-right"> Inscritos actual: <strong>{{vm.cursoSeleccionado.inscripcionesCursos.length}}</strong></span>
+                                                                                    N&uacute;m. m&iacute;nimo de inscritos: <strong>{{vm.cursoSeleccionado.minRequeridoInscritos}}</strong>
                                                                                 </li>
                                                                                 <li class="list-group-item">
-                                                                                    <span class="pull-right"> Pagaron: {{vm.total_pagados}} </span>
-                                                                                    N&uacute;m. m&iacute;nimo de inscritos pagados: {{vm.cursoSeleccionado.minRequeridoPago}}
+                                                                                    <span class="pull-right"> Pagaron: <strong>{{vm.total_pagados}}</strong> </span>
+                                                                                    N&uacute;m. m&iacute;nimo de inscritos pagados: <strong>{{vm.cursoSeleccionado.minRequeridoPago}}</strong>
                                                                                 </li>
                                                                             </ul>
 
@@ -224,7 +224,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12 text-center">
                                                                         <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 2) && (currentUser.perfil == 'unidad_capacit')" ng-click="vm.reprogramaCurso(vm.cursoSeleccionado)" class="btn btn-warning btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-share"></i></span> Reprogramar curso</button>
-                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 2) && (currentUser.perfil == 'unidad_capacit')" ng-click="vm.cancelaCurso(vm.cursoSeleccionado)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-ban"></i></span> Cancelar curso</button>
+                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 2) && (currentUser.perfil == 'unidad_capacit')" ng-click="vm.cancelaCurso(vm.cursoSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-ban"></i></span> Cancelar curso</button>
                                                                         
                                                                         <!-- botones cuando casi concluye el curso -->
                                                                         <button type="button" ng-show="(vm.cursoSeleccionado.estatus == 4) && (currentUser.perfil == 'unidad_capacit') && (vm.cursoSeleccionado.diasTermine <= 5)" ng-click="vm.concluyeCurso(vm.cursoSeleccionado)" class="btn btn-danger btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Marcar como concluido</button>

@@ -602,7 +602,7 @@
                                         .then(function(resp_control) {
 
                                               swal({
-                                                title: 'Cambio de estatus registrado',
+                                                title: 'Cierre de curso',
                                                 html: 'se realiz&oacute; el cambio de estatus del curso a cerrado y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
                                                 type: 'success',
                                                 showCancelButton: false,
@@ -775,7 +775,7 @@
                                         .then(function(resp_control) {
 
                                               swal({
-                                                title: 'Cambio de estatus registrado',
+                                                title: 'Conclusión del curso',
                                                 html: 'se realiz&oacute; el cambio de estatus del curso a concluido y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
                                                 type: 'success',
                                                 showCancelButton: false,

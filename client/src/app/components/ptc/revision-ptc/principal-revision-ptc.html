@@ -90,7 +90,7 @@
                                                 <td class="text-center"> {{registro.fechaEnvioRevision | date:'d/MMMM/yyyy'}}</td>
                                                 <td class="text-center"> {{registro.cursos_programados.length}}</td>
                                                 <td class="text-center"> {{registro.horasSeparadas}}</td>
-                                                <td class="client-status"  style="text-align: center;" ng-switch on="registro.estatus">
+                                                <td class="client-status" style="text-align: center;" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="0" class="label label-info texto-estatus-ptc">Sin revisar</span>
                                                     <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En revisi&oacute;n</span>
                                                     <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
@@ -100,18 +100,18 @@
                                                 
                                                 <td class="client-status" style="text-align: center;">
                                                     <button type="button" ng-show="( (registro.revisadoProgramas == false) && (registro.estatus == 1) )" ng-click="vm.aceptaPTC(registro, 'dp')" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Marcar como revisado este PTC por parte del &aacute;rea de programas de capacitaci&oacute;n"><i class="fa fa-check"></i></button>
-                                                    <span ng-show="( (registro.revisadoProgramas == true) && (registro.estatus == 1) )" class="label label-{{registro.revisadoProgramas === true ? 'primary' : 'warning'}}">{{registro.revisadoProgramas === true ? 'S&iacute;' : 'No'}}</span>
                                                     <button type="button" ng-show="( (registro.revisadoProgramas == false) && (registro.estatus == 1) )" ng-click="vm.rechazaPTC(registro)" class="btn btn-danger btn-sm" tooltip-placement="top" tooltip="Rechazar este PTC"><i class="fa fa-times"></i></button>
+                                                    <span ng-show="( (registro.revisadoProgramas == true) && (registro.estatus == 1) )" class="label label-{{registro.revisadoProgramas === true ? 'primary' : 'warning'}}">{{registro.revisadoProgramas === true ? 'S&iacute;' : 'No'}}</span>
                                                 </td>
                                                 <td class="client-status" style="text-align: center;">
-                                                    <button type="button" ng-show="( (registro.aprobadoAcademica == false) && (registro.estatus == 1) )"  ng-disabled="( (registro.revisadoProgramas == false) && (registro.estatus == 1) )" ng-click="vm.aceptaPTC(registro, 'da')" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Aprobar este PTC por parte del &aacute;rea acad&eacute;mica"><i class="fa fa-check"></i></button>
+                                                    <button type="button" ng-show="( (registro.aprobadoAcademica == false) && (registro.estatus == 1) )" ng-disabled="( (registro.revisadoProgramas == false) && (registro.estatus == 1) )" ng-click="vm.aceptaPTC(registro, 'da')" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Aprobar este PTC por parte del &aacute;rea acad&eacute;mica"><i class="fa fa-check"></i></button>
                                                     <span ng-show="( (registro.aprobadoAcademica == true) && (registro.estatus == 1) )" class="label label-{{registro.aprobadoAcademica === true ? 'primary' : 'warning'}}">{{registro.aprobadoAcademica === true ? 'S&iacute;' : 'No'}}</span>
                                                 </td>
                                                 <td class="client-status" style="text-align: center;">
-                                                    <button type="button" ng-disabled="( (registro.aprobadoAcademica == false) && (registro.estatus == 1) )" ng-click="vm.aceptaPTC(registro,'dg')" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Aprobar y aceptar este PTC"><i class="fa fa-check"></i></button>
+                                                    <button type="button" ng-show="(registro.estatus == 1)" ng-disabled="( (registro.aprobadoAcademica == false) && (registro.estatus == 1) )" ng-click="vm.aceptaPTC(registro,'dg')" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Aprobar y aceptar este PTC"><i class="fa fa-check"></i></button>
                                                 </td>
                                                 <td style="width:120px; text-align: center;">
-                                                    <button type="button" ng-disabled="( (registro.revisadoProgramas == false) && (registro.estatus == 1) )" class="btn btn-sm" ng-click="vm.generaDocumento(registro.idPtc)"><i class="fa fa-print" tooltip-placement="top" tooltip="Imprime Documento de autorizaci&oacute;n"></i> Imprimir</button>
+                                                    <button type="button" ng-show="(registro.estatus == 1)" ng-disabled="( (registro.revisadoProgramas == false) && ((registro.estatus == 1)||(registro.estatus == 3)) )" class="btn btn-sm" ng-click="vm.generaDocumento(registro.idPtc)"><i class="fa fa-print" tooltip-placement="top" tooltip="Imprime Documento de autorizaci&oacute;n"></i> Imprimir</button>
                                                 </td>
                                             </tr>
                                           </tbody>
@@ -196,7 +196,7 @@
                                                         <td class="text-center"> {{registroDetalle.fechaInicio | date:'d/MMMM/yyyy'}}</td>
                                                         <td class="text-center"> {{registroDetalle.fechaFin | date:'d/MMMM/yyyy'}}</td>
                                                         <td> {{registroDetalle.observaciones}}</td>
-                                                        <td style="width:85px">                                                               
+                                                        <td style="width:95px">                                                               
                                                                 <button type="button" ng-show="( (currentUser.unidad_pertenece_id == 1) && ((vm.RegistroPTCSeleccionado.estatus == 1)||(vm.RegistroPTCSeleccionado.estatus == 3)) && (registroDetalle.observacionesRevision.length > 0) )" class="btn btn-white btn-sm" tooltip-placement="top" tooltip="Observaciones hechas: {{registroDetalle.observacionesRevision}}"><i class="fa fa-asterisk"></i></button>
                                                                 <button type="button" ng-show="( (currentUser.perfil == 'programas') && (vm.RegistroPTCSeleccionado.revisadoProgramas == false) && (vm.RegistroPTCSeleccionado.estatus == 1) )" ng-click="vm.agregaObserRevision(registroDetalle)" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Agrega observaciones de revisi&oacute;n a este curso"><i class="fa fa-align-justify"></i></button>
                                                                 

@@ -337,8 +337,8 @@
                                               .then(function(resp_control) {
 
                                                     swal({
-                                                      title: 'PTC enviado',
-                                                      html: 'se env&iacute;o el curso a validaci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                      title: 'Curso enviado',
+                                                      html: 'se env&iacute;o el curso a validaci&oacute;n y se gener&oacute; el identificador de proceso <br><strong style="font-size: 12px;">' + resp_control.identificador + '</strong>',
                                                       type: 'success',
                                                       showCancelButton: false,
                                                       confirmButtonColor: "#9a0000",

@@ -36,7 +36,7 @@
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Localidad</label>
                               <div class="col-sm-9">
-                                  <ui-select ng-model="vm.localidadSeleccionada.selected" theme="bootstrap">
+                                  <ui-select ng-model="vm.localidadSeleccionada.selected" theme="bootstrap" required>
                                       <ui-select-match placeholder="Escriba la localidad a buscar">
                                           {{$select.selected.nombre +', '+$select.selected.municipio}}
                                       </ui-select-match>

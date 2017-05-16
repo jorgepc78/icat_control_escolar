@@ -44,7 +44,7 @@
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.plan_cursos_horas_unidad || currentUser.perfil_menu.plan_cursos_metas_capacit || currentUser.perfil_menu.plan_cursos_planeacion_ptc || currentUser.perfil_menu.plan_cursos_revision_ptc || currentUser.perfil_menu.plan_cursos_ptc_autorizados)">
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.plan_cursos_horas_unidad || currentUser.perfil_menu.plan_cursos_metas_capacit || currentUser.perfil_menu.plan_cursos_planeacion_ptc || currentUser.perfil_menu.plan_cursos_revision_ptc || currentUser.perfil_menu.plan_cursos_ptc_autorizados || currentUser.perfil_menu.plan_cursos_resumen_ptc_unidades)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Planeaci&oacute;n de Cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
                         <li ui-sref-active="active" ng-if="currentUser.perfil_menu.plan_cursos_horas_unidad">
@@ -62,6 +62,9 @@
                         </li>
                         <li ui-sref-active="active" ng-if="currentUser.perfil_menu.plan_cursos_ptc_autorizados">
                             <a ui-sref="ptc.pct_autorizados">   <span class="nav-label"> PTC autorizados </span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.plan_cursos_resumen_ptc_unidades">
+                            <a ui-sref="ptc.resumen_ptc_unidades">   <span class="nav-label"> Resumen PTC Unidades </span></a>
                         </li>
                     </ul>
                 </li>

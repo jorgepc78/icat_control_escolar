@@ -32,7 +32,7 @@
             vm.tablaListaCursos = {
               totalElementos     : 0,
               paginaActual       : 1,
-              registrosPorPagina : 5,
+              registrosPorPagina : 10,
               inicio             : 0,
               fin                : 1,
               condicion          : {},
@@ -153,7 +153,7 @@
                           }
                   };
 
-                  vm.client = 1;
+                  /*vm.client = 1;
                   vm.tablaListaCursos.paginaActual = 1;
                   vm.tablaListaCursos.inicio = 0;
                   vm.tablaListaCursos.fin = 1;
@@ -174,7 +174,7 @@
                             vm.tablaListaCursos.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.cursoSeleccionado);
                         }
-                  });
+                  });*/
 
             }
 
@@ -292,7 +292,7 @@
                         aprobadoDireccionGral: true,
                         estatus: 2
                       };
-                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>AUTORIZADA</strong> para su pre-apertura y promoci&oacute;n, ¿Continuar?';
+                      mensaje_confirmacion = 'La propuesta del curso <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; registrada como <strong>AUTORIZADA</strong>, a partir de ahora podr&aacute; recibir inscripci&oacute;n, ¿Continuar?';
                       mensaje_accion = 'CURSO APROBADO DIR GRAL';
                   }
 
@@ -437,11 +437,11 @@
 
                                               var titulo_ventana_aviso = 'Curso Revisado';
                                               
-                                              if($scope.currentUser.perfil == 'programas')
+                                              if(origen == 'dp')
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>REVISADO</strong> por el &aacute;rea de programas de capacitaci&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              else if($scope.currentUser.perfil == 'dir_academica')
+                                              else if(origen == 'da')
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>APROBADO</strong> por la direcci&oacute;n acad&eacute;mica; y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
-                                              else if($scope.currentUser.perfil == 'dir_gral')
+                                              else if(origen == 'dg')
                                               {
                                                   titulo_ventana_aviso = 'Curso Aceptado';
                                                   var mensaje_ventana_aviso = 'se marc&oacute; el curso como <strong>AUTORIZADO</strong> para su pre-apertura y promoci&oacute;n; se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>';
@@ -456,7 +456,8 @@
                                                 confirmButtonText: "Aceptar"
                                               });
                                               
-                                              inicia();
+                                              //inicia();
+                                              vm.muestra_cursos_unidad();
                                         });
                                   });
 

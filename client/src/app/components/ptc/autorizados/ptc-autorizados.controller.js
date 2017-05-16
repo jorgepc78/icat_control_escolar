@@ -389,11 +389,12 @@
                             vm.client = 2;
                             vm.icono = '';
 
-                            angular.forEach(respuesta.datos, function(registro) {
+                            vm.registrosCursosPTCs = respuesta.datos;
+                            
+                            /*angular.forEach(respuesta.datos, function(registro) {
                                   vm.registrosCursosPTCs.push({
                                       idCursoPTC              : registro.idCursoPTC,
-                                      nombreCurso             : registro.detalle_curso.nombreCurso,
-                                      modalidad               : registro.detalle_curso.modalidad,
+                                      detalle_curso           : registro.detalle_curso,
                                       horario                 : registro.horario,
                                       aulaAsignada            : registro.aulaAsignada,
                                       capacitandos            : registro.capacitandos,
@@ -406,7 +407,7 @@
                                       showChild               : false,
                                       curso_oficial_registrado: registro.curso_oficial_registrado
                                   });
-                            });
+                            });*/
 
                         }
                   });

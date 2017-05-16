@@ -1,0 +1,137 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+                <div class="col-md-12">
+    
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <div class="row">
+                                        <div class="col-md-10">
+                                                <h2 style="font-size:1.8em;">Resumen de PTC de las unidades</h2>
+                                        </div>
+                                        <div class="col-md-2">
+                                                        <div class="input-group" style="margin-top:7px;">
+                                                                <label class="col-md-3 control-label" style="margin-top:7px;">A&ntilde;o:</label>
+                                                                <div class="col-md-9">
+                                                                    <select class="form-control m-b" ng-model="vm.anioSeleccionado" ng-change="vm.muestra_ptcs_ano()" ng-options="registro as registro.anio for registro in vm.listaAniosDisp"></select>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                                             
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                            <tr>
+                                                <th rowspan="2" class="text-center">Unidad</th>
+                                                <th colspan="3" class="text-center">1er trimestre</th>
+                                                <th colspan="3" class="text-center">2o trimestre</th>
+                                                <th colspan="3" class="text-center">3er trimestre</th>
+                                                <th colspan="3" class="text-center">4o trimestre</th>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="text-center">Creado</th>
+                                                <th class="text-center">Estatus</th>
+                                                <th class="text-center">N&uacute;m. cursos</th>
+
+                                                <th class="text-center">Creado</th>
+                                                <th class="text-center">Estatus</th>
+                                                <th class="text-center">N&uacute;m. cursos</th>
+
+                                                <th class="text-center">Creado</th>
+                                                <th class="text-center">Estatus</th>
+                                                <th class="text-center">N&uacute;m. cursos</th>
+
+                                                <th class="text-center">Creado</th>
+                                                <th class="text-center">Estatus</th>
+                                                <th class="text-center">N&uacute;m. cursos</th>
+                                            </tr>
+                                          </thead>
+                                         <tbody>
+                                            <tr ng-repeat="registro in vm.registrosPTCs" class="pointer">
+                                                <td style="border-right: 1px solid #111;"> {{registro.nombre_unidad}}</td>
+                                                
+                                                <td class="client-status" style="text-align: center;">
+                                                    <span class="label label-{{registro.existe1trim === 1 ? 'primary' : 'warning'}}">{{registro.existe1trim === 1 ? 'S&iacute;' : 'No'}}</span>
+                                                </td>
+                                                <td ng-show="registro.existe1trim === 0" class="client-status" style="text-align: center;">
+                                                     &nbsp;
+                                                </td>
+                                                <td ng-show="registro.existe1trim === 1" class="client-status"  style="text-align: center;" ng-switch on="registro.estatus1trim">
+                                                    <span ng-switch-when="0" class="label label-info texto-estatus-ptc">Sin revisar</span>
+                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
+                                                    <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
+                                                    <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
+                                                    <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
+                                                </td>
+                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                    {{registro.num_cursos1tim > 0 ? registro.num_cursos1tim : ''}}
+                                                </td>
+
+                                                <td class="client-status" style="text-align: center;">
+                                                    <span class="label label-{{registro.existe2trim === 1 ? 'primary' : 'warning'}}">{{registro.existe2trim === 1 ? 'S&iacute;' : 'No'}}</span>
+                                                </td>
+                                                <td ng-show="registro.existe2trim === 0" class="client-status" style="text-align: center;">
+                                                     &nbsp;
+                                                </td>
+                                                <td ng-show="registro.existe2trim === 1" class="client-status"  style="text-align: center;" ng-switch on="registro.estatus2trim">
+                                                    <span ng-switch-when="0" class="label label-info texto-estatus-ptc">Sin revisar</span>
+                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
+                                                    <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
+                                                    <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
+                                                    <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
+                                                </td>
+                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                    {{registro.num_cursos2tim > 0 ? registro.num_cursos2tim : ''}}
+                                                </td>
+
+                                                <td class="client-status" style="text-align: center;">
+                                                    <span class="label label-{{registro.existe3trim === 1 ? 'primary' : 'warning'}}">{{registro.existe3trim === 1 ? 'S&iacute;' : 'No'}}</span>
+                                                </td>
+                                                <td ng-show="registro.existe3trim === 0" class="client-status" style="text-align: center;">
+                                                     &nbsp;
+                                                </td>
+                                                <td ng-show="registro.existe3trim === 1" class="client-status"  style="text-align: center;" ng-switch on="registro.estatus3trim">
+                                                    <span ng-switch-when="0" class="label label-info texto-estatus-ptc">Sin revisar</span>
+                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
+                                                    <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
+                                                    <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
+                                                    <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
+                                                </td>
+                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                    {{registro.num_cursos3tim > 0 ? registro.num_cursos3tim : ''}}
+                                                </td>
+
+                                                <td class="client-status" style="text-align: center;">
+                                                    <span class="label label-{{registro.existe4trim === 1 ? 'primary' : 'warning'}}">{{registro.existe4trim === 1 ? 'S&iacute;' : 'No'}}</span>
+                                                </td>
+                                                <td ng-show="registro.existe4trim === 0" class="client-status" style="text-align: center;">
+                                                     &nbsp;
+                                                </td>
+                                                <td ng-show="registro.existe4trim === 1" class="client-status"  style="text-align: center;" ng-switch on="registro.estatus4trim">
+                                                    <span ng-switch-when="0" class="label label-info texto-estatus-ptc">Sin revisar</span>
+                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
+                                                    <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
+                                                    <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
+                                                    <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
+                                                </td>
+                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                    {{registro.num_cursos4tim > 0 ? registro.num_cursos4tim : ''}}
+                                                </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+
+                            </div>
+                        </div>
+                
+                </div> <!-- column1 -->
+                <div class="col-md-1">
+                </div>
+
+    </div><!-- row principal -->
+
+
+</div>

@@ -74,9 +74,11 @@ module.exports = function(ProgTrimCursos) {
 						var suma_total = 0;
 						for(var i = 0; i < PTCencontrado.cursos_programados.length; i++)
 						{
-
-							var listaInstructores = JSON.parse( JSON.stringify( PTCencontrado.cursos_programados[i].instructores_propuestos ) );
 							//console.log("****************************************");
+							if(PTCencontrado.cursos_programados[i].instructores_propuestos === undefined)
+								var listaInstructores = [{ idInstructor: 0, apellidoPaterno: 'SIN', apellidoMaterno: 'INSTRUCTOR', nombre: 'ASIGNADO' }];
+							else
+								var listaInstructores = JSON.parse( JSON.stringify( PTCencontrado.cursos_programados[i].instructores_propuestos ) );
 							//console.log(listaInstructores);
 
 							var array_instructores = [];
@@ -233,6 +235,53 @@ module.exports = function(ProgTrimCursos) {
 		  returns: {},
 		  http: {path: '/exporta_doc_autorizacion_ptc/:id_ptc', verb: 'get'}
 		});
+
+/************************************************************************************************************/
+
+    ProgTrimCursos.resumen_ptc_unidades = function(anio, cb) {
+		
+		var ds = ProgTrimCursos.dataSource;
+
+		var sql = 'SELECT * FROM ptc.resumen_ptc_unidades WHERE anio = ' + anio;
+
+		ds.connector.execute(sql, '', function(err, resultado) {
+			if (err);
+			cb(err, resultado);
+		});
+
+    }
+     
+    ProgTrimCursos.remoteMethod(
+        'resumen_ptc_unidades', 
+        {
+          accepts: {arg: 'anio', type: 'number', required: true},
+          returns: {arg: 'data', type: 'array', root: true },
+          http: {path: '/resumen_ptc_unidades', verb: 'get'}
+        }
+    );
+
+/************************************************************************************************************/
+
+    ProgTrimCursos.anios_ptc = function(cb) {
+		
+		var ds = ProgTrimCursos.dataSource;
+
+		var sql = 'SELECT DISTINCT anio FROM ptc.prog_trim_cursos ORDER BY anio';
+
+		ds.connector.execute(sql, '', function(err, resultado) {
+			if (err);
+			cb(err, resultado);
+		});
+
+    }
+     
+    ProgTrimCursos.remoteMethod(
+        'anios_ptc', 
+        {
+          returns: {arg: 'data', type: 'array', root: true },
+          http: {path: '/anios_ptc', verb: 'get'}
+        }
+    );
 
 
 };

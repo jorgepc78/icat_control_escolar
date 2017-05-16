@@ -145,6 +145,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : false,
                     pre_cursos_eval_menu                      : false,
                     pre_cursos_eval_cursos_ptc                : false,
@@ -185,6 +186,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : true,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : true,
@@ -230,6 +232,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : true,
+                    plan_cursos_resumen_ptc_unidades          : true,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : true,
@@ -275,6 +278,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : true,
+                    plan_cursos_resumen_ptc_unidades          : true,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : true,
@@ -320,6 +324,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : true,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : false,
@@ -365,6 +370,7 @@
                     plan_cursos_metas_capacit                 : true,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : false,
@@ -410,6 +416,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : false,
@@ -455,6 +462,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : false,
@@ -500,6 +508,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : true,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : true,
@@ -545,6 +554,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : false,
 
                     pre_cursos_eval_menu                      : false,
@@ -590,6 +600,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : false,
@@ -635,6 +646,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : true,
 
                     pre_cursos_eval_menu                      : false,
@@ -680,6 +692,7 @@
                     plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
                     plan_cursos_ptc_autorizados               : false,
 
                     pre_cursos_eval_menu                      : true,

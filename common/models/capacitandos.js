@@ -40,7 +40,7 @@ module.exports = function(Capacitandos) {
 								var codigo = {
 									"fecha_elaboracion" : fechaElaboracion.getDate() +'/'+ meses[fechaElaboracion.getMonth()] +'/'+ fechaElaboracion.getUTCFullYear(),
 									"nombre_unidad"     : CursoEncontrado.unidad_pertenece.nombre,
-									"clavecct"  		: '',
+									"clavecct"  				: CursoEncontrado.unidad_pertenece.clavecct,
 									"apellido_paterno"  : CursoEncontrado.apellidoPaterno,
 									"apellido_materno"  : CursoEncontrado.apellidoMaterno,
 									"nombre"            : CursoEncontrado.nombre,

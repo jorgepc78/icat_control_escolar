@@ -190,7 +190,15 @@
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },
+  "MatriculaCorte": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
   "VistaEspecialidadesActivas": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "ParticipanteCurso": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
   }

@@ -42,22 +42,40 @@
                 CatalogoCursos.instructores_habilitados({
                         id: vm.registroEdicion.idCatalogoCurso,
                         filter: {
-                            where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp']
+                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp'],
+                            include: [
+                                {
+                                    relation: 'otras_unidades',
+                                    scope: {
+                                        where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                        fields:['idUnidadAdmtva']
+                                    }
+                                }
+                            ]
                         }
                 })
                 .$promise
                 .then(function(resp) {
 
+                    var index;
                     angular.forEach(resp, function(record) {
-                            vm.listaInstructores.push({
-                                idInstructor    : record.idInstructor,
-                                apellidoPaterno : record.apellidoPaterno,
-                                apellidoMaterno : record.apellidoMaterno,
-                                nombre          : record.nombre,
-                                curp          : record.curp,
-                                nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre
-                            });
+
+                            index = record.otras_unidades.map(function(unidad) {
+                                                                return unidad.idUnidadAdmtva;
+                                                              }).indexOf($scope.currentUser.unidad_pertenece_id);
+
+                            if(index >= 0)
+                            {
+                                vm.listaInstructores.push({
+                                    idInstructor    : record.idInstructor,
+                                    apellidoPaterno : record.apellidoPaterno,
+                                    apellidoMaterno : record.apellidoMaterno,
+                                    nombre          : record.nombre,
+                                    curp            : record.curp,
+                                    nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre
+                                });
+                            }
+
                     });
 
                     vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));

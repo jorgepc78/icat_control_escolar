@@ -310,7 +310,7 @@
                                                     })
                                                     .$promise
                                                     .then(function(resp) {
-                                                        
+
                                                         if(resp.count > 0)
                                                         {
                                                             vm.mostrarSpiner = false;
@@ -320,7 +320,6 @@
                                                                  vm.mostrar_msg_error = false;
                                                                  vm.mensaje = '';
                                                             }, 2000);
-
                                                         }
                                                         else
                                                         {

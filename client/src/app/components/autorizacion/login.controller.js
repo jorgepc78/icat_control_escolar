@@ -164,7 +164,10 @@
                     inscrip_pagos_registro_pago_eval          : false,
                     reportes_menu                             : false,
                     reportes_resumen_alumnos_cursos           : false,
-                    reportes_bitacora                         : false
+                    reportes_bitacora                         : false,
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'dir_gral':
@@ -210,7 +213,11 @@
 
                     reportes_menu                             : true,
                     reportes_resumen_alumnos_cursos           : true,
-                    reportes_bitacora                         : true
+                    reportes_bitacora                         : true,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'dir_academica':
@@ -256,7 +263,11 @@
 
                     reportes_menu                             : true,
                     reportes_resumen_alumnos_cursos           : true,
-                    reportes_bitacora                         : true
+                    reportes_bitacora                         : true,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'programas':
@@ -302,7 +313,11 @@
 
                     reportes_menu                             : true,
                     reportes_resumen_alumnos_cursos           : true,
-                    reportes_bitacora                         : true
+                    reportes_bitacora                         : true,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'serv_escolar':
@@ -348,7 +363,11 @@
 
                     reportes_menu                             : true,
                     reportes_resumen_alumnos_cursos           : true,
-                    reportes_bitacora                         : true
+                    reportes_bitacora                         : true,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'dir_planeacion':
@@ -394,7 +413,11 @@
 
                     reportes_menu                             : true,
                     reportes_resumen_alumnos_cursos           : true,
-                    reportes_bitacora                         : true
+                    reportes_bitacora                         : true,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'dir_admin':
@@ -440,7 +463,11 @@
 
                     reportes_menu                             : true,
                     reportes_resumen_alumnos_cursos           : true,
-                    reportes_bitacora                         : true
+                    reportes_bitacora                         : true,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'dir_vincula':
@@ -486,7 +513,11 @@
 
                     reportes_menu                             : true,
                     reportes_resumen_alumnos_cursos           : true,
-                    reportes_bitacora                         : true
+                    reportes_bitacora                         : true,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'unidad_capacit':
@@ -532,7 +563,11 @@
 
                     reportes_menu                             : true,
                     reportes_resumen_alumnos_cursos           : true,
-                    reportes_bitacora                         : true
+                    reportes_bitacora                         : true,
+
+                    tutorial_menu                             : true,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'unidad_inscrip':
@@ -578,7 +613,11 @@
 
                     reportes_menu                             : false,
                     reportes_resumen_alumnos_cursos           : false,
-                    reportes_bitacora                         : false
+                    reportes_bitacora                         : false,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'unidad_admin':
@@ -624,7 +663,11 @@
 
                     reportes_menu                             : false,
                     reportes_resumen_alumnos_cursos           : false,
-                    reportes_bitacora                         : false
+                    reportes_bitacora                         : false,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'unidad_vincula':
@@ -670,7 +713,11 @@
 
                     reportes_menu                             : false,
                     reportes_resumen_alumnos_cursos           : false,
-                    reportes_bitacora                         : false
+                    reportes_bitacora                         : false,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
                 };
                 break;
             case 'certificacion':
@@ -716,7 +763,61 @@
 
                     reportes_menu                             : false,
                     reportes_resumen_alumnos_cursos           : false,
-                    reportes_bitacora                         : false
+                    reportes_bitacora                         : false,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : false,
+                    encuestas_participante_curso              : false
+                };
+                break;
+            case 'unidad_encuesta_alumno':
+                json_perfil_menu = {
+                    usuarios_menu                             : false,
+                    usuarios_sistema                          : false,
+
+                    catalogos_menu                            : false,
+                    catalogos_temas                           : false,
+                    catalogos_especialidades                  : false,
+                    catalogos_cursos                          : false,
+
+                    instructores_menu                         : false,
+                    instructores_catinstructores              : false,
+                    instructores_consinstructores             : false,
+
+                    plan_cursos_menu                          : false,
+                    plan_cursos_horas_unidad                  : false,
+                    plan_cursos_metas_capacit                 : false,
+                    plan_cursos_planeacion_ptc                : false,
+                    plan_cursos_revision_ptc                  : false,
+                    plan_cursos_resumen_ptc_unidades          : false,
+                    plan_cursos_ptc_autorizados               : false,
+
+                    pre_cursos_eval_menu                      : false,
+                    pre_cursos_eval_cursos_ptc                : false,
+                    pre_cursos_eval_cursos_fuera_ptc          : false,
+                    pre_cursos_eval_validacion_cursos         : false,
+                    pre_cursos_eval_roco_estandar             : false,
+                    pre_cursos_eval_validacion_roco_estandar  : false,
+
+                    cursos_eval_autorizados_menu              : false,
+                    cursos_eval_autorizados_cursos_vigentes   : false,
+                    cursos_eval_autorizados_cursos_historicos : false,
+                    cursos_eval_autorizados_eval_vigentes     : false,
+                    cursos_eval_autorizados_eval_historicos   : false,
+
+                    registro_capacitandos_menu                : false,
+
+                    inscrip_pagos_menu                        : false,
+                    inscrip_pagos_registro_pago_curso         : false,
+                    inscrip_pagos_registro_pago_eval          : false,
+
+                    reportes_menu                             : false,
+                    reportes_resumen_alumnos_cursos           : false,
+                    reportes_bitacora                         : false,
+
+                    tutorial_menu                             : false,
+                    encuestas_menu                            : true,
+                    encuestas_participante_curso              : true
                 };
                 break;
         } 

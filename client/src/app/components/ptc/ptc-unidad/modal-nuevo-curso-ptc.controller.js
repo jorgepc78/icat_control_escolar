@@ -227,6 +227,16 @@
                 }
                 else
                 {
+                            var fechaInicio = new Date(vm.registroEdicion.fechaInicio);
+                            fechaInicio.setHours(0);
+                            fechaInicio.setMinutes(0);
+                            fechaInicio.setSeconds(0);
+                            
+                            var fechaFin = new Date(vm.registroEdicion.fechaFin);
+                            fechaFin.setHours(0);
+                            fechaFin.setMinutes(0);
+                            fechaFin.setSeconds(0);
+
                             CursosPtc
                             .create({
                                 idPtc           : vm.registroEdicion.idPtc,
@@ -236,8 +246,8 @@
                                 capacitandos    : vm.registroEdicion.capacitandos,
                                 semanas         : vm.registroEdicion.semanas,
                                 total           : vm.registroEdicion.total,
-                                fechaInicio     : vm.registroEdicion.fechaInicio,
-                                fechaFin        : vm.registroEdicion.fechaFin,
+                                fechaInicio     : fechaInicio,
+                                fechaFin        : fechaFin,
                                 observaciones   : vm.registroEdicion.observaciones
                             })
                             .$promise

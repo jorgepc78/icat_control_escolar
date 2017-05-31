@@ -356,7 +356,27 @@
                             vm.tablaListaCursos.inicio = respuesta.inicio;
                             vm.tablaListaCursos.fin = respuesta.fin;
 
-                            vm.registrosCursosPTCs = respuesta.datos;
+                            //vm.registrosCursosPTCs = respuesta.datos;
+                            vm.registrosCursosPTCs = [];
+
+                            angular.forEach(respuesta.datos, function(registro) {
+                                  vm.registrosCursosPTCs.push({
+                                      idCursoPTC              : registro.idCursoPTC,
+                                      detalle_curso           : registro.detalle_curso,
+                                      horario                 : registro.horario,
+                                      aulaAsignada            : registro.aulaAsignada,
+                                      capacitandos            : registro.capacitandos,
+                                      semanas                 : registro.semanas,
+                                      total                   : registro.total,
+                                      fechaInicio             : registro.fechaInicio,
+                                      fechaFin                :registro.fechaFin,
+                                      instructores_propuestos : registro.instructores_propuestos,
+                                      observaciones           : registro.observaciones,
+                                      showChild               : false,
+                                      curso_oficial_registrado: registro.curso_oficial_registrado
+                                  });
+                            });
+
                         });
                   }
             }
@@ -389,9 +409,9 @@
                             vm.client = 2;
                             vm.icono = '';
 
-                            vm.registrosCursosPTCs = respuesta.datos;
+                            //vm.registrosCursosPTCs = respuesta.datos;
                             
-                            /*angular.forEach(respuesta.datos, function(registro) {
+                            angular.forEach(respuesta.datos, function(registro) {
                                   vm.registrosCursosPTCs.push({
                                       idCursoPTC              : registro.idCursoPTC,
                                       detalle_curso           : registro.detalle_curso,
@@ -407,7 +427,7 @@
                                       showChild               : false,
                                       curso_oficial_registrado: registro.curso_oficial_registrado
                                   });
-                            });*/
+                            });
 
                         }
                   });

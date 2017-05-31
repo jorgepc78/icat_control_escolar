@@ -28,10 +28,11 @@
             vm.generaListados             = generaListados;
 
 
-            vm.tabs = [{active: true}, {active: false}];
+            vm.tabs = [{active: true}, {active: false}, {active: false}];
             vm.total_pagados = 0;
             vm.mostrarbtnLimpiar = false;
             vm.cadena_buscar = '';
+            vm.existeEncuesta = false;
 
             vm.listaUnidades = [];
             vm.unidadSeleccionada = undefined;
@@ -50,6 +51,53 @@
               fila_seleccionada  : 0
             };
 
+            vm.pieOptions = {
+              series: {
+                pie: {
+                  show: true,
+                  radius: 40,
+                  label: {
+                      show: false
+                  }
+                }
+              },
+              legend: {
+                  show: true,
+                  margin: [20,0],
+                  position: 'ne',
+                  labelFormatter: labelFormatter
+              },
+              grid: {
+                margin: {
+                  top: 0,
+                  left: 15,
+                  bottom: 0,
+                  right: 0
+                }
+              }
+            };
+
+            var dataDefinicion = [
+              { color: '#00B015', label:'Sí', data: 0 },
+              { color: '#FF1A1A', label:'No', data: 0 }
+            ];
+
+            vm.encuesta_alumno = {
+                respondidas : 0,
+                preg1 : dataDefinicion,
+                preg2 : dataDefinicion,
+                preg3 : dataDefinicion,
+                preg4 : dataDefinicion,
+                preg5 : dataDefinicion,
+                preg6 : dataDefinicion,
+                preg7 : dataDefinicion,
+                preg8 : dataDefinicion,
+                preg9 : dataDefinicion,
+                preg10 : dataDefinicion,
+                preg11 : dataDefinicion,
+                preg12 : dataDefinicion,
+                preg13 : dataDefinicion
+            };
 
             inicia();
 
@@ -169,13 +217,16 @@
                                       relation: 'inscripcionesCursos',
                                       scope: {
                                           fields:['id','pagado','idAlumno','calificacion','numDocAcreditacion'],
-                                          include:{
-                                              relation: 'Capacitandos',
-                                              scope: {
-                                                  fields:['numControl','apellidoPaterno','apellidoMaterno','nombre','curp'],
-                                                  order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
-                                              }
-                                          }
+                                          include: [
+                                              {
+                                                  relation: 'Capacitandos',
+                                                  scope: {
+                                                      fields:['numControl','apellidoPaterno','apellidoMaterno','nombre','curp'],
+                                                      order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+                                                  }
+                                              },
+                                              'encuesta_satisfacion'
+                                          ]
                                       }
                                   }
                               ]
@@ -438,12 +489,138 @@
                   vm.client = 2;
                   vm.tablaListaCursos.fila_seleccionada = index;
                   vm.total_pagados = 0;
+                  vm.encuesta_alumno.respondidas = 0;
+
+                  var dataDefinicion = [];
+                  vm.existeEncuesta = false;
+
+                  var preg1_si = 0, preg1_no = 0;
+                  var preg2_si = 0, preg2_no = 0;
+                  var preg3_si = 0, preg3_no = 0;
+                  var preg4_si = 0, preg4_no = 0;
+                  var preg5_si = 0, preg5_no = 0;
+                  var preg6_si = 0, preg6_no = 0;
+                  var preg7_si = 0, preg7_no = 0;
+                  var preg8_si = 0, preg8_no = 0;
+                  var preg9_si = 0, preg9_no = 0;
+                  var preg10_si = 0, preg10_no = 0;
+                  var preg11_ex = 0, preg11_mb = 0, preg11_bi = 0, preg11_re = 0, preg11_ma = 0;
+                  var preg12_ex = 0, preg12_mb = 0, preg12_bi = 0, preg12_re = 0, preg12_ma = 0;
+                  var preg13_si = 0, preg13_no = 0;
+
                   angular.forEach(vm.cursoSeleccionado.inscripcionesCursos, function(inscripcion) {
-                    if(inscripcion.pagado > 0)
-                    vm.total_pagados++;
+                      if(inscripcion.pagado > 0)
+                      vm.total_pagados++;
+
+                      if(inscripcion.encuesta_satisfacion !== undefined)
+                      {
+                          vm.existeEncuesta = true;
+                          vm.encuesta_alumno.respondidas++;
+
+                          if(inscripcion.encuesta_satisfacion.preg1 == 's') preg1_si ++; else preg1_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg2 == 's') preg2_si ++; else preg2_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg3 == 's') preg3_si ++; else preg3_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg4 == 's') preg4_si ++; else preg4_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg5 == 's') preg5_si ++; else preg5_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg6 == 's') preg6_si ++; else preg6_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg7 == 's') preg7_si ++; else preg7_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg8 == 's') preg8_si ++; else preg8_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg9 == 's') preg9_si ++; else preg8_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg10 == 's') preg10_si ++; else preg10_no ++;
+                          if(inscripcion.encuesta_satisfacion.preg13 == 's') preg13_si ++; else preg13_no ++;
+                          
+                          if(inscripcion.encuesta_satisfacion.preg11_ == 'e')
+                              preg11_ex ++;
+                          else if(inscripcion.encuesta_satisfacion.preg11 == 'm')
+                              preg11_mb ++;
+                          else if(inscripcion.encuesta_satisfacion.preg11 == 'b')
+                              preg11_bi ++;
+                          else if(inscripcion.encuesta_satisfacion.preg11 == 'r')
+                              preg11_re ++;
+                          else if(inscripcion.encuesta_satisfacion.preg11 == 'f')
+                              preg11_ma ++;
+
+                          if(inscripcion.encuesta_satisfacion.preg12 == 'e')
+                              preg12_ex ++;
+                          else if(inscripcion.encuesta_satisfacion.preg12 == 'm')
+                              preg12_mb ++;
+                          else if(inscripcion.encuesta_satisfacion.preg12 == 'b')
+                              preg12_bi ++;
+                          else if(inscripcion.encuesta_satisfacion.preg12 == 'r')
+                              preg12_re ++;
+                          else if(inscripcion.encuesta_satisfacion.preg12 == 'f')
+                              preg12_ma ++;
+
+                      }
                   });
 
-                  //vm.tabs = [{active: true}, {active: false}]; 
+                if(vm.existeEncuesta == false)
+                  vm.tabs = [{active: true}, {active: false}, {active: false}]; 
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg1_si }, { color: '#FF1A1A', label:'No', data: preg1_no }
+                        ];
+                        vm.encuesta_alumno.preg1 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg2_si }, { color: '#FF1A1A', label:'No', data: preg2_no }
+                        ];
+                        vm.encuesta_alumno.preg2 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg3_si }, { color: '#FF1A1A', label:'No', data: preg3_no }
+                        ];
+                        vm.encuesta_alumno.preg3 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg4_si }, { color: '#FF1A1A', label:'No', data: preg4_no }
+                        ];
+                        vm.encuesta_alumno.preg4 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg5_si }, { color: '#FF1A1A', label:'No', data: preg5_no }
+                        ];
+                        vm.encuesta_alumno.preg5 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg6_si }, { color: '#FF1A1A', label:'No', data: preg6_no }
+                        ];
+                        vm.encuesta_alumno.preg6 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg7_si }, { color: '#FF1A1A', label:'No', data: preg7_no }
+                        ];
+                        vm.encuesta_alumno.preg7 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg8_si }, { color: '#FF1A1A', label:'No', data: preg8_no }
+                        ];
+                        vm.encuesta_alumno.preg8 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg9_si }, { color: '#FF1A1A', label:'No', data: preg9_no }
+                        ];
+                        vm.encuesta_alumno.preg9 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg10_si }, { color: '#FF1A1A', label:'No', data: preg10_no }
+                        ];
+                        vm.encuesta_alumno.preg10 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#00B015', label:'Sí', data: preg13_si }, { color: '#FF1A1A', label:'No', data: preg13_no }
+                        ];
+                        vm.encuesta_alumno.preg13 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#077C15', label:'Excelentes', data: preg11_ex }, { color: '#00C217', label:'Muy bien', data: preg11_mb }, { color: '#F38F19', label:'Bien', data: preg11_bi }, { color: '#F3E03E', label:'Regulares', data: preg11_re }, { color: '#FF1A1A', label:'Malas', data: preg11_ma }
+                        ];
+                        vm.encuesta_alumno.preg11 = dataDefinicion;
+
+                        dataDefinicion = [
+                          { color: '#077C15', label:'Excelente', data: preg12_ex }, { color: '#00C217', label:'Muy bien', data: preg12_mb }, { color: '#F38F19', label:'Bueno', data: preg12_bi }, { color: '#F3E03E', label:'Regular', data: preg12_re }, { color: '#FF1A1A', label:'Malo', data: preg12_ma }
+                        ];
+                        vm.encuesta_alumno.preg12 = dataDefinicion;
             };
 
 
@@ -1159,6 +1336,10 @@
                   return rp;
             }
 
+
+            function labelFormatter(label, series) {
+              return "<div style='font-size:8pt; text-align:left; padding:2px; color:#000;'>" + label + " " + (isNaN(series.percent) ? 0 : Math.round(series.percent) ) + "%</div>";
+            }
 
 
             function formateaListado() {

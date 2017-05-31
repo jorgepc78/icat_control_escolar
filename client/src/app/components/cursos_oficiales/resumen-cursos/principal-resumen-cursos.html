@@ -182,43 +182,141 @@
                                                                             <table class="table" style="margin-bottom: 0;">
                                                                                 <thead>
                                                                                 <tr>
-                                                                                    <th style="width: 30px;"></th>
-                                                                                    <th style="width: 120px;">N&uacute;m. Control</th>
-                                                                                    <th style="width: 270px;">Nombre</th>
-                                                                                    <th ng-show="(vm.cursoSeleccionado.estatus < 5)">Pago</th>
-                                                                                    <th ng-show="(vm.cursoSeleccionado.estatus >= 5)">Calif.</th>
+                                                                                    <th style="width: 3%;"></th>
+                                                                                    <th style="width: 27%;">N&uacute;m. Control</th>
+                                                                                    <th style="width: 60%;">Nombre</th>
+                                                                                    <th style="width: 10%;" ng-show="(vm.cursoSeleccionado.estatus < 5)">Pago</th>
+                                                                                    <th style="width: 10%;" ng-show="(vm.cursoSeleccionado.estatus >= 5)">Calif.</th>
                                                                                 </tr>
                                                                                 </thead>
                                                                             </table>
-                                                                            <div  style="height: 380px;">
+                                                                            <div style="height: 380px;">
                                                                                     <div class="full-height-scroll" full-scroll>
                                                                                         <table class="table" ng-show="(vm.cursoSeleccionado.inscripcionesCursos.length == 0)">
                                                                                             <tr>
-                                                                                                <td style="width: 30px;"></td>
-                                                                                                <td style="width: 120px;"></td>
-                                                                                                <td style="width: 270px;">No hay ning&uacute;n inscrito</td>
+                                                                                                <td style="width: 3%;"></td>
+                                                                                                <td style="width: 27%;"></td>
+                                                                                                <td style="width: 60%;">No hay ning&uacute;n inscrito</td>
                                                                                                 <td></td>
                                                                                             </tr>
                                                                                         </table>
 
                                                                                         <table class="table table-striped" ng-show="(vm.cursoSeleccionado.inscripcionesCursos.length > 0)">
                                                                                             <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesCursos">
-                                                                                                <td> {{$index + 1}}</td>
-                                                                                                <td> {{inscripcion.Capacitandos.numControl}}</td>
-                                                                                                <td> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
-                                                                                                <td class="client-status" ng-switch on="inscripcion.pagado" ng-show="(vm.cursoSeleccionado.estatus < 5)">
+                                                                                                <td style="width: 3%;"> {{$index + 1}}</td>
+                                                                                                <td style="width: 27%;"> {{inscripcion.Capacitandos.numControl}}</td>
+                                                                                                <td style="width: 60%;"> {{inscripcion.Capacitandos.apellidoPaterno + ' ' + inscripcion.Capacitandos.apellidoMaterno + ' ' + inscripcion.Capacitandos.nombre}}</td>
+                                                                                                <td style="width: 10%;" class="client-status" ng-switch on="inscripcion.pagado" ng-show="(vm.cursoSeleccionado.estatus < 5)">
                                                                                                     <span ng-switch-when="0" class="label label-warning texto-estatus-ptc">Pendiente</span>
                                                                                                     <span ng-switch-when="1" class="label label-success texto-estatus-ptc">Pagado</span>
                                                                                                     <span ng-switch-when="2" class="label label-info texto-estatus-ptc">Exento al 100%</span>
                                                                                                     <span ng-switch-when="3" class="label label-primary texto-estatus-ptc">Exento con porcentaje</span>
                                                                                                 </td>
-                                                                                                <td ng-show="(vm.cursoSeleccionado.estatus >= 5)"> {{inscripcion.calificacion}}</td>
+                                                                                                <td style="width: 10%;" ng-show="(vm.cursoSeleccionado.estatus >= 5)"> {{inscripcion.calificacion}}</td>
                                                                                             </tr>
                                                                                         </table>
                                                                                         
                                                                                     </div>
                                                                             </div>
 
+                                                                    </tab>
+                                                                    <tab heading="Encuesta de satisfacci&oacute;n" ng-init="true" active="vm.tabs[2].active" ng-show="vm.existeEncuesta">
+
+                                                                            <ul class="list-group clear-list" style="margin-bottom: 2px;">
+                                                                                <li class="list-group-item fist-item">
+                                                                                    <span class="pull-right"> Encuestas respondidas: <strong>{{vm.encuesta_alumno.respondidas}}</strong></span>
+                                                                                    Total capacitandos: <strong>{{vm.cursoSeleccionado.inscripcionesCursos.length}}</strong>
+                                                                                </li>
+                                                                            </ul>
+                                                                            <br>
+                                                                            <div style="height: 450px;">
+                                                                                <div class="full-height-scroll" full-scroll>
+
+                                                                                        <ul class="list-group clear-list">
+
+                                                                                            <li class="list-group-item fist-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p  class="row-encuesta-pregunta">1. ¿Los temas del curso se dieron de manera adecuada?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg1" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">2. ¿El instructor fue respetuoso con usted y con el grupo?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg2" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">3. ¿El instructor motiv&oacute; su inter&eacute;s en cada uno de los temas?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg3" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">4. ¿El instructor resolvi&oacute; las dudas que le presentaron?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg4" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">5. ¿El instructor realiz&oacute; las pr&aacute;cticas de lo visto en clase?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg5" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">6. ¿El instructor recurri&oacute; al uso material didáctico de acuerdo al curso?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg6" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">7. ¿El instructor aplic&oacute; evaluaciones?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg7" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">8. ¿Las sesiones se llevaron a cabo en los horarios y las fechas que se le indicaron?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg8" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">9. El equipo y herramientas, ¿funcionaron bien, durante todo el curso?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg9" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">10. ¿Los temas del curso le ayudaron a tener un mejor trabajo?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg10" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">11. ¿Como considera el estado de las instalaciones?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg11" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">12. En general, ¿El curso le pareci&oacute;?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg12" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+                                                                                            <li class="list-group-item row-encuesta">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-7"><p class="row-encuesta-pregunta">13. ¿Volver&iacute;a a tomar cursos en el ICATQR?</p></div>
+                                                                                                    <div class="col-md-5 text-center"> <div class="row-encuesta-grafico"><div flot dataset="vm.encuesta_alumno.preg13" options="vm.pieOptions"></div></div> </div>
+                                                                                                </div>
+                                                                                            </li>
+
+                                                                                        </ul>
+
+                                                                                </div>
+                                                                            </div>
                                                                     </tab>
                                                                 </tabset>
                                                                 <div class="row">

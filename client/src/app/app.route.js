@@ -257,7 +257,7 @@
                 authenticate: true
             })
 
-            /*** seccion de la inscripcion a un curso y registro del pago ***/
+            /*** seccion de reportes ***/
             .state('reportes', {
                 abstract: true,
                 url: '/reportes',
@@ -276,6 +276,41 @@
                 controller: 'ResumenGeneralController',
                 controllerAs: 'vm',
                 authenticate: true
+            })
+
+            /*** seccion de videos tutoriales ***/
+            .state('tutorial', {
+                abstract: true,
+                url: '/tutorial',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('tutorial.ver_video', {
+                url: '/ver_video/:id_video',
+                templateUrl: 'app/components/tutorial/tutorial.html',
+                controller: 'TutorialController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+
+            /*** seccion de encuestas ***/
+            .state('encuestas', {
+                abstract: true,
+                url: '/encuestas',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('encuestas.participante_curso', {
+                url: '/participante_curso',
+                templateUrl: 'app/components/encuestas/participante-curso.html',
+                controller: 'ParticipanteCursoController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+
+            .state('encuesta_participante_curso', {
+                url: '/encuesta_participante_curso/:idInscripcion',
+                templateUrl: 'app/components/encuestas/participante-curso.html',
+                controller: 'ParticipanteCursoController',
+                controllerAs: 'vm'
             })
     }
 

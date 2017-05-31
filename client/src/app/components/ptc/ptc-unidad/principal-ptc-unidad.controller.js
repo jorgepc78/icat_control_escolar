@@ -391,67 +391,117 @@
 
             function enviaRevisionPTC(RegistroSeleccionado) {
 
-                  var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
-                  swal({
-                    title: "Confirmar",
-                    html: 'El PTC del Trimestre <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; enviado a su revisi&oacute;n, ¿Continuar?',
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#9a0000",
-                    confirmButtonText: "Aceptar",
-                    cancelButtonText: "Cancelar",
-                    closeOnConfirm: false,
-                    closeOnCancel: true
-                  }, function(){
-                          swal.disableButtons();
-
-                            ProgTrimCursos.prototype$updateAttributes(
+                  CursosPtc.find({
+                    filter: {
+                        where: {idPtc: vm.RegistroPTCSeleccionado.idPtc},
+                        fields: ['idCursoPTC','idCatalogoCurso'],
+                        order: ['fechaInicio ASC'],
+                        include: [
                             {
-                                id: RegistroSeleccionado.idPtc
-                            },{
-                                estatus: 1,
-                                fechaEnvioRevision: Date()
-                            })
-                            .$promise
-                            .then(function(respuesta) {
+                                relation: 'detalle_curso',
+                                scope: {
+                                  fields: ['nombreCurso']
+                                }
+                            },
+                            {
+                                relation: 'instructores_propuestos',
+                                scope: {
+                                  fields: ['idInstructor']
+                                }
+                            }
+                        ]
+                    }
+                  })
+                  .$promise
+                  .then(function(listaCursos) {
 
-                                  vm.RegistroPTCSeleccionado.estatus            = respuesta.estatus;
-                                  vm.RegistroPTCSeleccionado.fechaEnvioRevision = respuesta.fechaEnvioRevision;
+                        var faltaInstructores = false;
+                        var i = 0;
 
-                                  ControlProcesos
-                                  .create({
-                                      proceso              : 'PTC',
-                                      accion               : 'ENVIO REVISION PTC',
-                                      idDocumento          : RegistroSeleccionado.idPtc,
-                                      idUsuario            : $scope.currentUser.id_usuario,
-                                      idUnidadAdmtva       : $scope.currentUser.unidad_pertenece_id,
-                                      idUnidadAdmtvaRecibe : 1
-                                  })
-                                  .$promise
-                                  .then(function(resp) {
+                        for (i = 0; i < listaCursos.length; i++) {
+                          if (listaCursos[i].instructores_propuestos.length == 0) {
+                            faltaInstructores = true;
+                            break;
+                          }
+                        }
+                        
+                        if(faltaInstructores == true)
+                        {
+                              swal({
+                                title: 'Datos incompletos',
+                                html: 'El curso <strong>'+listaCursos[i].detalle_curso.nombreCurso+'</strong> no tiene instructores propuestos',
+                                type: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: "#9a0000",
+                                confirmButtonText: "Aceptar"
+                              });
+                        }
+                        else
+                        {
+                              var trimestres = ['PRIMERO','SEGUNDO','TERCERO','CUARTO'];
+                              swal({
+                                title: "Confirmar",
+                                html: 'El PTC del Trimestre <strong>'+ trimestres[(RegistroSeleccionado.trimestre-1)] +'</strong> del a&ntilde;o <strong>'+ RegistroSeleccionado.anio +'</strong> ser&aacute; enviado a su revisi&oacute;n, ¿Continuar?',
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#9a0000",
+                                confirmButtonText: "Aceptar",
+                                cancelButtonText: "Cancelar",
+                                closeOnConfirm: false,
+                                closeOnCancel: true
+                              }, function(){
+                                      swal.disableButtons();
 
-                                        ControlProcesos.findById({ 
-                                            id: resp.id,
-                                            filter: {
-                                              fields : ['identificador']
-                                            }
+                                        ProgTrimCursos.prototype$updateAttributes(
+                                        {
+                                            id: RegistroSeleccionado.idPtc
+                                        },{
+                                            estatus: 1,
+                                            fechaEnvioRevision: Date()
                                         })
                                         .$promise
-                                        .then(function(resp_control) {
+                                        .then(function(respuesta) {
 
-                                              swal({
-                                                title: 'PTC enviado',
-                                                html: 'se env&iacute;o el PTC a revisi&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
-                                                type: 'success',
-                                                showCancelButton: false,
-                                                confirmButtonColor: "#9a0000",
-                                                confirmButtonText: "Aceptar"
+                                              vm.RegistroPTCSeleccionado.estatus            = respuesta.estatus;
+                                              vm.RegistroPTCSeleccionado.fechaEnvioRevision = respuesta.fechaEnvioRevision;
+
+                                              ControlProcesos
+                                              .create({
+                                                  proceso              : 'PTC',
+                                                  accion               : 'ENVIO REVISION PTC',
+                                                  idDocumento          : RegistroSeleccionado.idPtc,
+                                                  idUsuario            : $scope.currentUser.id_usuario,
+                                                  idUnidadAdmtva       : $scope.currentUser.unidad_pertenece_id,
+                                                  idUnidadAdmtvaRecibe : 1
+                                              })
+                                              .$promise
+                                              .then(function(resp) {
+
+                                                    ControlProcesos.findById({ 
+                                                        id: resp.id,
+                                                        filter: {
+                                                          fields : ['identificador']
+                                                        }
+                                                    })
+                                                    .$promise
+                                                    .then(function(resp_control) {
+
+                                                          swal({
+                                                            title: 'PTC enviado',
+                                                            html: 'se env&iacute;o el PTC a revisi&oacute;n y se gener&oacute; el identificador del proceso <br><strong style="font-size: 13px;">' + resp_control.identificador + '</strong>',
+                                                            type: 'success',
+                                                            showCancelButton: false,
+                                                            confirmButtonColor: "#9a0000",
+                                                            confirmButtonText: "Aceptar"
+                                                          });
+
+                                                    });
                                               });
 
                                         });
-                                  });
 
-                            });
+                              });
+                        }
 
                   });
 

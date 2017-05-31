@@ -14,6 +14,9 @@
             vm.guardar = guardar;
 
             vm.habilitar = false;
+
+            vm.nombre_unidad = registroEditar.nombre;
+
             if(registroEditar.metas_asignadas.length == 0)
             {
                 var fechaHoy = new Date();

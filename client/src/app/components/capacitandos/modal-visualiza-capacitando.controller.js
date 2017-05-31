@@ -11,7 +11,9 @@
 
             var vm = this;
 
-            vm.soloLectura = true;            
+            vm.soloLectura = true;
+            vm.mostrarNumControl = true;
+            vm.soloLecturaNumControl = true;
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
             vm.mensaje = '';

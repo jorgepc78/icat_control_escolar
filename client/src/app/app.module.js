@@ -18,6 +18,8 @@
         'angular-flot',
         'ui.select',
         'ngSanitize',
+        'com.2fdevs.videogular',
+        'com.2fdevs.videogular.plugins.controls',
     	'templates'
     ]);
 })();

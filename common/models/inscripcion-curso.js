@@ -1,6 +1,7 @@
 module.exports = function(InscripcionCurso) {
 
-
+		//Activar cuando las unidades estén capturando el tercer trimestre
+		/*
 		InscripcionCurso.observe('after save', function(ctx, next) {
 
 			    var CursosOficiales = InscripcionCurso.app.models.CursosOficiales;
@@ -64,5 +65,5 @@ module.exports = function(InscripcionCurso) {
 
 					next();
 		});
-
+*/
 };

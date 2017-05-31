@@ -206,6 +206,17 @@
                 }
                 else
                 {
+
+                        var fechaInicio = new Date(vm.registroEdicion.fechaInicio);
+                        fechaInicio.setHours(0);
+                        fechaInicio.setMinutes(0);
+                        fechaInicio.setSeconds(0);
+                        
+                        var fechaFin = new Date(vm.registroEdicion.fechaFin);
+                        fechaFin.setHours(0);
+                        fechaFin.setMinutes(0);
+                        fechaFin.setSeconds(0);
+
                         CursosOficiales
                         .create({
                             idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
@@ -225,8 +236,8 @@
                             cupoMaximo            : vm.registroEdicion.capacitandos,
                             minRequeridoInscritos : vm.registroEdicion.min_requerido_inscritos,
                             minRequeridoPago      : vm.registroEdicion.min_requerido_pago,
-                            fechaInicio           : vm.registroEdicion.fechaInicio,
-                            fechaFin              : vm.registroEdicion.fechaFin,
+                            fechaInicio           : fechaInicio,
+                            fechaFin              : fechaFin,
                             publico               : vm.registroEdicion.publico,
 
                             idInstructor          : vm.instructorSeleccionado.idInstructor,

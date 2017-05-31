@@ -15,6 +15,8 @@
 
             vm.habilitar = true;
             
+            vm.nombre_unidad = registroEditar.nombre;
+            
             vm.registroEdicion = {
                 id             : registroEditar.metas_asignadas[0].id,
                 anio           : registroEditar.metas_asignadas[0].anio.toString(),

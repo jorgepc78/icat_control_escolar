@@ -78,7 +78,7 @@
                   vm.tablaListaCursos.filtro_datos = {
                           filter: {
                               where: vm.tablaListaCursos.condicion,
-                              order: ['fechaInicio ASC'],
+                              order: ['fechaInicio ASC', 'idCatalogoCurso ASC'],
                               limit: vm.tablaListaCursos.registrosPorPagina,
                               skip: vm.tablaListaCursos.paginaActual - 1,
                               include: [

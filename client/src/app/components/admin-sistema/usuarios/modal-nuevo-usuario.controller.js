@@ -103,7 +103,7 @@
                 if(vm.unidadSelecccionada.idUnidadAdmtva == 1)
                     var condicion = {name: {inq: ["dir_gral", "dir_academica","programas","serv_escolar","dir_planeacion","dir_admin","dir_vincula","certificacion"]}};
                 else
-                    var condicion = {name: {inq: ["unidad_capacit", "unidad_inscrip","unidad_admin","unidad_vincula"]}};
+                    var condicion = {name: {inq: ["unidad_capacit", "unidad_inscrip","unidad_admin","unidad_vincula","unidad_encuesta_alumno"]}};
 
                 Role.find({
                     filter: {

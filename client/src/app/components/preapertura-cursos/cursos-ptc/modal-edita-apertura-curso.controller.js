@@ -11,6 +11,15 @@
 
             var vm = this;
 
+            vm.sort_by = sort_by;
+            vm.openCalendar1 = openCalendar1;
+            vm.openCalendar2 = openCalendar2;
+
+            //vm.agregaInstructor = agregaInstructor;
+            //vm.eliminaInstructor = eliminaInstructor;
+            vm.guardar = guardar;
+
+
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
 
@@ -19,7 +28,7 @@
            
             vm.instructorSeleccionado = {};
             vm.radioidInstructorSeleccionado = 0;
-            vm.listaInstructores = [];
+            //vm.listaInstructores = [];
            
 
             vm.registroEdicion = {
@@ -51,8 +60,6 @@
                     instructores_propuestos : []
             };
 
-            vm.radioidInstructorSeleccionado = vm.registroEdicion.idInstructor;
-
             angular.forEach(registroEditar.instructores_propuestos, function(record) {
                   vm.registroEdicion.instructores_propuestos.push({
                       idInstructor    : record.idInstructor,
@@ -64,19 +71,14 @@
                   });
             });
 
-            vm.sort_by = sort_by;
-            vm.openCalendar1 = openCalendar1;
-            vm.openCalendar2 = openCalendar2;
-
-            vm.agregaInstructor = agregaInstructor;
-            vm.eliminaInstructor = eliminaInstructor;
-            vm.guardar = guardar;
+            vm.radioidInstructorSeleccionado = vm.registroEdicion.idInstructor;
 
             inicia();
 
+
             function inicia() {
 
-                CatalogoCursos.instructores_habilitados({
+                /*CatalogoCursos.instructores_habilitados({
                         id: registroEditar.idCatalogoCurso,
                         filter: {
                             where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
@@ -109,7 +111,7 @@
                                 vm.listaInstructores.splice(index, 1);
                     });
 
-                });
+                });*/
     
                 CatalogoLocalidades.find({
                     filter: {
@@ -159,7 +161,7 @@
             };
 
 
-            function agregaInstructor() {
+            /*function agregaInstructor() {
 
                 if(vm.listaInstructores.length > 0)
                 {
@@ -183,10 +185,10 @@
                         });
                         vm.instructorSeleccionado = {};
                 }
-            };
+            };*/
 
 
-            function eliminaInstructor(indice) {
+            /*function eliminaInstructor(indice) {
 
                 vm.listaInstructores.push({
                     idInstructor    : vm.registroEdicion.instructores_propuestos[indice].idInstructor,
@@ -198,7 +200,7 @@
                 
                 vm.registroEdicion.instructores_propuestos.splice(indice, 1);
                 vm.instructorSeleccionado = {};
-            };
+            };*/
 
 
             function guardar() {
@@ -231,6 +233,16 @@
                         vm.registroEdicion.idInstructor     = vm.registroEdicion.instructores_propuestos[index].idInstructor;
                         vm.registroEdicion.nombreInstructor = vm.registroEdicion.instructores_propuestos[index].nombre_completo;
 
+                        var fechaInicio = new Date(vm.registroEdicion.fechaInicio);
+                        fechaInicio.setHours(0);
+                        fechaInicio.setMinutes(0);
+                        fechaInicio.setSeconds(0);
+                        
+                        var fechaFin = new Date(vm.registroEdicion.fechaFin);
+                        fechaFin.setHours(0);
+                        fechaFin.setMinutes(0);
+                        fechaFin.setSeconds(0);
+
                         CursosOficiales.prototype$updateAttributes(
                         {
                             id: vm.registroEdicion.idCurso
@@ -251,8 +263,8 @@
                             cupoMaximo            : vm.registroEdicion.capacitandos,
                             minRequeridoInscritos : vm.registroEdicion.min_requerido_inscritos,
                             minRequeridoPago      : vm.registroEdicion.min_requerido_pago,
-                            fechaInicio           : vm.registroEdicion.fechaInicio,
-                            fechaFin              : vm.registroEdicion.fechaFin,
+                            fechaInicio           : fechaInicio,
+                            fechaFin              : fechaFin,
 
                             idInstructor          : vm.registroEdicion.instructores_propuestos[index].idInstructor,
                             curpInstructor        : vm.registroEdicion.instructores_propuestos[index].curp,

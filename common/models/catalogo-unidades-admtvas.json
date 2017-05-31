@@ -98,10 +98,10 @@
   },
   "acls": [
     {
-      "accessType": "WRITE",
+      "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
     },
     {
       "accessType": "READ",

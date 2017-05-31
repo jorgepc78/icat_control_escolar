@@ -1,5 +1,7 @@
 module.exports = function(Inscripcionevaluaciones) {
 
+    //Activar cuando las unidades estén capturando el tercer trimestre
+    /*
     Inscripcionevaluaciones.observe('after save', function(ctx, next) {
 
           var Evaluacion = Inscripcionevaluaciones.app.models.Evaluacion;
@@ -63,5 +65,5 @@ module.exports = function(Inscripcionevaluaciones) {
 
           next();
     });
-
+*/
 };

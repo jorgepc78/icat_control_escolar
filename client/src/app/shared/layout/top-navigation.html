@@ -139,7 +139,6 @@
                 <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.reportes_resumen_alumnos_cursos || currentUser.perfil_menu.reportes_bitacora)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Reportes <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
-                        </li>
                         <li ui-sref-active="active" ng-if="currentUser.perfil_menu.reportes_resumen_alumnos_cursos">
                             <a ui-sref="reportes.resumen_general">    <span class="nav-label"> Resumen de alumnos y cursos </span></a>
                         </li>
@@ -148,15 +147,51 @@
                         </li>
                     </ul>
                 </li>
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.tutorial_menu)">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Tutorial <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu" style="left: -100px;">
+                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id > 1)">
+                            <a ui-sref="tutorial.ver_video({ id_video: 1 })"> <span class="nav-label">1.- Modificaci&oacute;n y env&iacute;o del PTC </span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id > 1)">
+                            <a ui-sref="tutorial.ver_video({ id_video: 2 })"> <span class="nav-label">2.- Preapertura de un curso programado en el PTC </span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id > 1)">
+                            <a ui-sref="tutorial.ver_video({ id_video: 3 })"> <span class="nav-label">3.- Preapertura de un curso fuera del PTC </span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id > 1)">
+                            <a ui-sref="tutorial.ver_video({ id_video: 4 })"> <span class="nav-label">4.- Administración de cursos vigentes </span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id > 1)">
+                            <a ui-sref="tutorial.ver_video({ id_video: 5 })"> <span class="nav-label">5.- Registro de inscripción y pagos </span></a>
+                        </li>
+                        <li ui-sref-active="active" ng-if="(currentUser.unidad_pertenece_id > 1)">
+                            <a ui-sref="tutorial.ver_video({ id_video: 6 })"> <span class="nav-label">6.- Conclusión y cierre del curso </span></a>
+                        </li>
+
+                        <li style="border: 1px solid #e7eaec"></li>
+                        <li ui-sref-active="active">
+                            <a href="manual_usuario_unidad_control_escolar.pdf" target="_blank"><span class="nav-label">Manual del sistema </span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.encuestas_menu)">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Encuestas de satisfacci&oacute;n <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="(currentUser.perfil_menu.encuestas_participante_curso)">
+                            <a ui-sref="encuestas.participante_curso"> <span class="nav-label">Encuesta para el participante </span></a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
                     <a ui-sref="logout">Salir <i class="fa fa-sign-out"></i></a>
                 </li>
-                <li ng-if="(currentUser.unidad_pertenece_id > 1)" tooltip-placement="bottom" tooltip="Manual del sistema">
+                <!-- <li ng-if="(currentUser.unidad_pertenece_id > 1)" tooltip-placement="bottom" tooltip="Manual del sistema">
                     <a href="manual_usuario_unidad_control_escolar.pdf" target="_blank" style="padding: 14px 2px;"><i class="fa fa-question-circle fa-lg"></i></a>
-                    <!-- <a href="manual_usuario_unidad_control_escolar.pdf" target="_blank"><button type="button" class="btn btn-warning btn-sm" tooltip-placement="bottom" tooltip="Manual del sistema"><i class="fa fa-question-circle fa-lg"></i></button></a> -->
-                </li>
+                    <a href="manual_usuario_unidad_control_escolar.pdf" target="_blank"><button type="button" class="btn btn-warning btn-sm" tooltip-placement="bottom" tooltip="Manual del sistema"><i class="fa fa-question-circle fa-lg"></i></button></a>
+                </li> -->
             </ul>
         </div>
     </nav>

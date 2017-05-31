@@ -26839,6 +26839,30 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion() instead.
+            "prototype$__get__encuesta_satisfacion": {
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "GET",
+            },
+
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion.create() instead.
+            "prototype$__create__encuesta_satisfacion": {
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "POST",
+            },
+
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion.update() instead.
+            "prototype$__update__encuesta_satisfacion": {
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion.destroy() instead.
+            "prototype$__destroy__encuesta_satisfacion": {
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "DELETE",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.InscripcionCurso#create
@@ -27715,6 +27739,201 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.CursosOficiales = function() {
           var TargetResource = $injector.get("CursosOficiales");
           var action = TargetResource["::get::InscripcionCurso::CursosOficiales"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.InscripcionCurso.encuesta_satisfacion
+     * @header lbServices.InscripcionCurso.encuesta_satisfacion
+     * @object
+     * @description
+     *
+     * The object `InscripcionCurso.encuesta_satisfacion` groups methods
+     * manipulating `ParticipanteCurso` instances related to `InscripcionCurso`.
+     *
+     * Call {@link lbServices.InscripcionCurso#encuesta_satisfacion InscripcionCurso.encuesta_satisfacion()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InscripcionCurso#encuesta_satisfacion
+             * @methodOf lbServices.InscripcionCurso
+             *
+             * @description
+             *
+             * Fetches hasOne relation encuesta_satisfacion.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R.encuesta_satisfacion = function() {
+          var TargetResource = $injector.get("ParticipanteCurso");
+          var action = TargetResource["::get::InscripcionCurso::encuesta_satisfacion"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InscripcionCurso.encuesta_satisfacion#create
+             * @methodOf lbServices.InscripcionCurso.encuesta_satisfacion
+             *
+             * @description
+             *
+             * Creates a new instance in encuesta_satisfacion of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R.encuesta_satisfacion.create = function() {
+          var TargetResource = $injector.get("ParticipanteCurso");
+          var action = TargetResource["::create::InscripcionCurso::encuesta_satisfacion"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InscripcionCurso.encuesta_satisfacion#createMany
+             * @methodOf lbServices.InscripcionCurso.encuesta_satisfacion
+             *
+             * @description
+             *
+             * Creates a new instance in encuesta_satisfacion of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R.encuesta_satisfacion.createMany = function() {
+          var TargetResource = $injector.get("ParticipanteCurso");
+          var action = TargetResource["::createMany::InscripcionCurso::encuesta_satisfacion"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InscripcionCurso.encuesta_satisfacion#destroy
+             * @methodOf lbServices.InscripcionCurso.encuesta_satisfacion
+             *
+             * @description
+             *
+             * Deletes encuesta_satisfacion of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.encuesta_satisfacion.destroy = function() {
+          var TargetResource = $injector.get("ParticipanteCurso");
+          var action = TargetResource["::destroy::InscripcionCurso::encuesta_satisfacion"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.InscripcionCurso.encuesta_satisfacion#update
+             * @methodOf lbServices.InscripcionCurso.encuesta_satisfacion
+             *
+             * @description
+             *
+             * Update encuesta_satisfacion of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R.encuesta_satisfacion.update = function() {
+          var TargetResource = $injector.get("ParticipanteCurso");
+          var action = TargetResource["::update::InscripcionCurso::encuesta_satisfacion"];
           return action.apply(R, arguments);
         };
 
@@ -41989,6 +42208,65 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/MatriculaXUnidadTipos/:id",
               method: "PATCH",
             },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.findById() instead.
+            "::findById::MatriculaCorte::estadistica_matricula": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.destroyById() instead.
+            "::destroyById::MatriculaCorte::estadistica_matricula": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.updateById() instead.
+            "::updateById::MatriculaCorte::estadistica_matricula": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula() instead.
+            "::get::MatriculaCorte::estadistica_matricula": {
+              isArray: true,
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula",
+              method: "GET",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.create() instead.
+            "::create::MatriculaCorte::estadistica_matricula": {
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula",
+              method: "POST",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.createMany() instead.
+            "::createMany::MatriculaCorte::estadistica_matricula": {
+              isArray: true,
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula",
+              method: "POST",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.destroyAll() instead.
+            "::delete::MatriculaCorte::estadistica_matricula": {
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.count() instead.
+            "::count::MatriculaCorte::estadistica_matricula": {
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula/count",
+              method: "GET",
+            },
           }
         );
 
@@ -42071,6 +42349,1079 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.unidad_pertenece = function() {
           var TargetResource = $injector.get("CatalogoUnidadesAdmtvas");
           var action = TargetResource["::get::MatriculaXUnidadTipo::unidad_pertenece"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.MatriculaCorte
+ * @header lbServices.MatriculaCorte
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `MatriculaCorte` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "MatriculaCorte",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/MatriculaCortes/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.findById() instead.
+            "prototype$__findById__estadistica_matricula": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.destroyById() instead.
+            "prototype$__destroyById__estadistica_matricula": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.updateById() instead.
+            "prototype$__updateById__estadistica_matricula": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula() instead.
+            "prototype$__get__estadistica_matricula": {
+              isArray: true,
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula",
+              method: "GET",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.create() instead.
+            "prototype$__create__estadistica_matricula": {
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula",
+              method: "POST",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.destroyAll() instead.
+            "prototype$__delete__estadistica_matricula": {
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use MatriculaCorte.estadistica_matricula.count() instead.
+            "prototype$__count__estadistica_matricula": {
+              url: urlBase + "/MatriculaCortes/:id/estadistica_matricula/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#create
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/MatriculaCortes",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#createMany
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/MatriculaCortes",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#upsert
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/MatriculaCortes",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#replaceOrCreate
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Replace an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "replaceOrCreate": {
+              url: urlBase + "/MatriculaCortes/replaceOrCreate",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#exists
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/MatriculaCortes/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#findById
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/MatriculaCortes/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#replaceById
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Replace attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "replaceById": {
+              url: urlBase + "/MatriculaCortes/:id/replace",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#find
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/MatriculaCortes",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#findOne
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/MatriculaCortes/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#updateAll
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/MatriculaCortes/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#deleteById
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/MatriculaCortes/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#count
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/MatriculaCortes/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#prototype$updateAttributes
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/MatriculaCortes/:id",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#createChangeStream
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/MatriculaCortes/change-stream",
+              method: "POST",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#patchOrCreate
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+        R["patchOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#updateOrCreate
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#update
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#destroyById
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#removeById
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#patchAttributes
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaCorte` object.)
+             * </em>
+             */
+        R["patchAttributes"] = R["prototype$updateAttributes"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.MatriculaCorte#modelName
+        * @propertyOf lbServices.MatriculaCorte
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `MatriculaCorte`.
+        */
+        R.modelName = "MatriculaCorte";
+
+    /**
+     * @ngdoc object
+     * @name lbServices.MatriculaCorte.estadistica_matricula
+     * @header lbServices.MatriculaCorte.estadistica_matricula
+     * @object
+     * @description
+     *
+     * The object `MatriculaCorte.estadistica_matricula` groups methods
+     * manipulating `MatriculaXUnidadTipo` instances related to `MatriculaCorte`.
+     *
+     * Call {@link lbServices.MatriculaCorte#estadistica_matricula MatriculaCorte.estadistica_matricula()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte#estadistica_matricula
+             * @methodOf lbServices.MatriculaCorte
+             *
+             * @description
+             *
+             * Queries estadistica_matricula of MatriculaCorte.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaXUnidadTipo` object.)
+             * </em>
+             */
+        R.estadistica_matricula = function() {
+          var TargetResource = $injector.get("MatriculaXUnidadTipo");
+          var action = TargetResource["::get::MatriculaCorte::estadistica_matricula"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte.estadistica_matricula#count
+             * @methodOf lbServices.MatriculaCorte.estadistica_matricula
+             *
+             * @description
+             *
+             * Counts estadistica_matricula of MatriculaCorte.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.estadistica_matricula.count = function() {
+          var TargetResource = $injector.get("MatriculaXUnidadTipo");
+          var action = TargetResource["::count::MatriculaCorte::estadistica_matricula"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte.estadistica_matricula#create
+             * @methodOf lbServices.MatriculaCorte.estadistica_matricula
+             *
+             * @description
+             *
+             * Creates a new instance in estadistica_matricula of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaXUnidadTipo` object.)
+             * </em>
+             */
+        R.estadistica_matricula.create = function() {
+          var TargetResource = $injector.get("MatriculaXUnidadTipo");
+          var action = TargetResource["::create::MatriculaCorte::estadistica_matricula"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte.estadistica_matricula#createMany
+             * @methodOf lbServices.MatriculaCorte.estadistica_matricula
+             *
+             * @description
+             *
+             * Creates a new instance in estadistica_matricula of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaXUnidadTipo` object.)
+             * </em>
+             */
+        R.estadistica_matricula.createMany = function() {
+          var TargetResource = $injector.get("MatriculaXUnidadTipo");
+          var action = TargetResource["::createMany::MatriculaCorte::estadistica_matricula"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte.estadistica_matricula#destroyAll
+             * @methodOf lbServices.MatriculaCorte.estadistica_matricula
+             *
+             * @description
+             *
+             * Deletes all estadistica_matricula of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.estadistica_matricula.destroyAll = function() {
+          var TargetResource = $injector.get("MatriculaXUnidadTipo");
+          var action = TargetResource["::delete::MatriculaCorte::estadistica_matricula"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte.estadistica_matricula#destroyById
+             * @methodOf lbServices.MatriculaCorte.estadistica_matricula
+             *
+             * @description
+             *
+             * Delete a related item by id for estadistica_matricula.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for estadistica_matricula
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.estadistica_matricula.destroyById = function() {
+          var TargetResource = $injector.get("MatriculaXUnidadTipo");
+          var action = TargetResource["::destroyById::MatriculaCorte::estadistica_matricula"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte.estadistica_matricula#findById
+             * @methodOf lbServices.MatriculaCorte.estadistica_matricula
+             *
+             * @description
+             *
+             * Find a related item by id for estadistica_matricula.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for estadistica_matricula
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaXUnidadTipo` object.)
+             * </em>
+             */
+        R.estadistica_matricula.findById = function() {
+          var TargetResource = $injector.get("MatriculaXUnidadTipo");
+          var action = TargetResource["::findById::MatriculaCorte::estadistica_matricula"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.MatriculaCorte.estadistica_matricula#updateById
+             * @methodOf lbServices.MatriculaCorte.estadistica_matricula
+             *
+             * @description
+             *
+             * Update a related item by id for estadistica_matricula.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for estadistica_matricula
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `MatriculaXUnidadTipo` object.)
+             * </em>
+             */
+        R.estadistica_matricula.updateById = function() {
+          var TargetResource = $injector.get("MatriculaXUnidadTipo");
+          var action = TargetResource["::updateById::MatriculaCorte::estadistica_matricula"];
           return action.apply(R, arguments);
         };
 
@@ -42427,6 +43778,757 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         * i.e. `VistaEspecialidadesActivas`.
         */
         R.modelName = "VistaEspecialidadesActivas";
+
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.ParticipanteCurso
+ * @header lbServices.ParticipanteCurso
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `ParticipanteCurso` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "ParticipanteCurso",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector', '$q',
+      function(LoopBackResource, LoopBackAuth, $injector, $q) {
+        var R = LoopBackResource(
+        urlBase + "/ParticipanteCursos/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#create
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "create": {
+              url: urlBase + "/ParticipanteCursos",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#createMany
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Create a new instance of the model and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "createMany": {
+              isArray: true,
+              url: urlBase + "/ParticipanteCursos",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#upsert
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "upsert": {
+              url: urlBase + "/ParticipanteCursos",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#replaceOrCreate
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Replace an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "replaceOrCreate": {
+              url: urlBase + "/ParticipanteCursos/replaceOrCreate",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#exists
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/ParticipanteCursos/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#findById
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/ParticipanteCursos/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#replaceById
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Replace attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "replaceById": {
+              url: urlBase + "/ParticipanteCursos/:id/replace",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#find
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/ParticipanteCursos",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#findOne
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/ParticipanteCursos/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#updateAll
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+            "updateAll": {
+              url: urlBase + "/ParticipanteCursos/update",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#deleteById
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "deleteById": {
+              url: urlBase + "/ParticipanteCursos/:id",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#count
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/ParticipanteCursos/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#prototype$updateAttributes
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+            "prototype$updateAttributes": {
+              url: urlBase + "/ParticipanteCursos/:id",
+              method: "PATCH",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#createChangeStream
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Create a change stream.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `options` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `changes` – `{ReadableStream=}` -
+             */
+            "createChangeStream": {
+              url: urlBase + "/ParticipanteCursos/change-stream",
+              method: "POST",
+            },
+
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion() instead.
+            "::get::InscripcionCurso::encuesta_satisfacion": {
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "GET",
+            },
+
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion.create() instead.
+            "::create::InscripcionCurso::encuesta_satisfacion": {
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "POST",
+            },
+
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion.createMany() instead.
+            "::createMany::InscripcionCurso::encuesta_satisfacion": {
+              isArray: true,
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "POST",
+            },
+
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion.update() instead.
+            "::update::InscripcionCurso::encuesta_satisfacion": {
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use InscripcionCurso.encuesta_satisfacion.destroy() instead.
+            "::destroy::InscripcionCurso::encuesta_satisfacion": {
+              url: urlBase + "/InscripcionCursos/:id/encuesta_satisfacion",
+              method: "DELETE",
+            },
+          }
+        );
+
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#patchOrCreate
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R["patchOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#updateOrCreate
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Patch an existing model instance or insert a new one into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `data` – `{object=}` - Model instance data
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R["updateOrCreate"] = R["upsert"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#update
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Update instances of the model matched by {{where}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * The number of instances updated
+             */
+        R["update"] = R["updateAll"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#destroyById
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R["destroyById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#removeById
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Delete a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R["removeById"] = R["deleteById"];
+
+            /**
+             * @ngdoc method
+             * @name lbServices.ParticipanteCurso#patchAttributes
+             * @methodOf lbServices.ParticipanteCurso
+             *
+             * @description
+             *
+             * Patch attributes for a model instance and persist it into the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `data` – `{object=}` - An object of model property name/value pairs
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `ParticipanteCurso` object.)
+             * </em>
+             */
+        R["patchAttributes"] = R["prototype$updateAttributes"];
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.ParticipanteCurso#modelName
+        * @propertyOf lbServices.ParticipanteCurso
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `ParticipanteCurso`.
+        */
+        R.modelName = "ParticipanteCurso";
 
 
 

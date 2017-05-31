@@ -1,0 +1,187 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                        <div class="ibox">
+                        <div class="ibox-title">
+                            <div class="row">
+                                <div class="col-md-12 col-md-offset-1">
+                                    <h2>Encuesta de satisfacci&oacute;n</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-md-offset-1">
+                                    <h3>Esta encuesta tiene como finalidad que usted eval&uacute;e el desarrollo del curso. L&eacute;ala con atenci&oacute;n y responda las preguntas, seleccione la opci&oacute;n <br>que mejor exprese su opini&oacute;n.</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form name="form_datos" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Curso</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control m-b" 
+                                            ng-model="vm.cursoSeleccionado"
+                                            ng-change="vm.muestraListaAlumnos()"
+                                            ng-options="curso as (curso.nombreCurso + ' (INSTRUCTOR: ' + curso.nombreInstructor + ')' ) for curso in vm.listaCursos">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Capacitando</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control m-b" 
+                                            ng-model="vm.alumnoSeleccionado"
+                                            ng-change="vm.activaEncuesta()"
+                                            ng-options="alumno as alumno.nombreAlumno for alumno in vm.listaAlumnos">
+                                        </select>
+                                    </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1" style="text-align: right;">
+                                    <div ng-show="vm.mostrar_msg" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">Ya has llenado la encuesta</div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+            </div> <!-- column1 -->
+    </div><!-- row principal -->
+    <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+    
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <form name="form_datos2" class="form-horizontal">
+                                            <br>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">1. ¿Los temas del curso se dieron de manera adecuada?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg1" ng-model="vm.encuesta.preg1" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg1" ng-model="vm.encuesta.preg1" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">2. ¿El instructor fue respetuoso con usted y con el grupo?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg2" ng-model="vm.encuesta.preg2" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg2" ng-model="vm.encuesta.preg2" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">3. ¿El instructor motiv&oacute; su inter&eacute;s en cada uno de los temas?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg3" ng-model="vm.encuesta.preg3" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg3" ng-model="vm.encuesta.preg3" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">4. ¿El instructor resolvi&oacute; las dudas que le presentaron?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg4" ng-model="vm.encuesta.preg4" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg4" ng-model="vm.encuesta.preg4" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">5. ¿El instructor realiz&oacute; las pr&aacute;cticas de lo visto en clase?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg5" ng-model="vm.encuesta.preg5" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg5" ng-model="vm.encuesta.preg5" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">6. ¿El instructor recurri&oacute; al uso material didáctico de acuerdo al curso?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg6" ng-model="vm.encuesta.preg6" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg6" ng-model="vm.encuesta.preg6" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">7. ¿El instructor aplic&oacute; evaluaciones?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg7" ng-model="vm.encuesta.preg7" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg7" ng-model="vm.encuesta.preg7" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">8. ¿Las sesiones se llevaron a cabo en los horarios y las fechas que se le indicaron?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg8" ng-model="vm.encuesta.preg8" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg8" ng-model="vm.encuesta.preg8" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">9. El equipo y herramientas, ¿funcionaron bien, durante todo el curso?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg9" ng-model="vm.encuesta.preg9" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg9" ng-model="vm.encuesta.preg9" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-10 control-label" style="text-align: left;">10. ¿Los temas del curso le ayudaron a tener un mejor trabajo?</label>
+                                                <div class="col-sm-2" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg10" ng-model="vm.encuesta.preg10" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg10" ng-model="vm.encuesta.preg10" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label" style="text-align: left;">11. ¿Como considera el estado de las instalaciones?</label>
+                                                <div class="col-sm-7" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg11" ng-model="vm.encuesta.preg11" value="e" ng-disabled="vm.soloLectura" required> Excelentes </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg11" ng-model="vm.encuesta.preg11" value="m" ng-disabled="vm.soloLectura" required> Muy buenas </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg11" ng-model="vm.encuesta.preg11" value="b" ng-disabled="vm.soloLectura" required> Buenas </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg11" ng-model="vm.encuesta.preg11" value="r" ng-disabled="vm.soloLectura" required> Regulares </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg11" ng-model="vm.encuesta.preg11" value="f" ng-disabled="vm.soloLectura" required> Malas </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label" style="text-align: left;">12. En general, ¿El curso le pareci&oacute;?</label>
+                                                <div class="col-sm-7" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg12" ng-model="vm.encuesta.preg12" value="e" ng-disabled="vm.soloLectura" required> Excelente </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg12" ng-model="vm.encuesta.preg12" value="m" ng-disabled="vm.soloLectura" required> Muy bien </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg12" ng-model="vm.encuesta.preg12" value="b" ng-disabled="vm.soloLectura" required> Bueno </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg12" ng-model="vm.encuesta.preg12" value="r" ng-disabled="vm.soloLectura" required> Regular </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg12" ng-model="vm.encuesta.preg12" value="f" ng-disabled="vm.soloLectura" required> Malo </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-8 control-label" style="text-align: left;">13. ¿Volver&iacute;a a tomar cursos en el ICATQR?</label>
+                                                <div class="col-sm-4" style="text-align: right;">
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg13" ng-model="vm.encuesta.preg13" value="s" ng-disabled="vm.soloLectura" required> S&iacute; </label></div>
+                                                    <div class="radio-inline"><label> <input icheck type="radio" name="preg13" ng-model="vm.encuesta.preg13" value="n" ng-disabled="vm.soloLectura" required> No </label></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-6 control-label" style="text-align: left;">14. ¿Qu&eacute; otros cursos le gustar&iacute;a tomar?</label>
+                                                <div class="col-sm-6">
+                                                    <textarea class="form-control" ng-model="vm.encuesta.preg14" ng-disabled="vm.soloLectura" rows="2" cols="90"></textarea>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" style="text-align: left;">Comentarios</label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control" ng-model="vm.encuesta.comentarios" ng-disabled="vm.soloLectura" rows="4" cols="90"></textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="ibox-footer">
+                                <div class="row">
+                                    <div class="col-md-11" style="text-align: right;">
+                                        <button type="button" ng-show="!vm.soloLectura" ng-click="vm.guardaEncuesta()" ng-disabled="form_datos2.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar encuesta</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                </div> <!-- column1 -->
+    </div><!-- row principal -->
+    <br>
+</div>

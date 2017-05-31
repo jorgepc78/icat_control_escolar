@@ -10,7 +10,7 @@
     
     function runBlock($rootScope, $state, localStorageService) {
 
-                $rootScope.$on('$stateChangeStart', function(event, next) {
+                $rootScope.$on('$locationChangeStart', function(event, next) {
 
                 if (localStorageService.get('usuario') !== undefined && localStorageService.get('usuario') !== null)
                         $rootScope.currentUser = localStorageService.get('usuario');

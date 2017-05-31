@@ -47,7 +47,7 @@
                   vm.tablalListaCapacitados.filtro_datos = {
                           filter: {
                               where: vm.tablalListaCapacitados.condicion,
-                              fields: ['idAlumno', 'numControl', 'apellidoPaterno','apellidoMaterno','nombre','curp','idUnidadAdmtva'],
+                              fields: ['idAlumno', 'numControl', 'apellidoPaterno','apellidoMaterno','nombre','nombreCompleto','curp','idUnidadAdmtva'],
                               order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','curp ASC'],
                               limit: vm.tablalListaCapacitados.registrosPorPagina,
                               skip: vm.tablalListaCapacitados.paginaActual - 1,
@@ -98,14 +98,7 @@
                   vm.tablalListaCapacitados.fin = 1;
                   vm.mostrarbtnLimpiar = true;
 
-                  vm.tablalListaCapacitados.condicion = {
-                                    or: [
-                                      {apellidoPaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                      {apellidoMaterno: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-                                      {nombre: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
-
-                                    ]
-                                };
+                  vm.tablalListaCapacitados.condicion = {nombreCompleto: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}};
 
                   tablaDatosService.obtiene_datos_tabla(Capacitandos, vm.tablalListaCapacitados)
                   .then(function(respuesta) {
@@ -134,12 +127,13 @@
                   vm.personaSeleccionada = {};
                   vm.tablalListaCapacitados.fila_seleccionada = undefined;
                   vm.tablalListaCapacitados.paginaActual = 1;
-                  vm.tablalListaCapacitados.inicio = 0;
-                  vm.tablalListaCapacitados.fin = 1;
+                  vm.tablalListaCapacitados.inicio = -1;
+                  vm.tablalListaCapacitados.fin = 0;
+                  vm.tablalListaCapacitados.totalElementos = 0;
 
                   vm.tablalListaCapacitados.condicion = {};
 
-                  tablaDatosService.obtiene_datos_tabla(Capacitandos, vm.tablalListaCapacitados)
+                  /*tablaDatosService.obtiene_datos_tabla(Capacitandos, vm.tablalListaCapacitados)
                   .then(function(respuesta) {
 
                         vm.tablalListaCapacitados.totalElementos = respuesta.total_registros;
@@ -153,7 +147,7 @@
                             vm.tablalListaCapacitados.fila_seleccionada = 0;
                             muestraDatosRegistroActual(vm.personaSeleccionada);
                         }
-                  });
+                  });*/
 
             };
 

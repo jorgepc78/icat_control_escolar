@@ -171,7 +171,7 @@
                     <div class="row">
                         <div class="col-md-12" style="height: 380px;">
                             <div ng-repeat="registro in vm.registroEdicion.instructores_propuestos">
-                                <div class="radio-inline" style="margin-bottom:10px;"><label> <input icheck type="radio" name="instructor" ng-model="vm.radioidInstructorSeleccionado" value="{{registro.idInstructor}}"> {{registro.nombre_completo}} </label></div>
+                                <div class="radio-inline" style="margin-bottom:10px;"><label> <input icheck type="radio" name="instructor" ng-model="vm.radioidInstructorSeleccionado" ng-value="{{registro.idInstructor}}"> {{registro.nombre_completo}} </label></div>
                             </div>
                         </div>
 

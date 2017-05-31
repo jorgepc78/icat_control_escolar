@@ -31,9 +31,9 @@
                                             <tr>
                                                 <th>Curso o m&oacute;dulo</th>
                                                 <th>Tipo</th>
+                                                <th>Fecha inicio</th>
                                                 <th>Horario</th>
                                                 <th>Aula asignada</th>
-                                                <th>Fecha inicio</th>
                                                 <th>Estatus</th>
                                             </tr>
                                           </thead>
@@ -41,9 +41,9 @@
                                             <tr ng-repeat="registro in vm.registrosCursosPTCs" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaCursos.fila_seleccionada}" class="pointer">
                                                 <td> {{registro.detalle_curso.nombreCurso}}</td>
                                                 <td> {{registro.detalle_curso.modalidad}}</td>
+                                                <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.horario}}</td>
                                                 <td> {{registro.aulaAsignada}}</td>
-                                                <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
                                                 <td class="client-status" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
                                                     <span ng-switch-when="1" class="label label-success texto-estatus-ptc">Aprobado</span>

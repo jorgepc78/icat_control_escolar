@@ -41,7 +41,7 @@
                             ]
                           },
                           fields:['idCurso','nombreCurso','nombreInstructor','idLocalidad','idUnidadAdmtva','horario','fechaInicio','fechaFin'],
-                          order: ['fechaInicio DESC','nombreCurso ASC'],
+                          order: ['fechaInicio DESC','nombreCurso ASC','idCurso ASC'],
                           include: [
                               {
                                   relation: 'localidad_pertenece',
@@ -64,7 +64,7 @@
                                               relation: 'Capacitandos',
                                               scope: {
                                                   fields:['numControl','apellidoPaterno','apellidoMaterno','nombre','curp'],
-                                                  order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+                                                  order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','idAlumno ASC']
                                               }
                                           },
                                           'encuesta_satisfacion'

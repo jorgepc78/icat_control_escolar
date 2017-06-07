@@ -12,6 +12,7 @@
             var vm = this;
 
             vm.muestraPerfilesUnidad = muestraPerfilesUnidad;
+            vm.muestraUnidadesRevisa = muestraUnidadesRevisa;
             vm.guardar               = guardar;
 
             vm.mostrarSpiner = false;
@@ -19,6 +20,9 @@
             vm.txt_msg_password = '';
             vm.listaUnidades = [];
             vm.listaRoles = [];
+            vm.unidades_checkbox = [];
+            vm.mostrarUnidadesRevisa = false;
+            vm.tabs = [{active: false}, {active: true}];
             
             vm.usuarioEditar = {
                     idUsuario                    : usuarioEditar.idUsuario,
@@ -71,7 +75,8 @@
 
                     activo                       : usuarioEditar.activo,
                     idPerfil                     : (usuarioEditar.perfil.length > 0 ? usuarioEditar.perfil[0].id : 0),
-                    perfil                       : ''
+                    perfil                       : '',
+                    unidad_revisa                : []
             };
 
             vm.unidadSelecccionada = {};
@@ -84,6 +89,7 @@
 
                 CatalogoUnidadesAdmtvas.find({
                     filter: {
+                        fields: ['idUnidadAdmtva','nombre'],
                         order: 'nombre ASC'
                     }
                 })
@@ -106,18 +112,56 @@
                         Role.find({
                             filter: {
                                 where: condicion,
+                                fields:['id','name','description'],
                                 order: 'description ASC'
                             }
                         })
                         .$promise
                         .then(function(resp) {
-                            vm.listaRoles = resp;
+                                vm.listaRoles = resp;
 
-                            var perfilSeleccionadoIndex = vm.listaRoles.map(function(rol) {
-                                                                return rol.id;
-                                                              }).indexOf(vm.usuarioEditar.idPerfil);
+                                var perfilSeleccionadoIndex = vm.listaRoles.map(function(rol) {
+                                                                    return rol.id;
+                                                                  }).indexOf(vm.usuarioEditar.idPerfil);
 
-                            vm.perfilSeleccionado = vm.listaRoles[perfilSeleccionadoIndex];
+                                vm.perfilSeleccionado = vm.listaRoles[perfilSeleccionadoIndex];
+
+                                if(vm.perfilSeleccionado.name == 'programas') {
+                                    vm.tabs = [{active: true}, {active: false}];
+                                    vm.mostrarUnidadesRevisa = true;
+                                }
+                                else {
+                                    vm.tabs = [{active: false}, {active: true}];
+                                    vm.mostrarUnidadesRevisa = false;
+                                }
+                        });
+
+
+                        angular.forEach(vm.listaUnidades, function(registro) {
+
+                                var index = usuarioEditar.unidad_revisa.map(function(record) {
+                                                                return record.idUnidadAdmtva;
+                                                              }).indexOf(registro.idUnidadAdmtva);
+                                
+                                if(registro.idUnidadAdmtva > 1)
+                                {
+                                        if(index >= 0)
+                                        {
+                                            vm.unidades_checkbox.push({
+                                              idUnidadAdmtva : registro.idUnidadAdmtva,
+                                              nombre         : registro.nombre,
+                                              seleccionado   : true
+                                            });
+                                        }
+                                        else
+                                        {
+                                            vm.unidades_checkbox.push({
+                                              idUnidadAdmtva : registro.idUnidadAdmtva,
+                                              nombre         : registro.nombre,
+                                              seleccionado   : false
+                                            });
+                                        }
+                                }
                         });
 
                 });
@@ -138,6 +182,7 @@
                 Role.find({
                     filter: {
                         where: condicion,
+                        fields:['id','name','description'],
                         order: 'description ASC'
                     }
                 })
@@ -146,6 +191,22 @@
                     vm.listaRoles = resp;
                 });    
 
+            }
+
+
+            function muestraUnidadesRevisa() {
+                if(vm.perfilSeleccionado == undefined) {
+                    vm.tabs = [{active: false}, {active: true}];
+                    vm.mostrarUnidadesRevisa = false;
+                }
+                else if(vm.perfilSeleccionado.name == 'programas') {
+                    vm.tabs = [{active: true}, {active: false}];
+                    vm.mostrarUnidadesRevisa = true;
+                }
+                else {
+                    vm.tabs = [{active: false}, {active: true}];
+                    vm.mostrarUnidadesRevisa = false;
+                }
             }
 
 
@@ -319,31 +380,61 @@
                 .$promise
                 .then(function(respuesta) {
 
-                    if(vm.usuarioEditar.idPerfil != vm.perfilSeleccionado.id)
-                    {
-                            Usuario.perfil.destroyAll({ id: vm.usuarioEditar.idUsuario })
-                              .$promise
-                              .then(function() { 
+                    Usuario.unidad_revisa.destroyAll({ id: vm.usuarioEditar.idUsuario })
+                    .$promise
+                    .then(function() {
 
-                                    Role.principals.create({
-                                        id: vm.perfilSeleccionado.id
-                                    },{
-                                        principalType: 'USER',
-                                        principalId: vm.usuarioEditar.idUsuario,
-                                        roleId: vm.perfilSeleccionado.id
-                                    }) 
+                            for(var i=0; i < vm.unidades_checkbox.length; i++)
+                            {
+                                if(vm.unidades_checkbox[i].seleccionado == true )
+                                {
+                                        vm.usuarioEditar.unidad_revisa.push({
+                                          idUnidadAdmtva : vm.unidades_checkbox[i].idUnidadAdmtva,
+                                          nombre         : vm.unidades_checkbox[i].nombre
+                                        });
+                                }
+                            }
+
+                            angular.forEach(vm.usuarioEditar.unidad_revisa, function(registro) {
+
+                                    Usuario.unidad_revisa.link({
+                                        id: vm.usuarioEditar.idUsuario,
+                                        fk: registro.idUnidadAdmtva
+                                    },{}) 
                                     .$promise
-                                    .then(function() {                
-                                        $modalInstance.close(vm.usuarioEditar);
+                                    .then(function(resp) {
                                     });
+
                             });
 
-                    }
-                    else
-                    {
-                      $modalInstance.close(vm.usuarioEditar);
+                            if(vm.usuarioEditar.idPerfil != vm.perfilSeleccionado.id)
+                            {
+                                    Usuario.perfil.destroyAll({ id: vm.usuarioEditar.idUsuario })
+                                      .$promise
+                                      .then(function() { 
 
-                    }
+                                            Role.principals.create({
+                                                id: vm.perfilSeleccionado.id
+                                            },{
+                                                principalType: 'USER',
+                                                principalId: vm.usuarioEditar.idUsuario,
+                                                roleId: vm.perfilSeleccionado.id
+                                            }) 
+                                            .$promise
+                                            .then(function() {                
+                                                $modalInstance.close(vm.usuarioEditar);
+                                            });
+                                    });
+
+                            }
+                            else
+                            {
+                              $modalInstance.close(vm.usuarioEditar);
+
+                            }
+
+                    });
+
                 })
                 .catch(function(error) {
                     if(error.status == 422) {

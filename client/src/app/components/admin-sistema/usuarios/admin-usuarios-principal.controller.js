@@ -70,11 +70,22 @@
                               limit: vm.tablaListaUsuarios.registrosPorPagina,
                               skip: vm.tablaListaUsuarios.paginaActual - 1,
                               include: [
-                                'unidad_pertenece',
+                                {
+                                    relation: 'unidad_pertenece',
+                                    scope: {
+                                        fields:['idUnidadAdmtva','nombre']
+                                    }
+                                },
                                 {
                                     relation: 'perfil',
                                     scope: {
                                         fields:['name','description']
+                                    }
+                                },
+                                {
+                                    relation: 'unidad_revisa',
+                                    scope: {
+                                        fields:['idUnidadAdmtva','nombre']
                                     }
                                 }
                               ]
@@ -332,6 +343,18 @@
                                 name        : respuesta.perfil.name
                             });
                         }
+
+                        if(respuesta.unidad_revisa.length > 0)
+                        {
+                              vm.UsuarioSeleccionado.unidad_revisa = [];
+                              angular.forEach(respuesta.unidad_revisa, function(record) {
+                                    vm.UsuarioSeleccionado.unidad_revisa.push({
+                                        idUnidadAdmtva : record.idUnidadAdmtva,
+                                        nombre         : record.nombre,
+                                    });
+                              });
+                        }
+
                     }, function () {
                     });
             };

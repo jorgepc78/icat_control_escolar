@@ -92,7 +92,7 @@
                   vm.tablaListaCursos.filtro_datos = {
                           filter: {
                               where: vm.tablaListaCursos.condicion,
-                              order: ['fechaInicio ASC'],
+                              order: ['fechaInicio ASC','idCursoPTC ASC'],
                               limit: vm.tablaListaCursos.registrosPorPagina,
                               skip: vm.tablaListaCursos.paginaActual - 1,
                               include: [
@@ -106,7 +106,7 @@
                                       relation: 'instructores_propuestos',
                                       scope: {
                                         fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre'],
-                                        order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+                                        order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','idInstructor ASC']
                                       }
                                   }
                               ]
@@ -395,7 +395,7 @@
                     filter: {
                         where: {idPtc: vm.RegistroPTCSeleccionado.idPtc},
                         fields: ['idCursoPTC','idCatalogoCurso'],
-                        order: ['fechaInicio ASC'],
+                        order: ['fechaInicio ASC','idCursoPTC ASC'],
                         include: [
                             {
                                 relation: 'detalle_curso',

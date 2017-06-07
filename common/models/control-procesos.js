@@ -18,7 +18,15 @@ module.exports = function(ControlProcesos) {
               //Buscamos al usuario que disapara el evento para enviarle el aviso
               Usuario.find({
                 where:  {idUsuario: ctx.instance.idUsuario}, 
-                fields: ['idUsuario','nombre', 'email']
+                fields: ['idUsuario','nombre', 'email'],
+                include: [
+                  {
+                      relation: 'unidad_revisa',
+                      scope: {
+                          fields:['idUnidadAdmtva','nombre']
+                      }
+                  }
+                ]
               },
               function(err, usuarioEncontrado) {
                 
@@ -168,21 +176,42 @@ module.exports = function(ControlProcesos) {
 
                                 Usuario.find({
                                   where:  condicion, 
-                                  fields: ['idUsuario', 'nombre', 'email']
+                                  fields: ['idUsuario', 'nombre', 'email'],
+                                  include: [
+                                    {
+                                        relation: 'unidad_revisa',
+                                        scope: {
+                                            fields:['idUnidadAdmtva','nombre']
+                                        }
+                                    }
+                                  ]
                                 },
                                 function(err, usuarioEncontrado) {
                                   
                                       var usuarioRecord = JSON.parse( JSON.stringify( usuarioEncontrado ) );
+                                      var index = 0;
 
                                       for (var i = 0; i < usuarioRecord.length; i++) {
-                                          array_recibe.push({
-                                            idUsuario : usuarioRecord[i].idUsuario,
-                                            nombre    : usuarioRecord[i].nombre,
-                                            email     : usuarioRecord[i].email
-                                          });
+                                          var unidad_revisa_usuario = JSON.parse( JSON.stringify( usuarioRecord[i].unidad_revisa ) );
+
+                                          //console.log(unidad_revisa_usuario);
+                                          //console.log("****************************************************************");
+
+                                          index = unidad_revisa_usuario.map(function(record) {
+                                                                          return record.idUnidadAdmtva;
+                                                                        }).indexOf(ctx.instance.idUnidadAdmtva);
+
+                                          if(index >= 0)
+                                          {
+                                              array_recibe.push({
+                                                idUsuario : usuarioRecord[i].idUsuario,
+                                                nombre    : usuarioRecord[i].nombre,
+                                                email     : usuarioRecord[i].email
+                                              });                                            
+                                          }
                                       };
 
-                                      //console.log(array_recibe);
+                                      //console.log("array_recibe: " + JSON.stringify(array_recibe));
                                       //console.log("*************************************************************");
                                       PreparaMensajes(ctx.instance.accion, array_envia, array_recibe);
                                 });
@@ -327,7 +356,7 @@ module.exports = function(ControlProcesos) {
                                            '<tr><td>Costo</<td><td>'+ registro.costo +'</<td></tr>'+
                                            '<tr><td>Cupo m&aacute;ximo</<td><td>'+ registro.cupoMaximo +'</<td></tr>'+
                                            '<tr><td>M&iacute;nimo de inscritos requeridos</<td><td>'+ registro.minRequeridoInscritos +'</<td></tr>'+
-                                           '<tr><td>mM&iacute;nimo de inscritos pagados requeridos</<td><td>'+ registro.minRequeridoPago +'</<td></tr>'+
+                                           '<tr><td>M&iacute;nimo de inscritos pagados requeridos</<td><td>'+ registro.minRequeridoPago +'</<td></tr>'+
                                            '<tr><td>Fecha inicio</<td><td>'+ fechaInicio.getDate() +'/'+ meses[fechaInicio.getMonth()] +'/'+ fechaInicio.getUTCFullYear() + '</<td></tr>'+
                                            '<tr><td>Fecha terminaci&oacute;n</<td><td>'+ fechaFin.getDate() +'/'+ meses[fechaFin.getMonth()] +'/'+ fechaFin.getUTCFullYear() + '</<td></tr>'+
                                            '<tr><td>Instructor</<td><td>'+ registro.nombreInstructor +'</<td></tr>'+

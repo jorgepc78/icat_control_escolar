@@ -84,7 +84,7 @@
                           filter: {
                               where: vm.tablaListaRegistros.condicion,
                               //fields: ['idCatalogoCurso','claveCurso','descripcion','idEspecialidad','modalidad','nombreCurso','numeroHoras'],
-                              order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC'],
+                              order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','idInstructor ASC'],
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
                               include: [
@@ -116,7 +116,7 @@
                                             relation: 'CatalogoCursos',
                                             scope: {
                                                 fields:['idCatalogoCurso','nombreCurso','modalidad','numeroHoras'],
-                                                order: ['nombreCurso ASC']
+                                                order: ['nombreCurso ASC','idCatalogoCurso ASC']
                                             }
                                         }
                                     }

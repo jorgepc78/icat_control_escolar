@@ -44,7 +44,7 @@
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
                               where: vm.tablaListaRegistros.condicion,
-                              order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC'],
+                              order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','idInstructor ASC'],
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
                               include: [
@@ -76,7 +76,7 @@
                                             relation: 'CatalogoCursos',
                                             scope: {
                                                 fields:['idCatalogoCurso','nombreCurso','modalidad'],
-                                                order: ['nombreCurso ASC']
+                                                order: ['nombreCurso ASC','idCatalogoCurso ASC']
                                             }
                                         }
                                     }

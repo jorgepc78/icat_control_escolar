@@ -32,7 +32,7 @@
             vm.registroEditar = {
                 idAlumno            : registroEditar.idAlumno,
                 idUnidadAdmtva      : registroEditar.idUnidadAdmtva,
-                numControl          : registroEditar.numControl,
+                numControl          : registroEditar.numControl.trim(),
                 apellidoPaterno     : registroEditar.apellidoPaterno,
                 apellidoMaterno     : registroEditar.apellidoMaterno,
                 nombre              : registroEditar.nombre,
@@ -330,7 +330,7 @@
                                                                 id: vm.registroEditar.idAlumno
                                                             },{
                                                                 idUnidadAdmtva      : vm.registroEditar.idUnidadAdmtva,
-                                                                numControl          : vm.registroEditar.numControl,
+                                                                numControl          : vm.registroEditar.numControl.trim(),
                                                                 apellidoPaterno     : vm.registroEditar.apellidoPaterno,
                                                                 apellidoMaterno     : vm.registroEditar.apellidoMaterno,
                                                                 nombre              : vm.registroEditar.nombre,

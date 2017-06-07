@@ -191,7 +191,7 @@
                   vm.tablaListaCursos.filtro_datos = {
                           filter: {
                               where: vm.tablaListaCursos.condicion,
-                              order: ['fechaInicio DESC','nombreCurso ASC'],
+                              order: ['fechaInicio DESC','nombreCurso ASC','idCurso ASC'],
                               limit: vm.tablaListaCursos.registrosPorPagina,
                               skip: vm.tablaListaCursos.paginaActual - 1,
                               include: [
@@ -222,7 +222,7 @@
                                                   relation: 'Capacitandos',
                                                   scope: {
                                                       fields:['numControl','apellidoPaterno','apellidoMaterno','nombre','curp'],
-                                                      order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+                                                      order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','idAlumno ASC']
                                                   }
                                               },
                                               'encuesta_satisfacion'

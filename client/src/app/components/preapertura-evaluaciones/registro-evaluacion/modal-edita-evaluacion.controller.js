@@ -157,7 +157,7 @@
                       filter: {
                           where: vm.tablalListaCapacitados.condicion,
                           fields: ['idAlumno', 'numControl', 'nombreCompleto','idUnidadAdmtva'],
-                          order: ['nombreCompleto ASC'],
+                          order: ['nombreCompleto ASC','idAlumno ASC'],
                           limit: vm.tablalListaCapacitados.registrosPorPagina,
                           skip: vm.tablalListaCapacitados.paginaActual - 1,
                           include: [

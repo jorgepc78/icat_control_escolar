@@ -51,7 +51,7 @@
                               ]                            
                           },
                           fields: ['idPtc','anio','trimestre'],
-                          order: ['anio DESC','trimestre DESC']
+                          order: ['anio DESC','trimestre DESC','idPtc ASC']
                       }
                   })
                   .$promise

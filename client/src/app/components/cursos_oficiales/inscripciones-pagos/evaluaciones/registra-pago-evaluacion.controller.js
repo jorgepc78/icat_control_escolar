@@ -50,7 +50,7 @@
                   vm.tablaListaEvaluaciones.filtro_datos = {
                           filter: {
                               where: vm.tablaListaEvaluaciones.condicion,
-                              order: ['fechaEvaluacion DESC','nombreCurso ASC'],
+                              order: ['fechaEvaluacion DESC','nombreCurso ASC','idEvaluacion ASC'],
                               limit: vm.tablaListaEvaluaciones.registrosPorPagina,
                               skip: vm.tablaListaEvaluaciones.paginaActual - 1,
                               include: [

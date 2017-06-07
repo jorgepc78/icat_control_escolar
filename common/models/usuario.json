@@ -748,6 +748,13 @@
       "model": "Role",
       "foreignKey": "principalId",
       "through": "RoleMapping"
+    },
+    "unidad_revisa": {
+      "type": "hasMany",
+      "model": "CatalogoUnidadesAdmtvas",
+      "foreignKey": "idUsuario",
+      "through": "UnidadesRevisionUsuario",
+      "keyThrough": "idUnidadAdmtva"
     }
   },
   "acls": [

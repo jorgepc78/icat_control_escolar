@@ -22,6 +22,7 @@
                               <div class="col-md-5">
                                   <select class="form-control" 
                                       ng-model="vm.perfilSeleccionado"
+                                      ng-change="vm.muestraUnidadesRevisa()"
                                       ng-options="rol as rol.description for rol in vm.listaRoles" required>
                                   </select>
                               </div>
@@ -89,7 +90,18 @@
                   </div>
 
                   <tabset ng-show="(vm.unidadSelecccionada.idUnidadAdmtva == 1)">
-                      <tab heading="Eventos del PTC">
+
+                      <tab heading="Unidades que revisa" ng-show="vm.mostrarUnidadesRevisa" active="vm.tabs[0].active">
+                          <br>
+                          <div class="form-group">
+                              <label class="col-sm-2 control-label">Recibir avisos de</label>
+                              <div class="col-sm-9">
+                                  <div class="checkbox" ng-repeat="registro in vm.unidades_checkbox" ><label> <input icheck type="checkbox" ng-model="registro.seleccionado"> {{registro.nombre}} </label></div>
+                              </div>
+                          </div>                          
+                      </tab>
+
+                      <tab heading="Eventos del PTC" active="vm.tabs[1].active">
                           <br>
                           <div class="form-group">
                               <label class="col-sm-3 control-label">Env&iacute;o del PTC a revisi&oacute;n</label>
@@ -133,7 +145,6 @@
                                   <input ng-if="vm.usuarioEditar.avisoRechazoPTCGral!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.usuarioEditar.avisoRechazoPTCGral"/>
                               </div>
                           </div>
-
                       </tab>
 
                       <tab heading="Eventos Preapertura Cursos">

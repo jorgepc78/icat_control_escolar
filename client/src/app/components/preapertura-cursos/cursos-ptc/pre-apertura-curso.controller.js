@@ -57,7 +57,7 @@
                               ]                            
                           },
                           fields: ['idPtc','anio','trimestre'],
-                          order: ['anio DESC','trimestre DESC']
+                          order: ['anio DESC','trimestre DESC','idPtc ASC']
                       }
                   })
                   .$promise
@@ -92,7 +92,7 @@
                                       relation: 'instructores_propuestos',
                                       scope: {
                                         fields: ['apellidoPaterno','apellidoMaterno','nombre','curp'],
-                                        order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+                                        order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','idInstructor ASC']
                                       }
                                   },
                                   {
@@ -393,12 +393,8 @@
                                   });
 
                             });
-
                   });
-
             }
-
-
     };
 
 })();

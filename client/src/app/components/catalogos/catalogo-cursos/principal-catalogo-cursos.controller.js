@@ -79,7 +79,7 @@
                           filter: {
                               where: vm.tablaListaRegistros.condicion,
                               fields: ['idCatalogoCurso','claveCurso','descripcion','perfilEgresado','perfilInstructor','idEspecialidad','modalidad','nombreCurso','numeroHoras','activo'],
-                              order: ['nombreCurso ASC'],
+                              order: ['nombreCurso ASC','idCatalogoCurso ASC'],
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
                               include: [

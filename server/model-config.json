@@ -201,5 +201,9 @@
   "ParticipanteCurso": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
+  },
+  "UnidadesRevisionUsuario": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
   }
 }

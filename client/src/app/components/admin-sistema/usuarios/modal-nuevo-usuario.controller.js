@@ -12,6 +12,7 @@
             var vm = this;
             
             vm.muestraPerfilesUnidad = muestraPerfilesUnidad;
+            vm.muestraUnidadesRevisa = muestraUnidadesRevisa;
             vm.guardar               = guardar;
 
             vm.mostrarSpiner = false;
@@ -19,6 +20,9 @@
             vm.txt_msg_password = '';
             vm.listaUnidades = [];
             vm.listaRoles = [];
+            vm.unidades_checkbox = [];
+            vm.mostrarUnidadesRevisa = false;
+            vm.tabs = [{active: false}, {active: true}];
 
             vm.usuarioEditar = {
                     nombre                       : '',
@@ -71,7 +75,8 @@
                     
                     activo                       : true,
                     idPerfil                     : 0,
-                    perfil                       : ''
+                    perfil                       : '',
+                    unidad_revisa                : []
             };
 
             vm.unidadSelecccionada = {};
@@ -84,12 +89,26 @@
        
                 CatalogoUnidadesAdmtvas.find({
                     filter: {
+                        fields: ['idUnidadAdmtva','nombre'],
                         order: 'nombre ASC'
                     }
                 })
                 .$promise
                 .then(function(resp) {
                     vm.listaUnidades = resp;
+
+                    angular.forEach(vm.listaUnidades, function(registro) {
+
+                            if(registro.idUnidadAdmtva > 1)
+                            {
+                                vm.unidades_checkbox.push({
+                                  idUnidadAdmtva : registro.idUnidadAdmtva,
+                                  nombre         : registro.nombre,
+                                  seleccionado   : false
+                                });
+                            }
+                    });
+
                 });
 
             };
@@ -108,6 +127,7 @@
                 Role.find({
                     filter: {
                         where: condicion,
+                        fields:['id','name','description'],
                         order: 'description ASC'
                     }
                 })
@@ -116,6 +136,23 @@
                     vm.listaRoles = resp;
                 });    
 
+            }
+
+
+
+            function muestraUnidadesRevisa() {
+                if(vm.perfilSeleccionado == undefined) {
+                    vm.tabs = [{active: false}, {active: true}];
+                    vm.mostrarUnidadesRevisa = false;
+                }
+                else if(vm.perfilSeleccionado.name == 'programas') {
+                    vm.tabs = [{active: true}, {active: false}];
+                    vm.mostrarUnidadesRevisa = true;
+                }
+                else {
+                    vm.tabs = [{active: false}, {active: true}];
+                    vm.mostrarUnidadesRevisa = false;
+                }
             }
 
 
@@ -242,8 +279,32 @@
                                 roleId: vm.perfilSeleccionado.id
                             }) 
                             .$promise
-                            .then(function() {                
-                                $modalInstance.close();
+                            .then(function() {    
+
+                                    for(var i=0; i < vm.unidades_checkbox.length; i++)
+                                    {
+                                        if(vm.unidades_checkbox[i].seleccionado == true )
+                                        {
+                                                vm.usuarioEditar.unidad_revisa.push({
+                                                  idUnidadAdmtva : vm.unidades_checkbox[i].idUnidadAdmtva,
+                                                  nombre         : vm.unidades_checkbox[i].nombre
+                                                });
+                                        }
+                                    }
+
+                                    angular.forEach(vm.usuarioEditar.unidad_revisa, function(registro) {
+
+                                            Usuario.unidad_revisa.link({
+                                                id: vm.usuarioEditar.idUsuario,
+                                                fk: registro.idUnidadAdmtva
+                                            },{}) 
+                                            .$promise
+                                            .then(function(resp) {
+                                            });
+
+                                    });
+
+                                    $modalInstance.close();
                             });
                     })
                     .catch(function(error) {

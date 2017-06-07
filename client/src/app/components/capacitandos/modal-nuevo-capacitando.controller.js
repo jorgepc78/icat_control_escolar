@@ -308,13 +308,12 @@
                                                         }
                                                         else
                                                         {
-                                                            return;
                                                             vm.registroEditar.ultimaActualizacion =  Date();
 
                                                             Capacitandos.create(
                                                             {
                                                                 idUnidadAdmtva      : vm.registroEditar.idUnidadAdmtva,
-                                                                numControl          : vm.registroEditar.numControl,
+                                                                numControl          : vm.registroEditar.numControl.trim(),
                                                                 apellidoPaterno     : vm.registroEditar.apellidoPaterno,
                                                                 apellidoMaterno     : vm.registroEditar.apellidoMaterno,
                                                                 nombre              : vm.registroEditar.nombre,

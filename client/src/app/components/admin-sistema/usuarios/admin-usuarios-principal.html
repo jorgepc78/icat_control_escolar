@@ -110,6 +110,41 @@
                                                         <p ng-show="(vm.UsuarioSeleccionado.idUnidadAdmtva > 1)" style="padding-top: 25px;">No aplican los avisos a este usuario</p>
                                                         <tabset ng-show="(vm.UsuarioSeleccionado.idUnidadAdmtva == 1)" style="padding-top: 15px;">
                                                             
+                                                            <tab heading="Unidades revisa">
+
+                                                                            <p ng-show="(vm.UsuarioSeleccionado.perfil[0].name !== 'programas')" style="padding-top: 25px;">No aplica esta opci&oacute;n para este usuario</p>
+                                                                            <div class="tab-pane active" ng-show="(vm.UsuarioSeleccionado.perfil[0].name == 'programas')">
+                                                    
+                                                                                <table class="tablaDatos table table-condensed no-footer">
+                                                                                  <thead>
+                                                                                      <col width="10%">
+                                                                                      <col width="90%">
+                                                                                    <tr>
+                                                                                        <th>N&uacute;m.</th>
+                                                                                        <th>Unidad</th>
+                                                                                    </tr>
+                                                                                  </thead>
+                                                                                </table>
+
+                                                                                <div style="width:100%;height:549px">
+                                                                                    <!-- <div class="full-height-scroll" full-scroll> -->
+                                                                                        <table class="table table-striped">
+                                                                                            <thead>
+                                                                                              <col width="10%">
+                                                                                              <col width="90%">
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                            <tr ng-repeat="unidad in vm.UsuarioSeleccionado.unidad_revisa">
+                                                                                                <td> {{$index + 1}}</td>
+                                                                                                <td> {{unidad.nombre}}</td>
+                                                                                            </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    <!-- </div> -->
+                                                                                </div>
+                                                                            </div> <!-- client == 2 -->
+                                                                        
+                                                            </tab>
                                                             <tab heading="PTC">
                                                                 <ul class="list-group clear-list">
                                                                     <li class="list-group-item fist-item">

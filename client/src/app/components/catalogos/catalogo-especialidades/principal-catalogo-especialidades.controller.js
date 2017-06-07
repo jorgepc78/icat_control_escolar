@@ -37,7 +37,7 @@
                   vm.tablaCatalogo.filtro_datos = {
                           filter: {
                               where: vm.tablaCatalogo.condicion,
-                              order: ['nombre ASC'],
+                              order: ['nombre ASC','idEspecialidad ASC'],
                               fields:['idEspecialidad','idTema','clave','nombre'],
                               limit: vm.tablaCatalogo.registrosPorPagina,
                               skip: vm.tablaCatalogo.paginaActual - 1,

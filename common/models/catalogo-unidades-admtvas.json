@@ -94,6 +94,13 @@
       "foreignKey": "idUnidadAdmtva",
       "through": "RelInstrucUnidad",
       "keyThrough": "idInstructor"
+    },
+    "revisores_asignados": {
+      "type": "hasMany",
+      "model": "Usuario",
+      "foreignKey": "idUnidadAdmtva",
+      "through": "UnidadesRevisionUsuario",
+      "keyThrough": "idUsuario"
     }
   },
   "acls": [

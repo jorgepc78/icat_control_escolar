@@ -107,7 +107,7 @@
                   vm.tablaListaCursos.filtro_datos = {
                           filter: {
                               where: vm.tablaListaCursos.condicion,
-                              order: ['nombreCurso ASC'],
+                              order: ['nombreCurso ASC','idCurso ASC'],
                               limit: vm.tablaListaCursos.registrosPorPagina,
                               skip: vm.tablaListaCursos.paginaActual - 1,
                               include: [
@@ -143,7 +143,7 @@
                                                 relation: 'instructores_propuestos',
                                                 scope: {
                                                   fields: ['apellidoPaterno','apellidoMaterno','nombre','curp'],
-                                                  order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC']
+                                                  order: ['apellidoPaterno ASC','apellidoMaterno ASC','nombre ASC','idInstructor ASC']
                                                 }
                                             }
                                         ]

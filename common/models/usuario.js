@@ -34,7 +34,7 @@ module.exports = function(Usuario) {
 
             Usuario.app.models.Email.send({
               to: resultado[0].email,
-              from: 'control-escolar@icatqr.edu.mx',
+              from: 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
               subject: 'Datos de inicio en el sistema de Control Escolar',
               html: mensaje
             }, function(err) {

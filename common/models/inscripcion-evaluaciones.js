@@ -33,7 +33,7 @@ module.exports = function(Inscripcionevaluaciones) {
 
                               Inscripcionevaluaciones.app.models.Email.send({
                                 to: alumnoEncontrado.email,
-                                from: 'control-escolar@icatqr.edu.mx',
+                                from: 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
                                 subject: titulo,
                                 html: texto_alumno
                               }, function(err) {
@@ -50,7 +50,7 @@ module.exports = function(Inscripcionevaluaciones) {
 
                               Inscripcionevaluaciones.app.models.Email.send({
                                 to: alumnoEncontrado.email,
-                                from: 'control-escolar@icatqr.edu.mx',
+                                from: 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
                                 subject: titulo,
                                 html: texto_alumno
                               }, function(err) {

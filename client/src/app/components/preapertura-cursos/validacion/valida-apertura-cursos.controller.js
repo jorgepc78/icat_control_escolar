@@ -84,7 +84,7 @@
 
                       vm.listaUnidades.push({
                           idUnidadAdmtva  : -1,
-                          nombre          : 'Todas'
+                          nombre          : 'Seleccione la unidad'
                       });
 
                       angular.forEach(resp, function(unidad) {
@@ -189,29 +189,17 @@
                   vm.tablaListaCursos.inicio = 0;
                   vm.tablaListaCursos.fin = 1;
 
-                  if(vm.unidadSeleccionada.idUnidadAdmtva == -1)
-                  {
-                        vm.tablaListaCursos.condicion = {
+                  vm.tablaListaCursos.condicion = {
+                      and: [
+                        {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
+                        {
                             or: [
                               {estatus: 1},
                               {estatus: 3}
                             ]
-                        };
-                  }
-                  else
-                  {
-                        vm.tablaListaCursos.condicion = {
-                            and: [
-                              {idUnidadAdmtva: vm.unidadSeleccionada.idUnidadAdmtva},
-                              {
-                                  or: [
-                                    {estatus: 1},
-                                    {estatus: 3}
-                                  ]
-                              },
-                            ]
-                        };
-                  }
+                        },
+                      ]
+                  };
 
                   tablaDatosService.obtiene_datos_tabla(CursosOficiales, vm.tablaListaCursos)
                   .then(function(respuesta) {

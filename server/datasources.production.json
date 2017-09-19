@@ -1,10 +1,10 @@
 {
   "icat_control_escolar_ds": {
-    "host": "localhost",
+    "host": "35.196.78.232",
     "port": 5432,
     "database": "icat_control_escolar",
     "username": "postgres",
-    "password": "post01*",
+    "password": "JgekJ34!",
     "name": "icat_control_escolar_ds",
     "connector": "postgresql",
     "debug": false
@@ -32,7 +32,7 @@
     "name": "almacenamiento",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
-    "root": "../documentos",
+    "root": "/icat_control_escolar/documentos",
     "maxFileSize": "33554432"
   }
 }

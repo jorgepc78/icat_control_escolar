@@ -19,7 +19,7 @@
               registrosPorPagina : 5,
               inicio             : 0,
               fin                : 1,
-              condicion          : {estatus:{lt: 4}},
+              condicion          : {},
               filtro_datos       : {},
               fila_seleccionada  : 0
             };

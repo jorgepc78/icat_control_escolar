@@ -100,7 +100,7 @@
                 vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.selected.nombreCurso;
                 vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
                 vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
-                vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
+                //vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
                 vm.registroEdicion.descripcion = vm.cursoSeleccionado.selected.descripcion;
 
                 vm.listaInstructores = [];

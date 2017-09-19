@@ -24,36 +24,53 @@
                                         <table class="tablaDatos table table-condensed no-footer">
                                           <thead>
                                             <tr>
-                                                <th rowspan="2" class="text-center">Unidad</th>
-                                                <th colspan="3" class="text-center">1er trimestre</th>
-                                                <th colspan="3" class="text-center">2o trimestre</th>
-                                                <th colspan="3" class="text-center">3er trimestre</th>
-                                                <th colspan="3" class="text-center">4o trimestre</th>
+                                                <th rowspan="3" class="text-center" style="width: 90px;padding: 8px 1px 8px 1px !important;vertical-align: middle;">Unidad</th>
+                                                <th colspan="5" class="text-center">1er trimestre</th>
+                                                <th colspan="5" class="text-center">2o trimestre</th>
+                                                <th colspan="5" class="text-center">3er trimestre</th>
+                                                <th colspan="5" class="text-center">4o trimestre</th>
                                             </tr>
 
                                             <tr>
-                                                <th class="text-center">Creado</th>
-                                                <th class="text-center">Estatus</th>
-                                                <th class="text-center">N&uacute;m. cursos</th>
+                                                <th rowspan="2" class="text-center" style="width: 30px;padding: 8px 1px 8px 1px !important;border-left: 1px solid #111;vertical-align: middle;">Creado</th>
+                                                <th rowspan="2" class="text-center" style="width: 30px;padding: 8px 1px 8px 1px !important;vertical-align: middle;">Estatus</th>
+                                                <th colspan="3" class="text-center" style="border-right: 1px solid #111;">Cursos</th>
 
-                                                <th class="text-center">Creado</th>
-                                                <th class="text-center">Estatus</th>
-                                                <th class="text-center">N&uacute;m. cursos</th>
+                                                <th rowspan="2" class="text-center" style="width: 30px;padding: 8px 1px 8px 1px !important;vertical-align: middle;">Creado</th>
+                                                <th rowspan="2" class="text-center" style="width: 30px;padding: 8px 1px 8px 1px !important;vertical-align: middle;">Estatus</th>
+                                                <th colspan="3" class="text-center" style="border-right: 1px solid #111;">Cursos</th>
 
-                                                <th class="text-center">Creado</th>
-                                                <th class="text-center">Estatus</th>
-                                                <th class="text-center">N&uacute;m. cursos</th>
+                                                <th rowspan="2" class="text-center" style="width: 30px;padding: 8px 1px 8px 1px !important;vertical-align: middle;">Creado</th>
+                                                <th rowspan="2" class="text-center" style="width: 30px;padding: 8px 1px 8px 1px !important;vertical-align: middle;">Estatus</th>
+                                                <th colspan="3" class="text-center" style="border-right: 1px solid #111;">Cursos</th>
 
-                                                <th class="text-center">Creado</th>
-                                                <th class="text-center">Estatus</th>
-                                                <th class="text-center">N&uacute;m. cursos</th>
+                                                <th rowspan="2" class="text-center" style="width: 30px;padding: 8px 1px 8px 1px !important;vertical-align: middle;">Creado</th>
+                                                <th rowspan="2" class="text-center" style="width: 30px;padding: 8px 1px 8px 1px !important;vertical-align: middle;">Estatus</th>
+                                                <th colspan="3" class="text-center" style="border-right: 1px solid #111;">Cursos</th>
+                                            </tr>
+                                            <tr>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;">Prog.</th>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;">apert. PTC</th>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;border-right: 1px solid #111;">apert. Extra</th>
+
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;">Prog.</th>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;">apert. PTC</th>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;border-right: 1px solid #111;">apert. Extra</th>
+
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;">Prog.</th>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;">apert. PTC</th>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;border-right: 1px solid #111;">apert. Extra</th>
+
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;">Prog.</th>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;">apert. PTC</th>
+                                               <th class="text-center" style="width: 50px;padding: 8px 1px 8px 1px !important;border-right: 1px solid #111;">apert. Extra</th>
                                             </tr>
                                           </thead>
                                          <tbody>
                                             <tr ng-repeat="registro in vm.registrosPTCs" class="pointer">
                                                 <td style="border-right: 1px solid #111;"> {{registro.nombre_unidad}}</td>
                                                 
-                                                <td class="client-status" style="text-align: center;">
+                                                <td class="client-status" style="text-align: center;width: 30px;padding-left: 2px; padding-right: 2px;">
                                                     <span class="label label-{{registro.existe1trim === 1 ? 'primary' : 'warning'}}">{{registro.existe1trim === 1 ? 'S&iacute;' : 'No'}}</span>
                                                 </td>
                                                 <td ng-show="registro.existe1trim === 0" class="client-status" style="text-align: center;">
@@ -66,8 +83,14 @@
                                                     <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
                                                     <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
                                                 </td>
-                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                <td class="client-status" style="text-align: center;">
                                                     {{registro.num_cursos1tim > 0 ? registro.num_cursos1tim : ''}}
+                                                </td>
+                                                 <td class="client-status" style="text-align: center;">
+                                                    {{registro.cursos_aper_ptc1tim > 0 ? registro.cursos_aper_ptc1tim : ''}}
+                                                </td>
+                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                    {{registro.cursos_aper_no_ptc1tim > 0 ? registro.cursos_aper_no_ptc1tim : ''}}
                                                 </td>
 
                                                 <td class="client-status" style="text-align: center;">
@@ -83,8 +106,14 @@
                                                     <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
                                                     <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
                                                 </td>
-                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                <td class="client-status" style="text-align: center;">
                                                     {{registro.num_cursos2tim > 0 ? registro.num_cursos2tim : ''}}
+                                                </td>
+                                                <td class="client-status" style="text-align: center;">
+                                                    {{registro.cursos_aper_ptc2tim > 0 ? registro.cursos_aper_ptc2tim : ''}}
+                                                </td>
+                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                    {{registro.cursos_aper_no_ptc2tim > 0 ? registro.cursos_aper_no_ptc2tim : ''}}
                                                 </td>
 
                                                 <td class="client-status" style="text-align: center;">
@@ -100,8 +129,14 @@
                                                     <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
                                                     <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
                                                 </td>
-                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                <td class="client-status" style="text-align: center;">
                                                     {{registro.num_cursos3tim > 0 ? registro.num_cursos3tim : ''}}
+                                                </td>
+                                                <td class="client-status" style="text-align: center;">
+                                                    {{registro.cursos_aper_ptc3tim > 0 ? registro.cursos_aper_ptc3tim : ''}}
+                                                </td>
+                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                    {{registro.cursos_aper_no_ptc3tim > 0 ? registro.cursos_aper_no_ptc3tim : ''}}
                                                 </td>
 
                                                 <td class="client-status" style="text-align: center;">
@@ -117,8 +152,14 @@
                                                     <span ng-switch-when="3" class="label label-danger texto-estatus-ptc">Rechazado</span>
                                                     <span ng-switch-when="4" class="label label-white texto-estatus-ptc">Cerrado</span>
                                                 </td>
-                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                <td class="client-status" style="text-align: center;">
                                                     {{registro.num_cursos4tim > 0 ? registro.num_cursos4tim : ''}}
+                                                </td>
+                                                <td class="client-status" style="text-align: center;">
+                                                    {{registro.cursos_aper_ptc4tim > 0 ? registro.cursos_aper_ptc4tim : ''}}
+                                                </td>
+                                                <td class="client-status" style="text-align: center;border-right: 1px solid #111;">
+                                                    {{registro.cursos_aper_no_ptc4tim > 0 ? registro.cursos_aper_no_ptc4tim : ''}}
                                                 </td>
                                             </tr>
                                           </tbody>

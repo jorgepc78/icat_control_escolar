@@ -10,9 +10,6 @@
     "schema": "public",
     "table": "usuario"
   },
-  "scope": {
-    "limit": 10
-  },
   "properties": {
     "idUsuario": {
       "type": "Number",

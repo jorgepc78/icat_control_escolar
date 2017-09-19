@@ -305,13 +305,6 @@
                 controllerAs: 'vm',
                 authenticate: true
             })
-
-            .state('encuesta_participante_curso', {
-                url: '/encuesta_participante_curso/:idInscripcion',
-                templateUrl: 'app/components/encuestas/participante-curso.html',
-                controller: 'ParticipanteCursoController',
-                controllerAs: 'vm'
-            })
     }
 
 })();

@@ -59,10 +59,10 @@
                                                     <span ng-show="( (registro.aprobadoAcademica == true) && (registro.estatus == 1) )" class="label label-{{registro.aprobadoAcademica === true ? 'primary' : 'warning'}}">{{registro.aprobadoAcademica === true ? 'S&iacute;' : 'No'}}</span>
                                                 </td>
                                                 <td class="client-status" style="text-align: center;">
-                                                    <button type="button" ng-disabled="( (registro.aprobadoAcademica == false) && (registro.estatus == 1) )" ng-click="vm.apruebaCurso(registro,'dg')" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Aprobar y aceptar este curso por parte de direcci&oacute;n general"><i class="fa fa-check"></i></button>
+                                                    <button type="button" ng-show="(registro.estatus == 1)" ng-disabled="( (registro.aprobadoAcademica == false) && (registro.estatus == 1) )" ng-click="vm.apruebaCurso(registro,'dg')" class="btn btn-primary btn-sm" tooltip-placement="top" tooltip="Aprobar y aceptar este curso por parte de direcci&oacute;n general"><i class="fa fa-check"></i></button>
                                                 </td>
                                                 <td class="client-status" style="text-align: center;">
-                                                    <button type="button" ng-disabled="( (registro.revisadoProgramas == false) && (registro.estatus == 1) )" class="btn btn-sm" ng-click="vm.generaDocumento(registro.idCurso)"><i class="fa fa-print" tooltip-placement="top" tooltip="Imprime Documento de autorizaci&oacute;n"></i></button>
+                                                    <button type="button" ng-show="(registro.estatus == 1)" ng-disabled="( (registro.revisadoProgramas == false) && (registro.estatus == 1) )" class="btn btn-sm" ng-click="vm.generaDocumento(registro.idCurso)"><i class="fa fa-print" tooltip-placement="top" tooltip="Imprime Documento de autorizaci&oacute;n"></i></button>
                                                 </td>
                                             </tr>
                                           </tbody>

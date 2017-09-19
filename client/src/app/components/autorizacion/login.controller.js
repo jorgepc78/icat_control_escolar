@@ -64,7 +64,7 @@
                             $timeout(function(){
                                  vm.mostrar_msg_login = false;
                                  vm.msg_login_txt = '';
-                            }, 3000);
+                            }, 2000);
                         }
                         else
                         {

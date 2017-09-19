@@ -242,7 +242,7 @@ module.exports = function(ProgTrimCursos) {
 		
 		var ds = ProgTrimCursos.dataSource;
 
-		var sql = 'SELECT * FROM ptc.resumen_ptc_unidades WHERE anio = ' + anio;
+		var sql = 'SELECT * FROM estadisticas.resumen_ptc_unidades WHERE anio = ' + anio;
 
 		ds.connector.execute(sql, '', function(err, resultado) {
 			if (err);

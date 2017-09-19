@@ -18,7 +18,8 @@
             inicia();
 
             function inicia() {
-                if( (registroEditar.estatus == 4) && (registroEditar.diasTermine > 5) )
+                if( (registroEditar.estatus == 4) )
+                //if( (registroEditar.estatus == 4) && (registroEditar.diasTermine > 5) ) Esta opcion se habilita cuando se de el proceso normal
                     vm.btnhabilitado = false;
             };
 

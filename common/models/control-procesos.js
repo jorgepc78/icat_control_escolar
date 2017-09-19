@@ -1,226 +1,257 @@
 module.exports = function(ControlProcesos) {
 
     ControlProcesos.observe('after save', function(ctx, next) {
-              //El mensaje se le va a enviar a dos tipos de destinatarios, el que envia como un aviso de que ya se envió, y la persona o personas que de acuerdo a su perfil
-              //deben recibir el mensaje.
+ 
+              if( (ctx.instance.accion !== 'PTC REVISADO PROGRAMAS') && (ctx.instance.accion !== 'PTC APROBADO ACADEMICA') && (ctx.instance.accion !== 'CURSO REVISADO PROGRAMAS') && (ctx.instance.accion !== 'CURSO APROBADO ACADEMICA'))
+              {
+                      //El mensaje se le va a enviar a dos tipos de destinatarios, el que envia como un aviso de que ya se envió, y la persona o personas que de acuerdo a su perfil
+                      //deben recibir el mensaje.
 
-              var array_envia   = [];
-              var array_recibe  = [];
-              var condicion     = {};
-              var mensajes      = {
-                titulo : '',
-                envia  : '',
-                recibe : ''
-              };
+                      var array_envia   = [];
+                      var array_recibe  = [];
+                      var condicion     = {};
+                      var mensajes      = {
+                        titulo : '',
+                        envia  : '',
+                        recibe : ''
+                      };
 
-              var Usuario = ControlProcesos.app.models.Usuario;
+                      var Usuario = ControlProcesos.app.models.Usuario;
 
-              //Buscamos al usuario que disapara el evento para enviarle el aviso
-              Usuario.find({
-                where:  {idUsuario: ctx.instance.idUsuario}, 
-                fields: ['idUsuario','nombre', 'email'],
-                include: [
-                  {
-                      relation: 'unidad_revisa',
-                      scope: {
-                          fields:['idUnidadAdmtva','nombre']
-                      }
-                  }
-                ]
-              },
-              function(err, usuarioEncontrado) {
-                
-                    var usuarioRecord = JSON.parse( JSON.stringify( usuarioEncontrado[0] ) );
-                    array_envia.push({
-                      idUsuario : usuarioRecord.idUsuario,
-                      nombre    : usuarioRecord.nombre,
-                      email     : usuarioRecord.email
-                    });
-
-                    //Ahora buscamos a los usuarios que de acuerdo a su perfil van a recibir el mensaje, no tomando en cuenta al usuario que dispara el proceso.
-                    //Buscamos al dueño del documento para informarle del rechazo
-                    
-                    //console.log("idProcesoPadre: " + JSON.stringify(ctx.instance));
-
-                    ControlProcesos.findById(ctx.instance.id, 
-                    {
-                      fields: ['idProcesoPadre']
-                    },
-                    function(err, respuesta) {
-
-                          //console.log("idProcesoPadre: " + respuesta.idProcesoPadre);
-
-                          var idPadre = respuesta.idProcesoPadre;
-                          if(respuesta.idProcesoPadre == 0)
-                              idPadre = ctx.instance.id;
-                            
-                          ControlProcesos.findById(idPadre, 
-                          {
-                            fields: ['idUsuario'],
-                            include: {
-                              relation: 'usuario_pertenece',
-                              scope: {
-                                fields: ['idUsuario','nombre','email']
-                              }
+                      //Buscamos al usuario que disapara el evento para enviarle el aviso
+                      Usuario.find({
+                        where:  {idUsuario: ctx.instance.idUsuario}, 
+                        fields: ['idUsuario','nombre', 'email']
+                      },
+                      function(err, usuarioEncontrado) {
+                        
+                            if( (ctx.instance.accion !== 'PTC APROBADO DIR GRAL') && (ctx.instance.accion !== 'CURSO APROBADO DIR GRAL') )
+                            {
+                                  var usuarioRecord = JSON.parse( JSON.stringify( usuarioEncontrado[0] ) );
+                                  array_envia.push({
+                                    idUsuario : usuarioRecord.idUsuario,
+                                    nombre    : usuarioRecord.nombre,
+                                    email     : usuarioRecord.email
+                                  });                              
                             }
-                          },
-                          function(err, userEn) {
 
-                                var usuarioEn = JSON.parse(JSON.stringify(userEn));
-                                var usuario_pertenece = JSON.parse(JSON.stringify(usuarioEn.usuario_pertenece));
+                            //Ahora buscamos a los usuarios que de acuerdo a su perfil van a recibir el mensaje, no tomando en cuenta al usuario que dispara el proceso.
+                            //Buscamos al dueño del documento para informarle del rechazo
+                            
+                            //console.log("idProcesoPadre: " + JSON.stringify(ctx.instance));
 
-                                //console.log("usuario_pertenece:" +usuario_pertenece.nombre);
-                                if( (ctx.instance.accion == 'PTC RECHAZADO PROGRAMAS') || (ctx.instance.accion == 'PTC APROBADO DIR GRAL') || (ctx.instance.accion == 'CURSO RECHAZADO PROGRAMAS')  || (ctx.instance.accion == 'CURSO APROBADO DIR GRAL') || (ctx.instance.accion == 'EVALUACION RECHAZADA PROGRAMAS') || (ctx.instance.accion == 'EVALUACION APROBADA DIR GRAL') )
-                                {
-                                      array_recibe.push({
-                                        idUsuario : usuario_pertenece.idUsuario,
-                                        nombre    : usuario_pertenece.nombre,
-                                        email     : usuario_pertenece.email
-                                      });
-                                }
+                            ControlProcesos.findById(ctx.instance.id, 
+                            {
+                              fields: ['idProcesoPadre']
+                            },
+                            function(err, respuesta) {
 
-                                if(ctx.instance.accion == 'ENVIO REVISION PTC')
-                                  var tipo_aviso = {avisoEnvioPTC: true}
-                                else if(ctx.instance.accion == 'PTC REVISADO PROGRAMAS')
-                                  var tipo_aviso = {avisoRevisonPTCProgr: true}
-                                else if(ctx.instance.accion == 'PTC RECHAZADO PROGRAMAS')
-                                  var tipo_aviso = {avisoRechazoPTCProgr: true}
-                                else if(ctx.instance.accion == 'PTC APROBADO ACADEMICA')
-                                  var tipo_aviso = {avisoRevisonPTCAcad: true}
-                                else if(ctx.instance.accion == 'PTC RECHAZADO ACADEMICA')
-                                  var tipo_aviso = {avisoRechazoPTCAcad: true}
-                                else if(ctx.instance.accion == 'PTC APROBADO PLANEACION')
-                                  var tipo_aviso = {avisoRevisonPTCPlan: true}
-                                else if(ctx.instance.accion == 'PTC RECHAZADO PLANEACION')
-                                  var tipo_aviso = {avisoRechazoPTCPlan: true}
-                                else if(ctx.instance.accion == 'PTC APROBADO DIR GRAL')
-                                  var tipo_aviso = {avisoRevisionPTCGral: true}
-                                else if(ctx.instance.accion == 'PTC RECHAZADO DIR GRAL')
-                                  var tipo_aviso = {avisoRechazoPTCGral: true}
+                                  //console.log("idProcesoPadre: " + respuesta.idProcesoPadre);
 
-
-                                else if(ctx.instance.accion == 'ENVIO VALIDACION CURSO')
-                                  var tipo_aviso = {avisoEnvioPreapCurso: true}
-                                else if(ctx.instance.accion == 'CURSO REVISADO PROGRAMAS')
-                                  var tipo_aviso = {avisoRevisionPreapCursoProgr: true}
-                                else if(ctx.instance.accion == 'CURSO RECHAZADO PROGRAMAS')
-                                  var tipo_aviso = {avisoRechazoPreapCursoProgr: true}
-
-                                else if(ctx.instance.accion == 'CURSO APROBADO ACADEMICA')
-                                  var tipo_aviso = {avisoRevisionPreapCursoAcad: true}
-                                else if(ctx.instance.accion == 'CURSO RECHAZADO ACADEMICA')
-                                  var tipo_aviso = {avisoRechazoPreapCursoAcad: true}
-
-                                else if(ctx.instance.accion == 'CURSO APROBADO PLANEACION')
-                                  var tipo_aviso = {avisoRevisionPreapCursoPlan: true}
-                                else if(ctx.instance.accion == 'CURSO RECHAZADO PLANEACION')
-                                  var tipo_aviso = {avisoRechazoPreapCursoPlan: true}
-
-                                else if(ctx.instance.accion == 'CURSO APROBADO DIR GRAL')
-                                  var tipo_aviso = {avisoRevisionPreapCursoGral: true}
-                                else if(ctx.instance.accion == 'CURSO RECHAZADO DIR GRAL')
-                                  var tipo_aviso = {avisoRechazoPreapCursoGral: true}
-
-                                else if(ctx.instance.accion == 'REPROGRAMACION DE CURSO')
-                                  var tipo_aviso = {avisoReprogCurso: true}
-                                else if(ctx.instance.accion == 'CANCELACION DE CURSO')
-                                  var tipo_aviso = {avisoCancelacionCurso: true}
-                                else if(ctx.instance.accion == 'CONCLUSION DE CURSO')
-                                  var tipo_aviso = {avisoTerminacionCurso: true}
-                                else if(ctx.instance.accion == 'CIERRE DE CURSO')
-                                  var tipo_aviso = {avisoCierreCurso: true}
-
-                                else if(ctx.instance.accion == 'ALCANCE MINIMO INSCRITOS')
-                                  var tipo_aviso = {avisoMinimoInscritosCurso: true}
-                                else if(ctx.instance.accion == 'ALCANCE MINIMO PAGADOS')
-                                  var tipo_aviso = {avisoMinimoPagadosCurso: true}
-                                else if(ctx.instance.accion == 'REVERSION MINIMO PAGADOS')
-                                  var tipo_aviso = {avisoReversionPagadosCurso: true}
-
-                                else if(ctx.instance.accion == 'ENVIO VALIDACION')
-                                  var tipo_aviso = {avisoEnvioEvaluacion: true}
-
-                                else if(ctx.instance.accion == 'EVALUACION REVISADA PROGRAMAS')
-                                  var tipo_aviso = {avisoRevisionEvaluacionProgr: true}
-                                else if(ctx.instance.accion == 'EVALUACION RECHAZADA PROGRAMAS')
-                                  var tipo_aviso = {avisoRechazoEvaluacionProgr: true}
-
-                                else if(ctx.instance.accion == 'EVALUACION APROBADA ACADEMICA')
-                                  var tipo_aviso = {avisoRevisionEvaluacionAcad: true}
-                                else if(ctx.instance.accion == 'EVALUACION RECHAZADA ACADEMICA')
-                                  var tipo_aviso = {avisoRechazoEvaluacionAcad: true}
-
-                                else if(ctx.instance.accion == 'EVALUACION APROBADA PLANEACION')
-                                  var tipo_aviso = {avisoRevisionEvaluacionPlan: true}
-                                else if(ctx.instance.accion == 'EVALUACION RECHAZADA PLANEACION')
-                                  var tipo_aviso = {avisoRechazoEvaluacionPlan: true}
-
-                                else if(ctx.instance.accion == 'EVALUACION APROBADA DIR GRAL')
-                                  var tipo_aviso = {avisoRevisionEvaluacionGral: true}
-                                else if(ctx.instance.accion == 'EVALUACION RECHAZADA DIR GRAL')
-                                  var tipo_aviso = {avisoRechazoEvaluacionGral: true}
-
-                                else if(ctx.instance.accion == 'CANCELACION DE EVALUACION')
-                                  var tipo_aviso = {avisoCancelacionEvaluacion: true}
-                                else if(ctx.instance.accion == 'CIERRE DE EVALUACION')
-                                  var tipo_aviso = {avisoCierreEvaluacion: true}
-
-                                condicion = {
-                                    and: [
-                                      {idUsuario: {neq: array_envia[0].idUsuario}},
-                                      {idUnidadAdmtva: 1},
-                                      {activo: true},
-                                      tipo_aviso
-                                    ]
-                                };
-
-                                Usuario.find({
-                                  where:  condicion, 
-                                  fields: ['idUsuario', 'nombre', 'email'],
-                                  include: [
-                                    {
-                                        relation: 'unidad_revisa',
-                                        scope: {
-                                            fields:['idUnidadAdmtva','nombre']
-                                        }
+                                  var idPadre = respuesta.idProcesoPadre;
+                                  if(respuesta.idProcesoPadre == 0)
+                                      idPadre = ctx.instance.id;
+                                    
+                                  ControlProcesos.findById(idPadre, 
+                                  {
+                                    fields: ['idUsuario'],
+                                    include: {
+                                      relation: 'usuario_pertenece',
+                                      scope: {
+                                        fields: ['idUsuario','nombre','email']
+                                      }
                                     }
-                                  ]
-                                },
-                                function(err, usuarioEncontrado) {
-                                  
-                                      var usuarioRecord = JSON.parse( JSON.stringify( usuarioEncontrado ) );
-                                      var index = 0;
+                                  },
+                                  function(err, userEn) {
 
-                                      for (var i = 0; i < usuarioRecord.length; i++) {
-                                          var unidad_revisa_usuario = JSON.parse( JSON.stringify( usuarioRecord[i].unidad_revisa ) );
+                                        var usuarioEn = JSON.parse(JSON.stringify(userEn));
+                                        var usuario_pertenece = JSON.parse(JSON.stringify(usuarioEn.usuario_pertenece));
 
-                                          //console.log(unidad_revisa_usuario);
-                                          //console.log("****************************************************************");
-
-                                          index = unidad_revisa_usuario.map(function(record) {
-                                                                          return record.idUnidadAdmtva;
-                                                                        }).indexOf(ctx.instance.idUnidadAdmtva);
-
-                                          if(index >= 0)
-                                          {
+                                        //console.log("usuario_pertenece:" +usuario_pertenece.nombre);
+                                        if( (ctx.instance.accion == 'PTC RECHAZADO PROGRAMAS') || (ctx.instance.accion == 'PTC APROBADO DIR GRAL') || (ctx.instance.accion == 'CURSO RECHAZADO PROGRAMAS')  || (ctx.instance.accion == 'CURSO APROBADO DIR GRAL') || (ctx.instance.accion == 'EVALUACION RECHAZADA PROGRAMAS') || (ctx.instance.accion == 'EVALUACION APROBADA DIR GRAL') )
+                                        {
                                               array_recibe.push({
-                                                idUsuario : usuarioRecord[i].idUsuario,
-                                                nombre    : usuarioRecord[i].nombre,
-                                                email     : usuarioRecord[i].email
-                                              });                                            
-                                          }
-                                      };
+                                                idUsuario : usuario_pertenece.idUsuario,
+                                                nombre    : usuario_pertenece.nombre,
+                                                email     : usuario_pertenece.email
+                                              });
+                                        }
 
-                                      //console.log("array_recibe: " + JSON.stringify(array_recibe));
-                                      //console.log("*************************************************************");
-                                      PreparaMensajes(ctx.instance.accion, array_envia, array_recibe);
-                                });
+                                        if(ctx.instance.accion == 'ENVIO REVISION PTC')
+                                          var tipo_aviso = {avisoEnvioPTC: true}
+                                        else if(ctx.instance.accion == 'PTC REVISADO PROGRAMAS')
+                                          var tipo_aviso = {avisoRevisonPTCProgr: true}
+                                        else if(ctx.instance.accion == 'PTC RECHAZADO PROGRAMAS')
+                                          var tipo_aviso = {avisoRechazoPTCProgr: true}
+                                        else if(ctx.instance.accion == 'PTC APROBADO ACADEMICA')
+                                          var tipo_aviso = {avisoRevisonPTCAcad: true}
+                                        else if(ctx.instance.accion == 'PTC RECHAZADO ACADEMICA')
+                                          var tipo_aviso = {avisoRechazoPTCAcad: true}
+                                        else if(ctx.instance.accion == 'PTC APROBADO PLANEACION')
+                                          var tipo_aviso = {avisoRevisonPTCPlan: true}
+                                        else if(ctx.instance.accion == 'PTC RECHAZADO PLANEACION')
+                                          var tipo_aviso = {avisoRechazoPTCPlan: true}
+                                        else if(ctx.instance.accion == 'PTC APROBADO DIR GRAL')
+                                          var tipo_aviso = {avisoRevisionPTCGral: true}
+                                        else if(ctx.instance.accion == 'PTC RECHAZADO DIR GRAL')
+                                          var tipo_aviso = {avisoRechazoPTCGral: true}
 
 
-                          });
-                    });
+                                        else if(ctx.instance.accion == 'ENVIO VALIDACION CURSO')
+                                          var tipo_aviso = {avisoEnvioPreapCurso: true}
+                                        else if(ctx.instance.accion == 'CURSO REVISADO PROGRAMAS')
+                                          var tipo_aviso = {avisoRevisionPreapCursoProgr: true}
+                                        else if(ctx.instance.accion == 'CURSO RECHAZADO PROGRAMAS')
+                                          var tipo_aviso = {avisoRechazoPreapCursoProgr: true}
 
-              });
+                                        else if(ctx.instance.accion == 'CURSO APROBADO ACADEMICA')
+                                          var tipo_aviso = {avisoRevisionPreapCursoAcad: true}
+                                        else if(ctx.instance.accion == 'CURSO RECHAZADO ACADEMICA')
+                                          var tipo_aviso = {avisoRechazoPreapCursoAcad: true}
+
+                                        else if(ctx.instance.accion == 'CURSO APROBADO PLANEACION')
+                                          var tipo_aviso = {avisoRevisionPreapCursoPlan: true}
+                                        else if(ctx.instance.accion == 'CURSO RECHAZADO PLANEACION')
+                                          var tipo_aviso = {avisoRechazoPreapCursoPlan: true}
+
+                                        else if(ctx.instance.accion == 'CURSO APROBADO DIR GRAL')
+                                          var tipo_aviso = {avisoRevisionPreapCursoGral: true}
+                                        else if(ctx.instance.accion == 'CURSO RECHAZADO DIR GRAL')
+                                          var tipo_aviso = {avisoRechazoPreapCursoGral: true}
+
+                                        else if(ctx.instance.accion == 'REPROGRAMACION DE CURSO')
+                                          var tipo_aviso = {avisoReprogCurso: true}
+                                        else if(ctx.instance.accion == 'CANCELACION DE CURSO')
+                                          var tipo_aviso = {avisoCancelacionCurso: true}
+                                        else if(ctx.instance.accion == 'CONCLUSION DE CURSO')
+                                          var tipo_aviso = {avisoTerminacionCurso: true}
+                                        else if(ctx.instance.accion == 'CIERRE DE CURSO')
+                                          var tipo_aviso = {avisoCierreCurso: true}
+
+                                        else if(ctx.instance.accion == 'ALCANCE MINIMO INSCRITOS')
+                                          var tipo_aviso = {avisoMinimoInscritosCurso: true}
+                                        else if(ctx.instance.accion == 'ALCANCE MINIMO PAGADOS')
+                                          var tipo_aviso = {avisoMinimoPagadosCurso: true}
+                                        else if(ctx.instance.accion == 'REVERSION MINIMO PAGADOS')
+                                          var tipo_aviso = {avisoReversionPagadosCurso: true}
+
+                                        else if(ctx.instance.accion == 'ENVIO VALIDACION')
+                                          var tipo_aviso = {avisoEnvioEvaluacion: true}
+
+                                        else if(ctx.instance.accion == 'EVALUACION REVISADA PROGRAMAS')
+                                          var tipo_aviso = {avisoRevisionEvaluacionProgr: true}
+                                        else if(ctx.instance.accion == 'EVALUACION RECHAZADA PROGRAMAS')
+                                          var tipo_aviso = {avisoRechazoEvaluacionProgr: true}
+
+                                        else if(ctx.instance.accion == 'EVALUACION APROBADA ACADEMICA')
+                                          var tipo_aviso = {avisoRevisionEvaluacionAcad: true}
+                                        else if(ctx.instance.accion == 'EVALUACION RECHAZADA ACADEMICA')
+                                          var tipo_aviso = {avisoRechazoEvaluacionAcad: true}
+
+                                        else if(ctx.instance.accion == 'EVALUACION APROBADA PLANEACION')
+                                          var tipo_aviso = {avisoRevisionEvaluacionPlan: true}
+                                        else if(ctx.instance.accion == 'EVALUACION RECHAZADA PLANEACION')
+                                          var tipo_aviso = {avisoRechazoEvaluacionPlan: true}
+
+                                        else if(ctx.instance.accion == 'EVALUACION APROBADA DIR GRAL')
+                                          var tipo_aviso = {avisoRevisionEvaluacionGral: true}
+                                        else if(ctx.instance.accion == 'EVALUACION RECHAZADA DIR GRAL')
+                                          var tipo_aviso = {avisoRechazoEvaluacionGral: true}
+
+                                        else if(ctx.instance.accion == 'CANCELACION DE EVALUACION')
+                                          var tipo_aviso = {avisoCancelacionEvaluacion: true}
+                                        else if(ctx.instance.accion == 'CIERRE DE EVALUACION')
+                                          var tipo_aviso = {avisoCierreEvaluacion: true}
+
+                                        if(array_envia.length > 0)
+                                        {
+                                              condicion = {
+                                                  and: [
+                                                    {idUsuario: {neq: array_envia[0].idUsuario}},
+                                                    {idUnidadAdmtva: 1},
+                                                    {activo: true},
+                                                    tipo_aviso
+                                                  ]
+                                              };
+                                        }
+                                        else
+                                        {
+                                              condicion = {
+                                                  and: [
+                                                    {idUnidadAdmtva: 1},
+                                                    {activo: true},
+                                                    tipo_aviso
+                                                  ]
+                                              };
+                                        }
+
+                                        Usuario.find({
+                                          where:  condicion, 
+                                          fields: ['idUsuario', 'nombre', 'email'],
+                                          include: [
+                                            {
+                                                relation: 'perfil',
+                                                scope: {
+                                                    fields:['name','description']
+                                                }
+                                            },
+                                            {
+                                                relation: 'unidad_revisa',
+                                                scope: {
+                                                    fields:['idUnidadAdmtva','nombre']
+                                                }
+                                            }
+                                          ]
+                                        },
+                                        function(err, usuarioEncontrado) {
+                                          
+                                              var usuarioRecord = JSON.parse( JSON.stringify( usuarioEncontrado ) );
+                                              var index = 0;
+
+                                              for (var i = 0; i < usuarioRecord.length; i++) {
+                                                  var unidad_revisa_usuario = JSON.parse( JSON.stringify( usuarioRecord[i].unidad_revisa ) );
+                                                  var perfil_usuario = JSON.parse( JSON.stringify( usuarioRecord[i].perfil ) );
+
+                                                  //console.log(perfil_usuario[0].name);
+                                                  //console.log("****************************************************************");
+
+                                                  if(perfil_usuario[0].name == 'programas')
+                                                  {
+                                                        index = unidad_revisa_usuario.map(function(record) {
+                                                                                        return record.idUnidadAdmtva;
+                                                                                      }).indexOf(ctx.instance.idUnidadAdmtva);
+
+                                                        if(index >= 0)
+                                                        {
+                                                            array_recibe.push({
+                                                              idUsuario : usuarioRecord[i].idUsuario,
+                                                              nombre    : usuarioRecord[i].nombre,
+                                                              email     : usuarioRecord[i].email
+                                                            });
+                                                        }
+                                                  }
+                                                  else
+                                                  {
+                                                        array_recibe.push({
+                                                          idUsuario : usuarioRecord[i].idUsuario,
+                                                          nombre    : usuarioRecord[i].nombre,
+                                                          email     : usuarioRecord[i].email
+                                                        });
+                                                  }
+                                              };
+
+                                              //console.log("array_recibe: " + JSON.stringify(array_recibe));
+                                              //console.log("*************************************************************");
+                                              PreparaMensajes(ctx.instance.accion, array_envia, array_recibe);
+                                        });
+
+
+                                  });
+                            });
+
+                      });
+              }//End IF
+
 
 
 
@@ -497,7 +528,7 @@ module.exports = function(ControlProcesos) {
 
                                         ControlProcesos.app.models.Email.send({
                                           to      : registro.inscripcionesCursos[j].Capacitandos.email,
-                                          from    : 'control-escolar@icatqr.edu.mx',
+                                          from    : 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
                                           subject : 'Aviso de reprogramación del curso ICAT',
                                           html    : mensaje
                                         }, function(err) {
@@ -521,7 +552,7 @@ module.exports = function(ControlProcesos) {
 
                                         ControlProcesos.app.models.Email.send({
                                           to      : registro.inscripcionesCursos[j].Capacitandos.email,
-                                          from    : 'control-escolar@icatqr.edu.mx',
+                                          from    : 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
                                           subject : 'Aviso de cancelación de curso ICAT',
                                           html    : mensaje
                                         }, function(err) {
@@ -866,7 +897,7 @@ module.exports = function(ControlProcesos) {
 
                                         ControlProcesos.app.models.Email.send({
                                           to      : registro.inscripcionesEvaluaciones[j].Capacitandos.email,
-                                          from    : 'control-escolar@icatqr.edu.mx',
+                                          from    : 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
                                           subject : 'Aviso de cancelación de evaluación ICAT',
                                           html    : mensaje
                                         }, function(err) {
@@ -894,22 +925,25 @@ module.exports = function(ControlProcesos) {
 
                   if(mensajes.envia != '')
                   {
-                      ControlProcesos.app.models.Email.send({
-                        to      : array_envia[0].email,
-                        from    : 'control-escolar@icatqr.edu.mx',
-                        subject : mensajes.titulo,
-                        html    : mensajes.envia
-                      }, function(err) {
-                        if (err) console.log(err);
-                        //console.log('> envio del correo de aviso al remitente');
-                      });         
+                        if(array_envia.length > 0)
+                        {
+                              ControlProcesos.app.models.Email.send({
+                                to      : array_envia[0].email,
+                                from    : 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
+                                subject : mensajes.titulo,
+                                html    : mensajes.envia
+                              }, function(err) {
+                                if (err) console.log(err);
+                                //console.log('> envio del correo de aviso al remitente');
+                              });         
 
-                      ControlProcesos.app.models.DestinatariosAvisos.create({
-                        idControlProcesos : idControlProcesos,
-                        idUsuario         : array_envia[0].idUsuario
-                      }, function(err, respuesta) {
-                        if (err) throw err;
-                      });
+                              ControlProcesos.app.models.DestinatariosAvisos.create({
+                                idControlProcesos : idControlProcesos,
+                                idUsuario         : array_envia[0].idUsuario
+                              }, function(err, respuesta) {
+                                if (err) throw err;
+                              });
+                        }
                   }
 
                   if(mensajes.recibe != '')
@@ -918,7 +952,7 @@ module.exports = function(ControlProcesos) {
                         
                           ControlProcesos.app.models.Email.send({
                             to      : array_recibe[j].email,
-                            from    : 'control-escolar@icatqr.edu.mx',
+                            from    : 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
                             subject : mensajes.titulo,
                             html    : mensajes.recibe
                           }, function(err) {

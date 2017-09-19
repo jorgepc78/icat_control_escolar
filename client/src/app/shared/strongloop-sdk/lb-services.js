@@ -13,6 +13,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 (function(window, angular, undefined) {
   'use strict';
 
+  //var urlBase = "https://control-escolar.icatqr.edu.mx/api";
   var urlBase = "/api";
   var authHeader = 'authorization';
 

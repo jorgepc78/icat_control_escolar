@@ -18,6 +18,7 @@
             vm.muestraCursosPTCActual  = muestraCursosPTCActual;
             vm.cambiarPaginaPrincipal  = cambiarPaginaPrincipal;
             vm.cambiarPaginaDetalle    = cambiarPaginaDetalle;
+            vm.cambiarPaginaDetalleExtra = cambiarPaginaDetalleExtra;
             
             vm.muestraCursoPreapertura = muestraCursoPreapertura;
             vm.abreDocPTC              = abreDocPTC;
@@ -376,6 +377,23 @@
                                       curso_oficial_registrado: registro.curso_oficial_registrado
                                   });
                             });
+
+                        });
+                  }
+            }
+
+
+
+            function cambiarPaginaDetalleExtra() {
+
+                  if(vm.tablaListaCursosExtra.totalElementos > 0)
+                  {
+                        tablaDatosService.cambia_pagina(CursosOficiales, vm.tablaListaCursosExtra)
+                        .then(function(respuesta) {
+
+                            vm.tablaListaCursosExtra.inicio = respuesta.inicio;
+                            vm.tablaListaCursosExtra.fin = respuesta.fin;
+                            vm.registrosCursosExtras = respuesta.datos;
 
                         });
                   }

@@ -115,15 +115,6 @@
                     </ul>
                 </li>
 
-                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.registro_capacitandos_menu)">
-                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Capacitandos <span class="caret"></span></a>
-                    <ul role="menu" class="dropdown-menu">
-                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.registro_capacitandos_menu">
-                            <a ui-sref="capacitandos.principal_capacitandos">    <span class="nav-label"> Registro de capacitandos </span></a>
-                        </li>
-                    </ul>
-                </li>
-
                 <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.inscrip_pagos_registro_pago_curso || currentUser.perfil_menu.inscrip_pagos_registro_pago_eval)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Inscripciones y pagos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
@@ -136,6 +127,16 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.registro_capacitandos_menu)">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Capacitandos <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.registro_capacitandos_menu">
+                            <a ui-sref="capacitandos.principal_capacitandos">    <span class="nav-label"> Registro de capacitandos </span></a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.reportes_resumen_alumnos_cursos || currentUser.perfil_menu.reportes_bitacora)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Reportes <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">

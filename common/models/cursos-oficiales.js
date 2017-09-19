@@ -182,7 +182,7 @@ module.exports = function(CursosOficiales) {
         								"discapacidad"   : discapacidad.toString(),
         								"sexo"           : CUrsoEncontrado.inscripcionesCursos[i].Capacitandos.sexo,
         								"edad"           : edad,
-        								"escolaridad"    : (parseInt(CUrsoEncontrado.inscripcionesCursos[i].Capacitandos.idNivelEstudios) + 1),
+        								"escolaridad"    : (parseInt(CUrsoEncontrado.inscripcionesCursos[i].Capacitandos.idNivelEstudios) ),
         								"calificacion"   : CUrsoEncontrado.inscripcionesCursos[i].calificacion,
         								"acreditado"  	 : (CUrsoEncontrado.inscripcionesCursos[i].calificacion == 'ACREDITADO' ? 'X' : ''),
         								"no_acreditado"	 : (CUrsoEncontrado.inscripcionesCursos[i].calificacion == 'NO ACREDITADO' ? 'X' : ''),

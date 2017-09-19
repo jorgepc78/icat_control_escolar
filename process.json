@@ -2,7 +2,11 @@
   apps : [{
     name        : "icat_control_escolar",
     script      : "server/server.js",
-    watch       : true,
+    watch       : ["server"],
+    ignore_watch : ["node_modules","documentos/instructores"],
+    watch_options: {
+      followSymlinks: false
+    },
     env: {
       "NODE_ENV": "development",
     },

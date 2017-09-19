@@ -121,7 +121,19 @@
                   vm.tablaListaCursos.paginaActual = 1;
                   vm.tablaListaCursos.inicio = 0;
                   vm.tablaListaCursos.fin = 1;
-                  vm.tablaListaCursos.condicion = {idPtc: vm.PTCSeleccionado.idPtc};
+                  vm.tablaListaCursos.condicion = {
+                      and: [
+                        {
+                            or: [
+                              {estatus: 0},
+                              {estatus: 2},
+                              {estatus: 3},
+                              {estatus: 4}
+                            ]
+                        },
+                        {idPtc: vm.PTCSeleccionado.idPtc}
+                      ]
+                  };
 
                   vm.registrosCursosPTCs = {};
                   tablaDatosService.obtiene_datos_tabla(CursosPtc, vm.tablaListaCursos)

@@ -50,6 +50,11 @@
       "type": "hasMany",
       "model": "MatriculaXUnidadTipo",
       "foreignKey": "idCorte"
+    },
+    "estadistica_validaciones": {
+      "type": "hasMany",
+      "model": "Validaciones",
+      "foreignKey": "idCorte"
     }
   },
   "acls": [

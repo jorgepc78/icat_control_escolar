@@ -44,6 +44,7 @@
                                           <thead>
                                             <tr>
                                                 <th ng-show="(currentUser.unidad_pertenece_id == 1)" >Unidad</th>
+                                                <th>ID</th>
                                                 <th>Curso o m&oacute;dulo</th>
                                                 <th>Modalidad</th>
                                                 <th>Horario</th>
@@ -55,6 +56,7 @@
                                          <tbody>
                                             <tr ng-repeat="registro in vm.listaCursos" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaCursos.fila_seleccionada}" class="pointer">
                                                 <td ng-show="(currentUser.unidad_pertenece_id == 1)" > {{registro.unidad_pertenece.nombre}}</td>
+                                                <td> {{registro.idCurso}}</td>
                                                 <td> {{registro.nombreCurso}}</td>
                                                 <td> {{registro.modalidad}}</td>
                                                 <td> {{registro.horario}}</td>

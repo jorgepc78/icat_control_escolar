@@ -27,7 +27,10 @@
   },
   "RoleMapping": {
     "dataSource": "icat_control_escolar_ds",
-    "public": true
+    "public": true,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
   },
   "Role": {
     "dataSource": "icat_control_escolar_ds",
@@ -203,6 +206,10 @@
     "public": true
   },
   "UnidadesRevisionUsuario": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "Validaciones": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
   }

@@ -282,6 +282,22 @@
         "nullable": "YES"
       },
       "_selectable": true
+    },
+    "origen": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 16,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "origen",
+        "dataType": "smallint",
+        "dataLength": null,
+        "dataPrecision": 16,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
     }
   },
   "validations": [],

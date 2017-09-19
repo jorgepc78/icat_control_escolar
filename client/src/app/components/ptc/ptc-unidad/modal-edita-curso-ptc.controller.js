@@ -81,7 +81,7 @@
                     vm.cursoSeleccionado.selected = vm.listaCursos[index];
                     vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
                     vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
-                    vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
+                    //vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
                 });
     
 

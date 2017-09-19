@@ -20,7 +20,7 @@
             vm.mostrarSpiner = false;
             vm.mostrar_msg_error = false;
             vm.mensaje = '';
-            vm.correoCompartido = false;
+            //vm.correoCompartido = false;
 
             vm.listaLocalidades = [];
             vm.listaNivelEstudios = [];
@@ -227,7 +227,8 @@
                 .$promise
                 .then(function(resp) {
                     
-                        if((resp.count > 0)&&(vm.correoCompartido == false))
+                        //if((resp.count > 0)&&(vm.correoCompartido == false))
+                        if((resp.count > 0)&&(vm.registroEditar.email != ''))
                         {
                             vm.mostrarSpiner = false;
                             vm.mostrar_msg_error = true;

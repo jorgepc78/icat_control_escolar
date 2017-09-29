@@ -22,6 +22,7 @@
             vm.muestraCapacitando         = muestraCapacitando;
             vm.eliminaCapacitando         = eliminaCapacitando;
 
+            vm.opcionBuscar = 'nombre';
             vm.mostrarbtnLimpiar = false;
             vm.cadena_buscar = '';
 
@@ -119,8 +120,10 @@
                   vm.tablalListaCapacitados.fin = 1;
                   vm.mostrarbtnLimpiar = true;
 
-
-                  vm.tablalListaCapacitados.condicion = {nombreCompleto: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}};
+                  if(vm.opcionBuscar == 'nombre')
+                    vm.tablalListaCapacitados.condicion = {nombreCompleto: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}};
+                  else if(vm.opcionBuscar == 'numcontrol')
+                    vm.tablalListaCapacitados.condicion = {numControl: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}};
 
                   tablaDatosService.obtiene_datos_tabla(Capacitandos, vm.tablalListaCapacitados)
                   .then(function(respuesta) {

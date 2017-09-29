@@ -29,5 +29,4 @@ module.exports = function(CatalogoInstructores) {
           http: {path: '/ef_ter_anio', verb: 'get'}
         }
     );
-
 };

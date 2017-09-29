@@ -15,9 +15,20 @@
                                         </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <div class="input-group" style="margin-top:16px;width: 230px;">
+                                                <div class="col-md-9">
+                                                      <select class="form-control m-b"
+                                                          ng-model="vm.opcionBuscar">
+                                                          <option value="nombre" selected>Nombre</option>
+                                                          <option value="numcontrol">No. control</option>
+                                                      </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
                                         <div class="input-group" style="margin-top:16px;">
-                                            <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Persona a buscar" class="input form-control" ng-model="vm.cadena_buscar">
+                                            <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Texto a buscar" class="input form-control" ng-model="vm.cadena_buscar">
                                                     <span class="input-group-btn">
                                                             <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
                                                             <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
@@ -33,7 +44,7 @@
                                           <thead>
                                             <tr>
                                                 <th>Nombre</th>
-                                                <th>Email</th>
+                                                <th>No. Control</th>
                                                 <th>Tel&eacute;fono</th>
                                                 <th>Celular</th>
                                                 <th>Unidad registro</th>
@@ -42,7 +53,7 @@
                                          <tbody>
                                             <tr ng-repeat="registro in vm.listaCapacitandos" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablalListaCapacitados.fila_seleccionada}" class="pointer">
                                                 <td> {{registro.apellidoPaterno +' '+ registro.apellidoMaterno +' '+ registro.nombre}}</td>
-                                                <td> {{registro.email}}</td>
+                                                <td> {{registro.numControl}}</td>
                                                 <td> {{registro.telefono}}</td>
                                                 <td> {{registro.celular}}</td>
                                                 <td> {{registro.unidad_pertenece.nombre}}</td>

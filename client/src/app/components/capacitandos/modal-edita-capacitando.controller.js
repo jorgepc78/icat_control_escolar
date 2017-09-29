@@ -300,27 +300,35 @@
                                             else
                                             {
 
-                                                    Capacitandos.count({
-                                                        where: {
-                                                            and: [
-                                                                {numControl: vm.registroEditar.numControl},
-                                                                {numControl: {neq: ''}},
-                                                                {idAlumno : {neq: vm.registroEditar.idAlumno}}
-                                                            ]
+                                                    Capacitandos.find({
+                                                        filter: {
+                                                            where: {
+                                                                and: [
+                                                                    {numControl: vm.registroEditar.numControl},
+                                                                    {numControl: {neq: ''}},
+                                                                    {idAlumno : {neq: vm.registroEditar.idAlumno}}
+                                                                ]
+                                                            },
+                                                            include: [{
+                                                                  relation: 'unidad_pertenece',
+                                                                  scope: {
+                                                                    fields: ['nombre']
+                                                                  }
+                                                            }]
                                                         }
                                                     })
                                                     .$promise
                                                     .then(function(resp) {
 
-                                                        if(resp.count > 0)
+                                                        if(resp.length > 0)
                                                         {
                                                             vm.mostrarSpiner = false;
                                                             vm.mostrar_msg_error = true;
-                                                            vm.mensaje = 'El número de control ya se encuentra asignado a otra persona';
+                                                            vm.mensaje = 'El número de control ya se encuentra asignado a: '+ resp[0].nombreCompleto + ', registrado en la ' + resp[0].unidad_pertenece.nombre;
                                                             $timeout(function(){
                                                                  vm.mostrar_msg_error = false;
                                                                  vm.mensaje = '';
-                                                            }, 2000);
+                                                            }, 5000);
                                                         }
                                                         else
                                                         {

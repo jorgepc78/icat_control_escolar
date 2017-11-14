@@ -1,0 +1,19 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Observaciones para la unidad</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;padding-bottom:0;">
+            <form name="form_datos" class="form-horizontal">
+                  <div class="form-group">
+                      <div class="col-sm-12"><textarea class="form-control" ng-model="vm.registroEdicion.observacionesRevision" rows="8" cols="90"></textarea></div>
+                  </div>
+            </form>
+      </div>
+      <div class="modal-footer">
+          <div class="row">
+              <div class="col-md-12">
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+      </div>
+</div>

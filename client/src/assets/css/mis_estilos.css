@@ -193,6 +193,9 @@ body.fixed-nav #wrapper #page-wrapper {
 .app-modal-window .modal-dialog {
   width: 1224px;
 }
+.app-modal-window2 .modal-dialog {
+  width: 1024px;
+}
 .texto-estatus-ptc {
   font-size: 12px;
 }

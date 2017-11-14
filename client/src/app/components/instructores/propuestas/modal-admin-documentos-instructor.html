@@ -1,0 +1,121 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Documentaci&oacute;n del instructor</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;padding-bottom:0;">
+
+        <form name="form_datos" class="form-horizontal">
+              <div class="row">
+                      <div class="col-md-6" style="margin-bottom: 40px">
+                          <p>* Tama&ntilde;o m&aacute;ximo del archivo: 30MB.</p>
+                          <input nv-file-select uploader="vm.uploader" type="file"/>
+                          <br>
+                          <h3>Cola de subida</h3>
+                          <p>Total archivos: {{ vm.uploader.queue.length }}</p>
+                          <table class="table">
+                              <thead>
+                              <tr>
+                                  <th width="50%">Nombre</th>
+                                  <th ng-show="vm.uploader.isHTML5">Tama&ntilde;o</th>
+                                  <th ng-show="vm.uploader.isHTML5">Progreso</th>
+                                  <th>Estatus</th>
+                                  <th>Acciones</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr ng-repeat="item in vm.uploader.queue">
+                                  <td><strong>{{ item.file.name }}</strong></td>
+                                  <td ng-show="vm.uploader.isHTML5" nowrap>{{
+                                      item.file.size/1024/1024|number:2 }} MB
+                                  </td>
+                                  <td ng-show="vm.uploader.isHTML5">
+                                      <div class="progress" style="margin-bottom: 0;">
+                                          <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                      </div>
+                                  </td>
+                                  <td class="text-center">
+                                      <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                      <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                      <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                  </td>
+                                  <td nowrap>
+                                      <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                          <span class="glyphicon glyphicon-trash"></span>
+                                          Eliminar
+                                      </button>
+                                  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+
+                          <div>
+                              <p>
+                                  Progreso de la cola:
+                                  <div class="progress" style="">
+                                      <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                  </div>
+                              </p>
+                              <button type="button" class="btn btn-success btn-s" ng-click="vm.uploader.uploadAll()" ng-disabled="!vm.uploader.getNotUploadedItems().length">
+                                  <span class="glyphicon glyphicon-upload"></span> Cargar
+                              </button>
+                              <button type="button" class="btn btn-warning btn-s" ng-click="vm.uploader.cancelAll()" ng-disabled="!vm.uploader.isUploading">
+                                  <span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+                              </button>
+                              <button type="button" class="btn btn-danger btn-s" ng-click="vm.uploader.clearQueue()" ng-disabled="!vm.uploader.queue.length">
+                                  <span class="glyphicon glyphicon-trash"></span> Eliminar
+                              </button>
+                          </div>
+                      </div>
+                      <div class="col-md-6" style="height: 420px; margin-bottom: 5px">
+                            <div style="width:100%;height:380px">
+                                    <table class="tablaDatos table table-condensed no-footer">
+                                      <thead>
+                                        <tr>
+                                            <th width="2%"></th>
+                                            <th width="58%">Documento</th>
+                                            <th width="38%">Archivo</th>
+                                            <th width="2%"></th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                      </tbody>
+                                    </table>
+                                    <div class="full-height-scroll" full-scroll style="padding-right: 10px">
+                                          <table class="tablaDatos table table-condensed no-footer">
+                                           <tbody>
+                                              <tr ng-repeat="registro in vm.documentos_temp | filter : cambiarPagina" class="pointer">
+                                                  <td width="2%"> {{$index + 1}}</td>
+                                                  <td width="58%"><div dropdown-select="vm.ddSelectOptions" dropdown-model="registro.documento" dropdown-item-label="text" style="margin: 0; width: 290px;"></div></td>
+                                                  <td width="38%" style="word-break:break-all;"> {{registro.nombreArchivo}}</td>
+                                                  <td width="2%"> <button type="button" class="btn btn-warning btn-sm" tooltip-placement="left" tooltip="Eliminar documento" ng-click="vm.eliminaDocumento(registro)"><i class="fa fa-trash-o"></i></button> </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                    </div>
+                            </div>
+                      </div>
+              </div>
+        </form>
+
+
+
+      </div>
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-9">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje}}</div>
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

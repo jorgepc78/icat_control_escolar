@@ -1,0 +1,214 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Datos del instructor</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;padding-bottom:0;">
+
+        <form name="form_datos" class="form-horizontal">
+            <tabset>
+                <tab heading="Datos generales">
+                <br>
+
+                        <div class="row">
+                                <div class="col-lg-6">
+
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">CURP *</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" maxlength="22" ng-model="vm.registroEdicion.curp" ng-blur="vm.checaCURP()" required>
+                                              <span ng-show="vm.mostrar_msg_curp" class="alert alert-{{vm.color_msg_curp}}" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje_curp}}</span>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label" tooltip-placement="right" tooltip="Si no cuenta con apellido paterno, escribir XX">Ap. paterno *</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" maxlength="45" ng-model="vm.registroEdicion.apellidoPaterno" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label" tooltip-placement="right" tooltip="Si no cuenta con apellido materno, escribir XX">Ap. materno *</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" maxlength="45" ng-model="vm.registroEdicion.apellidoMaterno" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Nombre *</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" maxlength="45" ng-model="vm.registroEdicion.nombre" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">RFC</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" maxlength="14" ng-model="vm.registroEdicion.rfc" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Tel&eacute;fono *</label>
+                                          <div class="col-sm-9">
+                                              <input type="text" class="form-control" maxlength="22" ng-model="vm.registroEdicion.telefono" required>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Email</label>
+                                          <div class="col-sm-9">
+                                              <input type="email" class="form-control" maxlength="85" ng-model="vm.registroEdicion.email">
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Localidad donde vive</label>
+                                          <div class="col-sm-9">
+                                              <select class="form-control m-b" 
+                                                  ng-model="vm.localidadSeleccionada"
+                                                  ng-options="localidad as (localidad.nombre + ' (' + localidad.municipio +')') for localidad in vm.listaLocalidades" required>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-lg-4 control-label"><p class="form-control-static text-success">* Campos obligatorios</p></label>
+                                      </div>
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Cuenta con perfil acad&eacute;mico</label>
+                                          <div class="col-sm-9">
+                                              <input ng-if="vm.registroEdicion.conPerfilAcademico!==undefined" type="checkbox" class="js-switch" ui-switch="{color:'#1AB394', secondaryColor: '#F89279'}" ng-model="vm.registroEdicion.conPerfilAcademico"/>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Escolaridad</label>
+                                          <div class="col-sm-9">
+                                              <textarea class="form-control" ng-model="vm.registroEdicion.escolaridad" rows="6" cols="90" required></textarea>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label class="col-sm-3 control-label">Certificaciones en est&aacute;ndares de competencia</label>
+                                          <div class="col-sm-9">
+                                              <textarea class="form-control" ng-model="vm.registroEdicion.certificacion" rows="5" cols="90"></textarea>
+                                          </div>
+                                      </div>
+
+                                </div>
+                        </div>
+
+                </tab>
+
+                <tab heading="Cursos que puede impartir">
+                <br>
+                    <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-10">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                          <label class="col-sm-3 control-label">Especialidad</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                          <select class="form-control m-b" 
+                                              ng-model="vm.especialidadSeleccionada"
+                                              ng-change="vm.muestraCursosEspecialidad()"
+                                              ng-options="especialidad as especialidad.nombre for especialidad in vm.listaEspecialidades">
+                                          </select>                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                          <label class="col-sm-3 control-label">Curso</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                          <select class="form-control m-b" 
+                                              ng-model="vm.cursoSeleccionado"
+                                              ng-disabled="vm.listaCursosInhabilit"
+                                              ng-options="curso as (curso.nombreCurso + ' - ' + curso.modalidad + ' - ' + curso.numeroHoras + ' horas') for curso in vm.listaCursos">
+                                          </select>                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-8 text-center">
+                                          <button type="button" ng-disabled="(vm.cursoSeleccionado.idCatalogoCurso === undefined)" ng-click="vm.agregaCurso()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar curso</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                            <col width="20%">
+                                            <col width="55%">
+                                            <col width="10%">
+                                            <col width="10%">
+                                            <col width="5%">
+                                            <tr>
+                                                <th>Especialidad</th>
+                                                <th>Curso</th>
+                                                <th class="text-center">Modalidad</th>
+                                                <th class="text-center">Horas</th>
+                                                <th></th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="height: 350px;">
+                                        <div class="full-height-scroll" full-scroll>
+                                              <table class="tablaDatos table table-condensed no-footer">
+                                                <thead>
+                                                  <col width="20%">
+                                                  <col width="55%">
+                                                  <col width="10%">
+                                                  <col width="10%">
+                                                  <col width="5%">
+                                                </thead>
+                                               <tbody>
+                                                  <tr ng-repeat="registro in vm.cursos_habilitados | orderBy:'nombreCurso'" class="pointer">
+                                                      <td>{{registro.especialidad}}</td>
+                                                      <td>{{registro.nombreCurso}}</td>
+                                                      <td class="text-center">{{registro.modalidad}}</td>
+                                                      <td class="text-center">{{registro.numeroHoras}}</td>
+                                                      <td style="width:170px">
+                                                              <button type="button" ng-click="vm.eliminaRegistro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                      </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                            </div>
+                    </div>
+                </tab>
+            </tabset>
+
+        </form>
+
+
+
+      </div>
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-9">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje}}</div>
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

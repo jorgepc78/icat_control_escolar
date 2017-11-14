@@ -13,7 +13,7 @@
                     element.slimscroll({
                         height: '100%',
                         railOpacity: 0.9,
-                        alwaysVisible: true
+                        alwaysVisible: false
                     });
 
                 });

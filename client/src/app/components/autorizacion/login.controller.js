@@ -139,7 +139,9 @@
                     catalogos_cursos                          : false,
                     instructores_menu                         : false,
                     instructores_catinstructores              : false,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
                     plan_cursos_menu                          : false,
                     plan_cursos_horas_unidad                  : false,
                     plan_cursos_metas_capacit                 : false,
@@ -182,7 +184,9 @@
 
                     instructores_menu                         : true,
                     instructores_catinstructores              : true,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -232,7 +236,9 @@
 
                     instructores_menu                         : true,
                     instructores_catinstructores              : true,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -282,7 +288,9 @@
 
                     instructores_menu                         : true,
                     instructores_catinstructores              : true,
+                    instructores_valinstructores              : true,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -332,7 +340,9 @@
 
                     instructores_menu                         : true,
                     instructores_catinstructores              : true,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -382,7 +392,9 @@
 
                     instructores_menu                         : true,
                     instructores_catinstructores              : true,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : true,
@@ -432,7 +444,9 @@
 
                     instructores_menu                         : true,
                     instructores_catinstructores              : true,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -482,7 +496,9 @@
 
                     instructores_menu                         : false,
                     instructores_catinstructores              : false,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -532,7 +548,9 @@
 
                     instructores_menu                         : true,
                     instructores_catinstructores              : false,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : true,
+                    instructores_propinstructores             : true,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -582,7 +600,9 @@
 
                     instructores_menu                         : false,
                     instructores_catinstructores              : false,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : false,
                     plan_cursos_horas_unidad                  : false,
@@ -632,7 +652,9 @@
 
                     instructores_menu                         : true,
                     instructores_catinstructores              : false,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : true,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -682,7 +704,9 @@
 
                     instructores_menu                         : false,
                     instructores_catinstructores              : false,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -732,7 +756,9 @@
 
                     instructores_menu                         : false,
                     instructores_catinstructores              : false,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : false,
                     plan_cursos_horas_unidad                  : false,
@@ -782,7 +808,9 @@
 
                     instructores_menu                         : false,
                     instructores_catinstructores              : false,
+                    instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
+                    instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : false,
                     plan_cursos_horas_unidad                  : false,

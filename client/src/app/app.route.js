@@ -138,15 +138,29 @@
             })
             .state('instructores.admin_instructores', {
                 url: '/admin_instructores',
-                templateUrl: 'app/components/instructores/admin-instructores.html',
+                templateUrl: 'app/components/instructores/administracion/admin-instructores.html',
                 controller: 'AdminInstructoresController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+            .state('instructores.validacion_instructores', {
+                url: '/validacion_instructores',
+                templateUrl: 'app/components/instructores/validaciones/validacion-instructores.html',
+                controller: 'ValidacionInstructoresController',
                 controllerAs: 'vm',
                 authenticate: true
             })
             .state('instructores.consulta_instructores', {
                 url: '/consulta_instructores',
-                templateUrl: 'app/components/instructores/admin-instructores.html',
+                templateUrl: 'app/components/instructores/consulta/consulta-instructores.html',
                 controller: 'ConsultaInstructoresController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+            .state('instructores.propuestas_instructores', {
+                url: '/propuestas_instructores',
+                templateUrl: 'app/components/instructores/propuestas/propuestas-instructores.html',
+                controller: 'PropuestasInstructoresController',
                 controllerAs: 'vm',
                 authenticate: true
             })

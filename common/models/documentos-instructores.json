@@ -146,6 +146,12 @@
       "principalType": "ROLE",
       "principalId": "programas",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "unidad_capacit",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}

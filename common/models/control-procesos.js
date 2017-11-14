@@ -25,7 +25,7 @@ module.exports = function(ControlProcesos) {
                       },
                       function(err, usuarioEncontrado) {
                         
-                            if( (ctx.instance.accion !== 'PTC APROBADO DIR GRAL') && (ctx.instance.accion !== 'CURSO APROBADO DIR GRAL') )
+                            if( (ctx.instance.accion !== 'INSTRUCTOR APROBADO') && (ctx.instance.accion !== 'PTC APROBADO DIR GRAL') && (ctx.instance.accion !== 'CURSO APROBADO DIR GRAL') )
                             {
                                   var usuarioRecord = JSON.parse( JSON.stringify( usuarioEncontrado[0] ) );
                                   array_envia.push({
@@ -68,7 +68,7 @@ module.exports = function(ControlProcesos) {
                                         var usuario_pertenece = JSON.parse(JSON.stringify(usuarioEn.usuario_pertenece));
 
                                         //console.log("usuario_pertenece:" +usuario_pertenece.nombre);
-                                        if( (ctx.instance.accion == 'PTC RECHAZADO PROGRAMAS') || (ctx.instance.accion == 'PTC APROBADO DIR GRAL') || (ctx.instance.accion == 'CURSO RECHAZADO PROGRAMAS')  || (ctx.instance.accion == 'CURSO APROBADO DIR GRAL') || (ctx.instance.accion == 'EVALUACION RECHAZADA PROGRAMAS') || (ctx.instance.accion == 'EVALUACION APROBADA DIR GRAL') )
+                                        if( (ctx.instance.accion == 'INSTRUCTOR RECHAZADO') || (ctx.instance.accion == 'INSTRUCTOR APROBADO') || (ctx.instance.accion == 'PTC RECHAZADO PROGRAMAS') || (ctx.instance.accion == 'PTC APROBADO DIR GRAL') || (ctx.instance.accion == 'CURSO RECHAZADO PROGRAMAS')  || (ctx.instance.accion == 'CURSO APROBADO DIR GRAL') || (ctx.instance.accion == 'EVALUACION RECHAZADA PROGRAMAS') || (ctx.instance.accion == 'EVALUACION APROBADA DIR GRAL') )
                                         {
                                               array_recibe.push({
                                                 idUsuario : usuario_pertenece.idUsuario,
@@ -77,7 +77,14 @@ module.exports = function(ControlProcesos) {
                                               });
                                         }
 
-                                        if(ctx.instance.accion == 'ENVIO REVISION PTC')
+                                        if(ctx.instance.accion == 'ENVIO REVISION INSTRUCTOR')
+                                          var tipo_aviso = {avisoEnvioInstructor: true}
+                                        else if(ctx.instance.accion == 'INSTRUCTOR APROBADO')
+                                          var tipo_aviso = {avisoRevisonInstructor: true}
+                                        else if(ctx.instance.accion == 'INSTRUCTOR RECHAZADO')
+                                          var tipo_aviso = {avisoRechazoInstructor: true}
+
+                                        else if(ctx.instance.accion == 'ENVIO REVISION PTC')
                                           var tipo_aviso = {avisoEnvioPTC: true}
                                         else if(ctx.instance.accion == 'PTC REVISADO PROGRAMAS')
                                           var tipo_aviso = {avisoRevisonPTCProgr: true}
@@ -95,7 +102,6 @@ module.exports = function(ControlProcesos) {
                                           var tipo_aviso = {avisoRevisionPTCGral: true}
                                         else if(ctx.instance.accion == 'PTC RECHAZADO DIR GRAL')
                                           var tipo_aviso = {avisoRechazoPTCGral: true}
-
 
                                         else if(ctx.instance.accion == 'ENVIO VALIDACION CURSO')
                                           var tipo_aviso = {avisoEnvioPreapCurso: true}
@@ -258,6 +264,46 @@ module.exports = function(ControlProcesos) {
               function PreparaMensajes(accion, array_envia, array_recibe) {
 
                     //Obtenemos los datos para armar el mensaje
+                    if(ctx.instance.proceso === 'INSTRUCTORES')
+                    {
+                            var CatalogoInstructores = ControlProcesos.app.models.CatalogoInstructores;
+
+                            CatalogoInstructores.find({
+                              where: {idInstructor: ctx.instance.idDocumento },
+                              fields: {idInstructor: true, nombre_completo: true, idUnidadAdmtva: true},
+                              include: [{
+                                relation: 'unidad_pertenece',
+                                scope: {
+                                  fields:['idUnidadAdmtva','nombre']
+                                }
+                              }]
+                            },
+                            function(err, InstructorEncontrado) {
+
+                                var registro = JSON.parse( JSON.stringify( InstructorEncontrado[0] ) );
+                                
+                                if(ctx.instance.accion == 'ENVIO REVISION INSTRUCTOR')
+                                {
+                                    mensajes.titulo = 'Aviso de envío de evaluación del instructor propuesto';
+                                    mensajes.envia  = 'Has enviado los datos de la persona <strong>'+ registro.nombre_completo +'</strong> para su evaluaci&oacute;n como instructor.';
+                                    mensajes.recibe = 'La <strong>'+ registro.unidad_pertenece.nombre +'</strong> ha enviado los datos de la persona <strong>'+ registro.nombre_completo +'</strong> para su evaluaci&oacute;n como instructor.';
+                                }
+                                else if(ctx.instance.accion == 'INSTRUCTOR APROBADO')
+                                {         
+                                    mensajes.titulo = 'Aviso de Aprobación del instructor';
+                                    mensajes.envia  = 'Se ha evaluado a la persona <strong> ' + registro.nombre_completo + ' </strong> como instructor y ha sido autorizado. A partir de ahora el instructor aparecer&aacute; en su cat&aacute;logo de instructores de la unidad.';
+                                    mensajes.recibe = 'La persona <strong>'+ registro.nombre_completo +'</strong> de la <strong>'+ registro.unidad_pertenece.nombre +'</strong>, ha sido evaluada y aceptada como instructor.';
+                                }
+                                else if(ctx.instance.accion == 'INSTRUCTOR RECHAZADO')
+                                {         
+                                    mensajes.titulo = 'Aviso de rechazado de la persona como instructor';
+                                    mensajes.envia  = 'Has marcado la propuesta como instructor de la persona <strong>'+ registro.nombre_completo +'</strong> de la <strong>'+ registro.unidad_pertenece.nombre +'</strong> como rechazada y se ha regresado a la unidad para su revisi&oacute;n.';
+                                    mensajes.recibe = 'La propuesta como instructor de la persona <strong>'+ registro.nombre_completo +'</strong> ha sido rechazado y regresada para su revisi&oacute;n.';
+                                }
+
+                                enviaCorreos(ctx.instance.id, mensajes, array_envia, array_recibe);
+                            });
+                    }
                     if(ctx.instance.proceso === 'PTC')
                     {
                             var ProgTrimCursos = ControlProcesos.app.models.ProgTrimCursos;
@@ -931,7 +977,7 @@ module.exports = function(ControlProcesos) {
                                 to      : array_envia[0].email,
                                 from    : 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
                                 subject : mensajes.titulo,
-                                html    : mensajes.envia
+                                html    : mensajes.envia + '<br><br><br>* Este correo es generado autom&aacute;ticamente, favor de no contestar.'
                               }, function(err) {
                                 if (err) console.log(err);
                                 //console.log('> envio del correo de aviso al remitente');
@@ -954,7 +1000,7 @@ module.exports = function(ControlProcesos) {
                             to      : array_recibe[j].email,
                             from    : 'Sistema de Control Escolar del ICATQR <avisos@control-escolar.icatqr.edu.mx>',
                             subject : mensajes.titulo,
-                            html    : mensajes.recibe
+                            html    : mensajes.recibe + '<br><br><br>* Este correo es generado autom&aacute;ticamente, favor de no contestar.'
                           }, function(err) {
                             if (err) console.log(err);
                             //console.log('> envio del correo de aviso a central');

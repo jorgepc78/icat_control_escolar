@@ -38,8 +38,17 @@
                         <li ui-sref-active="active" ng-if="currentUser.perfil_menu.instructores_catinstructores">
                             <a ui-sref="instructores.admin_instructores">  <span class="nav-label"> Cat&aacute;logo de instructores </span></a>
                         </li>
+                        <li style="border: 1px solid #e7eaec"></li>
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.instructores_valinstructores">
+                            <a ui-sref="instructores.validacion_instructores">  <span class="nav-label"> Validaci&oacute;n de instructores </span></a>
+                        </li>
+
                         <li ui-sref-active="active" ng-if="currentUser.perfil_menu.instructores_consinstructores">
                             <a ui-sref="instructores.consulta_instructores">  <span class="nav-label"> Consulta de instructores </span></a>
+                        </li>
+                        <li style="border: 1px solid #e7eaec"></li>
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.instructores_propinstructores">
+                            <a ui-sref="instructores.propuestas_instructores">  <span class="nav-label"> Revisi&oacute;n de propuestas de instructores </span></a>
                         </li>
                     </ul>
                 </li>

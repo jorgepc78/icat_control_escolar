@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalEditaaCursoExtraController', ModalEditaaCursoExtraController);
 
-        ModalEditaaCursoExtraController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'CatalogoCursos', 'CatalogoInstructores', 'CatalogoLocalidades', 'CursosOficiales'];
+        ModalEditaaCursoExtraController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'CatalogoCursos', 'CatalogoInstructores', 'CatalogoLocalidades', 'CursosOficiales', 'CatalogoModalidades'];
 
-    function ModalEditaaCursoExtraController($scope, $timeout, $modalInstance, registroEditar, CatalogoCursos, CatalogoInstructores, CatalogoLocalidades, CursosOficiales) {
+    function ModalEditaaCursoExtraController($scope, $timeout, $modalInstance, registroEditar, CatalogoCursos, CatalogoInstructores, CatalogoLocalidades, CursosOficiales, CatalogoModalidades) {
 
             var vm = this;
 
@@ -25,6 +25,9 @@
 
             vm.cursoSeleccionado = {};
             vm.listaCursos = [];
+
+            vm.modalidadSeleccionada = {};
+            vm.listaModalidades = [];
 
             vm.localidadSeleccionada = {};
             vm.listaLocalidades = [];
@@ -69,7 +72,7 @@
 
                 CatalogoCursos.find({
                     filter: {
-                        fields: ['idCatalogoCurso','nombreCurso','modalidad','claveCurso','descripcion','numeroHoras'],
+                        fields: ['idCatalogoCurso','nombreCurso','claveCurso','descripcion','numeroHoras'],
                         order: 'nombreCurso ASC'
                     }
                 })
@@ -81,6 +84,23 @@
                                                         return record.idCatalogoCurso;
                                                       }).indexOf(vm.registroEdicion.idCatalogoCurso);
                     vm.cursoSeleccionado.selected = vm.listaCursos[index];
+                });
+
+
+                CatalogoModalidades.find({
+                    filter: {
+                        fields: ['idModalidad','modalidad'],
+                        order: 'modalidad ASC'
+                    }
+                })
+                .$promise
+                .then(function(resp) {
+                    vm.listaModalidades = resp;                   
+                    var index = vm.listaModalidades.map(function(curso) {
+                                                        return curso.modalidad;
+                                                      }).indexOf(vm.registroEdicion.modalidad);
+
+                    vm.modalidadSeleccionada = vm.listaModalidades[index];
                 });
 
     
@@ -163,11 +183,11 @@
 
             function muestraInstructoresCurso(){
 
-                vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.selected.idCatalogoCurso;
+                /*vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.selected.idCatalogoCurso;
                 vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.selected.nombreCurso;
                 vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
-                vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
-                //vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
+                //vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
+                vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
                 vm.registroEdicion.descripcion = vm.cursoSeleccionado.selected.descripcion;
 
                 vm.listaInstructores = [];
@@ -195,7 +215,7 @@
 
                     vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
 
-                });
+                });*/
 
             }
 
@@ -266,7 +286,7 @@
                             nombreCurso           : vm.registroEdicion.nombreCurso,
                             claveCurso            : vm.registroEdicion.claveCurso,
                             descripcionCurso      : vm.registroEdicion.descripcion,
-                            modalidad             : vm.registroEdicion.modalidad,
+                            modalidad             : vm.modalidadSeleccionada.modalidad,
                             horario               : vm.registroEdicion.horario,
                             aulaAsignada          : vm.registroEdicion.aulaAsignada,
                             horasSemana           : vm.registroEdicion.semanas,
@@ -295,6 +315,7 @@
                                 vm.registroEdicion.idLocalidad      = vm.localidadSeleccionada.selected.idLocalidad;
                                 vm.registroEdicion.nombreLocalidad  = vm.localidadSeleccionada.selected.nombre;
                                 vm.registroEdicion.nombreMunicipio  = vm.localidadSeleccionada.selected.municipio;
+                                vm.registroEdicion.modalidad  = vm.modalidadSeleccionada.modalidad;
                                 vm.registroEdicion.estatus          = 0;
 
                                 $modalInstance.close(vm.registroEdicion);

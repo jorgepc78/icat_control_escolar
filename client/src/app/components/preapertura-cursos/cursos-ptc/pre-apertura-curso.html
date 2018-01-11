@@ -40,7 +40,7 @@
                                          <tbody>
                                             <tr ng-repeat="registro in vm.registrosCursosPTCs" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaCursos.fila_seleccionada}" class="pointer">
                                                 <td> {{registro.detalle_curso.nombreCurso}}</td>
-                                                <td> {{registro.detalle_curso.modalidad}}</td>
+                                                <td> {{registro.modalidad_pertenece.modalidad}}</td>
                                                 <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
                                                 <td> {{registro.horario}}</td>
                                                 <td> {{registro.aulaAsignada}}</td>
@@ -168,8 +168,8 @@
                                                                                     Curso o m&oacute;dulo
                                                                                 </li>
                                                                                 <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.CursoPTCSeleccionado.detalle_curso.modalidad}} </span>
-                                                                                    Tipo
+                                                                                    <span class="pull-right"> {{vm.CursoPTCSeleccionado.modalidad_pertenece.modalidad}} </span>
+                                                                                    Modalidad
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.CursoPTCSeleccionado.horario}} </span>

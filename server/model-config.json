@@ -63,6 +63,10 @@
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },
+  "CatalogoModalidades": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
   "CatalogoCursos": {
     "dataSource": "icat_control_escolar_ds",
     "public": true

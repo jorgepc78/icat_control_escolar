@@ -1,7 +1,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
 
     <div class="row">
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                     <div class="ibox">
                         <div class="ibox-content" style="height:240px;">
                             <div class="tab-content">
@@ -22,13 +22,13 @@
                                                     <span>{{vm.anioSeleccionado.horasAsignadas | number:0}}</span>
                                                     <h3>Horas disponibles</h3>
                                                     <span>{{vm.horas_disponibles | number:0}}</span>
-                                            </div> <!--panel blank-panel-->
-                                </div> <!-- client == 2 -->
+                                            </div> panel blank-panel
+                                </div> client == 2
                             </div>
                         </div>
-                    </div> <!-- class ibox -->
-                </div>
-                <div class="col-md-10">
+                    </div> class ibox
+                </div> -->
+                <div class="col-md-12">
     
                         <div class="ibox">
                             <div class="ibox-title">
@@ -167,7 +167,7 @@
                                                     <tr>
                                                         <th class="text-center">Instructores propuestos</th>
                                                         <th class="text-center">Curso o m&oacute;dulo</th>
-                                                        <th class="text-center">Tipo</th>
+                                                        <th class="text-center">Modalidad</th>
                                                         <th class="text-center">Horario</th>
                                                         <th class="text-center">Aula asignada</th>
                                                         <th class="text-center">Capacitandos</th>
@@ -176,27 +176,27 @@
                                                         <th class="text-center">Fecha inicio</th>
                                                         <th class="text-center">Fecha t&eacute;rmino</th>
                                                         <th class="text-center">Observaciones</th>
-                                                        <th></th>
+                                                        <th width="120px"></th>
                                                     </tr>
                                                   </thead>
                                                  <tbody>
                                                     <tr ng-repeat="registroDetalle in vm.registrosCursosPTCs" class="pointer">
-                                                        <td>
+                                                        <td class="text-left">
                                                             <ul>
                                                                 <li ng-repeat="instructor in registroDetalle.instructores_propuestos">{{instructor.apellidoPaterno + ' ' + instructor.apellidoMaterno + ' ' + instructor.nombre}}</li>
                                                             </ul>                                                            
                                                         </td>
-                                                        <td> {{registroDetalle.detalle_curso.nombreCurso}}</td>
-                                                        <td> {{registroDetalle.detalle_curso.modalidad}}</td>
-                                                        <td> {{registroDetalle.horario}}</td>
-                                                        <td> {{registroDetalle.aulaAsignada}}</td>
+                                                        <td class="text-left"> {{registroDetalle.detalle_curso.nombreCurso}}</td>
+                                                        <td class="text-left"> {{registroDetalle.modalidad_pertenece.modalidad}}</td>
+                                                        <td class="text-left"> {{registroDetalle.horario}}</td>
+                                                        <td class="text-left"> {{registroDetalle.aulaAsignada}}</td>
                                                         <td class="text-center"> {{registroDetalle.capacitandos}}</td>
                                                         <td class="text-center"> {{registroDetalle.semanas}}</td>
                                                         <td class="text-center"> {{registroDetalle.total}}</td>
                                                         <td class="text-center"> {{registroDetalle.fechaInicio | date:'d/MMMM/yyyy'}}</td>
                                                         <td class="text-center"> {{registroDetalle.fechaFin | date:'d/MMMM/yyyy'}}</td>
                                                         <td> {{registroDetalle.observaciones}}</td>
-                                                        <td style="width:95px">                                                               
+                                                        <td>                                                               
                                                                 <button type="button" ng-show="( (currentUser.unidad_pertenece_id == 1) && ((vm.RegistroPTCSeleccionado.estatus == 1)||(vm.RegistroPTCSeleccionado.estatus == 3)) && (registroDetalle.observacionesRevision.length > 0) )" class="btn btn-white btn-sm" tooltip-placement="top" tooltip="Observaciones hechas: {{registroDetalle.observacionesRevision}}"><i class="fa fa-asterisk"></i></button>
                                                                 <button type="button" ng-show="( (currentUser.perfil == 'programas') && (vm.RegistroPTCSeleccionado.revisadoProgramas == false) && (vm.RegistroPTCSeleccionado.estatus == 1) )" ng-click="vm.agregaObserRevision(registroDetalle)" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Agrega observaciones de revisi&oacute;n a este curso"><i class="fa fa-align-justify"></i></button>
                                                                 

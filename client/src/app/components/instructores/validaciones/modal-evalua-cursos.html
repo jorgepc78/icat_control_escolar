@@ -13,14 +13,13 @@
                                         <table class="tablaDatos table table-condensed no-footer">
                                           <thead>
                                             <col width="20%">
-                                            <col width="50%">
+                                            <col width="60%">
                                             <col width="10%">
                                             <col width="10%">
                                             <col width="10%">
                                             <tr>
                                                 <th>Especialidad</th>
                                                 <th>Curso</th>
-                                                <th class="text-center">Modalidad</th>
                                                 <th class="text-center">Horas</th>
                                                 <th class="text-center">Puntaje</th>
                                             </tr>
@@ -43,7 +42,6 @@
                                                   <tr ng-repeat="registro in vm.cursos_habilitados | orderBy:'nombreCurso'" class="pointer">
                                                       <td>{{registro.especialidad}}</td>
                                                       <td>{{registro.nombreCurso}}</td>
-                                                      <td class="text-center">{{registro.modalidad}}</td>
                                                       <td class="text-center">{{registro.numeroHoras}}</td>
                                                       <td><input type="number" min="0" class="form-control" ng-model="registro.calificacion"></td>
                                                   </tr>

@@ -114,12 +114,12 @@
                                                         </div>
                                                         <div class="tab-pane active" ng-show="vm.client == 2">
                                                         
-                                                                  <table class="tablaDatos table table-condensed no-footer">
+                                                                  <table class="tablaDatosCompacta table table-condensed no-footer">
                                                                   <thead>
                                                                     <tr>
-                                                                        <th></th>
+                                                                        <th style="width:40px"></th>
                                                                         <th class="text-center">Curso o m&oacute;dulo</th>
-                                                                        <th class="text-center">Tipo</th>
+                                                                        <th class="text-center">Modalidad</th>
                                                                         <th class="text-center">Horario</th>
                                                                         <th class="text-center">Aula asignada</th>
                                                                         <th class="text-center">Capacitandos</th>
@@ -133,13 +133,13 @@
                                                                   </thead>
                                                                  <tbody ng-repeat="registroDetalle in vm.registrosCursosPTCs">
                                                                     <tr class="pointer">
-                                                                        <td style="width:60px">
+                                                                        <td  class="text-center" style="width:60px">
                                                                             <div ng-show="(registroDetalle.curso_oficial_registrado.length > 0)"><button type="button" ng-click="vm.muestraCursoPreapertura(registroDetalle)" class="btn btn-default" tooltip-placement="right" tooltip="Clic para ver el detalle de la propuesta de apertura"><i class="fa fa-eye{{vm.icono}}"></i></button></div>
                                                                         </td>
-                                                                        <td> {{registroDetalle.detalle_curso.nombreCurso}}</td>
-                                                                        <td> {{registroDetalle.detalle_curso.modalidad}}</td>
-                                                                        <td> {{registroDetalle.horario}}</td>
-                                                                        <td> {{registroDetalle.aulaAsignada}}</td>
+                                                                        <td class="text-left"> {{registroDetalle.detalle_curso.nombreCurso}}</td>
+                                                                        <td class="text-center"> {{registroDetalle.modalidad_pertenece.modalidad}}</td>
+                                                                        <td class="text-center"> {{registroDetalle.horario}}</td>
+                                                                        <td class="text-center"> {{registroDetalle.aulaAsignada}}</td>
                                                                         <td class="text-center"> {{registroDetalle.capacitandos}}</td>
                                                                         <td class="text-center"> {{registroDetalle.semanas}}</td>
                                                                         <td class="text-center"> {{registroDetalle.total}}</td>
@@ -153,34 +153,34 @@
                                                                         <td> {{registroDetalle.observaciones}}</td>
                                                                     </tr>
                                                                     <tr ng-show="registroDetalle.showChild" style="background: #CDCDCD;">
-                                                                        <td colspan="2"><h4>Propuesta para apertura</h4></td>
-                                                                        <td colspan="10">
+                                                                        <td colspan="1"><h4>Propuesta para apertura</h4></td>
+                                                                        <td colspan="11">
                                                                             <div class="pull-right">
                                                                                 <table class="tablaDatos table table-condensed no-footer">
                                                                                     <thead>
                                                                                     <tr>
-                                                                                        <th>Horario</th>
-                                                                                        <th>Aula asignada</th>
-                                                                                        <th>Cupo m&aacute;ximo</th>
-                                                                                        <th>M&iacute;nimo inscritos</th>
-                                                                                        <th>M&iacute;nimo inscritos pagados</th>
-                                                                                        <th>Fecha inicio</th>
-                                                                                        <th>Fecha t&eacute;rmino</th>
-                                                                                        <th>Instructor</th>
-                                                                                        <th>Estatus</th>
+                                                                                        <th class="text-center">Horario</th>
+                                                                                        <th class="text-center">Aula asignada</th>
+                                                                                        <th class="text-center">Cupo m&aacute;ximo</th>
+                                                                                        <th class="text-center">M&iacute;nimo inscritos</th>
+                                                                                        <th class="text-center">M&iacute;nimo inscritos pagados</th>
+                                                                                        <th class="text-center">Fecha inicio</th>
+                                                                                        <th class="text-center">Fecha t&eacute;rmino</th>
+                                                                                        <th class="text-center">Instructor</th>
+                                                                                        <th class="text-center">Estatus</th>
                                                                                     </tr>
                                                                                     </thead>
                                                                                     <tbody>
                                                                                         <tr ng-repeat="record in registroDetalle.curso_oficial_registrado">
-                                                                                            <td> {{record.horario}}</td>
-                                                                                            <td> {{record.aulaAsignada}}</td>
-                                                                                            <td> {{record.cupoMaximo}}</td>
-                                                                                            <td> {{record.minRequeridoInscritos}}</td>
-                                                                                            <td> {{record.minRequeridoPago}}</td>
-                                                                                            <td> {{record.fechaInicio | date:'d/MMMM/yyyy'}}</td>
-                                                                                            <td> {{record.fechaFin | date:'d/MMMM/yyyy'}}</td>
-                                                                                            <td> {{record.nombreInstructor}}</td>
-                                                                                            <td>
+                                                                                            <td class="text-left"> {{record.horario}}</td>
+                                                                                            <td class="text-left"> {{record.aulaAsignada}}</td>
+                                                                                            <td class="text-center"> {{record.cupoMaximo}}</td>
+                                                                                            <td class="text-center"> {{record.minRequeridoInscritos}}</td>
+                                                                                            <td class="text-center"> {{record.minRequeridoPago}}</td>
+                                                                                            <td class="text-center"> {{record.fechaInicio | date:'d/MMMM/yyyy'}}</td>
+                                                                                            <td class="text-center"> {{record.fechaFin | date:'d/MMMM/yyyy'}}</td>
+                                                                                            <td class="text-left"> {{record.nombreInstructor}}</td>
+                                                                                            <td class="text-center">
                                                                                                 <div class="client-status" ng-switch on="record.estatus">
                                                                                                         <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
                                                                                                     <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>
@@ -222,34 +222,34 @@
                                                                   <table class="tablaDatos table table-condensed no-footer">
                                                                   <thead>
                                                                     <tr>
-                                                                        <th>Curso o m&oacute;dulo</th>
-                                                                        <th>Tipo</th>
-                                                                        <th>Horario</th>
-                                                                        <th>Horas total</th>
-                                                                        <th>Aula asignada</th>
-                                                                        <th>Cupo m&aacute;ximo</th>
-                                                                        <th>M&iacute;nimo inscritos</th>
-                                                                        <th>M&iacute;nimo inscritos pagados</th>
-                                                                        <th>Fecha inicio</th>
-                                                                        <th>Fecha t&eacute;rmino</th>
-                                                                        <th>Instructor</th>
-                                                                        <th>Estatus</th>
+                                                                        <th class="text-center">Curso o m&oacute;dulo</th>
+                                                                        <th class="text-center">Modalidad</th>
+                                                                        <th class="text-center">Horario</th>
+                                                                        <th class="text-center">Horas total</th>
+                                                                        <th class="text-center">Aula asignada</th>
+                                                                        <th class="text-center">Cupo m&aacute;ximo</th>
+                                                                        <th class="text-center">M&iacute;nimo inscritos</th>
+                                                                        <th class="text-center">M&iacute;nimo inscritos pagados</th>
+                                                                        <th class="text-center">Fecha inicio</th>
+                                                                        <th class="text-center">Fecha t&eacute;rmino</th>
+                                                                        <th class="text-center">Instructor</th>
+                                                                        <th class="text-center">Estatus</th>
                                                                     </tr>
                                                                   </thead>
                                                                  <tbody ng-repeat="record in vm.registrosCursosExtras">
                                                                     <tr class="pointer">
-                                                                        <td> {{record.nombreCurso}}</td>
-                                                                        <td> {{record.modalidad}}</td>
-                                                                        <td> {{record.horario}}</td>
-                                                                        <td> {{record.numeroHoras}}</td>
-                                                                        <td> {{record.aulaAsignada}}</td>
-                                                                        <td> {{record.cupoMaximo}}</td>
-                                                                        <td> {{record.minRequeridoInscritos}}</td>
-                                                                        <td> {{record.minRequeridoPago}}</td>
-                                                                        <td> {{record.fechaInicio | date:'d/MMMM/yyyy'}}</td>
-                                                                        <td> {{record.fechaFin | date:'d/MMMM/yyyy'}}</td>
-                                                                        <td> {{record.nombreInstructor}}</td>
-                                                                        <td>
+                                                                        <td class="text-left"> {{record.nombreCurso}}</td>
+                                                                        <td class="text-center"> {{record.modalidad}}</td>
+                                                                        <td class="text-center"> {{record.horario}}</td>
+                                                                        <td class="text-center"> {{record.numeroHoras}}</td>
+                                                                        <td class="text-center"> {{record.aulaAsignada}}</td>
+                                                                        <td class="text-center"> {{record.cupoMaximo}}</td>
+                                                                        <td class="text-center"> {{record.minRequeridoInscritos}}</td>
+                                                                        <td class="text-center"> {{record.minRequeridoPago}}</td>
+                                                                        <td class="text-center"> {{record.fechaInicio | date:'d/MMMM/yyyy'}}</td>
+                                                                        <td class="text-center"> {{record.fechaFin | date:'d/MMMM/yyyy'}}</td>
+                                                                        <td class="text-center"> {{record.nombreInstructor}}</td>
+                                                                        <td class="text-center">
                                                                             <div class="client-status" ng-switch on="record.estatus">
                                                                                 <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
                                                                                 <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de revisi&oacute;n</span>

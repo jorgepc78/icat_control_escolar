@@ -267,8 +267,13 @@
                 vm.listaCursos = [];
                 CatalogoCursos.find({
                     filter: {
-                        where: {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
-                        fields: ['idCatalogoCurso','nombreCurso','modalidad','numeroHoras'],
+                        where: {
+                            and:[
+                                {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
+                                {activo: true}
+                            ]
+                        },
+                        fields: ['idCatalogoCurso','nombreCurso','numeroHoras','activo'],
                         order: 'nombreCurso ASC'
                     }
                 })
@@ -311,7 +316,9 @@
                     nombreCurso     : vm.cursoSeleccionado.nombreCurso,
                     modalidad       : vm.cursoSeleccionado.modalidad,
                     numeroHoras     : vm.cursoSeleccionado.numeroHoras,
-                    calificacion    : 0
+                    calificacion    : 0,
+                    activo          : vm.cursoSeleccionado.activo,
+                    especialidad    : vm.especialidadSeleccionada.nombre
                 });
 
                 vm.cursoSeleccionado = {};
@@ -412,7 +419,8 @@
                                 email              : vm.registroEdicion.email,
                                 certificacion      : vm.registroEdicion.certificacion,
                                 idLocalidad        : vm.localidadSeleccionada.idLocalidad,
-                                activo             : vm.registroEdicion.activo
+                                activo             : vm.registroEdicion.activo,
+                                estatus            : 3
                             })
                             .$promise
                             .then(function(respuesta) {

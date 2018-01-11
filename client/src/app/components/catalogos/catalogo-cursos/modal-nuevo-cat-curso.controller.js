@@ -29,7 +29,7 @@
                     perfilInstructor: '',
                     idEspecialidad  : '',
                     especialidad    : '',
-                    modalidad       : '',
+                    //modalidad       : '',
                     nombreCurso     : '',
                     numeroHoras     : '',
                     temario         : []
@@ -90,7 +90,7 @@
                             perfilEgresado  : vm.registroEdicion.perfilEgresado,
                             perfilInstructor: vm.registroEdicion.perfilInstructor,
                             idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
-                            modalidad      : vm.registroEdicion.modalidad,
+                            //modalidad      : vm.registroEdicion.modalidad,
                             nombreCurso    : vm.registroEdicion.nombreCurso,
                             numeroHoras    : vm.registroEdicion.numeroHoras
                     };
@@ -105,7 +105,7 @@
                         perfilEgresado : vm.registroEdicion.perfilEgresado,
                         perfilInstructor : vm.registroEdicion.perfilInstructor,
                         idEspecialidad : vm.especialidadSeleccionada.idEspecialidad,
-                        modalidad      : vm.registroEdicion.modalidad,
+                        //modalidad      : vm.registroEdicion.modalidad,
                         nombreCurso    : vm.registroEdicion.nombreCurso,
                         numeroHoras    : vm.registroEdicion.numeroHoras
                     })

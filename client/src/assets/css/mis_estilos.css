@@ -105,6 +105,10 @@ body.fixed-nav #wrapper #page-wrapper {
     padding: 10px 18px !important;
     border-bottom: 1px solid #111 !important;
 }
+.tablaDatosCompacta thead th, .tablaDatosCompacta thead td {
+    padding: 10px 5px !important;
+    border-bottom: 1px solid #111 !important;
+}
 .tablaDatos tbody {
     font-size: 12px;
 }

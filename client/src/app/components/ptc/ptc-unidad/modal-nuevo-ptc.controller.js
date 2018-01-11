@@ -14,6 +14,8 @@
             vm.muestraTrimestres = muestraTrimestres;
             vm.guardar    = guardar;
 
+            vm.mostrarSpiner = false;
+            vm.listaAniosDisp = [];
             vm.listaTrimestres = [];
 
             vm.registroEdicion = {
@@ -24,7 +26,7 @@
             inicia();
 
             function inicia() {
-                
+                vm.mostrarSpiner = true;
                 var fechaHoy = new Date();
 
                 HorasAsignadasUnidad.find({
@@ -42,13 +44,14 @@
                 .$promise
                 .then(function(resp) {
                     vm.listaAniosDisp = resp;
+                    vm.mostrarSpiner = false;
                 });
 
             };
 
 
             function muestraTrimestres() {
-
+                vm.mostrarSpiner = true;
                 ProgTrimCursos.find({
                     filter: {
                         where: {
@@ -79,6 +82,7 @@
                           if(index >= 0)
                             vm.listaTrimestres.splice(index, 1);
                     });
+                    vm.mostrarSpiner = false;
                     
                 });
             }

@@ -127,6 +127,12 @@
                                       }
                                   },
                                   {
+                                      relation: 'modalidad_pertenece',
+                                      scope: {
+                                        fields: ['idModalidad','modalidad']
+                                      }
+                                  },
+                                  {
                                       relation: 'instructores_propuestos',
                                       scope: {
                                         fields: ['apellidoPaterno','apellidoMaterno','nombre'],
@@ -210,7 +216,7 @@
                                         vm.tablaListaPTCs.fila_seleccionada = 0;
                                         muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
                                     }
-                                    calcula_horas_disponibles();
+                                    //calcula_horas_disponibles();
                               });
                         }
                         else
@@ -272,7 +278,7 @@
                             vm.tablaListaPTCs.fila_seleccionada = 0;
                             muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
                         }
-                        calcula_horas_disponibles();
+                        //calcula_horas_disponibles();
 
                   });
 
@@ -297,7 +303,7 @@
                             vm.client = 2;
                             vm.tablaListaPTCs.fila_seleccionada = 0;
                             muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
-                            calcula_horas_disponibles();
+                            //calcula_horas_disponibles();
                         });
                   }
             }

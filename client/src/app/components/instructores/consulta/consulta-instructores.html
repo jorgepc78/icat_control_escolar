@@ -4,37 +4,20 @@
     
                         <div class="ibox">
                             <div class="ibox-title">
-                                <div class="row">
-                                        <div class="col-md-6">
-                                                <h2>Cat&aacute;logo de instructores disponibles en la unidad</h2>
-                                        </div>
-                                        <div class="col-md-6 text-right" ng-if="(currentUser.perfil == 'programas')">
-                                                <div class="mail-tools">
-                                                        <button class="btn btn-default btn-labeled" ng-click="vm.nuevo_registro()"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar nuevo registro</button>
-                                                </div>
-                                        </div>
-                                </div>
+                                <h2>Cat&aacute;logo de instructores disponibles en la unidad</h2>
                             </div>
                             <div class="ibox-content">
                                 
                                 <div class="row">                                    
 
-                                    <div class="col-md-{{ (currentUser.unidad_pertenece_id > 1 ? 11 : 7) }}">
+                                    <div class="col-md-12">
                                         <div class="input-group" style="margin-top:16px;">
-                                            <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Texto a buscar" class="input form-control" ng-model="vm.cadena_buscar">
+                                            <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Nombre a buscar" class="input form-control" ng-model="vm.cadena_buscar">
                                                     <span class="input-group-btn">
                                                             <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
                                                             <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
                                                     </span>
                                         </div>
-                                    </div>
-                                    <div class="col-md-{{ (currentUser.unidad_pertenece_id > 1 ? 1 : 5) }}" style="padding-left: 0;">
-                                                    <div class="input-group" ng-show="(currentUser.unidad_pertenece_id == 1)" style="margin-top:17px;width: 350px;">
-                                                            <label class="col-md-2 control-label" style="margin-top:7px;">Unidad:</label>
-                                                            <div class="col-md-9">
-                                                                <select class="form-control m-b" ng-model="vm.unidadSeleccionada" ng-change="vm.muestra_ptc_unidad()" ng-options="unidad as unidad.nombre for unidad in vm.listaUnidades"></select>
-                                                        </div>
-                                                    </div>
                                     </div>
                                 </div>
                               
@@ -46,7 +29,7 @@
                                                 <th>Apellido paterno</th>
                                                 <th>Apellido materno</th>
                                                 <th>Nombre</th>
-                                                <th>Escolaridad</th>
+                                                <th>RFC</th>
                                                 <th>Activo</th>
                                             </tr>
                                           </thead>
@@ -56,7 +39,7 @@
                                                 <td> {{registro.apellidoPaterno}}</td>
                                                 <td> {{registro.apellidoMaterno}}</td>
                                                 <td> {{registro.nombre}}</td>
-                                                <td> {{registro.escolaridad}}</td>
+                                                <td> {{registro.rfc}}</td>
                                                 <td class="client-status"><span class="label label-{{registro.activo === true ? 'primary' : 'warning'}}">{{registro.activo === true ? 'S&iacute;' : 'No'}}</span></td>
                                             </tr>
                                           </tbody>
@@ -161,13 +144,15 @@
                                                             
                                                                                         <table class="tablaDatos table table-condensed no-footer">
                                                                                           <thead>
-                                                                                            <col width="70%">
+                                                                                            <col width="30%">
+                                                                                            <col width="40%">
                                                                                             <col width="10%">
                                                                                             <col width="10%">
                                                                                             <col width="10%">
                                                                                             <tr>
+                                                                                                <th>Especialidad</th>
                                                                                                 <th>Curso</th>
-                                                                                                <th>Modalidad</th>
+                                                                                                <th>Curso activo</th>
                                                                                                 <th>Horas</th>
                                                                                                 <th>Puntaje</th>
                                                                                             </tr>
@@ -175,24 +160,26 @@
                                                                                         </table>
 
                                                                                         <div style="width:100%;height:549px">
-                                                                                            <!-- <div class="full-height-scroll" full-scroll> -->
+                                                                                            <div class="full-height-scroll" full-scroll>
                                                                                                 <table class="table table-striped">
                                                                                                     <thead>
-                                                                                                      <col width="70%">
+                                                                                                      <col width="30%">
+                                                                                                      <col width="40%">
                                                                                                       <col width="10%">
                                                                                                       <col width="10%">
                                                                                                       <col width="10%">
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                     <tr ng-repeat="curso in vm.RegistroSeleccionado.evaluacion_curso | orderObjectBy: 'CatalogoCursos.nombreCurso' ">
+                                                                                                        <td> {{curso.CatalogoCursos.especialidad.nombre}}</td>
                                                                                                         <td> {{curso.CatalogoCursos.nombreCurso}}</td>
-                                                                                                        <td> {{curso.CatalogoCursos.modalidad}}</td>
+                                                                                                        <td class="client-status"><span class="label label-{{curso.CatalogoCursos.activo === true ? 'primary' : 'warning'}}">{{curso.CatalogoCursos.activo === true ? 'S&iacute;' : 'No'}}</span></td>
                                                                                                         <td> {{curso.CatalogoCursos.numeroHoras}}</td>
                                                                                                         <td> {{curso.calificacion}}</td>
                                                                                                     </tr>
                                                                                                     </tbody>
                                                                                                 </table>
-                                                                                            <!-- </div> -->
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div> <!-- client == 2 -->
                                                                                 

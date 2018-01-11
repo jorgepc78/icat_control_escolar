@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalAperturaCursoExtraController', ModalAperturaCursoExtraController);
 
-        ModalAperturaCursoExtraController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'CatalogoCursos', 'CatalogoInstructores', 'CatalogoLocalidades', 'CursosOficiales'];
+        ModalAperturaCursoExtraController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'CatalogoCursos', 'CatalogoInstructores', 'CatalogoLocalidades', 'CursosOficiales', 'CatalogoModalidades'];
 
-    function ModalAperturaCursoExtraController($scope, $timeout, $modalInstance, registroEditar, CatalogoCursos, CatalogoInstructores, CatalogoLocalidades, CursosOficiales) {
+    function ModalAperturaCursoExtraController($scope, $timeout, $modalInstance, registroEditar, CatalogoCursos, CatalogoInstructores, CatalogoLocalidades, CursosOficiales, CatalogoModalidades) {
 
             var vm = this;
 
@@ -26,6 +26,9 @@
             vm.cursoSeleccionado = {};
             vm.listaCursos = [];
 
+            vm.modalidadSeleccionada = {};
+            vm.listaModalidades = [];
+
             vm.localidadSeleccionada = {};
             vm.listaLocalidades = [];
            
@@ -39,6 +42,7 @@
                     idPtc                   : registroEditar.record.idPtc,
                     idCatalogoCurso         : 0,
                     nombreCurso             : '',
+                    idModalidad             : 0,
                     modalidad               : '',
                     claveCurso              : '',
                     descripcion             : '',
@@ -69,7 +73,7 @@
 
                 CatalogoCursos.find({
                     filter: {
-                        fields: ['idCatalogoCurso','nombreCurso','modalidad','claveCurso','descripcion','numeroHoras'],
+                        fields: ['idCatalogoCurso','nombreCurso','claveCurso','descripcion','numeroHoras'],
                         order: 'nombreCurso ASC'
                     }
                 })
@@ -79,6 +83,18 @@
                 });
 
     
+                CatalogoModalidades.find({
+                    filter: {
+                        where: {activo: true},
+                        fields: ['idModalidad','modalidad'],
+                        order: 'modalidad ASC'
+                    }
+                })
+                .$promise
+                .then(function(resp) {
+                    vm.listaModalidades = resp;
+                });
+
                 CatalogoLocalidades.find({
                     filter: {
                         fields: ['idLocalidad','nombre','municipio'],
@@ -99,8 +115,8 @@
                 vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.selected.idCatalogoCurso;
                 vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.selected.nombreCurso;
                 vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
-                vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
-                //vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
+                //vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
+                vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
                 vm.registroEdicion.descripcion = vm.cursoSeleccionado.selected.descripcion;
 
                 vm.listaInstructores = [];
@@ -193,19 +209,19 @@
 
                 vm.mostrarSpiner = true;
 
-                if(vm.registroEdicion.total > vm.horas_disponibles)
-                {
-                        vm.mostrarSpiner = false;
-                        vm.mensaje = 'El número de horas de este curso ('+vm.registroEdicion.total+' horas) sobrepasa las horas disponibles para la unidad ('+registroEditar.horas_disponibles+' horas)';
-                        vm.mostrar_msg_error = true;
-                        $timeout(function(){
-                             vm.mensaje = '';
-                             vm.mostrar_msg_error = false;
-                        }, 6000);
-                        return;
-                }
-                else
-                {
+                //if(vm.registroEdicion.total > vm.horas_disponibles)
+                //{
+                //        vm.mostrarSpiner = false;
+                //        vm.mensaje = 'El número de horas de este curso ('+vm.registroEdicion.total+' horas) sobrepasa las horas disponibles para la unidad ('+registroEditar.horas_disponibles+' horas)';
+                //        vm.mostrar_msg_error = true;
+                //        $timeout(function(){
+                //             vm.mensaje = '';
+                //             vm.mostrar_msg_error = false;
+                //        }, 6000);
+                //        return;
+                //}
+                //else
+                //{
 
                         var fechaInicio = new Date(vm.registroEdicion.fechaInicio);
                         fechaInicio.setHours(0);
@@ -227,7 +243,7 @@
                             nombreCurso           : vm.registroEdicion.nombreCurso,
                             claveCurso            : vm.registroEdicion.claveCurso,
                             descripcionCurso      : vm.registroEdicion.descripcion,
-                            modalidad             : vm.registroEdicion.modalidad,
+                            modalidad             : vm.modalidadSeleccionada.modalidad,
                             horario               : vm.registroEdicion.horario,
                             aulaAsignada          : vm.registroEdicion.aulaAsignada,
                             horasSemana           : vm.registroEdicion.semanas,
@@ -254,7 +270,7 @@
                         })
                         .catch(function(error) {
                         });
-                }
+                //}
 
             };
     };

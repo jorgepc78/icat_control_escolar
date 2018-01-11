@@ -60,6 +60,22 @@
       },
       "_selectable": true
     },
+    "idModalidad": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 16,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_modalidad",
+        "dataType": "smallint",
+        "dataLength": null,
+        "dataPrecision": 16,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "horario": {
       "type": "String",
       "required": false,
@@ -227,6 +243,11 @@
       "type": "belongsTo",
       "model": "CatalogoCursos",
       "foreignKey": "idCatalogoCurso"
+    },
+    "modalidad_pertenece": {
+      "type": "belongsTo",
+      "model": "CatalogoModalidades",
+      "foreignKey": "idModalidad"
     },
     "curso_oficial_registrado": {
       "type": "hasMany",

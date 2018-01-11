@@ -1,0 +1,90 @@
+{
+  "name": "CatalogoModalidades",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "postgresql": {
+    "schema": "catalogos",
+    "table": "catalogo_modalidades"
+  },
+  "properties": {
+    "idModalidad": {
+      "type": "number",
+      "id": true,
+      "required": false,
+      "index": true,
+      "length": null,
+      "precision": 16,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_modalidad",
+        "dataType": "smallint",
+        "dataLength": null,
+        "dataPrecision": 16,
+        "dataScale": 0,
+        "nullable": "NO"
+      },
+      "_selectable": false
+    },
+    "modalidad": {
+      "type": "string",
+      "required": true,
+      "length": 28,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "modalidad",
+        "dataType": "character varying",
+        "dataLength": 28,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    }
+  },
+  "validations": [],
+  "relations": {
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "programas",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "unidad_capacit",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

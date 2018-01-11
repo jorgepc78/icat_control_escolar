@@ -9,6 +9,7 @@
                       <label class="col-sm-3 control-label">A&ntilde;o</label>
                       <div class="col-sm-9">
                           <select class="form-control m-b" 
+                              ng-disabled="(vm.listaAniosDisp.length == 0)"
                               ng-change="vm.muestraTrimestres()"
                               ng-model="vm.registroEdicion.anio"
                               ng-options="registro.anio as registro.anio for registro in vm.listaAniosDisp" required>
@@ -19,6 +20,7 @@
                       <label class="col-sm-3 control-label">Trimestre</label>
                       <div class="col-sm-9">
                           <select class="form-control m-b" 
+                              ng-disabled="(vm.listaTrimestres.length == 0)"
                               ng-model="vm.registroEdicion.trimestre"
                               ng-options="registro.trimestre as registro.alias for registro in vm.listaTrimestres" convert-to-number required>
                           </select>
@@ -28,7 +30,20 @@
 
       </div>
       <div class="modal-footer">
-          <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
-          <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
       </div>
 </div>

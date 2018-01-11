@@ -121,7 +121,7 @@
                                           <select class="form-control m-b" 
                                               ng-model="vm.cursoSeleccionado"
                                               ng-disabled="vm.listaCursosInhabilit"
-                                              ng-options="curso as (curso.nombreCurso + ' - ' + curso.modalidad + ' - ' + curso.numeroHoras + ' horas') for curso in vm.listaCursos">
+                                              ng-options="curso as (curso.nombreCurso + ' - ' + curso.numeroHoras + ' horas') for curso in vm.listaCursos">
                                           </select>                        
                                     </div>
                                 </div>
@@ -140,14 +140,12 @@
                                         <table class="tablaDatos table table-condensed no-footer">
                                           <thead>
                                             <col width="20%">
-                                            <col width="55%">
-                                            <col width="10%">
+                                            <col width="65%">
                                             <col width="10%">
                                             <col width="5%">
                                             <tr>
                                                 <th>Especialidad</th>
                                                 <th>Curso</th>
-                                                <th class="text-center">Modalidad</th>
                                                 <th class="text-center">Horas</th>
                                                 <th></th>
                                             </tr>
@@ -163,14 +161,12 @@
                                                   <col width="20%">
                                                   <col width="55%">
                                                   <col width="10%">
-                                                  <col width="10%">
                                                   <col width="5%">
                                                 </thead>
                                                <tbody>
                                                   <tr ng-repeat="registro in vm.cursos_habilitados | orderBy:'nombreCurso'" class="pointer">
                                                       <td>{{registro.especialidad}}</td>
                                                       <td>{{registro.nombreCurso}}</td>
-                                                      <td class="text-center">{{registro.modalidad}}</td>
                                                       <td class="text-center">{{registro.numeroHoras}}</td>
                                                       <td style="width:170px">
                                                               <button type="button" ng-click="vm.eliminaRegistro(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>

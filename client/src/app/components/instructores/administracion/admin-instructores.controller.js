@@ -28,7 +28,7 @@
             vm.tablaListaRegistros = {
               totalElementos     : 0,
               paginaActual       : 1,
-              registrosPorPagina : 5,
+              registrosPorPagina : 10,
               inicio             : 0,
               fin                : 1,
               condicion          : {},
@@ -106,8 +106,14 @@
                                         include:{
                                             relation: 'CatalogoCursos',
                                             scope: {
-                                                fields:['idCatalogoCurso','nombreCurso','modalidad','numeroHoras'],
-                                                order: ['nombreCurso ASC','idCatalogoCurso ASC']
+                                                fields:['idCatalogoCurso','nombreCurso','numeroHoras','idEspecialidad','activo'],
+                                                order: ['nombreCurso ASC','idCatalogoCurso ASC'],
+                                                include:{
+                                                    relation: 'especialidad',
+                                                    scope: {
+                                                        fields:['nombre']
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -402,7 +408,8 @@
                                             idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
                                             nombreCurso     : record.CatalogoCursos.nombreCurso,
                                             numeroHoras     : record.CatalogoCursos.numeroHoras,
-                                            modalidad       : record.CatalogoCursos.modalidad
+                                            activo          : record.CatalogoCursos.activo,
+                                            especialidad    : { nombre: record.CatalogoCursos.especialidad.nombre }
                                         }
                                     });
                               });

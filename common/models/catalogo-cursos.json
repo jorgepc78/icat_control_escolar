@@ -91,22 +91,6 @@
       },
       "_selectable": true
     },
-    "modalidad": {
-      "type": "String",
-      "required": false,
-      "length": 9,
-      "precision": null,
-      "scale": null,
-      "postgresql": {
-        "columnName": "modalidad",
-        "dataType": "character varying",
-        "dataLength": 9,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "YES"
-      },
-      "_selectable": true
-    },
     "numeroHoras": {
       "type": "Number",
       "required": false,

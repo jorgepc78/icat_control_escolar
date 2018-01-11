@@ -299,22 +299,6 @@
         "nullable": "YES"
       },
       "_selectable": true
-    },
-    "estatus": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 16,
-      "scale": 0,
-      "postgresql": {
-        "columnName": "estatus",
-        "dataType": "smallint",
-        "dataLength": null,
-        "dataPrecision": 16,
-        "dataScale": 0,
-        "nullable": "YES"
-      },
-      "_selectable": true
     }
   },
   "validations": [],

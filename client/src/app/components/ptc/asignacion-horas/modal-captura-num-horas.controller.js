@@ -14,6 +14,8 @@
             vm.guardar = guardar;
 
             vm.habilitar = false;
+            vm.unidad = registroEditar.nombre;
+            
             if(registroEditar.horas_asignadas.length == 0)
             {
                 var fechaHoy = new Date();

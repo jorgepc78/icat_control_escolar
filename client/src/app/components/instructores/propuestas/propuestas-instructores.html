@@ -155,13 +155,12 @@
                                                                                         <table class="tablaDatos table table-condensed no-footer">
                                                                                           <thead>
                                                                                             <col width="30%">
-                                                                                            <col width="50%">
+                                                                                            <col width="60%">
                                                                                             <col width="10%">
                                                                                             <col width="10%">
                                                                                             <tr>
                                                                                                 <th>Especialidad</th>
                                                                                                 <th>Curso</th>
-                                                                                                <th class="text-center">Modalidad</th>
                                                                                                 <th class="text-center">Horas</th>
                                                                                             </tr>
                                                                                           </thead>
@@ -172,7 +171,7 @@
                                                                                                 <table class="table table-striped">
                                                                                                     <thead>
                                                                                                       <col width="30%">
-                                                                                                      <col width="50%">
+                                                                                                      <col width="60%">
                                                                                                       <col width="10%">
                                                                                                       <col width="10%">
                                                                                                     </thead>
@@ -180,7 +179,6 @@
                                                                                                     <tr ng-repeat="curso in vm.RegistroSeleccionado.evaluacion_curso | orderObjectBy: 'CatalogoCursos.nombreCurso' ">
                                                                                                         <td> {{curso.CatalogoCursos.especialidad.nombre}}</td>
                                                                                                         <td> {{curso.CatalogoCursos.nombreCurso}}</td>
-                                                                                                        <td class="text-center"> {{curso.CatalogoCursos.modalidad}}</td>
                                                                                                         <td class="text-center"> {{curso.CatalogoCursos.numeroHoras}}</td>
                                                                                                     </tr>
                                                                                                     </tbody>

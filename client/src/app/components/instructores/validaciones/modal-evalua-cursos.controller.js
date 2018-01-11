@@ -34,7 +34,6 @@
                           idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
                           especialidad    : record.CatalogoCursos.especialidad.nombre,
                           nombreCurso     : record.CatalogoCursos.nombreCurso,
-                          modalidad       : record.CatalogoCursos.modalidad,
                           numeroHoras     : record.CatalogoCursos.numeroHoras,
                           calificacion    : record.calificacion
                       });

@@ -14,6 +14,7 @@
             vm.guardar = guardar;
 
             vm.habilitar = true;
+            vm.unidad = registroEditar.nombre;
             
             vm.registroEdicion = {
               id             : registroEditar.horas_asignadas[0].id,

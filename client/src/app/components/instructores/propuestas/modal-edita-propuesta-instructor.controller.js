@@ -70,7 +70,6 @@
                       vm.cursos_habilitados.push({
                           idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
                           nombreCurso     : record.CatalogoCursos.nombreCurso,
-                          modalidad       : record.CatalogoCursos.modalidad,
                           numeroHoras     : record.CatalogoCursos.numeroHoras,
                           especialidad    : record.CatalogoCursos.especialidad.nombre
                       });
@@ -167,8 +166,13 @@
                 vm.listaCursos = [];
                 CatalogoCursos.find({
                     filter: {
-                        where: {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
-                        fields: ['idCatalogoCurso','nombreCurso','modalidad','numeroHoras'],
+                        where: {
+                            and:[
+                                {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
+                                {activo: true}
+                            ]
+                        },
+                        fields: ['idCatalogoCurso','nombreCurso','numeroHoras','activo'],
                         order: 'nombreCurso ASC'
                     }
                 })
@@ -196,7 +200,6 @@
                 vm.cursos_habilitados.push({
                     idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
                     nombreCurso     : vm.cursoSeleccionado.nombreCurso + ' - ' + vm.especialidadSeleccionada.nombre,
-                    modalidad       : vm.cursoSeleccionado.modalidad,
                     numeroHoras     : vm.cursoSeleccionado.numeroHoras,
                     especialidad    : vm.especialidadSeleccionada.nombre
                 });
@@ -309,7 +312,6 @@
                                                                             CatalogoCursos  : {
                                                                                 idCatalogoCurso : resp.idCatalogoCurso,
                                                                                 nombreCurso     : vm.cursos_habilitados[index].nombreCurso,
-                                                                                modalidad       : vm.cursos_habilitados[index].modalidad,
                                                                                 numeroHoras     : vm.cursos_habilitados[index].numeroHoras,
                                                                                 especialidad    : {
                                                                                     nombre: vm.cursos_habilitados[index].especialidad

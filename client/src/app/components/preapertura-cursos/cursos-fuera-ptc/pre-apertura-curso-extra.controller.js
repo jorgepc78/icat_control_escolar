@@ -147,7 +147,7 @@
                             muestraDatosRegistroActual(vm.CursoExtraSeleccionado);
                         }
                         
-                        calcula_horas_disponibles();
+                        //calcula_horas_disponibles();
                   });
 
             }
@@ -230,6 +230,7 @@
 
                     modalInstance.result.then(function (respuesta) {
 
+                        vm.CursoExtraSeleccionado.modalidad             = respuesta.modalidad;
                         vm.CursoExtraSeleccionado.horario               = respuesta.horario;
                         vm.CursoExtraSeleccionado.aulaAsignada          = respuesta.aulaAsignada;
                         vm.CursoExtraSeleccionado.cupoMaximo            = respuesta.capacitandos;
@@ -252,7 +253,7 @@
                         vm.CursoExtraSeleccionado.localidad_pertenece.nombre = respuesta.nombreLocalidad;
                         vm.CursoExtraSeleccionado.localidad_pertenece.municipio = respuesta.nombreMunicipio;
 
-                        calcula_horas_disponibles();
+                        //calcula_horas_disponibles();
                     }, function () {
                     });
 

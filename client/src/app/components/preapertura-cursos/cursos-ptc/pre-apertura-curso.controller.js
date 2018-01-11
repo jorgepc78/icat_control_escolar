@@ -85,7 +85,13 @@
                                   {
                                       relation: 'detalle_curso',
                                       scope: {
-                                        fields: ['nombreCurso','modalidad','claveCurso','descripcion']
+                                        fields: ['nombreCurso','claveCurso','descripcion']
+                                      }
+                                  },
+                                  {
+                                      relation: 'modalidad_pertenece',
+                                      scope: {
+                                        fields: ['idModalidad','modalidad']
                                       }
                                   },
                                   {

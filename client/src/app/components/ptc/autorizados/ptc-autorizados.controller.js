@@ -118,7 +118,13 @@
                                   {
                                       relation: 'detalle_curso',
                                       scope: {
-                                        fields: ['nombreCurso','modalidad']
+                                        fields: ['idCursoPTC', 'nombreCurso']
+                                      }
+                                  },
+                                  {
+                                      relation: 'modalidad_pertenece',
+                                      scope: {
+                                        fields: ['idModalidad','modalidad']
                                       }
                                   },
                                   {
@@ -364,6 +370,7 @@
                                   vm.registrosCursosPTCs.push({
                                       idCursoPTC              : registro.idCursoPTC,
                                       detalle_curso           : registro.detalle_curso,
+                                      modalidad_pertenece     : registro.modalidad_pertenece,
                                       horario                 : registro.horario,
                                       aulaAsignada            : registro.aulaAsignada,
                                       capacitandos            : registro.capacitandos,
@@ -433,6 +440,7 @@
                                   vm.registrosCursosPTCs.push({
                                       idCursoPTC              : registro.idCursoPTC,
                                       detalle_curso           : registro.detalle_curso,
+                                      modalidad_pertenece     : registro.modalidad_pertenece,
                                       horario                 : registro.horario,
                                       aulaAsignada            : registro.aulaAsignada,
                                       capacitandos            : registro.capacitandos,

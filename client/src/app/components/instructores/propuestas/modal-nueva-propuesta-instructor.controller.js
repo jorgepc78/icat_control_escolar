@@ -147,8 +147,13 @@
                 vm.listaCursos = [];
                 CatalogoCursos.find({
                     filter: {
-                        where: {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
-                        fields: ['idCatalogoCurso','nombreCurso','modalidad','numeroHoras'],
+                        where: {
+                            and:[
+                                {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
+                                {activo: true}
+                            ]
+                        },
+                        fields: ['idCatalogoCurso','nombreCurso','numeroHoras','activo'],
                         order: 'nombreCurso ASC'
                     }
                 })

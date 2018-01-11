@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalEditaCursoPTCController', ModalEditaCursoPTCController);
 
-        ModalEditaCursoPTCController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'ProgTrimCursos', 'CursosPtc', 'CatalogoCursos', 'CatalogoInstructores'];
+        ModalEditaCursoPTCController.$inject = ['$scope', '$timeout', '$modalInstance', 'registroEditar', 'ProgTrimCursos', 'CursosPtc', 'CatalogoCursos', 'CatalogoInstructores', 'CatalogoModalidades'];
 
-    function ModalEditaCursoPTCController($scope, $timeout, $modalInstance, registroEditar, ProgTrimCursos, CursosPtc, CatalogoCursos, CatalogoInstructores) {
+    function ModalEditaCursoPTCController($scope, $timeout, $modalInstance, registroEditar, ProgTrimCursos, CursosPtc, CatalogoCursos, CatalogoInstructores, CatalogoModalidades) {
 
             var vm = this;
 
@@ -31,19 +31,23 @@
             vm.cursoSeleccionado = {};
             vm.listaCursos = [];
            
+            vm.modalidadSeleccionada = {};
+            vm.listaModalidades = [];
+           
             vm.instructorSeleccionado = {};
             vm.listaInstructores = [];
            
-            vm.horas_disponibles = registroEditar.horas_disponibles - registroEditar.horas_usadas;
+            //vm.horas_disponibles = registroEditar.horas_disponibles - registroEditar.horas_usadas;
             vm.horas_curso_temp  = registroEditar.recordPTC.total;
 
             vm.registroEdicion = {
                     idPtc           : registroEditar.recordPTC.idPtc,
                     idCursoPTC      : registroEditar.recordPTC.idCursoPTC,
                     idCatalogoCurso : registroEditar.recordPTC.idCatalogoCurso,
+                    idModalidad     : registroEditar.recordPTC.idModalidad,
+                    modalidad       : registroEditar.recordPTC.modalidad_pertenece.modalidad,
                     claveCurso      : '',
                     nombreCurso     : '',
-                    modalidad       : '',
                     horario         : registroEditar.recordPTC.horario,
                     aulaAsignada    : registroEditar.recordPTC.aulaAsignada,
                     capacitandos    : registroEditar.recordPTC.capacitandos,
@@ -82,6 +86,23 @@
                     vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
                     vm.registroEdicion.modalidad = vm.cursoSeleccionado.selected.modalidad;
                     //vm.registroEdicion.total = vm.cursoSeleccionado.selected.numeroHoras;
+                });
+    
+
+                CatalogoModalidades.find({
+                    filter: {
+                        fields: ['idModalidad','modalidad'],
+                        order: 'modalidad ASC'
+                    }
+                })
+                .$promise
+                .then(function(resp) {
+                    vm.listaModalidades = resp;                   
+                    var index = vm.listaModalidades.map(function(curso) {
+                                                        return curso.idModalidad;
+                                                      }).indexOf(vm.registroEdicion.idModalidad);
+
+                    vm.modalidadSeleccionada = vm.listaModalidades[index];
                 });
     
 
@@ -237,19 +258,19 @@
                 
                 var diferencia = vm.registroEdicion.total - vm.horas_curso_temp;
 
-                if(diferencia > vm.horas_disponibles)
-                {
-                        vm.mostrarSpiner = false;
-                        vm.mensaje = 'El número de horas de este curso incrementa las horas total del PTC ('+(registroEditar.horas_usadas + diferencia)+' horas) siendo mayor a las horas disponibles para la unidad ('+registroEditar.horas_disponibles+' horas)';
-                        vm.mostrar_msg_error = true;
-                        $timeout(function(){
-                             vm.mensaje = '';
-                             vm.mostrar_msg_error = false;
-                        }, 6000);
-                        return;
-                }
-                else
-                {
+                //if(diferencia > vm.horas_disponibles)
+                //{
+                //        vm.mostrarSpiner = false;
+                //        vm.mensaje = 'El número de horas de este curso incrementa las horas total del PTC ('+(registroEditar.horas_usadas + diferencia)+' horas) siendo mayor a las horas disponibles para la unidad ('+registroEditar.horas_disponibles+' horas)';
+                //        vm.mostrar_msg_error = true;
+                //        $timeout(function(){
+                //             vm.mensaje = '';
+                //             vm.mostrar_msg_error = false;
+                //        }, 6000);
+                //        return;
+                //}
+                //else
+                //{
 
                         var fechaInicio = new Date(vm.registroEdicion.fechaInicio);
                         fechaInicio.setHours(0);
@@ -263,6 +284,7 @@
 
                         var datos = {
                                 idCatalogoCurso : vm.cursoSeleccionado.selected.idCatalogoCurso,
+                                idModalidad     : vm.modalidadSeleccionada.idModalidad,
                                 horario         : vm.registroEdicion.horario,
                                 aulaAsignada    : vm.registroEdicion.aulaAsignada,
                                 capacitandos    : vm.registroEdicion.capacitandos,
@@ -273,9 +295,9 @@
                                 observaciones   : vm.registroEdicion.observaciones
                         };
 
+                        vm.registroEdicion.modalidad   = vm.modalidadSeleccionada.modalidad;
                         vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.selected.nombreCurso;
-                        vm.registroEdicion.claveCurso   = vm.cursoSeleccionado.selected.claveCurso;
-                        vm.registroEdicion.modalidad   = vm.cursoSeleccionado.selected.modalidad;
+                        vm.registroEdicion.claveCurso  = vm.cursoSeleccionado.selected.claveCurso;
 
                         CursosPtc.prototype$updateAttributes(
                         {
@@ -345,8 +367,7 @@
                         })
                         .catch(function(error) {
                         });
-
-                }
+                //}
 
             };
     };

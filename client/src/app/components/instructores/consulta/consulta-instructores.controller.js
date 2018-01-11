@@ -39,12 +39,7 @@
 
             function inicia() {
 
-                  vm.tablaListaRegistros.condicion = {
-                    and: [
-                      {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                      {estatus: 3}
-                    ]
-                  };
+                  vm.tablaListaRegistros.condicion = {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id};
 
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
@@ -80,8 +75,14 @@
                                         include:{
                                             relation: 'CatalogoCursos',
                                             scope: {
-                                                fields:['idCatalogoCurso','nombreCurso','modalidad'],
-                                                order: ['nombreCurso ASC','idCatalogoCurso ASC']
+                                                fields:['idCatalogoCurso','nombreCurso','numeroHoras','idEspecialidad','activo'],
+                                                order: ['nombreCurso ASC','idCatalogoCurso ASC'],
+                                                include:{
+                                                    relation: 'especialidad',
+                                                    scope: {
+                                                        fields:['nombre']
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -131,7 +132,6 @@
                   vm.tablaListaRegistros.condicion = {
                       and: [
                         {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                        {estatus: 3},
                         {nombre_completo: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}},
                       ]
                   };
@@ -168,12 +168,7 @@
                   vm.tablaListaRegistros.inicio = 0;
                   vm.tablaListaRegistros.fin = 1;
 
-                  vm.tablaListaRegistros.condicion = {
-                    and: [
-                      {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                      {estatus: 3}
-                    ]
-                  };
+                  vm.tablaListaRegistros.condicion = {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id};
 
                   tablaDatosService.obtiene_datos_tabla(VistaCatalogoInstructores, vm.tablaListaRegistros)
                   .then(function(respuesta) {

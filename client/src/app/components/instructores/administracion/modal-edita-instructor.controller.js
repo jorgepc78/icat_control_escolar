@@ -190,9 +190,10 @@
                       vm.cursos_habilitados.push({
                           idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
                           nombreCurso     : record.CatalogoCursos.nombreCurso,
-                          modalidad       : record.CatalogoCursos.modalidad,
                           numeroHoras     : record.CatalogoCursos.numeroHoras,
-                          calificacion    : record.calificacion
+                          calificacion    : record.calificacion,
+                          activo          : record.CatalogoCursos.activo,
+                          especialidad    : record.CatalogoCursos.especialidad.nombre
                       });
                 });
 
@@ -365,8 +366,13 @@
                 vm.listaCursos = [];
                 CatalogoCursos.find({
                     filter: {
-                        where: {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
-                        fields: ['idCatalogoCurso','nombreCurso','modalidad','numeroHoras'],
+                        where: {
+                            and:[
+                                {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
+                                {activo: true}
+                            ]
+                        },
+                        fields: ['idCatalogoCurso','nombreCurso','numeroHoras','activo'],
                         order: 'nombreCurso ASC'
                     }
                 })
@@ -407,9 +413,10 @@
                 vm.cursos_habilitados.push({
                     idCatalogoCurso : vm.cursoSeleccionado.idCatalogoCurso,
                     nombreCurso     : vm.cursoSeleccionado.nombreCurso,
-                    modalidad       : vm.cursoSeleccionado.modalidad,
                     numeroHoras     : vm.cursoSeleccionado.numeroHoras,
-                    calificacion    : 0
+                    calificacion    : 0,
+                    activo          : vm.cursoSeleccionado.activo,
+                    especialidad    : vm.especialidadSeleccionada.nombre
                 });
 
                 vm.cursoSeleccionado = {};
@@ -606,8 +613,11 @@
                                                                                 CatalogoCursos  : {
                                                                                     idCatalogoCurso : resp.idCatalogoCurso,
                                                                                     nombreCurso     : vm.cursos_habilitados[index].nombreCurso,
-                                                                                    modalidad       : vm.cursos_habilitados[index].modalidad,
-                                                                                    numeroHoras     : vm.cursos_habilitados[index].numeroHoras
+                                                                                    numeroHoras     : vm.cursos_habilitados[index].numeroHoras,
+                                                                                    activo          : vm.cursos_habilitados[index].activo,
+                                                                                    especialidad    : {
+                                                                                        nombre: vm.cursos_habilitados[index].especialidad
+                                                                                    }
                                                                                 }
                                                                             });
                                                                             totalregistros++;

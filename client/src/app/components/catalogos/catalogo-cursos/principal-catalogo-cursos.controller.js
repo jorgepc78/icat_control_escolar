@@ -21,12 +21,16 @@
             vm.elimina_registro           = elimina_registro;
 
             vm.muestra_cursos_especialidad = muestra_cursos_especialidad;
-            vm.muestra_cursos_modalidad    = muestra_cursos_modalidad;
+            vm.muestra_cursos_estatus    = muestra_cursos_estatus;
+            //vm.muestra_cursos_modalidad    = muestra_cursos_modalidad;
 
             vm.listaEspecialidades = [];
             vm.especialidadSeleccionada = undefined;
-            vm.listaModalidades = [];
-            vm.modalidadSeleccionada = undefined;
+            //vm.listaModalidades = [];
+            //vm.modalidadSeleccionada = undefined;
+            
+            vm.listaEstatus = [];
+            vm.estatusSeleccionado = undefined;
 
             vm.tablaListaRegistros = {
               totalElementos     : 0,
@@ -66,19 +70,27 @@
                       vm.especialidadSeleccionada = vm.listaEspecialidades[0];
                   });
 
-                  vm.listaModalidades = [
+                  /*vm.listaModalidades = [
                   {modalidad: 't', alias: 'Todas'},
                   {modalidad: 'CAE', alias: 'CAE'},
                   {modalidad: 'Extension', alias: 'Extensión'},
                   {modalidad: 'Regular', alias: 'Regular'}
                   ];
+                  
+                  vm.modalidadSeleccionada = vm.listaModalidades[0];*/
 
-                  vm.modalidadSeleccionada = vm.listaModalidades[0];
+                  vm.listaEstatus = [
+                    {estatus: 't', alias: 'Todos'},
+                    {estatus: 'true', alias: 'Activos'},
+                    {estatus: 'false', alias: 'Inactivos'}
+                  ];
+
+                  vm.estatusSeleccionado = vm.listaEstatus[0];
 
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
                               where: vm.tablaListaRegistros.condicion,
-                              fields: ['idCatalogoCurso','claveCurso','descripcion','perfilEgresado','perfilInstructor','idEspecialidad','modalidad','nombreCurso','numeroHoras','activo'],
+                              fields: ['idCatalogoCurso','claveCurso','descripcion','perfilEgresado','perfilInstructor','idEspecialidad','nombreCurso','numeroHoras','activo'],
                               order: ['nombreCurso ASC','idCatalogoCurso ASC'],
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
@@ -133,14 +145,19 @@
 
                   if(vm.especialidadSeleccionada.idEspecialidad == -1)
                   {
-                        if(vm.modalidadSeleccionada.modalidad == 't')
+                        /*if(vm.modalidadSeleccionada.modalidad == 't')
                             vm.tablaListaRegistros.condicion = {};
                         else
-                            vm.tablaListaRegistros.condicion = {modalidad: vm.modalidadSeleccionada.modalidad};
+                            vm.tablaListaRegistros.condicion = {modalidad: vm.modalidadSeleccionada.modalidad};*/
+
+                        if(vm.estatusSeleccionado.estatus == 't')
+                            vm.tablaListaRegistros.condicion = {};
+                        else
+                            vm.tablaListaRegistros.condicion = {activo: vm.estatusSeleccionado.estatus};
                   }
                   else
                   {
-                        if(vm.modalidadSeleccionada.modalidad == 't')
+                        /*if(vm.modalidadSeleccionada.modalidad == 't')
                             vm.tablaListaRegistros.condicion = {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad};
                         else
                         {
@@ -148,6 +165,18 @@
                               and: [
                                 {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
                                 {modalidad: vm.modalidadSeleccionada.modalidad}
+                              ]
+                            };
+                        }*/
+                        
+                        if(vm.estatusSeleccionado.estatus == 't')
+                            vm.tablaListaRegistros.condicion = {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad};
+                        else
+                        {
+                            vm.tablaListaRegistros.condicion = {
+                              and: [
+                                {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
+                                {activo: vm.estatusSeleccionado.estatus}
                               ]
                             };
                         }
@@ -173,7 +202,60 @@
             }
 
 
-            function muestra_cursos_modalidad() {
+            function muestra_cursos_estatus() {
+                  vm.registros = {};
+                  vm.RegistroSeleccionado = {};
+                  vm.tablaListaRegistros.fila_seleccionada = undefined;
+                  vm.tablaListaRegistros.paginaActual = 1;
+                  vm.tablaListaRegistros.inicio = 0;
+                  vm.tablaListaRegistros.fin = 1;
+                  vm.client = 1;
+
+                  vm.mostrarbtnLimpiar = false;
+                  vm.cadena_buscar = '';
+
+                  if(vm.estatusSeleccionado.estatus == 't')
+                  {
+                        if(vm.especialidadSeleccionada.idEspecialidad == -1)
+                              vm.tablaListaRegistros.condicion = {};
+                        else
+                              vm.tablaListaRegistros.condicion = {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad};
+                  }
+                  else
+                  {
+                        if(vm.especialidadSeleccionada.idEspecialidad == -1)
+                              vm.tablaListaRegistros.condicion = {activo: vm.estatusSeleccionado.estatus};
+                        else
+                        {
+                              vm.tablaListaRegistros.condicion = {
+                                and: [
+                                  {idEspecialidad: vm.especialidadSeleccionada.idEspecialidad},
+                                  {activo: vm.estatusSeleccionado.estatus}
+                                ]
+                              };
+                        }
+                  }
+
+                  tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)
+                  .then(function(respuesta) {
+
+                        vm.tablaListaRegistros.totalElementos = respuesta.total_registros;
+                        vm.tablaListaRegistros.inicio = respuesta.inicio;
+                        vm.tablaListaRegistros.fin = respuesta.fin;
+
+                        if(vm.tablaListaRegistros.totalElementos > 0)
+                        {
+                            vm.registros = respuesta.datos;
+                            vm.RegistroSeleccionado = vm.registros[0];
+                            vm.client = 2;
+                            vm.tablaListaRegistros.fila_seleccionada = 0;
+                            muestraDatosRegistroActual(vm.RegistroSeleccionado);
+                        }
+                  });
+            }
+
+
+            /*function muestra_cursos_modalidad() {
                   vm.registros = {};
                   vm.RegistroSeleccionado = {};
                   vm.tablaListaRegistros.fila_seleccionada = undefined;
@@ -223,7 +305,7 @@
                             muestraDatosRegistroActual(vm.RegistroSeleccionado);
                         }
                   });
-            }
+            }*/
 
 
             function muestraResultadosBusqueda() {
@@ -237,7 +319,8 @@
                   vm.tablaListaRegistros.fin = 1;
 
                   vm.especialidadSeleccionada = vm.listaEspecialidades[0];
-                  vm.modalidadSeleccionada = vm.listaModalidades[0];
+                  vm.estatusSeleccionado = vm.listaEstatus[0];
+                  //vm.modalidadSeleccionada = vm.listaModalidades[0];
 
                   vm.tablaListaRegistros.condicion = {
                                     nombreCurso: {regexp: '/.*'+ vm.cadena_buscar +'.*/i'}
@@ -276,7 +359,8 @@
                   vm.tablaListaRegistros.condicion = {};
 
                   vm.especialidadSeleccionada = vm.listaEspecialidades[0];
-                  vm.modalidadSeleccionada = vm.listaModalidades[0];
+                  vm.estatusSeleccionado = vm.listaEstatus[0];
+                  //vm.modalidadSeleccionada = vm.listaModalidades[0];
 
                   tablaDatosService.obtiene_datos_tabla(CatalogoCursos, vm.tablaListaRegistros)
                   .then(function(respuesta) {
@@ -350,7 +434,7 @@
                         vm.RegistroSeleccionado.perfilEgresado              = respuesta.perfilEgresado;
                         vm.RegistroSeleccionado.perfilInstructor            = respuesta.perfilInstructor;
                         vm.RegistroSeleccionado.idEspecialidad              = respuesta.idEspecialidad;
-                        vm.RegistroSeleccionado.modalidad                   = respuesta.modalidad;
+                        //vm.RegistroSeleccionado.modalidad                   = respuesta.modalidad;
                         vm.RegistroSeleccionado.nombreCurso                 = respuesta.nombreCurso;
                         vm.RegistroSeleccionado.numeroHoras                 = respuesta.numeroHoras;
 

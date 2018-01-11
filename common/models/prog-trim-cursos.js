@@ -31,6 +31,12 @@ module.exports = function(ProgTrimCursos) {
 													        fields: ['nombreCurso','modalidad']
 													      }
 													  },
+                            {
+                                relation: 'modalidad_pertenece',
+                                scope: {
+                                  fields: ['idModalidad','modalidad']
+                                }
+                            },
 													  {
 													      relation: 'instructores_propuestos',
 													      scope: {
@@ -99,7 +105,7 @@ module.exports = function(ProgTrimCursos) {
 								"num": (i+1),
 								"instructores_propuestos": array_instructores,
 								"nombre_curso"  : PTCencontrado.cursos_programados[i].detalle_curso.nombreCurso,
-								"modalidad"     : PTCencontrado.cursos_programados[i].detalle_curso.modalidad,
+								"modalidad"     : PTCencontrado.cursos_programados[i].modalidad_pertenece.modalidad,
 								"horario"       : PTCencontrado.cursos_programados[i].horario,
 								"aula_asignada" : PTCencontrado.cursos_programados[i].aulaAsignada,
 								"capacitandos"  : PTCencontrado.cursos_programados[i].capacitandos,

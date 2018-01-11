@@ -18,7 +18,7 @@
                                       <ui-select-choices repeat="curso in vm.listaCursos | filter: { nombreCurso: $select.search } | limitTo: ($select.search.length <= 3) ? 0 : undefined">
                                           <div ng-bind-html="curso.nombreCurso | highlight: $select.search"></div>
                                           <small>
-                                            Modalidad: {{curso.modalidad}}, {{curso.numeroHoras}} horas
+                                            Horas: {{curso.numeroHoras}} horas
                                           </small>
                                       </ui-select-choices>
                                       <ui-select-no-choice>
@@ -43,9 +43,9 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 control-label">Tipo</label>
+                              <label class="col-sm-2 control-label">Modalidad abrir&aacute; curso</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.modalidad" readonly>
+                                <select class="form-control m-b" ng-model="vm.modalidadSeleccionada" ng-options="modalidad as modalidad.modalidad for modalidad in vm.listaModalidades" required></select>
                               </div>
                           </div>
                           <div class="form-group">

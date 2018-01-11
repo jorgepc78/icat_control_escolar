@@ -322,7 +322,6 @@
                                             idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
                                             nombreCurso     : record.CatalogoCursos.nombreCurso,
                                             numeroHoras     : record.CatalogoCursos.numeroHoras,
-                                            modalidad       : record.CatalogoCursos.modalidad,
                                             especialidad    : { nombre: record.CatalogoCursos.especialidad.nombre }
                                         }
                                     });

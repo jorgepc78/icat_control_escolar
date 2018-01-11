@@ -35,7 +35,7 @@
                     idPtc                   : registroEditar.idPtc,
                     idCatalogoCurso         : registroEditar.idCatalogoCurso,
                     nombreCurso             : registroEditar.detalle_curso.nombreCurso,
-                    modalidad               : registroEditar.detalle_curso.modalidad,
+                    modalidad_pertenece     : registroEditar.modalidad_pertenece,
                     claveCurso              : registroEditar.detalle_curso.claveCurso,
                     descripcion             : registroEditar.detalle_curso.descripcion,
                     horario                 : registroEditar.horario,
@@ -241,7 +241,7 @@
                             nombreCurso           : vm.registroEdicion.nombreCurso,
                             claveCurso            : vm.registroEdicion.claveCurso,
                             descripcionCurso      : vm.registroEdicion.descripcion,
-                            modalidad             : vm.registroEdicion.modalidad,
+                            modalidad             : vm.registroEdicion.modalidad_pertenece.modalidad,
                             horario               : vm.registroEdicion.horario,
                             aulaAsignada          : vm.registroEdicion.aulaAsignada,
                             horasSemana           : vm.registroEdicion.semanas,
@@ -274,7 +274,7 @@
                                 vm.registroEdicion.nombreMunicipio  = vm.localidadSeleccionada.selected.municipio;
                                 
                                 vm.registroEdicion.nombreCurso  = vm.registroEdicion.nombreCurso;
-                                vm.registroEdicion.modalidad    = vm.registroEdicion.modalidad;
+                                vm.registroEdicion.modalidad    = vm.registroEdicion.modalidad_pertenece.modalidad;
 
                               $modalInstance.close(vm.registroEdicion);
                         })

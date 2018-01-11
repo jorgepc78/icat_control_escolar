@@ -345,8 +345,8 @@
                     instructores_propinstructores             : false,
 
                     plan_cursos_menu                          : true,
-                    plan_cursos_horas_unidad                  : false,
-                    plan_cursos_metas_capacit                 : false,
+                    plan_cursos_horas_unidad                  : true,
+                    plan_cursos_metas_capacit                 : true,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
                     plan_cursos_resumen_ptc_unidades          : true,
@@ -398,7 +398,7 @@
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : true,
-                    plan_cursos_metas_capacit                 : true,
+                    plan_cursos_metas_capacit                 : false,
                     plan_cursos_planeacion_ptc                : false,
                     plan_cursos_revision_ptc                  : false,
                     plan_cursos_resumen_ptc_unidades          : false,

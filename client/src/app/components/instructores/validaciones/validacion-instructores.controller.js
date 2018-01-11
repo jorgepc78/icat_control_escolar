@@ -101,7 +101,7 @@
                                         include:{
                                             relation: 'CatalogoCursos',
                                             scope: {
-                                                fields:['idCatalogoCurso','nombreCurso','modalidad','numeroHoras','idEspecialidad'],
+                                                fields:['idCatalogoCurso','nombreCurso','numeroHoras','idEspecialidad'],
                                                 order: ['nombreCurso ASC','idCatalogoCurso ASC'],
                                                 include:{
                                                     relation: 'especialidad',

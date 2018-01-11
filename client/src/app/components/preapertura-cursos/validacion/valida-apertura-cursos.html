@@ -20,27 +20,27 @@
                             </div>
                             <div class="ibox-content">
                                 
-                                        <table class="tablaDatos table table-condensed no-footer">
+                                        <table class="tablaDatosCompacta table table-condensed no-footer">
                                           <thead>
                                             <tr>
-                                                <th class="text-center">Unidad</th>
+                                                <!-- <th class="text-center">Unidad</th> -->
                                                 <th class="text-center">Curso o m&oacute;dulo</th>
-                                                <th class="text-center">Tipo</th>
+                                                <th class="text-center">Modalidad</th>
                                                 <th class="text-center">Fecha inicio</th>
                                                 <th class="text-center">Estatus</th>
-                                                <th class="text-center">Revisi&oacute;n Programas</th>
-                                                <th class="text-center">Aprobaci&oacute;n Dir. Acad&eacute;mica</th>
-                                                <th class="text-center">Aprobaci&oacute;n Dir. Gral.</th>
-                                                <th class="text-center">Oficio de autorizaci&oacute;n</th>
+                                                <th class="text-center" style="width:120px;">Revisi&oacute;n Programas</th>
+                                                <th class="text-center" style="width:90px;">Aprobaci&oacute;n Dir. Acad&eacute;mica</th>
+                                                <th class="text-center" style="width:80px;">Aprobaci&oacute;n Dir. Gral.</th>
+                                                <th class="text-center" style="width:80px;">Oficio de autorizaci&oacute;n</th>
                                             </tr>
                                           </thead>
                                          <tbody>
                                             <tr ng-repeat="registro in vm.listaCursosValidar" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaCursos.fila_seleccionada}" class="pointer">
-                                                <td> {{registro.unidad_pertenece.nombre}}</td>
-                                                <td> {{registro.nombreCurso}}</td>
-                                                <td> {{registro.modalidad}}</td>
-                                                <td> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
-                                                <td class="client-status" ng-switch on="registro.estatus">
+                                                <!-- <td> {{registro.unidad_pertenece.nombre}}</td> -->
+                                                <td class="text-left"> {{registro.nombreCurso}}</td>
+                                                <td class="text-center"> {{registro.modalidad}}</td>
+                                                <td class="text-center"> {{registro.fechaInicio | date:'d/MMMM/yyyy'}}</td>
+                                                <td class="client-status" style="text-align: center;" ng-switch on="registro.estatus">
                                                     <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Sin revisar</span>
                                                     <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En revisi&oacute;n</span>
                                                     <span ng-switch-when="2" class="label label-success texto-estatus-ptc">Aprobado</span>
@@ -115,7 +115,7 @@
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.cursoSeleccionado.modalidad}} </span>
-                                                                                    Tipo
+                                                                                    Modalidad
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.cursoSeleccionado.localidad_pertenece.nombre}} </span>
@@ -172,8 +172,8 @@
                                                                                     Curso o m&oacute;dulo
                                                                                 </li>
                                                                                 <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.curso_ptc_pertenece.detalle_curso.modalidad}} </span>
-                                                                                    Tipo
+                                                                                    <span class="pull-right"> {{vm.cursoSeleccionado.curso_ptc_pertenece.modalidad_pertenece.modalidad}} </span>
+                                                                                    Modalidad
                                                                                 </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right"> {{vm.cursoSeleccionado.curso_ptc_pertenece.horario}} </span>

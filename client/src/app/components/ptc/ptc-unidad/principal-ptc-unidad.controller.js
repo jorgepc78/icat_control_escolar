@@ -99,7 +99,13 @@
                                   {
                                       relation: 'detalle_curso',
                                       scope: {
-                                        fields: ['nombreCurso','modalidad']
+                                        fields: ['idCursoPTC','nombreCurso']
+                                      }
+                                  },
+                                  {
+                                      relation: 'modalidad_pertenece',
+                                      scope: {
+                                        fields: ['idModalidad','modalidad']
                                       }
                                   },
                                   {
@@ -254,7 +260,7 @@
                             muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
                         }
 
-                        calcula_horas_disponibles();
+                        //calcula_horas_disponibles();
                   });
             };
 
@@ -526,23 +532,26 @@
                     });
 
                     modalInstance.result.then(function (respuesta) {
-                        seleccion.idCatalogoCurso           = respuesta.idCatalogoCurso;
-                        seleccion.detalle_curso.nombreCurso = respuesta.nombreCurso;
-                        seleccion.detalle_curso.modalidad   = respuesta.modalidad;
-                        seleccion.horario                   = respuesta.horario;
-                        seleccion.aulaAsignada              = respuesta.aulaAsignada;
-                        seleccion.capacitandos              = respuesta.capacitandos;
-                        seleccion.semanas                   = respuesta.semanas;
-                        seleccion.total                     = respuesta.total;
-                        seleccion.fechaInicio               = respuesta.fechaInicio;
-                        seleccion.fechaFin                  = respuesta.fechaFin;
-                        seleccion.observaciones             = respuesta.observaciones;
+                        seleccion.idCatalogoCurso                    = respuesta.idCatalogoCurso;
+                        seleccion.detalle_curso.nombreCurso          = respuesta.nombreCurso;
+                        seleccion.idModalidad                        = respuesta.idModalidad;
+                        seleccion.horario                            = respuesta.horario;
+                        seleccion.aulaAsignada                       = respuesta.aulaAsignada;
+                        seleccion.capacitandos                       = respuesta.capacitandos;
+                        seleccion.semanas                            = respuesta.semanas;
+                        seleccion.total                              = respuesta.total;
+                        seleccion.fechaInicio                        = respuesta.fechaInicio;
+                        seleccion.fechaFin                           = respuesta.fechaFin;
+                        seleccion.observaciones                      = respuesta.observaciones;
+                        
+                        seleccion.modalidad_pertenece.idModalidad    = respuesta.idModalidad;
+                        seleccion.modalidad_pertenece.modalidad      = respuesta.modalidad;
                         
                         vm.RegistroPTCSeleccionado.estatus           = respuesta.estatusPTC;
                         vm.RegistroPTCSeleccionado.horasSeparadas    = respuesta.horasSeparadas;
                         vm.RegistroPTCSeleccionado.fechaModificacion = respuesta.fechaModificacionPTC;
 
-                        calcula_horas_disponibles();
+                        //calcula_horas_disponibles();
 
                         seleccion.instructores_propuestos = [];
 
@@ -584,7 +593,7 @@
                             idPtc   : vm.RegistroPTCSeleccionado.idPtc
                         });
 
-                        calcula_horas_disponibles();
+                        //calcula_horas_disponibles();
 
                         muestraCursosPTCActual(vm.RegistroPTCSeleccionado);
 
@@ -652,7 +661,7 @@
                                                           vm.RegistroPTCSeleccionado.estatusPTC = respuesta.estatus;
                                                           vm.RegistroPTCSeleccionado.horasSeparadas = respuesta.horasSeparadas;
                                                           vm.RegistroPTCSeleccionado.fechaModificacionPTC = respuesta.fechaModificacion;
-                                                          calcula_horas_disponibles();
+                                                          //calcula_horas_disponibles();
                                                   });
 
 

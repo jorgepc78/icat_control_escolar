@@ -170,14 +170,13 @@
                                                                                         <table class="tablaDatos table table-condensed no-footer">
                                                                                           <thead>
                                                                                             <col width="30%">
-                                                                                            <col width="40%">
+                                                                                            <col width="50%">
                                                                                             <col width="10%">
                                                                                             <col width="10%">
                                                                                             <col width="10%">
                                                                                             <tr>
                                                                                                 <th class="text-left">Especialidad</th>
                                                                                                 <th class="text-left">Curso</th>
-                                                                                                <th class="text-left">Modalidad</th>
                                                                                                 <th class="text-center">Horas</th>
                                                                                                 <th class="text-center">Puntaje</th>
                                                                                             </tr>
@@ -198,7 +197,6 @@
                                                                                                     <tr ng-repeat="curso in vm.RegistroSeleccionado.evaluacion_curso | orderObjectBy: 'CatalogoCursos.nombreCurso' ">
                                                                                                         <td class="text-left"> {{curso.CatalogoCursos.especialidad.nombre}}</td>
                                                                                                         <td class="text-left"> {{curso.CatalogoCursos.nombreCurso}}</td>
-                                                                                                        <td class="text-left"> {{curso.CatalogoCursos.modalidad}}</td>
                                                                                                         <td class="text-center"> {{curso.CatalogoCursos.numeroHoras}}</td>
                                                                                                         <td class="text-center"> {{curso.calificacion}}</td>
                                                                                                     </tr>

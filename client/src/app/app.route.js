@@ -165,6 +165,20 @@
                 authenticate: true
             })
 
+            /*** seccion de evaluadores ***/
+            .state('evaluadores', {
+                abstract: true,
+                url: '/evaluadores',
+                templateUrl: 'app/shared/layout/content-top-navigation.html',
+            })
+            .state('evaluadores.admin_evaluadores', {
+                url: '/admin_evaluadores',
+                templateUrl: 'app/components/evaluadores/administracion/admin-evaluadores.html',
+                controller: 'AdminEvaluadoresController',
+                controllerAs: 'vm',
+                authenticate: true
+            })
+
             /*** seccion de pre apertura de cursos ***/
             .state('pre_apertura', {
                 abstract: true,

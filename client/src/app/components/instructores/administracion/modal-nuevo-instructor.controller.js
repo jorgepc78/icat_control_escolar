@@ -54,7 +54,7 @@
                     certificacion      : '',
                     idLocalidad        : 0,
                     activo             : true,
-                    evaluacion_curso   : [],
+                    calif_evaluacion_curso   : [],
                     otras_unidades     : [],
                     documentos         : []
             };

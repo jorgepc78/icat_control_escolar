@@ -20,8 +20,9 @@
               idAlumno       : registroEditar.seleccion.idAlumno,
               nombreCompleto : registroEditar.seleccion.Capacitandos.nombreCompleto,
               idEvaluacion   : registroEditar.seleccion.idEvaluacion,
-              nombreCurso    : registroEditar.nombreCurso,
+              nombreEvaluacion: registroEditar.nombreEvaluacion,
               numFactura     : registroEditar.seleccion.numFactura,
+              observPago     : registroEditar.seleccion.observPago,
               pagado         : registroEditar.seleccion.pagado
             };
 
@@ -49,15 +50,14 @@
                 {
                     id: vm.registroEdicion.id
                 },{
-                    pagado     : true,
+                    pagado     : vm.registroEdicion.pagado,
                     numFactura : vm.registroEdicion.numFactura,
+                    observPago : vm.registroEdicion.observPago,
                     fechaPago  : Date()
                 })
                 .$promise
                 .then(function(respuesta) {
-
                     $modalInstance.close(respuesta);
-
                 })
                 .catch(function(error) {
                 });

@@ -1,0 +1,187 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Edici&oacute;n de evaluaciones</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;padding-bottom:0;">
+
+        <form name="form_datos" class="form-horizontal">
+            <tabset>
+                <tab heading="Evaluaciones que puede aplicar">
+                <br>
+                    <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-10">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                          <label class="col-sm-3 control-label">Especialidad</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                          <select class="form-control m-b" 
+                                              ng-model="vm.especialidadEvalSeleccionada"
+                                              ng-change="vm.muestraEvalEspecialidad()"
+                                              ng-options="especialidad as especialidad.nombre for especialidad in vm.listaEspecialidadesEval">
+                                          </select>                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                          <label class="col-sm-3 control-label">Evaluaci&oacute;n</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                          <select class="form-control m-b" 
+                                              ng-model="vm.evaluacionSeleccionada"
+                                              ng-disabled="vm.listaEvalInhabilit"
+                                              ng-options="curso as curso.nombreCurso for curso in vm.listaEvaluaciones">
+                                          </select>                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-8 text-center">
+                                          <button type="button" ng-disabled="(vm.evaluacionSeleccionada.idCatalogoCurso === undefined)" ng-click="vm.agregaEvaluacion()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar evaluaci&oacute;n</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                                <col width="40%">
+                                                <col width="55%">
+                                                <col width="5%">
+                                            <tr>
+                                                <th>Especialidad</th>
+                                                <th>Evaluaci&oacute;n</th>
+                                                <th></th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="height: 350px;">
+                                        <div class="full-height-scroll" full-scroll>
+                                              <table class="tablaDatos table table-condensed no-footer">
+                                                <thead>
+                                                    <col width="40%">
+                                                    <col width="55%">
+                                                    <col width="5%">
+                                                </thead>
+                                               <tbody>
+                                                  <tr ng-repeat="registro in vm.evaluaciones_habilitadas | orderBy:'nombreCurso'" class="pointer">
+                                                      <td>{{registro.especialidad}}</td>
+                                                      <td>{{registro.nombreCurso}}</td>
+                                                      <td style="width:170px">
+                                                              <button type="button" ng-click="vm.eliminaEvaluacion(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                      </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                            </div>
+                    </div>
+                </tab>
+                <tab heading="Est&aacute;ndares que puede evaluar">
+                <br>
+                    <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-10">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                          <label class="col-sm-3 control-label">Est&aacute;ndar</label>
+                                    </div>
+                                    <div class="col-md-11">
+                                          <select class="form-control m-b" 
+                                              ng-model="vm.estandarSeleccionado"
+                                              ng-options="estandar as (estandar.codigo + ' - ' + estandar.nombre) for estandar in vm.listaEstandares">
+                                          </select>                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-8 text-center">
+                                          <button type="button" ng-disabled="(vm.estandarSeleccionado.idEstandar === undefined)" ng-click="vm.agregaEstandar()" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar est&aacute;ndar</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="tablaDatos table table-condensed no-footer">
+                                          <thead>
+                                                <col width="10%">
+                                                <col width="85%">
+                                                <col width="5%">
+                                            <tr>
+                                                <th>C&oacute;digo</th>
+                                                <th>Est&aacute;ndar</th>
+                                                <th></th>
+                                            </tr>
+                                          </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="height: 350px;">
+                                        <div class="full-height-scroll" full-scroll>
+                                              <table class="tablaDatos table table-condensed no-footer">
+                                                <thead>
+                                                    <col width="10%">
+                                                    <col width="85%">
+                                                    <col width="5%">
+                                                </thead>
+                                               <tbody>
+                                                  <tr ng-repeat="registro in vm.estandares_habilitados | orderBy:'nombre'" class="pointer">
+                                                      <td>{{registro.codigo}}</td>
+                                                      <td>{{registro.nombre}}</td>
+                                                      <td style="width:170px">
+                                                              <button type="button" ng-click="vm.eliminaEstandar(registro)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                      </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                            </div>
+                    </div>
+                </tab>
+            </tabset>
+
+        </form>
+
+
+
+      </div>
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-9">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje}}</div>
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="form_datos.$invalid" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-check"></i></span> Guardar</button>
+              </div>
+          </div>
+
+      </div>
+</div>

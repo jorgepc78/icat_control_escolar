@@ -95,7 +95,7 @@
                                     }
                                 },
                                 {
-                                    relation: 'evaluacion_curso',
+                                    relation: 'calif_evaluacion_curso',
                                     scope: {
                                         fields:['id','idInstructor','idCatalogoCurso','calificacion'],
                                         include:{
@@ -349,11 +349,11 @@
                             var index = 0;
                             angular.forEach(respuesta, function(record) {
 
-                                index = vm.RegistroSeleccionado.evaluacion_curso.map(function(registro) {
+                                index = vm.RegistroSeleccionado.calif_evaluacion_curso.map(function(registro) {
                                                                                       return registro.id;
                                                                                     }).indexOf(record.id);
 
-                                vm.RegistroSeleccionado.evaluacion_curso[index].calificacion = record.calificacion;
+                                vm.RegistroSeleccionado.calif_evaluacion_curso[index].calificacion = record.calificacion;
 
                             });
                       }

@@ -57,7 +57,7 @@
                                   {
                                       relation: 'inscripcionesEvaluaciones',
                                       scope: {
-                                        fields: ['id', 'idAlumno', 'pagado', 'fechaPago','numFactura','calificacion','numDocAcreditacion'],
+                                        fields: ['id', 'idAlumno', 'idEvaluacion', 'pagado', 'fechaPago','numFactura','observPago'],
                                         include:{
                                             relation: 'Capacitandos',
                                             scope: {
@@ -223,7 +223,7 @@
                         windowClass: "animated fadeIn",
                         controller: 'ModalCapturaNumFacturaEvalController as vm',
                         resolve: {
-                          registroEditar: function () { return {nombreCurso: vm.cursoSeleccionado.nombreCurso ,seleccion: seleccion} }
+                          registroEditar: function () { return {nombreEvaluacion: (vm.cursoSeleccionado.tipoEvaluacion == 1 ? vm.cursoSeleccionado.nombreCurso : vm.cursoSeleccionado.nombreEstandar) ,seleccion: seleccion} }
                         }
 
                     });

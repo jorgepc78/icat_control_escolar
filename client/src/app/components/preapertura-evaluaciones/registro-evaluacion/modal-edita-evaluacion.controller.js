@@ -5,22 +5,23 @@
         .module('icat_control_escolar')
         .controller('ModalEditaEvaluacionController', ModalEditaEvaluacionController);
 
-        ModalEditaEvaluacionController.$inject = ['$scope', '$timeout', '$modalInstance', 'tablaDatosService', 'registroEditar', 'CatalogoCursos', 'CatalogoInstructores', 'Evaluacion', 'Capacitandos'];
+        ModalEditaEvaluacionController.$inject = ['$scope', '$timeout', '$modalInstance', 'tablaDatosService', 'registroEditar', 'CatalogoCursos', 'CatalogoEstandares', 'CatalogoInstructores', 'Evaluacion', 'Capacitandos'];
 
-    function ModalEditaEvaluacionController($scope, $timeout, $modalInstance, tablaDatosService, registroEditar, CatalogoCursos, CatalogoInstructores, Evaluacion, Capacitandos) {
+    function ModalEditaEvaluacionController($scope, $timeout, $modalInstance, tablaDatosService, registroEditar, CatalogoCursos, CatalogoEstandares, CatalogoInstructores, Evaluacion, Capacitandos) {
 
             var vm = this;
 
             vm.sort_by = sort_by;
             vm.openCalendar1 = openCalendar1;
 
+            vm.muestraEvaluadoresCurso    = muestraEvaluadoresCurso;
+
+            vm.cambiaModalidad            = cambiaModalidad;
             vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
             vm.limpiaBusqueda             = limpiaBusqueda;
             vm.seleccionaAlumno           = seleccionaAlumno;
             vm.eliminaAlumno              = eliminaAlumno;
             vm.cambiarPagina              = cambiarPagina;
-
-            vm.muestraInstructoresCurso = muestraInstructoresCurso;
             vm.guardar = guardar;
 
             vm.mostrarbtnLimpiar = false;
@@ -46,28 +47,35 @@
             vm.mostrar_msg_error = false;
             vm.mensaje = '';
 
-            vm.listaCursos = {};
+            vm.listaCursos = [];
             vm.cursoSeleccionado = {};
 
-            vm.instructorSeleccionado = "";
+            vm.listaEstandares = [];
+            vm.estandarSeleccionado = {};
+
             vm.listaInstructores = [];
+            vm.instructorSeleccionado = {};
 
 
             vm.registroEdicion = {
                     idEvaluacion            : registroEditar.record.idEvaluacion,
+                    tipoEvaluacion          : registroEditar.record.tipoEvaluacion.toString(),
                     idPtc                   : registroEditar.record.idPtc,
                     idCatalogoCurso         : registroEditar.record.idCatalogoCurso,
                     nombreCurso             : registroEditar.record.nombreCurso,
-                    modalidad               : registroEditar.record.modalidad,
                     claveCurso              : registroEditar.record.claveCurso,
-                    descripcion             : registroEditar.record.descripcionCurso,
-                    horaEvaluacion          : registroEditar.record.horaEvaluacion,
+                    idEstandar              : registroEditar.record.idEstandar,
+                    codigoEstandar          : registroEditar.record.codigoEstandar,
+                    nombreEstandar          : registroEditar.record.nombreEstandar,
                     aulaAsignada            : registroEditar.record.aulaAsignada,
                     costo                   : registroEditar.record.costo,
                     fechaEvaluacion         : registroEditar.record.fechaEvaluacion,
+                    horaEvaluacion          : registroEditar.record.horaEvaluacion,
                     idInstructor            : registroEditar.record.idInstructor,
-                    nombreInstructor        : registroEditar.record.nombreInstructor,
-                    estatus                 : registroEditar.record.estatus,
+                    nombre_completo         : registroEditar.record.nombreInstructor,
+                    curp                    : registroEditar.record.curpInstructor,
+                    cantidadPagoEvaluador   : registroEditar.record.cantidadPagoEvaluador,
+                    nomenclaturaContrato    : registroEditar.record.nomenclaturaContrato,
                     observaciones           : registroEditar.record.observaciones,
                     idAlumno                : registroEditar.record.alumnos_inscritos[0].idAlumno,
                     nombreCompleto          : registroEditar.record.alumnos_inscritos[0].nombreCompleto
@@ -77,81 +85,6 @@
             inicia();
 
             function inicia() {
-
-                CatalogoCursos.find({
-                    filter: {
-                        fields: ['idCatalogoCurso','nombreCurso','modalidad','claveCurso','descripcion','numeroHoras'],
-                        order: 'nombreCurso ASC'
-                    }
-                })
-                .$promise
-                .then(function(resp) {
-                    vm.listaCursos = resp;
-
-                    var index = vm.listaCursos.map(function(record) {
-                                                        return record.idCatalogoCurso;
-                                                      }).indexOf(vm.registroEdicion.idCatalogoCurso);
-                    vm.cursoSeleccionado = vm.listaCursos[index];
-                });
-
-    
-                CatalogoCursos.instructores_habilitados({
-                        id: vm.registroEdicion.idCatalogoCurso,
-                        filter: {
-                            //where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp','efTerminal'],
-                            include: [
-                                {
-                                    relation: 'evaluacion_curso',
-                                    scope: {
-                                        where: {idCatalogoCurso: vm.registroEdicion.idCatalogoCurso},
-                                        fields:['calificacion']
-                                    }
-                                },
-                                {
-                                    relation: 'otras_unidades',
-                                    scope: {
-                                        where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                                        fields:['idUnidadAdmtva']
-                                    }
-                                }
-                            ]
-                        }
-                })
-                .$promise
-                .then(function(resp) {
-
-                    var index;
-                    angular.forEach(resp, function(record) {
-
-                            index = record.otras_unidades.map(function(unidad) {
-                                                                return unidad.idUnidadAdmtva;
-                                                              }).indexOf($scope.currentUser.unidad_pertenece_id);
-
-                            if(index >= 0)
-                            {
-                                vm.listaInstructores.push({
-                                    idInstructor    : record.idInstructor,
-                                    apellidoPaterno : record.apellidoPaterno,
-                                    apellidoMaterno : record.apellidoMaterno,
-                                    nombre          : record.nombre,
-                                    curp            : record.curp,
-                                    nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre,
-                                    calificacion    : record.evaluacion_curso[0].calificacion,
-                                    efTerminal      : record.efTerminal
-                                });
-                            }
-
-                    });
-
-                    vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
-
-                    var index = vm.listaInstructores.map(function(record) {
-                                                        return record.idInstructor;
-                                                      }).indexOf(vm.registroEdicion.idInstructor);
-                    vm.instructorSeleccionado = vm.listaInstructores[index];
-                });
-
 
                 vm.tablalListaCapacitados.filtro_datos = {
                       filter: {
@@ -171,7 +104,282 @@
                       }
                 };
 
+                if(vm.registroEdicion.tipoEvaluacion == 1)
+                {
+                    CatalogoCursos.find({
+                        filter: {
+                            where: {activo: true},
+                            fields: ['idCatalogoCurso','idEspecialidad','nombreCurso','claveCurso'],
+                            order: 'nombreCurso ASC',
+                            include: [
+                                {
+                                    relation: 'especialidad',
+                                    scope: {
+                                        fields:['nombre']
+                                    }
+                                }
+                            ]
+                        }
+                    })
+                    .$promise
+                    .then(function(resp) {
+                        vm.listaCursos = resp;
+
+                        var index = vm.listaCursos.map(function(record) {
+                                                            return record.idCatalogoCurso;
+                                                          }).indexOf(vm.registroEdicion.idCatalogoCurso);
+                        vm.cursoSeleccionado.selected = vm.listaCursos[index];
+
+
+                        CatalogoCursos.evaluadores_habilitados({
+                                id: vm.cursoSeleccionado.selected.idCatalogoCurso,
+                                filter: {
+                                    fields: ['idInstructor','nombre_completo','curp','idUnidadAdmtva'],
+                                    include: [
+                                        {
+                                            relation: 'otras_unidades',
+                                            scope: {
+                                                where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                                fields:['idUnidadAdmtva']
+                                            }
+                                        }
+                                    ]
+                                }
+                        })
+                        .$promise
+                        .then(function(resp) {
+                            var index;
+                            angular.forEach(resp, function(record) {
+
+                                    index = record.otras_unidades.map(function(unidad) {
+                                                                        return unidad.idUnidadAdmtva;
+                                                                      }).indexOf($scope.currentUser.unidad_pertenece_id);
+                                    if(index >= 0)
+                                    {
+                                        vm.listaInstructores.push({
+                                            idInstructor    : record.idInstructor,
+                                            nombre_completo : record.nombre_completo,
+                                            curp            : record.curp
+                                        });
+                                    }
+                            });
+                            vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
+
+                            index = vm.listaInstructores.map(function(record) {
+                                                                return record.idInstructor;
+                                                              }).indexOf(vm.registroEdicion.idInstructor);
+                            vm.instructorSeleccionado = vm.listaInstructores[index];
+
+                        });
+
+                    });
+                }
+                else
+                {
+                    CatalogoEstandares.find({
+                        filter: {
+                            order: 'nombre ASC'
+                        }
+                    })
+                    .$promise
+                    .then(function(resp) {
+                        vm.listaEstandares = resp;
+
+                        var index = vm.listaEstandares.map(function(record) {
+                                                            return record.idEstandar;
+                                                          }).indexOf(vm.registroEdicion.idEstandar);
+                        vm.estandarSeleccionado = vm.listaEstandares[index];
+
+                        CatalogoEstandares.evaluadores_habilitados({
+                                id: vm.estandarSeleccionado.idEstandar,
+                                filter: {
+                                    fields: ['idInstructor','nombre_completo','curp','idUnidadAdmtva'],
+                                    include: [
+                                        {
+                                            relation: 'otras_unidades',
+                                            scope: {
+                                                where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                                fields:['idUnidadAdmtva']
+                                            }
+                                        }
+                                    ]
+                                }
+                        })
+                        .$promise
+                        .then(function(resp) {
+                            var index;
+                            angular.forEach(resp, function(record) {
+
+                                    index = record.otras_unidades.map(function(unidad) {
+                                                                        return unidad.idUnidadAdmtva;
+                                                                      }).indexOf($scope.currentUser.unidad_pertenece_id);
+                                    if(index >= 0)
+                                    {
+                                        vm.listaInstructores.push({
+                                            idInstructor    : record.idInstructor,
+                                            nombre_completo : record.nombre_completo,
+                                            curp            : record.curp
+                                        });
+                                    }
+                            });
+                            vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
+
+                            index = vm.listaInstructores.map(function(record) {
+                                                                return record.idInstructor;
+                                                              }).indexOf(vm.registroEdicion.idInstructor);
+                            vm.instructorSeleccionado = vm.listaInstructores[index];
+
+                        });
+
+                    });
+                }
+
             };
+
+
+            function cambiaModalidad() {
+                vm.listaCursos = [];
+                vm.cursoSeleccionado = {};
+                vm.registroEdicion.idCatalogoCurso = 0;
+                vm.registroEdicion.nombreCurso = '';
+                vm.registroEdicion.claveCurso = '';
+
+                vm.listaEstandares = [];
+                vm.estandarSeleccionado = {};
+                vm.registroEdicion.idEstandar = 0;
+                vm.registroEdicion.codigoEstandar = '';
+                vm.registroEdicion.nombreEstandar = '';
+
+                vm.instructorSeleccionado = {};
+                vm.listaInstructores = [];
+
+                if(vm.registroEdicion.tipoEvaluacion == 1)
+                {
+                    CatalogoCursos.find({
+                        filter: {
+                            where: {activo: true},
+                            fields: ['idCatalogoCurso','idEspecialidad','nombreCurso','claveCurso'],
+                            order: 'nombreCurso ASC',
+                            include: [
+                                {
+                                    relation: 'especialidad',
+                                    scope: {
+                                        fields:['nombre']
+                                    }
+                                }
+                            ]
+                        }
+                    })
+                    .$promise
+                    .then(function(resp) {
+                        vm.listaCursos = resp;
+                    });
+                }
+                else
+                {
+                    CatalogoEstandares.find({
+                        filter: {
+                            order: 'nombre ASC'
+                        }
+                    })
+                    .$promise
+                    .then(function(resp) {
+                        vm.listaEstandares = resp;
+                    });
+                }
+            }
+
+
+            function muestraEvaluadoresCurso(){
+
+                if(vm.registroEdicion.tipoEvaluacion == 1)
+                {
+                      vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.selected.idCatalogoCurso;
+                      vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.selected.nombreCurso;
+                      vm.registroEdicion.claveCurso = vm.cursoSeleccionado.selected.claveCurso;
+
+                      vm.listaInstructores = [];
+                      vm.instructorSeleccionado = {};
+                      CatalogoCursos.evaluadores_habilitados({
+                              id: vm.cursoSeleccionado.selected.idCatalogoCurso,
+                              filter: {
+                                  fields: ['idInstructor','nombre_completo','curp','idUnidadAdmtva'],
+                                  include: [
+                                      {
+                                          relation: 'otras_unidades',
+                                          scope: {
+                                              where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                              fields:['idUnidadAdmtva']
+                                          }
+                                      }
+                                  ]
+                              }
+                      })
+                      .$promise
+                      .then(function(resp) {
+                          var index;
+                          angular.forEach(resp, function(record) {
+
+                                  index = record.otras_unidades.map(function(unidad) {
+                                                                      return unidad.idUnidadAdmtva;
+                                                                    }).indexOf($scope.currentUser.unidad_pertenece_id);
+                                  if(index >= 0)
+                                  {
+                                      vm.listaInstructores.push({
+                                          idInstructor    : record.idInstructor,
+                                          nombre_completo : record.nombre_completo,
+                                          curp            : record.curp
+                                      });
+                                  }
+                          });
+                          vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
+                      });
+                }
+                else
+                {
+                      vm.registroEdicion.idEstandar = vm.estandarSeleccionado.idEstandar;
+                      vm.registroEdicion.nombreEstandar = vm.estandarSeleccionado.nombre;
+                      vm.registroEdicion.codigoEstandar = vm.estandarSeleccionado.codigo;
+
+                      vm.listaInstructores = [];
+                      vm.instructorSeleccionado = {};
+                      CatalogoEstandares.evaluadores_habilitados({
+                              id: vm.estandarSeleccionado.idEstandar,
+                              filter: {
+                                  fields: ['idInstructor','nombre_completo','curp','idUnidadAdmtva'],
+                                  include: [
+                                      {
+                                          relation: 'otras_unidades',
+                                          scope: {
+                                              where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
+                                              fields:['idUnidadAdmtva']
+                                          }
+                                      }
+                                  ]
+                              }
+                      })
+                      .$promise
+                      .then(function(resp) {
+                          var index;
+                          angular.forEach(resp, function(record) {
+
+                                  index = record.otras_unidades.map(function(unidad) {
+                                                                      return unidad.idUnidadAdmtva;
+                                                                    }).indexOf($scope.currentUser.unidad_pertenece_id);
+                                  if(index >= 0)
+                                  {
+                                      vm.listaInstructores.push({
+                                          idInstructor    : record.idInstructor,
+                                          nombre_completo : record.nombre_completo,
+                                          curp            : record.curp
+                                      });
+                                  }
+                          });
+                          vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
+                      });
+                }
+
+            }
 
 
 
@@ -251,44 +459,6 @@
 
 
 
-            function muestraInstructoresCurso(){
-
-                vm.registroEdicion.idCatalogoCurso = vm.cursoSeleccionado.idCatalogoCurso;
-                vm.registroEdicion.nombreCurso = vm.cursoSeleccionado.nombreCurso;
-                vm.registroEdicion.claveCurso = vm.cursoSeleccionado.claveCurso;
-                vm.registroEdicion.modalidad = vm.cursoSeleccionado.modalidad;
-                vm.registroEdicion.descripcion = vm.cursoSeleccionado.descripcion;
-
-                vm.listaInstructores = [];
-                vm.instructorSeleccionado = "";
-                CatalogoCursos.instructores_habilitados({
-                        id: vm.cursoSeleccionado.idCatalogoCurso,
-                        filter: {
-                            where: {idUnidadAdmtva: $scope.currentUser.unidad_pertenece_id},
-                            fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp']
-                        }
-                })
-                .$promise
-                .then(function(resp) {
-
-                    angular.forEach(resp, function(record) {
-                            vm.listaInstructores.push({
-                                idInstructor    : record.idInstructor,
-                                apellidoPaterno : record.apellidoPaterno,
-                                apellidoMaterno : record.apellidoMaterno,
-                                nombre          : record.nombre,
-                                curp            : record.curp,
-                                nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre
-                            });
-                    });
-
-                    vm.listaInstructores.sort(sort_by('nombre_completo', false, function(a){return a.toUpperCase()}));
-
-                });
-
-            }
-
-
             function sort_by(field, reverse, primer) {
                 var key = primer ? 
                    function(x) {return primer(x[field])} : 
@@ -327,7 +497,7 @@
                 else
                 {
 
-                        Evaluacion.alumnos_inscritos.destroyById({
+                        Evaluacion.inscripcionesEvaluaciones.destroyAll({
                             id: vm.registroEdicion.idEvaluacion 
                         })
                         .$promise
@@ -337,22 +507,25 @@
                                 .prototype$updateAttributes({
                                     id: vm.registroEdicion.idEvaluacion
                                 },{
-
+                                    tipoEvaluacion        : vm.registroEdicion.tipoEvaluacion,
                                     idUnidadAdmtva        : $scope.currentUser.unidad_pertenece_id,
                                     idPtc                 : vm.registroEdicion.idPtc,
                                     idCatalogoCurso       : vm.registroEdicion.idCatalogoCurso,
                                     nombreCurso           : vm.registroEdicion.nombreCurso,
                                     claveCurso            : vm.registroEdicion.claveCurso,
-                                    descripcionCurso      : vm.registroEdicion.descripcion,
-                                    modalidad             : vm.registroEdicion.modalidad,
-                                    horaEvaluacion        : vm.registroEdicion.horaEvaluacion,
+                                    idEstandar            : vm.registroEdicion.idEstandar,
+                                    codigoEstandar        : vm.registroEdicion.codigoEstandar,
+                                    nombreEstandar        : vm.registroEdicion.nombreEstandar,
+                                    aulaAsignada          : vm.registroEdicion.aulaAsignada,
                                     costo                 : vm.registroEdicion.costo,
                                     fechaEvaluacion       : vm.registroEdicion.fechaEvaluacion,
-                                    aulaAsignada          : vm.registroEdicion.aulaAsignada,
-
+                                    horaEvaluacion        : vm.registroEdicion.horaEvaluacion,
                                     idInstructor          : vm.instructorSeleccionado.idInstructor,
                                     curpInstructor        : vm.instructorSeleccionado.curp,
                                     nombreInstructor      : vm.instructorSeleccionado.nombre_completo,
+
+                                    cantidadPagoEvaluador : vm.registroEdicion.cantidadPagoEvaluador,
+                                    nomenclaturaContrato  : vm.registroEdicion.nomenclaturaContrato,
 
                                     observaciones         : vm.registroEdicion.observaciones,
                                     estatus               : 0

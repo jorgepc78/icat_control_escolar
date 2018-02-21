@@ -363,6 +363,22 @@
         "nullable": "YES"
       },
       "_selectable": true
+    },
+    "evaluador": {
+      "type": "Boolean",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "evaluador",
+        "dataType": "boolean",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
     }
   },
   "validations": [],
@@ -381,7 +397,21 @@
       "through": "RelInstrucCatCurso",
       "keyThrough": "idCatalogoCurso"
     },
-    "evaluacion_curso": {
+    "evaluaciones_habilitadas": {
+      "type": "hasMany",
+      "model": "CatalogoCursos",
+      "foreignKey": "idInstructor",
+      "through": "RelInstrucEvalCurso",
+      "keyThrough": "idCatalogoCurso"
+    },
+    "estandares_habilitados": {
+      "type": "hasMany",
+      "model": "CatalogoEstandares",
+      "foreignKey": "idInstructor",
+      "through": "RelInstrucEstandar",
+      "keyThrough": "idEstandar"
+    },
+    "calif_evaluacion_curso": {
       "type": "hasMany",
       "model": "RelInstrucCatCurso",
       "foreignKey": "idInstructor"
@@ -443,6 +473,12 @@
       "accessType": "WRITE",
       "principalType": "ROLE",
       "principalId": "programas",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "certificacion",
       "permission": "ALLOW"
     },
     {

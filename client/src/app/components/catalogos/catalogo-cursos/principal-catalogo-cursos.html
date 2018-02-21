@@ -111,8 +111,8 @@
                                                                                     <span style="width: 300px;text-align: right;" class="pull-right"> {{vm.RegistroSeleccionado.nombreCurso}} </span>
                                                                                     Nombre curso
                                                                                 </li>
-                                                                                <li class="list-group-item">
-                                                                                    <span class="pull-right"> {{vm.RegistroSeleccionado.especialidad.nombre}} </span>
+                                                                                <li style="height: 50px" class="list-group-item">
+                                                                                    <span class="pull-right" style="width: 300px;text-align: right;"> {{vm.RegistroSeleccionado.especialidad.nombre}} </span>
                                                                                     Especialidad
                                                                                 </li>
                                                                                 <li class="list-group-item">
@@ -123,9 +123,13 @@
                                                                                     <span class="pull-right"> {{vm.RegistroSeleccionado.numeroHoras}} </span>
                                                                                     N&uacute;m. horas
                                                                                 </li>
+                                                                                <li style="height: 50px" class="list-group-item">                                                                                    
+                                                                                    <span class="pull-right"> <button type="button" ng-show="(vm.RegistroSeleccionado.nombreArchivo != '')" class="btn btn-default btn-sm" tooltip-placement="top" tooltip="Ver documento" ng-click="vm.abreDocumento(vm.RegistroSeleccionado)"><i class="fa fa-eye"></i></button> <i ng-show="(vm.RegistroSeleccionado.nombreArchivo == '')" class="fa fa-ban fa-2x"></i></span>
+                                                                                    Carta descriptiva
+                                                                                </li>
                                                                                 <li class="list-group-item">
                                                                                     <span class="pull-right label label-{{vm.RegistroSeleccionado.activo === true ? 'primary' : 'warning'}}">{{vm.RegistroSeleccionado.activo === true ? 'S&iacute;' : 'No'}}</span>
-                                                                                    Curso en Activo
+                                                                                    Activo
                                                                                 </li>
                                                                                 <li style="height: 105px" class="list-group-item">
                                                                                     <span class="pull-right" style="height: 85px;width: 300px;text-align: justify;overflow-y: scroll !important;"> {{vm.RegistroSeleccionado.descripcion}} </span>

@@ -160,14 +160,16 @@
                                     <div class="col-md-12">
                                         <table class="tablaDatos table table-condensed no-footer">
                                           <thead>
-                                            <col width="20%">
-                                            <col width="55%">
-                                            <col width="10%">
-                                            <col width="10%">
-                                            <col width="5%">
+                                                <col width="20%">
+                                                <col width="45%">
+                                                <col width="10%">
+                                                <col width="10%">
+                                                <col width="10%">
+                                                <col width="5%">
                                             <tr>
                                                 <th>Especialidad</th>
                                                 <th>Curso</th>
+                                                <th>Activo</th>
                                                 <th>Horas</th>
                                                 <th>Puntaje</th>
                                                 <th></th>
@@ -274,7 +276,6 @@
                                       </div>
                                   </div>
                                   <div class="col-md-6" style="height: 420px; margin-bottom: 5px">
-
                                       <div style="width:100%;height:380px">
                                                 <table class="tablaDatos table table-condensed no-footer">
                                                   <thead>
@@ -286,24 +287,22 @@
                                                     </tr>
                                                   </thead>
                                                  <tbody>
-                                                  </tbody>
+                                                 </tbody>
                                                 </table>
-                                          <div class="full-height-scroll" full-scroll style="padding-right: 10px">
-                                                <table class="tablaDatos table table-condensed no-footer">
-                                                 <tbody>
-                                                    <tr ng-repeat="registro in vm.documentos_temp | filter : cambiarPagina" class="pointer">
-                                                        <td width="2%"> {{$index + 1}}</td>
-                                                        <td width="58%"><div dropdown-select="vm.ddSelectOptions" dropdown-model="registro.documento" dropdown-item-label="text" style="margin: 0; width: 290px;"></div></td>
-                                                        <td width="38%" style="word-break:break-all;"> {{registro.nombreArchivo}}</td>
-                                                        <td width="2%"> <button type="button" class="btn btn-warning btn-sm" tooltip-placement="left" tooltip="Eliminar documento" ng-click="vm.eliminaDocumento(registro)"><i class="fa fa-trash-o"></i></button> </td>
-                                                    </tr>
-                                                  </tbody>
-                                                </table>
-                                          </div>
+                                                <div class="full-height-scroll" full-scroll style="padding-right: 10px">
+                                                      <table class="tablaDatos table table-condensed no-footer">
+                                                       <tbody>
+                                                          <tr ng-repeat="registro in vm.documentos_temp | filter : cambiarPagina" class="pointer">
+                                                              <td width="2%"> {{$index + 1}}</td>
+                                                              <td width="58%"><div dropdown-select="vm.ddSelectOptions" dropdown-model="registro.documento" dropdown-item-label="text" style="margin: 0; width: 290px;"></div></td>
+                                                              <td width="38%" style="word-break:break-all;"> {{registro.nombreArchivo}}</td>
+                                                              <td width="2%"> <button type="button" class="btn btn-warning btn-sm" tooltip-placement="left" tooltip="Eliminar documento" ng-click="vm.eliminaDocumento(registro)"><i class="fa fa-trash-o"></i></button> </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                </div>
                                       </div>
-
                                   </div>
-                              </div>
                           </div>
                     </div>
                 </tab>                

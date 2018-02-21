@@ -72,6 +72,7 @@
                   vm.tablaListaEvaluaciones.filtro_datos = {
                           filter: {
                               where: vm.tablaListaEvaluaciones.condicion,
+                              fields:['idEvaluacion','tipoEvaluacion','idUnidadAdmtva','idPtc','idCatalogoCurso','nombreCurso','claveCurso','idEstandar','codigoEstandar','nombreEstandar','aulaAsignada','costo','fechaEvaluacion','horaEvaluacion','idInstructor','curpInstructor','nombreInstructor','cantidadPagoEvaluador','nomenclaturaContrato','observaciones','estatus'],
                               order: ['nombreCurso ASC'],
                               limit: vm.tablaListaEvaluaciones.registrosPorPagina,
                               skip: vm.tablaListaEvaluaciones.paginaActual - 1,
@@ -85,7 +86,7 @@
                                   {
                                       relation: 'inscripcionesEvaluaciones',
                                       scope: {
-                                        fields: ['id', 'idAlumno', 'pagado', 'fechaPago','numFactura','calificacion','numDocAcreditacion']
+                                        fields: ['id', 'idAlumno', 'pagado', 'fechaPago','numFactura']
                                       }
                                   }
                               ]
@@ -236,9 +237,14 @@
 
             function enviaEvaluacionRevision(seleccion) {
 
+                  if(seleccion.tipoEvaluacion == 1)
+                      var nombreEvaluacion = seleccion.nombreCurso;
+                  else
+                      var nombreEvaluacion = seleccion.nombreEstandar;
+
                   swal({
                     title: "Confirmar",
-                    html: 'La propuesta de evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong> ser&aacute; enviada a validaci&oacute;n, ¿Continuar?',
+                    html: 'La propuesta de evaluaci&oacute;n <strong>'+ nombreEvaluacion +'</strong> ser&aacute; enviada a validaci&oacute;n, ¿Continuar?',
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#9a0000",
@@ -263,7 +269,7 @@
                                   ControlProcesos
                                   .create({
                                       proceso         : 'Pre-Apertura Evaluacion',
-                                      accion          : 'ENVIO VALIDACION',
+                                      accion          : 'ENVIO VALIDACION EVALUACION',
                                       idDocumento     : seleccion.idEvaluacion,
                                       idUsuario       : $scope.currentUser.id_usuario,
                                       idUnidadAdmtva  : $scope.currentUser.unidad_pertenece_id
@@ -301,11 +307,16 @@
 
             function eliminaEvaluacion(seleccion) {
                   
+                    if(seleccion.tipoEvaluacion == 1)
+                        var nombreEvaluacion = seleccion.nombreCurso;
+                    else
+                        var nombreEvaluacion = seleccion.nombreEstandar;
+                    
                     if(seleccion.inscripcionesEvaluaciones[0].pagado === true) 
                     {
                           swal({
                             title: 'Error',
-                            html: 'La evaluaci&oacute;n <strong>'+ seleccion.nombreCurso+'</strong> no puede ser eliminada ya que el capacitando ha realizado el pago correspondiente.',
+                            html: 'La evaluaci&oacute;n <strong>'+ nombreEvaluacion+'</strong> no puede ser eliminada ya que el capacitando ha realizado el pago correspondiente.',
                             type: 'error',
                             showCancelButton: false,
                             confirmButtonColor: "#9a0000",
@@ -316,7 +327,7 @@
                     {
                           swal({
                             title: "Confirmar",
-                            html: 'Se eliminar&aacute; la evaluaci&oacute;n <strong>'+ seleccion.nombreCurso +'</strong>, ¿Continuar?',
+                            html: 'Se eliminar&aacute; la evaluaci&oacute;n <strong>'+ nombreEvaluacion +'</strong>, ¿Continuar?',
                             type: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#9a0000",
@@ -327,7 +338,7 @@
                           }, function(){
                                   swal.disableButtons();
 
-                                Evaluacion.alumnos_inscritos.destroyById({
+                                Evaluacion.inscripcionesEvaluaciones.destroyAll({
                                     id: seleccion.idEvaluacion 
                                 })
                                 .$promise

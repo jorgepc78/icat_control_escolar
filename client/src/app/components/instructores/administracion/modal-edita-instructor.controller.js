@@ -5,9 +5,9 @@
         .module('icat_control_escolar')
         .controller('ModalEditaInstructorController', ModalEditaInstructorController);
 
-        ModalEditaInstructorController.$inject = ['$scope', '$timeout', '$modalInstance', 'FileUploader', 'registroEditar', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'CatalogoLocalidades', 'CatalogoEspecialidades', 'CatalogoCursos', 'CatalogoDocumentos', 'AlmacenDocumentos','DocumentosInstructores'];
+        ModalEditaInstructorController.$inject = ['$q', '$scope', '$timeout', '$modalInstance', 'FileUploader', 'registroEditar', 'CatalogoInstructores', 'CatalogoUnidadesAdmtvas', 'CatalogoLocalidades', 'CatalogoEspecialidades', 'CatalogoCursos', 'CatalogoDocumentos', 'AlmacenDocumentos','DocumentosInstructores', 'RelInstrucEvalCurso'];
 
-    function ModalEditaInstructorController($scope, $timeout, $modalInstance, FileUploader, registroEditar, CatalogoInstructores, CatalogoUnidadesAdmtvas, CatalogoLocalidades, CatalogoEspecialidades, CatalogoCursos, CatalogoDocumentos, AlmacenDocumentos, DocumentosInstructores) {
+    function ModalEditaInstructorController($q, $scope, $timeout, $modalInstance, FileUploader, registroEditar, CatalogoInstructores, CatalogoUnidadesAdmtvas, CatalogoLocalidades, CatalogoEspecialidades, CatalogoCursos, CatalogoDocumentos, AlmacenDocumentos, DocumentosInstructores, RelInstrucEvalCurso) {
 
             var vm = this;
 
@@ -16,7 +16,7 @@
             vm.muestraCursosEspecialidad = muestraCursosEspecialidad;
             vm.ocultaUnidadCheckbox      = ocultaUnidadCheckbox;
             vm.agregaCurso               = agregaCurso;
-            vm.eliminaRegistro           = eliminaRegistro;
+            vm.eliminaRegistro           = eliminaRegistro;            
             vm.eliminaDocumento          = eliminaDocumento;
 
             vm.curpTemp = '';
@@ -34,32 +34,32 @@
 
             vm.listaEspecialidades = {};
             vm.especialidadSeleccionada = {};
-
             vm.listaCursosInhabilit = true;
             vm.cursoSeleccionado = {};
             vm.listaCursos = [];
+            vm.cursos_habilitados = [];
 
             vm.registroEdicion = {
-                    idInstructor       : registroEditar.idInstructor,
-                    idUnidadAdmtva     : registroEditar.idUnidadAdmtva,
-                    UnidadAdmtva       : '',
-                    curp               : registroEditar.curp,
-                    apellidoPaterno    : registroEditar.apellidoPaterno,
-                    apellidoMaterno    : registroEditar.apellidoMaterno,
-                    nombre             : registroEditar.nombre,
-                    nombre_completo    : (registroEditar.apellidoPaterno + ' ' + registroEditar.apellidoMaterno + ' ' + registroEditar.nombre),
-                    rfc                : registroEditar.rfc,
-                    conPerfilAcademico : registroEditar.conPerfilAcademico,
-                    escolaridad        : registroEditar.escolaridad,
-                    telefono           : registroEditar.telefono,
-                    email              : registroEditar.email,
-                    certificacion      : registroEditar.certificacion,
-                    idLocalidad        : registroEditar.idLocalidad,
-                    localidad          : '',
-                    activo             : registroEditar.activo,
-                    evaluacion_curso   : [],
-                    otras_unidades     : [],
-                    documentos         : registroEditar.documentos
+                    idInstructor             : registroEditar.idInstructor,
+                    idUnidadAdmtva           : registroEditar.idUnidadAdmtva,
+                    UnidadAdmtva             : '',
+                    curp                     : registroEditar.curp,
+                    apellidoPaterno          : registroEditar.apellidoPaterno,
+                    apellidoMaterno          : registroEditar.apellidoMaterno,
+                    nombre                   : registroEditar.nombre,
+                    nombre_completo          : (registroEditar.apellidoPaterno + ' ' + registroEditar.apellidoMaterno + ' ' + registroEditar.nombre),
+                    rfc                      : registroEditar.rfc,
+                    conPerfilAcademico       : registroEditar.conPerfilAcademico,
+                    escolaridad              : registroEditar.escolaridad,
+                    telefono                 : registroEditar.telefono,
+                    email                    : registroEditar.email,
+                    certificacion            : registroEditar.certificacion,
+                    idLocalidad              : registroEditar.idLocalidad,
+                    localidad                : '',
+                    activo                   : registroEditar.activo,
+                    calif_evaluacion_curso   : [],
+                    otras_unidades           : [],
+                    documentos               : registroEditar.documentos
             };
 
             vm.tablaListaDocumentos = {
@@ -75,7 +75,6 @@
 
             vm.ddSelectOptions = [];
 
-            vm.cursos_habilitados = [];
             vm.unidades_checkbox = [];
             vm.documentos_temp = [];
             
@@ -186,7 +185,7 @@
 
             function inicia() {
 
-                angular.forEach(registroEditar.evaluacion_curso, function(record) {
+                angular.forEach(registroEditar.calif_evaluacion_curso, function(record) {
                       vm.cursos_habilitados.push({
                           idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
                           nombreCurso     : record.CatalogoCursos.nombreCurso,
@@ -381,7 +380,7 @@
                     vm.listaCursos = resp;
                     vm.listaCursosInhabilit = false;
 
-                    angular.forEach(vm.registroEdicion.cursos_habilitados, function(record) {
+                    angular.forEach(vm.cursos_habilitados, function(record) {
                         
                         var index = vm.listaCursos.map(function(registro) {
                                                             return registro.idCatalogoCurso;
@@ -394,6 +393,7 @@
                 });
 
             };
+
 
 
             function ocultaUnidadCheckbox(){
@@ -435,8 +435,7 @@
             function eliminaRegistro(seleccion) {
                 var indice = vm.cursos_habilitados.indexOf(seleccion);
                 vm.cursos_habilitados.splice(indice, 1);
-                vm.especialidadSeleccionada = undefined;
-                //vm.muestraCursosEspecialidad();
+                //vm.especialidadSeleccionada = undefined;
             };
 
 
@@ -537,52 +536,72 @@
                             .$promise
                             .then(function(respuesta) {
 
-                                        angular.forEach(vm.documentos_temp, function(seleccion) {
+                                        //promesa que actualiza los documentos
+                                        function actualizaDocumentos(vm) {
+                                            var deferred = $q.defer();
+                                            angular.forEach(vm.documentos_temp, function(seleccion) {
 
-                                            if(seleccion.documento.value != '')
-                                            {
-                                                var indice = vm.registroEdicion.documentos.map(function(registro) {
-                                                                                    return registro.idDocumento;
-                                                                                  }).indexOf(seleccion.idDocumento);
-
-                                                vm.registroEdicion.documentos[indice].documento = seleccion.documento.value;
-
-                                                DocumentosInstructores.prototype$updateAttributes(
-                                                    {id: seleccion.idDocumento }, 
-                                                    {documento : seleccion.documento.value}
-                                                )
-                                                .$promise.then(function() {
-                                                });
-                                            }
-                                        });
-
-                                        CatalogoInstructores.otras_unidades.destroyAll({ id: vm.registroEdicion.idInstructor })
-                                        .$promise
-                                        .then(function() {
-
-                                            for(var i=0; i < vm.unidades_checkbox.length; i++)
-                                            {
-                                                if( (vm.unidades_checkbox[i].seleccionado == true) || (vm.unidades_checkbox[i].idUnidadAdmtva == vm.unidadSeleccionada.idUnidadAdmtva) )
+                                                if(seleccion.documento.value != '')
                                                 {
-                                                        vm.registroEdicion.otras_unidades.push({
-                                                          idUnidadAdmtva : vm.unidades_checkbox[i].idUnidadAdmtva,
-                                                          nombre         : vm.unidades_checkbox[i].nombre
-                                                        });
-                                                }
-                                            }
+                                                    var indice = vm.registroEdicion.documentos.map(function(registro) {
+                                                                                        return registro.idDocumento;
+                                                                                      }).indexOf(seleccion.idDocumento);
 
-                                            angular.forEach(vm.registroEdicion.otras_unidades, function(registro) {
+                                                    vm.registroEdicion.documentos[indice].documento = seleccion.documento.value;
 
-                                                    CatalogoInstructores.otras_unidades.link({
-                                                        id: vm.registroEdicion.idInstructor,
-                                                        fk: registro.idUnidadAdmtva
-                                                    },{}) 
-                                                    .$promise
-                                                    .then(function(resp) {
+                                                    DocumentosInstructores.prototype$updateAttributes(
+                                                        {id: seleccion.idDocumento }, 
+                                                        {documento : seleccion.documento.value}
+                                                    )
+                                                    .$promise.then(function() {
                                                     });
-
+                                                }
                                             });
+                                            deferred.resolve();
+                                            return deferred.promise;
+                                        };
+                                        var promiseActualizaDocumentos = actualizaDocumentos(vm);
 
+
+                                        //Promesa que actualiza la asignación de otras unidades
+                                        function actualizaOtrasUnidades(vm) {
+                                            var deferred = $q.defer();
+                                            CatalogoInstructores.otras_unidades.destroyAll({ id: vm.registroEdicion.idInstructor })
+                                            .$promise
+                                            .then(function() {
+
+                                                for(var i=0; i < vm.unidades_checkbox.length; i++)
+                                                {
+                                                    if( (vm.unidades_checkbox[i].seleccionado == true) || (vm.unidades_checkbox[i].idUnidadAdmtva == vm.unidadSeleccionada.idUnidadAdmtva) )
+                                                    {
+                                                            vm.registroEdicion.otras_unidades.push({
+                                                              idUnidadAdmtva : vm.unidades_checkbox[i].idUnidadAdmtva,
+                                                              nombre         : vm.unidades_checkbox[i].nombre
+                                                            });
+                                                    }
+                                                }
+
+                                                angular.forEach(vm.registroEdicion.otras_unidades, function(registro) {
+
+                                                        CatalogoInstructores.otras_unidades.link({
+                                                            id: vm.registroEdicion.idInstructor,
+                                                            fk: registro.idUnidadAdmtva
+                                                        },{}) 
+                                                        .$promise
+                                                        .then(function(resp) {
+                                                        });
+
+                                                });
+                                                deferred.resolve();
+                                            });
+                                            return deferred.promise;
+                                        };
+                                        var promiseActualizaOtrasUnidades = actualizaOtrasUnidades(vm);
+
+
+                                        //Promesa que actualiza los cursos habilitados
+                                        function actualizaCursosHabilitados(vm) {
+                                            var deferred = $q.defer();
                                             CatalogoInstructores.cursos_habilitados.destroyAll({ id: vm.registroEdicion.idInstructor })
                                             .$promise
                                             .then(function() { 
@@ -605,7 +624,7 @@
                                                                                                                 return registro.idCatalogoCurso;
                                                                                                               }).indexOf(resp.idCatalogoCurso);
 
-                                                                            vm.registroEdicion.evaluacion_curso.push({
+                                                                            vm.registroEdicion.calif_evaluacion_curso.push({
                                                                                 id              : resp.id,
                                                                                 idInstructor    : resp.idInstructor,
                                                                                 idCatalogoCurso : resp.idCatalogoCurso,
@@ -622,17 +641,29 @@
                                                                             });
                                                                             totalregistros++;
                                                                             if(totalregistros == vm.cursos_habilitados.length)
-                                                                                $modalInstance.close(vm.registroEdicion);
-
+                                                                                deferred.resolve();
                                                                     });
                                                             });
-                                                            
                                                     }
                                                     else
-                                                        $modalInstance.close(vm.registroEdicion);
-
+                                                        deferred.resolve();
                                             });
-                                        });
+                                            return deferred.promise;
+                                        };
+                                        var promiseActualizaCursosHabilitados = actualizaCursosHabilitados(vm);
+
+
+                                        //Cuando todas las promesas se cumplan termina
+                                        $q.all({
+                                            promiseActualizaDocumentos,
+                                            promiseActualizaOtrasUnidades,
+                                            promiseActualizaCursosHabilitados
+                                          }).then(function() {
+                                            //console.log('Both promises have resolved');
+                                            $modalInstance.close(vm.registroEdicion);
+                                        });                                        
+
+
                             })
                             .catch(function(error) {
                             });

@@ -1,0 +1,62 @@
+<div class="inmodal">
+      <div class="modal-header">
+          <h4 class="modal-title"> Seleccione al instructor</h4>
+      </div>
+      <div class="modal-body" style="background: #fff;padding-bottom:0;">
+
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="input-group" style="margin-top:16px;">
+                          <input type="text" ng-teclaenter="vm.muestraResultadosBusqueda()" placeholder="Persona a buscar" class="input form-control" ng-model="vm.cadena_buscar">
+                                  <span class="input-group-btn">
+                                          <button class="btn btn-success btn-labeled" ng-click="vm.limpiaBusqueda()" ng-show="vm.mostrarbtnLimpiar"><span class="btn-label"><i class="fa fa-trash-o"></i></span> Limpiar</button>
+                                          <button class="btn btn-default btn-labeled" ng-click="vm.muestraResultadosBusqueda()"><span class="btn-label"><i class="fa fa-search"></i></span> Buscar</button>
+                                  </span>
+                      </div>
+                  </div>
+              </div>
+              <br>
+              <div class="ibox-content">
+                  
+                          <table class="tablaDatos table table-condensed no-footer">
+                            <thead>
+                              <tr>
+                                  <th>Nombre</th>
+                                  <th>curp</th>
+                                  <th>Unidad registro</th>
+                              </tr>
+                            </thead>
+                           <tbody>
+                              <tr ng-repeat="registro in vm.listaInstructores" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaInstructores.fila_seleccionada}" class="pointer">
+                                  <td> {{registro.nombre_completo}}</td>
+                                  <td> {{registro.curp}}</td>
+                                  <td> {{registro.unidad_pertenece.nombre}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+                          <tabla-paginacion config="vm.tablaListaInstructores" paginar="vm.cambiarPagina()"></tabla-paginacion>
+              </div>
+      </div>
+
+      <div class="modal-footer">
+
+          <div class="row">
+              <div class="col-md-3">
+              </div>
+              <div class="col-md-4">
+                  <div ng-show="vm.mostrar_msg_error" class="alert alert-danger" style="padding: 4px; margin-bottom: 0; text-align: center;">{{vm.mensaje}}</div>
+                  <div class="sk-spinner sk-spinner-three-bounce" ng-show="vm.mostrarSpiner">
+                      <div class="sk-bounce1"></div>
+                      <div class="sk-bounce2"></div>
+                      <div class="sk-bounce3"></div>
+                  </div>
+              </div>
+              <div class="col-md-5">
+                  <button type="button" ng-click="$dismiss()" class="btn btn-white btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-sign-out"></i></span> Cancelar</button>
+                  <button type="button" ng-click="vm.guardar()" ng-disabled="(vm.personaSeleccionada.idInstructor == undefined)" class="btn btn-default btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-plus"></i></span> Agregar persona</button>
+              </div>
+          </div>
+
+      </div>
+</div>

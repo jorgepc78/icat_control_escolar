@@ -59,6 +59,10 @@
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },
+  "CatalogoEstandares": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
   "CatalogoLocalidades": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
@@ -98,6 +102,14 @@
     "public": true
   },
   "RelInstrucCatCurso": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "RelInstrucEvalCurso": {
+    "dataSource": "icat_control_escolar_ds",
+    "public": true
+  },
+  "RelInstrucEstandar": {
     "dataSource": "icat_control_escolar_ds",
     "public": true
   },

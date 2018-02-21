@@ -53,6 +53,15 @@
                     </ul>
                 </li>
 
+                <li class="dropdown" dropdown ng-if="currentUser.perfil_menu.evaluadores_menu">
+                    <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Evaluadores <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-if="currentUser.perfil_menu.evaluadores_catevaluadores">
+                            <a ui-sref="evaluadores.admin_evaluadores">  <span class="nav-label"> Instructores como evaluadores</span></a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="dropdown" dropdown ng-if="(currentUser.perfil_menu.plan_cursos_horas_unidad || currentUser.perfil_menu.plan_cursos_metas_capacit || currentUser.perfil_menu.plan_cursos_planeacion_ptc || currentUser.perfil_menu.plan_cursos_revision_ptc || currentUser.perfil_menu.plan_cursos_ptc_autorizados || currentUser.perfil_menu.plan_cursos_resumen_ptc_unidades)">
                     <a class="dropdown-toggle" href dropdown-toggle style="color: #fff;">Planeaci&oacute;n de Cursos <span class="caret"></span></a>
                     <ul role="menu" class="dropdown-menu">
@@ -132,7 +141,7 @@
                         </li>
                         <li style="border: 1px solid #e7eaec"></li>
                         <li ui-sref-active="active" ng-if="currentUser.perfil_menu.inscrip_pagos_registro_pago_eval">
-                            <a ui-sref="inscripcion.registro_pagos_evaluaciones"> <span class="nav-label"> Registro de pago evaluaciones</span></a>
+                            <a ui-sref="inscripcion.registro_pagos_evaluaciones"> <span class="nav-label"> Registro del pago de evaluaciones</span></a>
                         </li>
                     </ul>
                 </li>

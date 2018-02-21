@@ -317,7 +317,21 @@
       "through": "RelInstrucCatCurso",
       "keyThrough": "idCatalogoCurso"
     },
-    "evaluacion_curso": {
+    "evaluaciones_habilitadas": {
+      "type": "hasMany",
+      "model": "CatalogoCursos",
+      "foreignKey": "idInstructor",
+      "through": "RelInstrucEvalCurso",
+      "keyThrough": "idCatalogoCurso"
+    },
+    "estandares_habilitados": {
+      "type": "hasMany",
+      "model": "CatalogoEstandares",
+      "foreignKey": "idInstructor",
+      "through": "RelInstrucEstandar",
+      "keyThrough": "idEstandar"
+    },
+    "calif_evaluacion_curso": {
       "type": "hasMany",
       "model": "RelInstrucCatCurso",
       "foreignKey": "idInstructor"

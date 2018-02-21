@@ -1,15 +1,13 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-                <div class="col-md-6">
-    
+                <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-12">
-
                                     <div class="ibox">
                                         <div class="ibox-title">
                                             <div class="row">
                                                     <div class="col-md-12">
-                                                            <h2>Pago de evaluaciones ROCO y Est&aacute;ndares</h2>
+                                                        <h2>Pago de evaluaciones ROCO y Est&aacute;ndares</h2>
                                                     </div>
                                             </div>
                                             <div class="row">
@@ -29,9 +27,9 @@
                                                     <table class="tablaDatos table table-condensed no-footer">
                                                       <thead>
                                                         <tr>
-                                                            <th>Evaluaci&oacute;n</th>
                                                             <th>Tipo</th>
-                                                            <th>Fecha Evaluaci&oacute;n</th>
+                                                            <th>Evaluaci&oacute;n</th>
+                                                            <th>Fecha evaluaci&oacute;n</th>
                                                             <th>Hora</th>
                                                             <th style="width: 100px;">Estatus</th>
                                                         </tr>
@@ -39,8 +37,8 @@
                                                      <tbody>
                                                         <tr ng-repeat="registro in vm.listaCursos" ng-click="vm.muestraDatosRegistroActual(registro)" ng-class="{seleccion:$index==vm.tablaListaEvaluaciones.fila_seleccionada}" class="pointer">
 
-                                                            <td> {{registro.nombreCurso}}</td>
-                                                            <td> {{registro.modalidad}}</td>
+                                                            <td> {{(registro.tipoEvaluacion == 1 ? 'ROCO' : 'Estándar')}} </td>
+                                                            <td> {{(registro.tipoEvaluacion == 1 ? registro.nombreCurso : registro.nombreEstandar)}}</td>
                                                             <td> {{registro.fechaEvaluacion | date:'d/MMMM/yyyy'}}</td>
                                                             <td> {{registro.horaEvaluacion}}</td>
                                                             <td class="client-status" ng-switch on="registro.estatus">
@@ -61,134 +59,105 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-1">
-                            </div>
-                            <div class="col-md-10">
-
-                                    <div class="ibox">
-                                        <div class="ibox-content" style="height:230px;">
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 text-center">
-                                                                    <p>
-                                                                        <h2>Seleccione un registro para ver los detalles</h2>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                </div>
-                                                <div class="tab-pane active" ng-show="vm.client == 2">
-                                                            <div class="panel blank-panel">
-
-                                                                    <ul class="list-group clear-list">
-
-                                                                        <li class="list-group-item fist-item" style="height: 60px">
-                                                                            <span style="width: 420px;text-align: right;" class="pull-right"> {{vm.cursoSeleccionado.nombreCurso}} </span>
-                                                                            <strong>Evaluaci&oacute;n</strong>
-                                                                        </li>
-                                                                        <li class="list-group-item">
-                                                                            <span class="pull-right"> {{vm.cursoSeleccionado.modalidad}} </span>
-                                                                            <strong>Tipo</strong>
-                                                                        </li>
-                                                                        <li class="list-group-item">
-                                                                            <span class="pull-right"> {{vm.cursoSeleccionado.aulaAsignada}} </span>
-                                                                            <strong>Aula asignada</strong>
-                                                                        </li>
-                                                                        <li class="list-group-item">
-                                                                            <span class="pull-right"> <strong>Hora:</strong> {{vm.cursoSeleccionado.horaEvaluacion}} </span>
-                                                                            <strong>Fecha:</strong> {{vm.cursoSeleccionado.fechaEvaluacion | date:'d/MMMM/yyyy'}}
-                                                                        </li>
-                                                                        <li class="list-group-item">
-                                                                            <span class="pull-right"> 
-                                                                                <strong>Estatus:</strong>
-                                                                                <span ng-switch on="vm.cursoSeleccionado.estatus">
-                                                                                    <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Registrado</span>
-                                                                                    <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de validaci&oacute;n</span>
-                                                                                    <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">Aprobada</span>
-                                                                                    <span ng-switch-when="3" class="label label-warning texto-estatus-ptc">Rechazada</span>
-                                                                                    <span ng-switch-when="4" class="label label-default texto-estatus-ptc">Concluida</span>
-                                                                                    <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cancelada</span>
-                                                                                </span>
-                                                                            </span>                                                                            
-                                                                            <strong>Costo:</strong> $ {{vm.cursoSeleccionado.costo | currency}}
-                                                                        </li>
-                                                                    </ul>
-
-                                                            </div> <!--panel blank-panel-->
-                              
-                                                </div> <!-- client == 2 -->
-                                            </div>
-                                        </div>
-                                    </div> <!-- class ibox -->
-
-                            </div>
-                            <div class="col-md-1">
-                            </div>
-                        </div>
-
                 </div> <!-- column1 -->
-                <div class="col-md-6">
+                <div class="col-md-5">
                     
                     <div class="row">
                         <div class="col-md-12">
 
                                 <div class="ibox">
-                                    <div class="ibox-content" style="height:740px;">
+                                    <div class="ibox-content" style="height:620px;">
                                         <div class="tab-content">
                                             <div class="tab-pane active" ng-show="vm.client == 1" ng-init="vm.client = 1">
-                                                        <div class="row">
-                                                            <div class="col-lg-12 text-center">
-                                                                <p>
-                                                                    <h2>Seleccione un registro para ver los detalles</h2>
-                                                                </p>
-                                                            </div>
-                                                        </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12 text-center">
+                                                        <p>
+                                                            <h2>Seleccione un registro para ver los detalles</h2>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="tab-pane active" ng-show="vm.client == 2">
                                                         <div class="panel blank-panel">
                                                                 <div class="row">
                                                                     <div class="col-lg-12 text-center">
                                                                         <p>
-                                                                            <h2>Registro de inscripciones y pagos</h2>
+                                                                            <h2>Registro del pago de la evaluaci&oacute;n</h2>
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                                 <br>
-                                                                <div  style="height: 580px;">
-                                                                        <div class="full-height-scroll" full-scroll>
-                                                
-                                                                            <table class="table table-striped">
-                                                                                <thead>
-                                                                                <tr>
-                                                                                    <th></th>
-                                                                                    <th>N&uacute;m. control</th>
-                                                                                    <th>Nombre</th>
-                                                                                    <th>Pago</th>
-                                                                                    <th>Recibo</th>
-                                                                                    <th width="85">Acciones</th>
-                                                                                </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                <tr ng-repeat="inscripcion in vm.cursoSeleccionado.inscripcionesEvaluaciones | orderObjectBy: 'Capacitandos.nombreCompleto' ">
-                                                                                    <td> {{$index + 1}}</td>
-                                                                                    <td> {{inscripcion.Capacitandos.numControl}}</td>
-                                                                                    <td> {{inscripcion.Capacitandos.nombreCompleto}}</td>
-                                                                                    <td class="client-status" ng-switch on="inscripcion.pagado">
-                                                                                        <span ng-switch-when="false" class="label label-warning texto-estatus-ptc">Pendiente</span>
-                                                                                        <span ng-switch-when="true" class="label label-success texto-estatus-ptc">Pagado</span>
-                                                                                    </td>
-                                                                                    <td>{{inscripcion.numFactura}}</td>
-                                                                                    <td>
-                                                                                        <button type="button" ng-show="(inscripcion.pagado == true && vm.cursoSeleccionado.estatus == 0)" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Editar n&uacute;m. factura" ng-click="vm.editaNumFactura(inscripcion)"><i class="fa fa-pencil"></i></button>
-                                                                                        <button type="button" ng-show="(inscripcion.pagado == false)" class="btn btn-success btn-sm" tooltip-placement="top" tooltip="Registrar pago" ng-click="vm.registraPagoEval(inscripcion)"><i class="fa fa-usd"></i></button>
-                                                                                    </td>
-                                                                                </tr>
+                                                                <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                                <ul class="list-group clear-list">
+                                                                                    <li class="list-group-item fist-item">
+                                                                                        <span class="pull-right"> <td> {{(vm.cursoSeleccionado.tipoEvaluacion == 1 ? 'ROCO' : 'Estándar')}} </td> </span>
+                                                                                        <strong>Tipo</strong>
+                                                                                    </li>
+                                                                                    <li class="list-group-item" style="height: 60px">
+                                                                                        <span style="width: 420px;text-align: right;" class="pull-right"> {{(vm.cursoSeleccionado.tipoEvaluacion == 1 ? vm.cursoSeleccionado.nombreCurso : vm.cursoSeleccionado.nombreEstandar)}} </span>
+                                                                                        <strong>Evaluaci&oacute;n</strong>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <span class="pull-right"> {{vm.cursoSeleccionado.aulaAsignada}} </span>
+                                                                                        <strong>Aula asignada</strong>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <span class="pull-right"> <strong>Hora:</strong> {{vm.cursoSeleccionado.horaEvaluacion}} </span>
+                                                                                        <strong>Fecha:</strong> {{vm.cursoSeleccionado.fechaEvaluacion | date:'d/MMMM/yyyy'}}
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <span class="pull-right"> 
+                                                                                            <strong>Estatus:</strong>
+                                                                                            <span ng-switch on="vm.cursoSeleccionado.estatus">
+                                                                                                <span ng-switch-when="0" class="label label-default texto-estatus-ptc">Registrado</span>
+                                                                                                <span ng-switch-when="1" class="label label-warning texto-estatus-ptc">En proceso de validaci&oacute;n</span>
+                                                                                                <span ng-switch-when="2" class="label label-primary texto-estatus-ptc">Aprobada</span>
+                                                                                                <span ng-switch-when="3" class="label label-warning texto-estatus-ptc">Rechazada</span>
+                                                                                                <span ng-switch-when="4" class="label label-default texto-estatus-ptc">Concluida</span>
+                                                                                                <span ng-switch-when="5" class="label label-default texto-estatus-ptc">Cancelada</span>
+                                                                                            </span>
+                                                                                        </span>                                                                            
+                                                                                        <strong>Costo:</strong> $ {{vm.cursoSeleccionado.costo | currency}}
+                                                                                    </li>
+                                                                                </ul>
 
-                                                                                </tbody>
-                                                                            </table>
-                                                                            
+                                                                                <ul class="list-group clear-list">
+                                                                                    <li class="list-group-item fist-item">
+                                                                                        <span class="pull-right"> {{vm.cursoSeleccionado.inscripcionesEvaluaciones[0].Capacitandos.nombreCompleto}} </span>
+                                                                                        <strong>Nombre</strong>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <span class="pull-right"> <td> {{(vm.cursoSeleccionado.inscripcionesEvaluaciones[0].Capacitandos.numControl)}} </td> </span>
+                                                                                        <strong>N&uacute;m. control</strong>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <span class="pull-right"> 
+                                                                                            <span ng-switch on="vm.cursoSeleccionado.inscripcionesEvaluaciones[0].pagado">
+                                                                                                <span ng-switch-when="0" class="label label-warning texto-estatus-ptc">Pendiente</span>
+                                                                                                <span ng-switch-when="1" class="label label-success texto-estatus-ptc" tooltip-placement="top" tooltip="{{inscripcion.observPago}}">Pagado</span>
+                                                                                                <span ng-switch-when="2" class="label label-info texto-estatus-ptc" tooltip-placement="top" tooltip="{{inscripcion.observPago}}">Exento al 100%</span>
+                                                                                                <span ng-switch-when="3" class="label label-primary texto-estatus-ptc" tooltip-placement="top" tooltip="{{inscripcion.observPago}}">Exento con porcentaje</span>
+                                                                                            </span>
+                                                                                        </span>
+                                                                                        <strong>Estatus pago</strong>
+                                                                                    </li>
+                                                                                    <li class="list-group-item">
+                                                                                        <span class="pull-right"> {{vm.cursoSeleccionado.inscripcionesEvaluaciones[0].numFactura}} </span>
+                                                                                        <strong>Factura</strong>
+                                                                                    </li>
+                                                                                    <li class="list-group-item" style="height: 80px">
+                                                                                        <span style="width: 420px;text-align: right;" class="pull-right"> {{vm.cursoSeleccionado.observPago}} </span>
+                                                                                        <strong>Observaciones</strong>
+                                                                                    </li>
+                                                                                </ul>
                                                                         </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 text-center">
+                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.inscripcionesEvaluaciones[0].pagado == 0)" ng-click="vm.registraPagoEval(vm.cursoSeleccionado.inscripcionesEvaluaciones[0])" class="btn btn-success btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-usd"></i></span>Registrar pago</button>
+                                                                        <button type="button" ng-show="(vm.cursoSeleccionado.inscripcionesEvaluaciones[0].pagado > 0 && vm.cursoSeleccionado.estatus == 0)" ng-click="vm.editaNumFactura(vm.cursoSeleccionado.inscripcionesEvaluaciones[0])" class="btn btn-warning btn-sm btn-labeled"><span class="btn-label"><i class="fa fa-pencil"></i></span> Editar n&uacute;m. factura</button>
+                                                                    </div>
                                                                 </div>
 
                                                         </div> <!--panel blank-panel-->

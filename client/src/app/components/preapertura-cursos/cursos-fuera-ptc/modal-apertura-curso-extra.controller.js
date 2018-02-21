@@ -128,7 +128,7 @@
                             fields: ['idInstructor','apellidoPaterno','apellidoMaterno','nombre','curp','efTerminal'],
                             include: [
                                 {
-                                    relation: 'evaluacion_curso',
+                                    relation: 'calif_evaluacion_curso',
                                     scope: {
                                         where: {idCatalogoCurso: vm.registroEdicion.idCatalogoCurso},
                                         fields:['calificacion']
@@ -163,7 +163,7 @@
                                     nombre          : record.nombre,
                                     curp            : record.curp,
                                     nombre_completo : record.apellidoPaterno + ' ' + record.apellidoMaterno + ' ' + record.nombre,
-                                    calificacion    : record.evaluacion_curso[0].calificacion,
+                                    calificacion    : record.calif_evaluacion_curso[0].calificacion,
                                     efTerminal      : record.efTerminal
                                 });
                             }

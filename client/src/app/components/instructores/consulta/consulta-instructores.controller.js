@@ -69,7 +69,7 @@
                                     }
                                 },
                                 {
-                                    relation: 'evaluacion_curso',
+                                    relation: 'calif_evaluacion_curso',
                                     scope: {
                                         fields:['id','idInstructor','idCatalogoCurso','calificacion'],
                                         include:{

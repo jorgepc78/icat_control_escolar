@@ -55,7 +55,7 @@
                     idLocalidad        : registroEditar.idLocalidad,
                     localidad          : '',
                     activo             : registroEditar.activo,
-                    evaluacion_curso   : []
+                    calif_evaluacion_curso   : []
             };
 
             vm.cursos_habilitados = [];
@@ -66,7 +66,7 @@
 
             function inicia() {
 
-                angular.forEach(registroEditar.evaluacion_curso, function(record) {
+                angular.forEach(registroEditar.calif_evaluacion_curso, function(record) {
                       vm.cursos_habilitados.push({
                           idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,
                           nombreCurso     : record.CatalogoCursos.nombreCurso,
@@ -305,7 +305,7 @@
                                                                                                             return registro.idCatalogoCurso;
                                                                                                           }).indexOf(resp.idCatalogoCurso);
 
-                                                                        vm.registroEdicion.evaluacion_curso.push({
+                                                                        vm.registroEdicion.calif_evaluacion_curso.push({
                                                                             id              : resp.id,
                                                                             idInstructor    : resp.idInstructor,
                                                                             idCatalogoCurso : resp.idCatalogoCurso,

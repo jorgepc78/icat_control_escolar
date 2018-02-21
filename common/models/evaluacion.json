@@ -15,6 +15,7 @@
       "type": "Number",
       "id": true,
       "required": false,
+      "index": true,
       "length": null,
       "precision": 32,
       "scale": 0,
@@ -27,6 +28,22 @@
         "nullable": "NO"
       },
       "_selectable": false
+    },
+    "tipoEvaluacion": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 16,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "tipo_evaluacion",
+        "dataType": "smallint",
+        "dataLength": null,
+        "dataPrecision": 16,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
     },
     "idUnidadAdmtva": {
       "type": "Number",
@@ -95,13 +112,13 @@
     "nombreCurso": {
       "type": "String",
       "required": false,
-      "length": 125,
+      "length": 254,
       "precision": null,
       "scale": null,
       "postgresql": {
         "columnName": "nombre_curso",
         "dataType": "character varying",
-        "dataLength": 125,
+        "dataLength": 254,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"
@@ -124,32 +141,48 @@
       },
       "_selectable": true
     },
-    "descripcionCurso": {
-      "type": "String",
+    "idEstandar": {
+      "type": "Number",
       "required": false,
       "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "id_estandar",
+        "dataType": "integer",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "codigoEstandar": {
+      "type": "String",
+      "required": false,
+      "length": 6,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "descripcion_curso",
-        "dataType": "text",
-        "dataLength": null,
+        "columnName": "codigo_estandar",
+        "dataType": "character varying",
+        "dataLength": 6,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"
       },
       "_selectable": true
     },
-    "modalidad": {
+    "nombreEstandar": {
       "type": "String",
       "required": false,
-      "length": 9,
+      "length": 154,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "modalidad",
+        "columnName": "nombre_estandar",
         "dataType": "character varying",
-        "dataLength": 9,
+        "dataLength": 154,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"
@@ -268,6 +301,38 @@
       },
       "_selectable": true
     },
+    "cantidadPagoEvaluador": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 32,
+      "scale": 0,
+      "postgresql": {
+        "columnName": "cantidad_pago_evaluador",
+        "dataType": "double precision",
+        "dataLength": null,
+        "dataPrecision": 32,
+        "dataScale": 0,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "nomenclaturaContrato": {
+      "type": "String",
+      "required": false,
+      "length": 25,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "nomenclatura_contrato",
+        "dataType": "character varying",
+        "dataLength": 25,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "observaciones": {
       "type": "String",
       "required": false,
@@ -300,14 +365,14 @@
       },
       "_selectable": true
     },
-    "revisadoProgramas": {
+    "revisadoCertificacion": {
       "type": "Boolean",
       "required": false,
       "length": null,
       "precision": null,
       "scale": null,
       "postgresql": {
-        "columnName": "revisado_programas",
+        "columnName": "revisado_certificacion",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,
@@ -324,22 +389,6 @@
       "scale": null,
       "postgresql": {
         "columnName": "aprobado_academica",
-        "dataType": "boolean",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "YES"
-      },
-      "_selectable": true
-    },
-    "aprobadoPlaneacion": {
-      "type": "Boolean",
-      "required": false,
-      "length": null,
-      "precision": null,
-      "scale": null,
-      "postgresql": {
-        "columnName": "aprobado_planeacion",
         "dataType": "boolean",
         "dataLength": null,
         "dataPrecision": null,
@@ -376,6 +425,11 @@
       "type": "belongsTo",
       "model": "CatalogoCursos",
       "foreignKey": "idCatalogoCurso"
+    },
+    "estandar_pertenece": {
+      "type": "belongsTo",
+      "model": "CatalogoEstandares",
+      "foreignKey": "idEstandar"
     },
     "ptc_pertenece": {
       "type": "belongsTo",

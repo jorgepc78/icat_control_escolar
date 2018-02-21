@@ -21,7 +21,6 @@
             vm.nuevo_registro             = nuevo_registro;
             vm.elimina_registro           = elimina_registro;
 
-
             vm.listaUnidades = [];
             vm.unidadSeleccionada = undefined;
 
@@ -100,7 +99,7 @@
                                     }
                                 },
                                 {
-                                    relation: 'evaluacion_curso',
+                                    relation: 'calif_evaluacion_curso',
                                     scope: {
                                         fields:['id','idInstructor','idCatalogoCurso','calificacion'],
                                         include:{
@@ -395,11 +394,11 @@
                               });
                         }
 
-                        if(respuesta.evaluacion_curso.length > 0)
+                        if(respuesta.calif_evaluacion_curso.length > 0)
                         {
-                              vm.RegistroSeleccionado.evaluacion_curso = [];
-                              angular.forEach(respuesta.evaluacion_curso, function(record) {
-                                    vm.RegistroSeleccionado.evaluacion_curso.push({
+                              vm.RegistroSeleccionado.calif_evaluacion_curso = [];
+                              angular.forEach(respuesta.calif_evaluacion_curso, function(record) {
+                                    vm.RegistroSeleccionado.calif_evaluacion_curso.push({
                                         id              : record.id,
                                         idInstructor    : record.idInstructor,
                                         idCatalogoCurso : record.idCatalogoCurso,

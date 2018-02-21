@@ -139,6 +139,22 @@
       },
       "_selectable": true
     },
+    "nombreArchivo": {
+      "type": "String",
+      "required": false,
+      "length": 125,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "nombre_archivo",
+        "dataType": "character varying",
+        "dataLength": 125,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
     "activo": {
       "type": "Boolean",
       "required": false,
@@ -173,6 +189,13 @@
       "model": "CatalogoInstructores",
       "foreignKey": "idCatalogoCurso",
       "through": "RelInstrucCatCurso",
+      "keyThrough": "idInstructor"
+    },
+    "evaluadores_habilitados": {
+      "type": "hasMany",
+      "model": "CatalogoInstructores",
+      "foreignKey": "idCatalogoCurso",
+      "through": "RelInstrucEvalCurso",
       "keyThrough": "idInstructor"
     },
     "cursosPTC_pertenece": {

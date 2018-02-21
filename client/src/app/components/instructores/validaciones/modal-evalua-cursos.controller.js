@@ -19,7 +19,7 @@
 
             vm.registroEdicion = {
                     idInstructor    : registroEditar.idInstructor,
-                    evaluacion_curso: []
+                    calif_evaluacion_curso: []
             };
             vm.cursos_habilitados = [];
 
@@ -28,7 +28,7 @@
 
             function inicia() {
 
-                angular.forEach(registroEditar.evaluacion_curso, function(record) {
+                angular.forEach(registroEditar.calif_evaluacion_curso, function(record) {
                       vm.cursos_habilitados.push({
                           id              : record.id,
                           idCatalogoCurso : record.CatalogoCursos.idCatalogoCurso,

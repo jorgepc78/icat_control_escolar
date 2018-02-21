@@ -5,12 +5,13 @@
         .module('icat_control_escolar')
         .controller('PrincipalCatalogoCursosController', PrincipalCatalogoCursosController);
 
-    PrincipalCatalogoCursosController.$inject = ['$modal', 'tablaDatosService', 'CatalogoCursos', 'CatalogoEspecialidades'];
+    PrincipalCatalogoCursosController.$inject = ['$scope', '$modal', 'Usuario', 'tablaDatosService', 'CatalogoCursos', 'CatalogoEspecialidades'];
 
-    function PrincipalCatalogoCursosController($modal, tablaDatosService, CatalogoCursos, CatalogoEspecialidades) {
+    function PrincipalCatalogoCursosController($scope, $modal, Usuario, tablaDatosService, CatalogoCursos, CatalogoEspecialidades) {
 
             var vm = this;
             vm.muestraDatosRegistroActual = muestraDatosRegistroActual;
+            vm.abreDocumento              =  abreDocumento;
             vm.muestraResultadosBusqueda  = muestraResultadosBusqueda;
             vm.limpiaBusqueda             = limpiaBusqueda;
             vm.cambiarPagina              = cambiarPagina;
@@ -90,7 +91,7 @@
                   vm.tablaListaRegistros.filtro_datos = {
                           filter: {
                               where: vm.tablaListaRegistros.condicion,
-                              fields: ['idCatalogoCurso','claveCurso','descripcion','perfilEgresado','perfilInstructor','idEspecialidad','nombreCurso','numeroHoras','activo'],
+                              fields: ['idCatalogoCurso','claveCurso','descripcion','perfilEgresado','perfilInstructor','idEspecialidad','nombreCurso','numeroHoras','nombreArchivo','activo'],
                               order: ['nombreCurso ASC','idCatalogoCurso ASC'],
                               limit: vm.tablaListaRegistros.registrosPorPagina,
                               skip: vm.tablaListaRegistros.paginaActual - 1,
@@ -413,6 +414,19 @@
                   vm.tablaListaRegistros.fila_seleccionada = index;
             };
 
+
+            function abreDocumento(seleccion) {
+                    Usuario.prototype$__get__accessTokens({ 
+                        id: $scope.currentUser.id_usuario
+                    })
+                    .$promise
+                    .then(function(resp) {
+                      var link = angular.element('<a href="api/AlmacenDocumentos/catalogo_cursos/download/'+seleccion.nombreArchivo+'?access_token='+resp[0].id+'" target="_blank"></a>');
+                        angular.element(document.body).append(link);
+                        link[0].click();
+                        link.remove();
+                    });
+            }
 
             function edita_datos_registro(seleccion) {
 

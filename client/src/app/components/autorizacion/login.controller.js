@@ -142,6 +142,10 @@
                     instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
+
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
+
                     plan_cursos_menu                          : false,
                     plan_cursos_horas_unidad                  : false,
                     plan_cursos_metas_capacit                 : false,
@@ -187,6 +191,9 @@
                     instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
+
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -240,6 +247,9 @@
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
 
+                    evaluadores_menu                          : true,
+                    evaluadores_catevaluadores                : true,
+
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
                     plan_cursos_metas_capacit                 : false,
@@ -291,6 +301,9 @@
                     instructores_valinstructores              : true,
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
+
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -344,6 +357,9 @@
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
 
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
+
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : true,
                     plan_cursos_metas_capacit                 : true,
@@ -395,6 +411,9 @@
                     instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
+
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : true,
@@ -448,6 +467,9 @@
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
 
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
+
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
                     plan_cursos_metas_capacit                 : false,
@@ -499,6 +521,9 @@
                     instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
+
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -552,6 +577,9 @@
                     instructores_consinstructores             : true,
                     instructores_propinstructores             : true,
 
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
+
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
                     plan_cursos_metas_capacit                 : false,
@@ -603,6 +631,9 @@
                     instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
+
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
 
                     plan_cursos_menu                          : false,
                     plan_cursos_horas_unidad                  : false,
@@ -656,6 +687,9 @@
                     instructores_consinstructores             : true,
                     instructores_propinstructores             : false,
 
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
+
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
                     plan_cursos_metas_capacit                 : false,
@@ -707,6 +741,9 @@
                     instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
+
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
 
                     plan_cursos_menu                          : true,
                     plan_cursos_horas_unidad                  : false,
@@ -760,6 +797,9 @@
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
 
+                    evaluadores_menu                          : true,
+                    evaluadores_catevaluadores                : true,
+
                     plan_cursos_menu                          : false,
                     plan_cursos_horas_unidad                  : false,
                     plan_cursos_metas_capacit                 : false,
@@ -811,6 +851,9 @@
                     instructores_valinstructores              : false,
                     instructores_consinstructores             : false,
                     instructores_propinstructores             : false,
+
+                    evaluadores_menu                          : false,
+                    evaluadores_catevaluadores                : false,
 
                     plan_cursos_menu                          : false,
                     plan_cursos_horas_unidad                  : false,

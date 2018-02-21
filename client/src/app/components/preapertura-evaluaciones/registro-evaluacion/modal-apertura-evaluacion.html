@@ -1,55 +1,98 @@
 <div class="inmodal">
       <div class="modal-header">
-          <h4 class="modal-title"> ROCO y Evaluaci&oacute;n de competencias</h4>
+          <h4 class="modal-title"> ROCO y Evaluaciones de competencias</h4>
       </div>
       <div class="modal-body" style="background: #fff;">
 
         <div class="row">
             <form name="form_datos" class="form-horizontal">
             
-                <div class="col-lg-6">
+                <div class="col-lg-7">
 
-                          <div class="form-group" ng-show="!vm.EdicionCurso">
-                              <label class="col-sm-2 control-label">Evaluaci&oacute;n</label>
-                              <div class="col-sm-10">
-                                  <select class="form-control m-b" 
-                                      ng-change="vm.muestraInstructoresCurso()"
-                                      ng-model="vm.cursoSeleccionado"
-                                      ng-disabled="vm.EdicionCurso"
-                                      ng-options="curso as (curso.nombreCurso + ' (' + curso.modalidad + ')' ) for curso in vm.listaCursos" required>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Tipo evaluaci&oacute;n</label>
+                              <div class="col-sm-9">
+                                  <select class="form-control m-b"
+                                      ng-change="vm.cambiaModalidad()"
+                                      ng-model="vm.registroEdicion.tipoEvaluacion">
+                                      <option value="1">ROCO</option>
+                                      <option value="2">Est&aacute;ndar</option>
                                   </select>
                               </div>
                           </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 control-label">Nombre curso</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCurso" readonly>
+                          
+                          <div class="form-group" ng-show="(vm.registroEdicion.tipoEvaluacion == 1)">
+                              <label class="col-sm-3 control-label">Buscar curso</label>
+                              <div class="col-sm-9">
+                                  <ui-select ng-model="vm.cursoSeleccionado.selected" theme="bootstrap" on-select="vm.muestraEvaluadoresCurso()">
+                                      <ui-select-match placeholder="Escriba el texto a buscar">
+                                          {{$select.selected.nombreCurso}}
+                                      </ui-select-match>
+                                      <ui-select-choices repeat="curso in vm.listaCursos | filter: { nombreCurso: $select.search } | limitTo: ($select.search.length <= 3) ? 0 : undefined">
+                                          <div ng-bind-html="curso.nombreCurso | highlight: $select.search"></div>
+                                          <small>
+                                            Especialidad: {{curso.especialidad.nombre}}
+                                          </small>
+                                      </ui-select-choices>
+                                      <ui-select-no-choice>
+                                        {{($select.search.length > 3 ? 'No se encontr&oacute; ning&uacute;n curso con el texto escrito' : '')}}
+                                      </ui-select-no-choice>
+                                  </ui-select>
                               </div>
                           </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 control-label">Clave curso</label>
-                              <div class="col-sm-10">
+
+                          <div class="form-group" ng-show="(vm.registroEdicion.tipoEvaluacion == 1)">
+                              <label class="col-sm-3 control-label">Nombre curso</label>
+                              <div class="col-sm-9">
+                                <textarea class="form-control" ng-model="vm.registroEdicion.nombreCurso" rows="2" cols="90" readonly></textarea>
+                              </div>
+                          </div>
+                          <div class="form-group" ng-show="(vm.registroEdicion.tipoEvaluacion == 1)">
+                              <label class="col-sm-3 control-label">Clave curso</label>
+                              <div class="col-sm-9">
                                   <input type="text" class="form-control" ng-model="vm.registroEdicion.claveCurso" readonly>
                               </div>
                           </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 control-label">Tipo</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.modalidad" readonly>
+
+                          <div class="form-group" ng-show="(vm.registroEdicion.tipoEvaluacion == 2)">
+                              <label class="col-sm-3 control-label">Est&aacute;ndar</label>
+                              <div class="col-sm-9">
+                                  <select class="form-control m-b" 
+                                      ng-change="vm.muestraEvaluadoresCurso()"
+                                      ng-model="vm.estandarSeleccionado"
+                                      ng-disabled="(vm.listaEstandares.length == 0)"                                      
+                                      ng-options="estandar as (' (' + estandar.codigo + ') ' + estandar.nombre) for estandar in vm.listaEstandares" required>
+                                  </select>
                               </div>
                           </div>
+
+                          <div class="form-group" ng-show="(vm.registroEdicion.tipoEvaluacion == 2)">
+                              <label class="col-sm-3 control-label">Nombre Est&aacute;ndar</label>
+                              <div class="col-sm-9">
+                                <textarea class="form-control" ng-model="vm.registroEdicion.nombreEstandar" rows="2" cols="90" readonly></textarea>
+                              </div>
+                          </div>
+                          <div class="form-group" ng-show="(vm.registroEdicion.tipoEvaluacion == 2)">
+                              <label class="col-sm-3 control-label">C&oacute;digo</label>
+                              <div class="col-sm-9">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.codigoEstandar" readonly>
+                              </div>
+                          </div>
+
+                          <div class="hr-line-dashed"></div>
+
                           <div class="form-group">
-                              <label class="col-sm-2 control-label">Evaluador</label>
-                              <div class="col-sm-10">
+                              <label class="col-sm-3 control-label">Evaluador</label>
+                              <div class="col-sm-9">
                                   <select class="form-control m-b" 
                                       ng-model="vm.instructorSeleccionado"
-                                      ng-options="instructor as (instructor.nombre_completo + ' (Puntaje: ' + instructor.calificacion + ', Ef. Term.: ' + instructor.efTerminal + '%)') for instructor in vm.listaInstructores" required>
+                                      ng-options="instructor as (instructor.nombre_completo) for instructor in vm.listaInstructores" required>
                                   </select>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 control-label">Fecha</label>
-                              <div class="col-sm-10">
+                              <label class="col-sm-3 control-label">Fecha plan evaluaci&oacute;n</label>
+                              <div class="col-sm-9">
                                   <div class="row">
                                       <div class="col-md-4">
                                           <div class="input-group date" style="width: 155px;">
@@ -67,33 +110,45 @@
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 control-label">Lugar evaluaci&oacute;n</label>
-                              <div class="col-sm-10">
+                              <label class="col-sm-3 control-label">Lugar evaluaci&oacute;n</label>
+                              <div class="col-sm-9">
                                   <input type="text" class="form-control" ng-model="vm.registroEdicion.aulaAsignada">
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 control-label">Costo</label>
+                              <label class="col-sm-3 control-label">Costo evaluaci&oacute;n</label>
                               <div class="col-sm-4">
                                   <input type="number" class="form-control" ng-model="vm.registroEdicion.costo" required>
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 control-label">Observaciones</label>
-                              <div class="col-sm-10">
+                              <label class="col-sm-3 control-label">Pago evaluador</label>
+                              <div class="col-sm-4">
+                                  <input type="number" class="form-control" ng-model="vm.registroEdicion.cantidadPagoEvaluador" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Nomenclatura contrato</label>
+                              <div class="col-sm-8">
+                                  <input type="text" class="form-control" ng-model="vm.registroEdicion.nomenclaturaContrato" required>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-3 control-label">Observaciones</label>
+                              <div class="col-sm-9">
                                   <textarea class="form-control" ng-model="vm.registroEdicion.observaciones" rows="4" cols="90"></textarea>
                               </div>
                           </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-5">
 
                           <div class="form-group">
                               <label class="col-sm-2 control-label">Capacitando</label>
-                              <div class="col-sm-9">
+                              <div class="col-sm-9" style="padding-right: 0;">
                                   <input type="text" class="form-control" ng-model="vm.registroEdicion.nombreCompleto" readonly required>
                               </div>
-                              <div class="col-sm-1">
+                              <div class="col-sm-1" style="padding-left: 0;">
                                   <button type="button" class="btn btn-warning btn-sm" tooltip-placement="top" tooltip="Eliminar persona" ng-click="vm.eliminaAlumno()"><i class="fa fa-times"></i></button>
                               </div>
                           </div>

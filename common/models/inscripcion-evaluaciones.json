@@ -61,17 +61,17 @@
       "_selectable": true
     },
     "pagado": {
-      "type": "Boolean",
+      "type": "Number",
       "required": false,
       "length": null,
-      "precision": null,
+      "precision": 16,
       "scale": null,
       "postgresql": {
         "columnName": "pagado",
-        "dataType": "boolean",
+        "dataType": "integer",
         "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
+        "dataPrecision": 16,
+        "dataScale": 0,
         "nullable": "YES"
       },
       "_selectable": true
@@ -102,6 +102,22 @@
         "columnName": "num_factura",
         "dataType": "character varying",
         "dataLength": 26,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "YES"
+      },
+      "_selectable": true
+    },
+    "observPago": {
+      "type": "String",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "postgresql": {
+        "columnName": "observ_pago",
+        "dataType": "text",
+        "dataLength": null,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "YES"

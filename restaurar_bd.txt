@@ -1,3 +1,0 @@
-pg_restore -i -h 127.0.0.1 -p 5432 -U postgres -d icat_control_escolar -v "icat_control_escolar.backup"
-
-password: post01*
